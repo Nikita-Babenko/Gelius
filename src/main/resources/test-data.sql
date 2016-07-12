@@ -1,0 +1,15 @@
+INSERT INTO CLIENTS (COMPANY_NAME, PHONE_NUMBER) VALUES ('АВК', '+38050-355-62-78');
+INSERT INTO CLIENTS (COMPANY_NAME, PHONE_NUMBER) VALUES ('Ласунка', '+38066-355-62-78');
+INSERT INTO CLIENTS (COMPANY_NAME, PHONE_NUMBER) VALUES ('Петрущенко', '+38067-355-62-78');
+
+INSERT INTO ORDERS (SHIP_DATA) VALUES ('2016-08-28');
+INSERT INTO ORDERS (SHIP_DATA) VALUES ('2016-09-28');
+INSERT INTO ORDERS (SHIP_DATA) VALUES ('2016-10-28');
+
+INSERT INTO REQUESTS (PRODUCTS_LIST) VALUES ('"Ящик 4-х клапанный большой", "Ящик 4-х клапанный малый", "Лоток"');
+INSERT INTO REQUESTS (PRODUCTS_LIST) VALUES ('"Лоток", "Ящик 4-х клапанный большой", "Ящик 4-х клапанный малый"');
+INSERT INTO REQUESTS (PRODUCTS_LIST) VALUES ('"Ящик 4-х клапанный малый", "Лоток", "Ящик 4-х клапанный большой"');
+
+INSERT INTO PRODUCTS (TYPE, GRADE) VALUES ('Ящик 4-х клапанный большой', 'Т-21');
+INSERT INTO PRODUCTS (TYPE, GRADE) VALUES ('Ящик 4-х клапанный малый', 'Т-21');
+INSERT INTO PRODUCTS (TYPE, GRADE) VALUES ('Лоток', 'П-31');

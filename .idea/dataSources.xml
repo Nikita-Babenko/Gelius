@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="65343365">
-    <data-source source="LOCAL" name="MySQL - @localhost" uuid="9f20f3fb-4af7-48b9-93c1-9908b8e0567d">
+  <component name="DataSourceManagerImpl" format="xml" hash="3164549659">
+    <data-source source="LOCAL" name="MySQL - Gelius@localhost" uuid="4f02d584-77a0-4932-a344-7d1811365c6d">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/Gelius</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
