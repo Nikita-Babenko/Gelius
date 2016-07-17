@@ -16,6 +16,7 @@
     <mysql.connector.version>5.1.31</mysql.connector.version>
     <jstl.version>1.2</jstl.version>
     <junit.version>4.1</junit.version>
+    <hikari.version>2.4.3</hikari.version>
   </properties>
 
   <dependencies>
@@ -24,7 +25,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -83,7 +84,7 @@
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
-      <version>2.4.3</version>
+      <version>${hikari.version}</version>
     </dependency>
 
     <!--Hibernate-->
@@ -149,6 +150,12 @@
           <target>${jdk.version}</target>
         </configuration>
       </plugin>
+
+     <!-- <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.3.8.v20160314</version>
+      </plugin>-->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
