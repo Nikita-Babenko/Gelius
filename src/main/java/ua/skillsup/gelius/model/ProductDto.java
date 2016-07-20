@@ -17,6 +17,7 @@ public class ProductDto {
     private String profile;
     private String colour;
     private String print;
+    private Character activity;
 
     public Long getId() {
         return id;
@@ -104,6 +105,14 @@ public class ProductDto {
 
     public void setPrint(String print) {
         this.print = print;
+    }
+
+    public Character getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Character activity) {
+        this.activity = activity;
     }
 
     @Override

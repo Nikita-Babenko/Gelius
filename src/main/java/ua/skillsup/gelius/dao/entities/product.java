@@ -14,24 +14,26 @@ public class Product {
     @OneToMany(mappedBy = "id")
     @Column(name = "CLIENTS_LIST")
     private List<Client> clients;
-    @Column(name = "PRODUCTS_NAME")
+    @Column(name = "PRODUCTS_NAME", nullable = false, unique = true)
     private String productsName;
-    @Column(name = "PRODUCTS_TYPE")
+    @Column(name = "PRODUCTS_TYPE", nullable = false)
     private String productsType;
-    @Column(name = "INNER_LENGTH")
+    @Column(name = "INNER_LENGTH", nullable = false)
     private Integer innerLength;
-    @Column(name = "INNER_WIDTH")
+    @Column(name = "INNER_WIDTH", nullable = false)
     private Integer innerWidth;
-    @Column(name = "INNER_HEIGHT")
+    @Column(name = "INNER_HEIGHT", nullable = false)
     private Integer innerHeight;
-    @Column(name = "GRADE")
+    @Column(name = "GRADE", nullable = false)
     private String grade;
-    @Column(name = "PROFILE")
+    @Column(name = "PROFILE", nullable = false)
     private String profile;
     @Column(name = "COLOUR")
     private String colour;
     @Column(name = "PRINT")
     private String print;
+    @Column(name = "ACTIVITY", nullable = false)
+    private Character activity;
 
     public Long getId() {
         return id;
@@ -119,6 +121,14 @@ public class Product {
 
     public void setPrint(String print) {
         this.print = print;
+    }
+
+    public Character getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Character activity) {
+        this.activity = activity;
     }
 
     @Override
