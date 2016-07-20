@@ -62,7 +62,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<ProductDto> findByClient(Client client) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("from Product").list();
-        List<ProductDto> result = new ArrayList<>(products.size());
+        List<ProductDto> result = new ArrayList<>();
         for (Product product : products){
             if (product.getClients().contains(client)){
                 result.add(convert(product));
