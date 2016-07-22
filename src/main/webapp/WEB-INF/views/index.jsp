@@ -9,6 +9,7 @@
 <h2>Hello World!</h2>
 
 <button class="btn btn-default" type="submit">Button</button>
+<a class="bnt btn-default" href="/register">Register page</a>
 
 </body>
 </html>

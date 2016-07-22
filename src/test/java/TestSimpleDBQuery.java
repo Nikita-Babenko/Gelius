@@ -1,18 +1,17 @@
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ua.skillsup.gelius.SpringConfig;
+import ua.skillsup.gelius.configs.HibernateConfig;
+
 
 import java.math.BigInteger;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = HibernateConfig.class)
 
 public class TestSimpleDBQuery {
     @Autowired

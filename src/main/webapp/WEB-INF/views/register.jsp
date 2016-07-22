@@ -4,6 +4,7 @@
 
 
 <!DOCTYPE html>
+<html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +46,7 @@
 
                         </div>
 
-                        <div align = "centr">
+                        <div align="centr">
                             <h3 class="panel-title">Реестр продукции</h3>
                         </div>
 
@@ -80,7 +81,7 @@
                                 -->
                                 <td class="hidden-xs">0001</td>
                                 <td>АВК</td>
-                                <td> </td>
+                                <td></td>
                                 <td>Ящик(4 клапана)</td>
                                 <td>385</td>
                                 <td>300</td>
@@ -94,7 +95,7 @@
                             <tr>
                                 <td class="hidden-xs">0002</td>
                                 <td>Петрущенко</td>
-                                <td> </td>
+                                <td></td>
                                 <td>Лоток</td>
                                 <td>400</td>
                                 <td>300</td>
@@ -108,7 +109,7 @@
                             <tr class="success">
                                 <td class="hidden-xs">0003</td>
                                 <td>Ласунка</td>
-                                <td> </td>
+                                <td></td>
                                 <td>Ящик (4 клапана)</td>
                                 <td>410</td>
                                 <td>300</td>
@@ -122,7 +123,7 @@
                             <tr>
                                 <td class="hidden-xs">0004</td>
                                 <td>Ласунка</td>
-                                <td> </td>
+                                <td></td>
                                 <td>Ящик (4 клапана)</td>
                                 <td>350</td>
                                 <td>252</td>
@@ -136,7 +137,7 @@
                             <tr class="success">
                                 <td class="hidden-xs">0005</td>
                                 <td>Ласунка</td>
-                                <td> </td>
+                                <td></td>
                                 <td>Ящик (4 клапана)</td>
                                 <td>385</td>
                                 <td>300</td>
@@ -154,7 +155,12 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+</html>
 <!--
 <div class="panel-footer">
 <div class="row">
@@ -178,4 +184,3 @@
 </div>
 -->
 
-</div></div></div>

@@ -1,4 +1,4 @@
-package ua.skillsup.gelius;
+package ua.skillsup.gelius.configs;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
-public class SpringConfig {
+public class HibernateConfig {
     @Autowired
     private Environment env;
 
@@ -25,6 +25,7 @@ public class SpringConfig {
     public DataSource dataSource() {
         final HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(env.getProperty("db.url"));
+        hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
         hikariConfig.setUsername(env.getProperty("db.username"));
         hikariConfig.setPassword(env.getProperty("db.password"));
         return new HikariDataSource(hikariConfig);

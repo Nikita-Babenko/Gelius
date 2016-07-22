@@ -1,4 +1,4 @@
-package ua.skillsup.gelius;
+package ua.skillsup.gelius.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,13 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-/**
- * Created by yaroslav on 7/17/16.
- */
 @Configuration
-@ComponentScan("ua.skillsup.gelius.web")
+@ComponentScan("ua.skillsup.gelius")
 @EnableWebMvc
-@Import({SpringConfig.class})
+@Import({HibernateConfig.class})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -28,7 +25,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views");
+        viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
 
         return viewResolver;
