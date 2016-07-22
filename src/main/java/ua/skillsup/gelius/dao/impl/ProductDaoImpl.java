@@ -5,13 +5,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dao.entities.Client;
 import ua.skillsup.gelius.dao.entities.Product;
 import ua.skillsup.gelius.model.ProductDto;
 import ua.skillsup.gelius.model.filter.ProductFilter;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
