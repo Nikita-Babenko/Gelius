@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.skillsup.gelius.configs.HibernateConfig;
+import ua.skillsup.gelius.services.ProductServ;
+
 
 import java.math.BigInteger;
 
@@ -17,12 +19,21 @@ import static org.junit.Assert.assertEquals;
 public class TestSimpleDBQuery {
     @Autowired
     SessionFactory sessionFactory;
+    @Autowired
+    ProductServ productServ;
 
     @Test
-    public void simpleQuery() {
+    public void simpleQuery(){
         Session session = sessionFactory.openSession();
-        BigInteger countOfRecords = (BigInteger) session.createSQLQuery("SELECT COUNT(*) FROM CLIENTS").uniqueResult();
-        assertEquals("CLIENTS table should contain at least 1 record.", 1, countOfRecords.compareTo(BigInteger.ZERO));
+        BigInteger actual = (BigInteger) session.createSQLQuery("SELECT 1").uniqueResult();
+        BigInteger expected = BigInteger.valueOf(1);
+
+        assertEquals(expected, actual);
     }
 
+//It's test for Product service-method
+    @Test
+    public void getAllProducts(){
+        assertEquals(5, productServ.getAllProducts().size());
+    }
 }
