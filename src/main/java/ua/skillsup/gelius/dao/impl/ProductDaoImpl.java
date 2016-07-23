@@ -1,5 +1,6 @@
 package ua.skillsup.gelius.dao.impl;
 
+import ua.skillsup.gelius.dao.entities.Product;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dao.entities.Client;
-import ua.skillsup.gelius.dao.entities.Product;
 import ua.skillsup.gelius.model.ProductDto;
 import ua.skillsup.gelius.model.filter.ProductFilter;
 
@@ -40,7 +40,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<ProductDto> findAll() {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("from Product").list();
+        List<Product> products = sessionFactory
+                .getCurrentSession()
+                .createQuery("from Product")
+                .list();
         List<ProductDto> result = new ArrayList<>(products.size());
         for (Product product : products){
             result.add(convert(product));
