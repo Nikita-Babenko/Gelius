@@ -1,6 +1,5 @@
 package ua.skillsup.gelius.dao.entities;
 
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
