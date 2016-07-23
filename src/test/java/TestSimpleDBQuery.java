@@ -7,7 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.skillsup.gelius.configs.HibernateConfig;
 
-
 import java.math.BigInteger;
 
 import static org.junit.Assert.assertEquals;
@@ -20,12 +19,10 @@ public class TestSimpleDBQuery {
     SessionFactory sessionFactory;
 
     @Test
-    public void simpleQuery(){
-        Session session = sessionFactory.openSession();     // Test returns true if we have only three records in table CLIENTS
-        BigInteger actual = (BigInteger) session.createSQLQuery("SELECT 1").uniqueResult();
-        BigInteger expected = BigInteger.valueOf(3);
-
-        assertEquals(expected, actual);
+    public void simpleQuery() {
+        Session session = sessionFactory.openSession();
+        BigInteger countOfRecords = (BigInteger) session.createSQLQuery("SELECT COUNT(*) FROM CLIENTS").uniqueResult();
+        assertEquals("CLIENTS table should contain at least 1 record.", 1, countOfRecords.compareTo(BigInteger.ZERO));
     }
 
 }
