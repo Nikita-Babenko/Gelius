@@ -3,7 +3,7 @@ package ua.skillsup.gelius.dao.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CLIENT")
+@Table(name = "CLIENTS")
 public class Client {
     @Id
     @Column(name = "ID")
@@ -21,5 +21,4 @@ public class Client {
     private String address;
     @Column(name = "DESCRIPTION", nullable = false, columnDefinition = "TEXT")
     private String description;
-
 }

@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -16,6 +17,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:config.properties")
+@ComponentScan({"ua.skillsup.gelius.dao.impl",
+                "ua.skillsup.gelius.services.impl"})
 @EnableTransactionManagement
 public class HibernateConfig {
     @Autowired
@@ -35,8 +38,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        /*sessionFactory.setPackagesToScan(
-                );*/
+//        sessionFactory.setPackagesToScan("ua.skillsup.gelious.dao.entities");
         sessionFactory.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
         return sessionFactory;
     }
