@@ -12,6 +12,7 @@ import ua.skillsup.gelius.model.entities.Client;
 import ua.skillsup.gelius.model.entities.Product;
 import ua.skillsup.gelius.model.filter.ProductFilter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void editProduct(ProductDto productDto) {
         Product product = convert(productDto);
-        sessionFactory.getCurrentSession().update(product);
+        sessionFactory.getCurrentSession().merge(product);
     }
 
     @Override
@@ -52,8 +53,12 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public ProductDto findById(Long id) {
-        Product product = (Product) sessionFactory.getCurrentSession().createQuery("select i from Product i where i.id = :id")
-                .setParameter("id", id);
+        Product product = (Product) sessionFactory
+                .getCurrentSession()
+                .createQuery("select i from Product i where i.id = :id")
+                .setParameter("id", id)
+                .uniqueResult();
+
         if (product == null){
             return null;
         }else {
@@ -157,5 +162,17 @@ public class ProductDaoImpl implements ProductDao {
             result.add(convert(product));
         }
         return result;
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        Product product = (Product) sessionFactory
+                .getCurrentSession()
+                .createQuery("FROM Product WHERE :id = id")
+                .setParameter("id",id)
+                .uniqueResult();
+
+        sessionFactory.getCurrentSession().delete(product);
+
     }
 }

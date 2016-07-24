@@ -15,6 +15,8 @@ public interface ProductDao {
 
     ProductDto findById(Long id);
 
+    void deleteProduct(Long id);
+
     List<ProductDto> findByClient(Client client);
 
     ProductDto findByName(String name);

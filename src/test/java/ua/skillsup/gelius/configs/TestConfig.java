@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dao.impl.ProductDaoImpl;
-import ua.skillsup.gelius.services.ProductServ;
-import ua.skillsup.gelius.services.impl.ProductServImpl;
+import ua.skillsup.gelius.services.ProductService;
+import ua.skillsup.gelius.services.impl.ProductServiceImpl;
 
 @Configuration
 public class TestConfig {
@@ -16,8 +16,8 @@ public class TestConfig {
     }
 
     @Bean
-    public ProductServ getProductSer() {
-        return new ProductServImpl();
+    public ProductService getProductSer() {
+        return new ProductServiceImpl();
     }
 
 }
