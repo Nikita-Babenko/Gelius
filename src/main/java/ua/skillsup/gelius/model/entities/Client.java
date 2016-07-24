@@ -1,14 +1,41 @@
-package ua.skillsup.gelius.model;
+package ua.skillsup.gelius.model.entities;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class ClientDto {
+@Entity
+@Table(name = "CLIENTS")
+public class Client {
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Size(max = 30)
+    @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @Size(max = 30)
+    @Column(name = "LAST_NAME")
     private String lastName;
+
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "COMPANY_NAME")
     private String companyName;
+
+    @NotNull
+    @Size(max = 20)
+    @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    @Size(max = 200)
+    @Column(name = "ADDRESS")
     private String address;
+
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public Long getId() {
@@ -70,25 +97,25 @@ public class ClientDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ClientDto clientDto = (ClientDto) o;
-        return Objects.equals(id, clientDto.id) &&
-                Objects.equals(firstName, clientDto.firstName) &&
-                Objects.equals(lastName, clientDto.lastName) &&
-                Objects.equals(companyName, clientDto.companyName) &&
-                Objects.equals(phoneNumber, clientDto.phoneNumber) &&
-                Objects.equals(address, clientDto.address) &&
-                Objects.equals(description, clientDto.description);
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
+        return Objects.equals(getId(), client.getId()) &&
+                Objects.equals(getFirstName(), client.getFirstName()) &&
+                Objects.equals(getLastName(), client.getLastName()) &&
+                Objects.equals(getCompanyName(), client.getCompanyName()) &&
+                Objects.equals(getPhoneNumber(), client.getPhoneNumber()) &&
+                Objects.equals(getAddress(), client.getAddress()) &&
+                Objects.equals(getDescription(), client.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, companyName, phoneNumber, address, description);
+        return Objects.hash(getId(), getFirstName(), getLastName(), getCompanyName(), getPhoneNumber(), getAddress(), getDescription());
     }
 
     @Override
     public String toString() {
-        return "ClientDto{" +
+        return "Client{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

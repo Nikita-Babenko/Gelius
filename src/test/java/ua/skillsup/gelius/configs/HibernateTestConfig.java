@@ -2,12 +2,8 @@ package ua.skillsup.gelius.configs;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -17,20 +13,17 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:config.properties")
-@ComponentScan({"ua.skillsup.gelius"})
 @EnableTransactionManagement
-public class HibernateConfig {
-    @Autowired
-    private Environment env;
+public class HibernateTestConfig {
 
     @Bean
     public DataSource dataSource() {
         final HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(env.getProperty("db.url"));
-        hikariConfig.setDriverClassName(env.getProperty("db.driver"));
-        hikariConfig.setUsername(env.getProperty("db.username"));
-        hikariConfig.setPassword(env.getProperty("db.password"));
+        hikariConfig.setJdbcUrl("jdbc:hsqldb:mem:testdb");
+        hikariConfig.setDriverClassName("org.hsqldb.jdbcDriver");
+        hikariConfig.setUsername("sa");
+        hikariConfig.setPassword("");
+
         return new HikariDataSource(hikariConfig);
     }
 
@@ -38,11 +31,12 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
+        sessionFactory.setPackagesToScan("ua.skillsup.gelius.model");
         Properties hibernateProperties = new Properties();
-        hibernateProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        hibernateProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        hibernateProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+        hibernateProperties.put("hibernate.show_sql", "true");
+        hibernateProperties.put("hibernate.hbm2ddl.auto", "create");
+        hibernateProperties.put("hibernate.hbm2ddl.import_files", "test-data.sql");
         sessionFactory.setHibernateProperties(hibernateProperties);
         return sessionFactory;
     }

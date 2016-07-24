@@ -1,7 +1,7 @@
-package ua.skillsup.gelius.model;
+package ua.skillsup.gelius.dto;
 
-import ua.skillsup.gelius.dao.entities.Order;
-import ua.skillsup.gelius.dao.entities.Product;
+import ua.skillsup.gelius.model.entities.Order;
+import ua.skillsup.gelius.model.entities.Product;
 
 import java.time.LocalDate;
 import java.util.List;

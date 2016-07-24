@@ -1,13 +1,12 @@
-package ua.skillsup.gelius.model;
+package ua.skillsup.gelius.dto;
 
-import ua.skillsup.gelius.dao.entities.Client;
+import ua.skillsup.gelius.model.entities.Client;
 
-import java.util.List;
 import java.util.Objects;
 
 public class ProductDto {
     private Long id;
-    private List<Client> clients;
+    private Client clients;
     private String productsName;
     private String productsType;
     private Integer innerLength;
@@ -27,11 +26,11 @@ public class ProductDto {
         this.id = id;
     }
 
-    public List<Client> getClients() {
+    public Client getClients() {
         return clients;
     }
 
-    public void setClients(List<Client> clients) {
+    public void setClient(Client clients) {
         this.clients = clients;
     }
 
@@ -142,7 +141,7 @@ public class ProductDto {
     public String toString() {
         return "ProductDto{" +
                 "id=" + id +
-                ", clients=" + clients +
+                ", client=" + clients +
                 ", productsName='" + productsName + '\'' +
                 ", productsType='" + productsType + '\'' +
                 ", innerLength=" + innerLength +

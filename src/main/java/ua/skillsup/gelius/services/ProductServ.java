@@ -1,6 +1,6 @@
 package ua.skillsup.gelius.services;
 
-import ua.skillsup.gelius.model.ProductDto;
+import ua.skillsup.gelius.dto.ProductDto;
 
 import java.util.List;
 

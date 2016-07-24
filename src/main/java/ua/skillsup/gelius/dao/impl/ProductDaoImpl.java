@@ -1,30 +1,30 @@
 package ua.skillsup.gelius.dao.impl;
 
-import ua.skillsup.gelius.dao.entities.Product;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.dao.entities.Client;
-import ua.skillsup.gelius.model.ProductDto;
+import ua.skillsup.gelius.dto.ProductDto;
+import ua.skillsup.gelius.model.entities.Client;
+import ua.skillsup.gelius.model.entities.Product;
 import ua.skillsup.gelius.model.filter.ProductFilter;
 
-import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 import static ua.skillsup.gelius.converters.EntityDtoConverter.convert;
 
 @Repository
+@Transactional
 public class ProductDaoImpl implements ProductDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional(readOnly = false)
     public Long createProduct(ProductDto productDto) {
         Product product = convert(productDto);
         sessionFactory.getCurrentSession().save(product);
@@ -32,7 +32,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    @Transactional(readOnly = false)
     public void editProduct(ProductDto productDto) {
         Product product = convert(productDto);
         sessionFactory.getCurrentSession().update(product);
@@ -67,7 +66,7 @@ public class ProductDaoImpl implements ProductDao {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("from Product").list();
         List<ProductDto> result = new ArrayList<>();
         for (Product product : products){
-            if (product.getClients().contains(client)){
+            if (product.getClient().equals(client)) {
                 result.add(convert(product));
             }
         }

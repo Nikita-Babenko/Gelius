@@ -1,15 +1,42 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="<c:url value="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/css/bootstrap.css"/>"
+          rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/webjars/font-awesome/4.6.3/css/font-awesome.css"/>"
+          rel="stylesheet">
+    <script src="<c:url value="${pageContext.request.contextPath}/webjars/jquery/2.1.4/jquery.js"/>"></script>
+    <script src="<c:url value="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/js/bootstrap.js"/>"></script>
+    <title>Главная</title>
 <body>
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h2 class="page-header">
+                        Проект "Gelius",
+                        <small>доступные страницы</small>
+                    </h2>
+                </div>
+                <div class="panel-body">
 
-<h2>Hello World!</h2>
 
-<button class="btn btn-default" type="submit">Button</button>
-<a class="bnt btn-default" href="/register">Register page</a>
+                    <div class="list-group text-center">
+                        <a href="/register" class="list-group-item">Реестр продукции</a>
+                        <a href="#" class="list-group-item disabled">Страница еще не доступна</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

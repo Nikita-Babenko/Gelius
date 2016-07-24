@@ -1,7 +1,7 @@
 package ua.skillsup.gelius.converters;
 
-import ua.skillsup.gelius.dao.entities.Product;
-import ua.skillsup.gelius.model.ProductDto;
+import ua.skillsup.gelius.dto.ProductDto;
+import ua.skillsup.gelius.model.entities.Product;
 
 public final class EntityDtoConverter {
 
@@ -14,7 +14,7 @@ public final class EntityDtoConverter {
         }
         Product product = new Product();
         product.setId(productDto.getId());
-        product.setClients(productDto.getClients());
+        product.setClient(productDto.getClients());
         product.setProductsName(productDto.getProductsName());
         product.setProductsType(productDto.getProductsType());
         product.setInnerLength(productDto.getInnerLength());
@@ -24,6 +24,7 @@ public final class EntityDtoConverter {
         product.setGrade(productDto.getGrade());
         product.setProfile(productDto.getProfile());
         product.setColour(productDto.getColour());
+        product.setPrint(productDto.getPrint());
         product.setActivity(productDto.getActivity());
         return product;
     }
@@ -33,7 +34,7 @@ public final class EntityDtoConverter {
         }
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());
-        productDto.setClients(product.getClients());
+        productDto.setClient(product.getClient());
         productDto.setProductsName(product.getProductsName());
         productDto.setProductsType(product.getProductsType());
         productDto.setInnerLength(product.getInnerLength());
@@ -43,6 +44,7 @@ public final class EntityDtoConverter {
         productDto.setGrade(product.getGrade());
         productDto.setProfile(product.getProfile());
         productDto.setColour(product.getColour());
+        productDto.setPrint(product.getPrint());
         productDto.setActivity(product.getActivity());
         return productDto;
     }

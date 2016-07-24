@@ -1,10 +1,9 @@
-package ua.skillsup.gelius.dao.entities;
+package ua.skillsup.gelius.model.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
 @Table(name = "REQUEST")
 public class Request {
     @Id
@@ -16,6 +15,6 @@ public class Request {
     @Column(name = "PRODUCTS_LIST")
     @OneToMany(mappedBy = "id")
     private List<Product> productsList;
-    @Column(name = "READINESS_DATA")
-    private LocalDate readinessData;
+    @Column(name = "READINESS_DATE")
+    private LocalDate readinessDate;
 }
