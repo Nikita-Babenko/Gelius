@@ -13,6 +13,8 @@ public class Order {
     private Long id;
 
     @Column(name = "CLIENT_ID")
+    @OneToOne
+    @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
     @Column(name = "SHIP_DATE")

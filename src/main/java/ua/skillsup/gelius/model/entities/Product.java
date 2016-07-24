@@ -15,6 +15,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "CLIENT_ID")
+    @Column(name = "CLIENT_ID")
     private Client client;
 
     @Size(max = 200)
