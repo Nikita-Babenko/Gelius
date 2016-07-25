@@ -1,0 +1,31 @@
+.dropdown-text {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.header-dropdown {
+    min-width: 230px;
+}
+
+.filter-search {
+    margin: 0px 10px 0px 10px;
+    height: 20px;
+}
+
+.filter-search input{
+    height: 30px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 150px;
+    overflow-x: hidden;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.wrap {
+    white-space: normal
+}

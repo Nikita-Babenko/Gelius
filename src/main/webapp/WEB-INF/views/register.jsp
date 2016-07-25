@@ -11,8 +11,12 @@
           rel="stylesheet">
     <link href="<c:url value="${pageContext.request.contextPath}/webjars/font-awesome/4.6.3/css/font-awesome.css"/>"
           rel="stylesheet">
+
+    <link href="/resources/css/register.css" rel="stylesheet">
+
     <script src="<c:url value="${pageContext.request.contextPath}/webjars/jquery/2.1.4/jquery.js"/>"></script>
     <script src="<c:url value="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/js/bootstrap.js"/>"></script>
+
     <title>Реестр продукции</title>
 </head>
 
@@ -53,7 +57,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-with-addons.min.js"/>"></script>
 <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-dom.min.js"/>"></script>
 <script src="/resources/js/react/babel.min.js"></script>
