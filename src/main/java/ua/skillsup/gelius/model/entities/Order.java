@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 public class Order {
     @Id
     @Column(name = "ID")

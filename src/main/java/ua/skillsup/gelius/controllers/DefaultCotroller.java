@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class DefaultCotroller {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView index() {
-        return new ModelAndView("/index");
+        return new ModelAndView("index");
     }
 
 }

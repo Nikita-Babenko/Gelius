@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Table(name = "REQUEST")
+@Table(name = "REQUESTS")
 public class Request {
     @Id
     @Column(name = "ID")
