@@ -21,9 +21,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
-    public void createProduct(ProductDto product) {
-        productDao.createProduct(product);
+    public Long createProduct(ProductDto product) {
+        return productDao.createProduct(product);
     }
 
     @Override

@@ -12,7 +12,6 @@ import ua.skillsup.gelius.model.entities.Client;
 import ua.skillsup.gelius.model.entities.Product;
 import ua.skillsup.gelius.model.filter.ProductFilter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +27,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Long createProduct(ProductDto productDto) {
         Product product = convert(productDto);
-        sessionFactory.getCurrentSession().save(product);
-        return null;
+        return (Long) sessionFactory.getCurrentSession().save(product);
     }
 
     @Override

@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.skillsup.gelius.configs.HibernateTestConfig;
 import ua.skillsup.gelius.configs.TestConfig;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HibernateTestConfig.class, TestConfig.class})
@@ -19,9 +19,8 @@ public class ProductDaoTest {
 
     @Test
     public void testFindAll() throws Exception {
-        int expectedNumber = 5;
-        int actualNuber = productDao.findAll().size();
+        int actualNumber = productDao.findAll().size();
 
-        assertEquals("PRODUCTS table should contain 5 rows", expectedNumber, actualNuber);
+        assertTrue("PRODUCTS table should contain any rows", actualNumber > 0);
     }
 }

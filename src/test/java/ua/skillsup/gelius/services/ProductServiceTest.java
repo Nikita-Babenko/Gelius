@@ -10,6 +10,7 @@ import ua.skillsup.gelius.configs.TestConfig;
 import ua.skillsup.gelius.dto.ProductDto;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HibernateTestConfig.class, TestConfig.class})
@@ -20,59 +21,55 @@ public class ProductServiceTest {
     @Test
     public void testGetAllProducts() throws Exception {
         int actualNumber = productService.getAllProducts().size();
-        ProductDto product = new ProductDto();
-        productService.createProduct(product);
 
-        int expectedNumber = productService.getAllProducts().size();
-
-        assertEquals("We added one object, thus we have deference: 1",1, expectedNumber - actualNumber);
+        assertTrue("PRODUCTS table should contain any rows", actualNumber > 0);
     }
 
     @Test
-    public void testCreateProduct(){
+    public void testCreateProduct() {
+        int beforeAddition = productService.getAllProducts().size();
         ProductDto product = new ProductDto();
+
         productService.createProduct(product);
-        int expected = 6;
-        int actual = productService.getAllProducts().size();
+        int afterAddition = productService.getAllProducts().size();
 
-        productService.getAllProducts().forEach(k->System.out.println(k.toString()));
-
-        assertEquals("PRODUCT table must contains 6 elements after creating new product",expected,actual);
+        assertEquals("One object was added, thus we should have deference: 1", 1, afterAddition - beforeAddition);
     }
 
     @Test
-    public void testUpdateProduct(){
+    public void testUpdateProduct() {
+        String expectedColor = "бур/бур";
         ProductDto product = new ProductDto();
         product.setColour("бел/бел");
-        productService.createProduct(product);
 
-        product.setColour("бур/бур");
+        long productId = productService.createProduct(product);
+
+        product = productService.findById(productId);
+        product.setColour(expectedColor);
         productService.editProduct(product);
 
-        String secondColor = productService
-                .getAllProducts()
-                .get(productService.getAllProducts().size()-1)
-                .getColour();
+        ProductDto editedProduct = productService.findById(productId);
+        String actualColor = editedProduct.getColour();
 
-        assertEquals("I updated color in last product, I can check it",true,secondColor.equals("бур/бур"));
+        assertEquals(expectedColor, actualColor);
     }
 
     @Test
-    public void testFindById(){
-        String firstColor = "бел/крас";
-
+    public void testFindById() {
         ProductDto product = new ProductDto();
-        product.setColour(firstColor);
-        productService.createProduct(product);
+        product.setColour("бел/крас");
+        long savedProductId = productService.createProduct(product);
 
-        long lastAdded = productService.getAllProducts().size();
-        product = productService.findById(lastAdded);
+        ProductDto lastAdded = productService.
+                getAllProducts().
+                get(productService.getAllProducts().size() - 1);
+        product = productService.findById(savedProductId);
 
-        assertEquals("I added product with color бел/крас, find him and check the color",true, firstColor.equals(product.getColour()));
+        assertEquals(product, lastAdded);
     }
 
     @Test
-    public void testDeleteProduct(){
+    public void testDeleteProduct() {
         int beforeDeleting = productService.getAllProducts().size();
 
         Long lastId = productService.findById((long) beforeDeleting).getId();
@@ -80,6 +77,6 @@ public class ProductServiceTest {
 
         int afterDeleting = productService.getAllProducts().size();
 
-        assertEquals("I deleted one product, thus we have deference: 1", 1 , beforeDeleting - afterDeleting);
+        assertEquals("One product was deleted, thus we should have deference: 1", 1, beforeDeleting - afterDeleting);
     }
 }
