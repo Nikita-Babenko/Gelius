@@ -2,7 +2,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
 .header-dropdown {
     min-width: 230px;
 }
@@ -22,10 +21,6 @@
     overflow-x: hidden;
 }
 
-.no-wrap {
-    white-space: nowrap;
-}
-
-.wrap {
-    white-space: normal
+.products-table tbody tr td {
+    text-align: center;
 }
