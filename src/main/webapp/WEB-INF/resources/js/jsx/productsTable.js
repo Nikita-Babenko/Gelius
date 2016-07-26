@@ -32,8 +32,8 @@ var ProductsTable = React.createClass({
     render: function () {
         return (
             <table className="table table-striped table-responsive table-bordered table-hover products-table">
-                {this.props.children}
-            </table>
+            {this.props.children}
+        </table>
         );
     }
 });
@@ -42,11 +42,11 @@ ProductsTable.Heading = React.createClass({
     render: function () {
         return (
             <th className="text-center">
-                <span>
-                    {this.props.heading.text}
-                </span>
-                {this.props.children}
-            </th>
+            <span>
+            {this.props.heading.text}
+        </span>
+        {this.props.children}
+        </th>
         );
     }
 });
@@ -78,40 +78,40 @@ ProductsTable.Heading.Dropdown = React.createClass({
 
         return (
             <div className="dropdown">
-                <button type="button" className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i className=" fa fa-chevron-down "></i>
-                </button>
-                <ul className={"dropdown-menu  header-dropdown " + this.props.position}>
-                    <li className="dropdown-header">Сортировка</li>
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-sort-amount-asc" aria-hidden="true">
-                                <span className="dropdown-text"> по возрастанию</span>
-                            </i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="fa fa-sort-amount-desc" aria-hidden="true">
-                                <span className="dropdown-text"> по убыванию</span>
-                            </i>
-                        </a>
-                    </li>
+            <button type="button" className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+            <i className=" fa fa-chevron-down "></i>
+            </button>
+            <ul className={"dropdown-menu  header-dropdown " + this.props.position}>
+            <li className="dropdown-header">Сортировка</li>
+            <li>
+            <a href="#">
+            <i className="fa fa-sort-amount-asc" aria-hidden="true">
+            <span className="dropdown-text"> по возрастанию</span>
+        </i>
+        </a>
+        </li>
+        <li>
+        <a href="#">
+            <i className="fa fa-sort-amount-desc" aria-hidden="true">
+            <span className="dropdown-text"> по убыванию</span>
+        </i>
+        </a>
+        </li>
 
-                    <li className="dropdown-header">Фильтры</li>
-                    <li className="input-group filter-search">
-                        <div className="input-group-addon">
-                            <i className="fa fa-search"></i>
-                        </div>
-                        <input className="form-control" id="search" name="search" type="text"
-                               value={this.state.searchString} onChange={this.__handleSearchChange}/>
-                    </li>
-                    <li>
-                        <ul className="scrollable-menu" role="menu">
-                            {filterCheckboxes}
-                        </ul>
-                    </li>
-                </ul>
+        <li className="dropdown-header">Фильтры</li>
+            <li className="input-group filter-search">
+            <div className="input-group-addon">
+            <i className="fa fa-search"></i>
+            </div>
+            <input className="form-control" id="search" name="search" type="text"
+        value={this.state.searchString} onChange={this.__handleSearchChange}/>
+        </li>
+        <li>
+        <ul className="scrollable-menu" role="menu">
+            {filterCheckboxes}
+            </ul>
+            </li>
+            </ul>
             </div>
 
         );
@@ -130,9 +130,9 @@ ProductsTable.Heading.Dropdown.FilterElement = React.createClass({
     render: function () {
         return (
             <li className="checkbox">
-                <label><input type="checkbox" checked={this.state.chacked} onChange={this.__changeSelection}
-                              name="checkbox" value={this.props.element.name}/>{this.props.element.name}</label>
-            </li>
+            <label><input type="checkbox" checked={this.state.chacked} onChange={this.__changeSelection}
+        name="checkbox" value={this.props.element.name}/>{this.props.element.name}</label>
+        </li>
         );
     },
 
@@ -149,15 +149,15 @@ ProductsTable.Headings = React.createClass({
         var headers = headersText.map(function (h, i) {
                 return (
                     <ProductsTable.Heading heading={h} key={i}>
-                        <ProductsTable.Heading.Dropdown position={(i < headersText.length/2) ? "pull-left" : "pull-right"}/>
-                    </ProductsTable.Heading>
+                    <ProductsTable.Heading.Dropdown position={(i < headersText.length/2) ? "pull-left" : "pull-right"}/>
+                </ProductsTable.Heading>
                 );
             }
         );
         return (
             <thead>
             <tr>
-                {headers}
+            {headers}
             </tr>
             </thead>
         );
@@ -169,6 +169,7 @@ ProductsTable.Row = React.createClass({
     render: function () {
         return (
             <tr>
+<<<<<<< Updated upstream
                 <td>{this.props.row.id}</td>
                 <td>{this.props.row.clients.companyName}</td>
                 <td>{this.props.row.productsName}</td>
@@ -181,6 +182,20 @@ ProductsTable.Row = React.createClass({
                 <td>{this.props.row.colour}</td>
                 <td>{this.props.row.print}</td>
             </tr>
+=======
+            <td>{this.props.row.id}</td>
+        <td>{this.props.row.clients.companyName}</td>
+        <td>{this.props.row.productsName}</td>
+        <td>{this.props.row.productsType}</td>
+        <td>{this.props.row.innerLength}</td>
+        <td>{this.props.row.innerWidth}</td>
+        <td>{this.props.row.innerHeight}</td>
+        <td>{this.props.row.grade}</td>
+        <td>{this.props.row.profile}</td>
+        <td>{this.props.row.colour}</td>
+        <td>{this.props.row.print}</td>
+        </tr>
+>>>>>>> Stashed changes
         );
     }
 });
@@ -221,8 +236,13 @@ var App = React.createClass({
     render: function () {
         return (
             <ProductsTable>
+<<<<<<< Updated upstream
                 <ProductsTable.Headings headings={productTableColumnNames}/>
                 <ProductsTable.Rows />
+=======
+            <ProductsTable.Headings headings={productTableColumnNames}/>
+            <ProductsTable.Rows />
+>>>>>>> Stashed changes
             </ProductsTable>
         )
     }
