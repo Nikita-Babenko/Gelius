@@ -1,6 +1,6 @@
 var productTableColumnNames = [
     {name: 'id', text: '№'},
-    {name: 'client', text: 'Клиент'},
+    {name: 'clients', text: 'Клиент'},
     {name: 'productsName', text: 'Наименование продукции'},
     {name: 'productsType', text: 'Тип изделия'},
     {name: 'innerLength', text: 'Длина внутренняя'},
@@ -12,69 +12,6 @@ var productTableColumnNames = [
     {name: 'print', text: 'Печать'}
 ];
 
-var testProducts = [
-    {
-        id: '0001',
-        client: 'АВК',
-        productsName: '',
-        productsType: 'Ящик(4 клапана)',
-        innerLength: 385,
-        innerWidth: 300,
-        innerHeight: 180,
-        grade: 'Т-21',
-        profile: 'В',
-        colour: 'бур/бур',
-        print: 'АВК14'
-    }, {
-        id: '0002',
-        client: 'Петрущенко',
-        productsName: '',
-        productsType: 'Лоток',
-        innerLength: 400,
-        innerWidth: 300,
-        innerHeight: 145,
-        grade: 'П-31',
-        profile: 'ВЕ',
-        colour: 'бур/бур',
-        print: 'Яблоки'
-    }, {
-        id: '0003',
-        client: 'Ласунка',
-        productsName: '',
-        productsType: 'Ящик(4 клапана)',
-        innerLength: 410,
-        innerWidth: 300,
-        innerHeight: 180,
-        grade: 'Т-21',
-        profile: 'В',
-        colour: 'бур/бур',
-        print: 'Ласунка'
-    }, {
-        id: '0004',
-        client: 'Ласунка',
-        productsName: '',
-        productsType: 'Ящик(4 клапана)',
-        innerLength: 410,
-        innerWidth: 300,
-        innerHeight: 180,
-        grade: 'Т-21',
-        profile: 'В',
-        colour: 'бур/бур',
-        print: 'Ласунка'
-    }, {
-        id: '0005',
-        client: 'Ласунка',
-        productsName: '',
-        productsType: 'Ящик(4 клапана)',
-        innerLength: 410,
-        innerWidth: 300,
-        innerHeight: 180,
-        grade: 'Т-21',
-        profile: 'В',
-        colour: 'бур/бур',
-        print: 'Ласунка'
-    }
-];
 var testFilterDataGrade = [
     {id: 1, name: 'Т-21'},
     {id: 2, name: 'Т-21КРАШ'},
@@ -233,7 +170,7 @@ ProductsTable.Row = React.createClass({
         return (
             <tr>
                 <td>{this.props.row.id}</td>
-                <td>{this.props.row.client}</td>
+                <td>{this.props.row.clients.companyName}</td>
                 <td>{this.props.row.productsName}</td>
                 <td>{this.props.row.productsType}</td>
                 <td>{this.props.row.innerLength}</td>
@@ -249,8 +186,27 @@ ProductsTable.Row = React.createClass({
 });
 
 ProductsTable.Rows = React.createClass({
+    getInitialState: function () {
+        return {products: []};
+    },
+
+    componentDidMount: function () {
+        this.__loadProductsFromServer('register/products');
+    },
+
+    __loadProductsFromServer(url) {
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function (productsData) {
+                this.setState({products: productsData});
+            }.bind(this)
+        });
+    },
+
     render: function () {
-        var rows = this.props.rows.map(function (r, i) {
+        var allProducts = this.state.products;
+        var rows = allProducts.map(function (r, i) {
             return (<ProductsTable.Row row={r} key={i}/>);
         });
         return (
@@ -266,7 +222,7 @@ var App = React.createClass({
         return (
             <ProductsTable>
                 <ProductsTable.Headings headings={productTableColumnNames}/>
-                <ProductsTable.Rows rows={testProducts}/>
+                <ProductsTable.Rows />
             </ProductsTable>
         )
     }
