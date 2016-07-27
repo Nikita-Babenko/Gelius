@@ -3,6 +3,7 @@ package ua.skillsup.gelius.dto;
 import java.util.List;
 
 public class ProductsSearchFilter {
+    private List<Integer> ids;
 
     private List<String> clients;
 
@@ -25,6 +26,14 @@ public class ProductsSearchFilter {
     private List<String> prints;
 
     public ProductsSearchFilter() {
+    }
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
     }
 
     public List<String> getClients() {
@@ -108,8 +117,25 @@ public class ProductsSearchFilter {
     }
 
     public Boolean isEmpty() {
-        return clients.isEmpty() && names.isEmpty() && types.isEmpty() && lengths.isEmpty()
+        return ids.isEmpty() && clients.isEmpty() && names.isEmpty() && types.isEmpty() && lengths.isEmpty()
                 && widths.isEmpty() && heights.isEmpty() && grades.isEmpty() && profiles.isEmpty()
                 && colours.isEmpty() && prints.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return "ProductsSearchFilter{" +
+                "ids=" + ids +
+                ", clients=" + clients +
+                ", names=" + names +
+                ", types=" + types +
+                ", lengths=" + lengths +
+                ", widths=" + widths +
+                ", heights=" + heights +
+                ", grades=" + grades +
+                ", profiles=" + profiles +
+                ", colours=" + colours +
+                ", prints=" + prints +
+                '}';
     }
 }

@@ -1,17 +1,30 @@
-.dropdown-text {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .header-dropdown {
     min-width: 230px;
 }
 
+.sorting-option {
+    padding: 7px 0px 7px 20px;
+}
+
+.sorting-option:hover {
+    background-color: #e9e9e9;
+}
+
+.sorting-option a i span {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #555;
+}
+
+.sorting-option a i {
+    color: #555;
+}
+
 .filter-search {
-    margin: 0px 10px 0px 10px;
+    margin: 10px 15px 10px 15px;
     height: 20px;
 }
 
-.filter-search input{
+.filter-search input {
     height: 30px;
 }
 
@@ -23,8 +36,12 @@
 
 .products-table tbody tr td {
     text-align: center;
-<<<<<<< Updated upstream
 }
-=======
+
+.display {
+    display: inline;
 }
->>>>>>> Stashed changes
+
+.hide {
+    display: none;
+}
