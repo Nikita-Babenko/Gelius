@@ -142,7 +142,7 @@ var Filtering = React.createClass({
         this.__loadFilterParametersFromServer();
     },
     __loadFilterParametersFromServer: function () {
-        var url = '/register/products/filter/' + this.props.filterName;
+        var url = '/register/products/filterParameters/' + this.props.filterName;
         $.ajax({
             url: url,
             dataType: 'json',
