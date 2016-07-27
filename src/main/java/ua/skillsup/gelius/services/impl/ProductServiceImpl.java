@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
+import ua.skillsup.gelius.dao.impl.ProductFilterImpl;
 import ua.skillsup.gelius.dto.ProductDto;
+import ua.skillsup.gelius.dto.ProductsSearchFilter;
 import ua.skillsup.gelius.services.ProductService;
 
 import java.util.List;
@@ -13,6 +15,9 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductDao productDao;
+
+    @Autowired
+    ProductFilterImpl productFilter;
 
     @Override
     @Transactional(readOnly = true)
@@ -40,5 +45,8 @@ public class ProductServiceImpl implements ProductService {
         return productDao.findById(id);
     }
 
-
+    @Override
+    public List<ProductDto> getProductsByFilter(ProductsSearchFilter searchFilter) {
+        return productFilter.findByFilter(searchFilter);
+    }
 }
