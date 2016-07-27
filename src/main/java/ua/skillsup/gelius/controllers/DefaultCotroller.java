@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DefaultCotroller {
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String index() {
+    private String index() {
         return "index";
     }
 
