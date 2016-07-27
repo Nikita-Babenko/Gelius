@@ -17,6 +17,7 @@ import java.util.List;
 
 import static ua.skillsup.gelius.converters.EntityDtoConverter.convert;
 
+@SuppressWarnings("ALL")
 @Repository
 @Transactional
 public class ProductDaoImpl implements ProductDao {
