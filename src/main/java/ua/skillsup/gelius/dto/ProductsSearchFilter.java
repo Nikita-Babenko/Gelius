@@ -1,9 +1,9 @@
 package ua.skillsup.gelius.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsSearchFilter {
-    private List<Integer> ids;
 
     private List<String> clients;
 
@@ -26,14 +26,16 @@ public class ProductsSearchFilter {
     private List<String> prints;
 
     public ProductsSearchFilter() {
-    }
-
-    public List<Integer> getIds() {
-        return ids;
-    }
-
-    public void setIds(List<Integer> ids) {
-        this.ids = ids;
+        clients = new ArrayList<>();
+        names = new ArrayList<>();
+        types = new ArrayList<>();
+        lengths = new ArrayList<>();
+        widths = new ArrayList<>();
+        heights = new ArrayList<>();
+        grades = new ArrayList<>();
+        profiles = new ArrayList<>();
+        colours = new ArrayList<>();
+        prints = new ArrayList<>();
     }
 
     public List<String> getClients() {
@@ -117,16 +119,22 @@ public class ProductsSearchFilter {
     }
 
     public Boolean isEmpty() {
-        return ids.isEmpty() && clients.isEmpty() && names.isEmpty() && types.isEmpty() && lengths.isEmpty()
-                && widths.isEmpty() && heights.isEmpty() && grades.isEmpty() && profiles.isEmpty()
-                && colours.isEmpty() && prints.isEmpty();
+        return ((clients == null) ? true : clients.isEmpty())
+               && ((names == null) ? true : names.isEmpty())
+               && ((types == null) ? true : types.isEmpty())
+               && ((lengths == null) ? true : lengths.isEmpty())
+               && ((widths == null) ? true : widths.isEmpty())
+               && ((heights == null) ? true : heights.isEmpty())
+               && ((grades == null) ? true : grades.isEmpty())
+               && ((profiles == null) ? true : profiles.isEmpty())
+               && ((colours == null) ? true : colours.isEmpty())
+               && ((prints == null) ? true : prints.isEmpty());
     }
 
     @Override
     public String toString() {
         return "ProductsSearchFilter{" +
-                "ids=" + ids +
-                ", clients=" + clients +
+                "clients=" + clients +
                 ", names=" + names +
                 ", types=" + types +
                 ", lengths=" + lengths +
