@@ -140,44 +140,64 @@ public class ProductDaoImpl implements ProductDao {
         if (!filter.isEmpty()) {
             List<String> clients = filter.getClients();
             for (String client : clients){
-                criteria.add(Restrictions.eq("client", client));
+                if (client!=null) {
+                    criteria.add(Restrictions.eq("client", client));
+                }
             }
             List<String> names = filter.getNames();
             for (String name : names){
-                criteria.add(Restrictions.eq("product_name", name));
+                if (name!=null) {
+                    criteria.add(Restrictions.eq("product_name", name));
+                }
             }
             List<String> types = filter.getTypes();
             for (String type : types){
-                criteria.add(Restrictions.eq("product_type", type));
+                if (type!=null) {
+                    criteria.add(Restrictions.eq("product_type", type));
+                }
             }
             List<Integer> lengths = filter.getLengths();
             for (Integer length : lengths){
-                criteria.add(Restrictions.eq("inner_length", length));
+                if (length!=null) {
+                    criteria.add(Restrictions.eq("inner_length", length));
+                }
             }
             List<Integer> widths = filter.getWidths();
             for (Integer width : widths){
-                criteria.add(Restrictions.eq("inner_width", width));
+                if (width!=null) {
+                    criteria.add(Restrictions.eq("inner_width", width));
+                }
             }
             List<Integer> heights = filter.getHeights();
             for (Integer height : heights){
-                criteria.add(Restrictions.eq("inner_height", height));
+                if (height!=null) {
+                    criteria.add(Restrictions.eq("inner_height", height));
+                }
             }
 
             List<String> grades = filter.getGrades();
             for (String grade : grades){
-                criteria.add(Restrictions.eq("grade", grade));
+                if (grade!=null) {
+                    criteria.add(Restrictions.eq("grade", grade));
+                }
             }
             List<String> profiles = filter.getProfiles();
             for (String profile : profiles){
-                criteria.add(Restrictions.eq("profile", profile));
+                if (profile!=null) {
+                    criteria.add(Restrictions.eq("profile", profile));
+                }
             }
             List<String> colours = filter.getColours();
             for (String colour : colours){
-                criteria.add(Restrictions.eq("colour", colour));
+                if (colour!=null) {
+                    criteria.add(Restrictions.eq("colour", colour));
+                }
             }
             List<String> prints = filter.getPrints();
             for (String print : prints){
-                criteria.add(Restrictions.eq("print", print));
+                if (print!=null) {
+                    criteria.add(Restrictions.eq("print", print));
+                }
             }
         }
         List <Product> products = criteria.list();
