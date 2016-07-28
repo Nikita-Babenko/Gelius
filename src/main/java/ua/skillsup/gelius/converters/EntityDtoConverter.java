@@ -1,7 +1,7 @@
 package ua.skillsup.gelius.converters;
 
 import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.model.entities.Product;
+import ua.skillsup.gelius.dao.entities.Product;
 
 public final class EntityDtoConverter {
 

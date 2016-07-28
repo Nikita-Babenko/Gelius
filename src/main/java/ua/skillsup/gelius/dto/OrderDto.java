@@ -1,7 +1,7 @@
 package ua.skillsup.gelius.dto;
 
-import ua.skillsup.gelius.model.entities.Client;
-import ua.skillsup.gelius.model.entities.Request;
+import ua.skillsup.gelius.dao.entities.Client;
+import ua.skillsup.gelius.dao.entities.Request;
 
 import java.time.LocalDate;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package ua.skillsup.gelius.dto;
 
-import ua.skillsup.gelius.model.entities.Client;
+import ua.skillsup.gelius.dao.entities.Client;
 
 import java.util.Objects;
 

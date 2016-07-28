@@ -1,10 +1,10 @@
 package ua.skillsup.gelius.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.dao.ProductFilter;
 import ua.skillsup.gelius.dto.ProductDto;
 import ua.skillsup.gelius.dto.ProductsSearchFilter;
 import ua.skillsup.gelius.services.ProductService;
@@ -13,11 +13,11 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    @Qualifier("productDaoImpl")
     @Autowired
     ProductDao productDao;
 
-    @Autowired
-    ProductFilter productFilter;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -47,6 +47,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getProductsByFilter(ProductsSearchFilter searchFilter) {
-        return productFilter.findByFilter(searchFilter);
+        return productDao.findByFilter(searchFilter);
     }
 }

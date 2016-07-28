@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.model.entities.Client;
-import ua.skillsup.gelius.model.entities.Product;
-import ua.skillsup.gelius.model.filter.ProductFilter;
+import ua.skillsup.gelius.dto.ProductsSearchFilter;
+import ua.skillsup.gelius.dao.entities.Client;
+import ua.skillsup.gelius.dao.entities.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,29 +135,54 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<ProductDto> findByFilter(ProductFilter filter) {
+    public List<ProductDto> findByFilter(ProductsSearchFilter filter) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        if (filter.getHeightFrom()!= null){
-            criteria.add(Restrictions.gt("height", filter.getHeightFrom()));
+        if (!filter.isEmpty()) {
+            List<String> clients = filter.getClients();
+            for (String client : clients){
+                criteria.add(Restrictions.eq("client", client));
+            }
+            List<String> names = filter.getNames();
+            for (String name : names){
+                criteria.add(Restrictions.eq("product_name", name));
+            }
+            List<String> types = filter.getTypes();
+            for (String type : types){
+                criteria.add(Restrictions.eq("product_type", type));
+            }
+            List<Integer> lengths = filter.getLengths();
+            for (Integer length : lengths){
+                criteria.add(Restrictions.eq("inner_length", length));
+            }
+            List<Integer> widths = filter.getWidths();
+            for (Integer width : widths){
+                criteria.add(Restrictions.eq("inner_width", width));
+            }
+            List<Integer> heights = filter.getHeights();
+            for (Integer height : heights){
+                criteria.add(Restrictions.eq("inner_height", height));
+            }
+
+            List<String> grades = filter.getGrades();
+            for (String grade : grades){
+                criteria.add(Restrictions.eq("grade", grade));
+            }
+            List<String> profiles = filter.getProfiles();
+            for (String profile : profiles){
+                criteria.add(Restrictions.eq("profile", profile));
+            }
+            List<String> colours = filter.getColours();
+            for (String colour : colours){
+                criteria.add(Restrictions.eq("colour", colour));
+            }
+            List<String> prints = filter.getPrints();
+            for (String print : prints){
+                criteria.add(Restrictions.eq("print", print));
+            }
         }
-        if (filter.getHeightTo() != null){
-            criteria.add(Restrictions.lt("height", filter.getHeightTo()));
-        }
-        if (filter.getWidthFrom() != null){
-            criteria.add(Restrictions.gt("width", filter.getWidthFrom()));
-        }
-        if (filter.getWidthTo() != null){
-            criteria.add(Restrictions.lt("width", filter.getWidthTo()));
-        }
-        if (filter.getLengthFrom() != null){
-            criteria.add(Restrictions.gt("weight", filter.getLengthFrom()));
-        }
-        if (filter.getLengthTo() != null){
-            criteria.add(Restrictions.lt("weight", filter.getLengthTo()));
-        }
-        List<Product> products = criteria.list();
+        List <Product> products = criteria.list();
         List<ProductDto> result = new ArrayList<ProductDto>(products.size());
-        for (Product product : products){
+        for (Product product : products) {
             result.add(convert(product));
         }
         return result;

@@ -1,8 +1,8 @@
 package ua.skillsup.gelius.dao;
 
 import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.model.entities.Client;
-import ua.skillsup.gelius.model.filter.ProductFilter;
+import ua.skillsup.gelius.dto.ProductsSearchFilter;
+import ua.skillsup.gelius.dao.entities.Client;
 
 import java.util.List;
 
@@ -29,5 +29,5 @@ public interface ProductDao {
 
     List<ProductDto> findByActivity(Character activity);
 
-    List<ProductDto> findByFilter(ProductFilter filter);
+    List<ProductDto> findByFilter(ProductsSearchFilter filter);
 }

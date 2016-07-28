@@ -1,4 +1,4 @@
-package ua.skillsup.gelius.model.entities;
+package ua.skillsup.gelius.dao.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
