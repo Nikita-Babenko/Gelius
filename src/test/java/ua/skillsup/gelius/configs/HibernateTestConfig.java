@@ -31,7 +31,7 @@ public class HibernateTestConfig {
     public LocalSessionFactoryBean sessionFactory() {
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ua.skillsup.gelius.model");
+        sessionFactory.setPackagesToScan("ua.skillsup.gelius.dao");
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         hibernateProperties.put("hibernate.show_sql", "true");
