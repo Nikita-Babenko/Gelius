@@ -2,15 +2,17 @@ package ua.skillsup.gelius.dao.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.dto.ProductsSearchFilter;
 import ua.skillsup.gelius.dao.entities.Client;
 import ua.skillsup.gelius.dao.entities.Product;
+import ua.skillsup.gelius.dto.ProductDto;
+import ua.skillsup.gelius.dto.ProductsSearchFilter;
+import ua.skillsup.gelius.dto.ProductsSortingDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,31 +149,31 @@ public class ProductDaoImpl implements ProductDao {
             List<String> names = filter.getNames();
             for (String name : names){
                 if (name!=null) {
-                    criteria.add(Restrictions.eq("product_name", name));
+                    criteria.add(Restrictions.eq("productsName", name));
                 }
             }
             List<String> types = filter.getTypes();
             for (String type : types){
                 if (type!=null) {
-                    criteria.add(Restrictions.eq("product_type", type));
+                    criteria.add(Restrictions.eq("productsType", type));
                 }
             }
             List<Integer> lengths = filter.getLengths();
             for (Integer length : lengths){
                 if (length!=null) {
-                    criteria.add(Restrictions.eq("inner_length", length));
+                    criteria.add(Restrictions.eq("innerLength", length));
                 }
             }
             List<Integer> widths = filter.getWidths();
             for (Integer width : widths){
                 if (width!=null) {
-                    criteria.add(Restrictions.eq("inner_width", width));
+                    criteria.add(Restrictions.eq("innerWidth", width));
                 }
             }
             List<Integer> heights = filter.getHeights();
             for (Integer height : heights){
                 if (height!=null) {
-                    criteria.add(Restrictions.eq("inner_height", height));
+                    criteria.add(Restrictions.eq("innerHeight", height));
                 }
             }
 
@@ -198,6 +200,92 @@ public class ProductDaoImpl implements ProductDao {
                 if (print!=null) {
                     criteria.add(Restrictions.eq("print", print));
                 }
+            }
+        }
+        List <Product> products = criteria.list();
+        List<ProductDto> result = new ArrayList<ProductDto>(products.size());
+        for (Product product : products) {
+            result.add(convert(product));
+        }
+        return result;
+    }
+
+    @Override
+    public List<ProductDto> sortingBySelectionOrderAsc(ProductsSortingDTO sorting) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
+        if (sorting.notNull()){
+           if (sorting.getClient()!=null){
+               criteria.addOrder(Order.asc(sorting.getClient()));
+           }
+           if (sorting.getProductsName()!=null){
+               criteria.addOrder(Order.asc(sorting.getProductsName()));
+           }
+            if (sorting.getProductsType()!=null){
+               criteria.addOrder(Order.asc(sorting.getProductsType()));
+           }
+            if (sorting.getInnerLength()!=null){
+               criteria.addOrder(Order.asc(sorting.getInnerLength().toString()));
+           }
+            if (sorting.getInnerWidth()!=null){
+               criteria.addOrder(Order.asc(sorting.getInnerWidth().toString()));
+           }
+            if (sorting.getInnerHeight()!=null){
+               criteria.addOrder(Order.asc(sorting.getInnerHeight().toString()));
+           }
+            if (sorting.getGrade()!=null){
+                criteria.addOrder(Order.asc(sorting.getGrade()));
+            }
+            if (sorting.getProfile()!=null){
+                criteria.addOrder(Order.asc(sorting.getProfile()));
+            }
+            if (sorting.getColour()!=null){
+                criteria.addOrder(Order.asc(sorting.getColour()));
+            }
+            if (sorting.getPrint()!=null){
+                criteria.addOrder(Order.asc(sorting.getPrint()));
+            }
+        }
+        List <Product> products = criteria.list();
+        List<ProductDto> result = new ArrayList<ProductDto>(products.size());
+        for (Product product : products) {
+            result.add(convert(product));
+        }
+        return result;
+    }
+
+    @Override
+    public List<ProductDto> sortingBySelectionOrderDesc(ProductsSortingDTO sorting) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
+        if (sorting.notNull()){
+            if (sorting.getClient()!=null){
+                criteria.addOrder(Order.desc(sorting.getClient()));
+            }
+            if (sorting.getProductsName()!=null){
+                criteria.addOrder(Order.desc(sorting.getProductsName()));
+            }
+            if (sorting.getProductsType()!=null){
+                criteria.addOrder(Order.desc(sorting.getProductsType()));
+            }
+            if (sorting.getInnerLength()!=null){
+                criteria.addOrder(Order.desc(sorting.getInnerLength().toString()));
+            }
+            if (sorting.getInnerWidth()!=null){
+                criteria.addOrder(Order.desc(sorting.getInnerWidth().toString()));
+            }
+            if (sorting.getInnerHeight()!=null){
+                criteria.addOrder(Order.desc(sorting.getInnerHeight().toString()));
+            }
+            if (sorting.getGrade()!=null){
+                criteria.addOrder(Order.desc(sorting.getGrade()));
+            }
+            if (sorting.getProfile()!=null){
+                criteria.addOrder(Order.desc(sorting.getProfile()));
+            }
+            if (sorting.getColour()!=null){
+                criteria.addOrder(Order.desc(sorting.getColour()));
+            }
+            if (sorting.getPrint()!=null){
+                criteria.addOrder(Order.desc(sorting.getPrint()));
             }
         }
         List <Product> products = criteria.list();
