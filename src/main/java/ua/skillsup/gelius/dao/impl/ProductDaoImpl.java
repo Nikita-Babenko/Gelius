@@ -138,77 +138,47 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<ProductDto> findByFilter(ProductsSearchFilter filter) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        if (!filter.isEmpty()) {
-            List<String> clients = filter.getClients();
-            for (String client : clients){
-                if (client!=null) {
-                    criteria.add(Restrictions.eq("client", client));
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class, "product");
+            if (!filter.isEmpty()) {
+                criteria.createAlias("product.client", "client");
+                if (!filter.getClients().isEmpty()) {
+                    criteria.add(Restrictions.in("client.companyName", filter.getClients()));
+                }
+                if (!filter.getNames().isEmpty()) {
+                    criteria.add(Restrictions.in("product.name", filter.getNames()));
+                }
+                if (!filter.getTypes().isEmpty()) {
+                    criteria.add(Restrictions.in("product.type", filter.getTypes()));
+                }
+                if (!filter.getLengths().isEmpty()) {
+                    criteria.add(Restrictions.in("product.length", filter.getLengths()));
+                }
+                if (!filter.getWidths().isEmpty()) {
+                    criteria.add(Restrictions.in("product.width", filter.getWidths()));
+                }
+                if (!filter.getHeights().isEmpty()) {
+                    criteria.add(Restrictions.in("product.height", filter.getHeights()));
+                }
+                if (!filter.getGrades().isEmpty()) {
+                    criteria.add(Restrictions.in("product.grade", filter.getGrades()));
+                }
+                if (!filter.getProfiles().isEmpty()) {
+                    criteria.add(Restrictions.in("product.profile", filter.getProfiles()));
+                }
+                if (!filter.getColours().isEmpty()) {
+                    criteria.add(Restrictions.in("product.colour", filter.getColours()));
+                }
+                if (!filter.getPrints().isEmpty()) {
+                    criteria.add(Restrictions.in("product.print", filter.getPrints()));
                 }
             }
-            List<String> names = filter.getNames();
-            for (String name : names){
-                if (name!=null) {
-                    criteria.add(Restrictions.eq("productsName", name));
+                List <Product> products = criteria.list();
+                List<ProductDto> result = new ArrayList<ProductDto>(products.size());
+                for (Product product : products) {
+                    result.add(convert(product));
                 }
-            }
-            List<String> types = filter.getTypes();
-            for (String type : types){
-                if (type!=null) {
-                    criteria.add(Restrictions.eq("productsType", type));
-                }
-            }
-            List<Integer> lengths = filter.getLengths();
-            for (Integer length : lengths){
-                if (length!=null) {
-                    criteria.add(Restrictions.eq("innerLength", length));
-                }
-            }
-            List<Integer> widths = filter.getWidths();
-            for (Integer width : widths){
-                if (width!=null) {
-                    criteria.add(Restrictions.eq("innerWidth", width));
-                }
-            }
-            List<Integer> heights = filter.getHeights();
-            for (Integer height : heights){
-                if (height!=null) {
-                    criteria.add(Restrictions.eq("innerHeight", height));
-                }
-            }
-
-            List<String> grades = filter.getGrades();
-            for (String grade : grades){
-                if (grade!=null) {
-                    criteria.add(Restrictions.eq("grade", grade));
-                }
-            }
-            List<String> profiles = filter.getProfiles();
-            for (String profile : profiles){
-                if (profile!=null) {
-                    criteria.add(Restrictions.eq("profile", profile));
-                }
-            }
-            List<String> colours = filter.getColours();
-            for (String colour : colours){
-                if (colour!=null) {
-                    criteria.add(Restrictions.eq("colour", colour));
-                }
-            }
-            List<String> prints = filter.getPrints();
-            for (String print : prints){
-                if (print!=null) {
-                    criteria.add(Restrictions.eq("print", print));
-                }
-            }
+                return result;
         }
-        List <Product> products = criteria.list();
-        List<ProductDto> result = new ArrayList<ProductDto>(products.size());
-        for (Product product : products) {
-            result.add(convert(product));
-        }
-        return result;
-    }
 
     @Override
     public List<ProductDto> sortingBySelectionOrderAsc(ProductsSortingDTO sorting) {
@@ -287,7 +257,7 @@ public class ProductDaoImpl implements ProductDao {
             if (sorting.getPrint()!=null){
                 criteria.addOrder(Order.desc(sorting.getPrint()));
             }
-        }
+    }
         List <Product> products = criteria.list();
         List<ProductDto> result = new ArrayList<ProductDto>(products.size());
         for (Product product : products) {
