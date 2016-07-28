@@ -2,9 +2,11 @@ package ua.skillsup.gelius.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.dto.ProductsSearchFilter;
 import ua.skillsup.gelius.services.ProductService;
 
 import java.util.Arrays;
@@ -26,12 +28,6 @@ public class RegisterController {
         return productService.getAllProducts();
     }
 
-    @RequestMapping(value = "/register/products/filtrate", method = RequestMethod.POST)
-    @ResponseBody
-    private ProductsSearchFilter filtrate(@RequestBody ProductsSearchFilter productsSearchFilter) {
-        return productsSearchFilter;
-    }
-
     @RequestMapping(path = "/register/products/filterParameters/{filterName}", method = RequestMethod.GET)
     @ResponseBody
     private List getFilterParameters(@PathVariable("filterName") String filterName) {
@@ -50,7 +46,7 @@ public class RegisterController {
                 parameters = Arrays.asList("Вкладыш", "Лоток", "Перегородка", "Ящик (дно)", "Ящик 4-х клапанный большой", "Ящик 4-х клапанный малый");
                 break;
             case "lengths":
-                parameters = Arrays.asList(410, 410, 385, 350, 340);
+                parameters = Arrays.asList(410, 400, 385, 350, 340);
                 break;
             case "widths":
                 parameters = Arrays.asList(300, 272, 252, 222);

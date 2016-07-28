@@ -158,6 +158,8 @@ var Filtering = React.createClass({
         var onFilterClick = this.__onFilterSelected;
         if (searchString.length > 0) {
             filterData = filterData.filter(function (d) {
+                if (typeof d === 'number')
+                    d = d + '';
                 return d.toLowerCase().match(searchString);
             });
         }
