@@ -1,7 +1,7 @@
 package ua.skillsup.gelius.dao;
 
 import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.dto.ProductsSearchFilter;
+import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
 import ua.skillsup.gelius.dao.entities.Client;
 import ua.skillsup.gelius.dto.ProductsSortingDTO;
 
@@ -30,7 +30,8 @@ public interface ProductDao {
 
     List<ProductDto> findByActivity(Character activity);
 
-    List<ProductDto> findByFilter(ProductsSearchFilter filter);
+    List<ProductDto> findByFilter(ProductsFilteringAndSortingDTO filter);
+    List findFilterParameters(ProductsFilteringAndSortingDTO filter, String filterName);
     List<ProductDto> sortingBySelectionOrderAsc(ProductsSortingDTO sorting);
     List<ProductDto> sortingBySelectionOrderDesc(ProductsSortingDTO sorting);
 }

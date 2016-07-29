@@ -29,7 +29,7 @@
 
 
                     <div class="list-group text-center">
-                        <a href="/register" class="list-group-item">Реестр продукции</a>
+                        <a href="/products/register" class="list-group-item">Реестр продукции</a>
                         <a href="#" class="list-group-item disabled">Страница еще не доступна</a>
                     </div>
                 </div>

@@ -3,7 +3,9 @@ package ua.skillsup.gelius.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsSearchFilter {
+public class ProductsFilteringAndSortingDTO {
+
+    private List<Long> ids;
 
     private List<String> clients;
 
@@ -25,7 +27,8 @@ public class ProductsSearchFilter {
 
     private List<String> prints;
 
-    public ProductsSearchFilter() {
+    public ProductsFilteringAndSortingDTO() {
+        ids = new ArrayList<>();
         clients = new ArrayList<>();
         names = new ArrayList<>();
         types = new ArrayList<>();
@@ -36,6 +39,14 @@ public class ProductsSearchFilter {
         profiles = new ArrayList<>();
         colours = new ArrayList<>();
         prints = new ArrayList<>();
+    }
+
+    public List<Long> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Long> ids) {
+        this.ids = ids;
     }
 
     public List<String> getClients() {
@@ -119,22 +130,24 @@ public class ProductsSearchFilter {
     }
 
     public Boolean isEmpty() {
-        return ((clients == null) ? true : clients.isEmpty())
-               && ((names == null) ? true : names.isEmpty())
-               && ((types == null) ? true : types.isEmpty())
-               && ((lengths == null) ? true : lengths.isEmpty())
-               && ((widths == null) ? true : widths.isEmpty())
-               && ((heights == null) ? true : heights.isEmpty())
-               && ((grades == null) ? true : grades.isEmpty())
-               && ((profiles == null) ? true : profiles.isEmpty())
-               && ((colours == null) ? true : colours.isEmpty())
-               && ((prints == null) ? true : prints.isEmpty());
+        return ((ids == null) ? true : ids.isEmpty())
+                && ((clients == null) ? true : clients.isEmpty())
+                && ((names == null) ? true : names.isEmpty())
+                && ((types == null) ? true : types.isEmpty())
+                && ((lengths == null) ? true : lengths.isEmpty())
+                && ((widths == null) ? true : widths.isEmpty())
+                && ((heights == null) ? true : heights.isEmpty())
+                && ((grades == null) ? true : grades.isEmpty())
+                && ((profiles == null) ? true : profiles.isEmpty())
+                && ((colours == null) ? true : colours.isEmpty())
+                && ((prints == null) ? true : prints.isEmpty());
     }
 
     @Override
     public String toString() {
-        return "ProductsSearchFilter{" +
-                "clients=" + clients +
+        return "ProductsFilteringAndSortingDTO{" +
+                "ids=" + ids +
+                ", clients=" + clients +
                 ", names=" + names +
                 ", types=" + types +
                 ", lengths=" + lengths +

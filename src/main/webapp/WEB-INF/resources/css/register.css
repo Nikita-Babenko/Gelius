@@ -1,3 +1,7 @@
+.products-panel {
+    min-height: 500px;
+}
+
 .header-dropdown {
     min-width: 230px;
 }

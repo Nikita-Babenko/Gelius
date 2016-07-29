@@ -29,7 +29,7 @@ var sendSearchFilterObject = function () {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/register/products/filtrate",
+        url: "/products/filtrate",
         data: JSON.stringify(searchFilter),
         dataType: 'json',
         timeout: 100000,
@@ -38,7 +38,6 @@ var sendSearchFilterObject = function () {
         },
         error: function (e) {
             console.log("ERROR: ", e);
-            display(e);
         }
     });
 };
@@ -94,7 +93,8 @@ ProductsTable.Heading.Dropdown = React.createClass({
                 </button>
                 <div className={"dropdown-menu  header-dropdown " + this.props.position}>
                     <Sorting />
-                    <Filtering filterName={this.props.filterName} enableFiltering={this.__enableFilteringStatus}/>
+                    <Filtering sendFilter={this.props.sendFilter} filterName={this.props.filterName}
+                               enableFiltering={this.__enableFilteringStatus}/>
                 </div>
             </div>
         );
@@ -142,12 +142,20 @@ var Filtering = React.createClass({
         this.__loadFilterParametersFromServer();
     },
     __loadFilterParametersFromServer: function () {
-        var url = '/register/products/filterParameters/' + this.props.filterName;
+        var url = '/products/filterParameters/' + this.props.filterName;
         $.ajax({
+
+            type: "POST",
+            contentType: "application/json",
             url: url,
+            data: JSON.stringify(searchFilter),
             dataType: 'json',
-            success: function (newData) {
-                this.setState({filterData: newData});
+            timeout: 100000,
+            success: function (productsData) {
+                this.setState({filterData: productsData.result});
+            }.bind(this),
+            error: function (e) {
+                console.log("ERROR: ", e);
             }.bind(this)
         });
     },
@@ -163,10 +171,15 @@ var Filtering = React.createClass({
                 return d.toLowerCase().match(searchString);
             });
         }
+        var loadParameters = this.__loadFilterParametersFromServer;
         var filterName = this.props.filterName;
+        var filter = this.props.sendFilter;
         var filterCheckboxes = filterData.map(function (e) {
             return (
-                <ProductsTable.Heading.Dropdown.FilterElement filterName={filterName} element={e}
+                <ProductsTable.Heading.Dropdown.FilterElement sendFilter={filter}
+                                                              loadParameters={loadParameters}
+                                                              filterName={filterName}
+                                                              element={e}
                                                               filterSelected={onFilterClick}/>
             );
         });
@@ -228,17 +241,20 @@ ProductsTable.Heading.Dropdown.FilterElement = React.createClass({
         } else {
             filterParameters.splice($.inArray(value, filterParameters), 1);
         }
-        sendSearchFilterObject();
+        this.props.sendFilter();
+
     }
 });
 
 ProductsTable.Headings = React.createClass({
     render: function () {
         var headersText = this.props.headings;
+        var filter = this.props.sendFilter;
         var headers = headersText.map(function (h, i) {
                 return (
                     <ProductsTable.Heading heading={h} key={i}>
-                        <ProductsTable.Heading.Dropdown filterName={h.name}
+                        <ProductsTable.Heading.Dropdown sendFilter={filter}
+                                                        filterName={h.name}
                                                         position={(i < headersText.length/2) ? "pull-left" : "pull-right"}/>
                     </ProductsTable.Heading>
                 );
@@ -276,26 +292,8 @@ ProductsTable.Row = React.createClass({
 });
 
 ProductsTable.Rows = React.createClass({
-    getInitialState: function () {
-        return {products: []};
-    },
-
-    componentDidMount: function () {
-        this.__loadProductsFromServer('register/products');
-    },
-
-    __loadProductsFromServer(url) {
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            success: function (productsData) {
-                this.setState({products: productsData});
-            }.bind(this)
-        });
-    },
-
     render: function () {
-        var allProducts = this.state.products;
+        var allProducts = this.props.rows;
         var rows = allProducts.map(function (r, i) {
             return (<ProductsTable.Row row={r} key={i}/>);
         });
@@ -308,11 +306,33 @@ ProductsTable.Rows = React.createClass({
 });
 
 var App = React.createClass({
+    getInitialState: function () {
+        return {rows: []}
+    },
+    componentDidMount: function () {
+        this.__sendFilterObject();
+    },
+    __sendFilterObject: function () {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/products/filtrate",
+            data: JSON.stringify(searchFilter),
+            dataType: 'json',
+            timeout: 100000,
+            success: function (productsData) {
+                this.setState({rows: productsData.result});
+            }.bind(this),
+            error: function (e) {
+                console.log("ERROR: ", e);
+            }.bind(this)
+        });
+    },
     render: function () {
         return (
             <ProductsTable>
-                <ProductsTable.Headings headings={productTableColumnNames}/>
-                <ProductsTable.Rows />
+                <ProductsTable.Headings sendFilter={this.__sendFilterObject} headings={productTableColumnNames}/>
+                <ProductsTable.Rows rows={this.state.rows}/>
             </ProductsTable>
         )
     }

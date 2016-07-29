@@ -1,7 +1,7 @@
 package ua.skillsup.gelius.services;
 
 import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.dto.ProductsSearchFilter;
+import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
 
 import java.util.List;
 
@@ -11,5 +11,7 @@ public interface ProductService {
     Long createProduct(ProductDto product);
     void editProduct(ProductDto prodcut);
     void deleteProduct(Long id);
-    List<ProductDto> getProductsByFilter(ProductsSearchFilter searchFilter);
+    List<ProductDto> getProductsByFilter(ProductsFilteringAndSortingDTO searchFilter);
+    List findFilterParameters(ProductsFilteringAndSortingDTO filter, String filterName);
+
 }

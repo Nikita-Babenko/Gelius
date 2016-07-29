@@ -24,7 +24,7 @@
 <div class="container" style="margin-top: 50px;">
     <div class="row">
         <div class="col-md-12 ">
-            <div class="panel panel-default panel-table">
+            <div class="panel panel-default panel-table" >
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-6">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" id="products-table">
+                    <div class="table-responsive products-panel" id="products-table">
 
                     </div>
 
