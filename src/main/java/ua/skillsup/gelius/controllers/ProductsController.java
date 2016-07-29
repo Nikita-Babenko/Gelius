@@ -64,7 +64,7 @@ public class ProductsController {
 
     private <T> JSONResponse createResponse(List<T> result, String resultName) {
         JSONResponse response = new JSONResponse();
-        if (result.isEmpty() || (result == null)) {
+        if (result.isEmpty()) {
             response.setCode("204");
             response.setMessage("List of " + resultName + " is empty!");
         } else {

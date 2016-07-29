@@ -140,6 +140,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<ProductDto> findByFilter(ProductsFilteringAndSortingDTO filter) {
         Criteria criteria = getFilterCriteria(filter);
+        criteria.addOrder(Order.asc("id"));
         List<Product> products = criteria.list();
         List<ProductDto> result = new ArrayList<ProductDto>(products.size());
         for (Product product : products) {
@@ -151,15 +152,14 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List findFilterParameters(ProductsFilteringAndSortingDTO filter, String filterName) {
         Criteria criteria = getFilterCriteria(filter);
-        System.out.println("");
         switch (filterName) {
             case "ids":
                 criteria.setProjection(Projections.distinct(Projections.property("id")));
                 criteria.addOrder(Order.asc("id"));
                 break;
             case "clients":
-                criteria.setProjection(Projections.distinct(Projections.property("id")));
-                criteria.addOrder(Order.asc("id"));
+                criteria.setProjection(Projections.distinct(Projections.property("client.companyName")));
+                criteria.addOrder(Order.asc("client.companyName"));
                 break;
             case "names":
                 criteria.setProjection(Projections.distinct(Projections.property("productsName")));
@@ -200,7 +200,6 @@ public class ProductDaoImpl implements ProductDao {
         }
         return criteria.list();
     }
-
 
     @Override
     public List<ProductDto> sortingBySelectionOrderAsc(ProductsSortingDTO sorting) {
@@ -302,8 +301,8 @@ public class ProductDaoImpl implements ProductDao {
 
     private Criteria getFilterCriteria(ProductsFilteringAndSortingDTO filter) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class, "product");
+        criteria.createAlias("product.client", "client");
         if (!filter.isEmpty()) {
-            criteria.createAlias("product.client", "client");
             if (!filter.getIds().isEmpty()) {
                 criteria.add(Restrictions.in("product.id", filter.getIds()));
             }
