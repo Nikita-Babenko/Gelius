@@ -52,15 +52,19 @@ ProductsTable.Heading = React.createClass({
 ProductsTable.Heading.Dropdown = React.createClass({
     getInitialState: function () {
         return {
+            filterData: [],
             filteringEnabled: false,
             sortingAsc: false,
             sortingDesc: false
         }
     },
+    componentDidMount: function () {
+        this.__loadFilterParametersFromServer();
+    },
 
     render: function () {
         var filterStatusClass = this.state.filteringEnabled ? 'display' : 'hide';
-
+        var updateDropdowns = this.props.updateDropdowns;
         return (
             <div className="dropdown">
                 <button type="button" className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -76,13 +80,33 @@ ProductsTable.Heading.Dropdown = React.createClass({
                 </button>
                 <div className={"dropdown-menu  header-dropdown " + this.props.position}>
                     <Sorting />
-                    <Filtering sendFilterObject={this.props.sendFilterObject} filterName={this.props.filterName}
+                    <Filtering sendFilterObject={this.props.sendFilterObject}
+                               updateDropdowns={updateDropdowns}
+                               filterName={this.props.filterName}
+                               filterData={this.state.filterData}
                                enableFiltering={this.__enableFilteringStatus}/>
                 </div>
             </div>
         );
     },
+    __loadFilterParametersFromServer: function () {
+        var url = '/products/filterParameters/' + this.props.filterName;
+        $.ajax({
 
+            type: "POST",
+            contentType: "application/json",
+            url: url,
+            data: JSON.stringify(searchFilter),
+            dataType: 'json',
+            timeout: 100000,
+            success: function (productsData) {
+                this.setState({filterData: $.extend(productsData.result, searchFilter[this.props.filterName])});
+            }.bind(this),
+            error: function (e) {
+                console.log("ERROR: ", e);
+            }.bind(this)
+        });
+    },
     __enableFilteringStatus: function (isEnabled) {
         this.setState({filteringEnabled: isEnabled});
     }
@@ -117,34 +141,12 @@ var Filtering = React.createClass({
     getInitialState: function () {
         return {
             filtersChecked: 0,
-            filterData: [],
             searchString: ''
         }
     },
-    componentDidMount: function () {
-        this.__loadFilterParametersFromServer();
-    },
-    __loadFilterParametersFromServer: function () {
-        var url = '/products/filterParameters/' + this.props.filterName;
-        $.ajax({
-
-            type: "POST",
-            contentType: "application/json",
-            url: url,
-            data: JSON.stringify(searchFilter),
-            dataType: 'json',
-            timeout: 100000,
-            success: function (productsData) {
-                this.setState({filterData: productsData.result});
-            }.bind(this),
-            error: function (e) {
-                console.log("ERROR: ", e);
-            }.bind(this)
-        });
-    },
 
     render: function () {
-        var filterData = this.state.filterData;
+        var filterData = this.props.filterData;
         var searchString = this.state.searchString.trim().toLowerCase();
         if (searchString.length > 0) {
             filterData = filterData.filter(function (d) {
@@ -156,9 +158,12 @@ var Filtering = React.createClass({
 
         var filterName = this.props.filterName;
         var onFilterClick = this.__onFilterSelected;
+        var updateParameters = this.__loadFilterParametersFromServer;
         var filterCheckboxes = filterData.map(function (e) {
             return (
                 <ProductsTable.Heading.Dropdown.FilterElement filterName={filterName}
+                                                              key={e}
+                                                              updateParameters={updateParameters}
                                                               element={e}
                                                               filterSelected={onFilterClick}/>
             );
@@ -181,16 +186,16 @@ var Filtering = React.createClass({
             </div>
         );
     },
-
     __handleSearchChange: function (e) {
         this.setState({searchString: e.target.value});
     },
-    __onFilterSelected: function (newState) {
+    __onFilterSelected: function (filteredColumn, newState) {
         var newTotal = this.state.filtersChecked + (newState ? 1 : -1);
         this.setState({filtersChecked: newTotal});
         this.props.enableFiltering(newTotal > 0);
         this.props.sendFilterObject();
-    }
+        this.props.updateDropdowns(filteredColumn);
+    },
 });
 
 ProductsTable.Heading.Dropdown.FilterElement = React.createClass({
@@ -221,7 +226,7 @@ ProductsTable.Heading.Dropdown.FilterElement = React.createClass({
         } else {
             filterParameters.splice($.inArray(value, filterParameters), 1);
         }
-        this.props.filterSelected(newState);
+        this.props.filterSelected(this.props.filterName, newState);
 
     }
 });
@@ -230,11 +235,14 @@ ProductsTable.Headings = React.createClass({
     render: function () {
         var headersText = this.props.headings;
         var sendFilter = this.props.sendFilterObject;
+        var updateDropdowns = this.__updateDropdowns;
         var headers = headersText.map(function (h, i) {
                 return (
                     <ProductsTable.Heading heading={h} key={i}>
-                        <ProductsTable.Heading.Dropdown sendFilterObject={sendFilter}
+                        <ProductsTable.Heading.Dropdown ref={h.name}
+                                                        sendFilterObject={sendFilter}
                                                         filterName={h.name}
+                                                        updateDropdowns={updateDropdowns}
                                                         position={(i < headersText.length/2) ? "pull-left" : "pull-right"}/>
                     </ProductsTable.Heading>
                 );
@@ -247,6 +255,19 @@ ProductsTable.Headings = React.createClass({
             </tr>
             </thead>
         );
+    },
+    __updateDropdowns: function (dontUpdateColumn) {
+        var update = this.__updateByRef;
+        productTableColumnNames.forEach(function (e) {
+            if ((e.name == dontUpdateColumn) && (searchFilter[dontUpdateColumn].length == 0))
+                update(dontUpdateColumn);
+            if (e.name !== dontUpdateColumn)
+                update(e.name);
+        });
+
+    },
+    __updateByRef(name) {
+        this.refs[name].__loadFilterParametersFromServer();
     }
 
 });

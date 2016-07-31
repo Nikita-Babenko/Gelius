@@ -30,13 +30,13 @@ public class ProductDaoTest {
     private ProductsFilteringAndSortingDTO searchFilter;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         filteredProducts = new ArrayList<>();
         searchFilter = new ProductsFilteringAndSortingDTO();
     }
 
     @After
-    public void cleanDate(){
+    public void cleanDate() {
         filteredProducts.clear();
         searchFilter = null;
     }
@@ -79,6 +79,17 @@ public class ProductDaoTest {
         filteredProducts = productDao.findByFilter(searchFilter);
         assertEquals("We should have 2 products (1 - \"Ласунка\" and 1 - \"АВК\") ", 2, filteredProducts.size());
 
+    }
+
+    @Test
+    public void testFindFilterParameters() throws Exception {
+        searchFilter.setIds(Arrays.asList(Long.valueOf(2), Long.valueOf(3), Long.valueOf(4)));
+        searchFilter.setWidths(Arrays.asList(300));
+
+        List expectedLengths = Arrays.asList(400, 410);
+        List actualLengths = productDao.findFilterParameters(searchFilter, "lengths");
+
+        assertEquals(expectedLengths, actualLengths);
     }
     /*@Test
     public void testGetAll(){

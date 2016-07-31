@@ -19,7 +19,7 @@ public class HibernateTestConfig {
     @Bean
     public DataSource dataSource() {
         final HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:hsqldb:mem:testdb?useUnicode=true&characterEncoding=utf-8");
+        hikariConfig.setJdbcUrl("jdbc:hsqldb:mem:testdb");
         hikariConfig.setDriverClassName("org.hsqldb.jdbcDriver");
         hikariConfig.setUsername("sa");
         hikariConfig.setPassword("");
