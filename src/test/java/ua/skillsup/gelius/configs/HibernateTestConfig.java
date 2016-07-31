@@ -19,7 +19,7 @@ public class HibernateTestConfig {
     @Bean
     public DataSource dataSource() {
         final HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:hsqldb:mem:testdb");
+        hikariConfig.setJdbcUrl("jdbc:hsqldb:mem:testdb?useUnicode=true&characterEncoding=utf-8");
         hikariConfig.setDriverClassName("org.hsqldb.jdbcDriver");
         hikariConfig.setUsername("sa");
         hikariConfig.setPassword("");
@@ -34,6 +34,9 @@ public class HibernateTestConfig {
         sessionFactory.setPackagesToScan("ua.skillsup.gelius.dao");
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+        hibernateProperties.put("hibernate.connection.CharSet", "utf-8");
+        hibernateProperties.put("hibernate.connection.useUnicode", true);
+        hibernateProperties.put("hibernate.connection.characterEncoding", "utf-8");
         hibernateProperties.put("hibernate.show_sql", "true");
         hibernateProperties.put("hibernate.hbm2ddl.auto", "create");
         hibernateProperties.put("hibernate.hbm2ddl.import_files", "test-data.sql");
