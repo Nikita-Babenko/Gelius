@@ -44,8 +44,6 @@ public class ProductsFilteringAndSortingDTO {
         profiles = new ArrayList<>();
         colours = new ArrayList<>();
         prints = new ArrayList<>();
-        sortableColumn = "";
-        sortingDirection = "";
     }
 
     public List<Long> getIds() {
@@ -175,6 +173,21 @@ public class ProductsFilteringAndSortingDTO {
     @Override
     public int hashCode() {
         return Objects.hash(getIds(), getClients(), getNames(), getTypes(), getLengths(), getWidths(), getHeights(), getGrades(), getProfiles(), getColours(), getPrints(), getSortableColumn(), getSortingDirection());
+    }
+
+    public Boolean isEmpty() {
+        return ((ids == null) ? true : ids.isEmpty())
+                && ((clients == null) ? true : clients.isEmpty())
+                && ((names == null) ? true : names.isEmpty())
+                && ((types == null) ? true : types.isEmpty())
+                && ((lengths == null) ? true : lengths.isEmpty())
+                && ((widths == null) ? true : widths.isEmpty())
+                && ((heights == null) ? true : heights.isEmpty())
+                && ((grades == null) ? true : grades.isEmpty())
+                && ((profiles == null) ? true : profiles.isEmpty())
+                && ((colours == null) ? true : colours.isEmpty())
+                && ((prints == null) ? true : prints.isEmpty())
+                && ((sortableColumn == null) ? true : sortableColumn.length() == 0);
     }
 
     @Override

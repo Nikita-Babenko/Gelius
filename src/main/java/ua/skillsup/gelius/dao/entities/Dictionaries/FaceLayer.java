@@ -1,15 +1,12 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Лицевой слой
 @Table(name = "FACE_LAYER")
 public class FaceLayer {
-
 
     @Id
     @Column(name = "FACE_LAYER_ID")
@@ -56,7 +53,7 @@ public class FaceLayer {
 
     @Override
     public String toString() {
-        return "FACE_LAYER{" +
+        return "FaceLayer{" +
                 "id=" + id +
                 ", faceLayer='" + faceLayer + '\'' +
                 '}';

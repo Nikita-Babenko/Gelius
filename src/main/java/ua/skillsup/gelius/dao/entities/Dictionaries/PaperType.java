@@ -1,22 +1,19 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Тип картона
 @Table(name = "PAPER_TYPE")
 public class PaperType {
-
 
     @Id
     @Column(name = "PAPER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
-    @Column(name = "PAPER")
+    @Column(name = "PAPER_TYPE")
     private String paperType;
 
     public PaperType(Long id, String paperType) {
@@ -56,7 +53,7 @@ public class PaperType {
 
     @Override
     public String toString() {
-        return "PAPER_TYPE{" +
+        return "PaperType{" +
                 "id=" + id +
                 ", paperType='" + paperType + '\'' +
                 '}';

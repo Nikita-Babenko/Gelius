@@ -1,15 +1,12 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Способ упаковки
 @Table(name = "PACKING")
 public class Packing {
-
 
     @Id
     @Column(name = "PACKING_ID")
@@ -56,7 +53,7 @@ public class Packing {
 
     @Override
     public String toString() {
-        return "PACKING{" +
+        return "Packing{" +
                 "id=" + id +
                 ", packing='" + packing + '\'' +
                 '}';

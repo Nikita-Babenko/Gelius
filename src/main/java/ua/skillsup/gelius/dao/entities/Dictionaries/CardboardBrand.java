@@ -1,27 +1,24 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       // Марка картона
 @Table(name = "CARDBOARD_BRAND")
 public class CardboardBrand {
 
-
     @Id
-    @Column(name = "BRAND_ID")
+    @Column(name = "CARDBOARD_BRAND_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
-    @Column(name = "BRAND")
-    private String brand;
+    @Column(name = "CARDBOARD_BRAND")
+    private String cardboardBrand;
 
-    public CardboardBrand(Long id, String brand) {
+    public CardboardBrand(Long id, String cardboardBrand) {
         this.id = id;
-        this.brand = brand;
+        this.cardboardBrand = cardboardBrand;
     }
 
     public Long getId() {
@@ -32,12 +29,12 @@ public class CardboardBrand {
         this.id = id;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getCardboardBrand() {
+        return cardboardBrand;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setCardboardBrand(String cardboardBrand) {
+        this.cardboardBrand = cardboardBrand;
     }
 
     @Override
@@ -46,19 +43,19 @@ public class CardboardBrand {
         if (!(o instanceof CardboardBrand)) return false;
         CardboardBrand that = (CardboardBrand) o;
         return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getBrand(), that.getBrand());
+                Objects.equals(getCardboardBrand(), that.getCardboardBrand());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getBrand());
+        return Objects.hash(getId(), getCardboardBrand());
     }
 
     @Override
     public String toString() {
         return "CardboardBrand{" +
                 "id=" + id +
-                ", brand='" + brand + '\'' +
+                ", cardboardBrand='" + cardboardBrand + '\'' +
                 '}';
     }
 }

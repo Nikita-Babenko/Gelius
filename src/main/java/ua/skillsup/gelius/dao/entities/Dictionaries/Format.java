@@ -1,22 +1,19 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Формат
 @Table(name = "FORMAT")
 public class Format {
-
 
     @Id
     @Column(name = "FORMAT_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
-    @Column(name = "FORMAT ")
+    @Column(name = "FORMAT")
     private String format;
 
     public Format(Long id, String format) {
@@ -56,7 +53,7 @@ public class Format {
 
     @Override
     public String toString() {
-        return "FORMAT{" +
+        return "Format{" +
                 "id=" + id +
                 ", format='" + format + '\'' +
                 '}';

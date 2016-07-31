@@ -1,15 +1,12 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Соединенине клапана
 @Table(name = "COMPOUND")
 public class Compound {
-
 
     @Id
     @Column(name = "COMPOUND_ID")
@@ -56,7 +53,7 @@ public class Compound {
 
     @Override
     public String toString() {
-        return "COMPOUND{" +
+        return "Compound{" +
                 "id=" + id +
                 ", compound='" + compound + '\'' +
                 '}';

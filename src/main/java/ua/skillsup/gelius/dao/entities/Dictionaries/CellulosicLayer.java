@@ -1,22 +1,19 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Целлюлозный слой
-@Table(name = "CELLULOCIS_LAYER")
+@Table(name = "CELLULOSIC_LAYER")
 public class CellulosicLayer {
 
-
     @Id
-    @Column(name = "CELLULOCIS_LAYER_ID")
+    @Column(name = "CELLULOSIC_LAYER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
-    @Column(name = "CELLULOCIS_LAYER")
+    @Column(name = "CELLULOSIC_LAYER")
     private String cellulosicLayer;
 
     public CellulosicLayer(Long id, String cellulosicLayer) {
@@ -56,7 +53,7 @@ public class CellulosicLayer {
 
     @Override
     public String toString() {
-        return "CELLULOCIS_LAYER{" +
+        return "CellulosicLayer{" +
                 "id=" + id +
                 ", cellulosicLayer='" + cellulosicLayer + '\'' +
                 '}';

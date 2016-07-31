@@ -4,21 +4,21 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@Entity       //  Способ упаковки
-@Table(name = "PACKING")
+@Entity       //  Профиль
+@Table(name = "PROFILE")
 public class Profile {
 
     @Id
-    @Column(name = "PACKING_ID")
+    @Column(name = "PROFILE_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
-    @Column(name = "PACKING")
-    private String packing;
+    @Column(name = "PROFILE")
+    private String profile;
 
-    public Profile(Long id, String packing) {
+    public Profile(Long id, String profile) {
         this.id = id;
-        this.packing = packing;
+        this.profile = profile;
     }
 
     public Long getId() {
@@ -29,33 +29,33 @@ public class Profile {
         this.id = id;
     }
 
-    public String getPacking() {
-        return packing;
+    public String getProfile() {
+        return profile;
     }
 
-    public void setPacking(String packing) {
-        this.packing = packing;
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Profile)) return false;
-        Profile that = (Profile) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getPacking(), that.getPacking());
+        Profile profile1 = (Profile) o;
+        return Objects.equals(getId(), profile1.getId()) &&
+                Objects.equals(getProfile(), profile1.getProfile());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPacking());
+        return Objects.hash(getId(), getProfile());
     }
 
     @Override
     public String toString() {
-        return "Packing{" +
+        return "Profile{" +
                 "id=" + id +
-                ", packing='" + packing + '\'' +
+                ", profile='" + profile + '\'' +
                 '}';
     }
 }

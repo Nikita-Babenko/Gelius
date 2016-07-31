@@ -1,15 +1,12 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Внутренний слой
 @Table(name = "INNER_LAYER")
 public class InnerLayer {
-
 
     @Id
     @Column(name = "INNER_LAYER_ID")
@@ -56,7 +53,7 @@ public class InnerLayer {
 
     @Override
     public String toString() {
-        return "INNER_LAYER{" +
+        return "InnerLayer{" +
                 "id=" + id +
                 ", innerLayer='" + innerLayer + '\'' +
                 '}';

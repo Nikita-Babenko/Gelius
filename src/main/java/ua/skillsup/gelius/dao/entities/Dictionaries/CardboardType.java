@@ -1,27 +1,24 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Тип картона
 @Table(name = "CARDBOARD_TYPE")
 public class CardboardType {
 
-
     @Id
-    @Column(name = "CTYPE_ID")
+    @Column(name = "CARDBOARD_TYPE_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
-    @Column(name = "CTYPE")
-    private String ctype;
+    @Column(name = "CARDBOARD_TYPE")
+    private String cardboardType;
 
-    public CardboardType(Long id, String ctype) {
+    public CardboardType(Long id, String cardboardType) {
         this.id = id;
-        this.ctype = ctype;
+        this.cardboardType = cardboardType;
     }
 
     public Long getId() {
@@ -32,12 +29,12 @@ public class CardboardType {
         this.id = id;
     }
 
-    public String getCtype() {
-        return ctype;
+    public String getCardboardType() {
+        return cardboardType;
     }
 
-    public void setCtype(String ctype) {
-        this.ctype = ctype;
+    public void setCardboardType(String ctype) {
+        this.cardboardType = ctype;
     }
 
     @Override
@@ -46,19 +43,19 @@ public class CardboardType {
         if (!(o instanceof CardboardType)) return false;
         CardboardType that = (CardboardType) o;
         return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getCtype(), that.getCtype());
+                Objects.equals(getCardboardType(), that.getCardboardType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCtype());
+        return Objects.hash(getId(), getCardboardType());
     }
 
     @Override
     public String toString() {
         return "CardboardType{" +
                 "id=" + id +
-                ", ctype='" + ctype + '\'' +
+                ", cardboardType='" + cardboardType + '\'' +
                 '}';
     }
 }

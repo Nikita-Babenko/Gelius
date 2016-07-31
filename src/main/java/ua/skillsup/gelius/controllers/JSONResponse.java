@@ -3,15 +3,25 @@ package ua.skillsup.gelius.controllers;
 public class JSONResponse {
 
     private String code;
-
     private String message;
-
     private Object result;
 
     public JSONResponse() {
-        code = "";
-        message = "";
-        result = "";
+        this.code = "";
+        this.message = "";
+        this.result = "";
+    }
+
+    public JSONResponse(String code, String message, Object result) {
+        this.code = code;
+        this.message = message;
+        this.result = result;
+    }
+
+    public JSONResponse(String code, String message) {
+        this.code = code;
+        this.message = message;
+        this.result = "";
     }
 
     public String getCode() {

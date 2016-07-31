@@ -24,6 +24,8 @@ searchFilter["grades"] = [];
 searchFilter["profiles"] = [];
 searchFilter["colours"] = [];
 searchFilter["prints"] = [];
+searchFilter["sortableColumn"] = "ids";
+searchFilter["sortingDirection"] = "asc";
 
 var ProductsTable = React.createClass({
     render: function () {

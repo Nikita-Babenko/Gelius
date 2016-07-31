@@ -1,15 +1,12 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Поддон
 @Table(name = "PALLET")
 public class Pallet {
-
 
     @Id
     @Column(name = "PALLET_ID")
@@ -56,7 +53,7 @@ public class Pallet {
 
     @Override
     public String toString() {
-        return "PALLET{" +
+        return "Pallet{" +
                 "id=" + id +
                 ", pallet='" + pallet + '\'' +
                 '}';

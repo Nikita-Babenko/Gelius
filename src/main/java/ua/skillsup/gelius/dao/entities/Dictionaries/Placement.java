@@ -1,15 +1,12 @@
-
 package ua.skillsup.gelius.dao.entities.Dictionaries;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity       //  Размещение на поддоне
 @Table(name = "PLACEMENT")
 public class Placement {
-
 
     @Id
     @Column(name = "PLACEMENT_ID")
@@ -56,7 +53,7 @@ public class Placement {
 
     @Override
     public String toString() {
-        return "PLACEMENT{" +
+        return "Placement{" +
                 "id=" + id +
                 ", placement='" + placement + '\'' +
                 '}';
