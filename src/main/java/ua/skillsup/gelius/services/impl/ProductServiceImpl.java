@@ -56,12 +56,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> sortingBySelectionOrderAsc(ProductsSortingDTO sorting) {
         return null;
-
     }
 
     @Override
     public List<ProductDto> sortingBySelectionOrderDesc(ProductsSortingDTO sorting) {
         return null;
-
     }
 }
