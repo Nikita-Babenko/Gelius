@@ -53,7 +53,7 @@ public class ProductDaoTest {
     @Ignore
     public void testFindByFilterLasunka() throws Exception {
         searchFilter.setClients(Arrays.asList("Ласунка"));
-        filteredProducts = productDao.findByFilter(searchFilter);
+        filteredProducts = productDao.findByFilterAndSorting(searchFilter);
         assertEquals("We should have 4 products with client - \"Ласунка\"", 4, filteredProducts.size());
     }
 
@@ -61,22 +61,22 @@ public class ProductDaoTest {
     @Ignore
     public void testFindByFilterLasunkaAndAVK() throws Exception {
         searchFilter.setClients(Arrays.asList("Ласунка", "АВК"));
-        filteredProducts = productDao.findByFilter(searchFilter);
+        filteredProducts = productDao.findByFilterAndSorting(searchFilter);
         assertEquals("We should have 5 products (4 - \"Ласунка\" and 1 - \"АВК\") ", 5, filteredProducts.size());
     }
 
     @Test
     public void testFindByFilterWidth() throws Exception {
-        //searchFilter.setClients(Arrays.asList("Ласунка", "АВК"));
+        searchFilter.setClients(Arrays.asList("Ласунка", "АВК"));
         searchFilter.setWidths(Arrays.asList(300));
-        filteredProducts = productDao.findByFilter(searchFilter);
-        assertEquals("We should have 3 products (2 - \"Ласунка\" and 1 - \"АВК\") ", 4, filteredProducts.size());
+        filteredProducts = productDao.findByFilterAndSorting(searchFilter);
+        assertEquals("We should have 3 products (2 - \"Ласунка\" and 1 - \"АВК\") ", 3, filteredProducts.size());
     }
 
     @Test
     public void testFindByFilterHeight() throws Exception {
         searchFilter.setHeights(Arrays.asList(180));
-        filteredProducts = productDao.findByFilter(searchFilter);
+        filteredProducts = productDao.findByFilterAndSorting(searchFilter);
         assertEquals("We should have 2 products (1 - \"Ласунка\" and 1 - \"АВК\") ", 2, filteredProducts.size());
 
     }
@@ -91,28 +91,4 @@ public class ProductDaoTest {
 
         assertEquals(expectedLengths, actualLengths);
     }
-    /*@Test
-    public void testGetAll(){
-        searchFilter.setHeights(Arrays.asList(180));
-        List<ProductDto> dtoList;
-        dtoList = productDao.findAll();
-        for (ProductDto productDto : dtoList){
-            System.out.println("It's all products ");
-            System.out.println(productDto.toString());
-        }
-        dtoList = productDao.findByFilter(searchFilter);
-        for (ProductDto productDto : dtoList){
-            System.out.println("It's filtered products ");
-            System.out.println(productDto.toString());
-        }
-    }
-    @Test
-    public void testSortDesc(){
-        filteredProducts = (List<ProductDto>)productDao.findFilterParameters(searchFilter, "clients");
-        for (ProductDto filter : filteredProducts){
-            System.out.println("It's filtered register of products ");
-            System.out.println(filter.toString());
-        }
-
-    }*/
 }

@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dto.ProductDto;
 import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
-import ua.skillsup.gelius.dto.ProductsSortingDTO;
 import ua.skillsup.gelius.services.ProductService;
 
 import java.util.List;
@@ -44,22 +43,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProductsByFilter(ProductsFilteringAndSortingDTO searchFilter) {
-        return productDao.findByFilter(searchFilter);
+    public List<ProductDto> getProductsByFilterAndSorting(ProductsFilteringAndSortingDTO searchFilter) {
+        return productDao.findByFilterAndSorting(searchFilter);
     }
 
     @Override
     public List findFilterParameters(ProductsFilteringAndSortingDTO filter, String filterName) {
         return productDao.findFilterParameters(filter, filterName);
-    }
-
-    @Override
-    public List<ProductDto> sortingBySelectionOrderAsc(ProductsSortingDTO sorting) {
-        return null;
-    }
-
-    @Override
-    public List<ProductDto> sortingBySelectionOrderDesc(ProductsSortingDTO sorting) {
-        return null;
     }
 }

@@ -9,7 +9,6 @@ import ua.skillsup.gelius.dto.ProductDto;
 import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
 import ua.skillsup.gelius.services.ProductService;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -47,7 +46,7 @@ public class ProductsController {
     private JSONResponse filtrateProducts(@RequestBody ProductsFilteringAndSortingDTO filter) {
         JSONResponse response;
         if (isValidSearchFilter(filter)) {
-            List<ProductDto> products = productService.getProductsByFilter(filter);
+            List<ProductDto> products = productService.getProductsByFilterAndSorting(filter);
             response = createResponse(products, "products");
         } else {
             List<ProductDto> allProducts = productService.getAllProducts();

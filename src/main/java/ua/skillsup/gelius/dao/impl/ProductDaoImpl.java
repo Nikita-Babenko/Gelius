@@ -13,7 +13,6 @@ import ua.skillsup.gelius.dao.entities.Client;
 import ua.skillsup.gelius.dao.entities.Product;
 import ua.skillsup.gelius.dto.ProductDto;
 import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
-import ua.skillsup.gelius.dto.ProductsSortingDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,9 +137,9 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<ProductDto> findByFilter(ProductsFilteringAndSortingDTO filter) {
+    public List<ProductDto> findByFilterAndSorting(ProductsFilteringAndSortingDTO filter) {
         Criteria criteria = getFilterCriteria(filter);
-        criteria.addOrder(Order.asc("id"));
+        criteria = getSortingCriteria(criteria, filter);
         List<Product> products = criteria.list();
         List<ProductDto> result = new ArrayList<ProductDto>(products.size());
         for (Product product : products) {
@@ -202,92 +201,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<ProductDto> sortingBySelectionOrderAsc(ProductsSortingDTO sorting) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        if (sorting.notNull()) {
-            if (sorting.getClient() != null) {
-                criteria.addOrder(Order.asc(sorting.getClient()));
-            }
-            if (sorting.getProductsName() != null) {
-                criteria.addOrder(Order.asc(sorting.getProductsName()));
-            }
-            if (sorting.getProductsType() != null) {
-                criteria.addOrder(Order.asc(sorting.getProductsType()));
-            }
-            if (sorting.getInnerLength() != null) {
-                criteria.addOrder(Order.asc(sorting.getInnerLength().toString()));
-            }
-            if (sorting.getInnerWidth() != null) {
-                criteria.addOrder(Order.asc(sorting.getInnerWidth().toString()));
-            }
-            if (sorting.getInnerHeight() != null) {
-                criteria.addOrder(Order.asc(sorting.getInnerHeight().toString()));
-            }
-            if (sorting.getGrade() != null) {
-                criteria.addOrder(Order.asc(sorting.getGrade()));
-            }
-            if (sorting.getProfile() != null) {
-                criteria.addOrder(Order.asc(sorting.getProfile()));
-            }
-            if (sorting.getColour() != null) {
-                criteria.addOrder(Order.asc(sorting.getColour()));
-            }
-            if (sorting.getPrint() != null) {
-                criteria.addOrder(Order.asc(sorting.getPrint()));
-            }
-        }
-        List<Product> products = criteria.list();
-        List<ProductDto> result = new ArrayList<ProductDto>(products.size());
-        for (Product product : products) {
-            result.add(convert(product));
-        }
-        return result;
-    }
-
-    @Override
-    public List<ProductDto> sortingBySelectionOrderDesc(ProductsSortingDTO sorting) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        if (sorting.notNull()) {
-            if (sorting.getClient() != null) {
-                criteria.addOrder(Order.desc(sorting.getClient()));
-            }
-            if (sorting.getProductsName() != null) {
-                criteria.addOrder(Order.desc(sorting.getProductsName()));
-            }
-            if (sorting.getProductsType() != null) {
-                criteria.addOrder(Order.desc(sorting.getProductsType()));
-            }
-            if (sorting.getInnerLength() != null) {
-                criteria.addOrder(Order.desc(sorting.getInnerLength().toString()));
-            }
-            if (sorting.getInnerWidth() != null) {
-                criteria.addOrder(Order.desc(sorting.getInnerWidth().toString()));
-            }
-            if (sorting.getInnerHeight() != null) {
-                criteria.addOrder(Order.desc(sorting.getInnerHeight().toString()));
-            }
-            if (sorting.getGrade() != null) {
-                criteria.addOrder(Order.desc(sorting.getGrade()));
-            }
-            if (sorting.getProfile() != null) {
-                criteria.addOrder(Order.desc(sorting.getProfile()));
-            }
-            if (sorting.getColour() != null) {
-                criteria.addOrder(Order.desc(sorting.getColour()));
-            }
-            if (sorting.getPrint() != null) {
-                criteria.addOrder(Order.desc(sorting.getPrint()));
-            }
-        }
-        List<Product> products = criteria.list();
-        List<ProductDto> result = new ArrayList<ProductDto>(products.size());
-        for (Product product : products) {
-            result.add(convert(product));
-        }
-        return result;
-    }
-
-    @Override
     public void deleteProduct(Long id) {
         Product product = (Product) sessionFactory
                 .getCurrentSession()
@@ -297,6 +210,80 @@ public class ProductDaoImpl implements ProductDao {
 
         sessionFactory.getCurrentSession().delete(product);
 
+    }
+
+    private Criteria getSortingCriteria(Criteria criteria, ProductsFilteringAndSortingDTO filter) {
+        if (filter.getSortableColumn() != null)
+        switch (filter.getSortableColumn()) {
+            case "ids":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("id"));
+                else
+                    criteria.addOrder(Order.desc("id"));
+                break;
+            case "clients":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("client.companyName"));
+                else
+                    criteria.addOrder(Order.desc("client.companyNamed"));
+                break;
+            case "names":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("productsName"));
+                else
+                    criteria.addOrder(Order.desc("productsName"));
+                break;
+            case "types":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("productsType"));
+                else
+                    criteria.addOrder(Order.desc("productsType"));
+                break;
+            case "lengths":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("innerLength"));
+                else
+                    criteria.addOrder(Order.desc("innerLength"));
+                break;
+            case "widths":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("innerWidth"));
+                else
+                    criteria.addOrder(Order.desc("innerWidth"));
+                break;
+            case "heights":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("innerHeight"));
+                else
+                    criteria.addOrder(Order.desc("innerHeight"));
+                break;
+            case "grades":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("grade"));
+                else
+                    criteria.addOrder(Order.desc("grade"));
+                break;
+            case "profiles":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("profile"));
+                else
+                    criteria.addOrder(Order.desc("profile"));
+                break;
+            case "colours":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("colour"));
+                else
+                    criteria.addOrder(Order.desc("colour"));
+                break;
+            case "prints":
+                if (filter.getSortingDirection().equals("asc"))
+                    criteria.addOrder(Order.asc("print"));
+                else
+                    criteria.addOrder(Order.desc("print"));
+                break;
+        }
+
+        return criteria;
     }
 
     private Criteria getFilterCriteria(ProductsFilteringAndSortingDTO filter) {
