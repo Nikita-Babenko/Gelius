@@ -49,3 +49,5 @@
 .hide {
     display: none;
 }
+
+tr:nth-child(even){background-color: #B6D7A8}

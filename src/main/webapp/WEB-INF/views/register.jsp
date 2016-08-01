@@ -24,21 +24,21 @@
 <div class="container" style="margin-top: 50px;">
     <div class="row">
         <div class="col-md-12 ">
-            <div class="panel panel-default panel-table" >
+            <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="col col-xs-1 ">
-                                <a class="btn btn-default btn-success text-left"><em class="fa fa-plus"></em></a>
+                                <a class="btn btn-success text-left"><em class="fa fa-plus"></em></a>
                             </div>
                             <div class="col col-xs-1 text-left">
-                                <a class="btn btn-default btn-success text-left"><em class="fa fa-pencil"></em></a>
+                                <a class="btn btn-success text-left"><em class="fa fa-pencil"></em></a>
                             </div>
                             <div class="col col-xs-1">
-                                <a class="btn btn-default btn-success text-left"><em class="fa fa-check"></em></a>
+                                <a class="btn btn-success text-left"><em class="fa fa-check"></em></a>
                             </div>
                             <div class="col col-xs-1">
-                                <a class="btn btn-default btn-success text-left"><em class="fa fa-copy"></em></a>
+                                <a class="btn btn-success text-left"><em class="fa fa-copy"></em></a>
                             </div>
                         </div>
 
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-with-addons.min.js"/>"></script>
 <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-dom.min.js"/>"></script>
 <script src="/resources/js/react/babel.min.js"></script>

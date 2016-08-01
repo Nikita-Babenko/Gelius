@@ -30,7 +30,7 @@ searchFilter["sortingDirection"] = "asc";
 var ProductsTable = React.createClass({
     render: function () {
         return (
-            <table className="table table-striped table-responsive table-bordered table-hover products-table">
+            <table className="table table-responsive table-bordered products-table">
                 {this.props.children}
             </table>
         );
@@ -60,6 +60,7 @@ ProductsTable.Heading.Dropdown = React.createClass({
             sortingDesc: false
         }
     },
+
     componentDidMount: function () {
         this.__loadFilterParametersFromServer();
     },
@@ -91,6 +92,7 @@ ProductsTable.Heading.Dropdown = React.createClass({
             </div>
         );
     },
+
     __loadFilterParametersFromServer: function () {
         var url = '/products/filterParameters/' + this.props.filterName;
         $.ajax({
@@ -109,6 +111,7 @@ ProductsTable.Heading.Dropdown = React.createClass({
             }.bind(this)
         });
     },
+
     __enableFilteringStatus: function (isEnabled) {
         this.setState({filteringEnabled: isEnabled});
     }
@@ -136,7 +139,6 @@ var Sorting = React.createClass({
             </div>
         );
     }
-
 });
 
 var Filtering = React.createClass({
@@ -188,16 +190,18 @@ var Filtering = React.createClass({
             </div>
         );
     },
+
     __handleSearchChange: function (e) {
         this.setState({searchString: e.target.value});
     },
+
     __onFilterSelected: function (filteredColumn, newState) {
         var newTotal = this.state.filtersChecked + (newState ? 1 : -1);
         this.setState({filtersChecked: newTotal});
         this.props.enableFiltering(newTotal > 0);
         this.props.sendFilterObject();
         this.props.updateDropdowns(filteredColumn);
-    },
+    }
 });
 
 ProductsTable.Heading.Dropdown.FilterElement = React.createClass({
@@ -258,6 +262,7 @@ ProductsTable.Headings = React.createClass({
             </thead>
         );
     },
+
     __updateDropdowns: function (dontUpdateColumn) {
         var update = this.__updateByRef;
         productTableColumnNames.forEach(function (e) {
@@ -268,10 +273,10 @@ ProductsTable.Headings = React.createClass({
         });
 
     },
+
     __updateByRef(name) {
         this.refs[name].__loadFilterParametersFromServer();
     }
-
 });
 
 ProductsTable.Row = React.createClass({
@@ -315,6 +320,16 @@ var App = React.createClass({
     componentDidMount: function () {
         this.__sendFilterObject();
     },
+
+    render: function () {
+        return (
+            <ProductsTable>
+                <ProductsTable.Headings sendFilterObject={this.__sendFilterObject} headings={productTableColumnNames}/>
+                <ProductsTable.Rows rows={this.state.rows}/>
+            </ProductsTable>
+        )
+    },
+
     __sendFilterObject: function () {
         $.ajax({
             type: "POST",
@@ -330,14 +345,6 @@ var App = React.createClass({
                 console.log("ERROR: ", e);
             }.bind(this)
         });
-    },
-    render: function () {
-        return (
-            <ProductsTable>
-                <ProductsTable.Headings sendFilterObject={this.__sendFilterObject} headings={productTableColumnNames}/>
-                <ProductsTable.Rows rows={this.state.rows}/>
-            </ProductsTable>
-        )
     }
 });
 
