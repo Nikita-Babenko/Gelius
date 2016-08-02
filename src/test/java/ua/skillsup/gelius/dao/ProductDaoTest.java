@@ -2,7 +2,6 @@ package ua.skillsup.gelius.dao;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,34 +49,34 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void testFindByFilterLasunka() throws Exception {
-        searchFilter.setClients(Arrays.asList("Ласунка"));
+        searchFilter.setClients(Arrays.asList("Lasunka"));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        assertEquals("We should have 4 products with client - \"Ласунка\"", 4, filteredProducts.size());
+        assertEquals("We should have 4 products with client - \"Lasunka\"", 4, filteredProducts.size());
     }
 
     @Test
-    @Ignore
+   // @Ignore
     public void testFindByFilterLasunkaAndAVK() throws Exception {
-        searchFilter.setClients(Arrays.asList("Ласунка", "АВК"));
+        searchFilter.setClients(Arrays.asList("Lasunka","ABK"));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        assertEquals("We should have 5 products (4 - \"Ласунка\" and 1 - \"АВК\") ", 5, filteredProducts.size());
+        assertEquals("We should have 5 products (4 - \"Lasunka\" and 1 - \"ABK\") ", 5, filteredProducts.size());
     }
 
     @Test
     public void testFindByFilterWidth() throws Exception {
-        searchFilter.setClients(Arrays.asList("Ласунка", "АВК"));
+        searchFilter.setClients(Arrays.asList("Lasunka","ABK"));
         searchFilter.setWidths(Arrays.asList(300));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        assertEquals("We should have 3 products (2 - \"Ласунка\" and 1 - \"АВК\") ", 3, filteredProducts.size());
+        assertEquals("We should have 3 products (2 - \"Lasunka\" and 1 - \"ABK\") ", 3, filteredProducts.size());
     }
 
     @Test
     public void testFindByFilterHeight() throws Exception {
         searchFilter.setHeights(Arrays.asList(180));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        assertEquals("We should have 2 products (1 - \"Ласунка\" and 1 - \"АВК\") ", 2, filteredProducts.size());
+        assertEquals("We should have 2 products (1 - \"Lasunka\" and 1 - \"ABK\") ", 2, filteredProducts.size());
 
     }
 
