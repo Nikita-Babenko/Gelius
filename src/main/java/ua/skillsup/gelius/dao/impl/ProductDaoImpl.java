@@ -225,7 +225,7 @@ public class ProductDaoImpl implements ProductDao {
                 if (filter.getSortingDirection().equals("asc"))
                     criteria.addOrder(Order.asc("client.companyName"));
                 else
-                    criteria.addOrder(Order.desc("client.companyNamed"));
+                    criteria.addOrder(Order.desc("client.companyName"));
                 break;
             case "names":
                 if (filter.getSortingDirection().equals("asc"))
