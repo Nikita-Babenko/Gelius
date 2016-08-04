@@ -92,11 +92,12 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<ProductDto> findByGrade(String grade) {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("select g from Product g where g.grade = :grade").list();
+    public List<ProductDto> findByGrade(String cardboardBrand) {
+        List<Product> products = sessionFactory.getCurrentSession().createQuery("select cb " +
+                "from Product cb where cb.cardboardBrend = :cardboardBrend").list();
         List<ProductDto> result = new ArrayList<>(products.size());
         for (Product product : products) {
-            if (product.getGrade().equals(grade))
+            if (product.getCardboardBrandID().equals(cardboardBrand))
                 result.add(convert(product));
         }
         return result;
@@ -104,11 +105,11 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<ProductDto> findByProfile(String profile) {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("select p from Product p where p.profile = :profile").list();
+    public List<ProductDto> findByProfile(String profileID) {
+        List<Product> products = sessionFactory.getCurrentSession().createQuery("select p from Product p where p.profileID = :profileID").list();
         List<ProductDto> result = new ArrayList<>(products.size());
         for (Product product : products) {
-            if (product.getProfile().equals(profile))
+            if (product.getProfileID().equals(profileID))
                 result.add(convert(product));
         }
         return result;

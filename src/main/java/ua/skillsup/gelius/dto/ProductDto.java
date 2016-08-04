@@ -6,14 +6,14 @@ import java.util.Objects;
 
 public class ProductDto {
     private Long id;
-    private Client clients;
+    private Client client;
     private String productsName;
-    private String productsType;
+    private Long productsTypeID;
     private Integer innerLength;
     private Integer innerWidth;
     private Integer innerHeight;
-    private String grade;
-    private String profile;
+    private Long cardboardBrandID;
+    private Long profileID;
     private String colour;
     private String print;
     private Character activity;
@@ -27,11 +27,11 @@ public class ProductDto {
     }
 
     public Client getClients() {
-        return clients;
+        return client;
     }
 
-    public void setClient(Client clients) {
-        this.clients = clients;
+    public void setClients(Client client) {
+        this.client = client;
     }
 
     public String getProductsName() {
@@ -42,12 +42,12 @@ public class ProductDto {
         this.productsName = productsName;
     }
 
-    public String getProductsType() {
-        return productsType;
+    public Long getProductsTypeID() {
+        return productsTypeID;
     }
 
-    public void setProductsType(String productsType) {
-        this.productsType = productsType;
+    public void setProductsTypeID(Long productsTypeID) {
+        this.productsTypeID = productsTypeID;
     }
 
     public Integer getInnerLength() {
@@ -74,20 +74,20 @@ public class ProductDto {
         this.innerHeight = innerHeight;
     }
 
-    public String getGrade() {
-        return grade;
+    public Long getCardboardBrandID() {
+        return cardboardBrandID;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setCardboardBrandID(Long cardboardBrandID) {
+        this.cardboardBrandID = cardboardBrandID;
     }
 
-    public String getProfile() {
-        return profile;
+    public Long getProfileID() {
+        return profileID;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setProfileID(Long profileID) {
+        this.profileID = profileID;
     }
 
     public String getColour() {
@@ -120,35 +120,36 @@ public class ProductDto {
         if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(clients, that.clients) &&
+                Objects.equals(client, that.client) &&
                 Objects.equals(productsName, that.productsName) &&
-                Objects.equals(productsType, that.productsType) &&
+                Objects.equals(productsTypeID, that.productsTypeID) &&
                 Objects.equals(innerLength, that.innerLength) &&
                 Objects.equals(innerWidth, that.innerWidth) &&
                 Objects.equals(innerHeight, that.innerHeight) &&
-                Objects.equals(grade, that.grade) &&
-                Objects.equals(profile, that.profile) &&
+                Objects.equals(cardboardBrandID, that.cardboardBrandID) &&
+                Objects.equals(profileID, that.profileID) &&
                 Objects.equals(colour, that.colour) &&
                 Objects.equals(print, that.print);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clients, productsName, productsType, innerLength, innerWidth, innerHeight, grade, profile, colour, print);
+        return Objects.hash(id, client, productsName, productsTypeID, innerLength, innerWidth, innerHeight,
+                cardboardBrandID, profileID, colour, print);
     }
 
     @Override
     public String toString() {
         return "ProductDto{" +
                 "id=" + id +
-                ", client=" + clients +
+                ", client=" + client +
                 ", productsName='" + productsName + '\'' +
-                ", productsType='" + productsType + '\'' +
+                ", productsTypeID='" + productsTypeID + '\'' +
                 ", innerLength=" + innerLength +
                 ", innerWidth=" + innerWidth +
                 ", innerHeight=" + innerHeight +
-                ", grade='" + grade + '\'' +
-                ", profile='" + profile + '\'' +
+                ", cardboardBrandID='" + cardboardBrandID + '\'' +
+                ", profileID='" + profileID + '\'' +
                 ", colour='" + colour + '\'' +
                 ", print='" + print + '\'' +
                 '}';

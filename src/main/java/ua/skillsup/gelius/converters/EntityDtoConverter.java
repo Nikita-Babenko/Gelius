@@ -16,13 +16,13 @@ public final class EntityDtoConverter {
         product.setId(productDto.getId());
         product.setClient(productDto.getClients());
         product.setProductsName(productDto.getProductsName());
-        product.setProductsType(productDto.getProductsType());
+        product.setProductsTypeID(productDto.getProductsTypeID());
         product.setInnerLength(productDto.getInnerLength());
         product.setInnerWidth(productDto.getInnerWidth());
         product.setInnerHeight(productDto.getInnerHeight());
         product.setInnerHeight(productDto.getInnerHeight());
-        product.setGrade(productDto.getGrade());
-        product.setProfile(productDto.getProfile());
+        product.setCardboardBrandID(productDto.getCardboardBrandID());
+        product.setProfileID(productDto.getProfileID());
         product.setColour(productDto.getColour());
         product.setPrint(productDto.getPrint());
         product.setActivity(productDto.getActivity());
@@ -34,15 +34,15 @@ public final class EntityDtoConverter {
         }
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());
-        productDto.setClient(product.getClient());
+        productDto.setClients(product.getClient());
         productDto.setProductsName(product.getProductsName());
-        productDto.setProductsType(product.getProductsType());
+        productDto.setProductsTypeID(product.getProductsTypeID());
         productDto.setInnerLength(product.getInnerLength());
         productDto.setInnerWidth(product.getInnerWidth());
         productDto.setInnerHeight(product.getInnerHeight());
         productDto.setInnerHeight(product.getInnerHeight());
-        productDto.setGrade(product.getGrade());
-        productDto.setProfile(product.getProfile());
+        productDto.setCardboardBrandID(product.getCardboardBrandID());
+        productDto.setProfileID(product.getProfileID());
         productDto.setColour(product.getColour());
         productDto.setPrint(product.getPrint());
         productDto.setActivity(product.getActivity());

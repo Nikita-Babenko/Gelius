@@ -3,6 +3,7 @@ package ua.skillsup.gelius.dao.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -40,11 +41,8 @@ public class Product {
     @Column(name = "PROFILE_ID")
     private Long profileID;
 
-    @Column(name = "CELLULOUSE_LAYER_ID")
-    private Long cellulouseLayerID;
-
-    @Column(name = "FACE_LAYER_ID")
-    private Long faceLayerID;
+    @Column(name = "COLOUR")
+    private String colour;
 
     @Size(max = 30)
     @Column(name = "PRINT")
@@ -117,6 +115,15 @@ public class Product {
         this.cardboardBrandID = cardboardBrandID;
     }
 
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
     public Long getProfileID() {
         return profileID;
     }
@@ -125,13 +132,7 @@ public class Product {
         this.profileID = profileID;
     }
 
-    public Long getCellulouseLayerID() {
-        return cellulouseLayerID;
-    }
 
-    public void setCellulouseLayerID(Long cellulouseLayerID) {
-        this.cellulouseLayerID = cellulouseLayerID;
-    }
 
     public String getPrint() {
         return print;
@@ -149,5 +150,47 @@ public class Product {
         this.activity = activity;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return Objects.equals(getId(), product.getId()) &&
+                Objects.equals(getClient(), product.getClient()) &&
+                Objects.equals(getProductsName(), product.getProductsName()) &&
+                Objects.equals(getProductsTypeID(), product.getProductsTypeID()) &&
+                Objects.equals(getInnerLength(), product.getInnerLength()) &&
+                Objects.equals(getInnerWidth(), product.getInnerWidth()) &&
+                Objects.equals(getInnerHeight(), product.getInnerHeight()) &&
+                Objects.equals(getCardboardBrandID(), product.getCardboardBrandID()) &&
+                Objects.equals(getProfileID(), product.getProfileID()) &&
+                Objects.equals(getColour(), product.getColour()) &&
+                Objects.equals(getPrint(), product.getPrint()) &&
+                Objects.equals(getActivity(), product.getActivity());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getClient(), getProductsName(), getProductsTypeID(), getInnerLength(),
+                getInnerWidth(), getInnerHeight(), getCardboardBrandID(), getProfileID(), getColour(), getPrint(), getActivity());
+    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", client=" + client +
+                ", productsName='" + productsName + '\'' +
+                ", productsTypeID='" + productsTypeID + '\'' +
+                ", innerLength=" + innerLength +
+                ", innerWidth=" + innerWidth +
+                ", innerHeight=" + innerHeight +
+                ", cardboardBrandID='" + cardboardBrandID + '\'' +
+                ", profileID='" + profileID + '\'' +
+                ", colour='" + colour + '\'' +
+                ", print='" + print + '\'' +
+                ", activity=" + activity +
+                '}';
+    }
 }
