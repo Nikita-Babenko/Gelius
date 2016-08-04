@@ -16,9 +16,11 @@ public class Compound {
     @Column(name = "COMPOUND")
     private String compound;
 
-    public Compound(Long id, String compound) {
-        this.id = id;
+    public Compound(String compound) {
         this.compound = compound;
+    }
+
+    public Compound() {
     }
 
     public Long getId() {

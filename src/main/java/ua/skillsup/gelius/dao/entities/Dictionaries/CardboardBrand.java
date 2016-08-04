@@ -16,9 +16,12 @@ public class CardboardBrand {
     @Column(name = "CARDBOARD_BRAND")
     private String cardboardBrand;
 
-    public CardboardBrand(Long id, String cardboardBrand) {
-        this.id = id;
+
+    public CardboardBrand(String cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
+    }
+
+    public CardboardBrand() {
     }
 
     public Long getId() {

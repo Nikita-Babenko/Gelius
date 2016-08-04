@@ -16,9 +16,11 @@ public class Placement {
     @Column(name = "PLACEMENT")
     private String placement;
 
-    public Placement(Long id, String placement) {
-        this.id = id;
+    public Placement(String placement) {
         this.placement = placement;
+    }
+
+    public Placement() {
     }
 
     public Long getId() {

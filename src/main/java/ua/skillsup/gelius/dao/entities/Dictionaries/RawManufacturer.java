@@ -5,20 +5,27 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity       //  Производитель сырья
-@Table(name = "MANUFACTURER")
-public class Manufacturer {
+@Table(name = "RAW_MANUFACTURER")
+public class RawManufacturer {
 
     @Id
-    @Column(name = "MANUFACTURER_ID")
+    @Column(name = "RAW_MANUFACTURER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
     @Column(name = "MANUFACTURER")
     private String manufacturer;
 
-    public Manufacturer(Long id, String manufacturer) {
+    /*public RawManufacturer(Long id, String manufacturer) {
         this.id = id;
         this.manufacturer = manufacturer;
+    }*/
+
+    public RawManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public RawManufacturer() {
     }
 
     public Long getId() {
@@ -40,8 +47,8 @@ public class Manufacturer {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Manufacturer)) return false;
-        Manufacturer that = (Manufacturer) o;
+        if (!(o instanceof RawManufacturer)) return false;
+        RawManufacturer that = (RawManufacturer) o;
         return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getManufacturer(), that.getManufacturer());
     }
@@ -53,7 +60,7 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return "Manufacturer{" +
+        return "RawManufacturer{" +
                 "id=" + id +
                 ", manufacturer='" + manufacturer + '\'' +
                 '}';

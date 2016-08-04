@@ -16,9 +16,11 @@ public class PaperType {
     @Column(name = "PAPER_TYPE")
     private String paperType;
 
-    public PaperType(Long id, String paperType) {
-        this.id = id;
+    public PaperType(String paperType) {
         this.paperType = paperType;
+    }
+
+    public PaperType() {
     }
 
     public Long getId() {

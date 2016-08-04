@@ -3,7 +3,6 @@ package ua.skillsup.gelius.dao.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -21,9 +20,10 @@ public class Product {
     @Column(name = "PRODUCTS_NAME")
     private String productsName;
 
-    @Size(max = 50)
-    @Column(name = "PRODUCTS_TYPE")
-    private String productsType;
+    @OneToOne
+    @JoinColumn(name = "PRODUCTS_TYPE_ID", table = "PRODUCT_TYPE")
+    @Column(name = "PRODUCTS_TYPE_ID")
+    private Long productsTypeID;
 
     @Column(name = "INNER_LENGTH")
     private Integer innerLength;
@@ -34,17 +34,17 @@ public class Product {
     @Column(name = "INNER_HEIGHT")
     private Integer innerHeight;
 
-    @Size(max = 20)
-    @Column(name = "GRADE")
-    private String grade;
+    @Column(name = "CARDBOARD_BRAND_ID")
+    private Long cardboardBrandID;
 
-    @Size(max = 10)
-    @Column(name = "PROFILE")
-    private String profile;
+    @Column(name = "PROFILE_ID")
+    private Long profileID;
 
-    @Size(max = 30)
-    @Column(name = "COLOUR")
-    private String colour;
+    @Column(name = "CELLULOUSE_LAYER_ID")
+    private Long cellulouseLayerID;
+
+    @Column(name = "FACE_LAYER_ID")
+    private Long faceLayerID;
 
     @Size(max = 30)
     @Column(name = "PRINT")
@@ -77,12 +77,12 @@ public class Product {
         this.productsName = productsName;
     }
 
-    public String getProductsType() {
-        return productsType;
+    public Long getProductsTypeID() {
+        return productsTypeID;
     }
 
-    public void setProductsType(String productsType) {
-        this.productsType = productsType;
+    public void setProductsTypeID(Long productsTypeID) {
+        this.productsTypeID = productsTypeID;
     }
 
     public Integer getInnerLength() {
@@ -109,28 +109,28 @@ public class Product {
         this.innerHeight = innerHeight;
     }
 
-    public String getGrade() {
-        return grade;
+    public Long getCardboardBrandID() {
+        return cardboardBrandID;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setCardboardBrandID(Long cardboardBrandID) {
+        this.cardboardBrandID = cardboardBrandID;
     }
 
-    public String getProfile() {
-        return profile;
+    public Long getProfileID() {
+        return profileID;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setProfileID(Long profileID) {
+        this.profileID = profileID;
     }
 
-    public String getColour() {
-        return colour;
+    public Long getCellulouseLayerID() {
+        return cellulouseLayerID;
     }
 
-    public void setColour(String colour) {
-        this.colour = colour;
+    public void setCellulouseLayerID(Long cellulouseLayerID) {
+        this.cellulouseLayerID = cellulouseLayerID;
     }
 
     public String getPrint() {
@@ -149,45 +149,5 @@ public class Product {
         this.activity = activity;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product)) return false;
-        Product product = (Product) o;
-        return Objects.equals(getId(), product.getId()) &&
-                Objects.equals(getClient(), product.getClient()) &&
-                Objects.equals(getProductsName(), product.getProductsName()) &&
-                Objects.equals(getProductsType(), product.getProductsType()) &&
-                Objects.equals(getInnerLength(), product.getInnerLength()) &&
-                Objects.equals(getInnerWidth(), product.getInnerWidth()) &&
-                Objects.equals(getInnerHeight(), product.getInnerHeight()) &&
-                Objects.equals(getGrade(), product.getGrade()) &&
-                Objects.equals(getProfile(), product.getProfile()) &&
-                Objects.equals(getColour(), product.getColour()) &&
-                Objects.equals(getPrint(), product.getPrint()) &&
-                Objects.equals(getActivity(), product.getActivity());
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getClient(), getProductsName(), getProductsType(), getInnerLength(), getInnerWidth(), getInnerHeight(), getGrade(), getProfile(), getColour(), getPrint(), getActivity());
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", client=" + client +
-                ", productsName='" + productsName + '\'' +
-                ", productsType='" + productsType + '\'' +
-                ", innerLength=" + innerLength +
-                ", innerWidth=" + innerWidth +
-                ", innerHeight=" + innerHeight +
-                ", grade='" + grade + '\'' +
-                ", profile='" + profile + '\'' +
-                ", colour='" + colour + '\'' +
-                ", print='" + print + '\'' +
-                ", activity=" + activity +
-                '}';
-    }
 }

@@ -16,9 +16,11 @@ public class ProductType {
     @Column(name = "PRODUCT_TYPE")
     private String typeOfProduct;
 
-    public ProductType(Long id, String typeOfProduct) {
-        this.id = id;
+    public ProductType(String typeOfProduct) {
         this.typeOfProduct = typeOfProduct;
+    }
+
+    public ProductType() {
     }
 
     public Long getId() {

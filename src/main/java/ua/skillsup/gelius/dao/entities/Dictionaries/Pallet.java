@@ -16,9 +16,11 @@ public class Pallet {
     @Column(name = "PALLET")
     private String pallet;
 
-    public Pallet(Long id, String pallet) {
-        this.id = id;
+    public Pallet(String pallet) {
         this.pallet = pallet;
+    }
+
+    public Pallet() {
     }
 
     public Long getId() {

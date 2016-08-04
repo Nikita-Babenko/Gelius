@@ -16,9 +16,11 @@ public class Profile {
     @Column(name = "PROFILE")
     private String profile;
 
-    public Profile(Long id, String profile) {
-        this.id = id;
+    public Profile(String profile) {
         this.profile = profile;
+    }
+
+    public Profile() {
     }
 
     public Long getId() {

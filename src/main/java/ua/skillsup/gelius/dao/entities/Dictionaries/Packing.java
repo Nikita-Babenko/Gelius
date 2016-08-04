@@ -16,9 +16,11 @@ public class Packing {
     @Column(name = "PACKING")
     private String packing;
 
-    public Packing(Long id, String packing) {
-        this.id = id;
+    public Packing(String packing) {
         this.packing = packing;
+    }
+
+    public Packing() {
     }
 
     public Long getId() {

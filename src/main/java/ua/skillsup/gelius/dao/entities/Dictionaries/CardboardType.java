@@ -16,9 +16,12 @@ public class CardboardType {
     @Column(name = "CARDBOARD_TYPE")
     private String cardboardType;
 
-    public CardboardType(Long id, String cardboardType) {
-        this.id = id;
+
+    public CardboardType(String cardboardType) {
         this.cardboardType = cardboardType;
+    }
+
+    public CardboardType() {
     }
 
     public Long getId() {

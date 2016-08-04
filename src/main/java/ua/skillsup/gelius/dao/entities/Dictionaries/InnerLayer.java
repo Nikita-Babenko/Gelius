@@ -16,9 +16,11 @@ public class InnerLayer {
     @Column(name = "INNER_LAYER")
     private String innerLayer;
 
-    public InnerLayer(Long id, String innerLayer) {
-        this.id = id;
+    public InnerLayer(String innerLayer) {
         this.innerLayer = innerLayer;
+    }
+
+    public InnerLayer() {
     }
 
     public Long getId() {

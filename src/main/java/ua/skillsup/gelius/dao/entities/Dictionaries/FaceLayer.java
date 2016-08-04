@@ -16,9 +16,11 @@ public class FaceLayer {
     @Column(name = "FACE_LAYER")
     private String faceLayer;
 
-    public FaceLayer(Long id, String faceLayer) {
-        this.id = id;
+    public FaceLayer(String faceLayer) {
         this.faceLayer = faceLayer;
+    }
+
+    public FaceLayer() {
     }
 
     public Long getId() {

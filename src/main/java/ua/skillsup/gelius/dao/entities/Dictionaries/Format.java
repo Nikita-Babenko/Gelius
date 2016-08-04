@@ -16,9 +16,11 @@ public class Format {
     @Column(name = "FORMAT")
     private String format;
 
-    public Format(Long id, String format) {
-        this.id = id;
+    public Format(String format) {
         this.format = format;
+    }
+
+    public Format() {
     }
 
     public Long getId() {
