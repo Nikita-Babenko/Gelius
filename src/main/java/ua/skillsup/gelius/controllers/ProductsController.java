@@ -56,6 +56,12 @@ public class ProductsController {
         return response;
     }
 
+    @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
+    private String openPageNewProduct() {
+
+        return "newProduct";
+    }
+
     private Boolean isValidSearchFilter(ProductsFilteringAndSortingDTO searchFilter) {
 
         return searchFilter != null && !searchFilter.isEmpty();

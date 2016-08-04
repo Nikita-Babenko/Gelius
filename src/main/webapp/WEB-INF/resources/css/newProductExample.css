@@ -1,0 +1,26 @@
+.vertical-text {
+
+    writing-mode: tb-rl;
+}
+
+
+.row {
+    margin-bottom: 10px
+}
+
+table {
+    margin-right: 5px;
+}
+
+.green {
+    background-color: green;
+}
+
+.darkgreen {
+    background-color: darkolivegreen;
+}
+
+* {
+    font-style: italic;
+}
+
