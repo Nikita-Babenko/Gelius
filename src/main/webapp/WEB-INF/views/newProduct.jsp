@@ -28,7 +28,7 @@
 
     <!--HEADER -->
     <div class="row">
-
+        HEADER
     </div>
 
     <!--BODY-->
@@ -172,11 +172,146 @@
 
         <!--CENTER COL-->
         <div class="col-md-3">
-
+            CENTER
         </div>
 
+
+
         <!--RIGHT COL-->
-        <div class="col-md-4">
+        <div class="col-md-4" id="rightColumn">
+
+
+            <div class="cellVerticalHeader">Aвто</div>
+
+            <div class="cellLabel">Способ упаковки</div>
+            <div class="cellValue">
+                <select id="">
+                    <option value="1">Без упаковки</option>
+                    <option value="2">Паллета, лента, стрейч</option>
+                    <option value="3">Паллета, лента, без стрейча</option>
+                </select>
+            </div>
+
+            <div class="cellLabel">В пачке, шт.</div>
+            <div class="cellValue">
+                <input type="text" id="" value="" />
+            </div>
+
+            <div class="cellLabel">В транспортном пакете, шт.</div>
+            <div class="cellValue">
+                <input type="text" id="" value="" />
+            </div>
+
+            <div class="cellLabel packingDims">Размеры пакета</div>
+            <div class="cellValue">
+                <input type="text" id="" value="" placeholder=" длина" />
+            </div>
+            <div class="cellValue">
+                <input type="text" id="" value="" placeholder=" ширина" />
+            </div>
+            <div class="cellValue">
+                <input type="text" id="" value="" placeholder=" высота" />
+            </div>
+
+            <div class="cellLabel">Поддон</div>
+            <div class="cellValue">
+                <select id="">
+                    <option value="1">1200x800</option>
+                    <option value="2">1200x1000</option>
+                </select>
+            </div>
+
+            <div class="cellLabel">Размещение на поддоне</div>
+            <div class="cellValue">
+                <select id="">
+                    <option value="1">1 пачка в ряду</option>
+                    <option value="2">2 пачки в ряду</option>
+                    <option value="3">3 пачки в ряду</option>
+                </select>
+            </div>
+
+            <div class="cellLabel">Рядов на поддоне</div>
+            <div class="cellValue">
+                <input type="text" id="" value="" />
+            </div>
+
+            <div class="cellLabel noBottomBorder">Загрузка автомобиля, шт.</div>
+            <div class="cellValue noBottomBorder">
+                <input type="text" id="" value="" />
+            </div>
+
+            <div class="attachments">
+
+                <div class="btnSmall">
+                    <em class="fa fa-paperclip fa-2x" aria-hidden="true"></em>
+                </div>
+                <div class="btnSmall">
+                    <em class="fa fa-trash fa-2x" aria-hidden="true"></em>
+                </div>
+
+                <div>
+                    <span style="">тех.карта.pdf</span><br/>
+                    <span style="">ссылка2.ai</span><br/>
+                    <span style="">ссылка3.png</span><br/>
+                </div>
+
+            </div>
+
+            <div class="cellHeader">Биговки</div>
+            <div class="bigovkiContainer">
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+                <div class="cellLabel">+</div>
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+                <div class="cellLabel">+</div>
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+            </div>
+
+            <div class="cellLabel mFormat">Производственный формат</div>
+            <div class="cellValue">
+                <input type="text" id="" value="" />
+            </div>
+
+            <div class="cellHeader">Просечки</div>
+            <div class="prosechkiContainer">
+                <div class="cellValue leftBorder">
+                    <input type="text" id="" value="" />
+                </div>
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+                <div class="cellValue">
+                    <input type="text" id="" value="" />
+                </div>
+            </div>
+
+            <div class="buttons">
+                &nbsp;
+                <div class="btn">
+                    <em class="fa fa-question fa-3x" aria-hidden="true"></em>
+                </div>
+                <div class="btn">
+                    <em class="fa fa-paperclip fa-3x" aria-hidden="true"></em>
+                </div>
+                <div class="btn">
+                    <em class="fa fa-trash fa-3x" aria-hidden="true"></em>
+                </div>
+            </div>
+
 
         </div>
 
