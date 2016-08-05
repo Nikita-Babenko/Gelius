@@ -1,0 +1,123 @@
+/*
+    LeftTable
+*/
+*{
+    font-style: normal;
+    font-family: Calibri;
+}
+
+.green_color{
+    background-color: #B6D7A8;
+}
+
+.left_title {
+    width: 6%;
+}
+
+.vertical_left_title {
+    padding-top: 5px;
+    writing-mode: tb-rl;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.left_table > tbody > tr > .products_large_td, .left_table > tbody > tr > .products_small_td{
+    max-height: 20px !important;
+    height: 20px !important;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.left_table > tbody > tr > td > input, .left_table > tbody > tr > td > select{
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin:0;
+    border:0;
+    border-radius:0;
+    background-color: white;
+}
+
+.products_large_td {
+    width: 30%;padding: 0;position: relative; overflow:hidden;
+}
+
+.products_small_td{
+    width: 17%;padding: 0;position: relative; overflow:hidden;
+}
+
+.material{
+    position: relative;
+    max-height: 80px !important;
+    height: 80px !important;
+    width: 94%;
+    padding: 0;
+    margin: 0;
+}
+
+.material > textarea{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding: 3px;
+    margin:0;
+    border:0;
+    border-radius:0;
+    background-color: white;
+    resize: none;
+}
+
+.left_table > tbody > tr > .special_conditions, .left_table > tbody > tr > .workability{
+    font-size: 16px;
+    text-align: center;
+    padding-left: 10px;
+    margin: 0;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.left_table > tbody > tr > .special_conditions > p, .left_table > tbody > tr > .workability > p{
+    margin: 0;
+    font-weight: bold;
+}
+
+
+.special_conditions_textarea{
+    position: relative;
+    max-height: 45px !important;
+    height: 45px !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.special_conditions_textarea > textarea, .workability_textarea > textarea{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding: 3px;
+    margin:0;
+    border:0;
+    border-radius:0;
+    background-color: white;
+    resize: none;
+}
+
+.workability_textarea{
+    position: relative;
+    max-height: 80px !important;
+    height: 80px !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
