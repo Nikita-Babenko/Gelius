@@ -13,7 +13,7 @@ public class RawManufacturer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Size(max = 50)
-    @Column(name = "MANUFACTURER")
+    @Column(name = "RAW_MANUFACTURER")
     private String manufacturer;
 
     /*public RawManufacturer(Long id, String manufacturer) {

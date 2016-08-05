@@ -1,7 +1,9 @@
 package ua.skillsup.gelius.dao.entities;
 
 
+import ua.skillsup.gelius.dao.entities.Dictionaries.CardboardBrand;
 import ua.skillsup.gelius.dao.entities.Dictionaries.ProductType;
+import ua.skillsup.gelius.dao.entities.Dictionaries.Profile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -19,13 +21,21 @@ public class Product {
     @JoinColumn(name = "CLIENTS_ID")
     private Client client;
 
+    @ManyToOne
+    @JoinColumn(name = "CARDBOARD_BRAND_ID")
+    private CardboardBrand cardboardBrand;
+
+    @ManyToOne
+    @JoinColumn(name = "PROFILE_ID")
+    private Profile profile;
+
+    @ManyToOne
+    @JoinColumn(name = "PRODUCTS_TYPE_ID")
+    private ProductType productsType;
+
     @Size(max = 200)
     @Column(name = "PRODUCTS_NAME")
     private String productsName;
-
-    @ManyToOne
-    @JoinColumn(name = "PRODUCT_TYPE_ID")
-    private ProductType productsType;
 
     @Column(name = "INNER_LENGTH")
     private Integer innerLength;
@@ -35,12 +45,6 @@ public class Product {
 
     @Column(name = "INNER_HEIGHT")
     private Integer innerHeight;
-
-    @Column(name = "CARDBOARD_BRAND")
-    private Long cardboardBrandID;
-
-    @Column(name = "PROFILE_ID")
-    private Long profileID;
 
     @Column(name = "COLOUR")
     private String colour;
@@ -111,12 +115,12 @@ public class Product {
         this.innerHeight = innerHeight;
     }
 
-    public Long getCardboardBrandID() {
-        return cardboardBrandID;
+    public CardboardBrand getCardboardBrand() {
+        return cardboardBrand;
     }
 
-    public void setCardboardBrandID(Long cardboardBrandID) {
-        this.cardboardBrandID = cardboardBrandID;
+    public void setCardboardBrand(CardboardBrand cardboardBrand) {
+        this.cardboardBrand = cardboardBrand;
     }
 
 
@@ -128,15 +132,13 @@ public class Product {
         this.colour = colour;
     }
 
-    public Long getProfileID() {
-        return profileID;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setProfileID(Long profileID) {
-        this.profileID = profileID;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
-
-
 
     public String getPrint() {
         return print;
@@ -166,8 +168,8 @@ public class Product {
                 Objects.equals(getInnerLength(), product.getInnerLength()) &&
                 Objects.equals(getInnerWidth(), product.getInnerWidth()) &&
                 Objects.equals(getInnerHeight(), product.getInnerHeight()) &&
-                Objects.equals(getCardboardBrandID(), product.getCardboardBrandID()) &&
-                Objects.equals(getProfileID(), product.getProfileID()) &&
+                Objects.equals(getCardboardBrand(), product.getCardboardBrand()) &&
+                Objects.equals(getProfile(), product.getProfile()) &&
                 Objects.equals(getColour(), product.getColour()) &&
                 Objects.equals(getPrint(), product.getPrint()) &&
                 Objects.equals(getActivity(), product.getActivity());
@@ -176,22 +178,21 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getClient(), getProductsName(), getProductsType(), getInnerLength(),
-                getInnerWidth(), getInnerHeight(), getCardboardBrandID(), getProfileID(), getColour(), getPrint(), getActivity());
+                getInnerWidth(), getInnerHeight(), getCardboardBrand(), getProfile(), getColour(), getPrint(), getActivity());
     }
-
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", client=" + client +
+                ", cardboardBrand=" + cardboardBrand +
+                ", profile=" + profile +
+                ", productsType=" + productsType +
                 ", productsName='" + productsName + '\'' +
-                ", productsTypeID='" + productsType + '\'' +
                 ", innerLength=" + innerLength +
                 ", innerWidth=" + innerWidth +
                 ", innerHeight=" + innerHeight +
-                ", cardboardBrandID='" + cardboardBrandID + '\'' +
-                ", profileID='" + profileID + '\'' +
                 ", colour='" + colour + '\'' +
                 ", print='" + print + '\'' +
                 ", activity=" + activity +
