@@ -2,7 +2,6 @@ package ua.skillsup.gelius.dao;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,6 @@ public class ProductDaoTest {
 
 
     @Test
-    @Ignore
     public void testFindAll() throws Exception {
         int actualNumber = productDao.findAll().size();
 
@@ -51,7 +49,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterLasunka() throws Exception {
         searchFilter.setClients(Arrays.asList("Lasunka"));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
@@ -59,7 +56,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterLasunkaAndAVK() throws Exception {
         searchFilter.setClients(Arrays.asList("Lasunka","ABK"));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
@@ -67,7 +63,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterWidth() throws Exception {
         searchFilter.setClients(Arrays.asList("Lasunka","ABK"));
         searchFilter.setWidths(Arrays.asList(300));
@@ -77,7 +72,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterHeight() throws Exception {
         searchFilter.setHeights(Arrays.asList(180));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
@@ -86,7 +80,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindFilterParameters() throws Exception {
         searchFilter.setIds(Arrays.asList(Long.valueOf(2), Long.valueOf(3), Long.valueOf(4)));
         searchFilter.setWidths(Arrays.asList(300));

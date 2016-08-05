@@ -331,14 +331,14 @@ ProductsTable.Row = React.createClass({
         return (
             <tr>
                 <td>{this.props.row.id}</td>
-                <td>{this.props.row.clients.companyName}</td>
+                <td>{this.props.row.client.companyName}</td>
                 <td>{this.props.row.productsName}</td>
-                <td>{this.props.row.productsType}</td>
+                <td>{this.props.row.productsType.productsType}</td>
                 <td>{this.props.row.innerLength}</td>
                 <td>{this.props.row.innerWidth}</td>
                 <td>{this.props.row.innerHeight}</td>
-                <td>{this.props.row.grade}</td>
-                <td>{this.props.row.profile}</td>
+                <td>{this.props.row.cardboardBrand.cardboardBrand}</td>
+                <td>{this.props.row.profile.profile}</td>
                 <td>{this.props.row.colour}</td>
                 <td>{this.props.row.print}</td>
             </tr>
