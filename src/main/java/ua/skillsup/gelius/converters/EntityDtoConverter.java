@@ -14,9 +14,9 @@ public final class EntityDtoConverter {
         }
         Product product = new Product();
         product.setId(productDto.getId());
-        product.setClient(productDto.getClients());
+        product.setClient(productDto.getClient());
         product.setProductsName(productDto.getProductsName());
-        product.setProductsTypeID(productDto.getProductsTypeID());
+        product.setProductsType(productDto.getProductsType());
         product.setInnerLength(productDto.getInnerLength());
         product.setInnerWidth(productDto.getInnerWidth());
         product.setInnerHeight(productDto.getInnerHeight());
@@ -34,9 +34,9 @@ public final class EntityDtoConverter {
         }
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());
-        productDto.setClients(product.getClient());
+        productDto.setClient(product.getClient());
         productDto.setProductsName(product.getProductsName());
-        productDto.setProductsTypeID(product.getProductsTypeID());
+        productDto.setProductsType(product.getProductsType());
         productDto.setInnerLength(product.getInnerLength());
         productDto.setInnerWidth(product.getInnerWidth());
         productDto.setInnerHeight(product.getInnerHeight());

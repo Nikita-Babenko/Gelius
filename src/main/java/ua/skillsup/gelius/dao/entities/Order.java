@@ -24,6 +24,9 @@ public class Order {
     @Column(name = "STATUS")
     private String status;
 
+    public Order() {
+    }
+
     public Long getId() {
         return id;
     }

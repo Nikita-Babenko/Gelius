@@ -1,6 +1,5 @@
 package ua.skillsup.gelius.dao;
 
-import ua.skillsup.gelius.dao.entities.Client;
 import ua.skillsup.gelius.dto.ProductDto;
 import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
 
@@ -17,11 +16,11 @@ public interface ProductDao {
 
     void deleteProduct(Long id);
 
-    List<ProductDto> findByClient(Client client);
+    List<ProductDto> findByClient(String client);
 
     ProductDto findByName(String name);
 
-    List<ProductDto> findByGrade(String grade);
+    List<ProductDto> findByCardboardBrand(String cardboardBrand);
 
     List<ProductDto> findByProfile(String profile);
 

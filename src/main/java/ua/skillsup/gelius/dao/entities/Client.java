@@ -38,6 +38,9 @@ public class Client {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    public Client() {
+    }
+
     public Long getId() {
         return id;
     }

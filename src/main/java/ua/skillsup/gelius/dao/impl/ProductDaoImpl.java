@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.dao.entities.Client;
 import ua.skillsup.gelius.dao.entities.Product;
 import ua.skillsup.gelius.dto.ProductDto;
 import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
@@ -41,10 +40,11 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<ProductDto> findAll() {
-        List<Product> products = sessionFactory
+        /*List<Product> products = sessionFactory
                 .getCurrentSession()
                 .createQuery("from Product")
-                .list();
+                .list();*/
+        List<Product> products = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
         List<ProductDto> result = new ArrayList<>(products.size());
         for (Product product : products) {
             result.add(convert(product));
@@ -68,11 +68,11 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<ProductDto> findByClient(Client client) {
+    public List<ProductDto> findByClient(String client) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("from Product").list();
         List<ProductDto> result = new ArrayList<>();
         for (Product product : products) {
-            if (product.getClient().equals(client)) {
+            if (product.getClient().getCompanyName().equals(client)) {
                 result.add(convert(product));
             }
         }
@@ -92,7 +92,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<ProductDto> findByGrade(String cardboardBrand) {
+    public List<ProductDto> findByCardboardBrand(String cardboardBrand) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("select cb " +
                 "from Product cb where cb.cardboardBrend = :cardboardBrend").list();
         List<ProductDto> result = new ArrayList<>(products.size());
@@ -166,8 +166,8 @@ public class ProductDaoImpl implements ProductDao {
                 criteria.addOrder(Order.asc("productsName"));
                 break;
             case "types":
-                criteria.setProjection(Projections.distinct(Projections.property("productsType")));
-                criteria.addOrder(Order.asc("productsType"));
+                criteria.setProjection(Projections.distinct(Projections.property("productsTypeID")));
+                criteria.addOrder(Order.asc("productsTypeID"));
                 break;
             case "lengths":
                 criteria.setProjection(Projections.distinct(Projections.property("innerLength")));
@@ -182,20 +182,20 @@ public class ProductDaoImpl implements ProductDao {
                 criteria.addOrder(Order.asc("innerHeight"));
                 break;
             case "grades":
-                criteria.setProjection(Projections.distinct(Projections.property("grade")));
-                criteria.addOrder(Order.asc("grade"));
+                criteria.setProjection(Projections.distinct(Projections.property("cardboardBrandID")));
+                criteria.addOrder(Order.asc("cardboardBrandID"));
                 break;
             case "profiles":
-                criteria.setProjection(Projections.distinct(Projections.property("profile")));
-                criteria.addOrder(Order.asc("profile"));
+                criteria.setProjection(Projections.distinct(Projections.property("profileID")));
+                criteria.addOrder(Order.asc("profileID"));
                 break;
             case "colours":
                 criteria.setProjection(Projections.distinct(Projections.property("colour")));
                 criteria.addOrder(Order.asc("colour"));
                 break;
             case "prints":
-                criteria.setProjection(Projections.distinct(Projections.property("print")));
-                criteria.addOrder(Order.asc("print"));
+                criteria.setProjection(Projections.distinct(Projections.property("printID")));
+                criteria.addOrder(Order.asc("printID"));
                 break;
         }
         return criteria.list();
@@ -301,7 +301,7 @@ public class ProductDaoImpl implements ProductDao {
                 criteria.add(Restrictions.in("product.productsName", filter.getNames()));
             }
             if (!filter.getTypes().isEmpty()) {
-                criteria.add(Restrictions.in("product.productsType", filter.getTypes()));
+                criteria.add(Restrictions.in("product.productsTypeID", filter.getTypes()));
             }
             if (!filter.getLengths().isEmpty()) {
                 criteria.add(Restrictions.in("product.innerLength", filter.getLengths()));
@@ -313,10 +313,10 @@ public class ProductDaoImpl implements ProductDao {
                 criteria.add(Restrictions.in("product.innerHeight", filter.getHeights()));
             }
             if (!filter.getGrades().isEmpty()) {
-                criteria.add(Restrictions.in("product.grade", filter.getGrades()));
+                criteria.add(Restrictions.in("product.cardboardBrandID", filter.getGrades()));
             }
             if (!filter.getProfiles().isEmpty()) {
-                criteria.add(Restrictions.in("product.profile", filter.getProfiles()));
+                criteria.add(Restrictions.in("product.profileID", filter.getProfiles()));
             }
             if (!filter.getColours().isEmpty()) {
                 criteria.add(Restrictions.in("product.colour", filter.getColours()));

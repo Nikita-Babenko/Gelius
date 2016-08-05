@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dto;
 
 import ua.skillsup.gelius.dao.entities.Client;
+import ua.skillsup.gelius.dao.entities.Dictionaries.ProductType;
 
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ public class ProductDto {
     private Long id;
     private Client client;
     private String productsName;
-    private Long productsTypeID;
+    private ProductType productsType;
     private Integer innerLength;
     private Integer innerWidth;
     private Integer innerHeight;
@@ -26,11 +27,11 @@ public class ProductDto {
         this.id = id;
     }
 
-    public Client getClients() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClients(Client client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
@@ -42,12 +43,12 @@ public class ProductDto {
         this.productsName = productsName;
     }
 
-    public Long getProductsTypeID() {
-        return productsTypeID;
+    public ProductType getProductsType() {
+        return productsType;
     }
 
-    public void setProductsTypeID(Long productsTypeID) {
-        this.productsTypeID = productsTypeID;
+    public void setProductsType(ProductType productsType) {
+        this.productsType = productsType;
     }
 
     public Integer getInnerLength() {
@@ -122,7 +123,7 @@ public class ProductDto {
         return Objects.equals(id, that.id) &&
                 Objects.equals(client, that.client) &&
                 Objects.equals(productsName, that.productsName) &&
-                Objects.equals(productsTypeID, that.productsTypeID) &&
+                Objects.equals(productsType, that.productsType) &&
                 Objects.equals(innerLength, that.innerLength) &&
                 Objects.equals(innerWidth, that.innerWidth) &&
                 Objects.equals(innerHeight, that.innerHeight) &&
@@ -134,7 +135,7 @@ public class ProductDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, productsName, productsTypeID, innerLength, innerWidth, innerHeight,
+        return Objects.hash(id, client, productsName, productsType, innerLength, innerWidth, innerHeight,
                 cardboardBrandID, profileID, colour, print);
     }
 
@@ -144,7 +145,7 @@ public class ProductDto {
                 "id=" + id +
                 ", client=" + client +
                 ", productsName='" + productsName + '\'' +
-                ", productsTypeID='" + productsTypeID + '\'' +
+                ", productsTypeID='" + productsType + '\'' +
                 ", innerLength=" + innerLength +
                 ", innerWidth=" + innerWidth +
                 ", innerHeight=" + innerHeight +

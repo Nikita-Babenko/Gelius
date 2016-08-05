@@ -17,4 +17,7 @@ public class Request {
     private List<Product> productsList;
     @Column(name = "READINESS_DATE")
     private LocalDate readinessDate;
+
+    public Request() {
+    }
 }

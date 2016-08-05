@@ -1,6 +1,8 @@
 package ua.skillsup.gelius.dao.entities;
 
 
+import ua.skillsup.gelius.dao.entities.Dictionaries.ProductType;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -21,10 +23,9 @@ public class Product {
     @Column(name = "PRODUCTS_NAME")
     private String productsName;
 
-    @OneToOne
-    @JoinColumn(name = "PRODUCTS_TYPE_ID", table = "PRODUCT_TYPE")
-    @Column(name = "PRODUCTS_TYPE_ID")
-    private Long productsTypeID;
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_TYPE_ID")
+    private ProductType productsType;
 
     @Column(name = "INNER_LENGTH")
     private Integer innerLength;
@@ -35,7 +36,7 @@ public class Product {
     @Column(name = "INNER_HEIGHT")
     private Integer innerHeight;
 
-    @Column(name = "CARDBOARD_BRAND_ID")
+    @Column(name = "CARDBOARD_BRAND")
     private Long cardboardBrandID;
 
     @Column(name = "PROFILE_ID")
@@ -50,6 +51,9 @@ public class Product {
 
     @Column(name = "ACTIVITY")
     private Character activity;
+
+    public Product() {
+    }
 
     public Long getId() {
         return id;
@@ -75,12 +79,12 @@ public class Product {
         this.productsName = productsName;
     }
 
-    public Long getProductsTypeID() {
-        return productsTypeID;
+    public ProductType getProductsType() {
+        return productsType;
     }
 
-    public void setProductsTypeID(Long productsTypeID) {
-        this.productsTypeID = productsTypeID;
+    public void setProductsType(ProductType productsType) {
+        this.productsType = productsType;
     }
 
     public Integer getInnerLength() {
@@ -158,7 +162,7 @@ public class Product {
         return Objects.equals(getId(), product.getId()) &&
                 Objects.equals(getClient(), product.getClient()) &&
                 Objects.equals(getProductsName(), product.getProductsName()) &&
-                Objects.equals(getProductsTypeID(), product.getProductsTypeID()) &&
+                Objects.equals(getProductsType(), product.getProductsType()) &&
                 Objects.equals(getInnerLength(), product.getInnerLength()) &&
                 Objects.equals(getInnerWidth(), product.getInnerWidth()) &&
                 Objects.equals(getInnerHeight(), product.getInnerHeight()) &&
@@ -171,7 +175,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getClient(), getProductsName(), getProductsTypeID(), getInnerLength(),
+        return Objects.hash(getId(), getClient(), getProductsName(), getProductsType(), getInnerLength(),
                 getInnerWidth(), getInnerHeight(), getCardboardBrandID(), getProfileID(), getColour(), getPrint(), getActivity());
     }
 
@@ -182,7 +186,7 @@ public class Product {
                 "id=" + id +
                 ", client=" + client +
                 ", productsName='" + productsName + '\'' +
-                ", productsTypeID='" + productsTypeID + '\'' +
+                ", productsTypeID='" + productsType + '\'' +
                 ", innerLength=" + innerLength +
                 ", innerWidth=" + innerWidth +
                 ", innerHeight=" + innerHeight +
