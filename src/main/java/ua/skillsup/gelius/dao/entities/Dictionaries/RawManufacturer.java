@@ -16,10 +16,6 @@ public class RawManufacturer {
     @Column(name = "RAW_MANUFACTURER")
     private String manufacturer;
 
-    /*public RawManufacturer(Long id, String manufacturer) {
-        this.id = id;
-        this.manufacturer = manufacturer;
-    }*/
 
     public RawManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
