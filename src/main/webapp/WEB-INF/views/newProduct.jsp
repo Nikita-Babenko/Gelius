@@ -178,140 +178,138 @@
 
 
         <!--RIGHT COL-->
-        <div class="col-md-4" id="rightColumn">
+        <div class="col-md-4">
 
+            <table border="1" class="table table-bordered rightTable">
+                <tbody>
 
-            <div class="cellVerticalHeader">Aвто</div>
+                <tr>
+                    <td rowspan="8" colspan="2" class="title leftTitle green_color">
+                        <p class="verticalLeftTitle">Авто</p>
+                    </td>
+                    <td colspan="12" class="label">Способ упаковки</td>
+                    <td colspan="6" class="value">
+                        <select>
+                            <option value="">Без упаковки</option>
+                            <option value="">Паллета, лента, стрейч</option>
+                            <option value="">Паллета, лента, без стрейча</option>
+                        </select>
+                    </td>
+                </tr>
 
-            <div class="cellLabel">Способ упаковки</div>
-            <div class="cellValue">
-                <select id="">
-                    <option value="1">Без упаковки</option>
-                    <option value="2">Паллета, лента, стрейч</option>
-                    <option value="3">Паллета, лента, без стрейча</option>
-                </select>
-            </div>
+                <tr>
+                    <td  colspan="12" class="label">В пачке, шт.</td>
+                    <td colspan="6" class="value"><input type="text" value="" /></td>
+                </tr>
 
-            <div class="cellLabel">В пачке, шт.</div>
-            <div class="cellValue">
-                <input type="text" id="" value="" />
-            </div>
+                <tr>
+                    <td  colspan="12" class="label">В транспортном пакете, шт.</td>
+                    <td colspan="6" class="value"><input type="text" value="" /></td>
+                </tr>
 
-            <div class="cellLabel">В транспортном пакете, шт.</div>
-            <div class="cellValue">
-                <input type="text" id="" value="" />
-            </div>
+                <tr>
+                    <td colspan="9" class="label dimensions">Размеры пакета</td>
+                    <td class="value dimensionLength" colspan="3"><input type="text" value="" placeholder="длина" /></td>
+                    <td class="value dimensionWidth" colspan="3"><input type="text" value="" placeholder="ширина" /></td>
+                    <td class="value dimensionHeight" colspan="3"><input type="text" value="" placeholder="высота" /></td>
+                </tr>
 
-            <div class="cellLabel packingDims">Размеры пакета</div>
-            <div class="cellValue">
-                <input type="text" id="" value="" placeholder=" длина" />
-            </div>
-            <div class="cellValue">
-                <input type="text" id="" value="" placeholder=" ширина" />
-            </div>
-            <div class="cellValue">
-                <input type="text" id="" value="" placeholder=" высота" />
-            </div>
+                <tr>
+                    <td  colspan="12" class="label">Поддон</td>
+                    <td colspan="6" class="value">
+                        <select>
+                            <option value="">1200x800</option>
+                            <option value="">1200x1000</option>
+                        </select>
+                    </td>
+                </tr>
 
-            <div class="cellLabel">Поддон</div>
-            <div class="cellValue">
-                <select id="">
-                    <option value="1">1200x800</option>
-                    <option value="2">1200x1000</option>
-                </select>
-            </div>
+                <tr>
+                    <td  colspan="12" class="label">Размещение на поддоне</td>
+                    <td colspan="6" class="value">
+                        <select>
+                            <option value="">1 пачка в ряду</option>
+                            <option value="">2 пачки в ряду</option>
+                            <option value="">3 пачки в ряду</option>
+                        </select>
+                    </td>
+                </tr>
 
-            <div class="cellLabel">Размещение на поддоне</div>
-            <div class="cellValue">
-                <select id="">
-                    <option value="1">1 пачка в ряду</option>
-                    <option value="2">2 пачки в ряду</option>
-                    <option value="3">3 пачки в ряду</option>
-                </select>
-            </div>
+                <tr>
+                    <td  colspan="12" class="label">Рядов на поддоне</td>
+                    <td colspan="6" class="value"><input type="text" value="" /></td>
+                </tr>
 
-            <div class="cellLabel">Рядов на поддоне</div>
-            <div class="cellValue">
-                <input type="text" id="" value="" />
-            </div>
+                <tr>
+                    <td  colspan="12" class="label">Загрузка автомобиля, шт.</td>
+                    <td colspan="6" class="value"><input type="text" value="" /></td>
+                </tr>
 
-            <div class="cellLabel noBottomBorder">Загрузка автомобиля, шт.</div>
-            <div class="cellValue noBottomBorder">
-                <input type="text" id="" value="" />
-            </div>
+                <tr>
+                    <td colspan="15" class="attachments">
+                        <a>тех.карта.pdf</a><br/>
+                        <a>ссылка2.ai</a>
+                    </td>
+                    <td colspan="5" class="attachmentsButtons">
+                        <div class="buttonSmall">
+                            <em class="fa fa-trash fa-2x" aria-hidden="true"></em>
+                        </div>
+                        <div class="buttonSmall">
+                            <em class="fa fa-paperclip fa-2x" aria-hidden="true"></em>
+                        </div>
+                    </td>
+                </tr>
 
-            <div class="attachments">
+                <tr>
+                    <td colspan="20" class="title green_color">
+                        Биговки
+                    </td>
+                </tr>
 
-                <div class="btnSmall">
-                    <em class="fa fa-paperclip fa-2x" aria-hidden="true"></em>
-                </div>
-                <div class="btnSmall">
-                    <em class="fa fa-trash fa-2x" aria-hidden="true"></em>
-                </div>
+                <tr class="bigovkiRow">
+                    <td class="value" colspan="4"><input type="text" value="" /></td>
+                    <td class="label" colspan="2">+</td>
+                    <td class="value" colspan="4"><input type="text" value="" /></td>
+                    <td class="label" colspan="2">+</td>
+                    <td class="value" colspan="4"><input type="text" value="" /></td>
+                    <td class="value" colspan="4"><input type="text" value="" /></td>
+                </tr>
 
-                <div>
-                    <span style="">тех.карта.pdf</span><br/>
-                    <span style="">ссылка2.ai</span><br/>
-                    <span style="">ссылка3.png</span><br/>
-                </div>
+                <tr>
+                    <td colspan="12" class="label">Производственный формат</td>
+                    <td colspan="8" class="value"><input type="text" value="" /></td>
+                </tr>
 
-            </div>
+                <tr>
+                    <td colspan="20" class="title green_color">
+                        Просечки
+                    </td>
+                </tr>
 
-            <div class="cellHeader">Биговки</div>
-            <div class="bigovkiContainer">
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-                <div class="cellLabel">+</div>
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-                <div class="cellLabel">+</div>
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-            </div>
+                <tr class="prosechkiRow">
+                    <td colspan="4" class="value"><input type="text" value="" /></td>
+                    <td colspan="4" class="value"><input type="text" value="" /></td>
+                    <td colspan="4" class="value"><input type="text" value="" /></td>
+                    <td colspan="4" class="value"><input type="text" value="" /></td>
+                    <td colspan="4" class="value"><input type="text" value="" /></td>
+                </tr>
 
-            <div class="cellLabel mFormat">Производственный формат</div>
-            <div class="cellValue">
-                <input type="text" id="" value="" />
-            </div>
+                <tr>
+                    <td colspan="20" class="buttonContainer">
+                        <div class="buttonBig">
+                            <em class="fa fa-trash fa-3x" aria-hidden="true"></em>
+                        </div>
+                        <div class="buttonBig">
+                            <em class="fa fa-paperclip fa-3x" aria-hidden="true"></em>
+                        </div>
+                        <div class="buttonBig">
+                            <em class="fa fa-question fa-3x" aria-hidden="true"></em>
+                        </div>
+                    </td>
+                </tr>
 
-            <div class="cellHeader">Просечки</div>
-            <div class="prosechkiContainer">
-                <div class="cellValue leftBorder">
-                    <input type="text" id="" value="" />
-                </div>
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-                <div class="cellValue">
-                    <input type="text" id="" value="" />
-                </div>
-            </div>
-
-            <div class="buttons">
-                &nbsp;
-                <div class="btn">
-                    <em class="fa fa-question fa-3x" aria-hidden="true"></em>
-                </div>
-                <div class="btn">
-                    <em class="fa fa-paperclip fa-3x" aria-hidden="true"></em>
-                </div>
-                <div class="btn">
-                    <em class="fa fa-trash fa-3x" aria-hidden="true"></em>
-                </div>
-            </div>
-
+                </tbody>
+            </table>
 
         </div>
 

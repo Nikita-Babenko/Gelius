@@ -124,176 +124,137 @@
 
 
 
-/* Правая колонка */
+/* Right table */
 
-#rightColumn {
+
+.rightTable {
+    border: 0;
+}
+
+.rightTable > TBODY > TR > TD {
     font-size: 16px;
-    padding: 0;
-    width: 380px;
-    border-top: 1px solid black;
+    color: black;
+    font-weight: normal;
 }
 
-#rightColumn DIV {
-    float: left;
-    margin: 0;
-    padding: 0;
+.rightTable > TBODY > TR > .leftTitle {
+    width: 10%;
+}
+.rightTable > TBODY > TR > .dimensions {
+    width: 45%;
+}
+.rightTable > TBODY > TR > .dimensionLength {
+    width: 15%;
+}
+.rightTable > TBODY > TR > .dimensionWidth {
+    width: 15%;
+}
+.rightTable > TBODY > TR > .dimensionHeight {
+    width: 15%;
 }
 
-#rightColumn INPUT {
-    width: 100%;
-    height: 21px;
-    /*background-color: #ecf2ff;*/
-    border: 0;
-}
-#rightColumn SELECT {
-    /*font-size: 10px;*/
-    width: 100%;
-    height: 21px;
-    border: 0;
+.rightTable .title {
+    text-align: center;
+    font-weight: bold;
 }
 
-#rightColumn .cellVerticalHeader {
-    width: 35px;
-    height: 176px;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-    padding: 2px;
+.rightTable .verticalLeftTitle {
     writing-mode: tb-rl;
     vertical-align: middle;
-    text-align: center;
-    background-color: #B6D7A8;
+    font-size: 20px;
 }
 
-#rightColumn .cellHeader {
-    width: 100%;
-    height: 22px;
-    text-align: center;
-    border: 1px solid black;
-    border-top: 0;
-    padding: 1px;
-    background-color: #B6D7A8;
+.rightTable > TBODY > TR > TD.label {
+    padding: 2px 2px 2px 5px;
+    text-align: left;
+    max-height: 25px !important;
+    height: 25px !important;
+    vertical-align: middle;
 }
 
-#rightColumn .cellLabel {
-    padding: 1px 2px 2px 4px;
-    width: 215px;
-    height: 22px;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-}
-
-#rightColumn .cellValue {
-    width: 130px;
-    height: 22px;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-}
-
-/*Размеры пакета*/
-#rightColumn .packingDims {
-    width: 150px
-}
-#rightColumn .packingDims + DIV {
-    width: 65px;
-}
-#rightColumn .packingDims + DIV + DIV {
-    width: 67px;
-}
-#rightColumn .packingDims + DIV + DIV + DIV {
-    width: 63px;
-}
-
-#rightColumn .attachments {
+.rightTable > TBODY > TR > .value {
+    padding: 0;
     position: relative;
+    max-height: 25px !important;
+    height: 25px !important;
+    vertical-align: middle;
+}
+.rightTable > TBODY > TR > .value > SELECT,INPUT[type=text] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
     width: 100%;
-    min-height: 50px;
-    padding: 10px 5px 5px 5px;
-    border: 1px solid black;
-}
-#rightColumn .attachments DIV:nth-of-type(1) {
-    position: absolute;
-    top: 5px;
-    left: 300px;
-}
-#rightColumn .attachments DIV:nth-of-type(2) {
-    position: absolute;
-    top: 5px;
-    left: 340px;
+    padding: 0;
+    margin:0;
+    border:0;
+    border-radius:0;
+    text-align: center;
+    background-color: white;
 }
 
-
-/*Биговки*/
-#rightColumn .bigovkiContainer DIV:nth-of-type(1) {
-    width: 85px; border-bottom: 1px solid black;  border-left: 1px solid black;
+.rightTable > TBODY > TR > TD.attachments {
+    width: 75%;
+    border-right: 0;
+    max-height: 40px !important;
+    height: 40px !important;
 }
-#rightColumn .bigovkiContainer DIV:nth-of-type(2) {
-    width: 35px; text-align: center;
+.rightTable > TBODY > TR > TD.attachmentsButtons {
+    border-left: 0;
 }
-#rightColumn .bigovkiContainer DIV:nth-of-type(3) {
-    width: 75px; border-bottom: 1px solid black;
-}
-#rightColumn .bigovkiContainer DIV:nth-of-type(4) {
-    width: 35px; text-align: center;
-}
-#rightColumn .bigovkiContainer DIV:nth-of-type(5) {
-    width: 75px; border-bottom: 1px solid black;
-}
-#rightColumn .bigovkiContainer DIV:nth-of-type(6) {
-    width: 75px; border-bottom: 1px solid black;
-}
-
-/*Производственный формат*/
-#rightColumn .mFormat {
-    border-left: 1px solid black; width: 230px;
-}
-#rightColumn .mFormat + DIV {
-    width: 150px;
-}
-
-
-#rightColumn .prosechkiContainer DIV {
-    width: 76px;
-}
-
-#rightColumn .leftBorder {
-    border-left: 1px solid black;
-}
-
-#rightColumn .noBottomBorder {
-    border-bottom: 0;
-}
-
-#rightColumn .buttons {
-    position: relative;
-}
-#rightColumn .buttons DIV:nth-of-type(1) {
-    position: absolute;
-    top: 5px;
-    left: 232px;
-}
-#rightColumn .buttons DIV:nth-of-type(2) {
-    position: absolute;
-    top: 5px;
-    left: 282px;
-}
-#rightColumn .buttons DIV:nth-of-type(3) {
-    position: absolute;
-    top: 5px;
-    left: 332px;
-}
-
-#rightColumn .btnSmall {
-    width: 32px;
-    height: 32px;
+.rightTable > TBODY > TR > .attachmentsButtons > .buttonSmall {
+    float: right;
+    margin-left: 6px;
+    width: 34px;
+    height: 34px;
     border: 1px solid #B6D7A8;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    background-color: green;
+}
+.rightTable > TBODY > TR > .attachmentsButtons > .buttonSmall > EM {
+    background-color: green;
+    color: white;
 }
 
-#rightColumn .btn {
-    width: 45px;
-    height: 45px;
+.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(1) {
+    width: 20%;
+}
+.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(2) {
+    width: 10%;
+    text-align: center;
+}
+.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(3) {
+    width: 20%;
+}
+.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(4) {
+    width: 10%;
+    text-align: center;
+}
+.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(5) {
+    width: 20%;
+}
+
+.rightTable > TBODY > .prosechkiRow > TD {
+    width: 20%;
+}
+
+.rightTable > TBODY > TR > TD.buttonContainer {
+    border: 0;
+}
+.rightTable > TBODY > TR > .buttonContainer > .buttonBig {
+    float: right;
+    margin-left: 6px;
+    width: 50px;
+    height: 50px;
     border: 1px solid #B6D7A8;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    background-color: green;
+}
+.rightTable > TBODY > TR > .buttonContainer > .buttonBig > EM {
+    background-color: green;
+    color: white;
 }
