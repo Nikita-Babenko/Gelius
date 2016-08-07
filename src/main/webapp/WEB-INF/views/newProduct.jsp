@@ -28,10 +28,126 @@
 
     <!--HEADER -->
     <div class="row">
-        HEADER
+        <div class="row header">
+
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-7 header_left">
+
+                <div class="col-md-12 header_top">
+
+                    <div class="col-md-5 header_buttons">
+
+                        <button type="button" class="btn btn-success glyphicon glyphicon-chevron-left">
+                            <a href="#">
+                            </a>
+                        </button>
+
+                        <button type="button" class="btn btn-success glyphicon glyphicon-pencil">
+                            <a href="#">
+                            </a>
+                        </button>
+
+                        <button type="button" class="btn btn-success glyphicon glyphicon-trash">
+                            <a href="#">
+                            </a>
+                        </button>
+
+                        <button type="button" class="btn btn-success glyphicon glyphicon-file">
+                            <a href="#">
+                            </a>
+                        </button>
+
+                        <button type="button" class="btn btn-success glyphicon glyphicon glyphicon-user">
+                            <a href="#">
+                            </a>
+                        </button>
+
+                    </div>
+
+                    <div class="col-md-7 header_title">
+                        <div class="header_title_text">
+                            <p>
+                                Новая техкарта №
+                            </p>
+                        </div>
+                        <div class="header_title_input">
+                            <input type="text" class="form-control" contenteditable="false">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 header_down">
+
+                    <div class="form-inline header_info">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label for="Customer">Заказчик</label>
+                            <select class="form-control header_info_customer" id="Customer">
+                                <option></option>
+                                <option>Customer1</option>
+                                <option>Customer2</option>
+                                <option>Customer3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <label for="Name">Название</label>
+                            <input type="text" class="form-control header_info_name" id="Name">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <label for="Type">Тип изделия</label>
+                            <select class="form-control header_info_type" id="Type">
+                                <option></option>
+                                <option>Type1</option>
+                                <option>Type2</option>
+                                <option>Type3</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-5 header_right">
+
+                <div class="form-group form-inline">
+                    <label for="exampleInput4" class="col-md-3 col-sm-6">Создано</label>
+                    <div class="input-group date col-md-3 col-sm-8" id="datetimepicker1">
+                        <input type="date" class="form-control" id="exampleInput4">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="exampleInput5" class="col-md-3 col-sm-6">Изменено</label>
+                    <div class="input-group date col-md-3 col-sm-8" id="datetimepicker2">
+                        <input type="date" class="form-control" id="exampleInput5">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="exampleInput5" class="col-md-4 col-sm-6">Подготовил</label>
+                    <div class="input-group date col-md-6 col-sm-8">
+                        <input type="text" class="form-control" id="exampleInput6">
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    <input id="exampleInput7" type="checkbox" class="header_righ_checkbox" checked>
+                    <label for="exampleInput7" class="" style="vertical-align: middle">Тех.карта используется</label>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!--BODY-->
+
     <div class="row">
 
         <!--LEFT COL-->
@@ -174,7 +290,6 @@
         <div class="col-md-3">
             CENTER
         </div>
-
 
 
         <!--RIGHT COL-->
