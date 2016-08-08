@@ -1,5 +1,7 @@
 package ua.skillsup.gelius.controllers;
 
+import java.util.List;
+
 public class JSONResponse {
 
     private String code;
@@ -22,6 +24,18 @@ public class JSONResponse {
         this.code = code;
         this.message = message;
         this.result = "";
+    }
+
+    public <T> JSONResponse(List<T> result, String listName) {
+        if (result.isEmpty()) {
+            this.code = "204";
+            this.message = "List of " + listName + " is empty!";
+            this.result = "";
+        } else {
+            this.code = "200";
+            this.message = "OK!";
+            this.result = result;
+        }
     }
 
     public String getCode() {

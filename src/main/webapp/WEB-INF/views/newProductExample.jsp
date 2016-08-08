@@ -59,8 +59,8 @@
                 <div class="col-md-12">
                     <div class="form-inline">
                         <div class="form-group">
-                            <label for="exampleInput1" class="">Заказчик</label>
-                            <select class="form-control" id="exampleInput1"></select>
+                            <label for="customer" class="">Заказчик</label>
+                            <select class="form-control" id="customer"></select>
                         </div>
                         <div class="form-group">
                             <label for="exampleInput2" class="">Название</label>
@@ -215,7 +215,7 @@
     </div>
 </div>
 
-<script src="/resources/js/jsx/newProductExample.js" type="text/javascript"></script>
+<script src="/resources/js/newProductExample.js" type="text/javascript"></script>
 
 </body>
 </html>

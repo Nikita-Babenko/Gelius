@@ -113,6 +113,9 @@ ProductsTable.Heading.Dropdown = React.createClass({
             timeout: 100000,
             success: function (productsData) {
                 this.setState({filterData: $.extend(productsData.result, searchFilter[this.props.columnName])});
+              //  console.log(productsData.result);
+              //  console.log(searchFilter[this.props.columnName]);
+                console.log("extend " + $.extend(productsData.result, searchFilter[this.props.columnName]));
             }.bind(this),
             error: function (e) {
                 console.log("ERROR: ", e);
