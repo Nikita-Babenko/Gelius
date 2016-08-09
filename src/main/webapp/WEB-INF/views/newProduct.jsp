@@ -134,11 +134,10 @@
     </div>
 
     <!--BODY-->
-
     <div class="row">
 
         <!--LEFT COL-->
-        <div class="col-md-5">
+        <div class="col-md-12 col-lg-5 left">
 
             <table border="1" class="table left_table">
 
@@ -274,13 +273,129 @@
         </div>
 
         <!--CENTER COL-->
-        <div class="col-md-3">
-            CENTER
+        <div class="col-md-12 col-lg-3 middle">
+
+            <table border="1" class="table left_table middle">
+
+                <tbody>
+
+                <tr>
+                    <td class="left_title green_color" rowspan="6">
+                        <p class="vertical_left_title">Продукция</p>
+                    </td>
+
+                    <td class="products_large_td">Размеры заготовки</td>
+                    <td class="products_small_td"><input type="text"></td>
+                    <td class="products_small_td"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="products_large_td">Количество с листа</td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td">Формат заготовки</td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td">Соединение клапана</td>
+                    <td colspan="5" class="products_small_td">
+                        <select>
+                            <option></option>
+                            <option>Text1</option>
+                            <option>Text2</option>
+                            <option>Text3</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td">Штамп</td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td">Клише</td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="left_title green_color" rowspan="7">
+                        <p class="vertical_left_title">Печать</p> </td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td">Цвет</td>
+                    <td class="products_small_td">Название</td>
+                    <td class="products_small_td">S запечатки</td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                    <td class="products_small_td" colspan="1"><input type="text"></td>
+                </tr>
+
+
+
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+
+
+
+                <tr>
+                    <td colspan="4" class="workability green_color"><p align="center">Примечания</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="products_small_td" colspan="2"><input type="text"></td>
+                    <td class="products_small_td" colspan="2"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                    <td class="products_large_td" colspan="2"><input type="text"></td>
+                </tr>
+                </tbody>
+            </table>
+
         </div>
 
 
         <!--RIGHT COL-->
-        <div class="col-md-4">
+        <div class="col-md-12 col-lg-4 right">
 
             <table border="1" class="table right_table">
                 <tbody>
@@ -404,7 +519,7 @@
             </table>
 
             <div class="buttonContainer">
-                <div class="buttons">
+                <div class="buttons_bottom">
                     <a class="fa fa-pencil  fa-3x" href="#">
                     </a>
                     <a class="fa fa-paperclip fa-3x" href="#">
@@ -417,8 +532,8 @@
         </div>
 
     </div>
-</div>
 
+</div>
 
 
 <script src="/resources/js/jsx/newProduct.js" type="text/javascript"></script>
