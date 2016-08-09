@@ -24,7 +24,7 @@
 <body>
 
 
-<div class="container-fluid target">
+    <div class="container-fluid target">
 
     <!--HEADER -->
     <div class="row">
@@ -110,37 +110,24 @@
 
 
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-5 header_right">
-
-                <div class="form-group form-inline">
-                    <label for="exampleInput4" class="col-md-3 col-sm-6">Создано</label>
-                    <div class="input-group date col-md-3 col-sm-8" id="datetimepicker1">
-                        <input type="date" class="form-control" id="exampleInput4">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+                <div class="form-group form-inline create">
+                    <p>Создано</p>
+                    <input type="date" class="form-control">
                 </div>
 
-                <div class="form-group form-inline">
-                    <label for="exampleInput5" class="col-md-3 col-sm-6">Изменено</label>
-                    <div class="input-group date col-md-3 col-sm-8" id="datetimepicker2">
-                        <input type="date" class="form-control" id="exampleInput5">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+                <div class="form-group form-inline update">
+                    <p>Изменено</p>
+                    <input type="date" class="form-control">
                 </div>
 
-                <div class="form-group form-inline">
-                    <label for="exampleInput5" class="col-md-4 col-sm-6">Подготовил</label>
-                    <div class="input-group date col-md-6 col-sm-8">
-                        <input type="text" class="form-control" id="exampleInput6">
-                    </div>
+                <div class="form-group form-inline do">
+                    <p>Подготовил</p>
+                    <input type="text" class="form-control">
                 </div>
 
-                <div class="form-group form-inline">
-                    <input id="exampleInput7" type="checkbox" class="header_righ_checkbox" checked>
-                    <label for="exampleInput7" class="" style="vertical-align: middle">Тех.карта используется</label>
+                <div class="form-group form-inline use">
+                    <input type="checkbox" class="header_righ_checkbox" checked>
+                    <p>Тех.карта используется</p>
                 </div>
             </div>
         </div>
@@ -153,11 +140,11 @@
         <!--LEFT COL-->
         <div class="col-md-5">
 
-            <table border="1" class="table table-bordered left_table">
+            <table border="1" class="table left_table">
 
                 <tbody>
 
-                <tr>
+                <tr style="border: 1px solid black">
                     <td class="left_title green_color" rowspan="5">
                         <p class="vertical_left_title">Продукция</p>
                     </td>
@@ -242,9 +229,9 @@
                         <p class="vertical_left_title">Материал</p>
                     </td>
                     <td colspan="4" class="material">
-                            <textarea>
+                        <textarea>
 
-                            </textarea>
+                        </textarea>
                     </td>
                 </tr>
 
@@ -260,9 +247,9 @@
 
                 <tr>
                     <td colspan="5" class="special_conditions_textarea">
-                            <textarea>
+                        <textarea>
 
-                            </textarea>
+                        </textarea>
                     </td>
                 </tr>
 
@@ -274,9 +261,9 @@
 
                 <tr>
                     <td colspan="5" class="workability_textarea">
-                            <textarea>
+                        <textarea>
 
-                            </textarea>
+                        </textarea>
                     </td>
                 </tr>
 
@@ -295,136 +282,137 @@
         <!--RIGHT COL-->
         <div class="col-md-4">
 
-            <table border="1" class="table table-bordered rightTable">
+            <table border="1" class="table right_table">
                 <tbody>
 
-                <tr>
-                    <td rowspan="8" colspan="2" class="title leftTitle green_color">
-                        <p class="verticalLeftTitle">Авто</p>
-                    </td>
-                    <td colspan="12" class="label">Способ упаковки</td>
-                    <td colspan="6" class="value">
-                        <select>
-                            <option value="">Без упаковки</option>
-                            <option value="">Паллета, лента, стрейч</option>
-                            <option value="">Паллета, лента, без стрейча</option>
-                        </select>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="avto_left_title green_color" rowspan="8">
+                            <p class="vertical_left_title">Авто</p>
+                        </td>
+                        <td class="avto_large_td">Способ упаковки</td>
+                        <td class="avto_small_td">
+                            <select>
+                                <option value=""></option>
+                                <option value="">Без упаковки</option>
+                                <option value="">Паллета, лента, стрейч</option>
+                                <option value="">Паллета, лента, без стрейча</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td  colspan="12" class="label">В пачке, шт.</td>
-                    <td colspan="6" class="value"><input type="text" value="" /></td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td">В пачке, шт.</td>
+                        <td class="avto_small_td"><input type="text" value="" /></td>
+                    </tr>
 
-                <tr>
-                    <td  colspan="12" class="label">В транспортном пакете, шт.</td>
-                    <td colspan="6" class="value"><input type="text" value="" /></td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td">В транспортном пакете, шт.</td>
+                        <td class="avto_small_td"><input type="text" value="" /></td>
+                    </tr>
 
-                <tr>
-                    <td colspan="9" class="label dimensions">Размеры пакета</td>
-                    <td class="value dimensionLength" colspan="3"><input type="text" value="" placeholder="длина" /></td>
-                    <td class="value dimensionWidth" colspan="3"><input type="text" value="" placeholder="ширина" /></td>
-                    <td class="value dimensionHeight" colspan="3"><input type="text" value="" placeholder="высота" /></td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td">
+                            Размеры пакета
+                                <input class="embeded_input" type="text" value=""/>
+                        </td>
+                        <td class="avto_small_td">
+                            <div class="inputs">
+                                <input type="text" value=""/>
+                                <input type="text" value=""/>
+                            </div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td  colspan="12" class="label">Поддон</td>
-                    <td colspan="6" class="value">
-                        <select>
-                            <option value="">1200x800</option>
-                            <option value="">1200x1000</option>
-                        </select>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td">Поддон</td>
+                        <td class="avto_small_td">
+                            <select>
+                                <option value=""></option>
+                                <option value="">1200x800</option>
+                                <option value="">1200x1000</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td  colspan="12" class="label">Размещение на поддоне</td>
-                    <td colspan="6" class="value">
-                        <select>
-                            <option value="">1 пачка в ряду</option>
-                            <option value="">2 пачки в ряду</option>
-                            <option value="">3 пачки в ряду</option>
-                        </select>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td">Размещение на поддоне</td>
+                        <td class="avto_small_td">
+                            <select>
+                                <option value=""></option>
+                                <option value="">1 пачка в ряду</option>
+                                <option value="">2 пачки в ряду</option>
+                                <option value="">3 пачки в ряду</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td  colspan="12" class="label">Рядов на поддоне</td>
-                    <td colspan="6" class="value"><input type="text" value="" /></td>
-                </tr>
 
-                <tr>
-                    <td  colspan="12" class="label">Загрузка автомобиля, шт.</td>
-                    <td colspan="6" class="value"><input type="text" value="" /></td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td">Рядов на поддоне</td>
+                        <td class="avto_small_td"><input type="text" value="" /></td>
+                    </tr>
 
-                <tr>
-                    <td colspan="15" class="attachments">
-                        <a>тех.карта.pdf</a><br/>
-                        <a>ссылка2.ai</a>
-                    </td>
-                    <td colspan="5" class="attachmentsButtons">
-                        <div class="buttonSmall">
-                            <em class="fa fa-trash fa-2x" aria-hidden="true"></em>
-                        </div>
-                        <div class="buttonSmall">
-                            <em class="fa fa-paperclip fa-2x" aria-hidden="true"></em>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td">Загрузка автомобиля, шт.</td>
+                        <td class="avto_small_td"><input type="text" value="" /></td>
+                    </tr>
 
-                <tr>
-                    <td colspan="20" class="title green_color">
-                        Биговки
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="3" class="attachments" style="position: relative">
+                            <div class="links">
+                                <a href="#">тех.карта.pdf</a><br/>
+                                <a href="#">ссылка2.ai</a>
+                            </div>
+                            <div class="buttons">
+                                <a class="fa fa-paperclip fa-2x" href="#">
+                                </a>
+                                <a class="fa fa-trash-o fa-2x" href="#">
+                                </a>
+                            </div>
 
-                <tr class="bigovkiRow">
-                    <td class="value" colspan="4"><input type="text" value="" /></td>
-                    <td class="label" colspan="2">+</td>
-                    <td class="value" colspan="4"><input type="text" value="" /></td>
-                    <td class="label" colspan="2">+</td>
-                    <td class="value" colspan="4"><input type="text" value="" /></td>
-                    <td class="value" colspan="4"><input type="text" value="" /></td>
-                </tr>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td colspan="12" class="label">Производственный формат</td>
-                    <td colspan="8" class="value"><input type="text" value="" /></td>
-                </tr>
+                    <tr>
+                        <td colspan="3" class="right_table_title green_color">
+                            Биговки
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td colspan="20" class="title green_color">
-                        Просечки
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="3" class="all">
+                        </td>
+                    </tr>
 
-                <tr class="prosechkiRow">
-                    <td colspan="4" class="value"><input type="text" value="" /></td>
-                    <td colspan="4" class="value"><input type="text" value="" /></td>
-                    <td colspan="4" class="value"><input type="text" value="" /></td>
-                    <td colspan="4" class="value"><input type="text" value="" /></td>
-                    <td colspan="4" class="value"><input type="text" value="" /></td>
-                </tr>
+                    <tr>
+                        <td class="avto_large_td" colspan="2">Производственный формат</td>
+                        <td class="avto_small_td"><input type="text" value="" /></td>
+                    </tr>
 
-                <tr>
-                    <td colspan="20" class="buttonContainer">
-                        <div class="buttonBig">
-                            <em class="fa fa-trash fa-3x" aria-hidden="true"></em>
-                        </div>
-                        <div class="buttonBig">
-                            <em class="fa fa-paperclip fa-3x" aria-hidden="true"></em>
-                        </div>
-                        <div class="buttonBig">
-                            <em class="fa fa-question fa-3x" aria-hidden="true"></em>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="3" class="right_table_title green_color">
+                            Просечки
+                        </td>
+                    </tr>
 
-                </tbody>
+                    <tr>
+                        <td colspan="3" class="all">
+                        </td>
+                    </tr>
+
+                    </tbody>
             </table>
+
+            <div class="buttonContainer">
+                <div class="buttons">
+                    <a class="fa fa-trash fa-3x" href="#">
+                    </a>
+                    <a class="fa fa-paperclip fa-3x" href="#">
+                    </a>
+                    <a class="fa fa-question fa-3x" href="#">
+                    </a>
+                </div>
+            </div>
 
         </div>
 

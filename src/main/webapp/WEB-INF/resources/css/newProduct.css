@@ -1,3 +1,17 @@
+*{
+    font-style: normal;
+    font-family: Calibri;
+}
+
+.green_color{
+    background-color: #B6D7A8;
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
 /*Header left*/
 .header_top{
     margin-bottom: 30px;
@@ -79,6 +93,7 @@
 .header_info_type{
     font-size: 18px;
     display: inline-block;
+    padding: 3px 9px !important;
     width: 50% !important;
 }
 
@@ -86,23 +101,75 @@
 .header_right{
     float: right;
     margin-top: 10px;
+    padding-right: 10px;
     display: inline-block;
+    font-size: 18px !important;
     padding-left: 0;
 }
 
-.header_right label{
-    font-size: 18px;
-    display: inline-block;
-    padding: 0;
-    font-weight: normal;
+.create{
+    padding-right: 20px;
+    float: right;
 }
 
-.header_right input{
-    font-size: 16px;
+
+.create > input{
+    width: 180px !important;
+    font-size: 16px !important;
+}
+
+.create > p{
+    display: inline-block;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.update{
+    padding-right: 20px;
+    float: right;
+}
+
+.update > p{
+    display: inline-block;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.update > input{
+    width: 180px !important;
+    font-size: 16px !important;
+}
+
+.do{
+    padding-right: 20px;
+    float: right;
+}
+
+.do > p{
+    display: inline-block;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.do > input{
+    width: 180px !important;
+    font-size: 16px !important;
 }
 
 .header_right > .form-group{
     margin-bottom: 2px;
+}
+
+.use{
+    padding-right: 20px;
+    float: right;
+}
+
+.use > p{
+    display: inline-block;
+    font-size: 16px !important;
+    float: right;
+    vertical-align: middle;
 }
 
 .header_righ_checkbox{
@@ -113,86 +180,94 @@
 /*
     LeftTable
 */
-*{
-    font-style: normal;
-    font-family: Calibri;
-}
-
-.green_color{
-    background-color: #B6D7A8;
-}
 
 .left_title {
-    width: 6%;
+    width: 5%;
+    border: 1px solid black !important;
+    padding : 5px 0 0 0 !important;
+    text-align: center;
 }
 
 .vertical_left_title {
     padding-top: 5px;
     writing-mode: tb-rl;
     vertical-align: middle;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
-.left_table > tbody > tr > .products_large_td, .left_table > tbody > tr > .products_small_td{
+.left_table > tbody > tr > .products_large_td{
+    width: 30%;
+    position: relative;
+    overflow:hidden;
     max-height: 20px !important;
     height: 20px !important;
-    padding: 2px;
-    text-align: center;
+    padding : 0 0 0 3px !important;
+    text-align: left;
+    font-size: 16px;
     vertical-align: middle;
+    border: 1px solid black;
+}
+
+.left_table > tbody > tr > .products_small_td{
+    width: 18%;
+    position: relative;
+    overflow:hidden;
+    max-height: 20px !important;
+    height: 20px !important;
+    padding : 0 0 0 3px !important;
+    text-align: left;
+    font-size: 16px;
+    vertical-align: middle;
+    border: 1px solid black;
 }
 
 .left_table > tbody > tr > td > input, .left_table > tbody > tr > td > select{
     position: absolute;
     text-align: center;
+    font-size: 16px;
     top: 0;
     right: 0;
     height: 100%;
     width: 100%;
     padding: 0;
     margin:0;
-    border:0;
     border-radius:0;
+    border:0;
+    outline: none;
     background-color: white;
 }
 
-.products_large_td {
-    width: 30%;padding: 0;position: relative; overflow:hidden;
-}
-
-.products_small_td{
-    width: 17%;padding: 0;position: relative; overflow:hidden;
-}
-
-.material{
+.left_table > tbody > tr > .material{
     position: relative;
     max-height: 80px !important;
     height: 80px !important;
-    width: 94%;
-    padding: 0;
+    width: 93%;
     margin: 0;
+    border: 1px solid !important;
+    padding: 0px;
 }
 
 .material > textarea{
     position: absolute;
-    top: 0;
-    right: 0;
     height: 100%;
     width: 100%;
-    padding: 3px;
-    margin:0;
-    border:0;
+    padding: 0;
+    margin: 0;
     border-radius:0;
+    border: 0;
     background-color: white;
+    font-size: 16px;
     resize: none;
+    outline: none;
 }
 
 .left_table > tbody > tr > .special_conditions, .left_table > tbody > tr > .workability{
     font-size: 16px;
-    text-align: center;
-    padding-left: 10px;
+    padding: 0 0 0 10px !important;
     margin: 0;
     text-align: left;
+    border: 1px solid black;
     vertical-align: middle;
 }
 
@@ -201,28 +276,14 @@
     font-weight: bold;
 }
 
-
 .special_conditions_textarea{
     position: relative;
-    max-height: 45px !important;
-    height: 45px !important;
+    max-height: 65px !important;
+    height: 65px !important;
     width: 100%;
-    padding: 0;
+    border: 1px solid black !important;
     margin: 0;
-}
-
-.special_conditions_textarea > textarea, .workability_textarea > textarea{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    padding: 3px;
-    margin:0;
-    border:0;
-    border-radius:0;
-    background-color: white;
-    resize: none;
+    padding: 0 !important;
 }
 
 .workability_textarea{
@@ -230,68 +291,82 @@
     max-height: 80px !important;
     height: 80px !important;
     width: 100%;
-    padding: 0;
+    padding: 0 !important;
     margin: 0;
+    border: 1px solid black !important;
 }
 
+.special_conditions_textarea > textarea, .workability_textarea > textarea{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius:0;
+    border: 0;
+    background-color: white;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+}
 
 
 /* Right table */
 
-
-.rightTable {
-    border: 0;
+.right_table{
+    border-collapse: collapse;
+    margin-bottom: 5px;
 }
 
-.rightTable > TBODY > TR > TD {
-    font-size: 16px;
-    color: black;
-    font-weight: normal;
-}
-
-.rightTable > TBODY > TR > .leftTitle {
-    width: 10%;
-}
-.rightTable > TBODY > TR > .dimensions {
-    width: 45%;
-}
-.rightTable > TBODY > TR > .dimensionLength {
-    width: 15%;
-}
-.rightTable > TBODY > TR > .dimensionWidth {
-    width: 15%;
-}
-.rightTable > TBODY > TR > .dimensionHeight {
-    width: 15%;
-}
-
-.rightTable .title {
+.avto_left_title {
+    width: 6%;
+    border: 1px solid black !important;
+    padding : 50px 0 0 0 !important;
     text-align: center;
-    font-weight: bold;
 }
 
-.rightTable .verticalLeftTitle {
-    writing-mode: tb-rl;
-    vertical-align: middle;
-    font-size: 20px;
-}
-
-.rightTable > TBODY > TR > TD.label {
-    padding: 2px 2px 2px 5px;
+.right_table > tbody > tr > .avto_large_td{
+    max-height: 20px !important;
+    height: 20px !important;
     text-align: left;
-    max-height: 25px !important;
-    height: 25px !important;
     vertical-align: middle;
+    width: 59%;
+    padding: 0 0 0 10px;
+    position: relative;
+    overflow:hidden;
+    font-size: 16px;
+    border: 1px solid black;
 }
 
-.rightTable > TBODY > TR > .value {
-    padding: 0;
-    position: relative;
-    max-height: 25px !important;
-    height: 25px !important;
+.right_table > tbody > tr > .avto_small_td{
+    max-height: 20px !important;
+    height: 20px !important;
+    text-align: left;
     vertical-align: middle;
+    width: 35%;
+    padding: 0 0 0 10px;
+    position: relative;
+    overflow:hidden;
+    font-size: 16px;
+    border: 1px solid black;
 }
-.rightTable > tbody > tr > td > input, .rightTable > tbody > tr > td > select{
+
+.right_table > tbody > tr > td > input, .right_table > tbody > tr > td > select {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin:0;
+    border:0;
+    border-radius:0;
+    background-color: white;
+    outline: none;
+}
+
+.right_table > tbody > tr > td > .inputs{
     position: absolute;
     top: 0;
     right: 0;
@@ -301,61 +376,64 @@
     margin:0;
     border:0;
     border-radius:0;
-    text-align: center;
     background-color: white;
+    outline: none;
 }
 
-.rightTable > TBODY > TR > TD.attachments {
-    width: 75%;
-    border-right: 0;
-    max-height: 40px !important;
-    height: 40px !important;
-}
-.rightTable > TBODY > TR > TD.attachmentsButtons {
+.right_table > tbody > tr > td > .inputs > input{
+    float:left;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid;
     border-left: 0;
-}
-.rightTable > TBODY > TR > .attachmentsButtons > .buttonSmall {
-    float: right;
-    margin-left: 6px;
-    width: 34px;
-    height: 34px;
-    border: 1px solid #B6D7A8;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    background-color: green;
-}
-.rightTable > TBODY > TR > .attachmentsButtons > .buttonSmall > EM {
-    background-color: green;
-    color: white;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
 }
 
-.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(1) {
-    width: 20%;
-}
-.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(2) {
-    width: 10%;
+.right_table > tbody > tr > td > .embeded_input{
+    position: absolute;
+    top: 0;
+    right: 0;
     text-align: center;
-}
-.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(3) {
-    width: 20%;
-}
-.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(4) {
-    width: 10%;
-    text-align: center;
-}
-.rightTable > TBODY > .bigovkiRow > TD:nth-of-type(5) {
-    width: 20%;
+    width: 30%;
+    height: 100%;
+    border-left: 1px solid !important;
+    border-radius:0;
+    outline: none;
 }
 
-.rightTable > TBODY > .prosechkiRow > TD {
-    width: 20%;
+.rightTable > tbody > tr > .attachments {
+    min-height: 60px !important;
+    position: relative;
+    border: 1px solid black;
+    padding: 10px 0 0 10px !important;
 }
 
-.rightTable > TBODY > TR > TD.buttonContainer {
-    border: 0;
+.attachments > .buttons{
+    position: absolute;
+    top: 0;
+    right: 10px;
 }
-.rightTable > TBODY > TR > .buttonContainer > .buttonBig {
+
+.attachments > .links{
+    padding-top: 10px;
+}
+
+.right_table > tbody > tr > .right_table_title{
+    font-size: 16px;
+    margin: 0;
+    padding: 0 0 0 0 !important;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+.rightTable > tbody > tr > .buttons > .buttonBig {
+
     float: right;
     margin-left: 6px;
     width: 50px;
@@ -366,7 +444,28 @@
     text-align: center;
     background-color: green;
 }
-.rightTable > TBODY > TR > .buttonContainer > .buttonBig > EM {
-    background-color: green;
-    color: white;
+.rightTable > tbody > tr > .buttonContainer > .buttonBig > a{
+    text-decoration:none
+}
+
+.all{
+    height: 20px;
+    padding: 0 !important;
+    border: 1px solid black;
+}
+
+.buttonContainer {
+    position: relative;
+    height: 50px;
+    border: 0 !important;
+}
+
+.buttons{
+    position: absolute;
+    right: 10px;
+}
+
+.buttons > a{
+    text-decoration:none;
+    color: green;
 }
