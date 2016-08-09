@@ -24,7 +24,7 @@
 <body>
 
 
-    <div class="container-fluid target">
+<div class="container-fluid target">
 
     <!--HEADER -->
     <div class="row">
@@ -285,131 +285,131 @@
             <table border="1" class="table right_table">
                 <tbody>
 
-                    <tr>
-                        <td class="avto_left_title green_color" rowspan="8">
-                            <p class="vertical_left_title">Авто</p>
-                        </td>
-                        <td class="avto_large_td">Способ упаковки</td>
-                        <td class="avto_small_td">
-                            <select>
-                                <option value=""></option>
-                                <option value="">Без упаковки</option>
-                                <option value="">Паллета, лента, стрейч</option>
-                                <option value="">Паллета, лента, без стрейча</option>
-                            </select>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="avto_left_title green_color" rowspan="8">
+                        <p class="vertical_left_title">Авто</p>
+                    </td>
+                    <td class="avto_large_td">Способ упаковки</td>
+                    <td class="avto_small_td">
+                        <select>
+                            <option value=""></option>
+                            <option value="">Без упаковки</option>
+                            <option value="">Паллета, лента, стрейч</option>
+                            <option value="">Паллета, лента, без стрейча</option>
+                        </select>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="avto_large_td">В пачке, шт.</td>
-                        <td class="avto_small_td"><input type="text" value="" /></td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td">В пачке, шт.</td>
+                    <td class="avto_small_td"><input type="text" value="" /></td>
+                </tr>
 
-                    <tr>
-                        <td class="avto_large_td">В транспортном пакете, шт.</td>
-                        <td class="avto_small_td"><input type="text" value="" /></td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td">В транспортном пакете, шт.</td>
+                    <td class="avto_small_td"><input type="text" value="" /></td>
+                </tr>
 
-                    <tr>
-                        <td class="avto_large_td">
-                            Размеры пакета
-                                <input class="embeded_input" type="text" value=""/>
-                        </td>
-                        <td class="avto_small_td">
-                            <div class="inputs">
-                                <input type="text" value=""/>
-                                <input type="text" value=""/>
-                            </div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td">
+                        Размеры пакета
+                        <input class="embeded_input" type="text" value=""/>
+                    </td>
+                    <td class="avto_small_td">
+                        <div class="inputs">
+                            <input type="text" value=""/>
+                            <input type="text" value=""/>
+                        </div>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="avto_large_td">Поддон</td>
-                        <td class="avto_small_td">
-                            <select>
-                                <option value=""></option>
-                                <option value="">1200x800</option>
-                                <option value="">1200x1000</option>
-                            </select>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td">Поддон</td>
+                    <td class="avto_small_td">
+                        <select>
+                            <option value=""></option>
+                            <option value="">1200x800</option>
+                            <option value="">1200x1000</option>
+                        </select>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="avto_large_td">Размещение на поддоне</td>
-                        <td class="avto_small_td">
-                            <select>
-                                <option value=""></option>
-                                <option value="">1 пачка в ряду</option>
-                                <option value="">2 пачки в ряду</option>
-                                <option value="">3 пачки в ряду</option>
-                            </select>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td">Размещение на поддоне</td>
+                    <td class="avto_small_td">
+                        <select>
+                            <option value=""></option>
+                            <option value="">1 пачка в ряду</option>
+                            <option value="">2 пачки в ряду</option>
+                            <option value="">3 пачки в ряду</option>
+                        </select>
+                    </td>
+                </tr>
 
 
-                    <tr>
-                        <td class="avto_large_td">Рядов на поддоне</td>
-                        <td class="avto_small_td"><input type="text" value="" /></td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td">Рядов на поддоне</td>
+                    <td class="avto_small_td"><input type="text" value="" /></td>
+                </tr>
 
-                    <tr>
-                        <td class="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td class="avto_small_td"><input type="text" value="" /></td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td">Загрузка автомобиля, шт.</td>
+                    <td class="avto_small_td"><input type="text" value="" /></td>
+                </tr>
 
-                    <tr>
-                        <td colspan="3" class="attachments" style="position: relative">
-                            <div class="links">
-                                <a href="#">тех.карта.pdf</a><br/>
-                                <a href="#">ссылка2.ai</a>
-                            </div>
-                            <div class="buttons">
-                                <a class="fa fa-paperclip fa-2x" href="#">
-                                </a>
-                                <a class="fa fa-trash-o fa-2x" href="#">
-                                </a>
-                            </div>
+                <tr>
+                    <td colspan="3" class="attachments" style="position: relative">
+                        <div class="links">
+                            <a href="#">тех.карта.pdf</a><br/>
+                            <a href="#">ссылка2.ai</a>
+                        </div>
+                        <div class="buttons">
+                            <a class="fa fa-paperclip fa-2x" href="#">
+                            </a>
+                            <a class="fa fa-trash-o fa-2x" href="#">
+                            </a>
+                        </div>
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td colspan="3" class="right_table_title green_color">
-                            Биговки
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="3" class="right_table_title green_color">
+                        Биговки
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td colspan="3" class="all">
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="3" class="all">
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="avto_large_td" colspan="2">Производственный формат</td>
-                        <td class="avto_small_td"><input type="text" value="" /></td>
-                    </tr>
+                <tr>
+                    <td class="avto_large_td" colspan="2">Производственный формат</td>
+                    <td class="avto_small_td"><input type="text" value="" /></td>
+                </tr>
 
-                    <tr>
-                        <td colspan="3" class="right_table_title green_color">
-                            Просечки
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="3" class="right_table_title green_color">
+                        Просечки
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td colspan="3" class="all">
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="3" class="all">
+                    </td>
+                </tr>
 
-                    </tbody>
+                </tbody>
             </table>
 
             <div class="buttonContainer">
                 <div class="buttons">
-                    <a class="fa fa-trash fa-3x" href="#">
+                    <a class="fa fa-pencil  fa-3x" href="#">
                     </a>
                     <a class="fa fa-paperclip fa-3x" href="#">
                     </a>
-                    <a class="fa fa-question fa-3x" href="#">
+                    <a class="fa fa-trash fa-3x" href="#">
                     </a>
                 </div>
             </div>
