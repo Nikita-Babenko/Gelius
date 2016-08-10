@@ -52,7 +52,7 @@ select:-moz-focusring {
 .header_title_text{
     display: inline-block;
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 10px;
 }
 
 .header_title_text > p{
@@ -74,12 +74,13 @@ select:-moz-focusring {
 
 .header_info > .form-group{
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 90px !important;
     margin-bottom:15px;
 }
 
 .header_info > .form-group > label{
     font-size: 18px;
+    padding-right: 10px;
     display: inline-block;
     font-weight: normal;
 }
@@ -87,14 +88,14 @@ select:-moz-focusring {
 .header_info_customer, .header_info_name{
     font-size: 18px;
     display: inline-block;
-    width: 56% !important;
+    width: 220px !important;
 }
 
 .header_info_type{
     font-size: 18px;
     display: inline-block;
-    padding: 3px 9px !important;
-    width: 50% !important;
+    width: 220px !important;
+    padding-right: 0 !important;
 }
 
 /*Header right*/
@@ -181,16 +182,18 @@ select:-moz-focusring {
 /*Main info about tables*/
 
 .left{
+    margin-bottom: 10px;
     padding-right: 5px;
 }
 
 .middle{
     padding-right: 5px;
-    margin: 0 !important;
+    margin-bottom: 10px;
     padding-left: 5px;
 }
 
 .right{
+    margin-bottom: 10px;
     padding-left: 15px;
 }
 
@@ -199,7 +202,7 @@ select:-moz-focusring {
     LeftTable
 */
 
-.left_title {
+.left_table > tbody > tr > .left_title {
     width: 5%;
     border: 1px solid black !important;
     padding : 5px 0 0 0 !important;
@@ -215,7 +218,7 @@ select:-moz-focusring {
 }
 
 .left_table > tbody > tr > .products_large_td{
-    width: 30%;
+    width: 30% !important;
     position: relative;
     overflow:hidden;
     max-height: 20px !important;
@@ -228,7 +231,7 @@ select:-moz-focusring {
 }
 
 .left_table > tbody > tr > .products_small_td{
-    width: 18%;
+    width: 18% !important;
     position: relative;
     overflow:hidden;
     max-height: 20px !important;
@@ -328,7 +331,6 @@ select:-moz-focusring {
     outline: none;
 }
 
-
 /* Right table */
 
 .right_table{
@@ -423,12 +425,13 @@ select:-moz-focusring {
     outline: none;
 }
 
-.rightTable > tbody > tr > .attachments {
-    min-height: 60px !important;
+.attachments {
+    min-height: 70px !important;
     position: relative;
     border: 1px solid black;
     padding: 10px 0 0 10px !important;
 }
+
 
 .attachments > .buttons{
     position: absolute;
