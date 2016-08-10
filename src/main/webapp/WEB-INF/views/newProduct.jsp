@@ -24,168 +24,23 @@
 <body>
 
 
-<div class="container-fluid target">
+    <div class="container-fluid target">
 
-    <!--HEADER -->
-    <div class="row">
-
-    </div>
-
-    <!--BODY-->
-    <div class="row">
-
-        <!--LEFT COL-->
-        <div class="col-md-5">
-
-            <table border="1" class="table table-bordered left_table">
-
-                <tbody>
-
-                <tr>
-                    <td class="left_title green_color" rowspan="5">
-                        <p class="vertical_left_title">Продукция</p>
-                    </td>
-                    <td class="products_large_td">Размеры внутренние</td>
-                    <td class="products_small_td" ><input type="text"></td>
-                    <td class="products_large_td" ><input type="text"></td>
-                    <td class="products_small_td" ><input type="text"></td>
-                </tr>
-
-                <tr>
-                    <td class="products_large_td">S теор.</td>
-                    <td class="products_small_td" ><input  type="text"></td>
-                    <td class="products_large_td">S факт.</td>
-                    <td class="products_small_td" ><input type="text"></td>
-                </tr>
-
-                <tr>
-                    <td class="products_large_td">Расчетный формат</td>
-                    <td class="products_small_td">
-                        <select>
-                            <option></option>
-                            <option>Text1</option>
-                            <option>Text2</option>
-                            <option>Text3</option>
-                        </select>
-                    </td>
-                    <td class="products_large_td">Профиль</td>
-                    <td class="products_small_td">
-                        <select>
-                            <option></option>
-                            <option>Text1</option>
-                            <option>Text2</option>
-                            <option>Text3</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="products_large_td">Марка картона</td>
-                    <td class="products_small_td">
-                        <select>
-                            <option></option>
-                            <option>Text1</option>
-                            <option>Text2</option>
-                            <option>Text3</option>
-                        </select>
-                    </td>
-                    <td class="products_large_td">Целлюлозный слой</td>
-                    <td class="products_small_td">
-                        <select>
-                            <option></option>
-                            <option>Text1</option>
-                            <option>Text2</option>
-                            <option>Text3</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="products_large_td">Лицевой слой</td>
-                    <td class="products_small_td">
-                        <select>
-                            <option></option>
-                            <option>Text1</option>
-                            <option>Text2</option>
-                            <option>Text3</option>
-                        </select>
-                    </td>
-                    <td class="products_large_td">Внутренний слой</td>
-                    <td class="products_small_td">
-                        <select>
-                            <option></option>
-                            <option>Text1</option>
-                            <option>Text2</option>
-                            <option>Text3</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="left_title green_color" rowspan="4">
-                        <p class="vertical_left_title">Материал</p>
-                    </td>
-                    <td colspan="4" class="material">
-                            <textarea>
-
-                            </textarea>
-                    </td>
-                </tr>
-
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-
-                <tr>
-                    <td colspan="5" class="special_conditions green_color">
-                        <p>Особые условия</p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="5" class="special_conditions_textarea">
-                            <textarea>
-
-                            </textarea>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="5" class="workability green_color">
-                        <p>Технологичность</p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="5" class="workability_textarea">
-                            <textarea>
-
-                            </textarea>
-                    </td>
-                </tr>
-
-                </tbody>
-
-            </table>
+        <div class="row" id="headerProduct">
 
         </div>
 
-        <!--CENTER COL-->
-        <div class="col-md-3">
-
-        </div>
-
-        <!--RIGHT COL-->
-        <div class="col-md-4">
+        <div class="row" id = "bodyProduct">
 
         </div>
 
     </div>
-</div>
 
 
-
-<script src="/resources/js/jsx/newProduct.js" type="text/javascript"></script>
+    <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-with-addons.min.js"/>"></script>
+    <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-dom.min.js"/>"></script>
+    <script src="/resources/js/react/babel.min.js"></script>
+    <script src="/resources/js/jsx/newProduct.js" type="text/babel"></script>
 
 </body>
 </html>

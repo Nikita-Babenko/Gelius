@@ -40,14 +40,13 @@ public class ProductsControllerTest {
     }
 
     @Test
-    @Ignore
     public void testGetProductsByEmptyFilter() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
 
         JSONResponse response = new JSONResponse();
-        response.setMessage("Filter is empty!");
-        response.setCode("400");
+        response.setMessage("List of products is empty!");
+        response.setCode("204");
 
         String expected = mapper.writeValueAsString(response);
         System.out.println("Expected : " + expected);

@@ -14,10 +14,10 @@ public class ProductType {
     private Long id;
     @Size(max = 50)
     @Column(name = "PRODUCT_TYPE")
-    private String typeOfProduct;
+    private String productsType;
 
-    public ProductType(String typeOfProduct) {
-        this.typeOfProduct = typeOfProduct;
+    public ProductType(String productsType) {
+        this.productsType = productsType;
     }
 
     public ProductType() {
@@ -31,12 +31,12 @@ public class ProductType {
         this.id = id;
     }
 
-    public String getTypeOfProduct() {
-        return typeOfProduct;
+    public String getProductsType() {
+        return productsType;
     }
 
-    public void setTypeOfProduct(String typeOfProduct) {
-        this.typeOfProduct = typeOfProduct;
+    public void setProductsType(String productsType) {
+        this.productsType = productsType;
     }
 
     @Override
@@ -45,19 +45,19 @@ public class ProductType {
         if (!(o instanceof ProductType)) return false;
         ProductType that = (ProductType) o;
         return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getTypeOfProduct(), that.getTypeOfProduct());
+                Objects.equals(getProductsType(), that.getProductsType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTypeOfProduct());
+        return Objects.hash(getId(), getProductsType());
     }
 
     @Override
     public String toString() {
         return "ProductType{" +
                 "id=" + id +
-                ", typeOfProduct='" + typeOfProduct + '\'' +
+                ", productsType='" + productsType + '\'' +
                 '}';
     }
 }

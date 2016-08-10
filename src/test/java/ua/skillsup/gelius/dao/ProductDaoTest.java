@@ -2,7 +2,6 @@ package ua.skillsup.gelius.dao;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,6 @@ public class ProductDaoTest {
 
 
     @Test
-    @Ignore
     public void testFindAll() throws Exception {
         int actualNumber = productDao.findAll().size();
 
@@ -51,7 +49,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterLasunka() throws Exception {
         searchFilter.setClients(Arrays.asList("Lasunka"));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
@@ -59,7 +56,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterLasunkaAndAVK() throws Exception {
         searchFilter.setClients(Arrays.asList("Lasunka","ABK"));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
@@ -67,7 +63,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterWidth() throws Exception {
         searchFilter.setClients(Arrays.asList("Lasunka","ABK"));
         searchFilter.setWidths(Arrays.asList(300));
@@ -77,7 +72,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindByFilterHeight() throws Exception {
         searchFilter.setHeights(Arrays.asList(180));
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
@@ -86,7 +80,6 @@ public class ProductDaoTest {
     }
 
     @Test
-    @Ignore
     public void testFindFilterParameters() throws Exception {
         searchFilter.setIds(Arrays.asList(Long.valueOf(2), Long.valueOf(3), Long.valueOf(4)));
         searchFilter.setWidths(Arrays.asList(300));
@@ -96,33 +89,23 @@ public class ProductDaoTest {
 
         assertEquals(expectedLengths, actualLengths);
     }
-    @Test
-    public void testSortingByClientsDesc(){
-        searchFilter.setSortableColumn("clients");
-        searchFilter.setSortingDirection("kuku");//на самом деле написать сюда можно что угодно, кроме asc.
-        filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        for (ProductDto product : filteredProducts){
-            int i=0;
-            i++;
-            if (i==1){
-                assertTrue("Sorting is mistakenly", product.getClient().getCompanyName().equals("Petruschenko"));
-                break;
-            }
-        }
-    }
+   @Test
+   public void testSortingByClientsDesc(){
+       searchFilter.setSortableColumn("clients");
+       searchFilter.setSortingDirection("kuku");
+       filteredProducts = productDao.findByFilterAndSorting(searchFilter);
+       String expected = "Petruschenko";
+       String actual = filteredProducts.get(0).getClient().getCompanyName();
+       assertEquals("Sorting is mistakenly",expected, actual);
+   }
     @Test
     public void testSortingByClientsAsc(){
         searchFilter.setSortableColumn("clients");
         searchFilter.setSortingDirection("asc");
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        for (ProductDto product : filteredProducts){
-            int i=0;
-            i++;
-            if (i==1){
-                assertTrue("Sorting is mistakenly", product.getClient().getCompanyName().equals("ABK"));
-                break;
-            }
-        }
+        String expected = "ABK";
+        String actual = filteredProducts.get(0).getClient().getCompanyName();
+        assertEquals("Sorting is mistakenly",expected, actual);
     }
     @Test
     public void testSortingByClientsDescWithFilter(){
@@ -130,14 +113,9 @@ public class ProductDaoTest {
         searchFilter.setSortableColumn("clients");
         searchFilter.setSortingDirection("desc");
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        for (ProductDto product : filteredProducts){
-            int i=0;
-            i++;
-            if (i==1){
-                assertTrue("Sorting is mistakenly", product.getClient().getCompanyName().equals("Lasunka"));
-                break;
-            }
-        }
+        String expected = "Lasunka";
+        String actual = filteredProducts.get(0).getClient().getCompanyName();
+        assertEquals("Sorting is mistakenly",expected, actual);
     }
     @Test
     public void testSortingByHeightAscWithFilter(){
@@ -145,14 +123,9 @@ public class ProductDaoTest {
         searchFilter.setSortableColumn("heights");
         searchFilter.setSortingDirection("asc");
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        for (ProductDto product : filteredProducts){
-            int i=0;
-            i++;
-            if (i==1){
-                assertTrue("Sorting is mistakenly", product.getInnerHeight() == 130);
-                break;
-            }
-        }
+        int expected = 130;
+        int actual = filteredProducts.get(0).getInnerHeight();
+        assertEquals("Sorting is mistakenly",expected, actual);
     }
     @Test
     public void testSortingByHeightDescWithFilter(){
@@ -160,14 +133,9 @@ public class ProductDaoTest {
         searchFilter.setSortableColumn("heights");
         searchFilter.setSortingDirection("desc");
         filteredProducts = productDao.findByFilterAndSorting(searchFilter);
-        for (ProductDto product : filteredProducts){
-            int i=0;
-            i++;
-            if (i==1){
-                assertTrue("Sorting is mistakenly", product.getInnerHeight() == 180);
-                break;
-            }
-        }
+        int expected = 180;
+        int actual = filteredProducts.get(0).getInnerHeight();
+        assertEquals("Sorting is mistakenly",expected, actual);
     }
 
 }

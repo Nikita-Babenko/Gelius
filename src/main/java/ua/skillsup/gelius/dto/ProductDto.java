@@ -1,20 +1,22 @@
 package ua.skillsup.gelius.dto;
 
 import ua.skillsup.gelius.dao.entities.Client;
+import ua.skillsup.gelius.dao.entities.Dictionaries.CardboardBrand;
 import ua.skillsup.gelius.dao.entities.Dictionaries.ProductType;
+import ua.skillsup.gelius.dao.entities.Dictionaries.Profile;
 
 import java.util.Objects;
 
 public class ProductDto {
     private Long id;
     private Client client;
-    private String productsName;
     private ProductType productsType;
+    private CardboardBrand cardboardBrand;
+    private String productsName;
     private Integer innerLength;
     private Integer innerWidth;
     private Integer innerHeight;
-    private Long cardboardBrandID;
-    private Long profileID;
+    private Profile profile;
     private String colour;
     private String print;
     private Character activity;
@@ -75,20 +77,20 @@ public class ProductDto {
         this.innerHeight = innerHeight;
     }
 
-    public Long getCardboardBrandID() {
-        return cardboardBrandID;
+    public CardboardBrand getCardboardBrand() {
+        return cardboardBrand;
     }
 
-    public void setCardboardBrandID(Long cardboardBrandID) {
-        this.cardboardBrandID = cardboardBrandID;
+    public void setCardboardBrand(CardboardBrand cardboardBrand) {
+        this.cardboardBrand = cardboardBrand;
     }
 
-    public Long getProfileID() {
-        return profileID;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setProfileID(Long profileID) {
-        this.profileID = profileID;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public String getColour() {
@@ -127,8 +129,8 @@ public class ProductDto {
                 Objects.equals(innerLength, that.innerLength) &&
                 Objects.equals(innerWidth, that.innerWidth) &&
                 Objects.equals(innerHeight, that.innerHeight) &&
-                Objects.equals(cardboardBrandID, that.cardboardBrandID) &&
-                Objects.equals(profileID, that.profileID) &&
+                Objects.equals(cardboardBrand, that.cardboardBrand) &&
+                Objects.equals(profile, that.profile) &&
                 Objects.equals(colour, that.colour) &&
                 Objects.equals(print, that.print);
     }
@@ -136,7 +138,7 @@ public class ProductDto {
     @Override
     public int hashCode() {
         return Objects.hash(id, client, productsName, productsType, innerLength, innerWidth, innerHeight,
-                cardboardBrandID, profileID, colour, print);
+                cardboardBrand, profile, colour, print);
     }
 
     @Override
@@ -144,15 +146,16 @@ public class ProductDto {
         return "ProductDto{" +
                 "id=" + id +
                 ", client=" + client +
+                ", productsType=" + productsType +
+                ", cardboardBrand=" + cardboardBrand +
                 ", productsName='" + productsName + '\'' +
-                ", productsTypeID='" + productsType + '\'' +
                 ", innerLength=" + innerLength +
                 ", innerWidth=" + innerWidth +
                 ", innerHeight=" + innerHeight +
-                ", cardboardBrandID='" + cardboardBrandID + '\'' +
-                ", profileID='" + profileID + '\'' +
+                ", profile=" + profile +
                 ", colour='" + colour + '\'' +
                 ", print='" + print + '\'' +
+                ", activity=" + activity +
                 '}';
     }
 }
