@@ -73,9 +73,10 @@ select:-moz-focusring {
     width: 150px;
 }
 
+
 .header_info > .form-group{
     padding-left: 0;
-    padding-right: 90px !important;
+    padding-right: 0;
     margin-bottom:15px;
 }
 
@@ -89,14 +90,15 @@ select:-moz-focusring {
 .header_info_customer, .header_info_name{
     font-size: 18px;
     display: inline-block;
-    width: 220px !important;
+    width: 70% !important;
+    padding: 0;
 }
 
 .header_info_type{
     font-size: 18px;
     display: inline-block;
-    width: 220px !important;
-    padding-right: 0 !important;
+    padding-right: 0;
+    width: 60% !important;
 }
 
 /*Header right*/
@@ -110,7 +112,7 @@ select:-moz-focusring {
 }
 
 .create{
-    padding-right: 20px;
+    padding-right: 5px;
     float: right;
 }
 
@@ -122,18 +124,18 @@ select:-moz-focusring {
 
 .create > p{
     display: inline-block;
-    padding-right: 10px;
+    padding-right: 5px;
     vertical-align: middle;
 }
 
 .update{
-    padding-right: 20px;
+    padding-right: 5px;
     float: right;
 }
 
 .update > p{
     display: inline-block;
-    padding-right: 10px;
+    padding-right: 5px;
     vertical-align: middle;
 }
 
@@ -143,7 +145,7 @@ select:-moz-focusring {
 }
 
 .do{
-    padding-right: 20px;
+    padding-right: 5px;
     float: right;
 }
 

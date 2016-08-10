@@ -11,7 +11,7 @@ var newProductHeader = React.createClass({
 newProductHeader.Left = React.createClass({
     render: function () {
         return (
-            <div className="col-lg-9 col-md-8 col-sm-7 col-xs-7 header_left">
+            <div className="col-lg-9 col-md-8 col-sm-8 col-xs-7 header_left">
 
                 <div className="col-md-12 header_top">
 
@@ -60,7 +60,7 @@ newProductHeader.Left = React.createClass({
                 <div className="col-md-12 header_down">
 
                     <div className="form-inline header_info">
-                        <div className="form-group">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
                             <label for="Customer">Заказчик</label>
                             <select className="form-control header_info_customer" id="Customer">
                                 <option></option>
@@ -70,12 +70,13 @@ newProductHeader.Left = React.createClass({
                             </select>
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
                             <label for="Name">Название</label>
                             <input type="text" className="form-control header_info_name" id="Name" />
                         </div>
 
-                        <div className="form-group">
+
+                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
                             <label for="Type">Тип изделия</label>
                             <select className="form-control header_info_type" id="Type">
                                 <option></option>
