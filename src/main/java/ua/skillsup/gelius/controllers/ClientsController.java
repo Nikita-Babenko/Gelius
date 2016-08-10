@@ -23,13 +23,14 @@ public class ClientsController {
     @RequestMapping(path = "/all", method = RequestMethod.GET)
     @ResponseBody
     private JSONResponse getAllClients() {
+        LOG.info("Get all clients");
         List<ClientDto> clients = clientService.getAllClients();
         return new JSONResponse(clients, "products");
     }
 
     @RequestMapping(value = "/newClient", method = RequestMethod.POST)
     private String openPageNewProduct() {
-
+        LOG.info("Open page for new client");
         return "newClient";
     }
 }

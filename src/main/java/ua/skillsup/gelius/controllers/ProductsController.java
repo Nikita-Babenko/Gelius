@@ -14,19 +14,21 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/products")
 public class ProductsController {
-    private static final Logger LOG = LoggerFactory.getLogger("ProductsFilter");
+    private static final Logger LOG = LoggerFactory.getLogger("ProductsController");
 
     @Autowired
     private ProductService productService;
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
     private String getRegister() {
+        LOG.info("Open register page");
         return "register";
     }
 
     @RequestMapping(path = "/all", method = RequestMethod.GET)
     @ResponseBody
     private JSONResponse getAllProducts() {
+        LOG.info("Get all products");
         List<ProductDto> allProducts = productService.getAllProducts();
 
         return createResponse(allProducts, "products");
@@ -35,6 +37,7 @@ public class ProductsController {
     @RequestMapping(value = "/filterParameters/{filterName}", method = RequestMethod.POST)
     @ResponseBody
     private JSONResponse getFilterParameters(@RequestBody ProductsFilteringAndSortingDTO filter, @PathVariable("filterName") String filterName) {
+        LOG.info("Get filter params of {}", filterName);
         List parameters = productService.findFilterParameters(filter, filterName);
 
         return createResponse(parameters, "parameters");
@@ -44,6 +47,7 @@ public class ProductsController {
     @RequestMapping(value = "/filtrate", method = RequestMethod.POST)
     @ResponseBody
     private JSONResponse filtrateProducts(@RequestBody ProductsFilteringAndSortingDTO filter) {
+        LOG.info("Filtering by filter {}", filter);
         JSONResponse response;
         if (isValidSearchFilter(filter)) {
             List<ProductDto> products = productService.getProductsByFilterAndSorting(filter);
@@ -58,7 +62,7 @@ public class ProductsController {
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
     private String openPageNewProduct() {
-
+        LOG.info("Open new product page");
         return "newProduct";
     }
 

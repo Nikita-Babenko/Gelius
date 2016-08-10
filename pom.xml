@@ -32,6 +32,7 @@
         <jquery.version>2.1.4</jquery.version>
         <font-awesome.version>4.6.3</font-awesome.version>
         <react.version>15.2.1</react.version>
+        <model-mapper.version>0.7.6</model-mapper.version>
     </properties>
 
     <dependencies>
@@ -177,6 +178,13 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-databind.version}</version>
+        </dependency>
+
+        <!--Model mapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${model-mapper.version}</version>
         </dependency>
 
         <!-- Front-End -->

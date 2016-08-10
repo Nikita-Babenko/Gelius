@@ -1,5 +1,8 @@
 package ua.skillsup.gelius.services.impl;
 
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,21 +15,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static ua.skillsup.gelius.converters.ClientDTOConverter.convert;
-
 @Service
+@Transactional
 public class ClientServiceImpl implements ClientService {
+
+    private static final Logger LOG = LoggerFactory.getLogger("ClientService");
 
     @Autowired
     ClientDAO clientDao;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     @Transactional(readOnly = true)
     public List<ClientDto> getAllClients() {
         List<ClientDto> result = new ArrayList<>();
         Collection<Client> clients = clientDao.findAll();
+        LOG.info("Find {} clients", clients.size());
         for(Client client : clients) {
-            result.add(convert(client));
+            ClientDto clientDTO = modelMapper.map(client, ClientDto.class);
+            result.add(clientDTO);
         }
 
         return result;
