@@ -15,7 +15,7 @@ newProductHeader.Left = React.createClass({
 
                 <div className="col-md-12 header_top">
 
-                    <div className="col-md-5 header_buttons">
+                    <div className="col-md-5 col-xs-10 col-sm-11  header_buttons">
 
                         <button type="button" className="btn btn-success glyphicon glyphicon-chevron-left">
                             <a href="#">

@@ -29,6 +29,7 @@ select:-moz-focusring {
 
 .header_buttons{
     margin-top: 10px;
+    margin-bottom: 5px;
     padding-left: 0;
     padding-right: 0;
 }
