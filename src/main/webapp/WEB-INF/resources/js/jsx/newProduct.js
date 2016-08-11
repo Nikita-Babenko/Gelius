@@ -1,14 +1,14 @@
-var newProductHeader = React.createClass({
+var newProductContainer = React.createClass({
     render: function () {
         return (
-            <div class="row" >
+            <div className="container-fluid target">
 
             </div>
         );
     }
 });
 
-newProductHeader.Left = React.createClass({
+newProductContainer.newProductHeaderLeft = React.createClass({
     render: function () {
         return (
             <div className="col-lg-9 col-md-8 col-sm-8 col-xs-7 header_left">
@@ -93,7 +93,7 @@ newProductHeader.Left = React.createClass({
     }
 });
 
-newProductHeader.Right = React.createClass({
+newProductContainer.newProductHeaderRight = React.createClass({
     render: function () {
         return (
             <div className="col-lg-3 col-md-4 col-sm-4 col-xs-5 header_right">
@@ -113,7 +113,7 @@ newProductHeader.Right = React.createClass({
                 </div>
 
                 <div className="form-group form-inline use">
-                    <input type="checkbox" className="header_righ_checkbox" checked />
+                    <input type="checkbox" className="header_righ_checkbox" />
                     <p>Тех.карта используется</p>
                 </div>
             </div>
@@ -121,17 +121,7 @@ newProductHeader.Right = React.createClass({
     }
 });
 
-var newProductBody = React.createClass({
-    render: function () {
-        return (
-            <div className="row" >
-
-            </div>
-        );
-    }
-});
-
-newProductBody.Left = React.createClass({
+newProductContainer.newProductBodyLeft = React.createClass({
     render: function () {
         return (
             <div className="col-md-12 col-lg-5 left">
@@ -271,38 +261,43 @@ newProductBody.Left = React.createClass({
     }
 });
 
-newProductBody.Middle = React.createClass({
+newProductContainer.newProductBodyMiddle = React.createClass({
     render: function () {
         return (
             <div className="col-md-12 col-lg-3 middle">
 
-                <table border="1" className="table left_table middle">
+                <table border="1" className="table middle_table">
 
                     <tbody>
 
                     <tr>
-                        <td className="left_title green_color" rowSpan="6">
+                        <td className="middle_left_title green_color" rowSpan="6">
                             <p className="vertical_left_title">Продукция</p>
                         </td>
 
-                        <td className="products_large_td">Размеры заготовки</td>
-                        <td className="products_small_td"><input type="text" /></td>
-                        <td className="products_small_td"><input type="text" /></td>
+                        <td className="middle_products_large_td">Размеры заготовки</td>
+                        <td className="middle_products_small_td">
+                            <div className="inputs">
+                                <input type="text" className="input_1" />
+                                <input type="text" className="input_2" />
+                            </div>
+                        </td>
+
                     </tr>
 
                     <tr>
-                        <td className="products_large_td">Количество с листа</td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td className="middle_products_large_td">Количество с листа</td>
+                        <td className="middle_products_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
-                        <td className="products_small_td">Формат заготовки</td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td className="middle_products_large_td">Формат заготовки</td>
+                        <td className="middle_products_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
-                        <td className="products_small_td">Соединение клапана</td>
-                        <td colSpan="5" className="products_small_td">
+                        <td className="middle_products_large_td">Соединение клапана</td>
+                        <td className="middle_products_small_td">
                             <select>
                                 <option></option>
                                 <option>Text1</option>
@@ -313,82 +308,143 @@ newProductBody.Middle = React.createClass({
                     </tr>
 
                     <tr>
-                        <td className="products_small_td">Штамп</td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td className="middle_products_large_td">Штамп</td>
+                        <td className="middle_products_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
-                        <td className="products_small_td">Клише</td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td className="middle_products_large_td">Клише</td>
+                        <td className="middle_products_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
-                        <td className="left_title green_color" rowSpan="7">
-                            <p className="vertical_left_title">Печать</p> </td>
-                    </tr>
-
-                    <tr>
-                        <td className="products_small_td">Цвет</td>
-                        <td className="products_small_td">Название</td>
-                        <td className="products_small_td">S запечатки</td>
-                    </tr>
-
-                    <tr>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                    </tr>
-
-                    <tr>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                    </tr>
-
-                    <tr>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                    </tr>
-
-                    <tr>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="1"><input type="text" /></td>
-                    </tr>
-
-
-
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-
-
-
-                    <tr>
-                        <td colSpan="4" className="workability green_color"><p align="center">Примечания</p>
+                        <td className="middle_left_title green_color" rowSpan="6">
+                            <p className="vertical_left_title">Печать</p>
                         </td>
                     </tr>
+
                     <tr>
-                        <td className="products_small_td" colSpan="2"><input type="text" /></td>
-                        <td className="products_small_td" colSpan="2"><input type="text" /></td>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"  value="Название" disabled/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"  value="Цена" disabled/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"  value="S запечатки" disabled/>
+                            </div>
+                        </td>
                     </tr>
+
                     <tr>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
                     </tr>
+
                     <tr>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
                     </tr>
+
                     <tr>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
                     </tr>
+
                     <tr>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
-                        <td className="products_large_td" colSpan="2"><input type="text" /></td>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
                     </tr>
+
+                    <tr>
+                        <td colSpan="4" className="notes green_color">
+                            <p>Примечания</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
+
                     </tbody>
                 </table>
 
@@ -397,7 +453,7 @@ newProductBody.Middle = React.createClass({
     }
 });
 
-newProductBody.Right = React.createClass({
+newProductContainer.newProductBodyRight = React.createClass({
     render: function () {
         return (
             <div className="col-md-12 col-lg-4 right">
@@ -413,33 +469,33 @@ newProductBody.Right = React.createClass({
                         <td className="avto_large_td">Способ упаковки</td>
                         <td className="avto_small_td">
                             <select>
-                                <option value=""></option>
-                                <option value="">Без упаковки</option>
-                                <option value="">Паллета, лента, стрейч</option>
-                                <option value="">Паллета, лента, без стрейча</option>
+                                <option></option>
+                                <option>Без упаковки</option>
+                                <option>Паллета, лента, стрейч</option>
+                                <option>Паллета, лента, без стрейча</option>
                             </select>
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В пачке, шт.</td>
-                        <td className="avto_small_td"><input type="text" value="" /></td>
+                        <td className="avto_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В транспортном пакете, шт.</td>
-                        <td className="avto_small_td"><input type="text" value="" /></td>
+                        <td className="avto_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">
                             Размеры пакета
-                            <input className="embeded_input" type="text" value=""/>
+                            <input className="embeded_input" type="text"/>
                         </td>
                         <td className="avto_small_td">
                             <div className="inputs">
-                                <input type="text" value=""/>
-                                <input type="text" value=""/>
+                                <input type="text" className="input_1" />
+                                <input type="text" className="input_2" />
                             </div>
                         </td>
                     </tr>
@@ -448,9 +504,9 @@ newProductBody.Right = React.createClass({
                         <td className="avto_large_td">Поддон</td>
                         <td className="avto_small_td">
                             <select>
-                                <option value=""></option>
-                                <option value="">1200x800</option>
-                                <option value="">1200x1000</option>
+                                <option></option>
+                                <option>1200x800</option>
+                                <option>1200x1000</option>
                             </select>
                         </td>
                     </tr>
@@ -459,10 +515,10 @@ newProductBody.Right = React.createClass({
                         <td className="avto_large_td">Размещение на поддоне</td>
                         <td className="avto_small_td">
                             <select>
-                                <option value=""></option>
-                                <option value="">1 пачка в ряду</option>
-                                <option value="">2 пачки в ряду</option>
-                                <option value="">3 пачки в ряду</option>
+                                <option></option>
+                                <option>1 пачка в ряду</option>
+                                <option>2 пачки в ряду</option>
+                                <option>3 пачки в ряду</option>
                             </select>
                         </td>
                     </tr>
@@ -470,12 +526,12 @@ newProductBody.Right = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">Рядов на поддоне</td>
-                        <td className="avto_small_td"><input type="text" value="" /></td>
+                        <td className="avto_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td className="avto_small_td"><input type="text" value="" /></td>
+                        <td className="avto_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
@@ -500,13 +556,25 @@ newProductBody.Right = React.createClass({
                     </tr>
 
                     <tr>
-                        <td colSpan="3" className="all">
+                        <td colSpan="3" className="bigovki_all">
+                            <div className="bigovki_inputs_1">
+                                <input type="text" className="bigovki_input_1"/>
+                                <input type="text" className="bigovki_input_2" value="+" disabled/>
+                            </div>
+                            <div className="bigovki_inputs_2">
+                                <input type="text" className="bigovki_input_1"/>
+                                <input type="text" className="bigovki_input_2" value="+" disabled/>
+                            </div>
+                            <div className="bigovki_inputs_3">
+                                <input type="text" className="bigovki_input_3" />
+                                <input type="text" className="bigovki_input_4" />
+                            </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                        <td className="avto_small_td"><input type="text" value="" /></td>
+                        <td className="avto_small_td"><input type="text" /></td>
                     </tr>
 
                     <tr>
@@ -516,7 +584,14 @@ newProductBody.Right = React.createClass({
                     </tr>
 
                     <tr>
-                        <td colSpan="3" className="all">
+                        <td colSpan="3" className="prosechki_all">
+                            <div className="prosechki_inputs">
+                                <input type="text" className="prosechki_input_1"/>
+                                <input type="text" className="prosechki_input_2"/>
+                                <input type="text" className="prosechki_input_3"/>
+                                <input type="text" className="prosechki_input_4"/>
+                                <input type="text" className="prosechki_input_5"/>
+                            </div>
                         </td>
                     </tr>
 
@@ -542,10 +617,10 @@ newProductBody.Right = React.createClass({
 var AppHeader = React.createClass({
     render: function () {
         return (
-            <newProductHeader>
-                <newProductHeader.Left />
-                <newProductHeader.Right />
-            </newProductHeader>
+            <div className="row" id="productHeader">
+                <newProductContainer.newProductHeaderLeft />
+                <newProductContainer.newProductHeaderRight />
+            </div>
         );
     }
 });
@@ -553,14 +628,24 @@ var AppHeader = React.createClass({
 var AppBody = React.createClass({
     render: function () {
         return (
-            <newProductBody>
-                <newProductBody.Left />
-                <newProductBody.Middle />
-                <newProductBody.Right />
-            </newProductBody>
+            <div className="row" id="productBody">
+                <newProductContainer.newProductBodyLeft />
+                <newProductContainer.newProductBodyMiddle/>
+                <newProductContainer.newProductBodyRight />
+            </div>
         );
     }
 });
 
-ReactDOM.render(<AppHeader />, document.getElementById("headerProduct"));
-ReactDOM.render(<AppBody />, document.getElementById("bodyProduct"));
+var App = React.createClass({
+    render: function () {
+        return (
+            <newProductContainer>
+                <AppHeader />
+                <AppBody />
+            </newProductContainer>
+        );
+    }
+});
+
+ReactDOM.render(<App />, document.getElementById("newProductContainer"));

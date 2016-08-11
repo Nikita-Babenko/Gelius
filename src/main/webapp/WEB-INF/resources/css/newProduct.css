@@ -12,6 +12,10 @@ select:-moz-focusring {
     text-shadow: 0 0 0 #000;
 }
 
+#productHeader{
+    margin-bottom: 10px;
+}
+
 /*Header left*/
 .header_top{
     margin-bottom: 30px;
@@ -334,6 +338,155 @@ select:-moz-focusring {
     outline: none;
 }
 
+
+/*
+    Middle table
+*/
+.middle_table > tbody > tr > .middle_left_title {
+    width: 5%;
+    border: 1px solid black !important;
+    padding : 15px 0 0 0 !important;
+    text-align: center;
+}
+
+.middle_table > tbody > tr > .middle_products_large_td{
+    max-height: 20px !important;
+    height: 20px !important;
+    text-align: left;
+    vertical-align: middle;
+    width: 60%;
+    padding: 0 0 0 10px;
+    position: relative;
+    overflow:hidden;
+    font-size: 16px;
+    border: 1px solid black;
+}
+
+.middle_table > tbody > tr >.middle_products_small_td{
+    max-height: 20px !important;
+    height: 20px !important;
+    text-align: left;
+    vertical-align: middle;
+    width: 35%;
+    padding: 0 0 0 10px;
+    position: relative;
+    overflow:hidden;
+    font-size: 16px;
+    border: 1px solid black;
+}
+
+.middle_table > tbody > tr > td > input, .middle_table > tbody > tr > td > select{
+    position: absolute;
+    text-align: center;
+    font-size: 16px;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin:0;
+    border-radius:0;
+    border:0;
+    outline: none;
+    background-color: white;
+}
+
+.middle_table > tbody > tr > .print_td{
+    height: 20px;
+    width: 100%;
+    padding: 0 !important;
+    border: 1px solid black;
+}
+
+.middle_table > tbody > tr > .print_td > .print_input_1,
+.middle_table > tbody > tr > .print_td > .print_input_2{
+    float: left;
+    height: 100%;
+    width: 30%;
+}
+
+.middle_table > tbody > tr > .print_td > .print_input_3{
+    float: left;
+    height: 100%;
+    width: 40%;
+}
+
+.middle_table > tbody > tr > .print_td > .print_input_1 > input,
+.middle_table > tbody > tr > .print_td > .print_input_2 > input{
+    float: left;
+    height: 100%;
+    width: 100%;
+    padding: 0 !important;
+    text-align: center;
+    border-right: 1px solid black;
+    background: white;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+.middle_table > tbody > tr > .print_td > .print_input_3 > input{
+    float: left;
+    height: 100%;
+    width: 100%;
+    padding: 0 !important;
+    text-align: center;
+    border: 0;
+    background: white;
+    border-radius:0;
+    outline: none;
+}
+
+.middle_table > tbody > tr > .notes{
+    font-size: 16px;
+    padding: 0 0 0 0 !important;
+    margin: 0;
+    text-align: center;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+.middle_table > tbody > tr > .notes > p{
+    margin: 0;
+    font-weight: bold;
+}
+
+.middle_table > tbody > tr > .notes_all{
+    height: 20px;
+    position: relative;
+    padding: 0 !important;
+    border: 1px solid black;
+}
+
+.middle_table > tbody > tr > .notes_all  > .notes_inputs > .note_input_1 {
+    float: left;
+    height: 100%;
+    width: 40%;
+    text-align: center;
+    border-right: 1px solid black;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+.middle_table > tbody > tr > .notes_all  > .notes_inputs > .note_input_2 {
+    float: left;
+    height: 100%;
+    width: 60%;
+    text-align: center;
+    border: 0;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+
 /* Right table */
 
 .right_table{
@@ -389,7 +542,7 @@ select:-moz-focusring {
     outline: none;
 }
 
-.right_table > tbody > tr > td > .inputs{
+.inputs{
     position: absolute;
     top: 0;
     right: 0;
@@ -403,12 +556,24 @@ select:-moz-focusring {
     outline: none;
 }
 
-.right_table > tbody > tr > td > .inputs > input{
+.inputs > .input_1{
+     float:left;
+     text-align: center;
+     width: 50%;
+     height: 100%;
+     border-right: 1px solid;
+     border-left: 0;
+     border-top: 0;
+     border-bottom: 0;
+     border-radius:0;
+     outline: none;
+ }
+
+.inputs > .input_2{
     float:left;
     text-align: center;
     width: 50%;
     height: 100%;
-    border-right: 1px solid;
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
@@ -432,9 +597,8 @@ select:-moz-focusring {
     min-height: 70px !important;
     position: relative;
     border: 1px solid black;
-    padding: 10px 0 0 10px !important;
+    padding: 0 0 0 0;
 }
-
 
 .attachments > .buttons{
     position: absolute;
@@ -442,8 +606,14 @@ select:-moz-focusring {
     right: 10px;
 }
 
+.attachments > .buttons > a{
+    height: 32px;
+    margin-left: 5px;
+    width: 32px;
+}
+
 .attachments > .links{
-    padding-top: 10px;
+    padding: 15px 0 10px 10px;
 }
 
 .right_table > tbody > tr > .right_table_title{
@@ -457,7 +627,6 @@ select:-moz-focusring {
 }
 
 .rightTable > tbody > tr > .buttons > .buttonBig {
-
     float: right;
     margin-left: 6px;
     width: 50px;
@@ -468,15 +637,134 @@ select:-moz-focusring {
     text-align: center;
     background-color: green;
 }
+
 .rightTable > tbody > tr > .buttonContainer > .buttonBig > a{
-    text-decoration:none
+    text-decoration:none;
 }
 
-.all{
+/* Bigovki right_table */
+
+.bigovki_all{
     height: 20px;
+    position: relative;
     padding: 0 !important;
     border: 1px solid black;
 }
+
+.bigovki_all > .bigovki_inputs_1{
+     float: left;
+     height: 100%;
+     width: 32%;
+ }
+
+.bigovki_all  > .bigovki_inputs_1{
+    float: left;
+    height: 100%;
+    width: 32%;
+}
+
+.bigovki_all  > .bigovki_inputs_2{
+    float: left;
+    height: 100%;
+    width: 33.3%;
+}
+
+.bigovki_all  > .bigovki_inputs_3{
+    float: left;
+    height: 100%;
+    width: 34.7%;
+}
+
+.bigovki_all > .bigovki_inputs_1 > .bigovki_input_1, .bigovki_all  > .bigovki_inputs_2 > .bigovki_input_1{
+    float:left;
+    text-align: center;
+    width: 70%;
+    height: 100%;
+    border-right: 1px solid black;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+.bigovki_all  > .bigovki_inputs_1 > .bigovki_input_2, .bigovki_all > .bigovki_inputs_2 > .bigovki_input_2{
+    float:left;
+    text-align: center;
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid black;
+    background: white;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+.bigovki_all > .bigovki_inputs_3 > .bigovki_input_3{
+    float:left;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid black;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+.bigovki_all > .bigovki_inputs_3 > .bigovki_input_4{
+    float:left;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+/* Prosechki right_table */
+
+.prosechki_all{
+    height: 20px;
+    position: relative;
+    padding: 0 !important;
+    border: 1px solid black;
+}
+
+.prosechki_all  > .prosechki_inputs > .prosechki_input_1,
+.prosechki_all  > .prosechki_inputs > .prosechki_input_2,
+.prosechki_all  > .prosechki_inputs > .prosechki_input_3,
+.prosechki_all  > .prosechki_inputs > .prosechki_input_4{
+    float: left;
+    height: 100%;
+    width: 20%;
+    text-align: center;
+    border-right: 1px solid black;
+    background: white;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius:0;
+    outline: none;
+}
+
+.prosechki_all  > .prosechki_inputs > .prosechki_input_5{
+    float: left;
+    height: 100%;
+    text-align: center;
+    width: 20%;
+    border: 0;
+    background: white;
+    border-radius:0;
+    outline: none;
+}
+
+/* Main buttons right_table */
 
 .buttonContainer {
     position: relative;

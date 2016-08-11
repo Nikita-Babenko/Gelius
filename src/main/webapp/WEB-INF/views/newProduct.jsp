@@ -23,16 +23,7 @@
 </head>
 <body>
 
-
-    <div class="container-fluid target">
-
-        <div class="row" id="headerProduct">
-
-        </div>
-
-        <div class="row" id = "bodyProduct">
-
-        </div>
+    <div class="container-fluid target" id = "newProductContainer">
 
     </div>
 
