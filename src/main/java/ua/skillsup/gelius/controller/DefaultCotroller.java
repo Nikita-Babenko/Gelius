@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class DefaultCotroller {
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
     private String index() {
         return "index";

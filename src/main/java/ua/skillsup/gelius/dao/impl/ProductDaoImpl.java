@@ -39,6 +39,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductDto> findAll() {
         List<Product> products = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
         List<ProductDto> result = new ArrayList<>(products.size());
@@ -64,6 +65,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductDto> findByClient(String client) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("from Product").list();
         List<ProductDto> result = new ArrayList<>();
@@ -88,6 +90,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductDto> findByCardboardBrand(String cardboardBrand) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("select cb " +
                 "from Product cb where cb.cardboardBrend = :cardboardBrend").list();
@@ -101,6 +104,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductDto> findByProfile(String profileID) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("select p from Product p where p.profileID = :profileID").list();
         List<ProductDto> result = new ArrayList<>(products.size());
@@ -112,6 +116,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductDto> findByColour(String colour) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("select c from Product c where c.colour = :colour").list();
         List<ProductDto> result = new ArrayList<>(products.size());
@@ -123,6 +128,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductDto> findByActivity(Character activity) {
         List<Product> products = sessionFactory.getCurrentSession().createQuery("select a from Product a where a.activity = :activity").list();
         List<ProductDto> result = new ArrayList<>(products.size());
@@ -134,6 +140,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductDto> findByFilterAndSorting(ProductsFilteringAndSortingDTO filter) {
         Criteria criteria = getFilterCriteria(filter);
         criteria = getSortingCriteria(criteria, filter);

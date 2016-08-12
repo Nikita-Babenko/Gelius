@@ -50,7 +50,7 @@
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
             </props>
         </property>
-        <property name="packagesToScan" value="ua.skillsup.gelius.dao" />
+        <property name="packagesToScan" value="ua.skillsup.gelius.model" />
     </bean>
 
     <!-- Transaction -->
