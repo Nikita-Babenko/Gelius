@@ -1,7 +1,7 @@
 package ua.skillsup.gelius.dao;
 
-import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
+import ua.skillsup.gelius.model.dto.ProductDto;
+import ua.skillsup.gelius.model.dto.ProductsFilteringAndSortingDTO;
 
 import java.util.List;
 

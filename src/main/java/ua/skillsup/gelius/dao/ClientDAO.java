@@ -1,6 +1,6 @@
 package ua.skillsup.gelius.dao;
 
-import ua.skillsup.gelius.dao.entities.Client;
+import ua.skillsup.gelius.model.Client;
 
 import java.io.Serializable;
 

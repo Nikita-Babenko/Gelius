@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.dao.entities.Product;
-import ua.skillsup.gelius.dto.ProductDto;
-import ua.skillsup.gelius.dto.ProductsFilteringAndSortingDTO;
+import ua.skillsup.gelius.model.Product;
+import ua.skillsup.gelius.model.dto.ProductDto;
+import ua.skillsup.gelius.model.dto.ProductsFilteringAndSortingDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ua.skillsup.gelius.converters.EntityDtoConverter.convert;
+import static ua.skillsup.gelius.model.convert.EntityDtoConverter.convert;
 
 
 @Repository
