@@ -18,7 +18,7 @@ public class ProductRegister {
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "client")
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @Size(max = 200)
@@ -27,7 +27,7 @@ public class ProductRegister {
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "product_type")
+    @JoinColumn(name = "product_type_id")
     private ProductType productType;
 
     @Column(name = "inner_length")
@@ -41,22 +41,22 @@ public class ProductRegister {
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "cardboard_brand")
+    @JoinColumn(name = "cardboard_brand_id")
     private CardboardBrand cardboardBrand;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "profile")
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "face_layer")
+    @JoinColumn(name = "face_layer_id")
     private FaceLayer faceLayer;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "inner_layer")
+    @JoinColumn(name = "inner_layer_id")
     private InnerLayer innerLayer;
 
     @Size(max = 50)
