@@ -134,13 +134,12 @@ CREATE TABLE product(
   face_layer_id BIGINT,
   inner_layer_id BIGINT,
   material VARCHAR(200),
-  special_conditions VARCHAR(500),
 
 
   size_workpiece_length INT,
   size_workpiece_width INT,
   number_from_sheet INT,
-  blank_format INT,
+  blank_format INT NOT NULL ,
   connection_valve_id BIGINT,
   stamp VARCHAR(50),
   cliche VARCHAR(50),
