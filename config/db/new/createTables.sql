@@ -176,7 +176,6 @@ CREATE TABLE product(
 CREATE TABLE print(
   print_id BIGINT AUTO_INCREMENT,
   product_id BIGINT NOT NULL,
-  isNew BOOLEAN NOT NULL,
   colour VARCHAR(50),
   name VARCHAR(50),
   square_seal INT,
