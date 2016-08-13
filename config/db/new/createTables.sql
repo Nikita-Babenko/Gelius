@@ -6,7 +6,7 @@ CREATE TABLE client(
   description VARCHAR(255),
   first_name VARCHAR(30),
   last_name VARCHAR(30),
-  prhone_number VARCHAR(20) NOT NULL,
+  phone_number VARCHAR(20) NOT NULL,
 
   PRIMARY KEY (client_id)
 );
@@ -125,8 +125,8 @@ CREATE TABLE product(
   inner_length INT,
   inner_width INT,
   inner_height INT,
-  theoretical_square INT,
-  actual_square INT,
+  theoretical_square DECIMAL(5,3),
+  actual_square DECIMAL(5,3),
   format BIGINT,
   profile BIGINT,
   cardboard_brand BIGINT,
