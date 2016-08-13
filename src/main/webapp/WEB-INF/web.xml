@@ -20,10 +20,6 @@
     <servlet>
         <servlet-name>WebjarsServlet</servlet-name>
         <servlet-class>org.webjars.servlet.WebjarsServlet</servlet-class>
-        <init-param>
-            <param-name>disableCache</param-name>
-            <param-value>true</param-value>
-        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
