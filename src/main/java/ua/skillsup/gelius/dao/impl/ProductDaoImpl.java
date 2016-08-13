@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.model.Product;
-import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.model.dto.ProductsFilteringAndSortingDTO;
+import ua.skillsup.gelius.model.dto.ProductRegisterDto;
+import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
+import ua.skillsup.gelius.model.entity.ProductRegister;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ua.skillsup.gelius.model.convert.EntityDtoConverter.convert;
+import static ua.skillsup.gelius.model.convert.ProductRegisterDtoConvert.convert;
 
 
 @Repository
@@ -27,33 +27,33 @@ public class ProductDaoImpl implements ProductDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public Long createProduct(ProductDto productDto) {
-        Product product = convert(productDto);
+    public Long createProduct(ProductRegisterDto productDto) {
+        ProductRegister product = convert(productDto);
         return (Long) sessionFactory.getCurrentSession().save(product);
     }
 
     @Override
-    public void editProduct(ProductDto productDto) {
-        Product product = convert(productDto);
+    public void editProduct(ProductRegisterDto productDto) {
+        ProductRegister product = convert(productDto);
         sessionFactory.getCurrentSession().merge(product);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> findAll() {
-        List<Product> products = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
-        List<ProductDto> result = new ArrayList<>(products.size());
-        for (Product product : products) {
+    public List<ProductRegisterDto> findAll() {
+        List<ProductRegister> products = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class).list();
+        List<ProductRegisterDto> result = new ArrayList<>(products.size());
+        for (ProductRegister product : products) {
             result.add(convert(product));
         }
         return result;
     }
 
     @Override
-    public ProductDto findById(Long id) {
-        Product product = (Product) sessionFactory
+    public ProductRegisterDto findById(Long id) {
+        ProductRegister product = (ProductRegister) sessionFactory
                 .getCurrentSession()
-                .createQuery("select i from Product i where i.id = :id")
+                .createQuery("select i from ProductRegister i where i.id = :id")
                 .setParameter("id", id)
                 .uniqueResult();
 
@@ -66,10 +66,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> findByClient(String client) {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("from Product").list();
-        List<ProductDto> result = new ArrayList<>();
-        for (Product product : products) {
+    public List<ProductRegisterDto> findByClient(String client) {
+        List<ProductRegister> products = sessionFactory.getCurrentSession().createQuery("from ProductRegister").list();
+        List<ProductRegisterDto> result = new ArrayList<>();
+        for (ProductRegister product : products) {
             if (product.getClient().getCompanyName().equals(client)) {
                 result.add(convert(product));
             }
@@ -78,8 +78,8 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public ProductDto findByName(String name) {
-        Product product = (Product) sessionFactory.getCurrentSession().createQuery("select n from Product n where n.name = :name")
+    public ProductRegisterDto findByName(String name) {
+        ProductRegister product = (ProductRegister) sessionFactory.getCurrentSession().createQuery("select n from ProductRegister n where n.name = :name")
                 .setParameter("name", name);
         if (product == null) {
             return null;
@@ -91,11 +91,11 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> findByCardboardBrand(String cardboardBrand) {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("select cb " +
-                "from Product cb where cb.cardboardBrend = :cardboardBrend").list();
-        List<ProductDto> result = new ArrayList<>(products.size());
-        for (Product product : products) {
+    public List<ProductRegisterDto> findByCardboardBrand(String cardboardBrand) {
+        List<ProductRegister> products = sessionFactory.getCurrentSession().createQuery("select cb " +
+                "from ProductRegister cb where cb.cardboardBrend = :cardboardBrend").list();
+        List<ProductRegisterDto> result = new ArrayList<>(products.size());
+        for (ProductRegister product : products) {
             if (product.getCardboardBrand().equals(cardboardBrand))
                 result.add(convert(product));
         }
@@ -105,10 +105,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> findByProfile(String profileID) {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("select p from Product p where p.profileID = :profileID").list();
-        List<ProductDto> result = new ArrayList<>(products.size());
-        for (Product product : products) {
+    public List<ProductRegisterDto> findByProfile(String profileID) {
+        List<ProductRegister> products = sessionFactory.getCurrentSession().createQuery("select p from ProductRegister p where p.profileID = :profileID").list();
+        List<ProductRegisterDto> result = new ArrayList<>(products.size());
+        for (ProductRegister product : products) {
             if (product.getProfile().equals(profileID))
                 result.add(convert(product));
         }
@@ -117,43 +117,43 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> findByColour(String colour) {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("select c from Product c where c.colour = :colour").list();
-        List<ProductDto> result = new ArrayList<>(products.size());
-        for (Product product : products) {
+    public List<ProductRegisterDto> findByColour(String colour) {
+        List<ProductRegister> products = sessionFactory.getCurrentSession().createQuery("select c from ProductRegister c where c.colour = :colour").list();
+        List<ProductRegisterDto> result = new ArrayList<>(products.size());
+        /*for (ProductRegister product : products) {
             if (product.getColour().equals(colour))
                 result.add(convert(product));
-        }
+        }*/
         return result;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> findByActivity(Character activity) {
-        List<Product> products = sessionFactory.getCurrentSession().createQuery("select a from Product a where a.activity = :activity").list();
-        List<ProductDto> result = new ArrayList<>(products.size());
-        for (Product product : products) {
+    public List<ProductRegisterDto> findByActivity(Character activity) {
+        List<ProductRegister> products = sessionFactory.getCurrentSession().createQuery("select a from ProductRegister a where a.activity = :activity").list();
+        List<ProductRegisterDto> result = new ArrayList<>(products.size());
+        /*for (ProductRegister product : products) {
             if (product.getActivity().equals(activity))
                 result.add(convert(product));
-        }
+        }*/
         return result;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> findByFilterAndSorting(ProductsFilteringAndSortingDTO filter) {
+    public List<ProductRegisterDto> findByFilterAndSorting(ProductRegisterFilter filter) {
         Criteria criteria = getFilterCriteria(filter);
         criteria = getSortingCriteria(criteria, filter);
-        List<Product> products = criteria.list();
-        List<ProductDto> result = new ArrayList<ProductDto>(products.size());
-        for (Product product : products) {
+        List<ProductRegister> products = criteria.list();
+        List<ProductRegisterDto> result = new ArrayList<ProductRegisterDto>(products.size());
+        for (ProductRegister product : products) {
             result.add(convert(product));
         }
         return result;
     }
 
     @Override
-    public List findFilterParameters(ProductsFilteringAndSortingDTO filter, String filterName) {
+    public List findFilterParameters(ProductRegisterFilter filter, String filterName) {
         Criteria criteria = getFilterCriteria(filter);
         switch (filterName) {
             case "ids":
@@ -206,9 +206,9 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void deleteProduct(Long id) {
-        Product product = (Product) sessionFactory
+        ProductRegister product = (ProductRegister) sessionFactory
                 .getCurrentSession()
-                .createQuery("FROM Product WHERE :id = id")
+                .createQuery("FROM ProductRegister WHERE :id = id")
                 .setParameter("id", id)
                 .uniqueResult();
 
@@ -216,7 +216,7 @@ public class ProductDaoImpl implements ProductDao {
 
     }
 
-    private Criteria getSortingCriteria(Criteria criteria, ProductsFilteringAndSortingDTO filter) {
+    private Criteria getSortingCriteria(Criteria criteria, ProductRegisterFilter filter) {
         if (filter.getSortableColumn() != null)
         switch (filter.getSortableColumn()) {
             case "ids":
@@ -290,8 +290,8 @@ public class ProductDaoImpl implements ProductDao {
         return criteria;
     }
 
-    private Criteria getFilterCriteria(ProductsFilteringAndSortingDTO filter) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class, "product");
+    private Criteria getFilterCriteria(ProductRegisterFilter filter) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class, "product");
         criteria.createAlias("product.client", "client");
         criteria.createAlias("product.cardboardBrand", "cardboardBrand");
         criteria.createAlias("product.productsType", "productsType");

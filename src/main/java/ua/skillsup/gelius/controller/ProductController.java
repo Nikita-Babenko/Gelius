@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.model.dto.ProductsFilteringAndSortingDTO;
+import ua.skillsup.gelius.model.dto.ProductRegisterDto;
+import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.service.ProductService;
 
 import java.util.List;
@@ -30,14 +30,14 @@ public class ProductController {
     @ResponseBody
     private JSONResponse getAllProducts() {
         LOG.info("Get all products");
-        List<ProductDto> allProducts = productService.getAllProducts();
+        List<ProductRegisterDto> allProducts = productService.getAllProducts();
 
         return createResponse(allProducts, "products");
     }
 
     @RequestMapping(value = "/filterParameters/{filterName}", method = RequestMethod.POST)
     @ResponseBody
-    private JSONResponse getFilterParameters(@RequestBody ProductsFilteringAndSortingDTO filter, @PathVariable("filterName") String filterName) {
+    private JSONResponse getFilterParameters(@RequestBody ProductRegisterFilter filter, @PathVariable("filterName") String filterName) {
         LOG.info("Get filter params of {}", filterName);
         List parameters = productService.findFilterParameters(filter, filterName);
 
@@ -47,14 +47,14 @@ public class ProductController {
 
     @RequestMapping(value = "/filtrate", method = RequestMethod.POST)
     @ResponseBody
-    private JSONResponse filtrateProducts(@RequestBody ProductsFilteringAndSortingDTO filter) {
+    private JSONResponse filtrateProducts(@RequestBody ProductRegisterFilter filter) {
         LOG.info("Filtering by filter {}", filter);
         JSONResponse response;
         if (isValidSearchFilter(filter)) {
-            List<ProductDto> products = productService.getProductsByFilterAndSorting(filter);
+            List<ProductRegisterDto> products = productService.getProductsByFilterAndSorting(filter);
             response = createResponse(products, "products");
         } else {
-            List<ProductDto> allProducts = productService.getAllProducts();
+            List<ProductRegisterDto> allProducts = productService.getAllProducts();
             response = createResponse(allProducts, "products");
         }
 
@@ -67,7 +67,7 @@ public class ProductController {
         return "newProduct";
     }
 
-    private Boolean isValidSearchFilter(ProductsFilteringAndSortingDTO searchFilter) {
+    private Boolean isValidSearchFilter(ProductRegisterFilter searchFilter) {
 
         return searchFilter != null && !searchFilter.isEmpty();
     }

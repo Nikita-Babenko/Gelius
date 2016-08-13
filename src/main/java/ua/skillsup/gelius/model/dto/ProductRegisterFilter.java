@@ -2,9 +2,8 @@ package ua.skillsup.gelius.model.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class ProductsFilteringAndSortingDTO {
+public class ProductRegisterFilter {
 
     private List<Long> ids;
 
@@ -32,7 +31,7 @@ public class ProductsFilteringAndSortingDTO {
 
     private String sortingDirection;
 
-    public ProductsFilteringAndSortingDTO() {
+    public ProductRegisterFilter() {
         ids = new ArrayList<>();
         clients = new ArrayList<>();
         names = new ArrayList<>();
@@ -150,32 +149,7 @@ public class ProductsFilteringAndSortingDTO {
         this.sortingDirection = sortingDirection;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ProductsFilteringAndSortingDTO)) return false;
-        ProductsFilteringAndSortingDTO that = (ProductsFilteringAndSortingDTO) o;
-        return Objects.equals(getIds(), that.getIds()) &&
-                Objects.equals(getClients(), that.getClients()) &&
-                Objects.equals(getNames(), that.getNames()) &&
-                Objects.equals(getTypes(), that.getTypes()) &&
-                Objects.equals(getLengths(), that.getLengths()) &&
-                Objects.equals(getWidths(), that.getWidths()) &&
-                Objects.equals(getHeights(), that.getHeights()) &&
-                Objects.equals(getGrades(), that.getGrades()) &&
-                Objects.equals(getProfiles(), that.getProfiles()) &&
-                Objects.equals(getColours(), that.getColours()) &&
-                Objects.equals(getPrints(), that.getPrints()) &&
-                Objects.equals(getSortableColumn(), that.getSortableColumn()) &&
-                Objects.equals(getSortingDirection(), that.getSortingDirection());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getIds(), getClients(), getNames(), getTypes(), getLengths(), getWidths(), getHeights(), getGrades(), getProfiles(), getColours(), getPrints(), getSortableColumn(), getSortingDirection());
-    }
-
-    public Boolean isEmpty() {
+    public boolean isEmpty() {
         return ((ids == null) ? true : ids.isEmpty())
                 && ((clients == null) ? true : clients.isEmpty())
                 && ((names == null) ? true : names.isEmpty())
@@ -190,22 +164,4 @@ public class ProductsFilteringAndSortingDTO {
                 && ((sortableColumn == null) ? true : sortableColumn.length() == 0);
     }
 
-    @Override
-    public String toString() {
-        return "ProductsFilteringAndSortingDTO{" +
-                "ids=" + ids +
-                ", clients=" + clients +
-                ", names=" + names +
-                ", types=" + types +
-                ", lengths=" + lengths +
-                ", widths=" + widths +
-                ", heights=" + heights +
-                ", grades=" + grades +
-                ", profiles=" + profiles +
-                ", colours=" + colours +
-                ", prints=" + prints +
-                ", sortableColumn='" + sortableColumn + '\'' +
-                ", sortingDirection='" + sortingDirection + '\'' +
-                '}';
-    }
 }

@@ -1,34 +1,34 @@
 package ua.skillsup.gelius.dao;
 
-import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.model.dto.ProductsFilteringAndSortingDTO;
+import ua.skillsup.gelius.model.dto.ProductRegisterDto;
+import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 
 import java.util.List;
 
 public interface ProductDao {
-    Long createProduct(ProductDto productDto);
+    Long createProduct(ProductRegisterDto productDto);
 
-    void editProduct(ProductDto productDto);
+    void editProduct(ProductRegisterDto productDto);
 
-    List<ProductDto> findAll();
+    List<ProductRegisterDto> findAll();
 
-    ProductDto findById(Long id);
+    ProductRegisterDto findById(Long id);
 
     void deleteProduct(Long id);
 
-    List<ProductDto> findByClient(String client);
+    List<ProductRegisterDto> findByClient(String client);
 
-    ProductDto findByName(String name);
+    ProductRegisterDto findByName(String name);
 
-    List<ProductDto> findByCardboardBrand(String cardboardBrand);
+    List<ProductRegisterDto> findByCardboardBrand(String cardboardBrand);
 
-    List<ProductDto> findByProfile(String profile);
+    List<ProductRegisterDto> findByProfile(String profile);
 
-    List<ProductDto> findByColour(String colour);
+    List<ProductRegisterDto> findByColour(String colour);
 
-    List<ProductDto> findByActivity(Character activity);
+    List<ProductRegisterDto> findByActivity(Character activity);
 
-    List<ProductDto> findByFilterAndSorting(ProductsFilteringAndSortingDTO filter);
+    List<ProductRegisterDto> findByFilterAndSorting(ProductRegisterFilter filter);
 
-    List findFilterParameters(ProductsFilteringAndSortingDTO filter, String filterName);
+    List findFilterParameters(ProductRegisterFilter filter, String filterName);
 }

@@ -189,7 +189,6 @@ CREATE TABLE print(
 CREATE  TABLE workability_notes(
   workability_notes_id BIGINT AUTO_INCREMENT,
   product_id BIGINT NOT NULL,
-  isNew BOOLEAN NOT NULL,
   service_center BIGINT,
   notes VARCHAR(100),
 

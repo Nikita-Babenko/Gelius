@@ -1,8 +1,7 @@
-package ua.skillsup.gelius.model.dictionary;
+package ua.skillsup.gelius.model.entity.dictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity       //  Поддон
 @Table(name = "PALLET")
@@ -12,13 +11,10 @@ public class Pallet {
     @Column(name = "PALLET_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Size(max = 50)
     @Column(name = "PALLET")
     private String pallet;
-
-    public Pallet(String pallet) {
-        this.pallet = pallet;
-    }
 
     public Pallet() {
     }
@@ -37,20 +33,6 @@ public class Pallet {
 
     public void setPallet(String pallet) {
         this.pallet = pallet;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pallet)) return false;
-        Pallet that = (Pallet) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getPallet(), that.getPallet());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getPallet());
     }
 
     @Override

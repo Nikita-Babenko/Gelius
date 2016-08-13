@@ -1,15 +1,14 @@
-package ua.skillsup.gelius.model;
+package ua.skillsup.gelius.model.entity.dictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity
-@Table(name = "CLIENTS")
+@Table(name = "CLIENT")
 public class Client {
     @Id
-    @Column(name = "CLIENTS_ID")
+    @Column(name = "CLIENT_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -95,25 +94,6 @@ public class Client {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Client)) return false;
-        Client client = (Client) o;
-        return Objects.equals(getId(), client.getId()) &&
-                Objects.equals(getFirstName(), client.getFirstName()) &&
-                Objects.equals(getLastName(), client.getLastName()) &&
-                Objects.equals(getCompanyName(), client.getCompanyName()) &&
-                Objects.equals(getPhoneNumber(), client.getPhoneNumber()) &&
-                Objects.equals(getAddress(), client.getAddress()) &&
-                Objects.equals(getDescription(), client.getDescription());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getCompanyName(), getPhoneNumber(), getAddress(), getDescription());
     }
 
     @Override
