@@ -4,16 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity       // Марка картона
-@Table(name = "CARDBOARD_BRAND")
+@Table(name = "cardboard_brand")
 public class CardboardBrand {
 
     @Id
-    @Column(name = "CARDBOARD_BRAND_ID")
+    @Column(name = "cardboard_brand_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "CARDBOARD_BRAND")
+    @Column(name = "cardboard_brand")
     private String cardboardBrand;
 
     public CardboardBrand() {
@@ -37,9 +37,10 @@ public class CardboardBrand {
 
     @Override
     public String toString() {
-        return "CardboardBrand{" +
-                "id=" + id +
-                ", cardboardBrand='" + cardboardBrand + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("CardboardBrand{");
+        sb.append("id=").append(id);
+        sb.append(", cardboardBrand='").append(cardboardBrand).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

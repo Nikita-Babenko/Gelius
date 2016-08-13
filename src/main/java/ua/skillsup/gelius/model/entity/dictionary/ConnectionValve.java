@@ -4,16 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity       // Соединение клапана
-@Table(name = "CONNECTION_VALVE")
+@Table(name = "connection_valve")
 public class ConnectionValve {
 
     @Id
-    @Column(name = "CONNECTION_VALVE_ID")
+    @Column(name = "connection_valve_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "CONNECTION_VALVE")
+    @Column(name = "connection_valve")
     private String connectionValve;
 
     public ConnectionValve() {
@@ -37,9 +37,10 @@ public class ConnectionValve {
 
     @Override
     public String toString() {
-        return "ConnectionValve{" +
-                "id=" + id +
-                ", connectionValve='" + connectionValve + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("ConnectionValve{");
+        sb.append("id=").append(id);
+        sb.append(", connectionValve='").append(connectionValve).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

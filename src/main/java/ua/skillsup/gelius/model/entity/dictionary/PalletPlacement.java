@@ -4,16 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity       //  Размещение на поддоне
-@Table(name = "PALLET_PLACEMENT")
+@Table(name = "pallet_placement")
 public class PalletPlacement {
 
     @Id
-    @Column(name = "PALLET_PLACEMENT_ID")
+    @Column(name = "pallet_placement_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "PALLET_PLACEMENT")
+    @Column(name = "pallet_placement")
     private String palletPlacement;
 
     public PalletPlacement() {
@@ -37,9 +37,10 @@ public class PalletPlacement {
 
     @Override
     public String toString() {
-        return "PalletPlacement{" +
-                "id=" + id +
-                ", palletPlacement='" + palletPlacement + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("PalletPlacement{");
+        sb.append("id=").append(id);
+        sb.append(", palletPlacement='").append(palletPlacement).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -4,19 +4,19 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity       //  Целлюлозный слой
-@Table(name = "CELLULOUSE_LAYER")
-public class CellulouseLayer {
+@Table(name = "cellulose_layer")
+public class CelluloseLayer {
 
     @Id
-    @Column(name = "CELLULOUSE_LAYER_ID")
+    @Column(name = "cellulouse_layer_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "CELLULOUSE_LAYER")
+    @Column(name = "cellulouse_layer")
     private String cellulouseLayer;
 
-    public CellulouseLayer() {
+    public CelluloseLayer() {
     }
 
     public Long getId() {
@@ -37,9 +37,10 @@ public class CellulouseLayer {
 
     @Override
     public String toString() {
-        return "CellulouseLayer{" +
-                "id=" + id +
-                ", cellulouseLayer='" + cellulouseLayer + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("CelluloseLayer{");
+        sb.append("id=").append(id);
+        sb.append(", cellulouseLayer='").append(cellulouseLayer).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

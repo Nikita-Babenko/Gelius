@@ -4,16 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity       //  Способ упаковки
-@Table(name = "PACKING")
+@Table(name = "packing")
 public class Packing {
 
     @Id
-    @Column(name = "PACKING_ID")
+    @Column(name = "packing_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "PACKING")
+    @Column(name = "packing")
     private String packing;
 
     public Packing() {
@@ -37,9 +37,10 @@ public class Packing {
 
     @Override
     public String toString() {
-        return "Packing{" +
-                "id=" + id +
-                ", packing='" + packing + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Packing{");
+        sb.append("id=").append(id);
+        sb.append(", packing='").append(packing).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -5,17 +5,31 @@ import ua.skillsup.gelius.model.entity.dictionary.*;
 public class ProductRegisterDto {
 
     private Long id;
+
     private Client client;
+
     private String productName;
+
     private ProductType productType;
+
     private Integer innerLength;
+
     private Integer innerWidth;
+
     private Integer innerHeight;
+
     private CardboardBrand cardboardBrand;
+
     private Profile profile;
+
     private FaceLayer faceLayer;
+
     private InnerLayer innerLayer;
+
     private String cliche;
+
+    public ProductRegisterDto() {
+    }
 
     public Long getId() {
         return id;

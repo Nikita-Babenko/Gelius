@@ -4,16 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity       //  Формат
-@Table(name = "FORMAT")
+@Table(name = "format")
 public class Format {
 
     @Id
-    @Column(name = "FORMAT_ID")
+    @Column(name = "format_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "FORMAT")
+    @Column(name = "format")
     private String format;
 
     public Format() {
@@ -37,9 +37,10 @@ public class Format {
 
     @Override
     public String toString() {
-        return "Format{" +
-                "id=" + id +
-                ", format='" + format + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Format{");
+        sb.append("id=").append(id);
+        sb.append(", format='").append(format).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

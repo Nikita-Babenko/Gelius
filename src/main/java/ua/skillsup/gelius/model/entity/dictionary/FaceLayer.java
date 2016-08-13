@@ -4,16 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity       //  Лицевой слой
-@Table(name = "FACE_LAYER")
+@Table(name = "face_layer")
 public class FaceLayer {
 
     @Id
-    @Column(name = "FACE_LAYER_ID")
+    @Column(name = "face_layer_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "FACE_LAYER")
+    @Column(name = "face_layer")
     private String faceLayer;
 
     public FaceLayer() {
@@ -37,9 +37,10 @@ public class FaceLayer {
 
     @Override
     public String toString() {
-        return "FaceLayer{" +
-                "id=" + id +
-                ", faceLayer='" + faceLayer + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("FaceLayer{");
+        sb.append("id=").append(id);
+        sb.append(", faceLayer='").append(faceLayer).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

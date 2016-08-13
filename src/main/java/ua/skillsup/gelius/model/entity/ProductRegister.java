@@ -1,58 +1,66 @@
 package ua.skillsup.gelius.model.entity;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ua.skillsup.gelius.model.entity.dictionary.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "product")
 public class ProductRegister {
     @Id
-    @Column(name = "PRODUCT_ID")
+    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CLIENT")
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "client")
     private Client client;
 
     @Size(max = 200)
-    @Column(name = "PRODUCT_NAME")
+    @Column(name = "product_name")
     private String productName;
 
     @ManyToOne
-    @JoinColumn(name = "PRODUCT_TYPE")
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "product_type")
     private ProductType productType;
 
-    @Column(name = "INNER_LENGTH")
+    @Column(name = "inner_length")
     private Integer innerLength;
 
-    @Column(name = "INNER_WIDTH")
+    @Column(name = "inner_width")
     private Integer innerWidth;
 
-    @Column(name = "INNER_HEIGHT")
+    @Column(name = "inner_height")
     private Integer innerHeight;
 
     @ManyToOne
-    @JoinColumn(name = "CARDBOARD_BRAND")
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "cardboard_brand")
     private CardboardBrand cardboardBrand;
 
     @ManyToOne
-    @JoinColumn(name = "PROFILE")
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "profile")
     private Profile profile;
 
     @ManyToOne
-    @JoinColumn(name = "FACE_LAYER")
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "face_layer")
     private FaceLayer faceLayer;
 
     @ManyToOne
-    @JoinColumn(name = "INNER_LAYER")
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "inner_layer")
     private InnerLayer innerLayer;
 
     @Size(max = 50)
-    @Column(name = "CLICHE")
+    @Column(name = "cliche")
     private String cliche;
 
     public ProductRegister() {
@@ -170,6 +178,7 @@ public class ProductRegister {
         sb.append(", innerLayer=").append(innerLayer);
         sb.append(", cliche='").append(cliche).append('\'');
         sb.append('}');
+        sb.append('\n');
         return sb.toString();
     }
 }

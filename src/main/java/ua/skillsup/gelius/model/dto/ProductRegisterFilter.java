@@ -3,6 +3,7 @@ package ua.skillsup.gelius.model.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ProductRegisterFilter {
 
     private List<Long> ids;
@@ -149,19 +150,21 @@ public class ProductRegisterFilter {
         this.sortingDirection = sortingDirection;
     }
 
+
     public boolean isEmpty() {
-        return ((ids == null) ? true : ids.isEmpty())
-                && ((clients == null) ? true : clients.isEmpty())
-                && ((names == null) ? true : names.isEmpty())
-                && ((types == null) ? true : types.isEmpty())
-                && ((lengths == null) ? true : lengths.isEmpty())
-                && ((widths == null) ? true : widths.isEmpty())
-                && ((heights == null) ? true : heights.isEmpty())
-                && ((grades == null) ? true : grades.isEmpty())
-                && ((profiles == null) ? true : profiles.isEmpty())
-                && ((colours == null) ? true : colours.isEmpty())
-                && ((prints == null) ? true : prints.isEmpty())
-                && ((sortableColumn == null) ? true : sortableColumn.length() == 0);
+        return ((ids == null) || ids.isEmpty())
+                && ((clients == null) || clients.isEmpty())
+                && ((names == null) || names.isEmpty())
+                && ((types == null) || types.isEmpty())
+                && ((lengths == null) || lengths.isEmpty())
+                && ((widths == null) || widths.isEmpty())
+                && ((heights == null) || heights.isEmpty())
+                && ((grades == null) || grades.isEmpty())
+                && ((profiles == null) || profiles.isEmpty())
+                && ((colours == null) || colours.isEmpty())
+                && ((prints == null) || prints.isEmpty())
+                && ((sortableColumn == null) || sortableColumn.length() == 0);
     }
+
 
 }
