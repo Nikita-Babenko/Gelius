@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Внутренний слой
-@Table(name = "inner_layer")
-public class InnerLayer {
+public class InnerLayerDto {
 
-    @Id
-    @Column(name = "inner_layer_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "inner_layer")
+    @Size(max = 50)
     private String innerLayer;
 
-    public InnerLayer() {
+    public InnerLayerDto() {
+    }
+
+    public InnerLayerDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class InnerLayer {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("InnerLayer{");
+        final StringBuilder sb = new StringBuilder("InnerLayerDto{");
         sb.append("id=").append(id);
         sb.append(", innerLayer='").append(innerLayer).append('\'');
         sb.append('}');

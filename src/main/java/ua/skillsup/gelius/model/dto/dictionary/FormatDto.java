@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Формат
-@Table(name = "format")
-public class Format {
+public class FormatDto {
 
-    @Id
-    @Column(name = "format_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "format")
+    @Size(max = 50)
     private String format;
 
-    public Format() {
+    public FormatDto() {
+    }
+
+    public FormatDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class Format {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Format{");
+        final StringBuilder sb = new StringBuilder("FormatDto{");
         sb.append("id=").append(id);
         sb.append(", format='").append(format).append('\'');
         sb.append('}');

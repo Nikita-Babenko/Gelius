@@ -1,35 +1,35 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "client")
-public class Client {
+public class ClientDto {
 
-    @Id
-    @Column(name = "client_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "first_name")
+    @Size(max = 30)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Size(max = 30)
     private String lastName;
 
-    @Column(name = "company_name")
+    @NotNull
+    @Size(max = 50)
     private String companyName;
 
-    @Column(name = "phone_number")
+    @Size(max = 20)
     private String phoneNumber;
 
-    @Column(name = "address")
+    @Size(max = 200)
     private String address;
 
-    @Column(name = "description")
     private String description;
 
-    public Client() {
+    public ClientDto() {
+    }
+
+    public ClientDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -90,7 +90,7 @@ public class Client {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Client{");
+        final StringBuilder sb = new StringBuilder("ClientDto{");
         sb.append("id=").append(id);
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');

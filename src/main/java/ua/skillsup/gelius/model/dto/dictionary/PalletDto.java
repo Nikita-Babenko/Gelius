@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Поддон
-@Table(name = "pallet")
-public class Pallet {
+public class PalletDto {
 
-    @Id
-    @Column(name = "pallet_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "pallet")
+    @Size(max = 50)
     private String pallet;
 
-    public Pallet() {
+    public PalletDto() {
+    }
+
+    public PalletDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class Pallet {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Pallet{");
+        final StringBuilder sb = new StringBuilder("PalletDto{");
         sb.append("id=").append(id);
         sb.append(", pallet='").append(pallet).append('\'');
         sb.append('}');
