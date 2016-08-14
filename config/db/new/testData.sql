@@ -68,10 +68,11 @@ INSERT INTO cardboard_brand (cardboard_brand) VALUES ('КГ-2');
 INSERT INTO cardboard_brand (cardboard_brand) VALUES ('КГ-4');
 
 
-INSERT INTO cellulose_layer (cellulose_layer) VALUES ('нет');
-INSERT INTO cellulose_layer (cellulose_layer) VALUES ('внутренний');
-INSERT INTO cellulose_layer (cellulose_layer) VALUES ('наружный');
-INSERT INTO cellulose_layer (cellulose_layer) VALUES ('оба');
+INSERT INTO cellulose_layer (cellulose_layer) VALUES
+  ('нет'),
+  ('внутренний'),
+  ('наружный'),
+  ('оба');
 
 
 INSERT INTO face_layer (face_layer) VALUES ('Белый');
@@ -116,46 +117,15 @@ INSERT INTO pallet_placement (pallet_placement) VALUES ('5 пачек в ряд�
 INSERT INTO pallet_placement (pallet_placement) VALUES ('6 пачек в ряду');
 INSERT INTO pallet_placement (pallet_placement) VALUES ('8 пачек в ряду');
 
-
-INSERT INTO product (product_number,
-                     isNew,
-                     product_create,
-                     product_update,
-                     person_prepared,
-                     isUse,
-                     client_id,
-                     product_name,
-                     product_type_id,
-                     inner_length,
-                     inner_width,
-                     inner_height,
-                     theoretical_square,
-                     actual_square,
-                     format_id,
-                     profile_id,
-                     cardboard_brand_id,
-                     cellulose_layer_id,
-                     face_layer_id,
-                     inner_layer_id,
-                     size_workpiece_length,
-                     size_workpiece_width,
-                     number_from_sheet,
-                     blank_format,
-                     connection_valve_id,
-                     packing_id,
-                     number_in_pack,
-                     number_in_transport_package,
-                     package_length,
-                     package_width,
-                     package_height,
-                     pallet_id,
-                     pallet_placement_id,
-                     pallet_rows
-)
-VALUES (34,TRUE,SYSDATE(),SYSDATE(),'Person_1', TRUE, 1, '329*292*210',
-           1, 392, 292, 210,0.724, 0.720,1,1,1,1,1,1,1415,512,1,512,1,1,20, 560, 1392,1032,1140,1,1,7);
-
-
+INSERT INTO product (product_id, product_name, product_type_id, inner_height,
+                     inner_length, inner_width, cardboard_brand_id, client_id,
+                     face_layer_id, inner_layer_id, profile_id, cliche)
+VALUES
+  (1, "-", 4, 340, 220, 410, 11, 2, 1, 2, 6, "Lasunka"),
+  (2, "-", 5, 350, 210, 450, 4, 3, 2, 1, 3, "Petruschenko"),
+  (3, "-", 1, 310, 350, 210, 2, 2, 4, 3, 3, "Lasunka"),
+  (4, "-", 1, 310, 360, 210, 7, 1, 5, 2, 4, "ABK"),
+  (5, "-", 1, 310, 350, 210, 7, 1, 1, 5, 2, "ABK");
 
 
 COMMIT;

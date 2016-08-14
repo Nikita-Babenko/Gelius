@@ -9,6 +9,7 @@ import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.service.ProductRegisterService;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductRegisterServiceImpl implements ProductRegisterService {
@@ -28,7 +29,7 @@ public class ProductRegisterServiceImpl implements ProductRegisterService {
     }
 
     @Override
-    public List findFilterParameters(ProductRegisterFilter filter, String filterName) {
-        return productRegisterDao.findFilterParameters(filter, filterName);
+    public <T> Map<String, List<T>> findAllFilterParameters(ProductRegisterFilter filter) {
+        return productRegisterDao.findAllFilterParameters(filter);
     }
 }

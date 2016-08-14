@@ -4,6 +4,7 @@ import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductRegisterDao {
 
@@ -11,6 +12,6 @@ public interface ProductRegisterDao {
 
     List<ProductRegisterDto> findByFilter(ProductRegisterFilter filter);
 
-    List findFilterParameters(ProductRegisterFilter filter, String filterName);
+    <T> Map<String, List<T>> findAllFilterParameters(ProductRegisterFilter filter);
 
 }
