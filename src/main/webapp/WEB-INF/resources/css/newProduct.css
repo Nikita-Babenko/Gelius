@@ -792,7 +792,7 @@ select:-moz-focusring {
 .buttons_bottom{
     padding-top: 5px;
     position: absolute;
-    right: 10px;
+    right: 0;
 }
 
 
@@ -801,6 +801,7 @@ select:-moz-focusring {
     border: 1px solid green !important;
     text-align: center;
     vertical-align: middle;
+    margin-right: 10px;
     width: 40px;
     height: 40px;
     border-radius: 4px;
