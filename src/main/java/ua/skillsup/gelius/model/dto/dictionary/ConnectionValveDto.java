@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       // Соединение клапана
-@Table(name = "connection_valve")
-public class ConnectionValve {
+public class ConnectionValveDto {
 
-    @Id
-    @Column(name = "connection_valve_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "connection_valve")
+    @Size(max = 50)
     private String connectionValve;
 
-    public ConnectionValve() {
+    public ConnectionValveDto() {
+    }
+
+    public ConnectionValveDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class ConnectionValve {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ConnectionValve{");
+        final StringBuilder sb = new StringBuilder("ConnectionValveDto{");
         sb.append("id=").append(id);
         sb.append(", connectionValve='").append(connectionValve).append('\'');
         sb.append('}');

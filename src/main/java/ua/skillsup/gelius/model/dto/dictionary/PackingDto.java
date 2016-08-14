@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Способ упаковки
-@Table(name = "packing")
-public class Packing {
+public class PackingDto {
 
-    @Id
-    @Column(name = "packing_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "packing")
+    @Size(max = 50)
     private String packing;
 
-    public Packing() {
+    public PackingDto() {
+    }
+
+    public PackingDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class Packing {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Packing{");
+        final StringBuilder sb = new StringBuilder("PackingDto{");
         sb.append("id=").append(id);
         sb.append(", packing='").append(packing).append('\'');
         sb.append('}');

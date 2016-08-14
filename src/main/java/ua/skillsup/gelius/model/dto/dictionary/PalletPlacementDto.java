@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Размещение на поддоне
-@Table(name = "pallet_placement")
-public class PalletPlacement {
+public class PalletPlacementDto {
 
-    @Id
-    @Column(name = "pallet_placement_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "pallet_placement")
+    @Size(max = 50)
     private String palletPlacement;
 
-    public PalletPlacement() {
+    public PalletPlacementDto() {
+    }
+
+    public PalletPlacementDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class PalletPlacement {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PalletPlacement{");
+        final StringBuilder sb = new StringBuilder("PalletPlacementDto{");
         sb.append("id=").append(id);
         sb.append(", palletPlacement='").append(palletPlacement).append('\'');
         sb.append('}');

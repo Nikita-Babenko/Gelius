@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Целлюлозный слой
-@Table(name = "cellulose_layer")
-public class CelluloseLayer {
+public class CelluloseLayerDto {
 
-    @Id
-    @Column(name = "cellulouse_layer_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cellulouse_layer")
+    @Size(max = 50)
     private String celluloseLayer;
 
-    public CelluloseLayer() {
+    public CelluloseLayerDto() {
+    }
+
+    public CelluloseLayerDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class CelluloseLayer {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CelluloseLayer{");
+        final StringBuilder sb = new StringBuilder("CelluloseLayerDto{");
         sb.append("id=").append(id);
         sb.append(", celluloseLayer='").append(celluloseLayer).append('\'');
         sb.append('}');

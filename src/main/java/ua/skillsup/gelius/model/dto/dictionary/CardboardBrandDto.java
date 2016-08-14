@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       // Марка картона
-@Table(name = "cardboard_brand")
-public class CardboardBrand {
+public class CardboardBrandDto {
 
-    @Id
-    @Column(name = "cardboard_brand_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cardboard_brand")
+    @Size(max = 50)
     private String cardboardBrand;
 
-    public CardboardBrand() {
+    public CardboardBrandDto() {
+    }
+
+    public CardboardBrandDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class CardboardBrand {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CardboardBrand{");
+        final StringBuilder sb = new StringBuilder("CardboardBrandDto{");
         sb.append("id=").append(id);
         sb.append(", cardboardBrand='").append(cardboardBrand).append('\'');
         sb.append('}');

@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Лицевой слой
-@Table(name = "face_layer")
-public class FaceLayer {
+public class FaceLayerDto {
 
-    @Id
-    @Column(name = "face_layer_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "face_layer")
+    @Size(max = 50)
     private String faceLayer;
 
-    public FaceLayer() {
+    public FaceLayerDto() {
+    }
+
+    public FaceLayerDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class FaceLayer {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FaceLayer{");
+        final StringBuilder sb = new StringBuilder("FaceLayerDto{");
         sb.append("id=").append(id);
         sb.append(", faceLayer='").append(faceLayer).append('\'');
         sb.append('}');

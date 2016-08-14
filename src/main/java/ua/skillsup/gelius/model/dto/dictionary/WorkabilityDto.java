@@ -1,20 +1,19 @@
-package ua.skillsup.gelius.model.entity.dictionary;
+package ua.skillsup.gelius.model.dto.dictionary;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity       //  Профиль
-@Table(name = "workability")
-public class Workability {
+public class WorkabilityDto {
 
-    @Id
-    @Column(name = "workability_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "service_center")
+    @Size(max = 50)
     private String serviceCenter;
 
-    public Workability() {
+    public WorkabilityDto() {
+    }
+
+    public WorkabilityDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -35,7 +34,7 @@ public class Workability {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Workability{");
+        final StringBuilder sb = new StringBuilder("WorkabilityDto{");
         sb.append("id=").append(id);
         sb.append(", serviceCenter='").append(serviceCenter).append('\'');
         sb.append('}');
