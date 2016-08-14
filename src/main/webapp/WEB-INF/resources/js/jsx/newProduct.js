@@ -602,7 +602,7 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <div className="buttons_bottom">
                         <a className="fa fa-pencil  fa-3x" href="#">
                         </a>
-                        <a className="fa fa-paperclip fa-3x" href="#">
+                        <a className="fa fa-plus fa-3x" href="#">
                         </a>
                         <a className="fa fa-trash fa-3x" href="#">
                         </a>
