@@ -41,7 +41,7 @@ public class Product {
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "client")
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @Size(max = 200)
@@ -50,7 +50,7 @@ public class Product {
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "product_type")
+    @JoinColumn(name = "product_type_id")
     private ProductType productType;
 
     @Column(name = "inner_length")
@@ -90,12 +90,12 @@ public class Product {
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "face_layer")
+    @JoinColumn(name = "face_layer_id")
     private FaceLayer faceLayer;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "inner_layer")
+    @JoinColumn(name = "inner_layer_id")
     private InnerLayer innerLayer;
 
     @Size(max = 200)
@@ -115,7 +115,6 @@ public class Product {
     private Integer blankFormat;
 
     @ManyToOne
-    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "connection_valve_id")
     private ConnectionValve connectionValve;
 

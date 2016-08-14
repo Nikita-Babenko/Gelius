@@ -7,11 +7,11 @@ import javax.persistence.*;
 public class CelluloseLayer {
 
     @Id
-    @Column(name = "cellulouse_layer_id")
+    @Column(name = "cellulose_layer_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cellulouse_layer")
+    @Column(name = "cellulose_layer")
     private String celluloseLayer;
 
     public CelluloseLayer() {
