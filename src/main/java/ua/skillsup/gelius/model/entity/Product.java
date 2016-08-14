@@ -86,7 +86,7 @@ public class Product {
     @ManyToOne
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "cellulose_layer_id")
-    private CardboardBrand celluloseLayer;
+    private CelluloseLayer celluloseLayer;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
@@ -310,11 +310,11 @@ public class Product {
         this.cardboardBrand = cardboardBrand;
     }
 
-    public CardboardBrand getCelluloseLayer() {
+    public CelluloseLayer getCelluloseLayer() {
         return celluloseLayer;
     }
 
-    public void setCelluloseLayer(CardboardBrand celluloseLayer) {
+    public void setCelluloseLayer(CelluloseLayer celluloseLayer) {
         this.celluloseLayer = celluloseLayer;
     }
 
