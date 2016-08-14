@@ -25,19 +25,19 @@ public class ProductType {
         this.id = id;
     }
 
-    public String getProductsType() {
+    public String getProductType() {
         return productType;
     }
 
-    public void setProductsType(String productsType) {
-        this.productType = productsType;
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductType{");
         sb.append("id=").append(id);
-        sb.append(", productsType='").append(productType).append('\'');
+        sb.append(", productType='").append(productType).append('\'');
         sb.append('}');
         return sb.toString();
     }

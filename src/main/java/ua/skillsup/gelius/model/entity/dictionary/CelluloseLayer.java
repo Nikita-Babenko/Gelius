@@ -29,8 +29,8 @@ public class CelluloseLayer {
         return celluloseLayer;
     }
 
-    public void setCelluloseLayer(String cellulosicLayer) {
-        this.celluloseLayer = cellulosicLayer;
+    public void setCelluloseLayer(String celluloseLayer) {
+        this.celluloseLayer = celluloseLayer;
     }
 
     @Override

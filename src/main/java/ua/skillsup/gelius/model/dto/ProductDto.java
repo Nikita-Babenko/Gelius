@@ -24,7 +24,7 @@ public class ProductDto {
     private Format format;
     private Profile profile;
     private CardboardBrand cardboardBrand;
-    private CardboardBrand celluloseLayer;
+    private CelluloseLayer celluloseLayer;
     private FaceLayer faceLayer;
     private InnerLayer innerLayer;
     private String material;
@@ -191,11 +191,11 @@ public class ProductDto {
         this.cardboardBrand = cardboardBrand;
     }
 
-    public CardboardBrand getCelluloseLayer() {
+    public CelluloseLayer getCelluloseLayer() {
         return celluloseLayer;
     }
 
-    public void setCelluloseLayer(CardboardBrand celluloseLayer) {
+    public void setCelluloseLayer(CelluloseLayer celluloseLayer) {
         this.celluloseLayer = celluloseLayer;
     }
 

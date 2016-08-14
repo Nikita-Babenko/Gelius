@@ -15,7 +15,9 @@ import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.model.entity.ProductRegister;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static ua.skillsup.gelius.model.convert.ProductRegisterDtoConvert.convert;
 
@@ -47,128 +49,39 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
         return result;
     }
 
-    @Override
-    public List findFilterParameters(ProductRegisterFilter filter, String filterName) {
+    private <T> List<T> getFilterParameters(final ProductRegisterFilter filter, String columnName) {
         Criteria criteria = getFilterCriteria(filter);
-        switch (filterName) {
-            case "ids":
-                criteria.setProjection(Projections.distinct(Projections.property("id")));
-                criteria.addOrder(Order.asc("id"));
-                break;
-            case "clients":
-                criteria.setProjection(Projections.distinct(Projections.property("client.companyName")));
-                criteria.addOrder(Order.asc("client.companyName"));
-                break;
-            case "names":
-                criteria.setProjection(Projections.distinct(Projections.property("productsName")));
-                criteria.addOrder(Order.asc("productsName"));
-                break;
-            case "types":
-                criteria.setProjection(Projections.distinct(Projections.property("productsType.productsType")));
-                criteria.addOrder(Order.asc("productsType.productsType"));
-                break;
-            case "lengths":
-                criteria.setProjection(Projections.distinct(Projections.property("innerLength")));
-                criteria.addOrder(Order.asc("innerLength"));
-                break;
-            case "widths":
-                criteria.setProjection(Projections.distinct(Projections.property("innerWidth")));
-                criteria.addOrder(Order.asc("innerWidth"));
-                break;
-            case "heights":
-                criteria.setProjection(Projections.distinct(Projections.property("innerHeight")));
-                criteria.addOrder(Order.asc("innerHeight"));
-                break;
-            case "grades":
-                criteria.setProjection(Projections.distinct(Projections.property("cardboardBrand.cardboardBrand")));
-                criteria.addOrder(Order.asc("cardboardBrand.cardboardBrand"));
-                break;
-            case "profiles":
-                criteria.setProjection(Projections.distinct(Projections.property("profile.profile")));
-                criteria.addOrder(Order.asc("profile.profile"));
-                break;
-            case "colours":
-                criteria.setProjection(Projections.distinct(Projections.property("colour")));
-                criteria.addOrder(Order.asc("colour"));
-                break;
-            case "prints":
-                criteria.setProjection(Projections.distinct(Projections.property("print")));
-                criteria.addOrder(Order.asc("print"));
-                break;
-        }
+        criteria.setProjection(Projections.distinct(Projections.property(columnName)));
+        criteria.addOrder(Order.asc(columnName));
+
         return criteria.list();
     }
 
+    @Override
+    public <T> Map<String, List<T>> findAllFilterParameters(ProductRegisterFilter filter) {
+        Map<String, List<T>> filterParameters = new HashMap<>();
+        filterParameters.put("id", getFilterParameters(filter, "id"));
+        filterParameters.put("client.companyName", getFilterParameters(filter, "client.companyName"));
+        filterParameters.put("productName", getFilterParameters(filter, "productName"));
+        filterParameters.put("productType.productType", getFilterParameters(filter, "productType.productType"));
+        filterParameters.put("innerLength", getFilterParameters(filter, "innerLength"));
+        filterParameters.put("innerWidth", getFilterParameters(filter, "innerWidth"));
+        filterParameters.put("innerHeight", getFilterParameters(filter, "innerHeight"));
+        filterParameters.put("cardboardBrand.cardboardBrand", getFilterParameters(filter, "cardboardBrand.cardboardBrand"));
+        filterParameters.put("profile.profile", getFilterParameters(filter, "profile.profile"));
+        filterParameters.put("layer", getFilterParameters(filter, "faceLayer.faceLayer"));
+        filterParameters.put("cliche", getFilterParameters(filter, "cliche"));
+
+        return filterParameters;
+    }
+
     private Criteria getSortingCriteria(Criteria criteria, ProductRegisterFilter filter) {
-        if (filter.getSortableColumn() != null)
-            switch (filter.getSortableColumn()) {
-                case "ids":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("id"));
-                    else
-                        criteria.addOrder(Order.desc("id"));
-                    break;
-                case "clients":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("client.companyName"));
-                    else
-                        criteria.addOrder(Order.desc("client.companyName"));
-                    break;
-                case "names":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("productsName"));
-                    else
-                        criteria.addOrder(Order.desc("productsName"));
-                    break;
-                case "types":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("productsType.productsType"));
-                    else
-                        criteria.addOrder(Order.desc("productsType.productsType"));
-                    break;
-                case "lengths":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("innerLength"));
-                    else
-                        criteria.addOrder(Order.desc("innerLength"));
-                    break;
-                case "widths":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("innerWidth"));
-                    else
-                        criteria.addOrder(Order.desc("innerWidth"));
-                    break;
-                case "heights":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("innerHeight"));
-                    else
-                        criteria.addOrder(Order.desc("innerHeight"));
-                    break;
-                case "grades":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("grade"));
-                    else
-                        criteria.addOrder(Order.desc("grade"));
-                    break;
-                case "profiles":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("profile.profile"));
-                    else
-                        criteria.addOrder(Order.desc("profile.profile"));
-                    break;
-                case "colours":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("colour"));
-                    else
-                        criteria.addOrder(Order.desc("colour"));
-                    break;
-                case "prints":
-                    if (filter.getSortingDirection().equals("asc"))
-                        criteria.addOrder(Order.asc("print"));
-                    else
-                        criteria.addOrder(Order.desc("print"));
-                    break;
-            }
+        String columnName = filter.getSortableColumn();
+
+        if (filter.getSortingDirection().equals("asc"))
+            criteria.addOrder(Order.asc(columnName));
+        else
+            criteria.addOrder(Order.desc(columnName));
 
         return criteria;
     }
@@ -177,41 +90,43 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class, "product");
         criteria.createAlias("product.client", "client");
         criteria.createAlias("product.cardboardBrand", "cardboardBrand");
-        criteria.createAlias("product.productsType", "productsType");
+        criteria.createAlias("product.productType", "productType");
         criteria.createAlias("product.profile", "profile");
+        criteria.createAlias("product.faceLayer", "faceLayer");
+        criteria.createAlias("product.innerLayer", "innerLayer");
         if (!filter.isEmpty()) {
             if (!filter.getIds().isEmpty()) {
                 criteria.add(Restrictions.in("product.id", filter.getIds()));
             }
-            if (!filter.getClients().isEmpty()) {
-                criteria.add(Restrictions.in("client.companyName", filter.getClients()));
+            if (!filter.getClientNames().isEmpty()) {
+                criteria.add(Restrictions.in("client.companyName", filter.getClientNames()));
             }
-            if (!filter.getNames().isEmpty()) {
-                criteria.add(Restrictions.in("product.productsName", filter.getNames()));
+            if (!filter.getProductNames().isEmpty()) {
+                criteria.add(Restrictions.in("product.productName", filter.getProductNames()));
             }
-            if (!filter.getTypes().isEmpty()) {
-                criteria.add(Restrictions.in("productsType.productsType", filter.getTypes()));
+            if (!filter.getProductTypes().isEmpty()) {
+                criteria.add(Restrictions.in("productType.productType", filter.getProductTypes()));
             }
-            if (!filter.getLengths().isEmpty()) {
-                criteria.add(Restrictions.in("product.innerLength", filter.getLengths()));
+            if (!filter.getInnerLengths().isEmpty()) {
+                criteria.add(Restrictions.in("product.innerLength", filter.getInnerLengths()));
             }
-            if (!filter.getWidths().isEmpty()) {
-                criteria.add(Restrictions.in("product.innerWidth", filter.getWidths()));
+            if (!filter.getInnerWidths().isEmpty()) {
+                criteria.add(Restrictions.in("product.innerWidth", filter.getInnerWidths()));
             }
-            if (!filter.getHeights().isEmpty()) {
-                criteria.add(Restrictions.in("product.innerHeight", filter.getHeights()));
+            if (!filter.getInnerHeights().isEmpty()) {
+                criteria.add(Restrictions.in("product.innerHeight", filter.getInnerHeights()));
             }
-            if (!filter.getGrades().isEmpty()) {
-                criteria.add(Restrictions.in("cardboardBrand.cardboardBrandID", filter.getGrades()));
+            if (!filter.getCardboardBrands().isEmpty()) {
+                criteria.add(Restrictions.in("cardboardBrand.cardboardBrand", filter.getCardboardBrands()));
             }
             if (!filter.getProfiles().isEmpty()) {
                 criteria.add(Restrictions.in("profile.profile", filter.getProfiles()));
             }
             if (!filter.getColours().isEmpty()) {
-                criteria.add(Restrictions.in("product.colour", filter.getColours()));
+                criteria.add(Restrictions.in("faceLayer.faceLayer", filter.getColours()));
             }
-            if (!filter.getPrints().isEmpty()) {
-                criteria.add(Restrictions.in("product.print", filter.getPrints()));
+            if (!filter.getCliches().isEmpty()) {
+                criteria.add(Restrictions.in("product.cliche", filter.getCliches()));
             }
         }
         return criteria;

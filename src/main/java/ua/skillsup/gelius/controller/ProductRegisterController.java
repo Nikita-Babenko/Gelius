@@ -10,6 +10,7 @@ import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.service.ProductRegisterService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/products")
@@ -35,30 +36,22 @@ public class ProductRegisterController {
         return createResponse(allProducts, "products");
     }
 
-    @RequestMapping(value = "/filterParameters/{filterName}", method = RequestMethod.POST)
+    @RequestMapping(value = "/allFilterParameters", method = RequestMethod.POST)
     @ResponseBody
-    private JSONResponse getFilterParameters(@RequestBody ProductRegisterFilter filter, @PathVariable("filterName") String filterName) {
-        LOG.info("Get filter params of {}", filterName);
-        List parameters = productRegisterService.findFilterParameters(filter, filterName);
+    private JSONResponse getFilterParameters(@RequestBody ProductRegisterFilter filter) {
+        Map parameters = productRegisterService.findAllFilterParameters(filter);
 
-        return createResponse(parameters, "parameters");
+        return new JSONResponse("200", "OK", parameters);
     }
 
 
     @RequestMapping(value = "/filtrate", method = RequestMethod.POST)
     @ResponseBody
     private JSONResponse filtrateProducts(@RequestBody ProductRegisterFilter filter) {
-        LOG.info("Filtering by filter {}", filter);
-        JSONResponse response;
-        if (isValidSearchFilter(filter)) {
-            List<ProductRegisterDto> products = productRegisterService.findByFilter(filter);
-            response = createResponse(products, "products");
-        } else {
-            List<ProductRegisterDto> allProducts = productRegisterService.getAllProducts();
-            response = createResponse(allProducts, "products");
-        }
+        List<ProductRegisterDto> products = productRegisterService.findByFilter(filter);
+        LOG.info("Get filtrated products");
 
-        return response;
+        return createResponse(products, "products");
     }
 
     private boolean isValidSearchFilter(ProductRegisterFilter searchFilter) {
