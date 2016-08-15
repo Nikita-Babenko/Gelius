@@ -1,19 +1,17 @@
 package ua.skillsup.gelius.model.entity.dictionary;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 @Entity       //  Внутренний слой
-@Table(name = "INNER_LAYER")
+@Table(name = "inner_layer")
 public class InnerLayer {
 
     @Id
-    @Column(name = "INNER_LAYER_ID")
+    @Column(name = "inner_layer_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Size(max = 50)
-    @Column(name = "INNER_LAYER")
+    @Column(name = "inner_layer")
     private String innerLayer;
 
     public InnerLayer() {
@@ -37,9 +35,10 @@ public class InnerLayer {
 
     @Override
     public String toString() {
-        return "InnerLayer{" +
-                "id=" + id +
-                ", innerLayer='" + innerLayer + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("InnerLayer{");
+        sb.append("id=").append(id);
+        sb.append(", innerLayer='").append(innerLayer).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

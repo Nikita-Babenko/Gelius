@@ -16,10 +16,10 @@ import ua.skillsup.gelius.service.ProductService;
 @RequestMapping("/products")
 public class ProductController {
 
+    private static final Logger LOG = LoggerFactory.getLogger("ProductController");
+
     @Autowired
     private ProductService productService;
-
-    private static final Logger LOG = LoggerFactory.getLogger("ProductController");
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
     private String openPageNewProduct() {

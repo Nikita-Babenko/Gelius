@@ -1,22 +1,12 @@
 package ua.skillsup.gelius.model.dto;
 
-import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
-import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
-import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
-import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
-import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
+import ua.skillsup.gelius.model.dto.dictionary.*;
 
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public class ProductDto {
@@ -53,7 +43,7 @@ public class ProductDto {
     private Long formatId; // *
     private ProfileDto profile;
     private Long profileId; // *
-    private CardboardBrandDto cardboardBrand;
+    private CardBoardBrandDto cardboardBrand;
     private Long cardboardBrandId; // *
     private CelluloseLayerDto celluloseLayer;
     private Long celluloseLayerId; // *
@@ -89,6 +79,13 @@ public class ProductDto {
     private Integer palletRows;
     private Integer numberLoadCar;
     private Integer productionFormat;
+
+    public ProductDto() {
+    }
+
+    public ProductDto(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -226,11 +223,11 @@ public class ProductDto {
         this.profile = profile;
     }
 
-    public CardboardBrandDto getCardboardBrand() {
+    public CardBoardBrandDto getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardboardBrandDto cardboardBrand) {
+    public void setCardboardBrand(CardBoardBrandDto cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 

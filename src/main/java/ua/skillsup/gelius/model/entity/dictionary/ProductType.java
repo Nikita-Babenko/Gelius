@@ -1,24 +1,18 @@
 package ua.skillsup.gelius.model.entity.dictionary;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 @Entity       //  Тип изделия
-@Table(name = "PRODUCT_TYPE")
+@Table(name = "product_type")
 public class ProductType {
 
     @Id
-    @Column(name = "PRODUCT_TYPE_ID")
+    @Column(name = "product_type_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Size(max = 50)
-    @Column(name = "PRODUCT_TYPE")
-    private String productsType;
-
-    public ProductType(String productsType) {
-        this.productsType = productsType;
-    }
+    @Column(name = "product_type")
+    private String productType;
 
     public ProductType() {
     }
@@ -31,19 +25,20 @@ public class ProductType {
         this.id = id;
     }
 
-    public String getProductsType() {
-        return productsType;
+    public String getProductType() {
+        return productType;
     }
 
-    public void setProductsType(String productsType) {
-        this.productsType = productsType;
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
     @Override
     public String toString() {
-        return "ProductType{" +
-                "id=" + id +
-                ", productsType='" + productsType + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("ProductType{");
+        sb.append("id=").append(id);
+        sb.append(", productType='").append(productType).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

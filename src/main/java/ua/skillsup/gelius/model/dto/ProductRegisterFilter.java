@@ -1,48 +1,62 @@
 package ua.skillsup.gelius.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRegisterFilter {
-
+    @JsonProperty("id")
     private List<Long> ids;
 
-    private List<String> clients;
+    @JsonProperty("client.companyName")
+    private List<String> clientNames;
 
-    private List<String> names;
+    @JsonProperty("productName")
+    private List<String> productNames;
 
-    private List<String> types;
+    @JsonProperty("productType.productType")
+    private List<String> productTypes;
 
-    private List<Integer> lengths;
+    @JsonProperty("innerLength")
+    private List<Integer> innerLengths;
 
-    private List<Integer> widths;
+    @JsonProperty("innerWidth")
+    private List<Integer> innerWidths;
 
-    private List<Integer> heights;
+    @JsonProperty("innerHeight")
+    private List<Integer> innerHeights;
 
-    private List<String> grades;
+    @JsonProperty("cardboardBrand.cardboardBrand")
+    private List<String> cardboardBrands;
 
+    @JsonProperty("profile.profile")
     private List<String> profiles;
 
+    @JsonProperty("layer")
     private List<String> colours;
 
-    private List<String> prints;
+    @JsonProperty("cliche")
+    private List<String> cliches;
 
+    @JsonProperty("sortableColumn")
     private String sortableColumn;
 
+    @JsonProperty("sortingDirection")
     private String sortingDirection;
 
     public ProductRegisterFilter() {
         ids = new ArrayList<>();
-        clients = new ArrayList<>();
-        names = new ArrayList<>();
-        types = new ArrayList<>();
-        lengths = new ArrayList<>();
-        widths = new ArrayList<>();
-        heights = new ArrayList<>();
-        grades = new ArrayList<>();
+        clientNames = new ArrayList<>();
+        productNames = new ArrayList<>();
+        productTypes = new ArrayList<>();
+        innerLengths = new ArrayList<>();
+        innerWidths = new ArrayList<>();
+        innerHeights = new ArrayList<>();
+        cardboardBrands = new ArrayList<>();
         profiles = new ArrayList<>();
         colours = new ArrayList<>();
-        prints = new ArrayList<>();
+        cliches = new ArrayList<>();
     }
 
     public List<Long> getIds() {
@@ -53,60 +67,60 @@ public class ProductRegisterFilter {
         this.ids = ids;
     }
 
-    public List<String> getClients() {
-        return clients;
+    public List<String> getClientNames() {
+        return clientNames;
     }
 
-    public void setClients(List<String> clients) {
-        this.clients = clients;
+    public void setClientNames(List<String> clientNames) {
+        this.clientNames = clientNames;
     }
 
-    public List<String> getNames() {
-        return names;
+    public List<String> getProductNames() {
+        return productNames;
     }
 
-    public void setNames(List<String> names) {
-        this.names = names;
+    public void setProductNames(List<String> productNames) {
+        this.productNames = productNames;
     }
 
-    public List<String> getTypes() {
-        return types;
+    public List<String> getProductTypes() {
+        return productTypes;
     }
 
-    public void setTypes(List<String> types) {
-        this.types = types;
+    public void setProductTypes(List<String> productTypes) {
+        this.productTypes = productTypes;
     }
 
-    public List<Integer> getLengths() {
-        return lengths;
+    public List<Integer> getInnerLengths() {
+        return innerLengths;
     }
 
-    public void setLengths(List<Integer> lengths) {
-        this.lengths = lengths;
+    public void setInnerLengths(List<Integer> innerLengths) {
+        this.innerLengths = innerLengths;
     }
 
-    public List<Integer> getWidths() {
-        return widths;
+    public List<Integer> getInnerWidths() {
+        return innerWidths;
     }
 
-    public void setWidths(List<Integer> widths) {
-        this.widths = widths;
+    public void setInnerWidths(List<Integer> innerWidths) {
+        this.innerWidths = innerWidths;
     }
 
-    public List<Integer> getHeights() {
-        return heights;
+    public List<Integer> getInnerHeights() {
+        return innerHeights;
     }
 
-    public void setHeights(List<Integer> heights) {
-        this.heights = heights;
+    public void setInnerHeights(List<Integer> innerHeights) {
+        this.innerHeights = innerHeights;
     }
 
-    public List<String> getGrades() {
-        return grades;
+    public List<String> getCardboardBrands() {
+        return cardboardBrands;
     }
 
-    public void setGrades(List<String> grades) {
-        this.grades = grades;
+    public void setCardboardBrands(List<String> cardboardBrands) {
+        this.cardboardBrands = cardboardBrands;
     }
 
     public List<String> getProfiles() {
@@ -125,12 +139,12 @@ public class ProductRegisterFilter {
         this.colours = colours;
     }
 
-    public List<String> getPrints() {
-        return prints;
+    public List<String> getCliches() {
+        return cliches;
     }
 
-    public void setPrints(List<String> prints) {
-        this.prints = prints;
+    public void setCliches(List<String> cliches) {
+        this.cliches = cliches;
     }
 
     public String getSortableColumn() {
@@ -149,19 +163,39 @@ public class ProductRegisterFilter {
         this.sortingDirection = sortingDirection;
     }
 
+
     public boolean isEmpty() {
-        return ((ids == null) ? true : ids.isEmpty())
-                && ((clients == null) ? true : clients.isEmpty())
-                && ((names == null) ? true : names.isEmpty())
-                && ((types == null) ? true : types.isEmpty())
-                && ((lengths == null) ? true : lengths.isEmpty())
-                && ((widths == null) ? true : widths.isEmpty())
-                && ((heights == null) ? true : heights.isEmpty())
-                && ((grades == null) ? true : grades.isEmpty())
-                && ((profiles == null) ? true : profiles.isEmpty())
-                && ((colours == null) ? true : colours.isEmpty())
-                && ((prints == null) ? true : prints.isEmpty())
-                && ((sortableColumn == null) ? true : sortableColumn.length() == 0);
+        return ((ids == null) || ids.isEmpty())
+                && ((clientNames == null) || clientNames.isEmpty())
+                && ((productNames == null) || productNames.isEmpty())
+                && ((productTypes == null) || productTypes.isEmpty())
+                && ((innerLengths == null) || innerLengths.isEmpty())
+                && ((innerWidths == null) || innerWidths.isEmpty())
+                && ((innerHeights == null) || innerHeights.isEmpty())
+                && ((cardboardBrands == null) || cardboardBrands.isEmpty())
+                && ((profiles == null) || profiles.isEmpty())
+                && ((colours == null) || colours.isEmpty())
+                && ((cliches == null) || cliches.isEmpty())
+                && ((sortableColumn == null) || sortableColumn.length() == 0);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ProductRegisterFilter{");
+        sb.append("ids=").append(ids);
+        sb.append(", clientNames=").append(clientNames);
+        sb.append(", productNames=").append(productNames);
+        sb.append(", productTypes=").append(productTypes);
+        sb.append(", innerLengths=").append(innerLengths);
+        sb.append(", innerWidths=").append(innerWidths);
+        sb.append(", innerHeights=").append(innerHeights);
+        sb.append(", cardboardBrands=").append(cardboardBrands);
+        sb.append(", profiles=").append(profiles);
+        sb.append(", colours=").append(colours);
+        sb.append(", cliches=").append(cliches);
+        sb.append(", sortableColumn='").append(sortableColumn).append('\'');
+        sb.append(", sortingDirection='").append(sortingDirection).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

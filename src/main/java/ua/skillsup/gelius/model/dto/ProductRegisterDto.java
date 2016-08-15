@@ -1,21 +1,39 @@
 package ua.skillsup.gelius.model.dto;
 
-import ua.skillsup.gelius.model.entity.dictionary.*;
+import ua.skillsup.gelius.model.dto.dictionary.*;
 
 public class ProductRegisterDto {
 
     private Long id;
-    private Client client;
+
+    private ClientDto client;
+
     private String productName;
-    private ProductType productType;
+
+    private ProductTypeDto productType;
+
     private Integer innerLength;
+
     private Integer innerWidth;
+
     private Integer innerHeight;
-    private CardboardBrand cardboardBrand;
-    private Profile profile;
-    private FaceLayer faceLayer;
-    private InnerLayer innerLayer;
+
+    private CardBoardBrandDto cardboardBrand;
+
+    private ProfileDto profile;
+
+    private FaceLayerDto faceLayer;
+
+    private InnerLayerDto innerLayer;
+
     private String cliche;
+
+    public ProductRegisterDto() {
+    }
+
+    public ProductRegisterDto(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -25,11 +43,11 @@ public class ProductRegisterDto {
         this.id = id;
     }
 
-    public Client getClient() {
+    public ClientDto getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientDto client) {
         this.client = client;
     }
 
@@ -41,11 +59,11 @@ public class ProductRegisterDto {
         this.productName = productName;
     }
 
-    public ProductType getProductType() {
+    public ProductTypeDto getProductType() {
         return productType;
     }
 
-    public void setProductType(ProductType productType) {
+    public void setProductType(ProductTypeDto productType) {
         this.productType = productType;
     }
 
@@ -73,35 +91,35 @@ public class ProductRegisterDto {
         this.innerHeight = innerHeight;
     }
 
-    public CardboardBrand getCardboardBrand() {
+    public CardBoardBrandDto getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardboardBrand cardboardBrand) {
+    public void setCardboardBrand(CardBoardBrandDto cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 
-    public Profile getProfile() {
+    public ProfileDto getProfile() {
         return profile;
     }
 
-    public void setProfile(Profile profile) {
+    public void setProfile(ProfileDto profile) {
         this.profile = profile;
     }
 
-    public FaceLayer getFaceLayer() {
+    public FaceLayerDto getFaceLayer() {
         return faceLayer;
     }
 
-    public void setFaceLayer(FaceLayer faceLayer) {
+    public void setFaceLayer(FaceLayerDto faceLayer) {
         this.faceLayer = faceLayer;
     }
 
-    public InnerLayer getInnerLayer() {
+    public InnerLayerDto getInnerLayer() {
         return innerLayer;
     }
 
-    public void setInnerLayer(InnerLayer innerLayer) {
+    public void setInnerLayer(InnerLayerDto innerLayer) {
         this.innerLayer = innerLayer;
     }
 

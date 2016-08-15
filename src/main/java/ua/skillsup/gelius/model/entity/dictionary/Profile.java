@@ -1,19 +1,17 @@
 package ua.skillsup.gelius.model.entity.dictionary;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 @Entity       //  Профиль
-@Table(name = "PROFILE")
+@Table(name = "profile")
 public class Profile {
 
     @Id
-    @Column(name = "PROFILE_ID")
+    @Column(name = "profile_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Size(max = 50)
-    @Column(name = "PROFILE")
+    @Column(name = "profile")
     private String profile;
 
     public Profile() {
@@ -37,9 +35,10 @@ public class Profile {
 
     @Override
     public String toString() {
-        return "Profile{" +
-                "id=" + id +
-                ", profile='" + profile + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Profile{");
+        sb.append("id=").append(id);
+        sb.append(", profile='").append(profile).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
