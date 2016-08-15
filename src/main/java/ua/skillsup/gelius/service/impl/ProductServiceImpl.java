@@ -2,12 +2,29 @@ package ua.skillsup.gelius.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.model.dto.ProductRegisterDto;
-import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
+import ua.skillsup.gelius.model.Data;
+import ua.skillsup.gelius.model.Response;
+import ua.skillsup.gelius.model.ResponseCode;
+import ua.skillsup.gelius.model.ResponseWithList;
+import ua.skillsup.gelius.model.dto.ProductDto;
+import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
+import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
+import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
+import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
+import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
 import ua.skillsup.gelius.service.ProductService;
+import ua.skillsup.gelius.service.ValidationService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @Service
@@ -15,40 +32,71 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private ValidationService<ProductDto> validationService;
 
     @Override
-    @Transactional(readOnly = true)
-    public List<ProductRegisterDto> getAllProducts() {
-        return productDao.findAll();
+    public Response createProduct(ProductDto product) {
+        if ( product.getNew() ) {
+            int productNumber = this.productDao.getNewDatasheetCount() + 1;
+            product.setProductNumber(productNumber);
+        }
+
+        //Парсинг (из строки) и заполнение дат:
+        LocalDate productCreateDate = parseDate(product.getProductCreateDateValue());
+        if (productCreateDate == null) {
+            return new Response(ResponseCode.ERROR);
+        }
+        LocalDate productUpdateDate = parseDate(product.getProductUpdateDateValue());
+        if (productUpdateDate == null) {
+            return new Response(ResponseCode.ERROR);
+        }
+        product.setProductCreateDate(productCreateDate);
+        product.setProductUpdateDate(productUpdateDate);
+
+        //Дозаполнение полей ДТО:
+        ProductDto filledProduct = fillProductDto(product);
+
+        //Валидация ДТО (в т.ч. проверка обязательных полей):
+        List<String> validationErrors = this.validationService.validation(filledProduct);
+        if (validationErrors.size() != 0) {
+            return new ResponseWithList<>(ResponseCode.VALIDATION_ERROR, validationErrors);
+        }
+
+        long productId = this.productDao.create(filledProduct);
+
+        return new Response(ResponseCode.OK, productId);
     }
 
-    @Override
-    public Long createProduct(ProductRegisterDto product) {
-        return productDao.createProduct(product);
+    private ProductDto fillProductDto(ProductDto product) {
+        product.setClient( new ClientDto(product.getClientId()) );
+        product.setProductType( new ProductTypeDto(product.getProductTypeId()) );
+        product.setFormat( new FormatDto(product.getFormatId()) );
+        product.setProfile( new ProfileDto(product.getProfileId()) );
+        product.setCardboardBrand( new CardboardBrandDto(product.getCardboardBrandId()) );
+        product.setCelluloseLayer( new CelluloseLayerDto(product.getCelluloseLayerId()) );
+        product.setFaceLayer( new FaceLayerDto(product.getFaceLayerId()) );
+        product.setInnerLayer( new InnerLayerDto(product.getInnerLayerId()) );
+        product.setConnectionValve( new ConnectionValveDto(product.getConnectionValveId()) );
+        product.setPacking( new PackingDto(product.getPackingId()) );
+        product.setPallet( new PalletDto(product.getPalletId()) );
+        product.setPalletPlacement( new PalletPlacementDto(product.getPalletPlacementId()) );
+
+        return product;
     }
 
-    @Override
-    public void editProduct(ProductRegisterDto product) {
-        productDao.editProduct(product);
+    /*Парсинг даты.
+    Если произошла ошибка парсинга, вернет null.
+    */
+    private LocalDate parseDate(String dateValue) {
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateValue, Data.DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+        return date;
     }
 
-    @Override
-    public void deleteProduct(Long id) {
-        productDao.deleteProduct(id);
-    }
 
-    @Override
-    public ProductRegisterDto findById(Long id) {
-        return productDao.findById(id);
-    }
-
-    @Override
-    public List<ProductRegisterDto> getProductsByFilterAndSorting(ProductRegisterFilter searchFilter) {
-        return productDao.findByFilterAndSorting(searchFilter);
-    }
-
-    @Override
-    public List findFilterParameters(ProductRegisterFilter filter, String filterName) {
-        return productDao.findFilterParameters(filter, filterName);
-    }
 }

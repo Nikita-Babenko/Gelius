@@ -4,62 +4,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import ua.skillsup.gelius.model.dto.ProductRegisterDto;
-import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import ua.skillsup.gelius.model.Response;
+import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.ProductService;
 
-import java.util.List;
-
 @Controller
-@RequestMapping(value = "/products")
+@RequestMapping("/products")
 public class ProductController {
-
-    private static final Logger LOG = LoggerFactory.getLogger("ProductController");
 
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(path = "/register", method = RequestMethod.GET)
-    private String getRegister() {
-        LOG.info("Open register page");
-        return "register";
-    }
-
-    @RequestMapping(path = "/all", method = RequestMethod.GET)
-    @ResponseBody
-    private JSONResponse getAllProducts() {
-        LOG.info("Get all products");
-        List<ProductRegisterDto> allProducts = productService.getAllProducts();
-
-        return createResponse(allProducts, "products");
-    }
-
-    @RequestMapping(value = "/filterParameters/{filterName}", method = RequestMethod.POST)
-    @ResponseBody
-    private JSONResponse getFilterParameters(@RequestBody ProductRegisterFilter filter, @PathVariable("filterName") String filterName) {
-        LOG.info("Get filter params of {}", filterName);
-        List parameters = productService.findFilterParameters(filter, filterName);
-
-        return createResponse(parameters, "parameters");
-    }
-
-
-    @RequestMapping(value = "/filtrate", method = RequestMethod.POST)
-    @ResponseBody
-    private JSONResponse filtrateProducts(@RequestBody ProductRegisterFilter filter) {
-        LOG.info("Filtering by filter {}", filter);
-        JSONResponse response;
-        if (isValidSearchFilter(filter)) {
-            List<ProductRegisterDto> products = productService.getProductsByFilterAndSorting(filter);
-            response = createResponse(products, "products");
-        } else {
-            List<ProductRegisterDto> allProducts = productService.getAllProducts();
-            response = createResponse(allProducts, "products");
-        }
-
-        return response;
-    }
+    private static final Logger LOG = LoggerFactory.getLogger("ProductController");
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
     private String openPageNewProduct() {
@@ -67,21 +27,24 @@ public class ProductController {
         return "newProduct";
     }
 
-    private Boolean isValidSearchFilter(ProductRegisterFilter searchFilter) {
-
-        return searchFilter != null && !searchFilter.isEmpty();
+    @RequestMapping(value = "/newProduct/create", method = RequestMethod.POST)
+    @ResponseBody
+    private Response saveProduct(@RequestBody ProductDto product) {
+        return this.productService.createProduct(product);
     }
 
-    private <T> JSONResponse createResponse(List<T> result, String resultName) {
+
+    /*private JSONResponse createResponse(long id) {
         JSONResponse response = new JSONResponse();
-        if (result.isEmpty()) {
-            response.setCode("204");
-            response.setMessage("List of " + resultName + " is empty!");
+        if (id == 0) {
+            response.setCode("???"); // код - ?
+            response.setMessage("Ошибка валидации...");
         } else {
             response.setCode("200");
             response.setMessage("OK");
-            response.setResult(result);
+            response.setResult(id);
         }
         return response;
-    }
+    }*/
+
 }
