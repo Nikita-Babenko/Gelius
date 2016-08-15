@@ -71,7 +71,6 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
         filterParameters.put("profile.profile", getFilterParameters(filter, "profile.profile"));
         filterParameters.put("layer", getFilterParameters(filter, "faceLayer.faceLayer"));
         filterParameters.put("cliche", getFilterParameters(filter, "cliche"));
-
         return filterParameters;
     }
 
