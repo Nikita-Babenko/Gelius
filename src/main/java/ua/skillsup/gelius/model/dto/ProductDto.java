@@ -1,19 +1,30 @@
 package ua.skillsup.gelius.model.dto;
 
-import ua.skillsup.gelius.model.dto.dictionary.*;
+import ua.skillsup.gelius.model.dto.dictionary.CardBoardBrandDto;
+import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
+import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
+import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
+import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
 
-import org.hibernate.validator.constraints.Range;
-
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class ProductDto {
 
-    // Звездочкой в комментарии помечены "сырые" поля, пришедшие от клиента, в которых находятся id.
-    // С этим id будет создана ДТО, которая затем будет помещена в поле, которое нваходится над "сырым" полем
-    // и имеет такое же имя, как и "сырое" поле, за исключением окончания "Id".
+    // Звездочкой в комментарии помечены "сырые" поля, пришедшие от клиента, в которых находятся id записей из словарей.
+    // С этим id будет создана ДТО, которая затем будет помещена в поле, которое находится НАД "сырым" полем,
+    // имеет тип соответствующего словаря, имеет такое же имя, как и "сырое" поле, но за исключением окончания "Id"
+    // Исключение - поля дат, они не являются словарными и их "сырые" поля заканчиваются на "Value".
 
     private Long id;
     private Integer productNumber;
@@ -27,13 +38,16 @@ public class ProductDto {
     private LocalDate productUpdateDate;
     private String productUpdateDateValue; // *
 
-    @Range(max = 50, message = "подготовил - не должно превышать {max} симв.")
+    @Size(max = 50, message = "подготовил - не должно превышать {max} симв.")
     private String personPrepared;
 
     private Boolean isUse;
     private ClientDto client;
     private Long clientId; // *
+
+    @Max(value = 200, message = "название продукта не может превышать {value} символов")
     private String productName;
+
     private ProductTypeDto productType;
     private Long productTypeId; // *
     private Integer innerLength;
@@ -53,7 +67,10 @@ public class ProductDto {
     private Long faceLayerId; // *
     private InnerLayerDto innerLayer;
     private Long innerLayerId; // *
+
+    @Max(value = 200, message = "материал не может превышать {value} символов")
     private String material;
+
     private Integer sizeWorkpieceLength;
     private Integer sizeWorkpieceWidth;
 
@@ -65,8 +82,13 @@ public class ProductDto {
 
     private ConnectionValveDto connectionValve;
     private Long connectionValveId; // *
+
+    @Max(value = 50, message = "штамп не может превышать {value} символов")
     private String stamp;
+
+    @Max(value = 50, message = "клише не может превышать {value} символов")
     private String cliche;
+
     private PackingDto packing;
     private Long packingId; // *
     private Integer numberInPack;
