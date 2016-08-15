@@ -8,8 +8,6 @@ import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.model.entity.Product;
 import ua.skillsup.gelius.model.convert.ProductConvert;
-import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.model.entity.Product;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public long create(ProductDto productDto) {
-        Product product = new Product(); //TODO конвертация из productDto
+        Product product = ProductConvert.convert(productDto);
         /*this.sessionFactory.getCurrentSession().save(product);
         return product.getId();*/
         return -1; //заглушка

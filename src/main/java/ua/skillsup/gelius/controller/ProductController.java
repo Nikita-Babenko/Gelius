@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.skillsup.gelius.model.Response;
+import ua.skillsup.gelius.model.ResponseCode;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.ProductService;
 
@@ -29,22 +30,16 @@ public class ProductController {
 
     @RequestMapping(value = "/newProduct/create", method = RequestMethod.POST)
     @ResponseBody
-    private Response saveProduct(@RequestBody ProductDto product) {
-        return this.productService.createProduct(product);
+    private Response createProduct(@RequestBody ProductDto product) {
+        LOG.info("createProduct controller");
+        long productId = this.productService.createProduct(product);
+        return new Response(ResponseCode.OK, productId);
     }
 
 
-    /*private JSONResponse createResponse(long id) {
-        JSONResponse response = new JSONResponse();
-        if (id == 0) {
-            response.setCode("???"); // код - ?
-            response.setMessage("Ошибка валидации...");
-        } else {
-            response.setCode("200");
-            response.setMessage("OK");
-            response.setResult(id);
-        }
-        return response;
-    }*/
+    //TODO ExceptionResolver:
+    // ParseProductDateException(dateValue) ->  return new Response(ResponseCode.ERROR) ?
+    // ProductValidationException(validationErrors) ->  return new ResponseWithList<>(ResponseCode.VALIDATION_ERROR, validationErrors)
+    // Exception ->  return new Response(ResponseCode.ERROR)
 
 }
