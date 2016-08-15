@@ -81,7 +81,7 @@ public class Product {
     @ManyToOne
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "cardboard_brand_id")
-    private CardboardBrand cardboardBrand;
+    private CardBoardBrand cardboardBrand;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
@@ -301,11 +301,11 @@ public class Product {
         this.profile = profile;
     }
 
-    public CardboardBrand getCardboardBrand() {
+    public CardBoardBrand getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardboardBrand cardboardBrand) {
+    public void setCardboardBrand(CardBoardBrand cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 

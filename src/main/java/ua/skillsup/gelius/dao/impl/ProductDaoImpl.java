@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.model.convert.ProductDtoConvert;
+import ua.skillsup.gelius.model.convert.ProductConvert;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.model.entity.Product;
 
@@ -22,7 +22,7 @@ public class ProductDaoImpl implements ProductDao {
     @SuppressWarnings("unchecked")
     public List<ProductDto> getAllProducts() {
         List<Product> products = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
-        return ProductDtoConvert.convertList(products);
+        return ProductConvert.convertList(products);
     }
 
 }

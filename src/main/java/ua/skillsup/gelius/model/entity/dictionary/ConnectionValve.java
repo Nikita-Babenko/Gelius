@@ -29,8 +29,8 @@ public class ConnectionValve {
         return connectionValve;
     }
 
-    public void setBrand(String paperType) {
-        this.connectionValve = paperType;
+    public void setConnectionValve(String connectionValve) {
+        this.connectionValve = connectionValve;
     }
 
     @Override

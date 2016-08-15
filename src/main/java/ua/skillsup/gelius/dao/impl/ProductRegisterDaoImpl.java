@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductRegisterDao;
-import ua.skillsup.gelius.model.convert.ProductRegisterDtoConvert;
+import ua.skillsup.gelius.model.convert.ProductRegisterConvert;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.model.entity.ProductRegister;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ua.skillsup.gelius.model.convert.ProductRegisterDtoConvert.convert;
+import static ua.skillsup.gelius.model.convert.ProductRegisterConvert.convert;
 
 
 @Repository
@@ -33,7 +33,7 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
     @SuppressWarnings("unchecked")
     public List<ProductRegisterDto> getAllProducts() {
         List<ProductRegister> productsRegister = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class).list();
-        return ProductRegisterDtoConvert.convertList(productsRegister);
+        return ProductRegisterConvert.convertList(productsRegister);
     }
 
     @Override

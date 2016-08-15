@@ -18,7 +18,7 @@ public class ProductRegisterDto {
 
     private Integer innerHeight;
 
-    private CardboardBrandDto cardboardBrand;
+    private CardBoardBrandDto cardboardBrand;
 
     private ProfileDto profile;
 
@@ -91,11 +91,11 @@ public class ProductRegisterDto {
         this.innerHeight = innerHeight;
     }
 
-    public CardboardBrandDto getCardboardBrand() {
+    public CardBoardBrandDto getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardboardBrandDto cardboardBrand) {
+    public void setCardboardBrand(CardBoardBrandDto cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 

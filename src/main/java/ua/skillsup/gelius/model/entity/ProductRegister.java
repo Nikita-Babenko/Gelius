@@ -42,7 +42,7 @@ public class ProductRegister {
     @ManyToOne
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "cardboard_brand_id")
-    private CardboardBrand cardboardBrand;
+    private CardBoardBrand cardboardBrand;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
@@ -122,11 +122,11 @@ public class ProductRegister {
         this.innerHeight = innerHeight;
     }
 
-    public CardboardBrand getCardboardBrand() {
+    public CardBoardBrand getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardboardBrand cardboardBrand) {
+    public void setCardboardBrand(CardBoardBrand cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 

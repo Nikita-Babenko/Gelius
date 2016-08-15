@@ -28,7 +28,7 @@ public class ConnectionValveDto {
         return connectionValve;
     }
 
-    public void setBrand(String paperType) {
+    public void setConnectionValve(String paperType) {
         this.connectionValve = paperType;
     }
 

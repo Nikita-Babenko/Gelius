@@ -23,7 +23,7 @@ public class ProductDto {
     private Double actualSquare;
     private FormatDto format;
     private ProfileDto profile;
-    private CardboardBrandDto cardboardBrand;
+    private CardBoardBrandDto cardboardBrand;
     private CelluloseLayerDto celluloseLayer;
     private FaceLayerDto faceLayer;
     private InnerLayerDto innerLayer;
@@ -190,11 +190,11 @@ public class ProductDto {
         this.profile = profile;
     }
 
-    public CardboardBrandDto getCardboardBrand() {
+    public CardBoardBrandDto getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardboardBrandDto cardboardBrand) {
+    public void setCardboardBrand(CardBoardBrandDto cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 
