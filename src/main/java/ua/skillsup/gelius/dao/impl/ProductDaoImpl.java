@@ -30,8 +30,9 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public long create(ProductDto productDto) {
         Product product = new Product(); //TODO конвертация из productDto
-        this.sessionFactory.getCurrentSession().save(product);
-        return product.getId();
+        /*this.sessionFactory.getCurrentSession().save(product);
+        return product.getId();*/
+        return -1; //заглушка
     }
 
     @Override

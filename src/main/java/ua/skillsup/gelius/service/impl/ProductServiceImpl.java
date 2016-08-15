@@ -56,13 +56,13 @@ public class ProductServiceImpl implements ProductService {
 
         return new Response(ResponseCode.OK, productId);
     }
-
+    
     private ProductDto fillProductDto(ProductDto product) {
         product.setClient( new ClientDto(product.getClientId()) );
         product.setProductType( new ProductTypeDto(product.getProductTypeId()) );
         product.setFormat( new FormatDto(product.getFormatId()) );
         product.setProfile( new ProfileDto(product.getProfileId()) );
-        product.setCardboardBrand( new CardboardBrandDto(product.getCardboardBrandId()) );
+        product.setCardboardBrand( new CardBoardBrandDto(product.getCardboardBrandId()) );
         product.setCelluloseLayer( new CelluloseLayerDto(product.getCelluloseLayerId()) );
         product.setFaceLayer( new FaceLayerDto(product.getFaceLayerId()) );
         product.setInnerLayer( new InnerLayerDto(product.getInnerLayerId()) );
