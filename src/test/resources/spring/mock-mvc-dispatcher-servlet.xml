@@ -10,7 +10,7 @@
     <context:component-scan base-package="ua.skillsup.gelius" />
 
     <!-- Getting Database properties -->
-    <context:property-placeholder location="classpath:resources/jdbc/jdbc_test.properties, classpath:resources/hibernate_test.properties" />
+    <context:property-placeholder location="classpath:/jdbc/jdbc_test.properties, classpath:/hibernate_test.properties" />
 
     <mvc:annotation-driven />
 
