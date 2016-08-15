@@ -1,12 +1,10 @@
 package ua.skillsup.gelius.model.dto;
 
-import ua.skillsup.gelius.model.entity.Product;
-
 public class PerforationDto {
 
     private Long id;
 
-    private Product product;
+    private ProductDto product;
 
     private Integer value;
 
@@ -25,11 +23,11 @@ public class PerforationDto {
         this.id = id;
     }
 
-    public Product getProduct() {
+    public ProductDto getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductDto product) {
         this.product = product;
     }
 

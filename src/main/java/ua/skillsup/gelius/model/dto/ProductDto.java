@@ -1,6 +1,6 @@
 package ua.skillsup.gelius.model.dto;
 
-import ua.skillsup.gelius.model.entity.dictionary.*;
+import ua.skillsup.gelius.model.dto.dictionary.*;
 
 import java.time.LocalDate;
 
@@ -13,39 +13,46 @@ public class ProductDto {
     private LocalDate productUpdateDate;
     private String personPrepared;
     private Boolean isUse;
-    private Client client;
+    private ClientDto client;
     private String productName;
-    private ProductType productType;
+    private ProductTypeDto productType;
     private Integer innerLength;
     private Integer innerWidth;
     private Integer innerHeight;
     private Double theoreticalSquare;
     private Double actualSquare;
-    private Format format;
-    private Profile profile;
-    private CardboardBrand cardboardBrand;
-    private CelluloseLayer celluloseLayer;
-    private FaceLayer faceLayer;
-    private InnerLayer innerLayer;
+    private FormatDto format;
+    private ProfileDto profile;
+    private CardboardBrandDto cardboardBrand;
+    private CelluloseLayerDto celluloseLayer;
+    private FaceLayerDto faceLayer;
+    private InnerLayerDto innerLayer;
     private String material;
     private Integer sizeWorkpieceLength;
     private Integer sizeWorkpieceWidth;
     private Integer numberFromSheet;
     private Integer blankFormat;
-    private ConnectionValve connectionValve;
+    private ConnectionValveDto connectionValve;
     private String stamp;
     private String cliche;
-    private Packing packing;
+    private PackingDto packing;
     private Integer numberInPack;
     private Integer numberInTransportPackage;
     private Integer packageLength;
     private Integer packageWidth;
     private Integer packageHeight;
-    private Pallet pallet;
-    private PalletPlacement palletPlacement;
+    private PalletDto pallet;
+    private PalletPlacementDto palletPlacement;
     private Integer palletRows;
     private Integer numberLoadCar;
     private Integer productionFormat;
+
+    public ProductDto() {
+    }
+
+    public ProductDto(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -103,11 +110,11 @@ public class ProductDto {
         isUse = use;
     }
 
-    public Client getClient() {
+    public ClientDto getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientDto client) {
         this.client = client;
     }
 
@@ -119,11 +126,11 @@ public class ProductDto {
         this.productName = productName;
     }
 
-    public ProductType getProductType() {
+    public ProductTypeDto getProductType() {
         return productType;
     }
 
-    public void setProductType(ProductType productType) {
+    public void setProductType(ProductTypeDto productType) {
         this.productType = productType;
     }
 
@@ -167,51 +174,51 @@ public class ProductDto {
         this.actualSquare = actualSquare;
     }
 
-    public Format getFormat() {
+    public FormatDto getFormat() {
         return format;
     }
 
-    public void setFormat(Format format) {
+    public void setFormat(FormatDto format) {
         this.format = format;
     }
 
-    public Profile getProfile() {
+    public ProfileDto getProfile() {
         return profile;
     }
 
-    public void setProfile(Profile profile) {
+    public void setProfile(ProfileDto profile) {
         this.profile = profile;
     }
 
-    public CardboardBrand getCardboardBrand() {
+    public CardboardBrandDto getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardboardBrand cardboardBrand) {
+    public void setCardboardBrand(CardboardBrandDto cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 
-    public CelluloseLayer getCelluloseLayer() {
+    public CelluloseLayerDto getCelluloseLayer() {
         return celluloseLayer;
     }
 
-    public void setCelluloseLayer(CelluloseLayer celluloseLayer) {
+    public void setCelluloseLayer(CelluloseLayerDto celluloseLayer) {
         this.celluloseLayer = celluloseLayer;
     }
 
-    public FaceLayer getFaceLayer() {
+    public FaceLayerDto getFaceLayer() {
         return faceLayer;
     }
 
-    public void setFaceLayer(FaceLayer faceLayer) {
+    public void setFaceLayer(FaceLayerDto faceLayer) {
         this.faceLayer = faceLayer;
     }
 
-    public InnerLayer getInnerLayer() {
+    public InnerLayerDto getInnerLayer() {
         return innerLayer;
     }
 
-    public void setInnerLayer(InnerLayer innerLayer) {
+    public void setInnerLayer(InnerLayerDto innerLayer) {
         this.innerLayer = innerLayer;
     }
 
@@ -255,11 +262,11 @@ public class ProductDto {
         this.blankFormat = blankFormat;
     }
 
-    public ConnectionValve getConnectionValve() {
+    public ConnectionValveDto getConnectionValve() {
         return connectionValve;
     }
 
-    public void setConnectionValve(ConnectionValve connectionValve) {
+    public void setConnectionValve(ConnectionValveDto connectionValve) {
         this.connectionValve = connectionValve;
     }
 
@@ -279,11 +286,11 @@ public class ProductDto {
         this.cliche = cliche;
     }
 
-    public Packing getPacking() {
+    public PackingDto getPacking() {
         return packing;
     }
 
-    public void setPacking(Packing packing) {
+    public void setPacking(PackingDto packing) {
         this.packing = packing;
     }
 
@@ -327,19 +334,19 @@ public class ProductDto {
         this.packageHeight = packageHeight;
     }
 
-    public Pallet getPallet() {
+    public PalletDto getPallet() {
         return pallet;
     }
 
-    public void setPallet(Pallet pallet) {
+    public void setPallet(PalletDto pallet) {
         this.pallet = pallet;
     }
 
-    public PalletPlacement getPalletPlacement() {
+    public PalletPlacementDto getPalletPlacement() {
         return palletPlacement;
     }
 
-    public void setPalletPlacement(PalletPlacement palletPlacement) {
+    public void setPalletPlacement(PalletPlacementDto palletPlacement) {
         this.palletPlacement = palletPlacement;
     }
 

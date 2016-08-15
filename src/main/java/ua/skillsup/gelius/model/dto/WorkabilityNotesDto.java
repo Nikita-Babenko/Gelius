@@ -1,15 +1,14 @@
 package ua.skillsup.gelius.model.dto;
 
-import ua.skillsup.gelius.model.entity.Product;
-import ua.skillsup.gelius.model.entity.dictionary.Workability;
+import ua.skillsup.gelius.model.dto.dictionary.WorkabilityDto;
 
 public class WorkabilityNotesDto {
 
     private Long id;
 
-    private Product product;
+    private ProductDto product;
 
-    private Workability sericeCenter;
+    private WorkabilityDto sericeCenter;
 
     public WorkabilityNotesDto() {
     }
@@ -26,19 +25,19 @@ public class WorkabilityNotesDto {
         this.id = id;
     }
 
-    public Product getProduct() {
+    public ProductDto getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductDto product) {
         this.product = product;
     }
 
-    public Workability getSericeCenter() {
+    public WorkabilityDto getSericeCenter() {
         return sericeCenter;
     }
 
-    public void setSericeCenter(Workability sericeCenter) {
+    public void setSericeCenter(WorkabilityDto sericeCenter) {
         this.sericeCenter = sericeCenter;
     }
 
