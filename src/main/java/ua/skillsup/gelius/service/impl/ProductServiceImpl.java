@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public long createProduct(ProductDto product) {
         if ( product.getNew() ) {
-            int productNumber = this.productDao.getNewDatasheetCount() + 1;
+            int productNumber = this.productDao.getNewDatasheetMaxProductNumber() + 1;
             product.setProductNumber(productNumber);
         }
 

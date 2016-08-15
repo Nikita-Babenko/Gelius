@@ -28,17 +28,16 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public long create(ProductDto productDto) {
         Product product = ProductConvert.convert(productDto);
-        /*this.sessionFactory.getCurrentSession().save(product);
-        return product.getId();*/
-        return -1; //заглушка
+        this.sessionFactory.getCurrentSession().save(product);
+        return product.getId();
     }
 
     @Override
-    public int getNewDatasheetCount() {
-        int count = (int) this.sessionFactory.getCurrentSession().
-            createQuery("select count(p) from Product p where p.isNew = true").
+    public int getNewDatasheetMaxProductNumber() {
+        int maxNumber = (int) this.sessionFactory.getCurrentSession().
+            createQuery("select max(p.productNumber) from Product p where p.isNew = true").
             uniqueResult();
-        return count;
+        return maxNumber;
     }
 
 }
