@@ -10,6 +10,7 @@ import ua.skillsup.gelius.model.dto.dictionary.*;
 import ua.skillsup.gelius.model.entity.dictionary.*;
 import ua.skillsup.gelius.service.DictionaryService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,20 +71,20 @@ public class DictionaryServiceImpl implements DictionaryService {
         return dictionaries;
     }
 
-    private <T, D> List<D> getEntitiesFromDictionary(Class<T> entity, Class<D> entityDto) {
+    private <T, D> List<D> getEntitiesFromDictionary(Class<T> entityClazz, Class<D> dtoClazz) {
 
-        List<D> result;
-        List<T> entities  = dictionaryDAO.getAll(entity);
-       // for((T) entity : entities) {
-      //      result.add(converEntityToDto(entity, entityDto));
-     //   }
-        return null;
+        List<D> result = new ArrayList<>();
+        List<T> entities  = dictionaryDAO.getAll(entityClazz);
+        for(T entity : entities) {
+            result.add(converEntityToDto(entity, dtoClazz));
+        }
+        return result;
     }
 
-    private <T> Object converEntityToDto(Object entity, Class<T> clazzDto) {
-        T entityDto = null;
+    private <D> D converEntityToDto(Object entity, Class<D> clazzDto) {
+        D entityDto = null;
         try {
-            entityDto = (T) clazzDto.newInstance();
+            entityDto = (D) clazzDto.newInstance();
         } catch (InstantiationException | IllegalAccessException ex) {
             LOG.error("Error when convert {} is : {}", entity, ex);
         }
