@@ -3,6 +3,14 @@
     font-family: Calibri;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
 .green_color{
     background-color: #B6D7A8;
 }
@@ -23,7 +31,7 @@ select:-moz-focusring {
 }
 
 .header_down{
-    padding-right: 0px;
+    padding-right: 0;
 }
 
 .header_left{
@@ -32,13 +40,15 @@ select:-moz-focusring {
 }
 
 .header_buttons{
-    margin-top: 10px;
-    margin-bottom: 5px;
+    display: block;
     padding-left: 0;
     padding-right: 0;
 }
 
 .header_buttons > button{
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-top: 10px;
     margin-left: 5px !important;
 }
 
@@ -73,15 +83,39 @@ select:-moz-focusring {
 }
 
 .header_title_input > input{
+    display: inline-block;
     font-size: 24px;
     width: 150px;
+}
+
+.header_title_input > .isNew{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 5px !important;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.header_title_input > .isNew > input{
+    display: inline-block;
+    vertical-align: middle !important;
+    margin: 0 0 3px 0 !important;
+    padding: 0;
+    height: 17px;
+    width: 17px;
+}
+
+.header_title_input > .isNew > p{
+    padding-left: 3px !important;
+    display: inline-block;
+    margin: 0 !important;
 }
 
 
 .header_info > .form-group{
     padding-left: 0;
     padding-right: 0;
-    margin-bottom:15px;
+    margin-bottom: 8px;
 }
 
 .header_info > .form-group > label{
@@ -95,13 +129,13 @@ select:-moz-focusring {
     font-size: 18px;
     display: inline-block;
     width: 70% !important;
-    padding: 0;
+    padding: 0 0 0 3px !important;
 }
 
 .header_info_type{
+    padding: 0 0 0 3px !important;
     font-size: 18px;
     display: inline-block;
-    padding-right: 0;
     width: 60% !important;
 }
 
@@ -128,6 +162,7 @@ select:-moz-focusring {
 
 .create > p{
     display: inline-block;
+    margin: 0 0 2px 0;
     padding-right: 5px;
     vertical-align: middle;
 }
@@ -138,6 +173,7 @@ select:-moz-focusring {
 }
 
 .update > p{
+    margin: 0 0 2px 0;
     display: inline-block;
     padding-right: 5px;
     vertical-align: middle;
@@ -154,12 +190,14 @@ select:-moz-focusring {
 }
 
 .do > p{
+    margin: 0 0 2px 0;
     display: inline-block;
     padding-right: 5px;
     vertical-align: middle;
 }
 
 .do > input{
+    padding: 0 0 0 7px !important;
     width: 180px !important;
     font-size: 16px !important;
 }
@@ -169,20 +207,22 @@ select:-moz-focusring {
 }
 
 .use{
-    padding-right: 20px;
+    padding-right: 10px;
     float: right;
 }
 
 .use > p{
     display: inline-block;
+    padding-left: 3px !important;
     font-size: 16px !important;
+    margin: 0 0 6px 0 !important;
     float: right;
     vertical-align: middle;
 }
 
 .header_righ_checkbox{
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
 }
 
 
@@ -273,14 +313,14 @@ select:-moz-focusring {
     width: 93%;
     margin: 0;
     border: 1px solid !important;
-    padding: 0px;
+    padding: 0;
 }
 
 .material > textarea{
     position: absolute;
     height: 100%;
     width: 100%;
-    padding: 0;
+    padding: 0 5px 0 5px !important;
     margin: 0;
     border-radius:0;
     border: 0;
@@ -326,9 +366,9 @@ select:-moz-focusring {
 
 .special_conditions_textarea > textarea, .workability_textarea > textarea{
     position: absolute;
+    padding: 0 5px 0 5px !important;
     height: 100%;
     width: 100%;
-    padding: 0;
     margin: 0;
     border-radius:0;
     border: 0;
@@ -465,6 +505,7 @@ select:-moz-focusring {
     height: 100%;
     width: 40%;
     text-align: center;
+    padding: 0!important;
     border-right: 1px solid black;
     border-left: 0;
     border-top: 0;
@@ -476,6 +517,7 @@ select:-moz-focusring {
 .middle_table > tbody > tr > .notes_all  > .notes_inputs > .note_input_2 {
     float: left;
     height: 100%;
+    padding: 0!important;
     width: 60%;
     text-align: center;
     border: 0;
@@ -746,6 +788,7 @@ select:-moz-focusring {
     text-align: center;
     border-right: 1px solid black;
     background: white;
+    padding: 0 !important;
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
@@ -757,6 +800,7 @@ select:-moz-focusring {
     float: left;
     height: 100%;
     text-align: center;
+    padding: 0 !important;
     width: 20%;
     border: 0;
     background: white;

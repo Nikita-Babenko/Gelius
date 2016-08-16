@@ -11,7 +11,7 @@ var newProductContainer = React.createClass({
 newProductContainer.newProductHeaderLeft = React.createClass({
     render: function () {
         return (
-            <div className="col-lg-9 col-md-8 col-sm-8 col-xs-7 header_left">
+            <div className="col-lg-9 col-md-8 col-sm-7 col-xs-7 header_left">
 
                 <div className="col-md-12 header_top">
 
@@ -44,7 +44,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
 
                     </div>
 
-                    <div className="col-md-7 header_title">
+                    <div className="col-md-7 col-xs-10 col-sm-11 header_title">
                         <div className="header_title_text">
                             <p>
                                 Новая техкарта №
@@ -52,6 +52,10 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                         </div>
                         <div className="header_title_input">
                             <input type="text" className="form-control" contenteditable="false" />
+                            <div className="isNew">
+                                <input type="checkbox" />
+                                <p>Новая Карта</p>
+                            </div>
                         </div>
                     </div>
 
@@ -60,7 +64,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                 <div className="col-md-12 header_down">
 
                     <div className="form-inline header_info">
-                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Customer">Заказчик</label>
                             <select className="form-control header_info_customer" id="Customer">
                                 <option></option>
@@ -70,13 +74,13 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                             </select>
                         </div>
 
-                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Name">Название</label>
                             <input type="text" className="form-control header_info_name" id="Name" />
                         </div>
 
 
-                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Type">Тип изделия</label>
                             <select className="form-control header_info_type" id="Type">
                                 <option></option>
@@ -96,12 +100,12 @@ newProductContainer.newProductHeaderLeft = React.createClass({
 newProductContainer.newProductHeaderRight = React.createClass({
     render: function () {
         return (
-            <div className="col-lg-3 col-md-4 col-sm-4 col-xs-5 header_right">
+            <div className="col-lg-3 col-md-4 col-sm-5 col-xs-5 header_right">
                 <div className="form-group form-inline create">
                     <p>Создано</p>
                     <input type="date" className="form-control" />
                 </div>
-                
+
                 <div className="form-group form-inline update">
                     <p>Изменено</p>
                     <input type="date" className="form-control" />
@@ -134,16 +138,16 @@ newProductContainer.newProductBodyLeft = React.createClass({
                             <p className="vertical_left_title">Продукция</p>
                         </td>
                         <td className="products_large_td">Размеры внутренние</td>
-                        <td className="products_small_td" ><input type="text" /></td>
-                        <td className="products_large_td" ><input type="text" /></td>
-                        <td className="products_small_td" ><input type="text" /></td>
+                        <td className="products_small_td" ><input type="number" /></td>
+                        <td className="products_large_td" ><input type="number" /></td>
+                        <td className="products_small_td" ><input type="number" /></td>
                     </tr>
 
                     <tr>
                         <td className="products_large_td">S теор.</td>
-                        <td className="products_small_td" ><input  type="text" /></td>
+                        <td className="products_small_td" ><input  type="number" /></td>
                         <td className="products_large_td">S факт.</td>
-                        <td className="products_small_td" ><input type="text" /></td>
+                        <td className="products_small_td" ><input type="number" /></td>
                     </tr>
 
                     <tr>
@@ -278,8 +282,8 @@ newProductContainer.newProductBodyMiddle = React.createClass({
                         <td className="middle_products_large_td">Размеры заготовки</td>
                         <td className="middle_products_small_td">
                             <div className="inputs">
-                                <input type="text" className="input_1" />
-                                <input type="text" className="input_2" />
+                                <input type="number" className="input_1" />
+                                <input type="number" className="input_2" />
                             </div>
                         </td>
 
@@ -287,12 +291,12 @@ newProductContainer.newProductBodyMiddle = React.createClass({
 
                     <tr>
                         <td className="middle_products_large_td">Количество с листа</td>
-                        <td className="middle_products_small_td"><input type="text" /></td>
+                        <td className="middle_products_small_td"><input type="number" /></td>
                     </tr>
 
                     <tr>
                         <td className="middle_products_large_td">Формат заготовки</td>
-                        <td className="middle_products_small_td"><input type="text" /></td>
+                        <td className="middle_products_small_td"><input type="number" required/></td>
                     </tr>
 
                     <tr>
@@ -479,23 +483,23 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">В пачке, шт.</td>
-                        <td className="avto_small_td"><input type="text" /></td>
+                        <td className="avto_small_td"><input type="number" /></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В транспортном пакете, шт.</td>
-                        <td className="avto_small_td"><input type="text" /></td>
+                        <td className="avto_small_td"><input type="number" /></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">
                             Размеры пакета
-                            <input className="embeded_input" type="text"/>
+                            <input className="embeded_input" type="number"/>
                         </td>
                         <td className="avto_small_td">
                             <div className="inputs">
-                                <input type="text" className="input_1" />
-                                <input type="text" className="input_2" />
+                                <input type="number" className="input_1" />
+                                <input type="number" className="input_2" />
                             </div>
                         </td>
                     </tr>
@@ -526,12 +530,12 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">Рядов на поддоне</td>
-                        <td className="avto_small_td"><input type="text" /></td>
+                        <td className="avto_small_td"><input type="number" /></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td className="avto_small_td"><input type="text" /></td>
+                        <td className="avto_small_td"><input type="number" /></td>
                     </tr>
 
                     <tr>
@@ -558,16 +562,16 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td colSpan="3" className="bigovki_all">
                             <div className="bigovki_inputs_1">
-                                <input type="text" className="bigovki_input_1"/>
+                                <input type="number" className="bigovki_input_1"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_2">
-                                <input type="text" className="bigovki_input_1"/>
+                                <input type="number" className="bigovki_input_1"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_3">
-                                <input type="text" className="bigovki_input_3" />
-                                <input type="text" className="bigovki_input_4" />
+                                <input type="number" className="bigovki_input_3" />
+                                <input type="number" className="bigovki_input_4" />
                             </div>
                         </td>
                     </tr>
@@ -586,11 +590,11 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td colSpan="3" className="prosechki_all">
                             <div className="prosechki_inputs">
-                                <input type="text" className="prosechki_input_1"/>
-                                <input type="text" className="prosechki_input_2"/>
-                                <input type="text" className="prosechki_input_3"/>
-                                <input type="text" className="prosechki_input_4"/>
-                                <input type="text" className="prosechki_input_5"/>
+                                <input type="number" className="prosechki_input_1"/>
+                                <input type="number" className="prosechki_input_2"/>
+                                <input type="number" className="prosechki_input_3"/>
+                                <input type="number" className="prosechki_input_4"/>
+                                <input type="number" className="prosechki_input_5"/>
                             </div>
                         </td>
                     </tr>
