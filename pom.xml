@@ -273,7 +273,7 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <nodeVersion>v0.10.26</nodeVersion>
+                            <nodeVersion>v0.12.10</nodeVersion>
                             <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                             <npmDownloadRoot>https://registry.npmjs.org/npm/-/</npmDownloadRoot>
                             <npmVersion>2.1.8</npmVersion>
