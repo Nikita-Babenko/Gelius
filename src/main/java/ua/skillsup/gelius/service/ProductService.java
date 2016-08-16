@@ -4,4 +4,5 @@ import ua.skillsup.gelius.model.dto.ProductDto;
 
 public interface ProductService {
     long createProduct(ProductDto product);
+    ProductDto findById(long productId);
 }
