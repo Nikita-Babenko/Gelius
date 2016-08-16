@@ -7,5 +7,6 @@ import java.util.List;
 public interface ProductDao {
     List<ProductDto> getAllProducts();
     long create(ProductDto product);
-    int getNewDatasheetMaxProductNumber();
+    int getMaxProductNumberOfNewDatasheets();
+    ProductDto findById(long productId);
 }

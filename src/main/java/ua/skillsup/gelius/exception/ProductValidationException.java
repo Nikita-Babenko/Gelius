@@ -9,4 +9,8 @@ public class ProductValidationException extends RuntimeException {
     public ProductValidationException(List<String> errors) {
         super("Invalid Product data: " + errors);
     }
+
+    public List<String> getErrors() {
+        return errors;
+    }
 }

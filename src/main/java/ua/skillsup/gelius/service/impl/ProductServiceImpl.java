@@ -34,22 +34,24 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public long createProduct(ProductDto product) {
         if ( product.getNew() ) {
-            int productNumber = this.productDao.getNewDatasheetMaxProductNumber() + 1;
+            int productNumber = this.productDao.getMaxProductNumberOfNewDatasheets() + 1;
             product.setProductNumber(productNumber);
         }
 
-        //Парсинг дат, внесение дат в ДТО:
+        //Date parsing, filling them to DTO:
         LocalDate productCreateDate = this.validationService.parseDate( product.getProductCreateDateValue() );
         LocalDate productUpdateDate = this.validationService.parseDate( product.getProductUpdateDateValue() );
         product.setProductCreateDate(productCreateDate);
         product.setProductUpdateDate(productUpdateDate);
 
-        //Дозаполнение остальных полей ДТО:
+        //TODO replace all empty strings for null-s
+
+        //Filling other DTO fields (LocalDates and vocabularies):
         ProductDto filledProduct = fillProductDto(product);
 
-        //Валидация ДТО (в т.ч. проверка обязательных полей):
+        //DTO validation (including mandatory fields check):
         List<String> validationErrors = this.validationService.validation(filledProduct);
-        if (validationErrors.size() != 0) {
+        if ( !validationErrors.isEmpty() ) {
             throw new ProductValidationException(validationErrors);
         }
 
@@ -97,4 +99,9 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
+    @Override
+    //Can returns null if product not found.
+    public ProductDto findById(long productId) {
+        return this.productDao.findById(productId);
+    }
 }
