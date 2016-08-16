@@ -10,7 +10,7 @@ var ObjectsConstants = {
         {name: 'innerHeight', text: 'Высота внутренняя'},
         {name: 'cardboardBrand.cardboardBrand', text: 'Марка'},
         {name: 'profile.profile', text: 'Профиль'},
-        {name: 'layer', text: 'Цвет'},
+        {name: 'layersColours', text: 'Цвет'},
         {name: 'cliche', text: 'Печать'}
     ]
 };

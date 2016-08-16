@@ -13,8 +13,17 @@ class Dropdown extends React.Component {
             sortingAsc: this.props.columnName === 'ids',
             sortingDesc: false
         };
-        this.__enableSortingStatus = this.__enableSortingStatus.bind(this);
-        this.__enableFilteringStatus = this.__enableFilteringStatus.bind(this);
+        this._enableSortingStatus = this._enableSortingStatus.bind(this);
+        this._disableSortingStatus = this._disableSortingStatus.bind(this);
+        this._enableFilteringStatus = this._enableFilteringStatus.bind(this);
+    }
+
+    componentDidMount() {
+        FilteringSortingStore.addListener(EventConstants.FILTERING_SORTING_CHANGE_EVENT, this._disableSortingStatus);
+    }
+
+    componentWillUnmount() {
+        FilteringSortingStore.removeListener(EventConstants.FILTERING_SORTING_CHANGE_EVENT, this._disableSortingStatus);
     }
 
     render() {
@@ -36,15 +45,16 @@ class Dropdown extends React.Component {
                     </sup>
                 </button>
                 <div className={"dropdown-menu  header-dropdown " + this.props.position}>
-                    <Sorting columnName={this.props.columnName}/>
+                    <Sorting columnName={this.props.columnName}
+                             enableSorting={this._enableSortingStatus}/>
                     <Filtering columnName={this.props.columnName}
-                               enableFiltering={this.__enableFilteringStatus}/>
+                               enableFiltering={this._enableFilteringStatus}/>
                 </div>
             </div>
         );
     }
 
-    __enableSortingStatus(direction) {
+    _enableSortingStatus(direction) {
         if (direction === 'asc') {
             this.setState({
                 sortingAsc: true,
@@ -58,14 +68,18 @@ class Dropdown extends React.Component {
         }
     }
 
-    __disableSortingStatus() {
-        this.setState({
-            sortingAsc: false,
-            sortingDesc: false
-        });
+    _disableSortingStatus() {
+        var lastSortedColumn = FilteringSortingStore.getLastSortedColumn();
+        if ((this.props.columnName === lastSortedColumn) &&
+            (this.state.sortingAsc || this.state.sortingDesc)) {
+            this.setState({
+                sortingAsc: false,
+                sortingDesc: false
+            });
+        }
     }
 
-    __enableFilteringStatus(isEnabled) {
+    _enableFilteringStatus(isEnabled) {
         this.setState({filteringEnabled: isEnabled});
     }
 

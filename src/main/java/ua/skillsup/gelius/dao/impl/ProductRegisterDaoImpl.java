@@ -37,7 +37,6 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<ProductRegisterDto> findByFilter(ProductRegisterFilter filter) {
         Criteria criteria = getFilterCriteria(filter);
         criteria = getSortingCriteria(criteria, filter);
@@ -69,7 +68,7 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
         filterParameters.put("innerHeight", getFilterParameters(filter, "innerHeight"));
         filterParameters.put("cardboardBrand.cardboardBrand", getFilterParameters(filter, "cardboardBrand.cardboardBrand"));
         filterParameters.put("profile.profile", getFilterParameters(filter, "profile.profile"));
-        filterParameters.put("layer", getFilterParameters(filter, "faceLayer.faceLayer"));
+        filterParameters.put("layersColours", getFilterParameters(filter, "layersColours"));
         filterParameters.put("cliche", getFilterParameters(filter, "cliche"));
         return filterParameters;
     }
@@ -121,8 +120,8 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
             if (!filter.getProfiles().isEmpty()) {
                 criteria.add(Restrictions.in("profile.profile", filter.getProfiles()));
             }
-            if (!filter.getColours().isEmpty()) {
-                criteria.add(Restrictions.in("faceLayer.faceLayer", filter.getColours()));
+            if (!filter.getLayersColours().isEmpty()) {
+                criteria.add(Restrictions.in("layersColours", filter.getLayersColours()));
             }
             if (!filter.getCliches().isEmpty()) {
                 criteria.add(Restrictions.in("product.cliche", filter.getCliches()));

@@ -13,7 +13,7 @@ class Row extends React.Component {
                 <td>{this.props.row.innerHeight}</td>
                 <td>{this.props.row.cardboardBrand.cardboardBrand}</td>
                 <td>{this.props.row.profile.profile}</td>
-                <td>{this.props.row.faceLayer.faceLayer + '/' + this.props.row.innerLayer.innerLayer}</td>
+                <td>{this.props.row.layersColours}</td>
                 <td>{this.props.row.cliche}</td>
             </tr>
         );

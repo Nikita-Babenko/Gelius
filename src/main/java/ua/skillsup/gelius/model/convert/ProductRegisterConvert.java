@@ -28,6 +28,7 @@ public final class ProductRegisterConvert {
         product.setProfile(ProfileConvert.convert(productDto.getProfile()));
         product.setFaceLayer(FaceLayerConvert.convert(productDto.getFaceLayer()));
         product.setInnerLayer(InnerLayerConvert.convert(productDto.getInnerLayer()));
+        product.setLayersColours(productDto.getLayersColours());
         product.setCliche(productDto.getCliche());
         return product;
     }
@@ -48,6 +49,7 @@ public final class ProductRegisterConvert {
         productDto.setProfile(ProfileConvert.convert(product.getProfile()));
         productDto.setFaceLayer(FaceLayerConvert.convert(product.getFaceLayer()));
         productDto.setInnerLayer(InnerLayerConvert.convert(product.getInnerLayer()));
+        productDto.setLayersColours(product.getLayersColours());
         productDto.setCliche(product.getCliche());
         return productDto;
     }

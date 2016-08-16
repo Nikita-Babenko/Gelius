@@ -18,7 +18,7 @@ class FilteringSortingStore extends EventEmitter {
             innerHeight: [],
             "cardboardBrand.cardboardBrand": [],
             "profile.profile": [],
-            layer: [],
+            layersColours: [],
             cliche: [],
             sortableColumn: "id",
             sortingDirection: "asc"
@@ -30,6 +30,8 @@ class FilteringSortingStore extends EventEmitter {
             name: "",
             parameters: []
         };
+
+        this.lastSortedColumn = "";
     }
 
     getFilterParametersForColumn(columnName) {
@@ -50,6 +52,10 @@ class FilteringSortingStore extends EventEmitter {
 
     getSortingFilteringData() {
         return this.sortingFiltering;
+    }
+
+    getLastSortedColumn() {
+        return this.lastSortedColumn;
     }
 
     onChange(listener, context) {
@@ -88,16 +94,16 @@ filteringSortingStore.dispatchToken = Dispatcher.register(function (event) {
                 lastColumn.parameters = filteringSortingStore.allFilterParameters[event.columnName];
                 lastColumn.name = event.columnName;
             }
-            filteringSortingStore.emitChange();
             break;
         case EventConstants.DELETE_FILTER_ELEMENT:
             var filterParameters = filteringSortingStore.sortingFiltering[event.columnName];
             filterParameters.splice($.inArray(event.parameterValue, filterParameters), 1);
-            filteringSortingStore.emitChange();
             break;
         case EventConstants.APPLY_SORTING:
             filteringSortingStore.sortingFiltering.sortableColumn = event.columnName;
             filteringSortingStore.sortingFiltering.sortingDirection = event.direction;
+            filteringSortingStore.emitChange();
+            filteringSortingStore.lastSortedColumn = event.columnName;
             break;
         default:
         // Do nothing
