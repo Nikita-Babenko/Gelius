@@ -16,7 +16,9 @@ import ua.skillsup.gelius.model.ResponseCode;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.ProductService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/products")
@@ -39,6 +41,18 @@ public class ProductController {
         LOG.info("createProduct controller");
         this.productService.createProduct(product); //возвращаемый productId не сохраняем
         return new Response(ResponseCode.OK);
+    }
+
+    @RequestMapping(value = "/newProduct/initData", method = RequestMethod.POST)
+    @ResponseBody
+    private Response getInitDataForCreateProduct() {
+        LOG.info("Get init data for product creating");
+        int newProductNumber = this.productService.getProductNumberOfNewDatasheet();
+        String newProductNumberValue = this.productService.getFullProductNumber(newProductNumber, true);
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("productNumberValue", newProductNumberValue);
+        responseData.put("dictionaries", null); //TODO put dictionaries
+        return new Response(ResponseCode.OK, responseData);
     }
 
 

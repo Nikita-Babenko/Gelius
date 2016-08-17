@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.exception.ProductValidationException;
+import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.model.dto.dictionary.CardBoardBrandDto;
 import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
@@ -34,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public long createProduct(ProductDto product) {
         if ( product.getNew() ) {
-            int productNumber = this.productDao.getMaxProductNumberOfNewDatasheets() + 1;
+            int productNumber = getProductNumberOfNewDatasheet();
             product.setProductNumber(productNumber);
         }
 
@@ -97,6 +98,23 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return product;
+    }
+
+    @Override
+    public int getProductNumberOfNewDatasheet() {
+        return this.productDao.getMaxProductNumberOfNewDatasheets() + 1;
+    }
+
+    @Override
+    public String getFullProductNumber(int productNumber, boolean isNewDatasheet) {
+        int needLength = isNewDatasheet ? Data.ProductNumber.DIGITS_COUNT_NEW : Data.ProductNumber.DIGITS_COUNT_OLD;
+        int currentLength = String.valueOf(productNumber).length();
+        int delta = needLength - currentLength;
+        StringBuilder value = new StringBuilder(productNumber);
+        for (int i = 0; i < delta; i++) {
+            value.append(Data.ProductNumber.PLACEHOLDER);
+        }
+        return value.toString();
     }
 
     @Override

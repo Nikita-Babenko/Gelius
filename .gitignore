@@ -1,6 +1,7 @@
 target
 *.iml
 .idea
+mem*
 
 /src/main/frontend/node/
 /src/main/frontend/node_modules/
