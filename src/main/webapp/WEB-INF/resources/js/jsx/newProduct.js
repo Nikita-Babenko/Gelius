@@ -1,5 +1,13 @@
+// logging
 var debug = (sessionStorage["debug"] == "true") ? true : false;
 
+function log(text) {
+    if (debug == true) {
+        console.log(text);
+    }
+}
+
+//
 var newProductContainer = React.createClass({
     render: function () {
         return (
@@ -53,7 +61,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                             </p>
                         </div>
                         <div className="header_title_input">
-                            <input type="text" className="form-control" contenteditable="false" />
+                            <input type="text" className="form-control" id="productNumber" contenteditable="false" />
                             <div className="isNew">
                                 <input type="checkbox" />
                                 <p>Новая Карта</p>
@@ -610,7 +618,9 @@ var AppBody = React.createClass({
 
 var App = React.createClass({
     getInitialState: function () {
-        return {dictionaries: {}}
+        return {
+            dictionaries: {}
+        }
     },
     componentDidMount: function () {
         this.__getAllDictionaries();
@@ -619,15 +629,20 @@ var App = React.createClass({
         $.ajax({
             type: 'get',
             contentType: "application/json",
-            url: "/dictionaries/all",
+            url: "/newProduct/initData",
             data: '',
             dataType: 'json',
             timeout: 100000,
             success: function (data) {
-                //TODO change property result
-                log("get dicts : result : " + JSON.stringify(data.result));
-                this.setState({dictionaries: data.result});
+                log("get init : result : " + JSON.stringify(data.result));
+                this.setState({
+                    dictionaries: data.result.dictionaries
+                });
+
                 this.__setAllDictionaries();
+
+                $('#productNumber').val(data.result.productNumber);
+
             }.bind(this),
             error: function (e) {
                 console.log("ERROR: ", e);
@@ -636,7 +651,6 @@ var App = React.createClass({
     },
 
     __setAllDictionaries: function () {
-        log("set dict : dictionaries : " + JSON.stringify(this.state.dictionaries));
         var data = this.state.dictionaries;
 
         // client
@@ -676,13 +690,10 @@ var App = React.createClass({
         this.__fillOptions("cardboardBrand", data.cardboardBrand, "cardboardBrand");
     },
     __fillOptions: function (selectId, data, textColumn) {
-        log("set dict : data : " + JSON.stringify(data));
-        log("set dict : selectId : " + JSON.stringify(selectId));
         var options = $("#" + selectId);
         options.empty();
         $.each(data, function (item) {
             options.append($("<option />").val(data[item].id).text(data[item][textColumn]));
-            log("set dict : option : val=" + data[item].id + " text=" + data[item][textColumn]);
         });
     },
     render: function () {

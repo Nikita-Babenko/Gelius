@@ -14,6 +14,7 @@ import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.Response;
 import ua.skillsup.gelius.model.ResponseCode;
 import ua.skillsup.gelius.model.dto.ProductDto;
+import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.ProductService;
 
 import java.util.HashMap;
@@ -28,6 +29,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private DictionaryService dictionaryService;
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
     private String openPageNewProduct() {
@@ -47,11 +51,16 @@ public class ProductController {
     @ResponseBody
     private Response getInitDataForCreateProduct() {
         LOG.info("Get init data for product creating");
+
         int newProductNumber = this.productService.getProductNumberOfNewDatasheet();
         String newProductNumberValue = this.productService.getFullProductNumber(newProductNumber, true);
+
+        Map<String, List<?>> dictionaries = dictionaryService.getAllDictionaries();
+
         Map<String, Object> responseData = new HashMap<>();
-        responseData.put("productNumberValue", newProductNumberValue);
-        responseData.put("dictionaries", null); //TODO put dictionaries
+        responseData.put("productNumber", newProductNumberValue);
+        responseData.put("dictionaries", dictionaries);
+
         return new Response(ResponseCode.OK, responseData);
     }
 
