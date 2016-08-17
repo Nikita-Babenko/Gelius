@@ -47,7 +47,7 @@ public class ProductController {
         return new Response(ResponseCode.OK);
     }
 
-    @RequestMapping(value = "/newProduct/initData", method = RequestMethod.POST)
+    @RequestMapping(value = "/newProduct/initData", method = RequestMethod.GET)
     @ResponseBody
     private Response getInitDataForCreateProduct() {
         LOG.info("Get init data for product creating");

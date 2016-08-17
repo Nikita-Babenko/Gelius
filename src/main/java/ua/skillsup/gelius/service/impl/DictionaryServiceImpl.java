@@ -59,7 +59,7 @@ public class DictionaryServiceImpl implements DictionaryService {
         Map<String, ClassWithDTOPair> dictionaries = new HashMap<>();
 
         dictionaries.put("client", new ClassWithDTOPair(Client.class, ClientDto.class));
-        dictionaries.put("cardBoardBrand", new ClassWithDTOPair(CardBoardBrand.class, CardBoardBrandDto.class));
+        dictionaries.put("cardBoardBrand", new ClassWithDTOPair(CardboardBrand.class, CardBoardBrandDto.class));
         dictionaries.put("celluloseLayer", new ClassWithDTOPair(CelluloseLayer.class, CelluloseLayerDto.class));
         dictionaries.put("connectionValve", new ClassWithDTOPair(ConnectionValve.class, ConnectionValveDto.class));
         dictionaries.put("faceLayer", new ClassWithDTOPair(FaceLayer.class, FaceLayerDto.class));
