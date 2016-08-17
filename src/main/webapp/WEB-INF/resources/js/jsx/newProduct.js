@@ -2,8 +2,6 @@ var product = {};
 product["productNumber"] = {};
 product["blankFormat"] = {};
 product["isNew"] = {};
-product["client"] = {};
-product["productType"] = {};
 product["productName"] = {};
 product["productCreateDateValue"] = {};
 product["productUpdateDateValue"] = {};
@@ -13,11 +11,22 @@ product["innerWidth"] = {};
 product["innerHeight"] = {};
 product["profile"] = {};
 product["cardboardBrand"] = {};
+product["celluloseLayer"] = {};
 product["innerLayer"] = {};
 product["faceLayer"] = {};
 product["cliche"] = {};
 product["isUse"] = {};
 
+// logging
+var debug = (sessionStorage["debug"] == "true") ? true : false;
+
+function log(text) {
+    if (debug == true) {
+        console.log(text);
+    }
+}
+
+//
 var newProductContainer = React.createClass({
     render: function () {
         return (
@@ -71,7 +80,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                             </p>
                         </div>
                         <div className="header_title_input">
-                            <input type="text" className="form-control" contenteditable="false" id="productNumber"/>
+                            <input type="text" className="form-control" id="productNumber" contenteditable="false" id="productNumber"/>
                             <div className="isNew">
                                 <input type="checkbox" id="isNew"/>
                                 <p>Новая Карта</p>
@@ -86,11 +95,8 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                     <div className="form-inline header_info">
                         <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Customer">Заказчик</label>
-                            <select className="form-control header_info_customer" id="Customer" id="client">
-                                <option></option>
-                                <option>Customer1</option>
-                                <option>Customer2</option>
-                                <option>Customer3</option>
+                            <select className="form-control header_info_customer" id="client">
+
                             </select>
                         </div>
 
@@ -102,11 +108,8 @@ newProductContainer.newProductHeaderLeft = React.createClass({
 
                         <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Type">Тип изделия</label>
-                            <select className="form-control header_info_type" id="productType" >
-                                <option></option>
-                                <option>Type1</option>
-                                <option>Type2</option>
-                                <option>Type3</option>
+                            <select className="form-control header_info_type" id="productType">
+
                             </select>
                         </div>
 
@@ -137,7 +140,7 @@ newProductContainer.newProductHeaderRight = React.createClass({
                 </div>
 
                 <div className="form-group form-inline use">
-                    <input type="checkbox" className="header_righ_checkbox" />
+                    <input type="checkbox" className="header_righ_checkbox" id="isUse"/>
                     <p>Тех.карта используется</p>
                 </div>
             </div>
@@ -173,20 +176,14 @@ newProductContainer.newProductBodyLeft = React.createClass({
                     <tr>
                         <td className="products_large_td">Расчетный формат</td>
                         <td className="products_small_td">
-                            <select>
-                                <option></option>
-                                <option>Text1</option>
-                                <option>Text2</option>
-                                <option>Text3</option>
+                            <select id="format">
+
                             </select>
                         </td>
                         <td className="products_large_td">Профиль</td>
                         <td className="products_small_td">
                             <select id="profile">
-                                <option></option>
-                                <option>Text1</option>
-                                <option>Text2</option>
-                                <option>Text3</option>
+
                             </select>
                         </td>
                     </tr>
@@ -195,19 +192,13 @@ newProductContainer.newProductBodyLeft = React.createClass({
                         <td className="products_large_td">Марка картона</td>
                         <td className="products_small_td">
                             <select id="cardboardBrand">
-                                <option></option>
-                                <option>Text1</option>
-                                <option>Text2</option>
-                                <option>Text3</option>
+
                             </select>
                         </td>
                         <td className="products_large_td">Целлюлозный слой</td>
                         <td className="products_small_td">
-                            <select>
-                                <option></option>
-                                <option>Text1</option>
-                                <option>Text2</option>
-                                <option>Text3</option>
+                            <select id="celluloseLayer">
+
                             </select>
                         </td>
                     </tr>
@@ -217,19 +208,13 @@ newProductContainer.newProductBodyLeft = React.createClass({
                         <td className="products_large_td">Лицевой слой</td>
                         <td className="products_small_td">
                             <select id="faceLayer">
-                                <option></option>
-                                <option>Text1</option>
-                                <option>Text2</option>
-                                <option>Text3</option>
+
                             </select>
                         </td>
                         <td className="products_large_td">Внутренний слой</td>
                         <td className="products_small_td">
                             <select id="innerLayer">
-                                <option></option>
-                                <option>Text1</option>
-                                <option>Text2</option>
-                                <option>Text3</option>
+
                             </select>
                         </td>
                     </tr>
@@ -322,11 +307,8 @@ newProductContainer.newProductBodyMiddle = React.createClass({
                     <tr>
                         <td className="middle_products_large_td">Соединение клапана</td>
                         <td className="middle_products_small_td">
-                            <select>
-                                <option></option>
-                                <option>Text1</option>
-                                <option>Text2</option>
-                                <option>Text3</option>
+                            <select id="connectionValve">
+
                             </select>
                         </td>
                     </tr>
@@ -492,11 +474,8 @@ newProductContainer.newProductBodyRight = React.createClass({
                         </td>
                         <td className="avto_large_td">Способ упаковки</td>
                         <td className="avto_small_td">
-                            <select>
-                                <option></option>
-                                <option>Без упаковки</option>
-                                <option>Паллета, лента, стрейч</option>
-                                <option>Паллета, лента, без стрейча</option>
+                            <select id="packing">
+
                             </select>
                         </td>
                     </tr>
@@ -527,10 +506,8 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td className="avto_large_td">Поддон</td>
                         <td className="avto_small_td">
-                            <select>
-                                <option></option>
-                                <option>1200x800</option>
-                                <option>1200x1000</option>
+                            <select id="pallet">
+
                             </select>
                         </td>
                     </tr>
@@ -538,11 +515,8 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td className="avto_large_td">Размещение на поддоне</td>
                         <td className="avto_small_td">
-                            <select>
-                                <option></option>
-                                <option>1 пачка в ряду</option>
-                                <option>2 пачки в ряду</option>
-                                <option>3 пачки в ряду</option>
+                            <select id="palletPlacement">
+
                             </select>
                         </td>
                     </tr>
@@ -634,9 +608,8 @@ newProductContainer.newProductBodyRight = React.createClass({
                 </div>
 
             </div>
-        )
+        );
     }
-    
 });
 
 var AppHeader = React.createClass({
@@ -663,19 +636,86 @@ var AppBody = React.createClass({
 });
 
 var App = React.createClass({
-
-    componentDidMount: function() {
+    getInitialState: function () {
+        return {
+            dictionaries: {}
+        }
+    },
+    componentDidMount: function () {
         this.__createProduct();
         this.__loadDataToServer();
+        this.__getAllDictionaries();
     },
-    
-    render: function () {
-        return (
-            <newProductContainer>
-                <AppHeader />
-                <AppBody />
-            </newProductContainer>
-        );
+    __getAllDictionaries: function () {
+        $.ajax({
+            type: 'get',
+            contentType: "application/json",
+            url: "/products/newProduct/initData",
+            data: '',
+            dataType: 'json',
+            timeout: 100000,
+            success: function (response) {
+                log("get init : response : " + JSON.stringify(response.data));
+                this.setState({
+                    dictionaries: response.data.dictionaries
+                });
+
+                $('#productNumber').val(response.data.productNumber);
+
+                this.__setAllDictionaries();
+
+            }.bind(this),
+            error: function (e) {
+                console.log("ERROR: ", e);
+            }.bind(this)
+        });
+    },
+
+    __setAllDictionaries: function () {
+        var data = this.state.dictionaries;
+
+        // client
+        this.__fillOptions("customer", data.client, "companyName");
+
+        // type
+        this.__fillOptions("type", data.productType, "productType");
+
+        // faceLayer
+        this.__fillOptions("faceLayer", data.faceLayer, "faceLayer");
+
+        // connectionValve
+        this.__fillOptions("connectionValve", data.connectionValve, "connectionValve");
+
+        // profile
+        this.__fillOptions("profile", data.profile, "profile");
+
+        // format
+        this.__fillOptions("format", data.format, "format");
+
+        // pallet
+        this.__fillOptions("pallet", data.pallet, "pallet");
+
+        // packing
+        this.__fillOptions("packing", data.packing, "packing");
+
+        // celluloseLayer
+        this.__fillOptions("celluloseLayer", data.celluloseLayer, "celluloseLayer");
+
+        // palletPlacement
+        this.__fillOptions("palletPlacement", data.palletPlacement, "palletPlacement");
+
+        // innerLayer
+        this.__fillOptions("innerLayer", data.innerLayer, "innerLayer");
+
+        // cardboardBrand
+        this.__fillOptions("cardboardBrand", data.cardBoardBrand, "cardboardBrand");
+    },
+    __fillOptions: function (selectId, data, textColumn) {
+        var options = $("#" + selectId);
+        options.empty();
+        $.each(data, function (item) {
+            options.append($("<option />").val(data[item].id).text(data[item][textColumn]));
+        });
     },
 
     __loadDataToServer : function () {
@@ -696,8 +736,6 @@ var App = React.createClass({
             product["isUse"] = $('#isUse').is(":checked");
             product["productNumber"] = $('#productNumber').val();
             product["blankFormat"] = $('#blankFormat').val();
-            product["client"] = $('#client :selected').length;
-            product["productType"] = $('#client :selected').length;
             product["productName"] = $('#productName').val();
             product["productCreateDateValue"] = $('#productCreateDate').val();
             product["productUpdateDateValue"] = $('#productUpdateDate').val();
@@ -707,11 +745,21 @@ var App = React.createClass({
             product["innerHeight"] = $('#innerHeight').val();
             product["profile"] = $('#profile :selected').length;
             product["cardboardBrand"] = $('#cardboardBrand :selected').length;
+            product["celluloseLayer"] = $('#celluloseLayer :selected').length;
             product["innerLayer"] = $('#innerLayer :selected').length;
             product["faceLayer"] = $('#faceLayer :selected').length;
             product["cliche"] = $('#cliche').val();
         });
-        
+
+    },
+
+    render: function () {
+        return (
+            <newProductContainer>
+                <AppHeader />
+                <AppBody />
+            </newProductContainer>
+        );
     }
 });
 
