@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/dictionary")
-public class DictionaryController {
+@RequestMapping("/dictionaries")
+public class DictionariesController {
 
     private static final Logger LOG = LoggerFactory.getLogger("DictionaryController");
 

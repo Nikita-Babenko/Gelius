@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.DictionaryDAO;
 import ua.skillsup.gelius.model.dto.dictionary.*;
 import ua.skillsup.gelius.model.entity.dictionary.*;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class DictionaryServiceImpl implements DictionaryService {
 
     private static final Logger LOG = LoggerFactory.getLogger("DictionaryService");
@@ -30,6 +32,8 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Override
     public Map<String, List<?>> getAllDictionaries() {
+        LOG.info("Get all dictionaries");
+
         Map<String, List<?>> result = new HashMap<>();
 
         for (String dictionaryName : dictionaries.keySet()) {

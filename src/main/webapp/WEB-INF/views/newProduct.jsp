@@ -27,7 +27,6 @@
 
     </div>
 
-
     <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-with-addons.min.js"/>"></script>
     <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-dom.min.js"/>"></script>
     <script src="/resources/js/react/babel.min.js"></script>
