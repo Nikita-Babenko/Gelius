@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public long createProduct(ProductDto product) {
-        if ( product.getNew() ) {
+        if ( product.getIsNew() ) {
             int productNumber = getProductNumberOfNewDatasheet();
             product.setProductNumber(productNumber);
         }
