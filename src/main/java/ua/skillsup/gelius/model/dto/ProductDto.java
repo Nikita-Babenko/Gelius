@@ -127,11 +127,11 @@ public class ProductDto {
         this.productNumber = productNumber;
     }
 
-    public Boolean getNew() {
+    public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setNew(Boolean aNew) {
+    public void setIsNew(Boolean aNew) {
         isNew = aNew;
     }
 
@@ -159,11 +159,11 @@ public class ProductDto {
         this.personPrepared = personPrepared;
     }
 
-    public Boolean getUse() {
+    public Boolean getIsUse() {
         return isUse;
     }
 
-    public void setUse(Boolean use) {
+    public void setIsUse(Boolean use) {
         isUse = use;
     }
 
