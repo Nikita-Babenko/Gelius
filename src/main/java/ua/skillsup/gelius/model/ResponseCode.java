@@ -2,12 +2,12 @@ package ua.skillsup.gelius.model;
 
 public enum ResponseCode {
 
-    ERROR(0), //ошибка общая
-    OK(1), //выполнено
-    NO_DATA(2), //ничего не найдено
-    VALIDATION_ERROR(3) //ошибки валидации
-    //OBJECT_EXISTS(4), //объект уже существует
-    //OBJECT_NOT_EXISTS(5) //объект не существует
+    OK(200),
+    NO_CONTENT(204),
+    VALIDATION_ERROR(406), //Not Acceptable
+    BAD_DATA(400), //Bad Request
+    NOT_FOUND(404),
+    SERVER_ERROR(500),
     ;
 
     private int code;

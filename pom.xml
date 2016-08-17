@@ -216,7 +216,6 @@
             <version>${react.version}</version>
         </dependency>
 
-
         <!--Logging-->
         <dependency>
             <groupId>log4j</groupId>
@@ -274,10 +273,10 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <nodeVersion>v0.10.26</nodeVersion>
-                            <nodeDownloadRoot>https://nodejs.org/nodejs/dist/</nodeDownloadRoot>
+                            <nodeVersion>v0.12.10</nodeVersion>
+                            <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                             <npmDownloadRoot>https://registry.npmjs.org/npm/-/</npmDownloadRoot>
-                            <npmVersion>1.4.3</npmVersion>
+                            <npmVersion>2.1.8</npmVersion>
                         </configuration>
                     </execution>
                     <execution>

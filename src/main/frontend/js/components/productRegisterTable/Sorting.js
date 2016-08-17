@@ -32,6 +32,7 @@ class Sorting extends React.Component {
     __onSortingDirectionClick(direction) {
         FilteringSortingActions.applySorting(this.props.columnName, direction);
         ProductRegisterTableActions.loadProductsFromServer();
+        this.props.enableSorting(direction);
     }
 }
 

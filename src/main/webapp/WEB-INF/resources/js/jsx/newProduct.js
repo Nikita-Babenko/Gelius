@@ -1,5 +1,3 @@
-var debug = (sessionStorage["debug"] == "true") ? true : false;
-
 var newProductContainer = React.createClass({
     render: function () {
         return (
@@ -13,7 +11,7 @@ var newProductContainer = React.createClass({
 newProductContainer.newProductHeaderLeft = React.createClass({
     render: function () {
         return (
-            <div className="col-lg-9 col-md-8 col-sm-8 col-xs-7 header_left">
+            <div className="col-lg-9 col-md-8 col-sm-7 col-xs-7 header_left">
 
                 <div className="col-md-12 header_top">
 
@@ -46,7 +44,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
 
                     </div>
 
-                    <div className="col-md-7 header_title">
+                    <div className="col-md-7 col-xs-10 col-sm-11 header_title">
                         <div className="header_title_text">
                             <p>
                                 Новая техкарта №
@@ -54,6 +52,10 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                         </div>
                         <div className="header_title_input">
                             <input type="text" className="form-control" contenteditable="false" />
+                            <div className="isNew">
+                                <input type="checkbox" />
+                                <p>Новая Карта</p>
+                            </div>
                         </div>
                     </div>
 
@@ -62,23 +64,29 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                 <div className="col-md-12 header_down">
 
                     <div className="form-inline header_info">
-                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Customer">Заказчик</label>
-                            <select className="form-control header_info_customer" id="customer">
-
+                            <select className="form-control header_info_customer" id="Customer">
+                                <option></option>
+                                <option>Customer1</option>
+                                <option>Customer2</option>
+                                <option>Customer3</option>
                             </select>
                         </div>
 
-                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Name">Название</label>
                             <input type="text" className="form-control header_info_name" id="Name" />
                         </div>
 
 
-                        <div className="form-group col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Type">Тип изделия</label>
-                            <select className="form-control header_info_type" id="type">
-
+                            <select className="form-control header_info_type" id="Type">
+                                <option></option>
+                                <option>Type1</option>
+                                <option>Type2</option>
+                                <option>Type3</option>
                             </select>
                         </div>
 
@@ -92,7 +100,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
 newProductContainer.newProductHeaderRight = React.createClass({
     render: function () {
         return (
-            <div className="col-lg-3 col-md-4 col-sm-4 col-xs-5 header_right">
+            <div className="col-lg-3 col-md-4 col-sm-5 col-xs-5 header_right">
                 <div className="form-group form-inline create">
                     <p>Создано</p>
                     <input type="date" className="form-control" />
@@ -125,121 +133,129 @@ newProductContainer.newProductBodyLeft = React.createClass({
 
                     <tbody>
 
-                        <tr>
-                            <td className="left_title green_color" rowSpan="5">
-                                <p className="vertical_left_title">Продукция</p>
-                            </td>
-                            <td className="products_large_td">Размеры внутренние</td>
-                            <td className="products_small_td" >
-                                <input type="text" />
-                            </td>
-                            <td className="products_large_td" >
-                                <input type="text" />
-                            </td>
-                            <td className="products_small_td" >
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="left_title green_color" rowSpan="5">
+                            <p className="vertical_left_title">Продукция</p>
+                        </td>
+                        <td className="products_large_td">Размеры внутренние</td>
+                        <td className="products_small_td" ><input type="number" /></td>
+                        <td className="products_large_td" ><input type="number" /></td>
+                        <td className="products_small_td" ><input type="number" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="products_large_td">S теор.</td>
-                            <td className="products_small_td" >
-                                <input  type="text" />
-                            </td>
-                            <td className="products_large_td">S факт.</td>
-                            <td className="products_small_td" >
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="products_large_td">S теор.</td>
+                        <td className="products_small_td" ><input  type="number" /></td>
+                        <td className="products_large_td">S факт.</td>
+                        <td className="products_small_td" ><input type="number" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="products_large_td">Расчетный формат</td>
-                            <td className="products_small_td">
-                                <select id="format">
+                    <tr>
+                        <td className="products_large_td">Расчетный формат</td>
+                        <td className="products_small_td">
+                            <select>
+                                <option></option>
+                                <option>Text1</option>
+                                <option>Text2</option>
+                                <option>Text3</option>
+                            </select>
+                        </td>
+                        <td className="products_large_td">Профиль</td>
+                        <td className="products_small_td">
+                            <select>
+                                <option></option>
+                                <option>Text1</option>
+                                <option>Text2</option>
+                                <option>Text3</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                                </select>
-                            </td>
-                            <td className="products_large_td">Профиль</td>
-                            <td className="products_small_td">
-                                <select id="profile">
-
-                                </select>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td className="products_large_td">Марка картона</td>
-                            <td className="products_small_td">
-                                <select id="cardboardBrand">
-
-                                </select>
-                            </td>
-                            <td className="products_large_td">Целлюлозный слой</td>
-                            <td className="products_small_td">
-                                <select id="celluloseLayer">
-
-                                </select>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="products_large_td">Марка картона</td>
+                        <td className="products_small_td">
+                            <select>
+                                <option></option>
+                                <option>Text1</option>
+                                <option>Text2</option>
+                                <option>Text3</option>
+                            </select>
+                        </td>
+                        <td className="products_large_td">Целлюлозный слой</td>
+                        <td className="products_small_td">
+                            <select>
+                                <option></option>
+                                <option>Text1</option>
+                                <option>Text2</option>
+                                <option>Text3</option>
+                            </select>
+                        </td>
+                    </tr>
 
 
-                        <tr>
-                            <td className="products_large_td">Лицевой слой</td>
-                            <td className="products_small_td">
-                                <select id="faceLayer">
+                    <tr>
+                        <td className="products_large_td">Лицевой слой</td>
+                        <td className="products_small_td">
+                            <select>
+                                <option></option>
+                                <option>Text1</option>
+                                <option>Text2</option>
+                                <option>Text3</option>
+                            </select>
+                        </td>
+                        <td className="products_large_td">Внутренний слой</td>
+                        <td className="products_small_td">
+                            <select>
+                                <option></option>
+                                <option>Text1</option>
+                                <option>Text2</option>
+                                <option>Text3</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                                </select>
-                            </td>
-                            <td className="products_large_td">Внутренний слой</td>
-                            <td className="products_small_td">
-                                <select id="innerLayer">
+                    <tr>
+                        <td className="left_title green_color" rowSpan="4">
+                            <p className="vertical_left_title">Материал</p>
+                        </td>
+                        <td colSpan="4" className="material">
+                        <textarea>
 
-                                </select>
-                            </td>
-                        </tr>
+                        </textarea>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td className="left_title green_color" rowSpan="4">
-                                <p className="vertical_left_title">Материал</p>
-                            </td>
-                            <td colSpan="4" className="material">
-                                <textarea>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
 
-                                </textarea>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="5" className="special_conditions green_color">
+                            <p>Особые условия</p>
+                        </td>
+                    </tr>
 
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
+                    <tr>
+                        <td colSpan="5" className="special_conditions_textarea">
+                        <textarea>
 
-                        <tr>
-                            <td colSpan="5" className="special_conditions green_color">
-                                <p>Особые условия</p>
-                            </td>
-                        </tr>
+                        </textarea>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="5" className="special_conditions_textarea">
-                                <textarea>
+                    <tr>
+                        <td colSpan="5" className="workability green_color">
+                            <p>Технологичность</p>
+                        </td>
+                    </tr>
 
-                                </textarea>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="5" className="workability_textarea">
+                        <textarea>
 
-                        <tr>
-                            <td colSpan="5" className="workability green_color">
-                                <p>Технологичность</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colSpan="5" className="workability_textarea">
-                                <textarea>
-
-                                </textarea>
-                            </td>
-                        </tr>
+                        </textarea>
+                        </td>
+                    </tr>
 
                     </tbody>
 
@@ -258,185 +274,180 @@ newProductContainer.newProductBodyMiddle = React.createClass({
 
                     <tbody>
 
-                        <tr>
-                            <td className="middle_left_title green_color" rowSpan="6">
-                                <p className="vertical_left_title">Продукция</p>
-                            </td>
+                    <tr>
+                        <td className="middle_left_title green_color" rowSpan="6">
+                            <p className="vertical_left_title">Продукция</p>
+                        </td>
 
-                            <td className="middle_products_large_td">Размеры заготовки</td>
-                            <td className="middle_products_small_td">
-                                <div className="inputs">
-                                    <input type="text" className="input_1" />
-                                    <input type="text" className="input_2" />
-                                </div>
-                            </td>
+                        <td className="middle_products_large_td">Размеры заготовки</td>
+                        <td className="middle_products_small_td">
+                            <div className="inputs">
+                                <input type="number" className="input_1" />
+                                <input type="number" className="input_2" />
+                            </div>
+                        </td>
 
-                        </tr>
+                    </tr>
 
-                        <tr>
-                            <td className="middle_products_large_td">Количество с листа</td>
-                            <td className="middle_products_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="middle_products_large_td">Количество с листа</td>
+                        <td className="middle_products_small_td"><input type="number" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="middle_products_large_td">Формат заготовки</td>
-                            <td className="middle_products_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="middle_products_large_td">Формат заготовки</td>
+                        <td className="middle_products_small_td"><input type="number" required/></td>
+                    </tr>
 
-                        <tr>
-                            <td className="middle_products_large_td">Соединение клапана</td>
-                            <td className="middle_products_small_td">
-                                <select id="connectionValve">
+                    <tr>
+                        <td className="middle_products_large_td">Соединение клапана</td>
+                        <td className="middle_products_small_td">
+                            <select>
+                                <option></option>
+                                <option>Text1</option>
+                                <option>Text2</option>
+                                <option>Text3</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                                </select>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="middle_products_large_td">Штамп</td>
+                        <td className="middle_products_small_td"><input type="text" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="middle_products_large_td">Штамп</td>
-                            <td className="middle_products_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="middle_products_large_td">Клише</td>
+                        <td className="middle_products_small_td"><input type="text" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="middle_products_large_td">Клише</td>
-                            <td className="middle_products_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="middle_left_title green_color" rowSpan="6">
+                            <p className="vertical_left_title">Печать</p>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td className="middle_left_title green_color" rowSpan="6">
-                                <p className="vertical_left_title">Печать</p>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"  value="Название" disabled/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"  value="Цена" disabled/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"  value="S запечатки" disabled/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="print_td">
-                                <div className="print_input_1">
-                                    <input type="text"  value="Название" disabled/>
-                                </div>
-                                <div className="print_input_2">
-                                    <input type="text"  value="Цена" disabled/>
-                                </div>
-                                <div className="print_input_3">
-                                    <input type="text"  value="S запечатки" disabled/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="print_td">
-                                <div className="print_input_1">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_2">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_3">
-                                    <input type="text"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="print_td">
-                                <div className="print_input_1">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_2">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_3">
-                                    <input type="text"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="print_td">
-                                <div className="print_input_1">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_2">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_3">
-                                    <input type="text"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="print_td">
+                            <div className="print_input_1">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_2">
+                                <input type="text"/>
+                            </div>
+                            <div className="print_input_3">
+                                <input type="text"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="print_td">
-                                <div className="print_input_1">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_2">
-                                    <input type="text"/>
-                                </div>
-                                <div className="print_input_3">
-                                    <input type="text"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="4" className="notes green_color">
+                            <p>Примечания</p>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="4" className="notes green_color">
-                                <p>Примечания</p>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="4" className="notes_all">
-                                <div className="notes_inputs">
-                                    <input type="text" className="note_input_1"/>
-                                    <input type="text" className="note_input_2"/>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colSpan="4" className="notes_all">
-                                <div className="notes_inputs">
-                                    <input type="text" className="note_input_1"/>
-                                    <input type="text" className="note_input_2"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
 
 
-                        <tr>
-                            <td colSpan="4" className="notes_all">
-                                <div className="notes_inputs">
-                                    <input type="text" className="note_input_1"/>
-                                    <input type="text" className="note_input_2"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="4" className="notes_all">
-                                <div className="notes_inputs">
-                                    <input type="text" className="note_input_1"/>
-                                    <input type="text" className="note_input_2"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="4" className="notes_all">
-                                <div className="notes_inputs">
-                                    <input type="text" className="note_input_1"/>
-                                    <input type="text" className="note_input_2"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="4" className="notes_all">
+                            <div className="notes_inputs">
+                                <input type="text" className="note_input_1"/>
+                                <input type="text" className="note_input_2"/>
+                            </div>
+                        </td>
+                    </tr>
 
                     </tbody>
                 </table>
@@ -455,141 +466,138 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tbody>
 
-                        <tr>
-                            <td className="avto_left_title green_color" rowSpan="8">
-                                <p className="vertical_left_title">Авто</p>
-                            </td>
-                            <td className="avto_large_td">Способ упаковки</td>
-                            <td className="avto_small_td">
-                                <select id="packing">
+                    <tr>
+                        <td className="avto_left_title green_color" rowSpan="8">
+                            <p className="vertical_left_title">Авто</p>
+                        </td>
+                        <td className="avto_large_td">Способ упаковки</td>
+                        <td className="avto_small_td">
+                            <select>
+                                <option></option>
+                                <option>Без упаковки</option>
+                                <option>Паллета, лента, стрейч</option>
+                                <option>Паллета, лента, без стрейча</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                                </select>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td">В пачке, шт.</td>
+                        <td className="avto_small_td"><input type="number" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="avto_large_td">В пачке, шт.</td>
-                            <td className="avto_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td">В транспортном пакете, шт.</td>
+                        <td className="avto_small_td"><input type="number" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="avto_large_td">В транспортном пакете, шт.</td>
-                            <td className="avto_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td">
+                            Размеры пакета
+                            <input className="embeded_input" type="number"/>
+                        </td>
+                        <td className="avto_small_td">
+                            <div className="inputs">
+                                <input type="number" className="input_1" />
+                                <input type="number" className="input_2" />
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td className="avto_large_td">
-                                Размеры пакета
-                                <input className="embeded_input" type="text"/>
-                            </td>
-                            <td className="avto_small_td">
-                                <div className="inputs">
-                                    <input type="text" className="input_1" />
-                                    <input type="text" className="input_2" />
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td">Поддон</td>
+                        <td className="avto_small_td">
+                            <select>
+                                <option></option>
+                                <option>1200x800</option>
+                                <option>1200x1000</option>
+                            </select>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td className="avto_large_td">Поддон</td>
-                            <td className="avto_small_td">
-                                <select id="pallet">
-
-                                </select>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td className="avto_large_td">Размещение на поддоне</td>
-                            <td className="avto_small_td">
-                                <select id="palletPlacement">
-
-                                </select>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td">Размещение на поддоне</td>
+                        <td className="avto_small_td">
+                            <select>
+                                <option></option>
+                                <option>1 пачка в ряду</option>
+                                <option>2 пачки в ряду</option>
+                                <option>3 пачки в ряду</option>
+                            </select>
+                        </td>
+                    </tr>
 
 
-                        <tr>
-                            <td className="avto_large_td">Рядов на поддоне</td>
-                            <td className="avto_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td">Рядов на поддоне</td>
+                        <td className="avto_small_td"><input type="number" /></td>
+                    </tr>
 
-                        <tr>
-                            <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                            <td className="avto_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td">Загрузка автомобиля, шт.</td>
+                        <td className="avto_small_td"><input type="number" /></td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="attachments">
-                                <div className="links">
-                                    <a href="#">тех.карта.pdf</a>
-                                    <br/>
-                                    <a href="#">ссылка2.ai</a>
-                                </div>
-                                <div className="buttons">
-                                    <a className="fa fa-paperclip fa-2x" href="#">
-                                    </a>
-                                    <a className="fa fa-trash-o fa-2x" href="#">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="attachments">
+                            <div className="links">
+                                <a href="#">тех.карта.pdf</a><br/>
+                                <a href="#">ссылка2.ai</a>
+                            </div>
+                            <div className="buttons">
+                                <a className="fa fa-paperclip fa-2x" href="#">
+                                </a>
+                                <a className="fa fa-trash-o fa-2x" href="#">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="right_table_title green_color">
-                                Биговки
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="right_table_title green_color">
+                            Биговки
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="bigovki_all">
-                                <div className="bigovki_inputs_1">
-                                    <input type="text" className="bigovki_input_1"/>
-                                    <input type="text" className="bigovki_input_2" value="+" disabled/>
-                                </div>
-                                <div className="bigovki_inputs_2">
-                                    <input type="text" className="bigovki_input_1"/>
-                                    <input type="text" className="bigovki_input_2" value="+" disabled/>
-                                </div>
-                                <div className="bigovki_inputs_3">
-                                    <input type="text" className="bigovki_input_3" />
-                                    <input type="text" className="bigovki_input_4" />
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="bigovki_all">
+                            <div className="bigovki_inputs_1">
+                                <input type="number" className="bigovki_input_1"/>
+                                <input type="text" className="bigovki_input_2" value="+" disabled/>
+                            </div>
+                            <div className="bigovki_inputs_2">
+                                <input type="number" className="bigovki_input_1"/>
+                                <input type="text" className="bigovki_input_2" value="+" disabled/>
+                            </div>
+                            <div className="bigovki_inputs_3">
+                                <input type="number" className="bigovki_input_3" />
+                                <input type="number" className="bigovki_input_4" />
+                            </div>
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                            <td className="avto_small_td">
-                                <input type="text" />
-                            </td>
-                        </tr>
+                    <tr>
+                        <td className="avto_large_td" colSpan="2">Производственный формат</td>
+                        <td className="avto_small_td"><input type="text" /></td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="right_table_title green_color">
-                                Просечки
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="right_table_title green_color">
+                            Просечки
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td colSpan="3" className="prosechki_all">
-                                <div className="prosechki_inputs">
-                                    <input type="text" className="prosechki_input_1"/>
-                                    <input type="text" className="prosechki_input_2"/>
-                                    <input type="text" className="prosechki_input_3"/>
-                                    <input type="text" className="prosechki_input_4"/>
-                                    <input type="text" className="prosechki_input_5"/>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td colSpan="3" className="prosechki_all">
+                            <div className="prosechki_inputs">
+                                <input type="number" className="prosechki_input_1"/>
+                                <input type="number" className="prosechki_input_2"/>
+                                <input type="number" className="prosechki_input_3"/>
+                                <input type="number" className="prosechki_input_4"/>
+                                <input type="number" className="prosechki_input_5"/>
+                            </div>
+                        </td>
+                    </tr>
 
                     </tbody>
                 </table>
@@ -634,83 +642,6 @@ var AppBody = React.createClass({
 });
 
 var App = React.createClass({
-    getInitialState: function () {
-        return {dictionaries: {}}
-    },
-    componentDidMount: function () {
-        this.__getAllDictionaries();
-    },
-    __getAllDictionaries: function () {
-        $.ajax({
-            type: 'get',
-            contentType: "application/json",
-            url: "/dictionaries/all",
-            data: '',
-            dataType: 'json',
-            timeout: 100000,
-            success: function (data) {
-                //TODO change property result
-                log("get dicts : result : " + JSON.stringify(data.result));
-                this.setState({dictionaries: data.result});
-                this.__setAllDictionaries();
-            }.bind(this),
-            error: function (e) {
-                console.log("ERROR: ", e);
-            }.bind(this)
-        });
-    },
-
-    __setAllDictionaries: function () {
-        log("set dict : dictionaries : " + JSON.stringify(this.state.dictionaries));
-        var data = this.state.dictionaries;
-
-        // client
-        this.__fillOptions("customer", data.client, "companyName");
-
-        // type
-        this.__fillOptions("type", data.productType, "productType");
-
-        // faceLayer
-        this.__fillOptions("faceLayer", data.faceLayer, "faceLayer");
-
-        // connectionValve
-        this.__fillOptions("connectionValve", data.connectionValve, "connectionValve");
-
-        // profile
-        this.__fillOptions("profile", data.profile, "profile");
-
-        // format
-        this.__fillOptions("format", data.format, "format");
-
-        // pallet
-        this.__fillOptions("pallet", data.pallet, "pallet");
-
-        // packing
-        this.__fillOptions("packing", data.packing, "packing");
-
-        // celluloseLayer
-        this.__fillOptions("celluloseLayer", data.celluloseLayer, "celluloseLayer");
-
-        // palletPlacement
-        this.__fillOptions("palletPlacement", data.palletPlacement, "palletPlacement");
-
-        // innerLayer
-        this.__fillOptions("innerLayer", data.innerLayer, "innerLayer");
-
-        // cardboardBrand
-        this.__fillOptions("cardboardBrand", data.cardboardBrand, "cardboardBrand");
-    },
-    __fillOptions: function (selectId, data, textColumn) {
-        log("set dict : data : " + JSON.stringify(data));
-        log("set dict : selectId : " + JSON.stringify(selectId));
-        var options = $("#" + selectId);
-        options.empty();
-        $.each(data, function (item) {
-            options.append($("<option />").val(data[item].id).text(data[item][textColumn]));
-            log("set dict : option : val=" + data[item].id + " text=" + data[item][textColumn]);
-        });
-    },
-
     render: function () {
         return (
             <newProductContainer>
@@ -722,9 +653,3 @@ var App = React.createClass({
 });
 
 ReactDOM.render(<App />, document.getElementById("newProductContainer"));
-
-function log(text) {
-    if (debug == true) {
-        console.log(text);
-    }
-}

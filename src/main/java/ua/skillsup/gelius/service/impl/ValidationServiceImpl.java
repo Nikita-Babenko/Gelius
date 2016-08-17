@@ -41,6 +41,9 @@ public class ValidationServiceImpl<T> implements ValidationService<T> {
     */
     @Override
     public LocalDate parseDate(String dateValue) {
+        if (dateValue == null) {
+            return null;
+        }
         LocalDate date;
         try {
             date = LocalDate.parse(dateValue, Data.DATE_FORMATTER);

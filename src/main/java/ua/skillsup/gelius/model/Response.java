@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Response {
     private int code;
-    private long objectId;
+    private Object data;
     @JsonIgnore
     private ResponseCode codeEnum;
 
@@ -13,21 +13,21 @@ public class Response {
         this.code = responseCode.getCode();
     }
 
-    public Response(ResponseCode responseCode, long objectId) {
+    public Response(ResponseCode responseCode, Object data) {
         this(responseCode);
-        this.objectId = objectId;
+        this.data = data;
     }
 
     public int getCode() {
         return code;
     }
 
-    public long getObjectId() {
-        return objectId;
+    public Object getData() {
+        return data;
     }
 
-    /*public ResponseCode getCodeEnum() {
+    public ResponseCode getCodeEnum() {
         return codeEnum;
-    }*/
+    }
 
 }

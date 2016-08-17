@@ -3,6 +3,7 @@ package ua.skillsup.gelius.model.entity;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Formula;
 import ua.skillsup.gelius.model.entity.dictionary.*;
 
 import javax.persistence.*;
@@ -42,7 +43,7 @@ public class ProductRegister {
     @ManyToOne
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "cardboard_brand_id")
-    private CardBoardBrand cardboardBrand;
+    private CardboardBrand cardboardBrand;
 
     @ManyToOne
     @Fetch(FetchMode.JOIN)
@@ -58,6 +59,10 @@ public class ProductRegister {
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "inner_layer_id")
     private InnerLayer innerLayer;
+
+    @Formula(value = "concat((select i.inner_layer from inner_layer i where i.inner_layer_id = inner_layer_id), " +
+            "'/', (select f.face_layer from face_layer f where f.face_layer_id = face_layer_id))")
+    private String layersColours;
 
     @Size(max = 50)
     @Column(name = "cliche")
@@ -122,11 +127,11 @@ public class ProductRegister {
         this.innerHeight = innerHeight;
     }
 
-    public CardBoardBrand getCardboardBrand() {
+    public CardboardBrand getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardBoardBrand cardboardBrand) {
+    public void setCardboardBrand(CardboardBrand cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 
@@ -152,6 +157,14 @@ public class ProductRegister {
 
     public void setInnerLayer(InnerLayer innerLayer) {
         this.innerLayer = innerLayer;
+    }
+
+    public String getLayersColours() {
+        return layersColours;
+    }
+
+    public void setLayersColours(String layersColours) {
+        this.layersColours = layersColours;
     }
 
     public String getCliche() {

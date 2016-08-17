@@ -11,6 +11,8 @@ import ua.skillsup.gelius.model.convert.ProductConvert;
 
 import java.util.List;
 
+import static ua.skillsup.gelius.model.convert.ProductConvert.convert;
+
 @Repository
 @Transactional
 public class ProductDaoImpl implements ProductDao {
@@ -27,18 +29,23 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public long create(ProductDto productDto) {
-        Product product = ProductConvert.convert(productDto);
-        /*this.sessionFactory.getCurrentSession().save(product);
-        return product.getId();*/
-        return -1; //заглушка
+        Product product = convert(productDto);
+        this.sessionFactory.getCurrentSession().save(product);
+        return product.getId();
     }
 
     @Override
-    public int getNewDatasheetCount() {
-        int count = (int) this.sessionFactory.getCurrentSession().
-            createQuery("select count(p) from Product p where p.isNew = true").
+    public int getMaxProductNumberOfNewDatasheets() {
+        int maxNumber = (int) this.sessionFactory.getCurrentSession().
+            createQuery("select max(p.productNumber) from Product p where p.isNew = true").
             uniqueResult();
-        return count;
+        return maxNumber;
     }
 
+    @Override
+    //Can returns null if product not found.
+    public ProductDto findById(long productId) {
+        Product product = (Product) this.sessionFactory.getCurrentSession().get(Product.class, productId);
+        return convert(product);
+    }
 }

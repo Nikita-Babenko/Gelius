@@ -1,6 +1,8 @@
 target
 *.iml
 .idea
+mem*
+
 /src/main/frontend/node/
 /src/main/frontend/node_modules/
 /src/main/webapp/WEB-INF/resources/js/productRegister.js

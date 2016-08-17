@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity       // Марка картона
 @Table(name = "cardboard_brand")
-public class CardBoardBrand {
+public class CardboardBrand {
 
     @Id
     @Column(name = "cardboard_brand_id")
@@ -12,9 +12,9 @@ public class CardBoardBrand {
     private Long id;
 
     @Column(name = "cardboard_brand")
-    private String cardBoardBrand;
+    private String cardboardBrand;
 
-    public CardBoardBrand() {
+    public CardboardBrand() {
     }
 
     public Long getId() {
@@ -26,18 +26,18 @@ public class CardBoardBrand {
     }
 
     public String getCardboardBrand() {
-        return cardBoardBrand;
+        return cardboardBrand;
     }
 
     public void setCardboardBrand(String cardBoardBrand) {
-        this.cardBoardBrand = cardBoardBrand;
+        this.cardboardBrand = cardBoardBrand;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CardBoardBrand{");
+        final StringBuilder sb = new StringBuilder("CardboardBrand{");
         sb.append("id=").append(id);
-        sb.append(", cardboardBrand='").append(cardBoardBrand).append('\'');
+        sb.append(", cardboardBrand='").append(cardboardBrand).append('\'');
         sb.append('}');
         return sb.toString();
     }

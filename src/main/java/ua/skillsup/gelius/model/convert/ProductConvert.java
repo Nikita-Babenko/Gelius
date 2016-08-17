@@ -19,11 +19,11 @@ public final class ProductConvert {
         Product product = new Product();
         product.setId(productDto.getId());
         product.setProductNumber(productDto.getProductNumber());
-        product.setNew(productDto.getNew());
+        product.setNew(productDto.getIsNew());
         product.setProductCreateDate(productDto.getProductCreateDate());
         product.setProductUpdateDate(productDto.getProductUpdateDate());
         product.setPersonPrepared(productDto.getPersonPrepared());
-        product.setUse(productDto.getUse());
+        product.setUse(productDto.getIsUse());
         product.setClient(ClientConvert.convert(productDto.getClient()));
         product.setProductName(productDto.getProductName());
         product.setProductType(ProductTypeConvert.convert(productDto.getProductType()));
@@ -69,11 +69,11 @@ public final class ProductConvert {
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());
         productDto.setProductNumber(product.getProductNumber());
-        productDto.setNew(product.getNew());
+        productDto.setIsNew(product.getNew());
         productDto.setProductCreateDate(product.getProductCreateDate());
         productDto.setProductUpdateDate(product.getProductUpdateDate());
         productDto.setPersonPrepared(product.getPersonPrepared());
-        productDto.setUse(product.getUse());
+        productDto.setIsUse(product.getUse());
         productDto.setClient(ClientConvert.convert(product.getClient()));
         productDto.setProductName(product.getProductName());
         productDto.setProductType(ProductTypeConvert.convert(product.getProductType()));

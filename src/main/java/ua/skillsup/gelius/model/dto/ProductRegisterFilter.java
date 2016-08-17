@@ -33,8 +33,8 @@ public class ProductRegisterFilter {
     @JsonProperty("profile.profile")
     private List<String> profiles;
 
-    @JsonProperty("layer")
-    private List<String> colours;
+    @JsonProperty("layersColours")
+    private List<String> layersColours;
 
     @JsonProperty("cliche")
     private List<String> cliches;
@@ -55,7 +55,7 @@ public class ProductRegisterFilter {
         innerHeights = new ArrayList<>();
         cardboardBrands = new ArrayList<>();
         profiles = new ArrayList<>();
-        colours = new ArrayList<>();
+        layersColours = new ArrayList<>();
         cliches = new ArrayList<>();
     }
 
@@ -131,12 +131,12 @@ public class ProductRegisterFilter {
         this.profiles = profiles;
     }
 
-    public List<String> getColours() {
-        return colours;
+    public List<String> getLayersColours() {
+        return layersColours;
     }
 
-    public void setColours(List<String> colours) {
-        this.colours = colours;
+    public void setLayersColours(List<String> layersColours) {
+        this.layersColours = layersColours;
     }
 
     public List<String> getCliches() {
@@ -174,7 +174,7 @@ public class ProductRegisterFilter {
                 && ((innerHeights == null) || innerHeights.isEmpty())
                 && ((cardboardBrands == null) || cardboardBrands.isEmpty())
                 && ((profiles == null) || profiles.isEmpty())
-                && ((colours == null) || colours.isEmpty())
+                && ((layersColours == null) || layersColours.isEmpty())
                 && ((cliches == null) || cliches.isEmpty())
                 && ((sortableColumn == null) || sortableColumn.length() == 0);
     }
@@ -191,7 +191,7 @@ public class ProductRegisterFilter {
         sb.append(", innerHeights=").append(innerHeights);
         sb.append(", cardboardBrands=").append(cardboardBrands);
         sb.append(", profiles=").append(profiles);
-        sb.append(", colours=").append(colours);
+        sb.append(", layersColours=").append(layersColours);
         sb.append(", cliches=").append(cliches);
         sb.append(", sortableColumn='").append(sortableColumn).append('\'');
         sb.append(", sortingDirection='").append(sortingDirection).append('\'');

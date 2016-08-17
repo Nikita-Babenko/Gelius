@@ -26,6 +26,8 @@ public class ProductRegisterDto {
 
     private InnerLayerDto innerLayer;
 
+    private String layersColours;
+
     private String cliche;
 
     public ProductRegisterDto() {
@@ -121,6 +123,14 @@ public class ProductRegisterDto {
 
     public void setInnerLayer(InnerLayerDto innerLayer) {
         this.innerLayer = innerLayer;
+    }
+
+    public String getLayersColours() {
+        return layersColours;
+    }
+
+    public void setLayersColours(String layersColours) {
+        this.layersColours = layersColours;
     }
 
     public String getCliche() {

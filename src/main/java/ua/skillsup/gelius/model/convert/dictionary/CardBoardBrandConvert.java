@@ -1,7 +1,7 @@
 package ua.skillsup.gelius.model.convert.dictionary;
 
 import ua.skillsup.gelius.model.dto.dictionary.CardBoardBrandDto;
-import ua.skillsup.gelius.model.entity.dictionary.CardBoardBrand;
+import ua.skillsup.gelius.model.entity.dictionary.CardboardBrand;
 
 public final class CardBoardBrandConvert {
 
@@ -9,18 +9,18 @@ public final class CardBoardBrandConvert {
 
     }
 
-    public static CardBoardBrand convert(CardBoardBrandDto cardBoardBrandDto) {
+    public static CardboardBrand convert(CardBoardBrandDto cardBoardBrandDto) {
         if (cardBoardBrandDto == null) {
             return null;
         }
-        CardBoardBrand cardboardBrand = new CardBoardBrand();
+        CardboardBrand cardboardBrand = new CardboardBrand();
         cardboardBrand.setId(cardBoardBrandDto.getId());
         cardboardBrand.setCardboardBrand(cardBoardBrandDto.getCardboardBrand());
 
         return cardboardBrand;
     }
 
-    public static CardBoardBrandDto convert(CardBoardBrand cardboardBrand) {
+    public static CardBoardBrandDto convert(CardboardBrand cardboardBrand) {
         if (cardboardBrand == null) {
             return null;
         }
