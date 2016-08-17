@@ -41,7 +41,7 @@ public class ValidationServiceImpl<T> implements ValidationService<T> {
     */
     @Override
     public LocalDate parseDate(String dateValue) {
-        if (dateValue == null) {
+        if (dateValue == null || "".equals(dateValue) ) { //вторая проверка - временная: до фикса пустых строк (к-рые буду исправлены на null-ы)
             return null;
         }
         LocalDate date;

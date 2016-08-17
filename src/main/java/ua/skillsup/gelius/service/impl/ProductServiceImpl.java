@@ -114,6 +114,7 @@ public class ProductServiceImpl implements ProductService {
         for (int i = 0; i < delta; i++) {
             value.append(Data.ProductNumber.PLACEHOLDER);
         }
+        value.append(productNumber);
         return value.toString();
     }
 
