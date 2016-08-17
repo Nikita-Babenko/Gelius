@@ -12,6 +12,8 @@ product["innerHeight"] = {};
 product["profile"] = {};
 product["cardboardBrand"] = {};
 product["celluloseLayer"] = {};
+product["productType"] = {};
+product["client"] = {};
 product["innerLayer"] = {};
 product["faceLayer"] = {};
 product["cliche"] = {};
@@ -675,10 +677,10 @@ var App = React.createClass({
         var data = this.state.dictionaries;
 
         // client
-        this.__fillOptions("customer", data.client, "companyName");
+        this.__fillOptions("client", data.client, "companyName");
 
         // type
-        this.__fillOptions("type", data.productType, "productType");
+        this.__fillOptions("productType", data.productType, "productType");
 
         // faceLayer
         this.__fillOptions("faceLayer", data.faceLayer, "faceLayer");
@@ -744,7 +746,9 @@ var App = React.createClass({
             product["innerWidth"] = $('#innerWidth').val();
             product["innerHeight"] = $('#innerHeight').val();
             product["profile"] = $('#profile :selected').length;
+            product["client"] = $('#client :selected').length;
             product["cardboardBrand"] = $('#cardboardBrand :selected').length;
+            product["productType"] = $('#productType :selected').length;
             product["celluloseLayer"] = $('#celluloseLayer :selected').length;
             product["innerLayer"] = $('#innerLayer :selected').length;
             product["faceLayer"] = $('#faceLayer :selected').length;
