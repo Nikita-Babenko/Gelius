@@ -114,7 +114,7 @@ public class ProductDaoImplTest {
         Long clientId = 1L;
         product.setClient( new ClientDto(clientId));
         product.setBlankFormat(42);
-        product.setNew(false);
+        product.setIsNew(false);
         product.setProductNumber(1845);
         return product;
     }
