@@ -13,8 +13,8 @@ public final class WorkabilityConvert {
             return null;
         }
         Workability workability = new Workability();
-        workability.setId(workability.getId());
-        workability.setServiceCenter(workability.getServiceCenter());
+        workability.setId(workabilityDto.getId());
+        workability.setServiceCenter(workabilityDto.getServiceCenter());
 
         return workability;
     }

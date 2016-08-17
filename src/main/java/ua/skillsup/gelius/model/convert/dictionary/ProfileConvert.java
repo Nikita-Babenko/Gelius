@@ -13,8 +13,8 @@ public final class ProfileConvert {
             return null;
         }
         Profile profile = new Profile();
-        profile.setId(profile.getId());
-        profile.setProfile(profile.getProfile());
+        profile.setId(profileDto.getId());
+        profile.setProfile(profileDto.getProfile());
 
         return profile;
     }

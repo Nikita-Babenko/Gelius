@@ -13,8 +13,8 @@ public final class InnerLayerConvert {
             return null;
         }
         InnerLayer innerLayer = new InnerLayer();
-        innerLayer.setId(innerLayer.getId());
-        innerLayer.setInnerLayer(innerLayer.getInnerLayer());
+        innerLayer.setId(innerLayerDto.getId());
+        innerLayer.setInnerLayer(innerLayerDto.getInnerLayer());
 
         return innerLayer;
     }

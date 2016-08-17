@@ -13,7 +13,6 @@ import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
 import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
 import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -45,7 +44,7 @@ public class ProductDto {
     private ClientDto client;
     private Long clientId; // *
 
-    @Max(value = 200, message = "название продукта не может превышать {value} символов")
+    @Size(max = 200, message = "название продукта не может превышать {max} символов")
     private String productName;
 
     private ProductTypeDto productType;
@@ -68,7 +67,7 @@ public class ProductDto {
     private InnerLayerDto innerLayer;
     private Long innerLayerId; // *
 
-    @Max(value = 200, message = "материал не может превышать {value} символов")
+    @Size(max = 200, message = "материал не может превышать {max} символов")
     private String material;
 
     private Integer sizeWorkpieceLength;
@@ -83,10 +82,10 @@ public class ProductDto {
     private ConnectionValveDto connectionValve;
     private Long connectionValveId; // *
 
-    @Max(value = 50, message = "штамп не может превышать {value} символов")
+    @Size(max = 50, message = "штамп не может превышать {max} символов")
     private String stamp;
 
-    @Max(value = 50, message = "клише не может превышать {value} символов")
+    @Size(max = 50, message = "клише не может превышать {max} символов")
     private String cliche;
 
     private PackingDto packing;
