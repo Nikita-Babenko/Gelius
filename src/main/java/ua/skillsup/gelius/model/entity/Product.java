@@ -8,6 +8,7 @@ import ua.skillsup.gelius.util.LocalDateConverter;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "product")

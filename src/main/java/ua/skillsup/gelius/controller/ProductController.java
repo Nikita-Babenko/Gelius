@@ -43,6 +43,7 @@ public class ProductController {
     @ResponseBody
     private Response createProduct(@RequestBody ProductDto product) {
         LOG.info("createProduct controller");
+        System.out.println(product);
         this.productService.createProduct(product); //возвращаемый productId не сохраняем
         return new Response(ResponseCode.OK);
     }

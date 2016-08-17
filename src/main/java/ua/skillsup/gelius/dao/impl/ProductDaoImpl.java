@@ -24,7 +24,8 @@ public class ProductDaoImpl implements ProductDao {
     @SuppressWarnings("unchecked")
     public List<ProductDto> getAllProducts() {
         List<Product> products = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
-        return ProductConvert.convertList(products);
+        System.out.println(products);
+        return null;
     }
 
     @Override
