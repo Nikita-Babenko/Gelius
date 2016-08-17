@@ -658,23 +658,28 @@ var AppHeader = React.createClass({
 
 var Select = React.createClass({
     getInitialState: function () {
-        return {
-            options: [
-                { value: 'one', name: 'One' },
-                { value: 'two', name: 'Two' }
-            ],
+       return {
+            opts: [],
             value: '',
             data: {}
         }
     },
     __fillOptions: function () {
+
+        var init = [ { id: 'one', str: 'One' },
+            { id: 'two', str: 'Two' } ]
+
+        this.setState({opts: init});
+
+        console.log(this.state.opts);
+
         var data = this.state.data;
 
         console.log(data);
 
         for (var i = 0; i < data.length; i++) {
             var option = data[i];
-            this.state.options.push(
+            this.state.opts.push(
                 <option key={i} value={option.value}>{option.name}</option>
             );
         }
@@ -692,7 +697,7 @@ var Select = React.createClass({
                 name={this.props.name}
                 id={this.props.id}
                 onChange={this.__onChange} ref={this.props.ref}>
-                {this.state.options}
+                {this.state.opts}
             </select>
         );
     }
