@@ -629,19 +629,19 @@ var App = React.createClass({
         $.ajax({
             type: 'get',
             contentType: "application/json",
-            url: "/newProduct/initData",
+            url: "/products/newProduct/initData",
             data: '',
             dataType: 'json',
             timeout: 100000,
-            success: function (data) {
-                log("get init : result : " + JSON.stringify(data.result));
+            success: function (response) {
+                log("get init : response : " + JSON.stringify(response.data));
                 this.setState({
-                    dictionaries: data.result.dictionaries
+                    dictionaries: response.data.dictionaries
                 });
 
-                this.__setAllDictionaries();
+                $('#productNumber').val(response.data.productNumber);
 
-                $('#productNumber').val(data.result.productNumber);
+                this.__setAllDictionaries();
 
             }.bind(this),
             error: function (e) {
@@ -687,7 +687,7 @@ var App = React.createClass({
         this.__fillOptions("innerLayer", data.innerLayer, "innerLayer");
 
         // cardboardBrand
-        this.__fillOptions("cardboardBrand", data.cardboardBrand, "cardboardBrand");
+        this.__fillOptions("cardboardBrand", data.cardBoardBrand, "cardboardBrand");
     },
     __fillOptions: function (selectId, data, textColumn) {
         var options = $("#" + selectId);

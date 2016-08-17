@@ -52,9 +52,11 @@ public class ProductController {
     private Response getInitDataForCreateProduct() {
         LOG.info("Get init data for product creating");
 
+        LOG.info("Get number of product");
         int newProductNumber = this.productService.getProductNumberOfNewDatasheet();
         String newProductNumberValue = this.productService.getFullProductNumber(newProductNumber, true);
 
+        LOG.info("Get dicts");
         Map<String, List<?>> dictionaries = dictionaryService.getAllDictionaries();
 
         Map<String, Object> responseData = new HashMap<>();
