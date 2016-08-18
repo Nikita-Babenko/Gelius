@@ -1,23 +1,44 @@
 var product = {};
-product["productNumber"] = {};
-product["blankFormat"] = {};
-product["isNew"] = {};
-product["productName"] = {};
-product["productCreateDateValue"] = {};
-product["productUpdateDateValue"] = {};
-product["personPrepared"] = {};
-product["innerLength"] = {};
-product["innerWidth"] = {};
-product["innerHeight"] = {};
-product["profile"] = {};
-product["cardboardBrand"] = {};
-product["celluloseLayer"] = {};
-product["productType"] = {};
-product["client"] = {};
-product["innerLayer"] = {};
-product["faceLayer"] = {};
-product["cliche"] = {};
-product["isUse"] = {};
+product["productNumber"] = '';
+product["isNew"] = '';
+product["productCreateDateValue"] = '';
+product["productUpdateDateValue"] = '';
+product["personPrepared"] = '';
+product["isUse"] = '';
+product["client"] = '';
+product["productName"] = '';
+product["productType"] = '';
+product["innerLength"] = '';
+product["innerWidth"] = '';
+product["innerHeight"] = '';
+product["theoreticalSquare"] = '';
+product["actualSquare"] = '';
+product["format"] = '';
+product["profile"] = '';
+product["cardboardBrand"] = '';
+product["celluloseLayer"] = '';
+product["innerLayer"] = '';
+product["faceLayer"] = '';
+product["material"] = '';
+product["sizeWorkpieceLength"] = '';
+product["sizeWorkpieceWidth"] = '';
+product["numberFromSheet"] = '';
+product["blankFormat"] = '';
+product["connectionValve"] = '';
+product["stamp"] = '';
+product["cliche"] = '';
+product["packing"] = '';
+product["numberInPack"] = '';
+product["numberInTransportPackage"] = '';
+product["packageLength"] = '';
+product["packageWidth"] = '';
+product["packageHeight"] = '';
+product["pallet"] = '';
+product["palletPlacement"] = '';
+product["numberLoadCar"] = '';
+product["palletRows"] = '';
+product["productionFormat"] = '';
+
 
 // logging
 var debug = (sessionStorage["debug"] == "true") ? true : false;
@@ -170,9 +191,9 @@ newProductContainer.newProductBodyLeft = React.createClass({
 
                     <tr>
                         <td className="products_large_td">S теор.</td>
-                        <td className="products_small_td" ><input  type="number" /></td>
+                        <td className="products_small_td" ><input  type="number" id="theoreticalSquare"/></td>
                         <td className="products_large_td">S факт.</td>
-                        <td className="products_small_td" ><input type="number" /></td>
+                        <td className="products_small_td" ><input type="number" id="actualSquare"/></td>
                     </tr>
 
                     <tr>
@@ -210,7 +231,6 @@ newProductContainer.newProductBodyLeft = React.createClass({
                         <td className="products_large_td">Лицевой слой</td>
                         <td className="products_small_td">
                             <select id="faceLayer">
-
                             </select>
                         </td>
                         <td className="products_large_td">Внутренний слой</td>
@@ -226,7 +246,7 @@ newProductContainer.newProductBodyLeft = React.createClass({
                             <p className="vertical_left_title">Материал</p>
                         </td>
                         <td colSpan="4" className="material">
-                        <textarea>
+                        <textarea id="material">
 
                         </textarea>
                         </td>
@@ -289,8 +309,8 @@ newProductContainer.newProductBodyMiddle = React.createClass({
                         <td className="middle_products_large_td">Размеры заготовки</td>
                         <td className="middle_products_small_td">
                             <div className="inputs">
-                                <input type="number" className="input_1" />
-                                <input type="number" className="input_2" />
+                                <input type="number" className="input_1" id="sizeWorkpieceLength"/>
+                                <input type="number" className="input_2" id="sizeWorkpieceWidth" disabled value="0"/>
                             </div>
                         </td>
 
@@ -298,12 +318,12 @@ newProductContainer.newProductBodyMiddle = React.createClass({
 
                     <tr>
                         <td className="middle_products_large_td">Количество с листа</td>
-                        <td className="middle_products_small_td"><input type="number" /></td>
+                        <td className="middle_products_small_td"><input type="number" id="numberFromSheet"/></td>
                     </tr>
 
                     <tr>
                         <td className="middle_products_large_td">Формат заготовки</td>
-                        <td className="middle_products_small_td"><input type="number" required id="blankFormat"/></td>
+                        <td className="middle_products_small_td"><input required type="number" id="blankFormat"/></td>
                     </tr>
 
                     <tr>
@@ -317,7 +337,7 @@ newProductContainer.newProductBodyMiddle = React.createClass({
 
                     <tr>
                         <td className="middle_products_large_td">Штамп</td>
-                        <td className="middle_products_small_td"><input type="text" /></td>
+                        <td className="middle_products_small_td"><input type="text" id="stamp"/></td>
                     </tr>
 
                     <tr>
@@ -484,23 +504,23 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">В пачке, шт.</td>
-                        <td className="avto_small_td"><input type="number" /></td>
+                        <td className="avto_small_td"><input type="number" id="numberInPack"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В транспортном пакете, шт.</td>
-                        <td className="avto_small_td"><input type="number" /></td>
+                        <td className="avto_small_td"><input type="number" id="numberInTransportPackage"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">
                             Размеры пакета
-                            <input className="embeded_input" type="number"/>
+                            <input className="embeded_input" type="number" id="packageLength"/>
                         </td>
                         <td className="avto_small_td">
                             <div className="inputs">
-                                <input type="number" className="input_1" />
-                                <input type="number" className="input_2" />
+                                <input type="number" className="input_1" id="packageWidth"/>
+                                <input type="number" className="input_2" id="packageHeight"/>
                             </div>
                         </td>
                     </tr>
@@ -526,12 +546,12 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">Рядов на поддоне</td>
-                        <td className="avto_small_td"><input type="number" /></td>
+                        <td className="avto_small_td"><input type="number" id="palletRows"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td className="avto_small_td"><input type="number" /></td>
+                        <td className="avto_small_td"><input type="number" id="numberLoadCar"/></td>
                     </tr>
 
                     <tr>
@@ -558,23 +578,23 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td colSpan="3" className="bigovki_all">
                             <div className="bigovki_inputs_1">
-                                <input type="number" className="bigovki_input_1"/>
+                                <input type="number" className="bigovki_input_1 sumBigovki" />
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_2">
-                                <input type="number" className="bigovki_input_1"/>
+                                <input type="number" className="bigovki_input_1 sumBigovki"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_3">
-                                <input type="number" className="bigovki_input_3" />
-                                <input type="number" className="bigovki_input_4" />
+                                <input type="number" className="bigovki_input_3 sumBigovki" />
+                                <input type="number" className="bigovki_input_4 sumBigovki" />
                             </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                        <td className="avto_small_td"><input type="text" /></td>
+                        <td className="avto_small_td"><input type="number" id="productionFormat"/></td>
                     </tr>
 
                     <tr>
@@ -644,10 +664,11 @@ var App = React.createClass({
         }
     },
     componentDidMount: function () {
-        this.__createProduct();
-        this.__loadDataToServer();
         this.__getAllDictionaries();
+        this.__sumBigovki();
+        this.__createProductAndLoadToServer();
     },
+
     __getAllDictionaries: function () {
         $.ajax({
             type: 'get',
@@ -657,14 +678,33 @@ var App = React.createClass({
             dataType: 'json',
             timeout: 100000,
             success: function (response) {
-                log("get init : response : " + JSON.stringify(response.data));
-                this.setState({
-                    dictionaries: response.data.dictionaries
-                });
 
-                $('#productNumber').val(response.data.productNumber);
+                log("get init : response : " + JSON.stringify(response));
 
-                this.__setAllDictionaries();
+                if (!response) {
+                    console.log("Empty response on '/products/newProduct/initData'");
+                    return;
+                };
+
+                if (!response["data"]) {
+                    console.log("Empty 'data' in response on '/products/newProduct/initData'");
+                    return;
+                }
+
+                if (response["data"]["dictionaries"]) {
+                    this.setState({
+                        dictionaries: response.data.dictionaries
+                    });
+                    this.__setAllDictionaries();
+                } else {
+                    console.log("Empty 'dictionaries' in response on '/products/newProduct/initData'");
+                };
+
+                if (response["data"]["productNumber"]) {
+                    $('#productNumber').val(response.data.productNumber);
+                } else {
+                    console.log("Empty 'productNumber' in response on '/products/newProduct/initData'");
+                }
 
             }.bind(this),
             error: function (e) {
@@ -712,6 +752,7 @@ var App = React.createClass({
         // cardboardBrand
         this.__fillOptions("cardboardBrand", data.cardBoardBrand, "cardboardBrand");
     },
+
     __fillOptions: function (selectId, data, textColumn) {
         var options = $("#" + selectId);
         options.empty();
@@ -720,24 +761,14 @@ var App = React.createClass({
         });
     },
 
-    __loadDataToServer : function () {
+    __createProductAndLoadToServer : function () {
         $("#addNew").click(function() {
-            $.ajax({
-                type: 'POST',
-                url: '/products/newProduct/create',
-                contentType: 'application/json',
-                data: JSON.stringify(product),
-                dataType: 'json'
-            });
-        });
-    },
-
-    __createProduct : function () {
-        $("#addNew").click(function() {
+            if(validationRequiredFields() === false) {
+                return;
+            }
             product["isNew"] = $('#isNew').is(":checked");
             product["isUse"] = $('#isUse').is(":checked");
             product["productNumber"] = $('#productNumber').val();
-            product["blankFormat"] = $('#blankFormat').val();
             product["productName"] = $('#productName').val();
             product["productCreateDateValue"] = $('#productCreateDate').val();
             product["productUpdateDateValue"] = $('#productUpdateDate').val();
@@ -745,16 +776,65 @@ var App = React.createClass({
             product["innerLength"] = $('#innerLength').val();
             product["innerWidth"] = $('#innerWidth').val();
             product["innerHeight"] = $('#innerHeight').val();
-            product["profile"] = $('#profile :selected').length;
-            product["client"] = $('#client :selected').length;
-            product["cardboardBrand"] = $('#cardboardBrand :selected').length;
-            product["productType"] = $('#productType :selected').length;
-            product["celluloseLayer"] = $('#celluloseLayer :selected').length;
-            product["innerLayer"] = $('#innerLayer :selected').length;
-            product["faceLayer"] = $('#faceLayer :selected').length;
+            product["profile"] = Number($('#profile :selected').val());
+            product["client"] = Number($('#client :selected').val());
+            product["cardboardBrand"] = Number($('#cardboardBrand :selected').val());
+            product["productType"] = Number($('#productType :selected').val());
+            product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());
+            product["innerLayer"] = Number($('#innerLayer :selected').val());
+            product["faceLayer"] = Number($('#faceLayer :selected').val());
             product["cliche"] = $('#cliche').val();
+            product["theoreticalSquare"] = $('#theoreticalSquare').val();
+            product["actualSquare"] = $('#actualSquare').val();
+            product["material"] = $('#material').val();
+            product["format"] = Number($('#format :selected').val());
+            product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
+            product["sizeWorkpieceWidth"] = $('#sizeWorkpieceWidth').val();
+            product["numberFromSheet"] = $('#numberFromSheet').val();
+            product["blankFormat"] = $('#blankFormat').val();
+            product["connectionValve"] = Number($('#connectionValve :selected').val());
+            product["stamp"] = $('#stamp').val();
+            product["packing"] = Number($('#packing :selected').val());
+            product["numberInPack"] = $('#numberInPack').val();
+            product["numberInTransportPackage"] = $('#numberInTransportPackage').val();
+            product["packageLength"] = $('#packageLength').val();
+            product["packageWidth"] = $('#packageWidth').val();
+            product["packageHeight"] = $('#packageHeight').val();
+            product["pallet"] = Number($('#pallet :selected').val());
+            product["palletPlacement"] = Number($('#palletPlacement :selected').val());
+            product["palletRows"] = $('#palletRows').val();
+            product["numberLoadCar"] = $('#numberLoadCar').val();
+            product["productionFormat"] = $('#productionFormat').val();
+            loadDataToServer();
         });
 
+        function validationRequiredFields(){
+            var value=$.trim($("#blankFormat").val());
+            if (value.length === 0){
+                alert("Формат заготовки не может быть пуст");
+                return false;
+            }
+        }
+
+        function loadDataToServer(){
+            $.ajax({
+                type: 'POST',
+                url: '/products/newProduct/create',
+                contentType: 'application/json',
+                data: JSON.stringify(product),
+                dataType: 'json'
+            });
+        }
+    },
+
+    __sumBigovki : function (){
+        $(".sumBigovki").keyup(function() {
+            var total = 0;
+            $('.sumBigovki').each(function() {
+                total = total + Number($(this).val());
+            });
+            $('input#sizeWorkpieceWidth').val(total);
+        });
     },
 
     render: function () {
