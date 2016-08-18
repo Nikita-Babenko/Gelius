@@ -16,6 +16,7 @@ class Filtering extends React.Component {
         this._onFilteringParametersDataUpdated = this._onFilteringParametersDataUpdated.bind(this);
         this._onFilteringParameterSelected = this._onFilteringParameterSelected.bind(this);
     }
+
     componentDidMount() {
         FilteringSortingStore.addListener(EventConstants.FILTERING_SORTING_CHANGE_EVENT, this._onFilteringParametersDataUpdated);
     }
@@ -37,12 +38,13 @@ class Filtering extends React.Component {
         var columnName = this.props.columnName;
         var onFilterParameterSelected = this._onFilteringParameterSelected;
         var filterCheckboxes = filterData.map(function (e) {
-            return (
-                <FilterElement columnName={columnName}
-                               parameterSelected={onFilterParameterSelected}
-                               key={e}
-                               element={e}/>
-            );
+            if (e !== null)
+                return (
+                    <FilterElement columnName={columnName}
+                                   parameterSelected={onFilterParameterSelected}
+                                   key={e}
+                                   element={e}/>
+                );
         });
         return (
             <div>

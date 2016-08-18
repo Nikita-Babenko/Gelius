@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,6 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
     private SessionFactory sessionFactory;
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<ProductRegisterDto> getAllProducts() {
         List<ProductRegister> productsRegister = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class).list();
         return ProductRegisterConvert.convertList(productsRegister);
@@ -86,12 +86,12 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
 
     private Criteria getFilterCriteria(ProductRegisterFilter filter) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class, "product");
-        criteria.createAlias("product.client", "client");
-        criteria.createAlias("product.cardboardBrand", "cardboardBrand");
-        criteria.createAlias("product.productType", "productType");
-        criteria.createAlias("product.profile", "profile");
-        criteria.createAlias("product.faceLayer", "faceLayer");
-        criteria.createAlias("product.innerLayer", "innerLayer");
+        criteria.createAlias("product.client", "client", JoinType.LEFT_OUTER_JOIN);
+        criteria.createAlias("product.cardboardBrand", "cardboardBrand", JoinType.LEFT_OUTER_JOIN);
+        criteria.createAlias("product.productType", "productType", JoinType.LEFT_OUTER_JOIN);
+        criteria.createAlias("product.profile", "profile", JoinType.LEFT_OUTER_JOIN);
+        criteria.createAlias("product.faceLayer", "faceLayer", JoinType.LEFT_OUTER_JOIN);
+        criteria.createAlias("product.innerLayer", "innerLayer", JoinType.LEFT_OUTER_JOIN);
         if (!filter.isEmpty()) {
             if (!filter.getIds().isEmpty()) {
                 criteria.add(Restrictions.in("product.id", filter.getIds()));

@@ -16,7 +16,7 @@ class FilterElement extends React.Component {
                 <label>
                     <input type="checkbox" checked={this.state.isChecked}
                            onChange={this._handleChangeSelection.bind(this)}
-                           className="filter-checkbox" value={this.props.element}/>{this.props.element}
+                           className="filter-checkbox"/>{this.props.element}
                 </label>
             </li>
         );
