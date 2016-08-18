@@ -60,6 +60,45 @@ var newProductContainer = React.createClass({
     }
 });
 
+var HeaderTitleInput = React.createClass({
+    getInitialState: function() {
+        return { isNewProduct: true, productNumberForNewProduct: "", currentProductNumber: ""  }
+    },
+    __changeCheckbox: function(e) {
+        var isNewProduct = e.target.checked;
+        var value;
+        this.setState({isNewProduct: isNewProduct});
+
+        if (isNewProduct) { //галочка установлена
+            value = this.state.productNumberForNewProduct;
+        } else { //галочка снята
+            value = "";
+            if (this.state.productNumberForNewProduct == "") { //галочка снята впервые
+                this.setState({ productNumberForNewProduct: $("#productNumber").val() });
+            }
+        }
+        this.setState({ currentProductNumber: value });
+    },
+    __changeText: function(e) {
+        this.setState({ currentProductNumber: e.target.value });
+    },
+    render: function() {
+        var fieldDisabled = this.state.isNewProduct;
+        return (
+            <div className="header_title_input">
+                <input
+                    type="text" className="form-control" id="productNumber" contenteditable="false"
+                    value={this.state.currentProductNumber} onChange={this.__changeText} disabled={fieldDisabled}
+                />
+                <div className="isNew">
+                    <input type="checkbox" id="isNew" checked={this.isNewProduct} onChange={this.__changeCheckbox}/>
+                    <p>Новая карта</p>
+                </div>
+            </div>
+        )
+    }
+});
+
 newProductContainer.newProductHeaderLeft = React.createClass({
     render: function () {
         return (
@@ -102,13 +141,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
                                 Новая техкарта №
                             </p>
                         </div>
-                        <div className="header_title_input">
-                            <input type="text" className="form-control" id="productNumber" contenteditable="false" id="productNumber"/>
-                            <div className="isNew">
-                                <input type="checkbox" id="isNew"/>
-                                <p>Новая Карта</p>
-                            </div>
-                        </div>
+                        <HeaderTitleInput/>
                     </div>
 
                 </div>
@@ -660,7 +693,8 @@ var AppBody = React.createClass({
 var App = React.createClass({
     getInitialState: function () {
         return {
-            dictionaries: {}
+            dictionaries: {},
+            productNumber: ""
         }
     },
     componentDidMount: function () {
@@ -700,7 +734,10 @@ var App = React.createClass({
                 };
 
                 if (response["data"]["productNumber"]) {
-                    $('#productNumber').val(response.data.productNumber);
+                    this.setState(
+                        { productNumber: response.data.productNumber}
+                    );
+                    this.__setProductNumber();
                 } else {
                     console.log("Empty 'productNumber' in response on '/products/newProduct/initData'");
                 }
@@ -710,6 +747,11 @@ var App = React.createClass({
                 console.log("ERROR: ", e);
             }.bind(this)
         });
+    },
+
+    __setProductNumber: function() {
+        $("#isNew").prop("checked", true);
+        $('#productNumber').val(this.state.productNumber).prop("disabled", true);
     },
 
     __setAllDictionaries: function () {
