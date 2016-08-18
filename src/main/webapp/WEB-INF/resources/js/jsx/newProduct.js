@@ -578,16 +578,16 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td colSpan="3" className="bigovki_all">
                             <div className="bigovki_inputs_1">
-                                <input type="number" className="bigovki_input_1 sumBigovki" />
+                                <input type="number" className="bigovki_input_1 sumBigovki" min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_2">
-                                <input type="number" className="bigovki_input_1 sumBigovki"/>
+                                <input type="number" className="bigovki_input_1 sumBigovki" min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_3">
-                                <input type="number" className="bigovki_input_3 sumBigovki" />
-                                <input type="number" className="bigovki_input_4 sumBigovki" />
+                                <input type="number" className="bigovki_input_3 sumBigovki" min="0"/>
+                                <input type="number" className="bigovki_input_4 sumBigovki" min="0"/>
                             </div>
                         </td>
                     </tr>
@@ -665,8 +665,7 @@ var App = React.createClass({
     },
     componentDidMount: function () {
         this.__getAllDictionaries();
-        this.__sumBigovki();
-        this.__createProductAndLoadToServer();
+        this.__bindElementsEvents();
     },
 
     __getAllDictionaries: function () {
@@ -761,79 +760,87 @@ var App = React.createClass({
         });
     },
 
-    __createProductAndLoadToServer : function () {
-        $("#addNew").click(function() {
-            if(validationRequiredFields() === false) {
-                return;
-            }
-            product["isNew"] = $('#isNew').is(":checked");
-            product["isUse"] = $('#isUse').is(":checked");
-            product["productNumber"] = $('#productNumber').val();
-            product["productName"] = $('#productName').val();
-            product["productCreateDateValue"] = $('#productCreateDate').val();
-            product["productUpdateDateValue"] = $('#productUpdateDate').val();
-            product["personPrepared"] = $('#personPrepared').val();
-            product["innerLength"] = $('#innerLength').val();
-            product["innerWidth"] = $('#innerWidth').val();
-            product["innerHeight"] = $('#innerHeight').val();
-            product["profile"] = Number($('#profile :selected').val());
-            product["client"] = Number($('#client :selected').val());
-            product["cardboardBrand"] = Number($('#cardboardBrand :selected').val());
-            product["productType"] = Number($('#productType :selected').val());
-            product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());
-            product["innerLayer"] = Number($('#innerLayer :selected').val());
-            product["faceLayer"] = Number($('#faceLayer :selected').val());
-            product["cliche"] = $('#cliche').val();
-            product["theoreticalSquare"] = $('#theoreticalSquare').val();
-            product["actualSquare"] = $('#actualSquare').val();
-            product["material"] = $('#material').val();
-            product["format"] = Number($('#format :selected').val());
-            product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
-            product["sizeWorkpieceWidth"] = $('#sizeWorkpieceWidth').val();
-            product["numberFromSheet"] = $('#numberFromSheet').val();
-            product["blankFormat"] = $('#blankFormat').val();
-            product["connectionValve"] = Number($('#connectionValve :selected').val());
-            product["stamp"] = $('#stamp').val();
-            product["packing"] = Number($('#packing :selected').val());
-            product["numberInPack"] = $('#numberInPack').val();
-            product["numberInTransportPackage"] = $('#numberInTransportPackage').val();
-            product["packageLength"] = $('#packageLength').val();
-            product["packageWidth"] = $('#packageWidth').val();
-            product["packageHeight"] = $('#packageHeight').val();
-            product["pallet"] = Number($('#pallet :selected').val());
-            product["palletPlacement"] = Number($('#palletPlacement :selected').val());
-            product["palletRows"] = $('#palletRows').val();
-            product["numberLoadCar"] = $('#numberLoadCar').val();
-            product["productionFormat"] = $('#productionFormat').val();
-            loadDataToServer();
-        });
 
-        function validationRequiredFields(){
-            var value=$.trim($("#blankFormat").val());
-            if (value.length === 0){
-                alert("Формат заготовки не может быть пуст");
-                return false;
-            }
-        }
-
-        function loadDataToServer(){
-            $.ajax({
-                type: 'POST',
-                url: '/products/newProduct/create',
-                contentType: 'application/json',
-                data: JSON.stringify(product),
-                dataType: 'json'
-            });
-        }
+    __bindElementsEvents : function(){
+        this.__bindOnClickButtonAddNew();
     },
 
-    __sumBigovki : function (){
-        $(".sumBigovki").keyup(function() {
+    __bindOnClickButtonAddNew: function () {
+        var context = this;
+        $("#addNew").unbind().click(function () {
+            context.__createProduct();
+        });
+
+        $(".sumBigovki").change(function() {
             var total = 0;
             $('.sumBigovki').each(function() {
                 total = total + Number($(this).val());
             });
             $('input#sizeWorkpieceWidth').val(total);
+        });
+    },
+
+    __createProduct : function () {
+        if(this.__validationBlankFormat() === false){
+            return;
+        }
+        product["isNew"] = $('#isNew').is(":checked");
+        product["isUse"] = $('#isUse').is(":checked");
+        product["productNumber"] = $('#productNumber').val();
+        product["productName"] = $('#productName').val();
+        product["productCreateDateValue"] = $('#productCreateDate').val();
+        product["productUpdateDateValue"] = $('#productUpdateDate').val();
+        product["personPrepared"] = $('#personPrepared').val();
+        product["innerLength"] = $('#innerLength').val();
+        product["innerWidth"] = $('#innerWidth').val();
+        product["innerHeight"] = $('#innerHeight').val();
+        product["profile"] = Number($('#profile :selected').val());
+        product["client"] = Number($('#client :selected').val());
+        product["cardboardBrand"] = Number($('#cardboardBrand :selected').val());
+        product["productType"] = Number($('#productType :selected').val());
+        product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());
+        product["innerLayer"] = Number($('#innerLayer :selected').val());
+        product["faceLayer"] = Number($('#faceLayer :selected').val());
+        product["cliche"] = $('#cliche').val();
+        product["theoreticalSquare"] = $('#theoreticalSquare').val();
+        product["actualSquare"] = $('#actualSquare').val();
+        product["material"] = $('#material').val();
+        product["format"] = Number($('#format :selected').val());
+        product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
+        product["sizeWorkpieceWidth"] = $('#sizeWorkpieceWidth').val();
+        product["numberFromSheet"] = $('#numberFromSheet').val();
+        product["blankFormat"] = $('#blankFormat').val();
+        product["connectionValve"] = Number($('#connectionValve :selected').val());
+        product["stamp"] = $('#stamp').val();
+        product["packing"] = Number($('#packing :selected').val());
+        product["numberInPack"] = $('#numberInPack').val();
+        product["numberInTransportPackage"] = $('#numberInTransportPackage').val();
+        product["packageLength"] = $('#packageLength').val();
+        product["packageWidth"] = $('#packageWidth').val();
+        product["packageHeight"] = $('#packageHeight').val();
+        product["pallet"] = Number($('#pallet :selected').val());
+        product["palletPlacement"] = Number($('#palletPlacement :selected').val());
+        product["palletRows"] = $('#palletRows').val();
+        product["numberLoadCar"] = $('#numberLoadCar').val();
+        product["productionFormat"] = $('#productionFormat').val();
+        this.__loadDataToServer();
+    },
+
+    __validationBlankFormat : function(){
+        var value = $.trim($("#blankFormat").val());
+        if (value.length === 0) {
+            alert("Формат заготовки не может быть пуст");
+            return false;
+        }
+    },
+
+    __loadDataToServer : function(){
+        $.ajax({
+            type: 'POST',
+            url: '/products/newProduct/create',
+            contentType: 'application/json',
+            data: JSON.stringify(product),
+            dataType: 'json'
         });
     },
 
