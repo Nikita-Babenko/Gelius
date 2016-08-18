@@ -2,7 +2,7 @@ package ua.skillsup.gelius.model.entity.dictionary;
 
 import javax.persistence.*;
 
-@Entity       //  Профиль
+@Entity       //  Рабочий центр
 @Table(name = "workability")
 public class Workability {
 
@@ -13,6 +13,12 @@ public class Workability {
 
     @Column(name = "service_center")
     private String serviceCenter;
+
+    @Column(name = "group_priority")
+    private Integer groupPriority;
+
+    @Column(name = "element_priority")
+    private Integer elementPriority;
 
     public Workability() {
     }
@@ -33,12 +39,29 @@ public class Workability {
         this.serviceCenter = serviceCenter;
     }
 
+    public Integer getGroupPriority() {
+        return groupPriority;
+    }
+
+    public void setGroupPriority(Integer groupPriority) {
+        this.groupPriority = groupPriority;
+    }
+
+    public Integer getElementPriority() {
+        return elementPriority;
+    }
+
+    public void setElementPriority(Integer elementPriority) {
+        this.elementPriority = elementPriority;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Workability{");
-        sb.append("id=").append(id);
-        sb.append(", serviceCenter='").append(serviceCenter).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Workability{" +
+            "id=" + id +
+            ", serviceCenter='" + serviceCenter + '\'' +
+            ", groupPriority=" + groupPriority +
+            ", elementPriority=" + elementPriority +
+            '}';
     }
 }

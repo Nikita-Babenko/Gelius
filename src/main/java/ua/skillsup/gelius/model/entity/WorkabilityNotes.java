@@ -19,7 +19,7 @@ public class WorkabilityNotes {
 
     @ManyToOne
     @JoinColumn(name="service_center")
-    private Workability sericeCenter;
+    private Workability serviceCenter;
 
     public WorkabilityNotes() {
     }
@@ -40,12 +40,12 @@ public class WorkabilityNotes {
         this.product = product;
     }
 
-    public Workability getSericeCenter() {
-        return sericeCenter;
+    public Workability getServiceCenter() {
+        return serviceCenter;
     }
 
-    public void setSericeCenter(Workability sericeCenter) {
-        this.sericeCenter = sericeCenter;
+    public void setServiceCenter(Workability serviceCenter) {
+        this.serviceCenter = serviceCenter;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class WorkabilityNotes {
         final StringBuilder sb = new StringBuilder("WorkabilityNotes{");
         sb.append("id=").append(id);
         sb.append(", product=").append(product);
-        sb.append(", sericeCenter=").append(sericeCenter);
+        sb.append(", serviceCenter=").append(serviceCenter);
         sb.append('}');
         return sb.toString();
     }

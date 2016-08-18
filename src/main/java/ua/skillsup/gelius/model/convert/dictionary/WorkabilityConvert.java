@@ -15,6 +15,8 @@ public final class WorkabilityConvert {
         Workability workability = new Workability();
         workability.setId(workabilityDto.getId());
         workability.setServiceCenter(workabilityDto.getServiceCenter());
+        workability.setGroupPriority(workabilityDto.getGroupPriority());
+        workability.setElementPriority(workabilityDto.getElementPriority());
 
         return workability;
     }
@@ -26,6 +28,8 @@ public final class WorkabilityConvert {
         WorkabilityDto workabilityDto = new WorkabilityDto();
         workabilityDto.setId(workability.getId());
         workabilityDto.setServiceCenter(workability.getServiceCenter());
+        workabilityDto.setGroupPriority(workability.getGroupPriority());
+        workabilityDto.setElementPriority(workability.getElementPriority());
 
         return workabilityDto;
     }

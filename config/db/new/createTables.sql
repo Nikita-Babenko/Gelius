@@ -75,10 +75,12 @@ CREATE TABLE connection_valve(
   PRIMARY KEY (connection_valve_id)
 );
 
-/* Технологичность */
+/* Рабочие центры (технологичность) */
 CREATE TABLE workability(
   workability_id BIGINT AUTO_INCREMENT,
   service_center VARCHAR(100),
+  group_priority INT,
+  element_priority INT,
 
   PRIMARY KEY (workability_id)
 );
@@ -135,11 +137,10 @@ CREATE TABLE product(
   inner_layer_id BIGINT,
   material VARCHAR(200),
 
-
   size_workpiece_length INT,
   size_workpiece_width INT,
   number_from_sheet INT,
-  blank_format INT NOT NULL ,
+  blank_format INT NOT NULL,
   connection_valve_id BIGINT,
   stamp VARCHAR(50),
   cliche VARCHAR(50),

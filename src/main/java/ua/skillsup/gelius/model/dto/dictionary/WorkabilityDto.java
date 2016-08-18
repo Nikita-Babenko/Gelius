@@ -6,8 +6,12 @@ public class WorkabilityDto {
 
     private Long id;
 
-    @Size(max = 50)
+    @Size(max = 50, message = "наименование рабочего центра не может превышать {max} символов")
     private String serviceCenter;
+
+    private Integer groupPriority;
+
+    private Integer elementPriority;
 
     public WorkabilityDto() {
     }
@@ -32,12 +36,29 @@ public class WorkabilityDto {
         this.serviceCenter = serviceCenter;
     }
 
+    public Integer getGroupPriority() {
+        return groupPriority;
+    }
+
+    public void setGroupPriority(Integer groupPriority) {
+        this.groupPriority = groupPriority;
+    }
+
+    public Integer getElementPriority() {
+        return elementPriority;
+    }
+
+    public void setElementPriority(Integer elementPriority) {
+        this.elementPriority = elementPriority;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("WorkabilityDto{");
-        sb.append("id=").append(id);
-        sb.append(", serviceCenter='").append(serviceCenter).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "WorkabilityDto{" +
+            "id=" + id +
+            ", serviceCenter='" + serviceCenter + '\'' +
+            ", groupPriority=" + groupPriority +
+            ", elementPriority=" + elementPriority +
+            '}';
     }
 }

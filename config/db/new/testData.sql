@@ -94,8 +94,24 @@ INSERT INTO connection_valve (connection_valve) VALUES ('сшитый');
 INSERT INTO connection_valve (connection_valve) VALUES ('склееный+сшитый');
 
 
-INSERT INTO workability (service_center) VALUES ('Тайванец');
-INSERT INTO workability (service_center) VALUES ('Упаковка');
+INSERT INTO workability (service_center, group_priority, element_priority) VALUES
+    ('АГ', NULL, NULL),
+    ('Тайванец', 10, 10),
+    ('Болгарец', 10, 20),
+    ('Сшивка ручная', 20, 10),
+    ('Сшивка автомат', 20, 20),
+    ('Склейка ручная', 30, 10),
+    ('Склейка 3 точки', 30, 20),
+    ('БОБСТ', 40, NULL),
+    ('Ротация', 50, NULL),
+    ('Тигель большой', 60, 10),
+    ('Тигель малый', 60, 20),
+    ('Ролевый', 60, 30),
+    ('К. Р.', 70, NULL),
+    ('БОИКС', 80, NULL),
+    ('Перегородки', 90, NULL),
+    ('Упаковка', 10, NULL)
+;
 
 
 INSERT INTO packing (packing) VALUES ('Без упаковки');
