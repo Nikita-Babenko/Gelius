@@ -9,4 +9,5 @@ public interface ProductDao {
     long create(ProductDto product);
     int getMaxProductNumberOfNewDatasheets();
     ProductDto findById(long productId);
+    boolean isExistsOldProductWithSameProductNumber(int productNumber);
 }

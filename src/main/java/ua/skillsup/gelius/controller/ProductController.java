@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.skillsup.gelius.exception.ParseProductDateException;
+import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.Response;
 import ua.skillsup.gelius.model.ResponseCode;
@@ -42,8 +43,7 @@ public class ProductController {
     @RequestMapping(value = "/newProduct/create", method = RequestMethod.POST)
     @ResponseBody
     private Response createProduct(@RequestBody ProductDto product) {
-        LOG.info("createProduct controller");
-        System.out.println(product);
+        LOG.info("createProduct. Mapping 'raw' product data:\n" + product);
         this.productService.createProduct(product); //возвращаемый productId не сохраняем
         return new Response(ResponseCode.OK);
     }
@@ -77,7 +77,9 @@ public class ProductController {
             List<String> validationErrors = ((ProductValidationException) e).getErrors();
             return new Response(ResponseCode.VALIDATION_ERROR, validationErrors);
         } else if (e instanceof ParseProductDateException) {
-            return new Response(ResponseCode.BAD_DATA); //maybe, 415 Unsupported Media Type
+            return new Response(ResponseCode.BAD_DATA);
+        } else if (e instanceof ProductExistsException) {
+            return new Response(ResponseCode.OBJECT_EXISTS);
         }
 
         return new Response(ResponseCode.SERVER_ERROR);

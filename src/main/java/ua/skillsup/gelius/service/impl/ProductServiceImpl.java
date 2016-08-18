@@ -3,6 +3,7 @@ package ua.skillsup.gelius.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.skillsup.gelius.dao.ProductDao;
+import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.model.dto.ProductDto;
@@ -39,13 +40,13 @@ public class ProductServiceImpl implements ProductService {
             product.setProductNumber(productNumber);
         }
 
-        //Date parsing, filling them to DTO:
+        //Dates parsing, filling them to DTO:
         LocalDate productCreateDate = this.validationService.parseDate( product.getProductCreateDateValue() );
         LocalDate productUpdateDate = this.validationService.parseDate( product.getProductUpdateDateValue() );
         product.setProductCreateDate(productCreateDate);
         product.setProductUpdateDate(productUpdateDate);
 
-        //TODO replace all empty strings for null-s
+        //TODO replace all empty strings for null-s?
 
         //Filling other DTO fields (LocalDates and vocabularies):
         ProductDto filledProduct = fillProductDto(product);
@@ -54,6 +55,19 @@ public class ProductServiceImpl implements ProductService {
         List<String> validationErrors = this.validationService.validation(filledProduct);
         if ( !validationErrors.isEmpty() ) {
             throw new ProductValidationException(validationErrors);
+        }
+
+        //Check existing product with same productNumber in DB (AFTER DTO validation, because before validation productNumber may be null):
+        if (!filledProduct.getIsNew()) {
+            int productNumber = filledProduct.getProductNumber();
+            boolean isExists = this.productDao.isExistsOldProductWithSameProductNumber(productNumber);
+            if (isExists) {
+                throw new ProductExistsException(productNumber);
+            }
+        }
+
+        if (filledProduct.getIsUse() == null) {
+            filledProduct.setIsUse(false);
         }
 
         return this.productDao.create(filledProduct);

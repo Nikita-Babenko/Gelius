@@ -37,10 +37,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int getMaxProductNumberOfNewDatasheets() {
-        int maxNumber = (int) this.sessionFactory.getCurrentSession().
+        Integer maxNumber = (Integer) this.sessionFactory.getCurrentSession().
             createQuery("select max(p.productNumber) from Product p where p.isNew = true").
             uniqueResult();
-        return maxNumber;
+        return maxNumber == null ? 0 : maxNumber;
     }
 
     @Override
@@ -48,5 +48,14 @@ public class ProductDaoImpl implements ProductDao {
     public ProductDto findById(long productId) {
         Product product = (Product) this.sessionFactory.getCurrentSession().get(Product.class, productId);
         return convert(product);
+    }
+
+    @Override
+    public boolean isExistsOldProductWithSameProductNumber(int productNumber) {
+        long count = (long) this.sessionFactory.getCurrentSession().
+            createQuery("select count(p) from Product p where p.productNumber = :productNumber and p.isNew = false").
+            setParameter("productNumber", productNumber).
+            uniqueResult();
+        return count != 0;
     }
 }
