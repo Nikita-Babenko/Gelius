@@ -1,8 +1,8 @@
 {
-  "name": "react-es6-gulp-playground",
+  "name": "Gelius-project",
   "version": "1.0.0",
-  "description": "Playground for React, ES6 and gulp",
-  "repository": "https://www.github.com/imcnally/react-es6-gulp-playground",
+  "description": "gelius",
+  "repository": "https://github.com/Yan-Brav/ua.skillsup.gelius",
   "main": "Gulpfile.js",
   "scripts": {
     "test": "gulp test"

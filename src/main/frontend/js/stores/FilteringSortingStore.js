@@ -31,7 +31,12 @@ class FilteringSortingStore extends EventEmitter {
             parameters: []
         };
 
-        this.lastSortedColumn = "";
+        this.sortableColumns = {
+            previousSortableColumn: "",
+            currentSortableColumn: ""
+        };
+
+        this.isSortingAction = false;
     }
 
     getFilterParametersForColumn(columnName) {
@@ -50,12 +55,16 @@ class FilteringSortingStore extends EventEmitter {
 
     }
 
+    getSortingActionStatus() {
+        return this.isSortingAction;
+    }
+
     getSortingFilteringData() {
         return this.sortingFiltering;
     }
 
     getLastSortedColumn() {
-        return this.lastSortedColumn;
+        return this.sortableColumns.previousSortableColumn;
     }
 
     onChange(listener, context) {
@@ -88,26 +97,26 @@ filteringSortingStore.dispatchToken = Dispatcher.register(function (event) {
         case EventConstants.ADD_FILTER_ELEMENT:
             var filterParameters = filteringSortingStore.sortingFiltering[event.columnName];
             var lastColumn = filteringSortingStore.lastFilteredColumn;
-
             filterParameters.push(event.parameterValue);
             if (lastColumn.name !== event.columnName) {
                 lastColumn.parameters = filteringSortingStore.allFilterParameters[event.columnName];
                 lastColumn.name = event.columnName;
             }
+            filteringSortingStore.isSortingAction = false;
             break;
         case EventConstants.DELETE_FILTER_ELEMENT:
             var filterParameters = filteringSortingStore.sortingFiltering[event.columnName];
             filterParameters.splice($.inArray(event.parameterValue, filterParameters), 1);
+            filteringSortingStore.isSortingAction = false;
             break;
         case EventConstants.APPLY_SORTING:
             filteringSortingStore.sortingFiltering.sortableColumn = event.columnName;
             filteringSortingStore.sortingFiltering.sortingDirection = event.direction;
+            filteringSortingStore.isSortingAction = true;
+            filteringSortingStore.sortableColumns.previousSortableColumn = filteringSortingStore.sortableColumns.currentSortableColumn;
+            filteringSortingStore.sortableColumns.currentSortableColumn = event.columnName;
             filteringSortingStore.emitChange();
-            filteringSortingStore.lastSortedColumn = event.columnName;
             break;
-        default:
-        // Do nothing
-
     }
 });
 

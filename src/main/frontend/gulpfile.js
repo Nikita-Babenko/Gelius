@@ -9,6 +9,10 @@ var jest = require('gulp-jest');
 var chalk = require('chalk');
 var streamify = require('gulp-streamify');
 
+gulp.task('apply-prod-environment', function () {
+    process.env.NODE_ENV = 'production';
+});
+
 gulp.task('compile', function(){
     browserify('./js/productRegister.js')
         .transform(babelify)
@@ -36,6 +40,6 @@ gulp.task('watch', function(){
     gulp.watch(['src/**/*.js*'], ['compile']);
 });
 
-gulp.task('default', ['compile']);
+gulp.task('default', ['apply-prod-environment', 'compile']);
 
 gulp.task('test', ['jest']);

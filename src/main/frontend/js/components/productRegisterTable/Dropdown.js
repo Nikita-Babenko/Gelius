@@ -69,13 +69,16 @@ class Dropdown extends React.Component {
     }
 
     _disableSortingStatus() {
-        var lastSortedColumn = FilteringSortingStore.getLastSortedColumn();
-        if ((this.props.columnName === lastSortedColumn) &&
-            (this.state.sortingAsc || this.state.sortingDesc)) {
-            this.setState({
-                sortingAsc: false,
-                sortingDesc: false
-            });
+        var isSortingAction = FilteringSortingStore.getSortingActionStatus();
+        if (isSortingAction) {
+            var lastSortedColumn = FilteringSortingStore.getLastSortedColumn();
+            if ((this.props.columnName === lastSortedColumn) &&
+                (this.state.sortingAsc || this.state.sortingDesc)) {
+                this.setState({
+                    sortingAsc: false,
+                    sortingDesc: false
+                });
+            }
         }
     }
 
