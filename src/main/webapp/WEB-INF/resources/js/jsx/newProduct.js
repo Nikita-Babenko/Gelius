@@ -39,6 +39,13 @@ product["numberLoadCar"] = '';
 product["palletRows"] = '';
 product["productionFormat"] = '';
 
+var EVENTS = {
+    newProductNumberReceived: function(newProductNumber) {
+        $("#isNew").prop("checked", true);
+        $('#productNumber').val(newProductNumber).prop("disabled", true);
+    }
+};
+
 
 // logging
 var debug = (sessionStorage["debug"] == "true") ? true : false;
@@ -69,11 +76,11 @@ var HeaderTitleInput = React.createClass({
         var value;
         this.setState({isNewProduct: isNewProduct});
 
-        if (isNewProduct) { //галочка установлена
+        if (isNewProduct) { //checkbox was checked
             value = this.state.productNumberForNewProduct;
-        } else { //галочка снята
+        } else { //checkbox was unchecked
             value = "";
-            if (this.state.productNumberForNewProduct == "") { //галочка снята впервые
+            if (this.state.productNumberForNewProduct == "") { //checkbox was unchecked first
                 this.setState({ productNumberForNewProduct: $("#productNumber").val() });
             }
         }
@@ -693,8 +700,7 @@ var AppBody = React.createClass({
 var App = React.createClass({
     getInitialState: function () {
         return {
-            dictionaries: {},
-            productNumber: ""
+            dictionaries: {}
         }
     },
     componentDidMount: function () {
@@ -734,10 +740,7 @@ var App = React.createClass({
                 };
 
                 if (response["data"]["productNumber"]) {
-                    this.setState(
-                        { productNumber: response.data.productNumber}
-                    );
-                    this.__setProductNumber();
+                    this.__setProductNumber(response.data.productNumber);
                 } else {
                     console.log("Empty 'productNumber' in response on '/products/newProduct/initData'");
                 }
@@ -749,9 +752,8 @@ var App = React.createClass({
         });
     },
 
-    __setProductNumber: function() {
-        $("#isNew").prop("checked", true);
-        $('#productNumber').val(this.state.productNumber).prop("disabled", true);
+    __setProductNumber: function(productNUmber) {
+        EVENTS.newProductNumberReceived(productNUmber);
     },
 
     __setAllDictionaries: function () {

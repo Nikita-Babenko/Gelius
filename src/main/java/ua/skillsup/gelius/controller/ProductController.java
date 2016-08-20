@@ -44,8 +44,9 @@ public class ProductController {
     @ResponseBody
     private Response createProduct(@RequestBody ProductDto product) {
         LOG.info("createProduct. Mapping 'raw' product data:\n" + product);
-        this.productService.createProduct(product); //возвращаемый productId не сохраняем
-        return new Response(ResponseCode.OK);
+        this.productService.createProduct(product); //we need not save returned productId
+        String newProductNumberValue = getFullProductNumber();
+        return new Response(ResponseCode.OK, newProductNumberValue);
     }
 
     @RequestMapping(value = "/newProduct/initData", method = RequestMethod.GET)
@@ -54,8 +55,7 @@ public class ProductController {
         LOG.info("Get init data for product creating");
 
         LOG.info("Get number of product");
-        int newProductNumber = this.productService.getProductNumberOfNewDatasheet();
-        String newProductNumberValue = this.productService.getFullProductNumber(newProductNumber, true);
+        String newProductNumberValue = getFullProductNumber();
 
         LOG.info("Get dicts");
         Map<String, List<?>> dictionaries = dictionaryService.getAllDictionaries();
@@ -65,6 +65,11 @@ public class ProductController {
         responseData.put("dictionaries", dictionaries);
 
         return new Response(ResponseCode.OK, responseData);
+    }
+
+    private String getFullProductNumber() {
+        int newProductNumber = this.productService.getProductNumberOfNewDatasheet();
+        return this.productService.getFullProductNumber(newProductNumber, true);
     }
 
 

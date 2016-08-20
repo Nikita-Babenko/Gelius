@@ -59,11 +59,7 @@ public class ProductServiceImpl implements ProductService {
 
         //Check existing product with same productNumber in DB (AFTER DTO validation, because before validation productNumber may be null):
         if (!filledProduct.getIsNew()) {
-            int productNumber = filledProduct.getProductNumber();
-            boolean isExists = this.productDao.isExistsOldProductWithSameProductNumber(productNumber);
-            if (isExists) {
-                throw new ProductExistsException(productNumber);
-            }
+            checkExistenceOldProductWithSameProductNumber( filledProduct.getProductNumber() );
         }
 
         if (filledProduct.getIsUse() == null) {
@@ -112,6 +108,14 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return product;
+    }
+
+    //If product with same productNumber exists in DB, throw ProductExistsException
+    private void checkExistenceOldProductWithSameProductNumber(int productNumber) {
+        boolean isExists = this.productDao.isExistsOldProductWithSameProductNumber(productNumber);
+        if (isExists) {
+            throw new ProductExistsException(productNumber);
+        }
     }
 
     @Override

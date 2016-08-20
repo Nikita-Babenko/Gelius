@@ -20,8 +20,8 @@ public class ValidationServiceImpl<T> implements ValidationService<T> {
     private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     /*
-    Валидация элемента.
-    Возвращает человекочитабельный список ошибок валидации.
+    Element validation.
+    Returns human-readable list of validation errors.
     */
     @Override
     public List<String> validation(T element) {
@@ -36,8 +36,8 @@ public class ValidationServiceImpl<T> implements ValidationService<T> {
     }
 
     /*
-    Парсинг даты.
-    Если произошла ошибка парсинга, выбрасывает ParseProductDateException.
+    Date parsing.
+    If parsing error occurred, throw ParseProductDateException.
     */
     @Override
     public LocalDate parseDate(String dateValue) {
