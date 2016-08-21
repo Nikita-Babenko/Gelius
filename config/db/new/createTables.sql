@@ -93,6 +93,7 @@ CREATE TABLE packing(
   PRIMARY KEY (packing_id)
 );
 
+/* Поддон */
 CREATE TABLE pallet(
   pallet_id BIGINT AUTO_INCREMENT,
   pallet VARCHAR(50),
@@ -100,7 +101,7 @@ CREATE TABLE pallet(
   PRIMARY KEY (pallet_id)
 );
 
-/* Поддон */
+/* Размещениен на поддоне */
 CREATE TABLE pallet_placement(
   pallet_placement_id BIGINT AUTO_INCREMENT,
   pallet_placement VARCHAR(50),
