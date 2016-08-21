@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractCommonDAO implements CommonDAO {
+public abstract class AbstractCommonDao implements CommonDao {
 
     @Autowired
     private SessionFactory sessionFactory;

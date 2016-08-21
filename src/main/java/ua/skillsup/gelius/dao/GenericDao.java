@@ -3,7 +3,7 @@ package ua.skillsup.gelius.dao;
 import java.io.Serializable;
 import java.util.Collection;
 
-public interface GenericDAO<T, PK extends Serializable> {
+public interface GenericDao<T, PK extends Serializable> {
 
     PK create(T newObject);
 

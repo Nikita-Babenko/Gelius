@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.skillsup.gelius.dao.DictionaryDAO;
+import ua.skillsup.gelius.dao.DictionaryDao;
 import ua.skillsup.gelius.model.dto.dictionary.*;
 import ua.skillsup.gelius.model.entity.dictionary.*;
 import ua.skillsup.gelius.service.DictionaryService;
@@ -25,10 +25,10 @@ public class DictionaryServiceImpl implements DictionaryService {
     private Map<String, ClassWithDTOPair> dictionaries = getDictionariesWithClasses();
 
     @Autowired
-    DictionaryDAO dictionaryDAO;
+    private DictionaryDao dictionaryDao;
 
     @Autowired
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Override
     public Map<String, List<?>> getAllDictionaries() {
@@ -78,7 +78,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     private <T, D> List<D> getEntitiesFromDictionary(Class<T> entityClazz, Class<D> dtoClazz) {
 
         List<D> result = new ArrayList<>();
-        List<T> entities  = dictionaryDAO.getAll(entityClazz);
+        List<T> entities  = dictionaryDao.getAll(entityClazz);
         for(T entity : entities) {
             result.add(converEntityToDto(entity, dtoClazz));
         }
@@ -102,16 +102,16 @@ public class DictionaryServiceImpl implements DictionaryService {
         private Class<?> clazz;
         private Class<?> clazzDto;
 
-        public ClassWithDTOPair(Class<?> clazz, Class<?> clazzDto) {
+        ClassWithDTOPair(Class<?> clazz, Class<?> clazzDto) {
             this.clazz = clazz;
             this.clazzDto = clazzDto;
         }
 
-        public Class<?> getClazz() {
+        Class<?> getClazz() {
             return clazz;
         }
 
-        public Class<?> getClazzDto() {
+        Class<?> getClazzDto() {
             return clazzDto;
         }
     }

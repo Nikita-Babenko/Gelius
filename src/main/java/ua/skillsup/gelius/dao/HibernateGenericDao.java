@@ -7,15 +7,15 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 
-public abstract class HibernateGenericDAO<T, PK extends Serializable>
-        implements GenericDAO<T, Long> {
+public abstract class HibernateGenericDao<T, PK extends Serializable>
+        implements GenericDao<T, Long> {
 
     private Class<T> type;
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public HibernateGenericDAO() {
+    public HibernateGenericDao() {
         type = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }

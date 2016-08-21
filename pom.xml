@@ -9,30 +9,46 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <!-- Main properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.8</jdk.version>
+
+        <!-- Spring propeties-->
         <spring.version>4.2.0.RELEASE</spring.version>
+
+        <!-- ORMs and database properties -->
         <hibernate.version>4.3.6.Final</hibernate.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-        <javax.servlet.version>3.0.1</javax.servlet.version>
         <mysql.connector.version>5.1.31</mysql.connector.version>
+        <h2database.version>1.4.189</h2database.version>
         <hsqldb.version>2.3.4</hsqldb.version>
         <hikari.version>2.4.3</hikari.version>
+
+        <!-- WEB -->
+        <javax.servlet.version>3.0.1</javax.servlet.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <javax.el.version>2.2.6</javax.el.version>
         <jstl.version>1.2</jstl.version>
+
+        <!-- Data format(JSON) -->
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
         <jackson-databind.version>2.5.0</jackson-databind.version>
+
+        <!-- Testing -->
         <junit.version>4.12</junit.version>
         <mockito.version>1.9.5</mockito.version>
-        <hamcrest.version>1.3</hamcrest.version>
+
+        <!-- Logging -->
         <log4j.version>1.2.16</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
+
+        <!-- Frontend -->
         <bootstrap.version>3.3.5</bootstrap.version>
         <jquery.version>2.1.4</jquery.version>
         <font-awesome.version>4.6.3</font-awesome.version>
         <react.version>15.2.1</react.version>
         <model-mapper.version>0.7.6</model-mapper.version>
+
     </properties>
 
     <dependencies>
@@ -50,14 +66,6 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- hamcrest -->
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>${hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -82,36 +90,43 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -131,11 +146,13 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -155,11 +172,11 @@
             <version>${javax.el.version}</version>
         </dependency>
 
-        <!--HSQLDB in-memory DB for testing-->
+        <!-- In-memory database -->
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>${hsqldb.version}</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2database.version}</version>
         </dependency>
 
         <!--mysql connector-->
@@ -175,6 +192,7 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>${jackson-mapper.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -230,11 +248,10 @@
 
     </dependencies>
 
-
     <build>
+
         <finalName>gelius</finalName>
         <defaultGoal>package</defaultGoal>
-        <testSourceDirectory>src/test</testSourceDirectory>
 
         <plugins>
             <plugin>
@@ -251,7 +268,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
