@@ -94,7 +94,7 @@ var HeaderTitleInput = React.createClass({
         return (
             <div className="header_title_input">
                 <input
-                    type="text" className="form-control" id="productNumber" contenteditable="false"
+                    type="text" className="form-control numberInputCheck" id="productNumber" contenteditable="false"
                     value={this.state.currentProductNumber} onChange={this.__changeText} disabled={fieldDisabled}
                 />
                 <div className="isNew">
@@ -224,16 +224,16 @@ newProductContainer.newProductBodyLeft = React.createClass({
                             <p className="vertical_left_title">Продукция</p>
                         </td>
                         <td className="products_large_td">Размеры внутренние</td>
-                        <td className="products_small_td" ><input type="number" id="innerLength"/></td>
-                        <td className="products_large_td" ><input type="number" id="innerWidth"/></td>
-                        <td className="products_small_td" ><input type="number" id="innerHeight"/></td>
+                        <td className="products_small_td" ><input className="numberInputCheck" type="number" id="innerLength" min="0"/></td>
+                        <td className="products_large_td" ><input className="numberInputCheck" type="number" id="innerWidth" min="0"/></td>
+                        <td className="products_small_td" ><input className="numberInputCheck" type="number" id="innerHeight" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="products_large_td">S теор.</td>
-                        <td className="products_small_td" ><input  type="number" id="theoreticalSquare"/></td>
+                        <td className="products_small_td" ><input  type="number" className="numberInputCheck" id="theoreticalSquare"/></td>
                         <td className="products_large_td">S факт.</td>
-                        <td className="products_small_td" ><input type="number" id="actualSquare"/></td>
+                        <td className="products_small_td" ><input type="number" className="numberInputCheck" id="actualSquare"/></td>
                     </tr>
 
                     <tr>
@@ -349,8 +349,8 @@ newProductContainer.newProductBodyMiddle = React.createClass({
                         <td className="middle_products_large_td">Размеры заготовки</td>
                         <td className="middle_products_small_td">
                             <div className="inputs">
-                                <input type="number" className="input_1" id="sizeWorkpieceLength"/>
-                                <input type="number" className="input_2" id="sizeWorkpieceWidth" disabled value="0"/>
+                                <input type="number" className="input_1 numberInputCheck" id="sizeWorkpieceLength" min="0"/>
+                                <input type="number" className="input_2 numberInputCheck" id="sizeWorkpieceWidth" min="0"/>
                             </div>
                         </td>
 
@@ -358,12 +358,12 @@ newProductContainer.newProductBodyMiddle = React.createClass({
 
                     <tr>
                         <td className="middle_products_large_td">Количество с листа</td>
-                        <td className="middle_products_small_td"><input type="number" id="numberFromSheet"/></td>
+                        <td className="middle_products_small_td"><input type="number" className="numberInputCheck" id="numberFromSheet" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="middle_products_large_td">Формат заготовки</td>
-                        <td className="middle_products_small_td"><input required type="number" id="blankFormat"/></td>
+                        <td className="middle_products_small_td"><input required type="number" className="numberInputCheck" id="blankFormat" min="0"/></td>
                     </tr>
 
                     <tr>
@@ -397,10 +397,10 @@ newProductContainer.newProductBodyMiddle = React.createClass({
                                 <input type="text"  value="Название" disabled/>
                             </div>
                             <div className="print_input_2">
-                                <input type="text"  value="Цена" disabled/>
+                                <input type="text" className="numberInputCheck"  value="Цена" disabled/>
                             </div>
                             <div className="print_input_3">
-                                <input type="text"  value="S запечатки" disabled/>
+                                <input type="text" className="numberInputCheck"  value="S запечатки" disabled/>
                             </div>
                         </td>
                     </tr>
@@ -544,23 +544,23 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">В пачке, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberInPack"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="numberInPack" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В транспортном пакете, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberInTransportPackage"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="numberInTransportPackage" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">
                             Размеры пакета
-                            <input className="embeded_input" type="number" id="packageLength"/>
+                            <input className="embeded_input numberInputCheck" type="number" id="packageLength" min="0"/>
                         </td>
                         <td className="avto_small_td">
                             <div className="inputs">
-                                <input type="number" className="input_1" id="packageWidth"/>
-                                <input type="number" className="input_2" id="packageHeight"/>
+                                <input type="number" className="input_1 numberInputCheck" id="packageWidth" min="0"/>
+                                <input type="number" className="input_2 numberInputCheck" id="packageHeight" min="0"/>
                             </div>
                         </td>
                     </tr>
@@ -586,12 +586,12 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">Рядов на поддоне</td>
-                        <td className="avto_small_td"><input type="number" id="palletRows"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="palletRows" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberLoadCar"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="numberLoadCar" min="0"/></td>
                     </tr>
 
                     <tr>
@@ -618,23 +618,23 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td colSpan="3" className="bigovki_all">
                             <div className="bigovki_inputs_1">
-                                <input type="number" className="bigovki_input_1 sumBigovki" min="0"/>
+                                <input type="number" className="bigovki_1 bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_2">
-                                <input type="number" className="bigovki_input_1 sumBigovki" min="0"/>
+                                <input type="number" className="bigovki_2 bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_3">
-                                <input type="number" className="bigovki_input_3 sumBigovki" min="0"/>
-                                <input type="number" className="bigovki_input_4 sumBigovki" min="0"/>
+                                <input type="number" className="bigovki_3 bigovki_input_3 sumBigovki numberInputCheck" min="0"/>
+                                <input type="number" className="bigovki_4 bigovki_input_4 sumBigovki numberInputCheck" min="0"/>
                             </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                        <td className="avto_small_td"><input type="number" id="productionFormat"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="productionFormat" min="0"/></td>
                     </tr>
 
                     <tr>
@@ -646,11 +646,11 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td colSpan="3" className="prosechki_all">
                             <div className="prosechki_inputs">
-                                <input type="number" className="prosechki_input_1"/>
-                                <input type="number" className="prosechki_input_2"/>
-                                <input type="number" className="prosechki_input_3"/>
-                                <input type="number" className="prosechki_input_4"/>
-                                <input type="number" className="prosechki_input_5"/>
+                                <input type="number" className="prosechki_input_1 numberInputCheck" min="0"/>
+                                <input type="number" className="prosechki_input_2 numberInputCheck" min="0"/>
+                                <input type="number" className="prosechki_input_3 numberInputCheck" min="0"/>
+                                <input type="number" className="prosechki_input_4 numberInputCheck" min="0"/>
+                                <input type="number" className="prosechki_input_5 numberInputCheck" min="0"/>
                             </div>
                         </td>
                     </tr>
@@ -807,6 +807,8 @@ var App = React.createClass({
 
     __bindElementsEvents : function(){
         this.__bindOnClickButtonAddNew();
+        this.__checkInputNumber();
+        this.__sumBigovki();
     },
 
     __bindOnClickButtonAddNew: function () {
@@ -814,13 +816,40 @@ var App = React.createClass({
         $("#addNew").unbind().click(function () {
             context.__createProduct();
         });
-
+    },
+    
+    __sumBigovki : function () {
         $(".sumBigovki").change(function() {
+            var isEmpty = true;
             var total = 0;
-            $('.sumBigovki').each(function() {
+            $('.sumBigovki').each(function () {
                 total = total + Number($(this).val());
+                if ($.trim($(this).val()) !== '') {
+                    isEmpty = isEmpty && false;
+                }
             });
-            $('input#sizeWorkpieceWidth').val(total);
+            if(isEmpty === false) {
+                $('input#sizeWorkpieceWidth').prop("disabled", true);
+                $('input#sizeWorkpieceWidth').val(total);
+            }
+            else $('input#sizeWorkpieceWidth').prop("disabled", false);
+        });
+    },
+
+    __checkInputNumber : function () {
+        $(".numberInputCheck").keydown(function (event) {
+            if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+                if(event.keyCode === 48 || event.keyCode == 96){
+                    var isEmpty = this.value;
+                    if(isEmpty.length === 0){
+                        event.preventDefault();
+                    }
+                }
+                this.value = parseInt(this.value, 10);
+            }
+            else if (event.keyCode != 8 && event.keyCode != 46 && event.keyCode != 37 && event.keyCode != 39){
+                event.preventDefault();
+            }
         });
     },
 
