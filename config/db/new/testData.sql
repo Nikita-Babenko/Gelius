@@ -110,7 +110,7 @@ INSERT INTO workability (service_center, group_priority, element_priority) VALUE
     ('К. Р.', 70, NULL),
     ('БОИКС', 80, NULL),
     ('Перегородки', 90, NULL),
-    ('Упаковка', 10, NULL)
+  ('Упаковка', 100, NULL)
 ;
 
 

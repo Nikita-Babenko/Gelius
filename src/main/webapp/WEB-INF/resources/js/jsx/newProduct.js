@@ -39,8 +39,26 @@ product["numberLoadCar"] = '';
 product["palletRows"] = '';
 product["productionFormat"] = '';
 
+var productCenters = [
+    {id: 1, serviceCenter: "Тайванец", groupPriority: 10, elementPriority: 10},
+    {id: 2, serviceCenter: "Болгарец", groupPriority: 10, elementPriority: 20},
+    {id: 3, serviceCenter: "Сшивка ручная", groupPriority: 20, elementPriority: 10},
+    {id: 4, serviceCenter: "Сшивка автомат", groupPriority: 20, elementPriority: 20},
+    {id: 5, serviceCenter: "Склейка ручная", groupPriority: 30, elementPriority: 10},
+    {id: 6, serviceCenter: "Склейка 3 точки", groupPriority: 30, elementPriority: 20},
+    {id: 7, serviceCenter: "БОБСТ", groupPriority: 40, elementPriority: null},
+    {id: 8, serviceCenter: "Ротация", groupPriority: 50, elementPriority: null},
+    {id: 9, serviceCenter: "Тигель большой", groupPriority: 60, elementPriority: 10},
+    {id: 10, serviceCenter: "Тигель малый", groupPriority: 60, elementPriority: 20},
+    {id: 11, serviceCenter: "Ролевый", groupPriority: 60, elementPriority: 30},
+    {id: 12, serviceCenter: "К. Р.", groupPriority: 70, elementPriority: null},
+    {id: 13, serviceCenter: "БОИКС", groupPriority: 80, elementPriority: null},
+    {id: 14, serviceCenter: "Перегородки", groupPriority: 90, elementPriority: null},
+    {id: 15, serviceCenter: "Упаковка", groupPriority: 100, elementPriority: null}
+];
+
 var EVENTS = {
-    newProductNumberReceived: function(newProductNumber) {
+    newProductNumberReceived: function (newProductNumber) {
         $("#isNew").prop("checked", true);
         $('#productNumber').val(newProductNumber).prop("disabled", true);
     }
@@ -68,10 +86,10 @@ var newProductContainer = React.createClass({
 });
 
 var HeaderTitleInput = React.createClass({
-    getInitialState: function() {
-        return { isNewProduct: true, productNumberForNewProduct: "", currentProductNumber: ""  }
+    getInitialState: function () {
+        return {isNewProduct: true, productNumberForNewProduct: "", currentProductNumber: ""}
     },
-    __changeCheckbox: function(e) {
+    __changeCheckbox: function (e) {
         var isNewProduct = e.target.checked;
         var value;
         this.setState({isNewProduct: isNewProduct});
@@ -81,15 +99,15 @@ var HeaderTitleInput = React.createClass({
         } else { //checkbox was unchecked
             value = "";
             if (this.state.productNumberForNewProduct == "") { //checkbox was unchecked first
-                this.setState({ productNumberForNewProduct: $("#productNumber").val() });
+                this.setState({productNumberForNewProduct: $("#productNumber").val()});
             }
         }
-        this.setState({ currentProductNumber: value });
+        this.setState({currentProductNumber: value});
     },
-    __changeText: function(e) {
-        this.setState({ currentProductNumber: e.target.value });
+    __changeText: function (e) {
+        this.setState({currentProductNumber: e.target.value});
     },
-    render: function() {
+    render: function () {
         var fieldDisabled = this.state.isNewProduct;
         return (
             <div className="header_title_input">
@@ -165,7 +183,7 @@ newProductContainer.newProductHeaderLeft = React.createClass({
 
                         <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Name">Название</label>
-                            <input type="text" className="form-control header_info_name" id="productName" />
+                            <input type="text" className="form-control header_info_name" id="productName"/>
                         </div>
 
 
@@ -212,6 +230,10 @@ newProductContainer.newProductHeaderRight = React.createClass({
 });
 
 newProductContainer.newProductBodyLeft = React.createClass({
+    showModal: function () {
+        $(ReactDOM.findDOMNode(this.refs.modal)).modal();
+    },
+
     render: function () {
         return (
             <div className="col-md-12 col-lg-5 left">
@@ -224,16 +246,21 @@ newProductContainer.newProductBodyLeft = React.createClass({
                             <p className="vertical_left_title">Продукция</p>
                         </td>
                         <td className="products_large_td">Размеры внутренние</td>
-                        <td className="products_small_td" ><input className="numberInputCheck" type="number" id="innerLength" min="0"/></td>
-                        <td className="products_large_td" ><input className="numberInputCheck" type="number" id="innerWidth" min="0"/></td>
-                        <td className="products_small_td" ><input className="numberInputCheck" type="number" id="innerHeight" min="0"/></td>
+                        <td className="products_small_td"><input className="numberInputCheck" type="number"
+                                                                 id="innerLength" min="0"/></td>
+                        <td className="products_large_td"><input className="numberInputCheck" type="number"
+                                                                 id="innerWidth" min="0"/></td>
+                        <td className="products_small_td"><input className="numberInputCheck" type="number"
+                                                                 id="innerHeight" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="products_large_td">S теор.</td>
-                        <td className="products_small_td" ><input  type="number" className="numberInputCheck" id="theoreticalSquare"/></td>
+                        <td className="products_small_td"><input type="number" className="numberInputCheck"
+                                                                 id="theoreticalSquare"/></td>
                         <td className="products_large_td">S факт.</td>
-                        <td className="products_small_td" ><input type="number" className="numberInputCheck" id="actualSquare"/></td>
+                        <td className="products_small_td"><input type="number" className="numberInputCheck"
+                                                                 id="actualSquare"/></td>
                     </tr>
 
                     <tr>
@@ -318,9 +345,9 @@ newProductContainer.newProductBodyLeft = React.createClass({
 
                     <tr>
                         <td colSpan="5" className="workability_textarea">
-                        <textarea>
-
+                        <textarea readOnly onClick={this.showModal}>
                         </textarea>
+                            <WorkCentersModal ref="modal"/>
                         </td>
                     </tr>
 
@@ -329,6 +356,111 @@ newProductContainer.newProductBodyLeft = React.createClass({
                 </table>
             </div>
         );
+    }
+});
+
+var WorkCentersModal = React.createClass({
+    render: function () {
+        return (
+            <div className="modal" id="work-centers-modal">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <WorkCentersModal.ModalBody />
+                        <WorkCentersModal.ModalFooter />
+                    </div>
+                </div>
+            </div>)
+    }
+});
+
+WorkCentersModal.ModalBody = React.createClass({
+    render: function () {
+        var group1 = [], group2 = [], group3 = [], group45 = [], group6 = [], group78910 = [];
+        productCenters.forEach(function (item) {
+            switch (item.groupPriority) {
+                case 10:
+                    group1.push(<WorkCenterItem item={item}/>);
+                    break;
+                case 20:
+                    group2.push(<WorkCenterItem item={item}/>);
+                    break;
+                case 30:
+                    group3.push(<WorkCenterItem item={item}/>);
+                    break;
+                case 40:
+                case 50:
+                    group45.push(<WorkCenterItem item={item}/>);
+                    break;
+                case 60:
+                    group6.push(<WorkCenterItem item={item}/>);
+                    break;
+                case 70:
+                case 80:
+                case 90:
+                case 100:
+                    group78910.push(<WorkCenterItem item={item}/>);
+                    break;
+                default :
+                    console.log("don't match any group priority");
+
+            }
+        });
+        return (
+            <div className="modal-body">
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="=row group">
+                            {group1}
+                        </div>
+                        <div className="=row group">
+                            {group2}
+                        </div>
+                        <div className="=row group">
+                            {group3}
+                        </div>
+                        <div className="=row ungrouped">
+                            {group45}
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="=row group">
+                            {group6}
+                        </div>
+                        <div className="=row ungrouped">
+                            {group78910}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
+
+var WorkCenterItem = React.createClass({
+    render: function () {
+        return (
+            <div className="row checkbox">
+                <label>
+                    <input type="checkbox"
+                           value={this.props.item.id}
+                           className="filter-checkbox"/>
+                    {this.props.item.serviceCenter}
+                </label>
+            </div>
+        );
+    }
+});
+
+WorkCentersModal.ModalFooter = React.createClass({
+    render: function () {
+        return (
+            <div className="modal-footer">
+                <div className="row text-center">
+                    <button type="button" className="btn modal-btn " data-dismiss="modal">Ok</button>
+                    <button type="button" className="btn modal-btn" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        )
     }
 });
 
@@ -349,8 +481,10 @@ newProductContainer.newProductBodyMiddle = React.createClass({
                         <td className="middle_products_large_td">Размеры заготовки</td>
                         <td className="middle_products_small_td">
                             <div className="inputs">
-                                <input type="number" className="input_1 numberInputCheck" id="sizeWorkpieceLength" min="0"/>
-                                <input type="number" className="input_2 numberInputCheck" id="sizeWorkpieceWidth" min="0"/>
+                                <input type="number" className="input_1 numberInputCheck" id="sizeWorkpieceLength"
+                                       min="0"/>
+                                <input type="number" className="input_2 numberInputCheck" id="sizeWorkpieceWidth"
+                                       min="0"/>
                             </div>
                         </td>
 
@@ -358,12 +492,15 @@ newProductContainer.newProductBodyMiddle = React.createClass({
 
                     <tr>
                         <td className="middle_products_large_td">Количество с листа</td>
-                        <td className="middle_products_small_td"><input type="number" className="numberInputCheck" id="numberFromSheet" min="0"/></td>
+                        <td className="middle_products_small_td"><input type="number" className="numberInputCheck"
+                                                                        id="numberFromSheet" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="middle_products_large_td">Формат заготовки</td>
-                        <td className="middle_products_small_td"><input required type="number" className="numberInputCheck" id="blankFormat" min="0"/></td>
+                        <td className="middle_products_small_td"><input required type="number"
+                                                                        className="numberInputCheck" id="blankFormat"
+                                                                        min="0"/></td>
                     </tr>
 
                     <tr>
@@ -394,13 +531,13 @@ newProductContainer.newProductBodyMiddle = React.createClass({
                     <tr>
                         <td colSpan="3" className="print_td">
                             <div className="print_input_1">
-                                <input type="text"  value="Название" disabled/>
+                                <input type="text" value="Название" disabled/>
                             </div>
                             <div className="print_input_2">
-                                <input type="text" className="numberInputCheck"  value="Цена" disabled/>
+                                <input type="text" className="numberInputCheck" value="Цена" disabled/>
                             </div>
                             <div className="print_input_3">
-                                <input type="text" className="numberInputCheck"  value="S запечатки" disabled/>
+                                <input type="text" className="numberInputCheck" value="S запечатки" disabled/>
                             </div>
                         </td>
                     </tr>
@@ -544,12 +681,14 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">В пачке, шт.</td>
-                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="numberInPack" min="0"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck"
+                                                             id="numberInPack" min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В транспортном пакете, шт.</td>
-                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="numberInTransportPackage" min="0"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck"
+                                                             id="numberInTransportPackage" min="0"/></td>
                     </tr>
 
                     <tr>
@@ -586,12 +725,14 @@ newProductContainer.newProductBodyRight = React.createClass({
 
                     <tr>
                         <td className="avto_large_td">Рядов на поддоне</td>
-                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="palletRows" min="0"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="palletRows"
+                                                             min="0"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="numberLoadCar" min="0"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck"
+                                                             id="numberLoadCar" min="0"/></td>
                     </tr>
 
                     <tr>
@@ -618,23 +759,28 @@ newProductContainer.newProductBodyRight = React.createClass({
                     <tr>
                         <td colSpan="3" className="bigovki_all">
                             <div className="bigovki_inputs_1">
-                                <input type="number" className="bigovki_1 bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
+                                <input type="number" className="bigovki_1 bigovki_input_1 sumBigovki numberInputCheck"
+                                       min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_2">
-                                <input type="number" className="bigovki_2 bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
+                                <input type="number" className="bigovki_2 bigovki_input_1 sumBigovki numberInputCheck"
+                                       min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_3">
-                                <input type="number" className="bigovki_3 bigovki_input_3 sumBigovki numberInputCheck" min="0"/>
-                                <input type="number" className="bigovki_4 bigovki_input_4 sumBigovki numberInputCheck" min="0"/>
+                                <input type="number" className="bigovki_3 bigovki_input_3 sumBigovki numberInputCheck"
+                                       min="0"/>
+                                <input type="number" className="bigovki_4 bigovki_input_4 sumBigovki numberInputCheck"
+                                       min="0"/>
                             </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                        <td className="avto_small_td"><input type="number" className="numberInputCheck" id="productionFormat" min="0"/></td>
+                        <td className="avto_small_td"><input type="number" className="numberInputCheck"
+                                                             id="productionFormat" min="0"/></td>
                     </tr>
 
                     <tr>
@@ -723,7 +869,7 @@ var App = React.createClass({
                 if (!response) {
                     console.log("Empty response on '/products/newProduct/initData'");
                     return;
-                };
+                }
 
                 if (!response["data"]) {
                     console.log("Empty 'data' in response on '/products/newProduct/initData'");
@@ -737,7 +883,7 @@ var App = React.createClass({
                     this.__setAllDictionaries();
                 } else {
                     console.log("Empty 'dictionaries' in response on '/products/newProduct/initData'");
-                };
+                }
 
                 if (response["data"]["productNumber"]) {
                     this.__setProductNumber(response.data.productNumber);
@@ -752,7 +898,7 @@ var App = React.createClass({
         });
     },
 
-    __setProductNumber: function(productNUmber) {
+    __setProductNumber: function (productNUmber) {
         EVENTS.newProductNumberReceived(productNUmber);
     },
 
@@ -805,7 +951,7 @@ var App = React.createClass({
     },
 
 
-    __bindElementsEvents : function(){
+    __bindElementsEvents: function () {
         this.__bindOnClickButtonAddNew();
         this.__checkInputNumber();
         this.__sumBigovki();
@@ -817,9 +963,9 @@ var App = React.createClass({
             context.__createProduct();
         });
     },
-    
-    __sumBigovki : function () {
-        $(".sumBigovki").change(function() {
+
+    __sumBigovki: function () {
+        $(".sumBigovki").change(function () {
             var isEmpty = true;
             var total = 0;
             $('.sumBigovki').each(function () {
@@ -828,7 +974,7 @@ var App = React.createClass({
                     isEmpty = isEmpty && false;
                 }
             });
-            if(isEmpty === false) {
+            if (isEmpty === false) {
                 $('input#sizeWorkpieceWidth').prop("disabled", true);
                 $('input#sizeWorkpieceWidth').val(total);
             }
@@ -836,25 +982,25 @@ var App = React.createClass({
         });
     },
 
-    __checkInputNumber : function () {
+    __checkInputNumber: function () {
         $(".numberInputCheck").keydown(function (event) {
             if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
-                if(event.keyCode === 48 || event.keyCode == 96){
+                if (event.keyCode === 48 || event.keyCode == 96) {
                     var isEmpty = this.value;
-                    if(isEmpty.length === 0){
+                    if (isEmpty.length === 0) {
                         event.preventDefault();
                     }
                 }
                 this.value = parseInt(this.value, 10);
             }
-            else if (event.keyCode != 8 && event.keyCode != 46 && event.keyCode != 37 && event.keyCode != 39){
+            else if (event.keyCode != 8 && event.keyCode != 46 && event.keyCode != 37 && event.keyCode != 39) {
                 event.preventDefault();
             }
         });
     },
 
-    __createProduct : function () {
-        if(this.__validationBlankFormat() === false){
+    __createProduct: function () {
+        if (this.__validationBlankFormat() === false) {
             return;
         }
         product["isNew"] = $('#isNew').is(":checked");
@@ -899,7 +1045,7 @@ var App = React.createClass({
         this.__loadDataToServer();
     },
 
-    __validationBlankFormat : function(){
+    __validationBlankFormat: function () {
         var value = $.trim($("#blankFormat").val());
         if (value.length === 0) {
             alert("Формат заготовки не может быть пуст");
@@ -907,7 +1053,7 @@ var App = React.createClass({
         }
     },
 
-    __loadDataToServer : function(){
+    __loadDataToServer: function () {
         $.ajax({
             type: 'POST',
             url: '/products/newProduct/create',

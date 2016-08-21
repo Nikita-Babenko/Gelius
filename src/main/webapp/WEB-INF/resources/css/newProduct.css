@@ -1,6 +1,6 @@
-*{
+* {
     font-style: normal;
-    font-family: Calibri;
+    font-family: sans-serif, Calibri;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -11,48 +11,47 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-
-.green_color{
+.green_color {
     background-color: #B6D7A8;
 }
 
-#productHeader{
+#productHeader {
     margin-bottom: 10px;
 }
 
 /*Header left*/
-.header_top{
+.header_top {
     margin-bottom: 30px;
     padding-right: 0;
 }
 
-.header_down{
+.header_down {
     padding-right: 0;
 }
 
-.header_left{
+.header_left {
     display: inline-block;
     padding-right: 0;
 }
 
-.header_buttons{
+.header_buttons {
     display: block;
     padding-left: 0;
     padding-right: 0;
 }
 
-.header_buttons > button{
+.header_buttons > button {
     display: inline-block;
     margin-bottom: 5px;
     margin-top: 10px;
     margin-left: 5px !important;
 }
 
-.header_buttons > button > a{
+.header_buttons > button > a {
     display: block;
 }
 
-.header_title{
+.header_title {
     display: block;
     padding-left: 0;
     margin-right: 0;
@@ -60,13 +59,13 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 10px;
 }
 
-.header_title_text{
+.header_title_text {
     display: inline-block;
     padding-left: 0;
     padding-right: 10px;
 }
 
-.header_title_text > p{
+.header_title_text > p {
     vertical-align: middle;
     font-size: 24px;
     padding: 0;
@@ -78,13 +77,13 @@ input[type=number]::-webkit-outer-spin-button {
     display: inline-block;
 }
 
-.header_title_input > input{
+.header_title_input > input {
     display: inline-block;
     font-size: 24px;
     width: 150px;
 }
 
-.header_title_input > .isNew{
+.header_title_input > .isNew {
     display: inline-block;
     vertical-align: middle;
     margin-top: 5px !important;
@@ -92,7 +91,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 16px;
 }
 
-.header_title_input > .isNew > input{
+.header_title_input > .isNew > input {
     display: inline-block;
     vertical-align: middle !important;
     margin: 0 0 3px 0 !important;
@@ -101,34 +100,33 @@ input[type=number]::-webkit-outer-spin-button {
     width: 17px;
 }
 
-.header_title_input > .isNew > p{
+.header_title_input > .isNew > p {
     padding-left: 3px !important;
     display: inline-block;
     margin: 0 !important;
 }
 
-
-.header_info > .form-group{
+.header_info > .form-group {
     padding-left: 0;
     padding-right: 0;
     margin-bottom: 8px;
 }
 
-.header_info > .form-group > label{
+.header_info > .form-group > label {
     font-size: 18px;
     padding-right: 10px;
     display: inline-block;
     font-weight: normal;
 }
 
-.header_info_customer, .header_info_name{
+.header_info_customer, .header_info_name {
     font-size: 18px;
     display: inline-block;
     width: 70% !important;
     padding: 0 0 0 3px !important;
 }
 
-.header_info_type{
+.header_info_type {
     padding: 0 0 0 3px !important;
     font-size: 18px;
     display: inline-block;
@@ -136,7 +134,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /*Header right*/
-.header_right{
+.header_right {
     float: right;
     margin-top: 10px;
     padding-right: 10px;
@@ -145,69 +143,68 @@ input[type=number]::-webkit-outer-spin-button {
     padding-left: 0;
 }
 
-.create{
+.create {
     padding-right: 5px;
     float: right;
 }
 
-
-.create > input{
+.create > input {
     width: 180px !important;
     font-size: 16px !important;
 }
 
-.create > p{
+.create > p {
     display: inline-block;
     margin: 0 0 2px 0;
     padding-right: 5px;
     vertical-align: middle;
 }
 
-.update{
+.update {
     padding-right: 5px;
     float: right;
 }
 
-.update > p{
+.update > p {
     margin: 0 0 2px 0;
     display: inline-block;
     padding-right: 5px;
     vertical-align: middle;
 }
 
-.update > input{
+.update > input {
     width: 180px !important;
     font-size: 16px !important;
 }
 
-.do{
+.do {
     padding-right: 5px;
     float: right;
 }
 
-.do > p{
+.do > p {
     margin: 0 0 2px 0;
     display: inline-block;
     padding-right: 5px;
     vertical-align: middle;
 }
 
-.do > input{
+.do > input {
     padding: 0 0 0 7px !important;
     width: 180px !important;
     font-size: 16px !important;
 }
 
-.header_right > .form-group{
+.header_right > .form-group {
     margin-bottom: 2px;
 }
 
-.use{
+.use {
     padding-right: 10px;
     float: right;
 }
 
-.use > p{
+.use > p {
     display: inline-block;
     padding-left: 3px !important;
     font-size: 16px !important;
@@ -216,30 +213,28 @@ input[type=number]::-webkit-outer-spin-button {
     vertical-align: middle;
 }
 
-.header_righ_checkbox{
+.header_righ_checkbox {
     width: 17px;
     height: 17px;
 }
 
-
 /*Main info about tables*/
 
-.left{
+.left {
     margin-bottom: 10px;
     padding-right: 5px;
 }
 
-.middle{
+.middle {
     padding-right: 5px;
     margin-bottom: 10px;
     padding-left: 5px;
 }
 
-.right{
+.right {
     margin-bottom: 10px;
     padding-left: 15px;
 }
-
 
 /*
     LeftTable
@@ -248,7 +243,7 @@ input[type=number]::-webkit-outer-spin-button {
 .left_table > tbody > tr > .left_title {
     width: 5%;
     border: 1px solid black !important;
-    padding : 5px 0 0 0 !important;
+    padding: 5px 0 0 0 !important;
     text-align: center;
 }
 
@@ -260,33 +255,33 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: bold;
 }
 
-.left_table > tbody > tr > .products_large_td{
+.left_table > tbody > tr > .products_large_td {
     width: 30% !important;
     position: relative;
-    overflow:hidden;
+    overflow: hidden;
     max-height: 20px !important;
     height: 20px !important;
-    padding : 0 0 0 3px !important;
+    padding: 0 0 0 3px !important;
     text-align: left;
     font-size: 16px;
     vertical-align: middle;
     border: 1px solid black;
 }
 
-.left_table > tbody > tr > .products_small_td{
+.left_table > tbody > tr > .products_small_td {
     width: 18% !important;
     position: relative;
-    overflow:hidden;
+    overflow: hidden;
     max-height: 20px !important;
     height: 20px !important;
-    padding : 0 0 0 3px !important;
+    padding: 0 0 0 3px !important;
     text-align: center;
     font-size: 16px;
     vertical-align: middle;
     border: 1px solid black;
 }
 
-.left_table > tbody > tr > td > input, .left_table > tbody > tr > td > select{
+.left_table > tbody > tr > td > input, .left_table > tbody > tr > td > select {
     position: absolute;
     text-align: center;
     font-size: 16px;
@@ -294,13 +289,13 @@ input[type=number]::-webkit-outer-spin-button {
     right: 0;
     width: 100%;
     height: 100%;
-    border-radius:0;
-    border:0;
+    border-radius: 0;
+    border: 0;
     outline: none;
     background-color: white;
 }
 
-.left_table > tbody > tr > .material{
+.left_table > tbody > tr > .material {
     position: relative;
     max-height: 80px !important;
     height: 80px !important;
@@ -310,13 +305,13 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 0;
 }
 
-.material > textarea{
+.material > textarea {
     position: absolute;
     height: 100%;
     width: 100%;
     padding: 0 5px 0 5px !important;
     margin: 0;
-    border-radius:0;
+    border-radius: 0;
     border: 0;
     background-color: white;
     font-size: 16px;
@@ -324,7 +319,7 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 
-.left_table > tbody > tr > .special_conditions, .left_table > tbody > tr > .workability{
+.left_table > tbody > tr > .special_conditions, .left_table > tbody > tr > .workability {
     font-size: 16px;
     padding: 0 0 0 10px !important;
     margin: 0;
@@ -333,12 +328,12 @@ input[type=number]::-webkit-outer-spin-button {
     vertical-align: middle;
 }
 
-.left_table > tbody > tr > .special_conditions > p, .left_table > tbody > tr > .workability > p{
+.left_table > tbody > tr > .special_conditions > p, .left_table > tbody > tr > .workability > p {
     margin: 0;
     font-weight: bold;
 }
 
-.special_conditions_textarea{
+.special_conditions_textarea {
     position: relative;
     max-height: 65px !important;
     height: 65px !important;
@@ -348,7 +343,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 0 !important;
 }
 
-.workability_textarea{
+.workability_textarea {
     position: relative;
     max-height: 80px !important;
     height: 80px !important;
@@ -358,13 +353,13 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid black !important;
 }
 
-.special_conditions_textarea > textarea, .workability_textarea > textarea{
+.special_conditions_textarea > textarea, .workability_textarea > textarea {
     position: absolute;
     padding: 0 5px 0 5px !important;
     height: 100%;
     width: 100%;
     margin: 0;
-    border-radius:0;
+    border-radius: 0;
     border: 0;
     background-color: white;
     font-size: 16px;
@@ -372,18 +367,17 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 
-
 /*
     Middle table
 */
 .middle_table > tbody > tr > .middle_left_title {
     width: 5%;
     border: 1px solid black !important;
-    padding : 15px 0 0 0 !important;
+    padding: 15px 0 0 0 !important;
     text-align: center;
 }
 
-.middle_table > tbody > tr > .middle_products_large_td{
+.middle_table > tbody > tr > .middle_products_large_td {
     max-height: 20px !important;
     height: 20px !important;
     text-align: left;
@@ -391,12 +385,12 @@ input[type=number]::-webkit-outer-spin-button {
     width: 60%;
     padding: 0 0 0 10px;
     position: relative;
-    overflow:hidden;
+    overflow: hidden;
     font-size: 16px;
     border: 1px solid black;
 }
 
-.middle_table > tbody > tr >.middle_products_small_td{
+.middle_table > tbody > tr > .middle_products_small_td {
     max-height: 20px !important;
     height: 20px !important;
     text-align: left;
@@ -404,12 +398,12 @@ input[type=number]::-webkit-outer-spin-button {
     width: 35%;
     padding: 0 0 0 10px;
     position: relative;
-    overflow:hidden;
+    overflow: hidden;
     font-size: 16px;
     border: 1px solid black;
 }
 
-.middle_table > tbody > tr > td > input, .middle_table > tbody > tr > td > select{
+.middle_table > tbody > tr > td > input, .middle_table > tbody > tr > td > select {
     position: absolute;
     text-align: center;
     font-size: 16px;
@@ -418,14 +412,14 @@ input[type=number]::-webkit-outer-spin-button {
     height: 100%;
     width: 100%;
     padding: 0;
-    margin:0;
-    border-radius:0;
-    border:0;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
     outline: none;
     background-color: white;
 }
 
-.middle_table > tbody > tr > .print_td{
+.middle_table > tbody > tr > .print_td {
     height: 20px;
     width: 100%;
     padding: 0 !important;
@@ -433,20 +427,20 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .middle_table > tbody > tr > .print_td > .print_input_1,
-.middle_table > tbody > tr > .print_td > .print_input_2{
+.middle_table > tbody > tr > .print_td > .print_input_2 {
     float: left;
     height: 100%;
     width: 30%;
 }
 
-.middle_table > tbody > tr > .print_td > .print_input_3{
+.middle_table > tbody > tr > .print_td > .print_input_3 {
     float: left;
     height: 100%;
     width: 40%;
 }
 
 .middle_table > tbody > tr > .print_td > .print_input_1 > input,
-.middle_table > tbody > tr > .print_td > .print_input_2 > input{
+.middle_table > tbody > tr > .print_td > .print_input_2 > input {
     float: left;
     height: 100%;
     width: 100%;
@@ -457,11 +451,11 @@ input[type=number]::-webkit-outer-spin-button {
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-.middle_table > tbody > tr > .print_td > .print_input_3 > input{
+.middle_table > tbody > tr > .print_td > .print_input_3 > input {
     float: left;
     height: 100%;
     width: 100%;
@@ -469,11 +463,11 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
     border: 0;
     background: white;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-.middle_table > tbody > tr > .notes{
+.middle_table > tbody > tr > .notes {
     font-size: 16px;
     padding: 0 0 0 0 !important;
     margin: 0;
@@ -482,50 +476,49 @@ input[type=number]::-webkit-outer-spin-button {
     vertical-align: middle;
 }
 
-.middle_table > tbody > tr > .notes > p{
+.middle_table > tbody > tr > .notes > p {
     margin: 0;
     font-weight: bold;
 }
 
-.middle_table > tbody > tr > .notes_all{
+.middle_table > tbody > tr > .notes_all {
     height: 20px;
     position: relative;
     padding: 0 !important;
     border: 1px solid black;
 }
 
-.middle_table > tbody > tr > .notes_all  > .notes_inputs > .note_input_1 {
+.middle_table > tbody > tr > .notes_all > .notes_inputs > .note_input_1 {
     float: left;
     height: 100%;
     width: 40%;
     text-align: center;
-    padding: 0!important;
+    padding: 0 !important;
     border-right: 1px solid black;
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-.middle_table > tbody > tr > .notes_all  > .notes_inputs > .note_input_2 {
+.middle_table > tbody > tr > .notes_all > .notes_inputs > .note_input_2 {
     float: left;
     height: 100%;
-    padding: 0!important;
+    padding: 0 !important;
     width: 60%;
     text-align: center;
     border: 0;
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-
 /* Right table */
 
-.right_table{
+.right_table {
     border-collapse: collapse;
     margin-bottom: 5px;
 }
@@ -533,11 +526,11 @@ input[type=number]::-webkit-outer-spin-button {
 .avto_left_title {
     width: 6%;
     border: 1px solid black !important;
-    padding : 50px 0 0 0 !important;
+    padding: 50px 0 0 0 !important;
     text-align: center;
 }
 
-.right_table > tbody > tr > .avto_large_td{
+.right_table > tbody > tr > .avto_large_td {
     max-height: 20px !important;
     height: 20px !important;
     text-align: left;
@@ -545,12 +538,12 @@ input[type=number]::-webkit-outer-spin-button {
     width: 59%;
     padding: 0 0 0 10px;
     position: relative;
-    overflow:hidden;
+    overflow: hidden;
     font-size: 16px;
     border: 1px solid black;
 }
 
-.right_table > tbody > tr > .avto_small_td{
+.right_table > tbody > tr > .avto_small_td {
     max-height: 20px !important;
     height: 20px !important;
     text-align: left;
@@ -558,7 +551,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 35%;
     padding: 0 0 0 10px;
     position: relative;
-    overflow:hidden;
+    overflow: hidden;
     font-size: 16px;
     border: 1px solid black;
 }
@@ -571,54 +564,54 @@ input[type=number]::-webkit-outer-spin-button {
     height: 100%;
     width: 100%;
     padding: 0;
-    margin:0;
-    border:0;
-    border-radius:0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
     background-color: white;
     outline: none;
 }
 
-.inputs{
+.inputs {
     position: absolute;
     top: 0;
     right: 0;
     height: 100%;
     width: 100%;
     padding: 0;
-    margin:0;
-    border:0;
-    border-radius:0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
     background-color: white;
     outline: none;
 }
 
-.inputs > .input_1{
-     float:left;
-     text-align: center;
-     width: 50%;
-     height: 100%;
-     border-right: 1px solid;
-     border-left: 0;
-     border-top: 0;
-     border-bottom: 0;
-     border-radius:0;
-     outline: none;
- }
+.inputs > .input_1 {
+    float: left;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    outline: none;
+}
 
-.inputs > .input_2{
-    float:left;
+.inputs > .input_2 {
+    float: left;
     text-align: center;
     width: 50%;
     height: 100%;
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     background-color: white;
     outline: none;
 }
 
-.right_table > tbody > tr > td > .embeded_input{
+.right_table > tbody > tr > td > .embeded_input {
     position: absolute;
     top: 0;
     right: 0;
@@ -626,7 +619,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 30%;
     height: 100%;
     border-left: 1px solid !important;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
@@ -637,23 +630,23 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 0 0 0 0;
 }
 
-.attachments > .buttons{
+.attachments > .buttons {
     position: absolute;
     top: 0;
     right: 10px;
 }
 
-.attachments > .buttons > a{
+.attachments > .buttons > a {
     height: 32px;
     margin-left: 5px;
     width: 32px;
 }
 
-.attachments > .links{
+.attachments > .links {
     padding: 15px 0 10px 10px;
 }
 
-.right_table > tbody > tr > .right_table_title{
+.right_table > tbody > tr > .right_table_title {
     font-size: 16px;
     margin: 0;
     padding: 0 0 0 0 !important;
@@ -675,45 +668,45 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: green;
 }
 
-.rightTable > tbody > tr > .buttonContainer > .buttonBig > a{
-    text-decoration:none;
+.rightTable > tbody > tr > .buttonContainer > .buttonBig > a {
+    text-decoration: none;
 }
 
 /* Bigovki right_table */
 
-.bigovki_all{
+.bigovki_all {
     height: 20px;
     position: relative;
     padding: 0 !important;
     border: 1px solid black;
 }
 
-.bigovki_all > .bigovki_inputs_1{
-     float: left;
-     height: 100%;
-     width: 32%;
- }
-
-.bigovki_all  > .bigovki_inputs_1{
+.bigovki_all > .bigovki_inputs_1 {
     float: left;
     height: 100%;
     width: 32%;
 }
 
-.bigovki_all  > .bigovki_inputs_2{
+.bigovki_all > .bigovki_inputs_1 {
+    float: left;
+    height: 100%;
+    width: 32%;
+}
+
+.bigovki_all > .bigovki_inputs_2 {
     float: left;
     height: 100%;
     width: 33.3%;
 }
 
-.bigovki_all  > .bigovki_inputs_3{
+.bigovki_all > .bigovki_inputs_3 {
     float: left;
     height: 100%;
     width: 34.7%;
 }
 
-.bigovki_all > .bigovki_inputs_1 > .bigovki_input_1, .bigovki_all  > .bigovki_inputs_2 > .bigovki_input_1{
-    float:left;
+.bigovki_all > .bigovki_inputs_1 > .bigovki_input_1, .bigovki_all > .bigovki_inputs_2 > .bigovki_input_1 {
+    float: left;
     text-align: center;
     width: 70%;
     height: 100%;
@@ -721,12 +714,12 @@ input[type=number]::-webkit-outer-spin-button {
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-.bigovki_all  > .bigovki_inputs_1 > .bigovki_input_2, .bigovki_all > .bigovki_inputs_2 > .bigovki_input_2{
-    float:left;
+.bigovki_all > .bigovki_inputs_1 > .bigovki_input_2, .bigovki_all > .bigovki_inputs_2 > .bigovki_input_2 {
+    float: left;
     text-align: center;
     width: 30%;
     height: 100%;
@@ -735,12 +728,12 @@ input[type=number]::-webkit-outer-spin-button {
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-.bigovki_all > .bigovki_inputs_3 > .bigovki_input_3{
-    float:left;
+.bigovki_all > .bigovki_inputs_3 > .bigovki_input_3 {
+    float: left;
     text-align: center;
     width: 50%;
     height: 100%;
@@ -748,35 +741,35 @@ input[type=number]::-webkit-outer-spin-button {
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-.bigovki_all > .bigovki_inputs_3 > .bigovki_input_4{
-    float:left;
+.bigovki_all > .bigovki_inputs_3 > .bigovki_input_4 {
+    float: left;
     text-align: center;
     width: 50%;
     height: 100%;
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
 /* Prosechki right_table */
 
-.prosechki_all{
+.prosechki_all {
     height: 20px;
     position: relative;
     padding: 0 !important;
     border: 1px solid black;
 }
 
-.prosechki_all  > .prosechki_inputs > .prosechki_input_1,
-.prosechki_all  > .prosechki_inputs > .prosechki_input_2,
-.prosechki_all  > .prosechki_inputs > .prosechki_input_3,
-.prosechki_all  > .prosechki_inputs > .prosechki_input_4{
+.prosechki_all > .prosechki_inputs > .prosechki_input_1,
+.prosechki_all > .prosechki_inputs > .prosechki_input_2,
+.prosechki_all > .prosechki_inputs > .prosechki_input_3,
+.prosechki_all > .prosechki_inputs > .prosechki_input_4 {
     float: left;
     height: 100%;
     width: 20%;
@@ -787,11 +780,11 @@ input[type=number]::-webkit-outer-spin-button {
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
-.prosechki_all  > .prosechki_inputs > .prosechki_input_5{
+.prosechki_all > .prosechki_inputs > .prosechki_input_5 {
     float: left;
     height: 100%;
     text-align: center;
@@ -799,7 +792,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 20%;
     border: 0;
     background: white;
-    border-radius:0;
+    border-radius: 0;
     outline: none;
 }
 
@@ -811,14 +804,14 @@ input[type=number]::-webkit-outer-spin-button {
     border: 0 !important;
 }
 
-.buttons{
+.buttons {
     padding-top: 5px;
     position: absolute;
     right: 10px;
 }
 
-.buttons > a{
-    text-decoration:none;
+.buttons > a {
+    text-decoration: none;
     border: 1px solid green;
     text-align: center;
     vertical-align: middle;
@@ -828,15 +821,14 @@ input[type=number]::-webkit-outer-spin-button {
     color: green;
 }
 
-.buttons_bottom{
+.buttons_bottom {
     padding-top: 5px;
     position: absolute;
     right: 0;
 }
 
-
-.buttons_bottom > a{
-    text-decoration:none;
+.buttons_bottom > a {
+    text-decoration: none;
     border: 1px solid green !important;
     text-align: center;
     vertical-align: middle;
@@ -845,4 +837,30 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     border-radius: 4px;
     color: green;
+}
+
+.group {
+    padding-left: 20px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-color: #B6D7A8;
+}
+
+.ungrouped {
+    padding-left: 22px;
+}
+
+.modal-btn {
+    color: #222222;
+    background-color: #B6D7A8;
+}
+
+#work-centers-modal .modal-dialog {
+    width: 35%;
+    top: 100px;
+    right: 28%;
+}
+
+#work-centers-modal .modal-content {
+    background-color: #fafafa;
 }
