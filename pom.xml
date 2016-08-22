@@ -252,6 +252,7 @@
 
         <finalName>gelius</finalName>
         <defaultGoal>package</defaultGoal>
+        <testSourceDirectory>src/test/</testSourceDirectory>
 
         <plugins>
             <plugin>

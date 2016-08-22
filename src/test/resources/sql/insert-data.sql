@@ -1,6 +1,8 @@
-INSERT INTO client (company_name, phone_number) VALUES ('ABK', '+38050-355-62-78');
+INSERT INTO client (company_name, phone_number) VALUES ('АВК', '+38050-355-62-78');
 INSERT INTO client (company_name, phone_number) VALUES ('Lasunka', '+38066-355-62-78');
 INSERT INTO client (company_name, phone_number) VALUES ('Petruschenko', '+38067-355-62-78');
+INSERT INTO client (company_name, phone_number) VALUES ('Ласунка', '+38066-355-62-78');
+INSERT INTO client (company_name, phone_number) VALUES ('Петрушенко', '+38066-355-62-78');
 
 
 INSERT INTO product_type (product_type) VALUES ('Box (4 flaps)');
@@ -135,17 +137,15 @@ INSERT INTO pallet_placement (pallet_placement) VALUES ('5 пачек в ряд�
 INSERT INTO pallet_placement (pallet_placement) VALUES ('6 пачек в ряду');
 INSERT INTO pallet_placement (pallet_placement) VALUES ('8 пачек в ряду');
 
-INSERT INTO product (product_number, isNew, product_type_id, inner_height,
-                     inner_length, inner_width, cardboard_brand_id, client_id,
-                     face_layer_id, inner_layer_id, profile_id, cliche, blank_format)
+INSERT INTO product (product_number, isNew, product_name, client_id, blank_format, inner_width, inner_height, inner_length, cardboard_brand_id)
 VALUES
-  (1, true, 4, 340, 220, 410, 11, 2, 1, 2, 6, 'Lasunka', 4),
-  (2, true, 5, 350, 210, 450, 4, 3, 2, 1, 3, 'Petruschenko', 5),
-  (1800, false, 1, 310, 350, 210, 2, 2, 4, 3, 3, 'Lasunka', 7),
-  (1645, false, 1, 310, 360, 210, 7, 1, 5, 2, 4, 'AVK', 8),
-  (19, false, 1, 310, 360, 210, 7, 1, 5, 2, 4, 'АВК', 8),
-  (3, true, 3, 310, 350, 210, 7, 2, 1, 5, 2, 'Ласунка', 9),
-  (4, true, 15, 310, 350, 210, 3, 3, 1, 5, 2, 'ABK', 9);
+  (1, true, 'Product 1',2, 12, 200, 50, 140, 1),
+  (1, false, 'Product 2',2, 15, 100, 75, 188, 1),
+  (567, false,'Product 3', 1, 45, 324, 44, 124, 2),
+  (14, true,'Product 4', 4, 8, 200, 89, 255,3),
+  (45, false,'Product 5', 4, 8, 415, 30, 90,4),
+  (2, false, 'Product 6',2, 9, 200, 46, 145,5),
+  (34, false,'Product 7', 3, 9, 200, 66, 167, 4);
 
 
 COMMIT;
