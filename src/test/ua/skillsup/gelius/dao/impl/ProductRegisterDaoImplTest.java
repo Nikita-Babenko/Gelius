@@ -234,16 +234,4 @@ public class ProductRegisterDaoImplTest {
         assertEquals("Find Products with different width, lenghts and clients", byFilter.size(), 1);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
