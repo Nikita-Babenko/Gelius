@@ -27,7 +27,7 @@ public class ValidationServiceImpl<T> implements ValidationService<T> {
     public List<String> validation(T element) {
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(element);
         List<String> errorList = new ArrayList<>(constraintViolations.size());
-        if (constraintViolations.size() != 0) {
+        if (!constraintViolations.isEmpty()) {
             for (ConstraintViolation<T> violation : constraintViolations) {
                 errorList.add( violation.getMessage() );
             }
