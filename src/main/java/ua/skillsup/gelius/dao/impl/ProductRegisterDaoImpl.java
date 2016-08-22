@@ -10,17 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductRegisterDao;
-import ua.skillsup.gelius.model.convert.ProductRegisterConvert;
+import ua.skillsup.gelius.dao.entity.ProductRegister;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
-import ua.skillsup.gelius.model.entity.ProductRegister;
+import ua.skillsup.gelius.util.convert.ProductRegisterConvert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ua.skillsup.gelius.model.convert.ProductRegisterConvert.convert;
+import static ua.skillsup.gelius.util.convert.ProductRegisterConvert.convert;
 
 
 @Repository

@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.model.convert.ProductConvert;
+import ua.skillsup.gelius.dao.entity.Product;
 import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.model.entity.Product;
+import ua.skillsup.gelius.util.convert.ProductConvert;
 
 import java.util.List;
 
-import static ua.skillsup.gelius.model.convert.ProductConvert.convert;
+import static ua.skillsup.gelius.util.convert.ProductConvert.convert;
 
 @Repository
 @Transactional
