@@ -46,8 +46,6 @@ public class ProductServiceImpl implements ProductService {
         product.setProductCreateDate(productCreateDate);
         product.setProductUpdateDate(productUpdateDate);
 
-        //TODO replace all empty strings for null-s?
-
         //Filling other DTO fields (LocalDates and vocabularies):
         ProductDto filledProduct = fillProductDto(product);
 
@@ -70,41 +68,41 @@ public class ProductServiceImpl implements ProductService {
     }
     
     private ProductDto fillProductDto(ProductDto product) {
-        if ( product.getClientId() != null ) {
-            product.setClient( new ClientDto(product.getClientId()) );
+        if ( product.getClient().getId() == 0 ) {
+            product.setClient(null);
         }
-        if ( product.getProductTypeId() != null ) {
-            product.setProductType( new ProductTypeDto(product.getProductTypeId()) );
+        if ( product.getProductType().getId() == 0 ) {
+            product.setProductType(null);
         }
-        if ( product.getFormatId() != null ) {
-            product.setFormat(new FormatDto(product.getFormatId()));
+        if ( product.getFormat().getId() == 0 ) {
+            product.setFormat(null);
         }
-        if ( product.getProfileId() != null ) {
-            product.setProfile( new ProfileDto(product.getProfileId()) );
+        if ( product.getProfile().getId() == 0 ) {
+            product.setProfile(null);
         }
-        if ( product.getCardboardBrandId() != null ) {
-            product.setCardboardBrand( new CardBoardBrandDto(product.getCardboardBrandId()) );
+        if ( product.getCardboardBrand().getId() == 0 ) {
+            product.setCardboardBrand(null);
         }
-        if ( product.getCelluloseLayerId() != null ) {
-            product.setCelluloseLayer( new CelluloseLayerDto(product.getCelluloseLayerId()) );
+        if ( product.getCelluloseLayer().getId() == 0 ) {
+            product.setCelluloseLayer(null);
         }
-        if ( product.getFaceLayerId() != null ) {
-            product.setFaceLayer( new FaceLayerDto(product.getFaceLayerId()) );
+        if ( product.getFaceLayer().getId() == 0 ) {
+            product.setFaceLayer(null);
         }
-        if ( product.getInnerLayerId() != null ) {
-            product.setInnerLayer( new InnerLayerDto(product.getInnerLayerId()) );
+        if ( product.getInnerLayer().getId() == 0 ) {
+            product.setInnerLayer(null);
         }
-        if ( product.getConnectionValveId() != null ) {
-            product.setConnectionValve( new ConnectionValveDto(product.getConnectionValveId()) );
+        if ( product.getConnectionValve().getId() == 0 ) {
+            product.setConnectionValve(null);
         }
-        if ( product.getPackingId() != null ) {
-            product.setPacking( new PackingDto(product.getPackingId()) );
+        if ( product.getPacking().getId() == 0 ) {
+            product.setPacking(null);
         }
-        if ( product.getPalletId() != null ) {
-            product.setPallet( new PalletDto(product.getPalletId()) );
+        if ( product.getPallet().getId() == 0 ) {
+            product.setPallet(null);
         }
-        if ( product.getPalletPlacementId() != null ) {
-            product.setPalletPlacement( new PalletPlacementDto(product.getPalletPlacementId()) );
+        if ( product.getPalletPlacement().getId() == 0 ) {
+            product.setPalletPlacement(null);
         }
 
         return product;
