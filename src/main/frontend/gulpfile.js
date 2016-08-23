@@ -25,6 +25,17 @@ gulp.task('compile', function(){
         .pipe(gulp.dest('../webapp/WEB-INF/resources/js'));
 });
 
+gulp.task('compile', function(){
+    browserify('./js/Product.js')
+        .transform(babelify)
+        .bundle()
+        .on('error', function(err){
+            console.log(chalk.bold.red(err));
+        })
+        .pipe(source('newProduct.js'))
+        .pipe(gulp.dest('../webapp/WEB-INF/resources/js'));
+});
+
 gulp.task('jest', function(){
     gulp.src('src/**/*-test.js')
         .pipe(jest({
