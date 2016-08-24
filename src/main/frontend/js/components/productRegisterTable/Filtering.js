@@ -32,7 +32,8 @@ class Filtering extends React.Component {
             filterData = filterData.filter(function (d) {
                 if (typeof d === 'number')
                     d = d + '';
-                return d.toLowerCase().match(searchString);
+                if (d !== null)
+                    return d.toLowerCase().match(searchString);
             });
         }
         var columnName = this.props.columnName;

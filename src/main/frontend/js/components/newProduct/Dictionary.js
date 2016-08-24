@@ -1,7 +1,6 @@
 import React from 'react';
 import DictionaryStore from '../../stores/DictionariesStore';
 import EventConstants from '../../constants/Events';
-import DictionaryOption from '../newProduct/DictionaryOption';
 
 class Dictionary extends React.Component {
     constructor(props) {
@@ -55,3 +54,16 @@ Dictionary.defaultProps = {
     style: ""
 };
 export default Dictionary;
+
+class DictionaryOption extends React.Component {
+    render() {
+        return (
+            <option value={this.props.id}>{this.props.text}</option>
+        );
+    }
+}
+
+DictionaryOption.propTypes = {
+    id: React.PropTypes.number.isRequired,
+    text: React.PropTypes.string.isRequired
+};

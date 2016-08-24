@@ -8,14 +8,6 @@ class DictionaryStore extends EventEmitter {
         this.allDictionaryParameters = {};
     }
 
-    onChange(listener, context) {
-        this.on(EventConstants.DICTIONARIES_CHANGE_EVENT, listener, context);
-    }
-
-    offChange(listener, context) {
-        this.removeListener(EventConstants.DICTIONARIES_CHANGE_EVENT, listener, context);
-    }
-
     emitChange() {
         this.emit(EventConstants.DICTIONARIES_CHANGE_EVENT);
     }

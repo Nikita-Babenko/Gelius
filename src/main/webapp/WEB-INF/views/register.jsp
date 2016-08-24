@@ -31,7 +31,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="col col-xs-1 ">
-                                <a class="btn btn-success text-left" onclick="window.location.href ='/products/newProduct'"><em class="fa fa-plus"></em></a>
+                                <a class="btn btn-success text-left" href="/products/newProduct"><em
+                                        class="fa fa-plus"></em></a>
                             </div>
                             <div class="col col-xs-1 text-left">
                                 <a class="btn btn-success text-left"><em class="fa fa-pencil"></em></a>

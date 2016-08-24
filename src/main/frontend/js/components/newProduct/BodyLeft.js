@@ -1,16 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dictionary from '../newProduct/Dictionary';
+import EventConstants from '../../constants/Events';
+import WorkCentersStore from '../../stores/WorkCentersStore';
 import WorkCenterModal from '../newProduct/WorkCenterModal';
+import Dictionary from '../newProduct/Dictionary';
 
 class BodyLeft extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            workabilityCenters: ""
+            workabilityCentersText: ""
         };
 
         this.__showWorkCentersModal = this.__showWorkCentersModal.bind(this);
+        this.__updateWorkabilityTextArea = this.__updateWorkabilityTextArea.bind(this);
+    }
+
+    componentWillMount() {
+        WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
+    }
+
+    componentWillUnmount() {
+        WorkCentersStore.removeListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
     }
 
     render() {
@@ -131,9 +142,8 @@ class BodyLeft extends React.Component {
 
                     <tr>
                         <td colSpan="5" className="workability_textarea">
-                        <textarea readOnly onClick={this.__showWorkCentersModal}>
-                            {this.state.workabilityCenters}
-                        </textarea>
+                            <textarea readOnly onClick={this.__showWorkCentersModal}
+                                      value={this.state.workabilityCentersText}/>
                             <WorkCenterModal ref="modal"/>
                         </td>
                     </tr>
@@ -143,6 +153,12 @@ class BodyLeft extends React.Component {
                 </table>
             </div>
         );
+    }
+
+    __updateWorkabilityTextArea() {
+        this.setState({
+            workabilityCentersText: WorkCentersStore.getSelectedCentersText()
+        });
     }
 
     __showWorkCentersModal() {

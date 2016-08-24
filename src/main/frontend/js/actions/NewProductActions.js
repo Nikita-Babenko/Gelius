@@ -88,7 +88,28 @@ var NewProductActions = {
 
             });
         }
+    },
+
+    addWorkCenter(center) {
+        Dispatcher.dispatch({
+            eventType: EventConstants.ADD_WORK_CENTER,
+            workCenter: center
+        });
+    },
+
+    deleteWorkCenter(center) {
+        Dispatcher.dispatch({
+            eventType: EventConstants.DELETE_WORK_CENTER,
+            workCenter: center
+        });
+    },
+
+    updateWorkabilityInfo() {
+        Dispatcher.dispatch({
+            eventType: EventConstants.UPDATE_WORKABILITY_INFO
+        });
     }
+
 
 };
 

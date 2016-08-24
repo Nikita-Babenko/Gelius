@@ -13,14 +13,6 @@ class ProductsTableStore extends EventEmitter {
         return this.products;
     }
 
-    onChange(listener, context) {
-        this.on(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT, listener, context);
-    }
-
-    offChange(listener, context) {
-        this.removeListener(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT, listener, context);
-    }
-
     emitChange() {
         this.emit(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT);
     }

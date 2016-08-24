@@ -14,14 +14,6 @@ class NewProductStore extends EventEmitter {
         this.showAlert = false;
     }
 
-    onChange(listener, context) {
-        this.on(EventConstants.NEW_PRODUCT_CHANGE_EVENT, listener, context);
-    }
-
-    offChange(listener, context) {
-        this.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, listener, context);
-    }
-
     emitChange() {
         this.emit(EventConstants.NEW_PRODUCT_CHANGE_EVENT);
     }

@@ -67,14 +67,6 @@ class FilteringSortingStore extends EventEmitter {
         return this.sortableColumns.previousSortableColumn;
     }
 
-    onChange(listener, context) {
-        this.on(EventConstants.FILTERING_SORTING_CHANGE_EVENT, listener, context);
-    }
-
-    offChange(listener, context) {
-        this.removeListener(EventConstants.FILTERING_SORTING_CHANGE_EVENT, listener, context);
-    }
-
     emitChange() {
         this.emit(EventConstants.FILTERING_SORTING_CHANGE_EVENT);
     }

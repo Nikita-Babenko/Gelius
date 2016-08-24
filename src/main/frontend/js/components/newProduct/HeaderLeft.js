@@ -9,30 +9,15 @@ class HeaderLeft extends React.Component {
                 <div className="col-md-12 header_top">
                     <div className="col-md-5 col-xs-10 col-sm-11  header_buttons">
 
-                        <button type="button" className="btn btn-success glyphicon glyphicon-chevron-left">
-                            <a href="#">
-                            </a>
-                        </button>
+                        <a href="/products/register" className="btn btn-success glyphicon glyphicon-chevron-left"></a>
 
-                        <button type="button" className="btn btn-success glyphicon glyphicon-pencil">
-                            <a href="#">
-                            </a>
-                        </button>
+                        <a href="#" className="btn btn-success glyphicon glyphicon-pencil"></a>
 
-                        <button type="button" className="btn btn-success glyphicon glyphicon-trash">
-                            <a href="#">
-                            </a>
-                        </button>
+                        <a href="#" className="btn btn-success glyphicon glyphicon-trash"></a>
 
-                        <button type="button" className="btn btn-success glyphicon glyphicon-file">
-                            <a href="#">
-                            </a>
-                        </button>
+                        <a href="#" className="btn btn-success glyphicon glyphicon-file"></a>
 
-                        <button type="button" className="btn btn-success glyphicon glyphicon glyphicon-user">
-                            <a href="#">
-                            </a>
-                        </button>
+                        <a href="#" className="btn btn-success glyphicon glyphicon glyphicon-user"></a>
 
                     </div>
 
