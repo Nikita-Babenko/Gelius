@@ -2,17 +2,17 @@ package ua.skillsup.gelius.model.dto.dictionary;
 
 import javax.validation.constraints.Size;
 
-public class CardBoardBrandDto {
+public class CardboardBrandDto {
 
     private Long id;
 
     @Size(max = 50)
     private String cardboardBrand;
 
-    public CardBoardBrandDto() {
+    public CardboardBrandDto() {
     }
 
-    public CardBoardBrandDto(Long id) {
+    public CardboardBrandDto(Long id) {
         this.id = id;
     }
 
@@ -34,7 +34,7 @@ public class CardBoardBrandDto {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CardBoardBrandDto{");
+        final StringBuilder sb = new StringBuilder("CardboardBrandDto{");
         sb.append("id=").append(id);
         sb.append(", cardboardBrand='").append(cardboardBrand).append('\'');
         sb.append('}');

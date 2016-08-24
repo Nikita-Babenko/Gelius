@@ -2,7 +2,6 @@ import Dispatcher from '../dispatcher/Dispatcher';
 import FilteringSortingStore from '../stores/FilteringSortingStore';
 import UrlConstants from '../constants/Url';
 import EventConstants from '../constants/Events';
-import $ from 'jquery';
 
 var FilteringSortingActions = {
 

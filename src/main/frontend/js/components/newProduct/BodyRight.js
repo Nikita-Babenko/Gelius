@@ -1,8 +1,10 @@
 import React from 'react';
+import Dictionary from '../newProduct/Dictionary';
+import NewProductActions from '../../actions/NewProductActions';
 
-class BodyRight extends React.Component{
-    render(){
-        return(
+class BodyRight extends React.Component {
+    render() {
+        return (
             <div className="col-md-12 col-lg-4 right">
 
                 <table border="1" className="table right_table">
@@ -15,9 +17,10 @@ class BodyRight extends React.Component{
                         </td>
                         <td className="avto_large_td">Способ упаковки</td>
                         <td className="avto_small_td">
-                            <select id="packing">
-
-                            </select>
+                            <Dictionary
+                                dictionaryName="packing"
+                                dictionaryTextName="packing"
+                            />
                         </td>
                     </tr>
 
@@ -47,18 +50,20 @@ class BodyRight extends React.Component{
                     <tr>
                         <td className="avto_large_td">Поддон</td>
                         <td className="avto_small_td">
-                            <select id="pallet">
-
-                            </select>
+                            <Dictionary
+                                dictionaryName="pallet"
+                                dictionaryTextName="pallet"
+                            />
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Размещение на поддоне</td>
                         <td className="avto_small_td">
-                            <select id="palletPlacement">
-
-                            </select>
+                            <Dictionary
+                                dictionaryName="palletPlacement"
+                                dictionaryTextName="palletPlacement"
+                            />
                         </td>
                     </tr>
 
@@ -141,7 +146,8 @@ class BodyRight extends React.Component{
                     <div className="buttons_bottom">
                         <a className="fa fa-pencil  fa-3x" href="#">
                         </a>
-                        <a className="fa fa-plus fa-3x" href="#" id="addNew">
+                        <a className="fa fa-plus fa-3x" href="#" id="addNew"
+                           onClick={this.__onAddNewProductButtonClick}>
                         </a>
                         <a className="fa fa-trash fa-3x" href="#">
                         </a>
@@ -150,6 +156,10 @@ class BodyRight extends React.Component{
 
             </div>
         );
+    }
+
+    __onAddNewProductButtonClick() {
+        NewProductActions.saveProduct();
     }
 }
 

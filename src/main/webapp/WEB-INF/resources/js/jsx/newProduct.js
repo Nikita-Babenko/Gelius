@@ -113,10 +113,12 @@ var HeaderTitleInput = React.createClass({
             <div className="header_title_input">
                 <input
                     type="text" className="form-control numberInputCheck" id="productNumber" contenteditable="false"
-                    value={this.state.currentProductNumber} onChange={this.__changeText} disabled={fieldDisabled}
+                    value={this.state.currentProductNumber} onChange={this.__changeText}
+                    disabled={this.state.isNewProduct}
                 />
                 <div className="isNew">
-                    <input type="checkbox" id="isNew" checked={this.isNewProduct} onChange={this.__changeCheckbox}/>
+                    <input type="checkbox" id="isNew" checked={this.state.isNewProduct}
+                           onChange={this.__changeCheckbox}/>
                     <p>Новая карта</p>
                 </div>
             </div>
@@ -230,8 +232,8 @@ newProductContainer.newProductHeaderRight = React.createClass({
 });
 
 newProductContainer.newProductBodyLeft = React.createClass({
-    showModal: function () {
-        $(ReactDOM.findDOMNode(this.refs.modal)).modal();
+    getInitialState: function () {
+        return {workabilityCenters: "Рабочие центры еще не выбраны"}
     },
 
     render: function () {
@@ -345,7 +347,8 @@ newProductContainer.newProductBodyLeft = React.createClass({
 
                     <tr>
                         <td colSpan="5" className="workability_textarea">
-                        <textarea readOnly onClick={this.showModal}>
+                        <textarea readOnly onClick={this.__showWorkCentersModal}>
+                            {this.state.workabilityCenters}
                         </textarea>
                             <WorkCentersModal ref="modal"/>
                         </td>
@@ -356,8 +359,23 @@ newProductContainer.newProductBodyLeft = React.createClass({
                 </table>
             </div>
         );
+    },
+    __showWorkCentersModal: function () {
+        $(ReactDOM.findDOMNode(this.refs.modal)).modal();
     }
+
 });
+
+function __generateTextForProducibilityArea() {
+    var text = "";
+    /*if (!selectedWorkCenters.group1) {
+     selectedWorkCenters.group1.forEach(function (item, index) {
+     console.log(index + " - " + item.serviceCenter);
+     })
+     }*/
+    console.log("__generateTextForProducibilityArea");
+
+}
 
 var WorkCentersModal = React.createClass({
     render: function () {
@@ -437,30 +455,92 @@ WorkCentersModal.ModalBody = React.createClass({
 });
 
 var WorkCenterItem = React.createClass({
+    getInitialState: function () {
+        return {isChecked: false};
+    },
     render: function () {
         return (
             <div className="row checkbox">
                 <label>
                     <input type="checkbox"
+                           checked={this.state.isChecked}
                            value={this.props.item.id}
+                           onChange={this._handleChangeSelection}
                            className="filter-checkbox"/>
                     {this.props.item.serviceCenter}
                 </label>
             </div>
         );
+    },
+
+    _handleChangeSelection: function () {
+        var newState = !this.state.isChecked;
+        this.setState({isChecked: newState});
+
+        if (newState)
+            switch (this.props.item.groupPriority) {
+                case 10:
+                    selectedWorkCenters.group1.push(this.props.item);
+                    break;
+                case 20:
+                    selectedWorkCenters.group2.push(this.props.item);
+                    break;
+                case 30:
+                    selectedWorkCenters.group3.push(this.props.item);
+                    break;
+                case 60:
+                    selectedWorkCenters.group6.push(this.props.item);
+                    break;
+                default:
+                    selectedWorkCenters.other.push(this.props.item)
+            }
+        else
+            switch (this.props.item.groupPriority) {
+                case 10:
+                    selectedWorkCenters.group1.splice($.inArray(this.props.item, selectedWorkCenters.group1), 1);
+                    break;
+                case 20:
+                    selectedWorkCenters.group2.splice($.inArray(this.props.item, selectedWorkCenters.group2), 1);
+                    break;
+                case 30:
+                    selectedWorkCenters.group3.splice($.inArray(this.props.item, selectedWorkCenters.group3), 1);
+                    break;
+                case 60:
+                    selectedWorkCenters.group6.splice($.inArray(this.props.item, selectedWorkCenters.group6), 1);
+                    break;
+                default:
+                    selectedWorkCenters.other.splice($.inArray(this.props.item, selectedWorkCenters.other), 1)
+
+            }
+        generateTextForProducibilityArea();
     }
 });
+
+var selectedWorkCenters = {
+    group1: [],
+    group2: [],
+    group3: [],
+    group6: [],
+    other: []
+};
 
 WorkCentersModal.ModalFooter = React.createClass({
     render: function () {
         return (
             <div className="modal-footer">
                 <div className="row text-center">
-                    <button type="button" className="btn modal-btn " data-dismiss="modal">Ok</button>
+                    <button type="button" className="btn modal-btn " data-dismiss="modal" onClick={this.__onOkCilck}>
+                        Ok
+                    </button>
                     <button type="button" className="btn modal-btn" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         )
+    },
+
+    __onOkCilck: function () {
+        console.log("onOkClick");
+        __generateTextForProducibilityArea();
     }
 });
 

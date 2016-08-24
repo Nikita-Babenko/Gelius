@@ -1,17 +1,22 @@
 import React from 'react';
+import DatePicker from '../newProduct/DatePicker';
 
-class HeaderRight extends React.Component{
-    render(){
-        return(
+class HeaderRight extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
             <div className="col-lg-3 col-md-4 col-sm-5 col-xs-5 header_right">
                 <div className="form-group form-inline create">
                     <p>Создано</p>
-                    <input type="date" className="form-control" id="productCreateDate"/>
+                    <DatePicker class="form-control" id="productCreateDate"/>
                 </div>
 
                 <div className="form-group form-inline update">
                     <p>Изменено</p>
-                    <input type="date" className="form-control" id="productUpdateDate"/>
+                    <DatePicker class="form-control" id="productUpdateDate"/>
                 </div>
 
                 <div className="form-group form-inline do">

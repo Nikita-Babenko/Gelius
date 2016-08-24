@@ -1,18 +1,7 @@
 package ua.skillsup.gelius.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import ua.skillsup.gelius.model.dto.dictionary.CardBoardBrandDto;
-import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
-import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
-import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
-import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
+import ua.skillsup.gelius.model.dto.dictionary.*;
+import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -59,7 +48,7 @@ public class ProductDto {
     private Long formatId; // *
     private ProfileDto profile;
     private Long profileId; // *
-    private CardBoardBrandDto cardboardBrand;
+    private CardboardBrandDto cardboardBrand;
     private Long cardboardBrandId; // *
     private CelluloseLayerDto celluloseLayer;
     private Long celluloseLayerId; // *
@@ -247,11 +236,11 @@ public class ProductDto {
         this.profile = profile;
     }
 
-    public CardBoardBrandDto getCardboardBrand() {
+    public CardboardBrandDto getCardboardBrand() {
         return cardboardBrand;
     }
 
-    public void setCardboardBrand(CardBoardBrandDto cardboardBrand) {
+    public void setCardboardBrand(CardboardBrandDto cardboardBrand) {
         this.cardboardBrand = cardboardBrand;
     }
 

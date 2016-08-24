@@ -13,7 +13,7 @@ gulp.task('apply-prod-environment', function () {
     process.env.NODE_ENV = 'production';
 });
 
-gulp.task('compile', function(){
+gulp.task('compileProductRegister', function () {
     browserify('./js/productRegister.js')
         .transform(babelify)
         .bundle()
@@ -25,14 +25,15 @@ gulp.task('compile', function(){
         .pipe(gulp.dest('../webapp/WEB-INF/resources/js'));
 });
 
-gulp.task('compile', function(){
-    browserify('./js/Product.js')
+gulp.task('compileNewProduct', function () {
+    browserify('./js/newProduct.js')
         .transform(babelify)
         .bundle()
         .on('error', function(err){
             console.log(chalk.bold.red(err));
         })
         .pipe(source('newProduct.js'))
+        .pipe(streamify(uglify()))
         .pipe(gulp.dest('../webapp/WEB-INF/resources/js'));
 });
 
@@ -51,6 +52,6 @@ gulp.task('watch', function(){
     gulp.watch(['src/**/*.js*'], ['compile']);
 });
 
-gulp.task('default', ['apply-prod-environment', 'compile']);
+gulp.task('default', ['apply-prod-environment', 'compileProductRegister', 'compileNewProduct']);
 
 gulp.task('test', ['jest']);

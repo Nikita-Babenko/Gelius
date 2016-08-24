@@ -1,97 +1,60 @@
-INSERT INTO client (company_name, phone_number) VALUES ('ABK', '+38050-355-62-78');
-INSERT INTO client (company_name, phone_number) VALUES ('Lasunka', '+38066-355-62-78');
-INSERT INTO client (company_name, phone_number) VALUES ('Petruschenko', '+38067-355-62-78');
+INSERT INTO client (company_name, phone_number) VALUES
+  ('ABK', '+38050-355-62-78'),
+  ('Lasunka', '+38066-355-62-78'),
+  ('Petruschenko', '+38067-355-62-78');
 
 
-INSERT INTO product_type (product_type) VALUES ('Box (4 flaps)');
-INSERT INTO product_type (product_type) VALUES ('Ящик сложный');
-INSERT INTO product_type (product_type) VALUES ('Ящик (крышка)');
-INSERT INTO product_type (product_type) VALUES ('Box (bottom)');
-INSERT INTO product_type (product_type) VALUES ('Tray');
-INSERT INTO product_type (product_type) VALUES ('Трейс');
-INSERT INTO product_type (product_type) VALUES ('Лист');
-INSERT INTO product_type (product_type) VALUES ('barrier');
-INSERT INTO product_type (product_type) VALUES ('Прокладка');
-INSERT INTO product_type (product_type) VALUES ('Уголок');
-INSERT INTO product_type (product_type) VALUES ('Двухслойка рулон');
-INSERT INTO product_type (product_type) VALUES ('Комплектация');
-INSERT INTO product_type (product_type) VALUES ('Bush');
-INSERT INTO product_type (product_type) VALUES ('Комплект');
-INSERT INTO product_type (product_type) VALUES ('Шоубокс');
-INSERT INTO product_type (product_type) VALUES ('Гофрозаготовка');
-INSERT INTO product_type (product_type) VALUES ('Лист необрезной');
+INSERT INTO product_type (product_type) VALUES
+  ('Box (4 flaps)'),
+  ('Ящик сложный'),
+  ('Ящик (крышка)'),
+  ('Box (bottom)'),
+  ('Tray'),
+  ('Трейс'),
+  ('Лист'),
+  ('barrier'),
+  ('Прокладка'),
+  ('Уголок'),
+  ('Двухслойка рулон'),
+  ('Комплектация'),
+  ('Bush'),
+  ('Комплект'),
+  ('Шоубокс'),
+  ('Гофрозаготовка'),
+  ('Лист необрезной');
 
 
-INSERT INTO format (format) VALUES ('1050');
-INSERT INTO format (format) VALUES ('1250');
-INSERT INTO format (format) VALUES ('1400');
-INSERT INTO format (format) VALUES ('1510');
+INSERT INTO format (format) VALUES
+  ('1050'), ('1250'), ('1400'), ('1510');
 
 
-INSERT INTO profile (profile) VALUES ('В');
-INSERT INTO profile (profile) VALUES ('Е');
-INSERT INTO profile (profile) VALUES ('С');
-INSERT INTO profile (profile) VALUES ('ВЕ');
-INSERT INTO profile (profile) VALUES ('ВС');
-INSERT INTO profile (profile) VALUES ('СЕ');
+INSERT INTO profile (profile) VALUES
+  ('В'), ('Е'), ('С'), ('ВЕ'), ('ВС'), ('СЕ');
 
 
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-21');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-21КРАШ');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-24Бел');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-21Бел');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-21Целл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-22ЦЕЛ+ЦЕЛ');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-22Бел');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-22ЦЕЛ+ЦЕЛ');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-22 КРАШ');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-22Целл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-23');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-23Бел');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-23Бел+Целл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-24Целл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-24КРАШ');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-24 НМ');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-23Целл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-23ДвеЦелл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-24');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-22');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-24БелЦелл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-24ДвеЦелл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-25');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-25Бел');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-25Бел+Целл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-25Целл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('Т-25ДвеЦелл');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('КГ-1');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('КГ-2');
-INSERT INTO cardboard_brand (cardboard_brand) VALUES ('КГ-4');
+INSERT INTO cardboard_brand (cardboard_brand) VALUES
+  ('Т-21'), ('Т-21КРАШ'), ('Т-24Бел'), ('Т-21Бел'), ('Т-21Целл'),
+  ('Т-22ЦЕЛ+ЦЕЛ'), ('Т-22Бел'), ('Т-22ЦЕЛ+ЦЕЛ'), ('Т-22 КРАШ'),
+  ('Т-22Целл'), ('Т-23'), ('Т-23Бел'), ('Т-23Бел+Целл'), ('Т-24Целл'),
+  ('Т-24КРАШ'), ('Т-24 НМ'), ('Т-23Целл'), ('Т-23ДвеЦелл'), ('Т-24'),
+  ('Т-22'), ('Т-24БелЦелл'), ('Т-24ДвеЦелл'), ('Т-25'), ('Т-25Бел'),
+  ('Т-25Бел+Целл'), ('Т-25Целл'), ('Т-25ДвеЦелл'), ('КГ-1'), ('КГ-2'), ('КГ-4');
 
 
 INSERT INTO cellulose_layer (cellulose_layer) VALUES
-  ('нет'),
-  ('внутренний'),
-  ('наружный'),
-  ('оба');
+  ('нет'), ('внутренний'), ('наружный'), ('оба');
 
 
-INSERT INTO face_layer (face_layer) VALUES ('Белый');
-INSERT INTO face_layer (face_layer) VALUES ('Бурый');
-INSERT INTO face_layer (face_layer) VALUES ('Крашеный');
-INSERT INTO face_layer (face_layer) VALUES ('НМ');
-INSERT INTO face_layer (face_layer) VALUES ('МО');
+INSERT INTO face_layer (face_layer) VALUES
+  ('Белый'), ('Бурый'), ('Крашеный'), ('НМ'), ('МО');
 
 
-INSERT INTO inner_layer (inner_layer) VALUES ('Белый');
-INSERT INTO inner_layer (inner_layer) VALUES ('Бурый');
-INSERT INTO inner_layer (inner_layer) VALUES ('Крашеный');
-INSERT INTO inner_layer (inner_layer) VALUES ('НМ');
-INSERT INTO inner_layer (inner_layer) VALUES ('МО');
+INSERT INTO inner_layer (inner_layer) VALUES
+  ('Белый'), ('Бурый'), ('Крашеный'), ('НМ'), ('МО');
 
 
-INSERT INTO connection_valve (connection_valve) VALUES ('склееный');
-INSERT INTO connection_valve (connection_valve) VALUES ('сшитый');
-INSERT INTO connection_valve (connection_valve) VALUES ('склееный+сшитый');
+INSERT INTO connection_valve (connection_valve) VALUES
+  ('склееный'), ('сшитый'), ('склееный+сшитый');
 
 
 INSERT INTO workability (service_center, group_priority, element_priority) VALUES
@@ -114,24 +77,21 @@ INSERT INTO workability (service_center, group_priority, element_priority) VALUE
 ;
 
 
-INSERT INTO packing (packing) VALUES ('Без упаковки');
-INSERT INTO packing (packing) VALUES ('Паллета, лента, стрейч');
-INSERT INTO packing (packing) VALUES ('Паллета, лента, без стрейча');
-INSERT INTO packing (packing) VALUES ('Паллета, стрейч, без ленты');
-INSERT INTO packing (packing) VALUES ('2 пака на паллете');
+INSERT INTO packing (packing) VALUES
+  ('Без упаковки'),
+  ('Паллета, лента, стрейч'),
+  ('Паллета, лента, без стрейча'),
+  ('Паллета, стрейч, без ленты'),
+  ('2 пака на паллете');
 
 
-INSERT INTO pallet (pallet) VALUES ('1200х800');
-INSERT INTO pallet (pallet) VALUES ('1200х1000');
+INSERT INTO pallet (pallet) VALUES
+  ('1200х800'), ('1200х1000');
 
 
-INSERT INTO pallet_placement (pallet_placement) VALUES ('1 пачка в ряду');
-INSERT INTO pallet_placement (pallet_placement) VALUES ('2 пачки в ряду');
-INSERT INTO pallet_placement (pallet_placement) VALUES ('3 пачки в ряду');
-INSERT INTO pallet_placement (pallet_placement) VALUES ('4 пачки в ряду');
-INSERT INTO pallet_placement (pallet_placement) VALUES ('5 пачек в ряду');
-INSERT INTO pallet_placement (pallet_placement) VALUES ('6 пачек в ряду');
-INSERT INTO pallet_placement (pallet_placement) VALUES ('8 пачек в ряду');
+INSERT INTO pallet_placement (pallet_placement) VALUES
+  ('1 пачка в ряду'), ('2 пачки в ряду'), ('3 пачки в ряду'),
+  ('4 пачки в ряду'), ('5 пачек в ряду'), ('6 пачек в ряду'), ('8 пачек в ряду');
 
 INSERT INTO product (product_number, isNew, product_type_id, inner_height,
                      inner_length, inner_width, cardboard_brand_id, client_id,

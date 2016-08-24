@@ -19,19 +19,12 @@
     <script src="<c:url value="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/js/bootstrap.js"/>"></script>
 
     <title>Новая техкарта</title>
-
 </head>
 <body>
 
-    <div class="container-fluid target" id = "newProductContainer">
+<div class="container-fluid target" id="newProductContainer">
+</div>
 
-    </div>
-
-
-    <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-with-addons.min.js"/>"></script>
-    <script src="<c:url value="${pageContext.request.contextPath}/webjars/react/15.2.1/react-dom.min.js"/>"></script>
-    <script src="/resources/js/react/babel.min.js"></script>
-    <script src="/resources/js/jsx/newProduct.js" type="text/babel"></script>
-
+<script src="/resources/js/newProduct.js" type="text/javascript"></script>
 </body>
 </html>

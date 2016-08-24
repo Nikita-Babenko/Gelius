@@ -4,7 +4,7 @@ import BodyRight from '../newProduct/BodyRight';
 import BodyMiddle from '../newProduct/BodyMiddle';
 
 class Body extends React.Component{
-    render(){
+    render() {
         return(
             <div className="row" id="productBody">
                 <BodyLeft />

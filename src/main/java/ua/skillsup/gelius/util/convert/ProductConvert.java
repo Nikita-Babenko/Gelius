@@ -34,7 +34,7 @@ public final class ProductConvert {
         product.setActualSquare(productDto.getActualSquare());
         product.setFormat(FormatConvert.convert(productDto.getFormat()));
         product.setProfile(ProfileConvert.convert(productDto.getProfile()));
-        product.setCardboardBrand(CardBoardBrandConvert.convert(productDto.getCardboardBrand()));
+        product.setCardboardBrand(CardboardBrandConvert.convert(productDto.getCardboardBrand()));
         product.setCelluloseLayer(CelluloseLayerConvert.convert(productDto.getCelluloseLayer()));
         product.setFaceLayer(FaceLayerConvert.convert(productDto.getFaceLayer()));
         product.setInnerLayer(InnerLayerConvert.convert(productDto.getInnerLayer()));
@@ -84,7 +84,7 @@ public final class ProductConvert {
         productDto.setActualSquare(product.getActualSquare());
         productDto.setFormat(FormatConvert.convert(product.getFormat()));
         productDto.setProfile(ProfileConvert.convert(product.getProfile()));
-        productDto.setCardboardBrand(CardBoardBrandConvert.convert(product.getCardboardBrand()));
+        productDto.setCardboardBrand(CardboardBrandConvert.convert(product.getCardboardBrand()));
         productDto.setCelluloseLayer(CelluloseLayerConvert.convert(product.getCelluloseLayer()));
         productDto.setFaceLayer(FaceLayerConvert.convert(product.getFaceLayer()));
         productDto.setInnerLayer(InnerLayerConvert.convert(product.getInnerLayer()));

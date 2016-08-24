@@ -7,18 +7,6 @@ import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.model.dto.dictionary.CardBoardBrandDto;
-import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
-import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
-import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
-import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
 import ua.skillsup.gelius.service.ProductService;
 import ua.skillsup.gelius.service.ValidationService;
 

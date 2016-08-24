@@ -40,31 +40,33 @@ public class ProductController {
         return "newProduct";
     }
 
-    @RequestMapping(value = "/newProduct/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
     @ResponseBody
-    private Response createProduct(@RequestBody ProductDto product) {
+    private Response saveProduct(@RequestBody ProductDto product) {
         LOG.info("createProduct. Mapping 'raw' product data:\n" + product);
-        this.productService.createProduct(product); //we need not save returned productId
+        this.productService.createProduct(product);
         String newProductNumberValue = getFullProductNumber();
         return new Response(ResponseCode.OK, newProductNumberValue);
     }
 
-    @RequestMapping(value = "/newProduct/initData", method = RequestMethod.GET)
+    @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)
     @ResponseBody
-    private Response getInitDataForCreateProduct() {
-        LOG.info("Get init data for product creating");
+    private Response getNumberForNewProduct() {
 
-        LOG.info("Get number of product");
+        LOG.info("Get number for new product");
         String newProductNumberValue = getFullProductNumber();
 
-        LOG.info("Get dicts");
+        return new Response(ResponseCode.OK, newProductNumberValue);
+    }
+
+    @RequestMapping(value = "/newProduct/allDictionaries", method = RequestMethod.GET)
+    @ResponseBody
+    private Response getDictionaries() {
+
+        LOG.info("Get all dictionaries");
         Map<String, List<?>> dictionaries = dictionaryService.getAllDictionaries();
 
-        Map<String, Object> responseData = new HashMap<>();
-        responseData.put("productNumber", newProductNumberValue);
-        responseData.put("dictionaries", dictionaries);
-
-        return new Response(ResponseCode.OK, responseData);
+        return new Response(ResponseCode.OK, dictionaries);
     }
 
     private String getFullProductNumber() {

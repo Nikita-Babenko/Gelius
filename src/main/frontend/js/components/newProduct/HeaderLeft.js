@@ -1,8 +1,10 @@
 import React from 'react';
+import Dictionary from '../newProduct/Dictionary';
+import ProductNumberInput from '../newProduct/ProductNumberInput';
 
-class HeaderLeft extends React.Component{
-    render(){
-        return(
+class HeaderLeft extends React.Component {
+    render() {
+        return (
             <div className="col-lg-9 col-md-8 col-sm-7 col-xs-7 header_left">
                 <div className="col-md-12 header_top">
                     <div className="col-md-5 col-xs-10 col-sm-11  header_buttons">
@@ -40,13 +42,7 @@ class HeaderLeft extends React.Component{
                                 Новая техкарта №
                             </p>
                         </div>
-                        <div className="header_title_input">
-                            <input type="text" className="form-control" id="productNumber" contenteditable="false" id="productNumber"/>
-                            <div className="isNew">
-                                <input type="checkbox" id="isNew"/>
-                                <p>Новая Карта</p>
-                            </div>
-                        </div>
+                        <ProductNumberInput />
                     </div>
 
                 </div>
@@ -55,22 +51,26 @@ class HeaderLeft extends React.Component{
                     <div className="form-inline header_info">
                         <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Customer">Заказчик</label>
-                            <select className="form-control header_info_customer" id="client">
-
-                            </select>
+                            <Dictionary
+                                dictionaryName="client"
+                                dictionaryTextName="companyName"
+                                style="form-control header_info_customer"
+                            />
                         </div>
 
                         <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Name">Название</label>
-                            <input type="text" className="form-control header_info_name" id="productName" />
+                            <input type="text" className="form-control header_info_name" id="productName"/>
                         </div>
 
 
                         <div className="form-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
                             <label for="Type">Тип изделия</label>
-                            <select className="form-control header_info_type" id="productType">
-
-                            </select>
+                            <Dictionary
+                                dictionaryName="productType"
+                                dictionaryTextName="productType"
+                                style="form-control header_info_type"
+                            />
                         </div>
 
                     </div>

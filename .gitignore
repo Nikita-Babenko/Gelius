@@ -7,4 +7,4 @@ mem*
 /src/main/frontend/npm-debug.log
 /src/main/frontend/node/
 /src/main/frontend/node_modules/
-/src/main/webapp/WEB-INF/resources/js/productRegister.js
+/src/main/webapp/WEB-INF/resources/js/*.js
