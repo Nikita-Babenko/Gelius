@@ -3,38 +3,38 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <context:component-scan base-package="ua.skillsup.gelius" />
 
-    <context:property-placeholder location="classpath:application.properties"/>
+    <context:property-placeholder location="classpath:db/application_test.properties"/>
 
     <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
 
     <mvc:annotation-driven />
 
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
     <bean id="modelMapper" class="org.modelmapper.ModelMapper" />
 
-    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:comp/env/jdbc/MySqlDb" />
-    </bean>
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:sql/create_db.sql" />
+        <jdbc:script location="classpath:sql/insert-data.sql" />
+    </jdbc:embedded-database>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.dialect">${hibernate_test.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate_test.show_sql}</prop>
             </props>
         </property>
         <property name="packagesToScan" value="ua.skillsup.gelius.dao.entity" />

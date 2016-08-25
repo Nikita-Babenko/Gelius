@@ -9,22 +9,21 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+
         <!-- Main properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.8</jdk.version>
 
-        <!-- Spring propeties-->
-        <spring.version>4.2.0.RELEASE</spring.version>
+        <!-- Spring properties-->
+        <spring.version>4.2.6.RELEASE</spring.version>
 
-        <!-- ORMs and database properties -->
-        <hibernate.version>4.3.6.Final</hibernate.version>
+        <!-- ORMs and database's properties -->
+        <hibernate.version>5.2.1.Final</hibernate.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-        <mysql.connector.version>5.1.31</mysql.connector.version>
+        <mysql.connector.version>5.1.39</mysql.connector.version>
         <h2database.version>1.4.189</h2database.version>
-        <hsqldb.version>2.3.4</hsqldb.version>
-        <hikari.version>2.4.3</hikari.version>
 
-        <!-- WEB -->
+        <!-- Web -->
         <javax.servlet.version>3.0.1</javax.servlet.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <javax.el.version>2.2.6</javax.el.version>
@@ -32,14 +31,14 @@
 
         <!-- Data format(JSON) -->
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
-        <jackson-databind.version>2.5.0</jackson-databind.version>
+        <jackson-databind.version>2.8.0</jackson-databind.version>
 
         <!-- Testing -->
         <junit.version>4.12</junit.version>
-        <mockito.version>1.9.5</mockito.version>
+        <mockito.version>1.10.19</mockito.version>
 
         <!-- Logging -->
-        <log4j.version>1.2.16</log4j.version>
+        <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
 
         <!-- Frontend -->
@@ -133,13 +132,6 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!--Connection pool Hikari-->
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>${hikari.version}</version>
-        </dependency>
-
         <!--Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -218,16 +210,19 @@
             <artifactId>bootstrap</artifactId>
             <version>${bootstrap.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>${jquery.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>font-awesome</artifactId>
             <version>${font-awesome.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>react</artifactId>
@@ -240,6 +235,7 @@
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -316,4 +312,5 @@
 
         </plugins>
     </build>
+
 </project>

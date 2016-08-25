@@ -6,5 +6,4 @@ import ua.skillsup.gelius.dao.DictionaryDao;
 
 @Repository
 public class DictionaryDaoImpl extends AbstractCommonDao implements DictionaryDao {
-
 }

@@ -6,8 +6,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ua.skillsup.gelius.config.HibernateTestConfiguration;
-import ua.skillsup.gelius.config.TestConfiguration;
 import ua.skillsup.gelius.dao.ProductRegisterDao;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
@@ -19,7 +17,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HibernateTestConfiguration.class, TestConfiguration.class})
+@ContextConfiguration(value = "classpath:spring/mock-mvc-dispatcher-servlet.xml")
 public class ProductRegisterDaoImplTest {
 
     @Autowired

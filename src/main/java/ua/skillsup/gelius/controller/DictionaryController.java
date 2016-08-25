@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/dictionaries")
-public class DictionariesController {
+public class DictionaryController {
 
     private static final Logger LOG = LoggerFactory.getLogger("DictionaryController");
 
