@@ -79,7 +79,7 @@ var NewProductActions = {
                 success: function (response) {
                     Dispatcher.dispatch({
                         eventType: EventConstants.SAVE_NEW_PRODUCT,
-                        productNumber: response.data
+                        response: response
                     });
                 }.bind(this),
                 error: function (e) {

@@ -7,7 +7,7 @@ class ProductNumberInput extends React.Component {
         super(props);
         this.state = {
             isNewProduct: true,
-            newProductNumber: "0005"
+            newProductNumber: ""
         };
         this.__changeCheckbox = this.__changeCheckbox.bind(this);
         this.__changeText = this.__changeText.bind(this);

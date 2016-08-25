@@ -12,10 +12,7 @@ import java.time.LocalDate;
 @CheckOldProductNumberExistence(message = "не заполнен номер техкарты")
 public class ProductDto {
 
-    // Звездочкой в комментарии помечены "сырые" поля, пришедшие от клиента, в которых находятся id записей из словарей.
-    // С этим id будет создана ДТО, которая затем будет помещена в поле, которое находится НАД "сырым" полем,
-    // имеет тип соответствующего словаря, имеет такое же имя, как и "сырое" поле, но за исключением окончания "Id"
-    // Исключение - поля дат, они не являются словарными и их "сырые" поля заканчиваются на "Value".
+    // Звездочкой в комментарии помечены "сырые" поля дат, пришедшие от клиента в виде строки.
 
     private Long id;
     private Integer productNumber;
@@ -34,30 +31,22 @@ public class ProductDto {
 
     private Boolean isUse;
     private ClientDto client;
-    private Long clientId; // *
 
     @Size(max = 200, message = "название продукта не может превышать {max} символов")
     private String productName;
 
     private ProductTypeDto productType;
-    private Long productTypeId; // *
     private Integer innerLength;
     private Integer innerWidth;
     private Integer innerHeight;
     private Double theoreticalSquare;
     private Double actualSquare;
     private FormatDto format;
-    private Long formatId; // *
     private ProfileDto profile;
-    private Long profileId; // *
     private CardboardBrandDto cardboardBrand;
-    private Long cardboardBrandId; // *
     private CelluloseLayerDto celluloseLayer;
-    private Long celluloseLayerId; // *
     private FaceLayerDto faceLayer;
-    private Long faceLayerId; // *
     private InnerLayerDto innerLayer;
-    private Long innerLayerId; // *
 
     @Size(max = 200, message = "материал не может превышать {max} символов")
     private String material;
@@ -72,7 +61,6 @@ public class ProductDto {
     private Integer blankFormat;
 
     private ConnectionValveDto connectionValve;
-    private Long connectionValveId; // *
 
     @Size(max = 50, message = "штамп не может превышать {max} символов")
     private String stamp;
@@ -81,16 +69,13 @@ public class ProductDto {
     private String cliche;
 
     private PackingDto packing;
-    private Long packingId; // *
     private Integer numberInPack;
     private Integer numberInTransportPackage;
     private Integer packageLength;
     private Integer packageWidth;
     private Integer packageHeight;
     private PalletDto pallet;
-    private Long palletId; // *
     private PalletPlacementDto palletPlacement;
-    private Long palletPlacementId; // *
     private Integer palletRows;
     private Integer numberLoadCar;
     private Integer productionFormat;
@@ -438,102 +423,6 @@ public class ProductDto {
         this.productUpdateDateValue = productUpdateDateValue;
     }
 
-    public Long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
-
-    public Long getProductTypeId() {
-        return productTypeId;
-    }
-
-    public void setProductTypeId(Long productTypeId) {
-        this.productTypeId = productTypeId;
-    }
-
-    public Long getFormatId() {
-        return formatId;
-    }
-
-    public void setFormatId(Long formatId) {
-        this.formatId = formatId;
-    }
-
-    public Long getProfileId() {
-        return profileId;
-    }
-
-    public void setProfileId(Long profileId) {
-        this.profileId = profileId;
-    }
-
-    public Long getCardboardBrandId() {
-        return cardboardBrandId;
-    }
-
-    public void setCardboardBrandId(Long cardboardBrandId) {
-        this.cardboardBrandId = cardboardBrandId;
-    }
-
-    public Long getCelluloseLayerId() {
-        return celluloseLayerId;
-    }
-
-    public void setCelluloseLayerId(Long celluloseLayerId) {
-        this.celluloseLayerId = celluloseLayerId;
-    }
-
-    public Long getFaceLayerId() {
-        return faceLayerId;
-    }
-
-    public void setFaceLayerId(Long faceLayerId) {
-        this.faceLayerId = faceLayerId;
-    }
-
-    public Long getInnerLayerId() {
-        return innerLayerId;
-    }
-
-    public void setInnerLayerId(Long innerLayerId) {
-        this.innerLayerId = innerLayerId;
-    }
-
-    public Long getConnectionValveId() {
-        return connectionValveId;
-    }
-
-    public void setConnectionValveId(Long connectionValveId) {
-        this.connectionValveId = connectionValveId;
-    }
-
-    public Long getPackingId() {
-        return packingId;
-    }
-
-    public void setPackingId(Long packingId) {
-        this.packingId = packingId;
-    }
-
-    public Long getPalletId() {
-        return palletId;
-    }
-
-    public void setPalletId(Long palletId) {
-        this.palletId = palletId;
-    }
-
-    public Long getPalletPlacementId() {
-        return palletPlacementId;
-    }
-
-    public void setPalletPlacementId(Long palletPlacementId) {
-        this.palletPlacementId = palletPlacementId;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductDto{");
@@ -547,47 +436,35 @@ public class ProductDto {
         sb.append(", personPrepared='").append(personPrepared).append('\'');
         sb.append(", isUse=").append(isUse);
         sb.append(", client=").append(client);
-        sb.append(", clientId=").append(clientId);
         sb.append(", productName='").append(productName).append('\'');
         sb.append(", productType=").append(productType);
-        sb.append(", productTypeId=").append(productTypeId);
         sb.append(", innerLength=").append(innerLength);
         sb.append(", innerWidth=").append(innerWidth);
         sb.append(", innerHeight=").append(innerHeight);
         sb.append(", theoreticalSquare=").append(theoreticalSquare);
         sb.append(", actualSquare=").append(actualSquare);
         sb.append(", format=").append(format);
-        sb.append(", formatId=").append(formatId);
         sb.append(", profile=").append(profile);
-        sb.append(", profileId=").append(profileId);
         sb.append(", cardboardBrand=").append(cardboardBrand);
-        sb.append(", cardboardBrandId=").append(cardboardBrandId);
         sb.append(", celluloseLayer=").append(celluloseLayer);
-        sb.append(", celluloseLayerId=").append(celluloseLayerId);
         sb.append(", faceLayer=").append(faceLayer);
-        sb.append(", faceLayerId=").append(faceLayerId);
         sb.append(", innerLayer=").append(innerLayer);
-        sb.append(", innerLayerId=").append(innerLayerId);
         sb.append(", material='").append(material).append('\'');
         sb.append(", sizeWorkpieceLength=").append(sizeWorkpieceLength);
         sb.append(", sizeWorkpieceWidth=").append(sizeWorkpieceWidth);
         sb.append(", numberFromSheet=").append(numberFromSheet);
         sb.append(", blankFormat=").append(blankFormat);
         sb.append(", connectionValve=").append(connectionValve);
-        sb.append(", connectionValveId=").append(connectionValveId);
         sb.append(", stamp='").append(stamp).append('\'');
         sb.append(", cliche='").append(cliche).append('\'');
         sb.append(", packing=").append(packing);
-        sb.append(", packingId=").append(packingId);
         sb.append(", numberInPack=").append(numberInPack);
         sb.append(", numberInTransportPackage=").append(numberInTransportPackage);
         sb.append(", packageLength=").append(packageLength);
         sb.append(", packageWidth=").append(packageWidth);
         sb.append(", packageHeight=").append(packageHeight);
         sb.append(", pallet=").append(pallet);
-        sb.append(", palletId=").append(palletId);
         sb.append(", palletPlacement=").append(palletPlacement);
-        sb.append(", palletPlacementId=").append(palletPlacementId);
         sb.append(", palletRows=").append(palletRows);
         sb.append(", numberLoadCar=").append(numberLoadCar);
         sb.append(", productionFormat=").append(productionFormat);
