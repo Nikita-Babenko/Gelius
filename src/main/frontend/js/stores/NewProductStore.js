@@ -1,6 +1,7 @@
 import EventEmitter from 'eventemitter3';
 import Dispatcher from '../dispatcher/Dispatcher';
 import EventConstants from '../constants/Events';
+import ResponseCodeConstants from '../constants/ResponseCodes';
 
 class NewProductStore extends EventEmitter {
     constructor() {
@@ -123,10 +124,24 @@ const newProductStore = new NewProductStore();
 newProductStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.SAVE_NEW_PRODUCT:
-            newProductStore.newProductNumber = event.productNumber;
-            newProductStore.clearAllSelectedValues();
-            newProductStore.alert.alertType = "alert-success";
-            newProductStore.alert.message = "Новый продукт был успешно добавлен";
+            var responseData = event.response;
+            newProductStore.alert.alertType = "alert-danger";
+            switch (responseData.code) {
+                case ResponseCodeConstants.OK:
+                    newProductStore.newProductNumber = responseData.data.newProductNumber;
+                    newProductStore.clearAllSelectedValues();
+                    newProductStore.alert.alertType = "alert-success";
+                    newProductStore.alert.message = "Новый продукт (техкарта № " + responseData.data.savedProductNumber + ") был успешно добавлен";
+                    break;
+                case ResponseCodeConstants.VALIDATION_ERROR:
+                    newProductStore.alert.message = "Вами допущены ошибки: " + responseData.data.join(", ");
+                    break;
+                case ResponseCodeConstants.OBJECT_EXISTS:
+                    newProductStore.alert.message = "Техкарта с таким номером уже существует";
+                    break;
+                default:
+                    newProductStore.alert.message = "Произошла ошибка, попробуйте повторить действие позже";
+                }
             newProductStore.showAlert = true;
             newProductStore.emitChange();
             break;

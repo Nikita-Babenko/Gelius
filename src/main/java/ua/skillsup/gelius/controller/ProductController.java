@@ -18,6 +18,7 @@ import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.ProductService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,9 +44,13 @@ public class ProductController {
     @ResponseBody
     private Response saveProduct(@RequestBody ProductDto product) {
         LOG.info("createProduct. Mapping 'raw' product data:\n" + product);
-        this.productService.createProduct(product);
+        String savedProductNumberValue = this.productService.createProduct(product);
         String newProductNumberValue = getFullProductNumber();
-        return new Response(ResponseCode.OK, newProductNumberValue);
+        Map<String, String> responseData = new HashMap<>();
+        responseData.put("newProductNumber", newProductNumberValue);
+        responseData.put("savedProductNumber", savedProductNumberValue);
+
+        return new Response(ResponseCode.OK, responseData);
     }
 
     @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)

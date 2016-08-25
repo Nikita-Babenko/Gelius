@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     private ValidationService<ProductDto> validationService;
 
     @Override
-    public long createProduct(ProductDto product) {
+    public String createProduct(ProductDto product) {
         if ( product.getIsNew() ) {
             int productNumber = getProductNumberOfNewDatasheet();
             product.setProductNumber(productNumber);
@@ -53,7 +53,9 @@ public class ProductServiceImpl implements ProductService {
             filledProduct.setIsUse(false);
         }
 
-        return this.productDao.create(filledProduct);
+        this.productDao.create(filledProduct);
+
+        return getFullProductNumber(filledProduct.getProductNumber(), filledProduct.getIsNew());
     }
     
     private ProductDto fillProductDto(ProductDto product) {
