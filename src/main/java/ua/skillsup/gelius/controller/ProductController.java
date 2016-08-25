@@ -18,7 +18,6 @@ import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.ProductService;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

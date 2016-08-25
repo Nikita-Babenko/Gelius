@@ -1,5 +1,6 @@
 package ua.skillsup.gelius.model.dto;
 
+import ua.skillsup.gelius.annotation.CheckOldProductNumberExistence;
 import ua.skillsup.gelius.model.dto.dictionary.*;
 import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@CheckOldProductNumberExistence(message = "не заполнен номер техкарты")
 public class ProductDto {
 
     // Звездочкой в комментарии помечены "сырые" поля, пришедшие от клиента, в которых находятся id записей из словарей.
@@ -63,7 +65,7 @@ public class ProductDto {
     private Integer sizeWorkpieceLength;
     private Integer sizeWorkpieceWidth;
 
-    @Min(value = 1, message = "количество с листа не может быть меньше {min} шт.")
+    @Min(value = 1, message = "количество с листа не может быть меньше {value} шт.")
     private Integer numberFromSheet;
 
     @NotNull(message = "формат заготовки должен быть заполнен")
