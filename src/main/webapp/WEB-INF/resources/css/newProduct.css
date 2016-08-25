@@ -851,10 +851,12 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #B6D7A8;
 }
 
-#work-centers-modal .modal-dialog {
-    width: 35%;
-    top: 100px;
-    right: 28%;
+@media screen and (min-width: 1100px) {
+    #work-centers-modal .modal-dialog {
+        width: 35%;
+        top: 100px;
+        right: 20%;
+    }
 }
 
 #work-centers-modal .modal-content {

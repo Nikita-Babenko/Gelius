@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "product")
+@Table(name = "product", uniqueConstraints = {@UniqueConstraint(columnNames = {"product_number", "isNew"})})
 public class Product {
 
     @Id
