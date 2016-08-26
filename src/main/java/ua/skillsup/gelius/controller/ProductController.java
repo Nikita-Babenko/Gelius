@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.skillsup.gelius.exception.ParseProductDateException;
-import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.Response;
 import ua.skillsup.gelius.model.ResponseCode;
@@ -79,20 +78,26 @@ public class ProductController {
     }
 
 
+
+    @ResponseBody
+    @ExceptionHandler(ProductValidationException.class)
+    public Response exceptionHandler(ProductValidationException e) {
+        LOG.info("ExceptionHandler: " + e);
+        List<String> validationErrors = e.getErrors();
+        return new Response(ResponseCode.VALIDATION_ERROR, validationErrors);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(ParseProductDateException.class)
+    public Response exceptionHandler(ParseProductDateException e) {
+        LOG.info("ExceptionHandler: " + e);
+        return new Response(ResponseCode.BAD_DATA);
+    }
+
     @ResponseBody
     @ExceptionHandler(Exception.class)
-    public Response ExceptionHandler(Exception e) {
+    public Response exceptionHandler(Exception e) {
         LOG.info("ExceptionHandler: " + e);
-
-        if (e instanceof ProductValidationException) {
-            List<String> validationErrors = ((ProductValidationException) e).getErrors();
-            return new Response(ResponseCode.VALIDATION_ERROR, validationErrors);
-        } else if (e instanceof ParseProductDateException) {
-            return new Response(ResponseCode.BAD_DATA);
-        } else if (e instanceof ProductExistsException) {
-            return new Response(ResponseCode.OBJECT_EXISTS);
-        }
-
         return new Response(ResponseCode.SERVER_ERROR);
     }
 
