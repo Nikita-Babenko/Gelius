@@ -1,8 +1,8 @@
 package ua.skillsup.gelius.model.dto;
 
+import ua.skillsup.gelius.annotation.CheckDoubleAboveZero;
 import ua.skillsup.gelius.annotation.CheckOldProductNumberExistence;
 import ua.skillsup.gelius.model.dto.dictionary.*;
-import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -12,21 +12,21 @@ import java.time.LocalDate;
 @CheckOldProductNumberExistence(message = "не заполнен номер техкарты")
 public class ProductDto {
 
-    // Звездочкой в комментарии помечены "сырые" поля дат, пришедшие от клиента в виде строки.
+    //"Raw" date fields marked with an "asterisk" in comments.They was sent from the client as a string.
 
     private Long id;
     private Integer productNumber;
     private Boolean isNew;
 
-    //TODO валидация: дата должна быть сегодняшней или в прошлом
+    //TODO validation: date should not be in the future?
     private LocalDate productCreateDate;
     private String productCreateDateValue; // *
 
-    //TODO валидация: дата должна быть сегодняшней?
+    //TODO validation: date should not be in the future?
     private LocalDate productUpdateDate;
     private String productUpdateDateValue; // *
 
-    @Size(max = 50, message = "подготовил - не должно превышать {max} симв.")
+    @Size(max = 50, message = "подготовил - не должно превышать {max} символов")
     private String personPrepared;
 
     private Boolean isUse;
@@ -36,11 +36,22 @@ public class ProductDto {
     private String productName;
 
     private ProductTypeDto productType;
+
+    @Min(value = 1, message = "внутренняя длина не может быть меньше {value}")
     private Integer innerLength;
+
+    @Min(value = 1, message = "внутренняя ширина не может быть меньше {value}")
     private Integer innerWidth;
+
+    @Min(value = 1, message = "внутренняя высота не может быть меньше {value}")
     private Integer innerHeight;
+
+    @CheckDoubleAboveZero(message = "теоретическая площадь должна быть больше нуля")
     private Double theoreticalSquare;
+
+    @CheckDoubleAboveZero(message = "фактическая площадь должна быть больше нуля")
     private Double actualSquare;
+
     private FormatDto format;
     private ProfileDto profile;
     private CardboardBrandDto cardboardBrand;
@@ -51,13 +62,17 @@ public class ProductDto {
     @Size(max = 200, message = "материал не может превышать {max} символов")
     private String material;
 
+    @Min(value = 1, message = "длина (размер заготовки) не может быть меньше {value}")
     private Integer sizeWorkpieceLength;
+
+    @Min(value = 1, message = "ширина (размер заготовки) не может быть меньше {value}")
     private Integer sizeWorkpieceWidth;
 
     @Min(value = 1, message = "количество с листа не может быть меньше {value} шт.")
     private Integer numberFromSheet;
 
     @NotNull(message = "формат заготовки должен быть заполнен")
+    @Min(value = 1, message = "формат заготовки не может быть меньше {value}")
     private Integer blankFormat;
 
     private ConnectionValveDto connectionValve;
@@ -69,16 +84,34 @@ public class ProductDto {
     private String cliche;
 
     private PackingDto packing;
+
+    @Min(value = 1, message = "количество в пачке не может быть меньше {value} шт.")
     private Integer numberInPack;
+
+    @Min(value = 1, message = "количество в транспортном пакете не может быть меньше {value} шт.")
     private Integer numberInTransportPackage;
+
+    @Min(value = 1, message = "длина (размеры пакета) не может быть меньше {value}")
     private Integer packageLength;
+
+    @Min(value = 1, message = "ширина (размеры пакета) не может быть меньше {value}")
     private Integer packageWidth;
+
+    @Min(value = 1, message = "высота (размеры пакета) не может быть меньше {value}")
     private Integer packageHeight;
+
     private PalletDto pallet;
     private PalletPlacementDto palletPlacement;
+
+    @Min(value = 1, message = "количество рядов на поддоне не может быть меньше {value} шт.")
     private Integer palletRows;
+
+    @Min(value = 1, message = "загрузка автомобиля не может быть меньше {value} шт.")
     private Integer numberLoadCar;
+
+    @Min(value = 1, message = "производственный формат не может быть меньше {value}")
     private Integer productionFormat;
+
 
     public ProductDto() {
     }
