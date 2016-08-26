@@ -8,7 +8,7 @@ public class ProductType {
 
     @Id
     @Column(name = "product_type_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "product_type")

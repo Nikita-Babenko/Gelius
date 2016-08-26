@@ -10,7 +10,7 @@ public class WorkabilityNotes {
 
     @Id
     @Column(name = "workability_notes_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

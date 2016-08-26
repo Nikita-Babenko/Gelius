@@ -8,7 +8,7 @@ public class CardboardBrand {
 
     @Id
     @Column(name = "cardboard_brand_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "cardboard_brand")
