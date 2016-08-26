@@ -8,7 +8,7 @@ public class Profile {
 
     @Id
     @Column(name = "profile_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "profile")

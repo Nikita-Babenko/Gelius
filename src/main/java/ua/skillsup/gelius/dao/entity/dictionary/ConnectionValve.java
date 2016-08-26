@@ -8,7 +8,7 @@ public class ConnectionValve {
 
     @Id
     @Column(name = "connection_valve_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "connection_valve")

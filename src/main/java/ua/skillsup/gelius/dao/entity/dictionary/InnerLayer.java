@@ -8,7 +8,7 @@ public class InnerLayer {
 
     @Id
     @Column(name = "inner_layer_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "inner_layer")

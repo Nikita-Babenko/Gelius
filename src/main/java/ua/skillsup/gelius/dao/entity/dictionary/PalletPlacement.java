@@ -8,7 +8,7 @@ public class PalletPlacement {
 
     @Id
     @Column(name = "pallet_placement_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "pallet_placement")

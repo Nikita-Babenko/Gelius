@@ -8,7 +8,7 @@ public class Format {
 
     @Id
     @Column(name = "format_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "format")

@@ -10,12 +10,12 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "product", uniqueConstraints = {@UniqueConstraint(columnNames = {"product_number", "isNew"})})
+@Table(name = "product")
 public class Product {
 
     @Id
     @Column(name = "product_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "product_number")

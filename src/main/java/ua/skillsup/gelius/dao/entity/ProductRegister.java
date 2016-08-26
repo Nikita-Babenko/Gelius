@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class ProductRegister {
     @Id
     @Column(name = "product_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

@@ -8,7 +8,7 @@ public class FaceLayer {
 
     @Id
     @Column(name = "face_layer_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "face_layer")
