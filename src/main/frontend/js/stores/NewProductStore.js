@@ -156,7 +156,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
             newProductStore.alert.alertType = "alert-danger";
             newProductStore.alert.message = "Поле 'формат заготовки' должно быть заполнено!";
             newProductStore.showAlert = true;
-            newProductStore.emitChange(false);
+            newProductStore.emitChange(true);
             newProductStore.showAlert = false;
     }
 });
