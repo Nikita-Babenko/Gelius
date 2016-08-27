@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ua.skillsup.gelius.controller.response.Response;
+import ua.skillsup.gelius.controller.response.ResponseCode;
 import ua.skillsup.gelius.exception.ParseProductDateException;
+import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
-import ua.skillsup.gelius.model.Response;
-import ua.skillsup.gelius.model.ResponseCode;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.ProductService;
@@ -80,9 +81,16 @@ public class ProductController {
 
 
     @ResponseBody
+    @ExceptionHandler(ProductExistsException.class)
+    public Response exceptionHandler(ProductExistsException e) {
+        LOG.info("ExceptionHandler (ProductExistsException): " + e);
+        return new Response(ResponseCode.OBJECT_EXISTS);
+    }
+
+    @ResponseBody
     @ExceptionHandler(ProductValidationException.class)
     public Response exceptionHandler(ProductValidationException e) {
-        LOG.info("ExceptionHandler: " + e);
+        LOG.info("ExceptionHandler (ProductValidationException): " + e);
         List<String> validationErrors = e.getErrors();
         return new Response(ResponseCode.VALIDATION_ERROR, validationErrors);
     }
@@ -90,14 +98,14 @@ public class ProductController {
     @ResponseBody
     @ExceptionHandler(ParseProductDateException.class)
     public Response exceptionHandler(ParseProductDateException e) {
-        LOG.info("ExceptionHandler: " + e);
+        LOG.info("ExceptionHandler (ParseProductDateException): " + e);
         return new Response(ResponseCode.BAD_DATA);
     }
 
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public Response exceptionHandler(Exception e) {
-        LOG.info("ExceptionHandler: " + e);
+        LOG.info("ExceptionHandler (Exception): " + e);
         return new Response(ResponseCode.SERVER_ERROR);
     }
 

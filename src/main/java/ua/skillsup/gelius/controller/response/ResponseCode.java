@@ -1,4 +1,4 @@
-package ua.skillsup.gelius.model;
+package ua.skillsup.gelius.controller.response;
 
 public enum ResponseCode {
 
