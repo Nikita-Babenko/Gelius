@@ -15,8 +15,9 @@ class NewProductStore extends EventEmitter {
         this.showAlert = false;
     }
 
-    emitChange() {
-        this.emit(EventConstants.NEW_PRODUCT_CHANGE_EVENT);
+    emitChange(hasDoneWithError) {
+        var event = hasDoneWithError ? EventConstants.NEW_PRODUCT_CHANGE_WITH_ERROR_EVENT : EventConstants.NEW_PRODUCT_CHANGE_EVENT;
+        this.emit(event);
     }
 
     getNewProductNumber() {
@@ -125,6 +126,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.SAVE_NEW_PRODUCT:
             var responseData = event.response;
+            var hasDoneWithError = true;
             newProductStore.alert.alertType = "alert-danger";
             switch (responseData.code) {
                 case ResponseCodeConstants.OK:
@@ -132,6 +134,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.clearAllSelectedValues();
                     newProductStore.alert.alertType = "alert-success";
                     newProductStore.alert.message = "Новый продукт (техкарта № " + responseData.data.savedProductNumber + ") был успешно добавлен";
+                    hasDoneWithError = false;
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.alert.message = "Вами допущены ошибки: " + responseData.data.join(", ");
@@ -140,20 +143,20 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.alert.message = "Техкарта с таким номером уже существует";
                     break;
                 default:
-                    newProductStore.alert.message = "Произошла ошибка, попробуйте повторить действие позже";
+                    newProductStore.alert.message = "Произошла ошибка. Обновите страницу и повторите действие или попробуйте повторить действие позже";
                 }
             newProductStore.showAlert = true;
-            newProductStore.emitChange();
+            newProductStore.emitChange(hasDoneWithError);
             break;
         case EventConstants.LOAD_PRODUCT_NUMBER:
             newProductStore.newProductNumber = event.productNumber;
-            newProductStore.emitChange();
+            newProductStore.emitChange(false);
             break;
         case EventConstants.BLANK_FORMAT_VALIDATION_ERROR:
             newProductStore.alert.alertType = "alert-danger";
             newProductStore.alert.message = "Поле 'формат заготовки' должно быть заполнено!";
             newProductStore.showAlert = true;
-            newProductStore.emitChange();
+            newProductStore.emitChange(false);
             newProductStore.showAlert = false;
     }
 });

@@ -55,7 +55,7 @@ class ProductNumberInput extends React.Component {
 
     __getNewProductNumber() {
         this.setState({
-            newProductNumber: NewProductStore.getNewProductNumber()
+            newProductNumber: NewProductStore.getNewProductNumber(), isNewProduct: true
         });
     }
 }

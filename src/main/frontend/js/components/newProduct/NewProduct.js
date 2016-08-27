@@ -18,11 +18,13 @@ class NewProduct extends React.Component {
         NewProductAction.loadAllDictionaries();
         NewProductAction.loadNewProductNumber();
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__enableAlert);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_WITH_ERROR_EVENT, this.__enableAlert);
 
     }
 
     componentWillUnmount() {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__enableAlert);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_WITH_ERROR_EVENT, this.__enableAlert);
     }
 
     render() {
