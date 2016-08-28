@@ -24,6 +24,7 @@ class ModalBody extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            //TODO for #1186: add AG (id=1 or id will be find by "groupPriority==null && elementPriority==null") (must it be here or in NewProductStore.getNewProduct()?)
             workCenters: []
         };
         this._onWorkCentersUpdated = this._onWorkCentersUpdated.bind(this);
@@ -135,10 +136,11 @@ class WorkCenterItem extends React.Component {
         var newState = !this.state.isChecked;
         this.setState({isChecked: newState});
 
-        if (newState)
+        if (newState) {
             NewProductAction.addWorkCenter(this.props.item);
-        else
+        } else {
             NewProductAction.deleteWorkCenter(this.props.item);
+        }
     }
 }
 
@@ -151,7 +153,7 @@ class ModalFooter extends React.Component {
                     <button type="button"
                             className="btn modal-btn "
                             data-dismiss="modal"
-                            onClick={this.__onOkCilck}>Ok
+                            onClick={this.__onOkClick}>Ok
                     </button>
                     <button type="button"
                             className="btn modal-btn"
@@ -162,7 +164,7 @@ class ModalFooter extends React.Component {
         )
     }
 
-    __onOkCilck() {
+    __onOkClick() {
         NewProductAction.updateWorkabilityInfo();
     }
 }

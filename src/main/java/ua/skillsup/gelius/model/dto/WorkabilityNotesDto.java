@@ -2,13 +2,18 @@ package ua.skillsup.gelius.model.dto;
 
 import ua.skillsup.gelius.model.dto.dictionary.WorkabilityDto;
 
+import javax.validation.constraints.Size;
+
 public class WorkabilityNotesDto {
 
     private Long id;
 
     private ProductDto product;
 
-    private WorkabilityDto sericeCenter;
+    private WorkabilityDto serviceCenter;
+
+    @Size(max = 100, message = "примечание к рабочему центру не может превышать {max} символов")
+    private String note;
 
     public WorkabilityNotesDto() {
     }
@@ -33,12 +38,20 @@ public class WorkabilityNotesDto {
         this.product = product;
     }
 
-    public WorkabilityDto getSericeCenter() {
-        return sericeCenter;
+    public WorkabilityDto getServiceCenter() {
+        return serviceCenter;
     }
 
-    public void setSericeCenter(WorkabilityDto sericeCenter) {
-        this.sericeCenter = sericeCenter;
+    public void setServiceCenter(WorkabilityDto serviceCenter) {
+        this.serviceCenter = serviceCenter;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override
@@ -46,7 +59,8 @@ public class WorkabilityNotesDto {
         final StringBuilder sb = new StringBuilder("WorkabilityNotesDto{");
         sb.append("id=").append(id);
         sb.append(", product=").append(product);
-        sb.append(", sericeCenter=").append(sericeCenter);
+        sb.append(", serviceCenter=").append(serviceCenter);
+        sb.append(", note=").append(note);
         sb.append('}');
         return sb.toString();
     }

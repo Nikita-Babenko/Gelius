@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductCreateDate(productCreateDate);
         product.setProductUpdateDate(productUpdateDate);
 
-        //Filling other DTO fields (LocalDates and vocabularies):
+        //Filling other DTO fields (vocabularies):
         ProductDto filledProduct = fillProductDto(product);
 
         //DTO validation (including mandatory fields check):

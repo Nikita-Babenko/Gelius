@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dao.entity.Product;
+import ua.skillsup.gelius.dao.entity.WorkabilityNotes;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.util.convert.ProductConvert;
 
@@ -30,8 +31,16 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public long create(ProductDto productDto) {
         Product product = convert(productDto);
-        this.sessionFactory.getCurrentSession().save(product);
+        assignProductToWorkabilityNotes(product);
+        this.sessionFactory.getCurrentSession().persist(product);
         return product.getId();
+    }
+
+    private void assignProductToWorkabilityNotes(Product product) {
+        List<WorkabilityNotes> workabilityNotes = product.getWorkabilityNotes();
+        for (int i = 0; i < workabilityNotes.size(); i++) {
+            workabilityNotes.get(i).setProduct(product);
+        }
     }
 
     @Override

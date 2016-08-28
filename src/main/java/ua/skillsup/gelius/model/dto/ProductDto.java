@@ -2,12 +2,25 @@ package ua.skillsup.gelius.model.dto;
 
 import ua.skillsup.gelius.annotation.CheckDoubleAboveZero;
 import ua.skillsup.gelius.annotation.CheckOldProductNumberExistence;
-import ua.skillsup.gelius.model.dto.dictionary.*;
+import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
+import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
+import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
+import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
+import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @CheckOldProductNumberExistence(message = "не заполнен номер техкарты")
 public class ProductDto {
@@ -111,6 +124,9 @@ public class ProductDto {
 
     @Min(value = 1, message = "производственный формат не может быть меньше {value}")
     private Integer productionFormat;
+
+    @Valid
+    private List<WorkabilityNotesDto> workabilityNotes;
 
 
     public ProductDto() {
@@ -456,6 +472,14 @@ public class ProductDto {
         this.productUpdateDateValue = productUpdateDateValue;
     }
 
+    public List<WorkabilityNotesDto> getWorkabilityNotes() {
+        return workabilityNotes;
+    }
+
+    public void setWorkabilityNotes(List<WorkabilityNotesDto> workabilityNotes) {
+        this.workabilityNotes = workabilityNotes;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductDto{");
@@ -501,6 +525,7 @@ public class ProductDto {
         sb.append(", palletRows=").append(palletRows);
         sb.append(", numberLoadCar=").append(numberLoadCar);
         sb.append(", productionFormat=").append(productionFormat);
+        sb.append(", workabilityNotes=").append(workabilityNotes);
         sb.append('}');
         return sb.toString();
     }

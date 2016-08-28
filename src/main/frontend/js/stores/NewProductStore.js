@@ -1,5 +1,6 @@
 import EventEmitter from 'eventemitter3';
 import Dispatcher from '../dispatcher/Dispatcher';
+import WorkCentersStore from './WorkCentersStore';
 import EventConstants from '../constants/Events';
 import ResponseCodeConstants from '../constants/ResponseCodes';
 
@@ -74,8 +75,24 @@ class NewProductStore extends EventEmitter {
         product["numberLoadCar"] = $('#numberLoadCar').val();
         product["productionFormat"] = $('#productionFormat').val();
 
+        //Workability notes:
+        product["workabilityNotes"] = [];
+        //product["workabilityNotes"].push( {serviceCenter: idOfAG, note: noteForAG} );  - blank for #1186
+        var centers = WorkCentersStore.selectedWorkCenters;
+        for (var key in centers) {
+            centers[key].forEach(function(item) {
+                product["workabilityNotes"].push(
+                    { serviceCenter: item.id, note: null } //null will be replaced for workcenter's note (in #1186)
+                );
+            });
+        }
+
         return product;
     }
+
+    /*__createWorkabilityNotesElement(serviceCenterId, note) {
+        return { serviceCenter: serviceCenterId, note: note };
+    }*/
 
     clearAllSelectedValues() {
         $('#isNew').attr('checked', false);
@@ -116,6 +133,8 @@ class NewProductStore extends EventEmitter {
         $('#palletRows').val("");
         $('#numberLoadCar').val("");
         $('#productionFormat').val("");
+
+        //TODO reset selected workcenters in WorkCentersStore and reset checkboxes in modal window
     }
 
 }
