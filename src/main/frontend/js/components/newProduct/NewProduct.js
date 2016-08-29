@@ -1,12 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Header from '../newProduct/Header';
-import Body from '../newProduct/Body';
-import NewProductAction from '../../actions/NewProductActions';
-import NewProductStore from '../../stores/NewProductStore';
-import DictionaryStore from '../../stores/DictionariesStore'
-import EventConstants from '../../constants/Events';
-import Alert from '../newProduct/Alert';
+import React from "react";
+import ReactDOM from "react-dom";
+import Header from "../newProduct/Header";
+import Body from "../newProduct/Body";
+import NewProductAction from "../../actions/NewProductActions";
+import NewProductStore from "../../stores/NewProductStore";
+import EventConstants from "../../constants/Events";
+import Alert from "../newProduct/Alert";
 
 class NewProduct extends React.Component {
     constructor(props) {
@@ -14,6 +13,11 @@ class NewProduct extends React.Component {
         this.__enableAlert = this.__enableAlert.bind(this);
     }
 
+    componentDidMount(){
+        NewProductAction.disablePalletDictionaryByDefault();
+        NewProductAction.disablePalletDictionaryDependsFromChangePacking();
+    }
+    
     componentWillMount() {
         NewProductAction.loadAllDictionaries();
         NewProductAction.loadNewProductNumber();
