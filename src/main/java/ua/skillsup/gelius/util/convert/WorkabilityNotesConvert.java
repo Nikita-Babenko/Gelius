@@ -16,7 +16,8 @@ public final class WorkabilityNotesConvert {
         WorkabilityNotes workabilityNotes = new WorkabilityNotes();
         workabilityNotes.setId(workabilityNotesDto.getId());
         workabilityNotes.setProduct(ProductConvert.convert(workabilityNotesDto.getProduct()));
-        workabilityNotes.setServiceCenter(WorkabilityConvert.convert(workabilityNotesDto.getSericeCenter()));
+        workabilityNotes.setServiceCenter(WorkabilityConvert.convert(workabilityNotesDto.getServiceCenter()));
+        workabilityNotes.setNote(workabilityNotesDto.getNote());
 
         return workabilityNotes;
     }
@@ -28,7 +29,8 @@ public final class WorkabilityNotesConvert {
         WorkabilityNotesDto workabilityNotesDto = new WorkabilityNotesDto();
         workabilityNotesDto.setId(workabilityNotes.getId());
         workabilityNotesDto.setProduct(ProductConvert.convert(workabilityNotes.getProduct()));
-        workabilityNotesDto.setSericeCenter(WorkabilityConvert.convert(workabilityNotes.getServiceCenter()));
+        workabilityNotesDto.setServiceCenter(WorkabilityConvert.convert(workabilityNotes.getServiceCenter()));
+        workabilityNotesDto.setNote(workabilityNotes.getNote());
 
         return workabilityNotesDto;
     }

@@ -5,6 +5,7 @@ INSERT INTO client (company_name, phone_number) VALUES ('Ласунка', '+3806
 INSERT INTO client (company_name, phone_number) VALUES ('Петрушенко', '+38066-355-62-78');
 
 
+
 INSERT INTO product_type (product_type) VALUES ('Box (4 flaps)');
 INSERT INTO product_type (product_type) VALUES ('Ящик сложный');
 INSERT INTO product_type (product_type) VALUES ('Ящик (крышка)');

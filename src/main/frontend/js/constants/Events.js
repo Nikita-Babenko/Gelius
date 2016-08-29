@@ -20,6 +20,7 @@ var EventConstants = {
 
     DICTIONARIES_CHANGE_EVENT: "dictionaries_change_event",
     NEW_PRODUCT_CHANGE_EVENT: "new_product_change_event",
+    NEW_PRODUCT_CHANGE_WITH_ERROR_EVENT: "new_product_change_with_error_event",
     BLANK_FORMAT_VALIDATION_ERROR: "blank_format_validation_error",
 
     ADD_WORK_CENTER: "add_work_center",

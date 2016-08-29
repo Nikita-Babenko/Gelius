@@ -2,12 +2,36 @@ package ua.skillsup.gelius.dao.entity;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import ua.skillsup.gelius.dao.entity.dictionary.*;
+import ua.skillsup.gelius.dao.entity.dictionary.CardboardBrand;
+import ua.skillsup.gelius.dao.entity.dictionary.CelluloseLayer;
+import ua.skillsup.gelius.dao.entity.dictionary.Client;
+import ua.skillsup.gelius.dao.entity.dictionary.ConnectionValve;
+import ua.skillsup.gelius.dao.entity.dictionary.FaceLayer;
+import ua.skillsup.gelius.dao.entity.dictionary.Format;
+import ua.skillsup.gelius.dao.entity.dictionary.InnerLayer;
+import ua.skillsup.gelius.dao.entity.dictionary.Packing;
+import ua.skillsup.gelius.dao.entity.dictionary.Pallet;
+import ua.skillsup.gelius.dao.entity.dictionary.PalletPlacement;
+import ua.skillsup.gelius.dao.entity.dictionary.ProductType;
+import ua.skillsup.gelius.dao.entity.dictionary.Profile;
 import ua.skillsup.gelius.util.LocalDateConverter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -164,6 +188,9 @@ public class Product {
 
     @Column(name = "production_format")
     private Integer productionFormat;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<WorkabilityNotes> workabilityNotes;
 
     public Long getId() {
         return id;
@@ -485,6 +512,14 @@ public class Product {
         this.productionFormat = productionFormat;
     }
 
+    public List<WorkabilityNotes> getWorkabilityNotes() {
+        return workabilityNotes;
+    }
+
+    public void setWorkabilityNotes(List<WorkabilityNotes> workabilityNotes) {
+        this.workabilityNotes = workabilityNotes;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Product{");
@@ -528,6 +563,7 @@ public class Product {
         sb.append(", palletRows=").append(palletRows);
         sb.append(", numberLoadCar=").append(numberLoadCar);
         sb.append(", productionFormat=").append(productionFormat);
+        sb.append(", workabilityNotes=").append(workabilityNotes);
         sb.append('}');
         sb.append('\n');
         return sb.toString();

@@ -1,8 +1,21 @@
 package ua.skillsup.gelius.util.convert;
 
 import ua.skillsup.gelius.dao.entity.Product;
+import ua.skillsup.gelius.dao.entity.WorkabilityNotes;
 import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.util.convert.dictionary.*;
+import ua.skillsup.gelius.model.dto.WorkabilityNotesDto;
+import ua.skillsup.gelius.util.convert.dictionary.CardboardBrandConvert;
+import ua.skillsup.gelius.util.convert.dictionary.CelluloseLayerConvert;
+import ua.skillsup.gelius.util.convert.dictionary.ClientConvert;
+import ua.skillsup.gelius.util.convert.dictionary.ConnectionValveConvert;
+import ua.skillsup.gelius.util.convert.dictionary.FaceLayerConvert;
+import ua.skillsup.gelius.util.convert.dictionary.FormatConvert;
+import ua.skillsup.gelius.util.convert.dictionary.InnerLayerConvert;
+import ua.skillsup.gelius.util.convert.dictionary.PackingConvert;
+import ua.skillsup.gelius.util.convert.dictionary.PalletConvert;
+import ua.skillsup.gelius.util.convert.dictionary.PalletPlacementConvert;
+import ua.skillsup.gelius.util.convert.dictionary.ProductTypeConvert;
+import ua.skillsup.gelius.util.convert.dictionary.ProfileConvert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +71,12 @@ public final class ProductConvert {
         product.setNumberLoadCar(productDto.getNumberLoadCar());
         product.setProductionFormat(productDto.getProductionFormat());
 
+        List<WorkabilityNotes> workabilityNotes = new ArrayList<>(productDto.getWorkabilityNotes().size());
+        for (WorkabilityNotesDto workabilityNote : productDto.getWorkabilityNotes()) {
+            workabilityNotes.add( WorkabilityNotesConvert.convert(workabilityNote) );
+        }
+        product.setWorkabilityNotes(workabilityNotes);
+
         return product;
     }
 
@@ -107,6 +126,12 @@ public final class ProductConvert {
         productDto.setPalletRows(product.getPalletRows());
         productDto.setNumberLoadCar(product.getNumberLoadCar());
         productDto.setProductionFormat(product.getProductionFormat());
+
+        List<WorkabilityNotesDto> workabilityNotesDto = new ArrayList<>(product.getWorkabilityNotes().size());
+        for (WorkabilityNotes workabilityNote : product.getWorkabilityNotes()) {
+            workabilityNotesDto.add( WorkabilityNotesConvert.convert(workabilityNote) );
+        }
+        productDto.setWorkabilityNotes(workabilityNotesDto);
 
         return productDto;
     }

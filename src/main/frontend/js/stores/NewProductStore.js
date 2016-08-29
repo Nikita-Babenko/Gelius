@@ -1,5 +1,6 @@
 import EventEmitter from 'eventemitter3';
 import Dispatcher from '../dispatcher/Dispatcher';
+import WorkCentersStore from './WorkCentersStore';
 import EventConstants from '../constants/Events';
 import ResponseCodeConstants from '../constants/ResponseCodes';
 
@@ -15,8 +16,9 @@ class NewProductStore extends EventEmitter {
         this.showAlert = false;
     }
 
-    emitChange() {
-        this.emit(EventConstants.NEW_PRODUCT_CHANGE_EVENT);
+    emitChange(hasDoneWithError) {
+        var event = hasDoneWithError ? EventConstants.NEW_PRODUCT_CHANGE_WITH_ERROR_EVENT : EventConstants.NEW_PRODUCT_CHANGE_EVENT;
+        this.emit(event);
     }
 
     getNewProductNumber() {
@@ -73,8 +75,24 @@ class NewProductStore extends EventEmitter {
         product["numberLoadCar"] = $('#numberLoadCar').val();
         product["productionFormat"] = $('#productionFormat').val();
 
+        //Workability notes:
+        product["workabilityNotes"] = [];
+        //product["workabilityNotes"].push( {serviceCenter: idOfAG, note: noteForAG} );  - blank for #1186
+        var centers = WorkCentersStore.selectedWorkCenters;
+        for (var key in centers) {
+            centers[key].forEach(function(item) {
+                product["workabilityNotes"].push(
+                    { serviceCenter: item.id, note: null } //null will be replaced for workcenter's note (in #1186)
+                );
+            });
+        }
+
         return product;
     }
+
+    /*__createWorkabilityNotesElement(serviceCenterId, note) {
+        return { serviceCenter: serviceCenterId, note: note };
+    }*/
 
     clearAllSelectedValues() {
         $('#isNew').attr('checked', false);
@@ -115,6 +133,8 @@ class NewProductStore extends EventEmitter {
         $('#palletRows').val("");
         $('#numberLoadCar').val("");
         $('#productionFormat').val("");
+
+        //TODO reset selected workcenters in WorkCentersStore and reset checkboxes in modal window
     }
 
 }
@@ -125,6 +145,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.SAVE_NEW_PRODUCT:
             var responseData = event.response;
+            var hasDoneWithError = true;
             newProductStore.alert.alertType = "alert-danger";
             switch (responseData.code) {
                 case ResponseCodeConstants.OK:
@@ -132,6 +153,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.clearAllSelectedValues();
                     newProductStore.alert.alertType = "alert-success";
                     newProductStore.alert.message = "Новый продукт (техкарта № " + responseData.data.savedProductNumber + ") был успешно добавлен";
+                    hasDoneWithError = false;
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.alert.message = "Вами допущены ошибки: " + responseData.data.join(", ");
@@ -140,20 +162,20 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.alert.message = "Техкарта с таким номером уже существует";
                     break;
                 default:
-                    newProductStore.alert.message = "Произошла ошибка, попробуйте повторить действие позже";
+                    newProductStore.alert.message = "Произошла ошибка. Обновите страницу и повторите действие или попробуйте повторить действие позже";
                 }
             newProductStore.showAlert = true;
-            newProductStore.emitChange();
+            newProductStore.emitChange(hasDoneWithError);
             break;
         case EventConstants.LOAD_PRODUCT_NUMBER:
             newProductStore.newProductNumber = event.productNumber;
-            newProductStore.emitChange();
+            newProductStore.emitChange(false);
             break;
         case EventConstants.BLANK_FORMAT_VALIDATION_ERROR:
             newProductStore.alert.alertType = "alert-danger";
             newProductStore.alert.message = "Поле 'формат заготовки' должно быть заполнено!";
             newProductStore.showAlert = true;
-            newProductStore.emitChange();
+            newProductStore.emitChange(true);
             newProductStore.showAlert = false;
     }
 });

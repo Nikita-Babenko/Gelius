@@ -4,10 +4,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Data {
 
-    //DateTimeFormatter для указанных пользователем дат (согласно формату из HTML-поля INPUT:date):
+    //DateTimeFormatter for dates (according to HTML-field INPUT:date format):
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    //Номера новых и старых техкарт - заполнитель (дополняет слева) и количество цифр:
+    //Numbers of old and new datasheets - placeholder (padded from left) and number of digits:
     public class ProductNumber {
         public static final String PLACEHOLDER = "0";
         public static final int DIGITS_COUNT_NEW = 5;

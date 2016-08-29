@@ -1,7 +1,7 @@
-import Dispatcher from '../dispatcher/Dispatcher';
-import UrlConstants from '../constants/Url';
-import EventConstants from '../constants/Events';
-import NewProductStore from '../stores/NewProductStore';
+import Dispatcher from "../dispatcher/Dispatcher";
+import UrlConstants from "../constants/Url";
+import EventConstants from "../constants/Events";
+import NewProductStore from "../stores/NewProductStore";
 
 var NewProductActions = {
 
@@ -108,9 +108,28 @@ var NewProductActions = {
         Dispatcher.dispatch({
             eventType: EventConstants.UPDATE_WORKABILITY_INFO
         });
+    },
+    
+    disablePalletDictionaryDependsFromChangePacking(){
+        var pallet = $('#pallet');
+        $('#packing').change(function() {
+            if (this.value === ''){
+                pallet.prop( "disabled", true);
+                pallet.val('');
+            }
+            else{
+                pallet.prop( "disabled", false);
+                pallet.val('1');
+            }
+        });
+    },
+
+    disablePalletDictionaryByDefault(){
+        var isEmpty = $('#packing :selected').val();
+        if (isEmpty === ''){
+            $('#pallet').prop( "disabled", true);
+        }
     }
-
-
 };
 
 export default NewProductActions;

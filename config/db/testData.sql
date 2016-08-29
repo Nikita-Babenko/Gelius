@@ -1,14 +1,14 @@
 INSERT INTO client (client_id, company_name, phone_number) VALUES
   (1, 'АВК', '+38050-355-62-78'),
   (2, 'Ласунка', '+38066-355-62-78'),
-  (3, 'Пертущенко', '+38067-355-62-78');
+  (3, 'Петрушенко', '+38067-355-62-78');
 
 
 INSERT INTO product_type (product_type_id, product_type) VALUES
   (1, 'Ящик (4 flaps)'),
   (2, 'Ящик сложный'),
   (3, 'Ящик (крышка)'),
-  (4, 'Box (bottom)'),
+  (4, 'Ящик (bottom)'),
   (5, 'Tray'),
   (6, 'Трейс'),
   (7, 'Лист'),
@@ -97,12 +97,12 @@ INSERT INTO product (product_id, product_number, isNew, product_type_id, inner_h
                      inner_length, inner_width, cardboard_brand_id, client_id,
                      face_layer_id, inner_layer_id, profile_id, cliche, blank_format)
 VALUES
-  (1, 1, true, 4, 340, 220, 410, 11, 2, 1, 2, 6, 'Lasunka', 4),
-  (2, 2, true, 5, 350, 210, 450, 4, 3, 2, 1, 3, 'Petruschenko', 5),
-  (3, 1800, false, 1, 310, 350, 210, 2, 2, 4, 3, 3, 'Lasunka', 7),
-  (4, 1645, false, 1, 310, 360, 210, 7, 1, 5, 2, 4, 'ABK', 8),
-  (5, 3, true, 3, 310, 350, 210, 7, 2, 1, 5, 2, 'Lasunka', 9),
-  (6, 4, true, 15, 310, 350, 210, 3, 3, 1, 5, 2, 'ABK', 9);
+  (1, 1, true, 4, 340, 220, 410, 11, 2, 1, 2, 6, 'Ласунка', 4),
+  (2, 2, true, 5, 350, 210, 450, 4, 3, 2, 1, 3, 'Петрушенко', 5),
+  (3, 1800, false, 1, 310, 350, 210, 2, 2, 4, 3, 3, 'Ласунка', 7),
+  (4, 1645, false, 1, 310, 360, 210, 7, 1, 5, 2, 4, 'АВК', 8),
+  (5, 3, true, 3, 310, 350, 210, 7, 2, 1, 5, 2, 'Ласунка', 9),
+  (6, 4, true, 15, 310, 350, 210, 3, 3, 1, 5, 2, 'АВК', 9);
 
 
 COMMIT;

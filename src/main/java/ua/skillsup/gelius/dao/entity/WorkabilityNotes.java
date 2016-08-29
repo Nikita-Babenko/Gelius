@@ -21,6 +21,9 @@ public class WorkabilityNotes {
     @JoinColumn(name="service_center")
     private Workability serviceCenter;
 
+    @Column(name = "notes")
+    private String note;
+
     public WorkabilityNotes() {
     }
 
@@ -48,12 +51,21 @@ public class WorkabilityNotes {
         this.serviceCenter = serviceCenter;
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("WorkabilityNotes{");
         sb.append("id=").append(id);
         sb.append(", product=").append(product);
         sb.append(", serviceCenter=").append(serviceCenter);
+        sb.append(", note=").append(note);
         sb.append('}');
         return sb.toString();
     }

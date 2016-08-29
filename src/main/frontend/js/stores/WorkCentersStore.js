@@ -23,8 +23,9 @@ class WorkCentersStore extends EventEmitter {
         for (var key in centers) {
             if (centers[key].length > 0) {
                 centers[key].forEach(function (item, i) {
-                    if (i > 0)
+                    if (i > 0) {
                         text += '/';
+                    }
                     text += item.serviceCenter;
                 });
                 text += "      ";
