@@ -36,7 +36,9 @@ class WorkCentersStore extends EventEmitter {
 
     __initWorkCenters() {
         return {
-            group1: [], group2: [], group3: [], group6: [], other: []
+            group0: [], //for AG
+            group10: [], group20: [], group30: [], group40: [], group50: [],
+            group60: [], group70: [], group80: [], group90: [], group100: []
         };
     }
 
@@ -54,41 +56,17 @@ workCentersStore.dispatchToken = Dispatcher.register(function (event) {
         case EventConstants.ADD_WORK_CENTER:
             var centers = workCentersStore.selectedWorkCenters;
             var center = event.workCenter;
-            switch (center.groupPriority) {
-                case 10:
-                    centers.group1.push(center);
-                    break;
-                case 20:
-                    centers.group2.push(center);
-                    break;
-                case 30:
-                    centers.group3.push(center);
-                    break;
-                case 60:
-                    centers.group6.push(center);
-                    break;
-                default:
-                    centers.other.push(center)
+            var groupName = "group" + center.groupPriority;
+            if (centers[groupName] !== undefined) {
+                centers[groupName].push(center);
             }
             break;
         case EventConstants.DELETE_WORK_CENTER:
             var centers = workCentersStore.selectedWorkCenters;
             var center = event.workCenter;
-            switch (center.groupPriority) {
-                case 10:
-                    centers.group1.splice($.inArray(center, centers.group1), 1);
-                    break;
-                case 20:
-                    centers.group2.splice($.inArray(center, centers.group2), 1);
-                    break;
-                case 30:
-                    centers.group3.splice($.inArray(center, centers.group3), 1);
-                    break;
-                case 60:
-                    centers.group6.splice($.inArray(center, centers.group6), 1);
-                    break;
-                default:
-                    centers.other.splice($.inArray(center, centers.other), 1);
+            var groupName = "group" + center.groupPriority;
+            if (centers[groupName] !== undefined) {
+                centers[groupName].splice($.inArray(center, centers[groupName]), 1);
             }
             break;
     }

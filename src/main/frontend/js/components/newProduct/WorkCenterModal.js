@@ -41,34 +41,14 @@ class ModalBody extends React.Component {
     render() {
         var centers = this.state.workCenters;
         var groups = {
-            group1: [], group2: [], group3: [], group4_5: [], group6: [], group7_10: []
+            group10: [], group20: [], group30: [], group40: [], group50: [],
+            group60: [], group70: [], group80: [], group90: [], group100: []
         };
 
         centers.forEach(function (item) {
-            switch (item.groupPriority) {
-                case 10:
-                    groups.group1.push(<WorkCenterItem item={item}/>);
-                    break;
-                case 20:
-                    groups.group2.push(<WorkCenterItem item={item}/>);
-                    break;
-                case 30:
-                    groups.group3.push(<WorkCenterItem item={item}/>);
-                    break;
-                case 40:
-                case 50:
-                    groups.group4_5.push(<WorkCenterItem item={item}/>);
-                    break;
-                case 60:
-                    groups.group6.push(<WorkCenterItem item={item}/>);
-                    break;
-                case 70:
-                case 80:
-                case 90:
-                case 100:
-                    groups.group7_10.push(<WorkCenterItem item={item}/>);
-                    break;
-
+            var groupName = "group" + item.groupPriority;
+            if (groups[groupName] !== undefined) {
+                groups[groupName].push(<WorkCenterItem item={item}/>);
             }
         });
         return (
@@ -76,24 +56,36 @@ class ModalBody extends React.Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="=row group">
-                            {groups.group1}
+                            {groups.group10}
                         </div>
                         <div className="=row group">
-                            {groups.group2}
+                            {groups.group20}
                         </div>
                         <div className="=row group">
-                            {groups.group3}
+                            {groups.group30}
                         </div>
                         <div className="=row ungrouped">
-                            {groups.group4_5}
+                            {groups.group40}
+                        </div>
+                        <div className="=row ungrouped">
+                            {groups.group50}
                         </div>
                     </div>
                     <div className="col-md-6">
                         <div className="=row group">
-                            {groups.group6}
+                            {groups.group60}
                         </div>
                         <div className="=row ungrouped">
-                            {groups.group7_10}
+                            {groups.group70}
+                        </div>
+                        <div className="=row ungrouped">
+                            {groups.group80}
+                        </div>
+                        <div className="=row ungrouped">
+                            {groups.group90}
+                        </div>
+                        <div className="=row ungrouped">
+                            {groups.group100}
                         </div>
                     </div>
                 </div>

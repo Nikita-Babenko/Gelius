@@ -110,25 +110,36 @@ var NewProductActions = {
         });
     },
     
+    // implemented #1201
     disablePalletDictionaryDependsFromChangePacking(){
-        var pallet = $('#pallet');
+        var palletContext = $('#pallet');
         $('#packing').change(function() {
-            if (this.value === ''){
-                pallet.prop( "disabled", true);
-                pallet.val('');
+            if (this.value === '' || this.value === '1'){
+                palletContext.prop( "disabled", true);
+                palletContext.val('');
             }
             else{
-                pallet.prop( "disabled", false);
-                pallet.val('1');
+                palletContext.prop( "disabled", false);
+                palletContext.val('1');
             }
         });
     },
 
     disablePalletDictionaryByDefault(){
-        var isEmpty = $('#packing :selected').val();
-        if (isEmpty === ''){
+        var value = $('#packing').find(':selected').val();
+        if (value === '' || value === '1'){
             $('#pallet').prop( "disabled", true);
         }
+    },
+
+    // implemented 1203
+    defaultConnectionValveDictionaryDependsFromProductType(){
+        $('#productType').change(function() {
+            if (this.value === '1'){
+                $('#connectionValve').val('1');
+            }
+            else $('#connectionValve').val('');
+        });
     }
 };
 
