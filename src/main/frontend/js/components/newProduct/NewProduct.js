@@ -16,6 +16,7 @@ class NewProduct extends React.Component {
     componentDidMount(){
         NewProductAction.disablePalletDictionaryByDefault();
         NewProductAction.disablePalletDictionaryDependsFromChangePacking();
+        NewProductAction.defaultConnectionValveDictionaryDependsFromProductType();
     }
     
     componentWillMount() {

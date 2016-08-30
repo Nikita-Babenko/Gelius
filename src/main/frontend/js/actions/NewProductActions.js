@@ -110,7 +110,7 @@ var NewProductActions = {
         });
     },
     
-    // implemented #1203
+    // implemented #1201
     disablePalletDictionaryDependsFromChangePacking(){
         var palletContext = $('#pallet');
         $('#packing').change(function() {
@@ -130,6 +130,16 @@ var NewProductActions = {
         if (value === '' || value === '1'){
             $('#pallet').prop( "disabled", true);
         }
+    },
+
+    // implemented 1203
+    defaultConnectionValveDictionaryDependsFromProductType(){
+        $('#productType').change(function() {
+            if (this.value === '1'){
+                $('#connectionValve').val('1');
+            }
+            else $('#connectionValve').val('');
+        });
     }
 };
 
