@@ -13,6 +13,6 @@ public interface DictionaryDao{
 
     <T> T update(T object);
 
-    <T> List<T> getAll(Class<T> type);
+    <T> List<T> findAll(Class<T> type);
 
 }

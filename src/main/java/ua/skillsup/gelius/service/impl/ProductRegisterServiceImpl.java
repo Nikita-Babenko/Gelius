@@ -20,7 +20,7 @@ public class ProductRegisterServiceImpl implements ProductRegisterService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductRegisterDto> getAllProducts() {
-        return productRegisterDao.getAllProducts();
+        return productRegisterDao.findAll();
     }
 
     @Override

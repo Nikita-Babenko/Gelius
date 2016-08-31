@@ -31,7 +31,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     private ModelMapper modelMapper;
 
     @Override
-    public Map<String, List<?>> getAllDictionaries() {
+    public Map<String, List<?>> findAll() {
         LOG.info("Get all dictionaries");
 
         Map<String, List<?>> result = new HashMap<>();
@@ -52,8 +52,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public void editDictionary(String dictionary, String operation, Object object) {
-
+    public void update(String dictionary, String operation, Object object) {
     }
 
     private Map<String, ClassWithDTOPair> getDictionariesWithClasses() {
@@ -79,7 +78,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     private <T, D> List<D> getEntitiesFromDictionary(Class<T> entityClazz, Class<D> dtoClazz, String fieldNameToDisplay) {
 
         List<D> result = new ArrayList<>();
-        List<T> entities = dictionaryDao.getAll(entityClazz);
+        List<T> entities = dictionaryDao.findAll(entityClazz);
         for (T entity : entities) {
             result.add(converEntityToDto(entity, dtoClazz));
         }

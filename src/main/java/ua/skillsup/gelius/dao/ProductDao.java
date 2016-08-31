@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface ProductDao {
 
-    List<ProductDto> getAllProducts();
+    List<ProductDto> findAll();
 
-    long create(ProductDto product);
+    long save(ProductDto product);
 
-    int getMaxProductNumberOfNewDataSheets();
+    int getMaxProductNumber();
 
     ProductDto findById(long productId);
 
-    boolean isExistsOldProductWithSameProductNumber(int productNumber);
+    boolean isProductExist(int productNumber);
 
 }

@@ -25,7 +25,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ProductDto> getAllProducts() {
+    public List<ProductDto> findAll() {
         List<Product> productList = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
         List<ProductDto> productDtoList = new ArrayList<>(productList.size());
         productList.forEach(product -> productDtoList.add(modelMapper.map(product, ProductDto.class)));
@@ -33,7 +33,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public long create(ProductDto productDto) {
+    public long save(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
         assignProductToWorkabilityNotes(product);
         this.sessionFactory.getCurrentSession().persist(product);
@@ -46,7 +46,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public int getMaxProductNumberOfNewDataSheets() {
+    public int getMaxProductNumber() {
         Integer maxNumber = (Integer) this.sessionFactory.getCurrentSession().
             createQuery("select max(p.productNumber) from Product p where p.isNew = true").
             uniqueResult();
@@ -61,7 +61,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean isExistsOldProductWithSameProductNumber(int productNumber) {
+    public boolean isProductExist(int productNumber) {
         long count = (long) this.sessionFactory.getCurrentSession().
             createQuery("select count(p) from Product p where p.productNumber = :productNumber and p.isNew = false").
             setParameter("productNumber", productNumber).

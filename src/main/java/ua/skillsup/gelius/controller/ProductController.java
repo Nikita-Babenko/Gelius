@@ -31,16 +31,16 @@ public class ProductController {
     private DictionaryService dictionaryService;
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
-    private String openPageNewProduct() {
+    private String pageNewProduct() {
         LOG.info("Open new product page");
         return "newProduct";
     }
 
     @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
     @ResponseBody
-    private Response saveProduct(@RequestBody ProductDto product) {
+    private Response save(@RequestBody ProductDto product) {
         LOG.info("createProduct. Mapping 'raw' product data:\n" + product);
-        String savedProductNumberValue = this.productService.createProduct(product);
+        String savedProductNumberValue = this.productService.save(product);
         String newProductNumberValue = getFullProductNumber();
         Map<String, String> responseData = new HashMap<>();
         responseData.put("newProductNumber", newProductNumberValue);
@@ -61,16 +61,16 @@ public class ProductController {
 
     @RequestMapping(value = "/newProduct/allDictionaries", method = RequestMethod.GET)
     @ResponseBody
-    private Response getDictionaries() {
+    private Response findAllDictionaries() {
 
         LOG.info("Get all dictionaries");
-        Map<String, List<?>> dictionaries = dictionaryService.getAllDictionaries();
+        Map<String, List<?>> dictionaries = dictionaryService.findAll();
 
         return new Response(ResponseCode.OK, dictionaries);
     }
 
     private String getFullProductNumber() {
-        int newProductNumber = this.productService.getProductNumberOfNewDatasheet();
+        int newProductNumber = this.productService.getProductNumber();
         return this.productService.getFullProductNumber(newProductNumber, true);
     }
 

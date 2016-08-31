@@ -30,7 +30,7 @@ public abstract class AbstractDictionaryDao {
         return (object);
     }
 
-    public <T> List<T> getAll(Class<T> type) {
+    public <T> List<T> findAll(Class<T> type) {
         final Session session = sessionFactory.getCurrentSession();
         final Criteria crit = session.createCriteria(type);
         return crit.list();

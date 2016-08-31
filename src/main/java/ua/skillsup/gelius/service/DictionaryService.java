@@ -5,8 +5,8 @@ import java.util.Map;
 
 public interface DictionaryService {
 
-    Map<String, List<?>> getAllDictionaries();
+    Map<String, List<?>> findAll();
 
-    void editDictionary(String dictionary, String operation, Object object);
+    void update(String dictionary, String operation, Object object);
 
 }

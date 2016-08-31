@@ -25,14 +25,14 @@ public class ProductRegisterController {
     private ProductRegisterService productRegisterService;
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
-    private String getRegister() {
+    private String pageRegister() {
         LOG.info("Open register page");
         return "register";
     }
 
     @RequestMapping(path = "/all", method = RequestMethod.GET)
     @ResponseBody
-    private JSONResponse getAllProducts() {
+    private JSONResponse findAllProducts() {
         LOG.info("Get all products");
         List<ProductRegisterDto> allProducts = productRegisterService.getAllProducts();
         return createResponse(allProducts, "products");
@@ -40,7 +40,7 @@ public class ProductRegisterController {
 
     @RequestMapping(value = "/allFilterParameters", method = RequestMethod.POST)
     @ResponseBody
-    private JSONResponse getFilterParameters(@RequestBody ProductRegisterFilter filter) {
+    private JSONResponse findFilterParameters(@RequestBody ProductRegisterFilter filter) {
         Map parameters = productRegisterService.findAllFilterParameters(filter);
 
         return new JSONResponse("200", "OK", parameters);
@@ -49,7 +49,7 @@ public class ProductRegisterController {
 
     @RequestMapping(value = "/filtrate", method = RequestMethod.POST)
     @ResponseBody
-    private JSONResponse filtrateProducts(@RequestBody ProductRegisterFilter filter) {
+    private JSONResponse findByFilter(@RequestBody ProductRegisterFilter filter) {
         List<ProductRegisterDto> products = productRegisterService.findByFilter(filter);
         LOG.info("Get filtrated products");
 
