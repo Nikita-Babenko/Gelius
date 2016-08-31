@@ -46,7 +46,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public int getMaxProductNumberOfNewDatasheets() {
+    public int getMaxProductNumberOfNewDataSheets() {
         Integer maxNumber = (Integer) this.sessionFactory.getCurrentSession().
             createQuery("select max(p.productNumber) from Product p where p.isNew = true").
             uniqueResult();

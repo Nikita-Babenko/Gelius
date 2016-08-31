@@ -10,7 +10,7 @@ public interface ProductDao {
 
     long create(ProductDto product);
 
-    int getMaxProductNumberOfNewDatasheets();
+    int getMaxProductNumberOfNewDataSheets();
 
     ProductDto findById(long productId);
 

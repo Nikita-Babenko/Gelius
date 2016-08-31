@@ -102,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int getProductNumberOfNewDatasheet() {
-        return this.productDao.getMaxProductNumberOfNewDatasheets() + 1;
+        return this.productDao.getMaxProductNumberOfNewDataSheets() + 1;
     }
 
     @Override
