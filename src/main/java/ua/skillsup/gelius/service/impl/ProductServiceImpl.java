@@ -10,7 +10,6 @@ import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.ProductService;
 import ua.skillsup.gelius.service.ValidationService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -28,12 +27,6 @@ public class ProductServiceImpl implements ProductService {
             int productNumber = getProductNumberOfNewDatasheet();
             product.setProductNumber(productNumber);
         }
-
-        //Dates parsing, filling them to DTO:
-        LocalDate productCreateDate = this.validationService.parseDate( product.getProductCreateDateValue() );
-        LocalDate productUpdateDate = this.validationService.parseDate( product.getProductUpdateDateValue() );
-        product.setProductCreateDate(productCreateDate);
-        product.setProductUpdateDate(productUpdateDate);
 
         //Filling other DTO fields (vocabularies):
         ProductDto filledProduct = fillProductDto(product);

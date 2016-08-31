@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.impl;
 
 import org.hibernate.SessionFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,11 +9,9 @@ import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dao.entity.Product;
 import ua.skillsup.gelius.dao.entity.WorkabilityNotes;
 import ua.skillsup.gelius.model.dto.ProductDto;
-import ua.skillsup.gelius.util.convert.ProductConvert;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static ua.skillsup.gelius.util.convert.ProductConvert.convert;
 
 @Repository
 @Transactional
@@ -21,16 +20,21 @@ public class ProductDaoImpl implements ProductDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     @SuppressWarnings("unchecked")
     public List<ProductDto> getAllProducts() {
-        List<Product> products = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
-        return ProductConvert.convertList(products);
+        List<Product> productList = sessionFactory.getCurrentSession().createCriteria(Product.class).list();
+        List<ProductDto> productDtoList = new ArrayList<>(productList.size());
+        productList.forEach(product -> productDtoList.add(modelMapper.map(product, ProductDto.class)));
+        return productDtoList;
     }
 
     @Override
     public long create(ProductDto productDto) {
-        Product product = convert(productDto);
+        Product product = modelMapper.map(productDto, Product.class);
         assignProductToWorkabilityNotes(product);
         this.sessionFactory.getCurrentSession().persist(product);
         return product.getId();
@@ -38,9 +42,7 @@ public class ProductDaoImpl implements ProductDao {
 
     private void assignProductToWorkabilityNotes(Product product) {
         List<WorkabilityNotes> workabilityNotes = product.getWorkabilityNotes();
-        for (int i = 0; i < workabilityNotes.size(); i++) {
-            workabilityNotes.get(i).setProduct(product);
-        }
+        workabilityNotes.forEach(workabilityNote -> workabilityNote.setProduct(product));
     }
 
     @Override
@@ -54,8 +56,8 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     //Can returns null if product not found.
     public ProductDto findById(long productId) {
-        Product product = (Product) this.sessionFactory.getCurrentSession().get(Product.class, productId);
-        return convert(product);
+        Product product = this.sessionFactory.getCurrentSession().get(Product.class, productId);
+        return modelMapper.map(product, ProductDto.class);
     }
 
     @Override

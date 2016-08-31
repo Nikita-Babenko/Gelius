@@ -6,6 +6,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,14 +14,11 @@ import ua.skillsup.gelius.dao.ProductRegisterDao;
 import ua.skillsup.gelius.dao.entity.ProductRegister;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
-import ua.skillsup.gelius.util.convert.ProductRegisterConvert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static ua.skillsup.gelius.util.convert.ProductRegisterConvert.convert;
 
 
 @Repository
@@ -30,22 +28,28 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public List<ProductRegisterDto> getAllProducts() {
-        List<ProductRegister> productsRegister = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class).list();
-        return ProductRegisterConvert.convertList(productsRegister);
+        List<ProductRegister> productList = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class).list();
+        List<ProductRegisterDto> productDtoList = new ArrayList<>(productList.size());
+        productList.forEach(product -> productDtoList.add(modelMapper.map(product, ProductRegisterDto.class)));
+
+        return productDtoList;
     }
 
     @Override
     public List<ProductRegisterDto> findByFilter(ProductRegisterFilter filter) {
         Criteria criteria = getFilterCriteria(filter);
         criteria = getSortingCriteria(criteria, filter);
-        List<ProductRegister> products = criteria.list();
-        List<ProductRegisterDto> result = new ArrayList<>(products.size());
-        for (ProductRegister product : products) {
-            result.add(convert(product));
-        }
-        return result;
+
+        List<ProductRegister> productList = criteria.list();
+        List<ProductRegisterDto> productDtoList = new ArrayList<>(productList.size());
+        productList.forEach(product -> productDtoList.add(modelMapper.map(product, ProductRegisterDto.class)));
+
+        return productDtoList;
     }
 
     private <T> List<T> getFilterParameters(final ProductRegisterFilter filter, String columnName) {
@@ -70,6 +74,7 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
         filterParameters.put("profile.profile", getFilterParameters(filter, "profile.profile"));
         filterParameters.put("layersColours", getFilterParameters(filter, "layersColours"));
         filterParameters.put("cliche", getFilterParameters(filter, "cliche"));
+
         return filterParameters;
     }
 
