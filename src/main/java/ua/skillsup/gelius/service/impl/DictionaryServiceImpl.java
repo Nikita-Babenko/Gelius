@@ -42,9 +42,8 @@ public class DictionaryServiceImpl implements DictionaryService {
 
             Class<?> clazzEntity = classes.getClazz();
             Class<?> clazzDto = classes.getClazzDto();
-            String fieldNameToDisplay = classes.getFieldNameToDisplay();
 
-            List<?> listEntities = getEntitiesFromDictionary(clazzEntity, clazzDto, fieldNameToDisplay);
+            List<?> listEntities = getEntitiesFromDictionary(clazzEntity, clazzDto);
             result.put(dictionaryName, listEntities);
         }
 
@@ -58,24 +57,24 @@ public class DictionaryServiceImpl implements DictionaryService {
     private Map<String, ClassWithDTOPair> getDictionariesWithClasses() {
         Map<String, ClassWithDTOPair> dictionaries = new HashMap<>();
 
-        dictionaries.put("client", new ClassWithDTOPair(Client.class, ClientDto.class, "companyName"));
-        dictionaries.put("cardboardBrand", new ClassWithDTOPair(CardboardBrand.class, CardboardBrandDto.class, "cardboardBrand"));
-        dictionaries.put("celluloseLayer", new ClassWithDTOPair(CelluloseLayer.class, CelluloseLayerDto.class, "celluloseLayer"));
-        dictionaries.put("connectionValve", new ClassWithDTOPair(ConnectionValve.class, ConnectionValveDto.class, "connectionValve"));
-        dictionaries.put("faceLayer", new ClassWithDTOPair(FaceLayer.class, FaceLayerDto.class, "faceLayer"));
-        dictionaries.put("format", new ClassWithDTOPair(Format.class, FormatDto.class, "format"));
-        dictionaries.put("innerLayer", new ClassWithDTOPair(InnerLayer.class, InnerLayerDto.class, "innerLayer"));
-        dictionaries.put("packing", new ClassWithDTOPair(Packing.class, PackingDto.class, "packing"));
-        dictionaries.put("pallet", new ClassWithDTOPair(Pallet.class, PalletDto.class, "pallet"));
-        dictionaries.put("palletPlacement", new ClassWithDTOPair(PalletPlacement.class, PalletPlacementDto.class, "palletPlacement"));
-        dictionaries.put("productType", new ClassWithDTOPair(ProductType.class, ProductTypeDto.class, "productType"));
-        dictionaries.put("profile", new ClassWithDTOPair(Profile.class, ProfileDto.class, "profile"));
-        dictionaries.put("workability", new ClassWithDTOPair(Workability.class, WorkabilityDto.class, "serviceCenter"));
+        dictionaries.put("client", new ClassWithDTOPair(Client.class, ClientDto.class));
+        dictionaries.put("cardboardBrand", new ClassWithDTOPair(CardboardBrand.class, CardboardBrandDto.class));
+        dictionaries.put("celluloseLayer", new ClassWithDTOPair(CelluloseLayer.class, CelluloseLayerDto.class));
+        dictionaries.put("connectionValve", new ClassWithDTOPair(ConnectionValve.class, ConnectionValveDto.class));
+        dictionaries.put("faceLayer", new ClassWithDTOPair(FaceLayer.class, FaceLayerDto.class));
+        dictionaries.put("format", new ClassWithDTOPair(Format.class, FormatDto.class));
+        dictionaries.put("innerLayer", new ClassWithDTOPair(InnerLayer.class, InnerLayerDto.class));
+        dictionaries.put("packing", new ClassWithDTOPair(Packing.class, PackingDto.class));
+        dictionaries.put("pallet", new ClassWithDTOPair(Pallet.class, PalletDto.class));
+        dictionaries.put("palletPlacement", new ClassWithDTOPair(PalletPlacement.class, PalletPlacementDto.class));
+        dictionaries.put("productType", new ClassWithDTOPair(ProductType.class, ProductTypeDto.class));
+        dictionaries.put("profile", new ClassWithDTOPair(Profile.class, ProfileDto.class));
+        dictionaries.put("workability", new ClassWithDTOPair(Workability.class, WorkabilityDto.class));
 
         return dictionaries;
     }
 
-    private <T, D> List<D> getEntitiesFromDictionary(Class<T> entityClazz, Class<D> dtoClazz, String fieldNameToDisplay) {
+    private <T, D> List<D> getEntitiesFromDictionary(Class<T> entityClazz, Class<D> dtoClazz) {
 
         List<D> result = new ArrayList<>();
         List<T> entities = dictionaryDao.findAll(entityClazz);
@@ -102,12 +101,10 @@ public class DictionaryServiceImpl implements DictionaryService {
     private class ClassWithDTOPair {
         private Class<?> clazz;
         private Class<?> clazzDto;
-        private String fieldNameToDisplay;
 
-        ClassWithDTOPair(Class<?> clazz, Class<?> clazzDto, String fieldNameToDisplay) {
+        ClassWithDTOPair(Class<?> clazz, Class<?> clazzDto) {
             this.clazz = clazz;
             this.clazzDto = clazzDto;
-            this.fieldNameToDisplay = fieldNameToDisplay;
         }
 
         Class<?> getClazz() {
@@ -118,8 +115,5 @@ public class DictionaryServiceImpl implements DictionaryService {
             return clazzDto;
         }
 
-        public String getFieldNameToDisplay() {
-            return fieldNameToDisplay;
-        }
     }
 }
