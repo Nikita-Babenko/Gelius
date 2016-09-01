@@ -49,7 +49,7 @@ gulp.task('jest', function(){
 });
 
 gulp.task('watch', function(){
-    gulp.watch(['src/**/*.js*'], ['compile']);
+    gulp.watch(['src/main/frontend/js/**/*.js*'], ['default']);
 });
 
 gulp.task('default', ['apply-prod-environment', 'compileProductRegister', 'compileNewProduct']);

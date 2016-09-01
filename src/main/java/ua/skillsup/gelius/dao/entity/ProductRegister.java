@@ -60,8 +60,8 @@ public class ProductRegister {
     @JoinColumn(name = "inner_layer_id")
     private InnerLayer innerLayer;
 
-    @Formula(value = "concat((select i.inner_layer from inner_layer i where i.inner_layer_id = inner_layer_id), " +
-            "'/', (select f.face_layer from face_layer f where f.face_layer_id = face_layer_id))")
+    @Formula(value = "concat(coalesce((select f.face_layer from face_layer f where f.face_layer_id = face_layer_id), '-'), " +
+            "'/', coalesce((select i.inner_layer from inner_layer i where i.inner_layer_id = inner_layer_id), '-'))")
     private String layersColours;
 
     @Size(max = 50)

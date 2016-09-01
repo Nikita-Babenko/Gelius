@@ -53,8 +53,8 @@ class NewProductStore extends EventEmitter {
         product["innerLayer"] = Number($('#innerLayer :selected').val());
         product["faceLayer"] = Number($('#faceLayer :selected').val());
         product["cliche"] = $('#cliche').val();
-        product["theoreticalSquare"] = $('#theoreticalSquare').val();
-        product["actualSquare"] = $('#actualSquare').val();
+        product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/,'.'));
+        product["actualSquare"] = $('#actualSquare').val().replace(/,/,'.');
         product["material"] = $('#material').val();
         product["format"] = Number($('#format :selected').val());
         product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
