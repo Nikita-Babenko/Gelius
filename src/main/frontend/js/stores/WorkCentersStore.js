@@ -19,6 +19,10 @@ class WorkCentersStore extends EventEmitter {
         return this.selectedCentersText;
     }
 
+    getSelectedCenters() {
+        return this.selectedWorkCenters;
+    }
+
     __prepareTextOfSelectedWorkCenters() {
         var text = "";
         var centers = this.selectedWorkCenters;
@@ -51,10 +55,22 @@ class WorkCentersStore extends EventEmitter {
 
     __initWorkCenters() {
         return {
-            group0: [], //for Agregator
-            group10: [], group20: [], group30: [], group40: [], group50: [],
-            group60: [], group70: [], group80: [], group90: [], group100: []
+            group0: this.createWorkCentersGroup(), //for Agregator
+            group10: this.createWorkCentersGroup(),
+            group20: this.createWorkCentersGroup(),
+            group30: this.createWorkCentersGroup(),
+            group40: this.createWorkCentersGroup(),
+            group50: this.createWorkCentersGroup(),
+            group60: this.createWorkCentersGroup(),
+            group70: this.createWorkCentersGroup(),
+            group80: this.createWorkCentersGroup(),
+            group90: this.createWorkCentersGroup(),
+            group100: this.createWorkCentersGroup()
         };
+    }
+
+    createWorkCentersGroup() {
+        return [];
     }
 
 

@@ -488,9 +488,10 @@ input[type=number]::-webkit-outer-spin-button {
     float: left;
     height: 100%;
     width: 40%;
-    text-align: center;
+    text-align: left;
     padding: 0 !important;
     border-right: 1px solid black;
+    background: white;
     border-left: 0;
     border-top: 0;
     border-bottom: 0;

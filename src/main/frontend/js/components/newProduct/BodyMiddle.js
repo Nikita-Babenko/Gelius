@@ -1,9 +1,34 @@
 import React from 'react';
+import WorkCentersStore from '../../stores/WorkCentersStore';
+import EventConstants from '../../constants/Events';
 import Dictionary from '../newProduct/Dictionary';
 import SquareInput from '../newProduct/SquareInput';
+import WorkCenterNoteRow from '../newProduct/WorkCenterNoteRow';
 
 class BodyMiddle extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedCenters: []
+        };
+        this.__getSelectedCenters = this.__getSelectedCenters.bind(this);
+    }
+
+    componentWillMount() {
+        WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__getSelectedCenters);
+    }
+
+    componentWillUnmount() {
+        WorkCentersStore.removeListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__getSelectedCenters);
+    }
+
+    __getSelectedCenters() {
+        this.setState({ selectedCenters: WorkCentersStore.getSelectedCenters() });
+    }
+
     render() {
+        var workCentersNotes = this.__createWorkCentersNotes();
         return (
             <div className="col-md-12 col-lg-3 middle">
 
@@ -143,51 +168,7 @@ class BodyMiddle extends React.Component {
                         </td>
                     </tr>
 
-                    <tr>
-                        <td colSpan="4" className="notes_all">
-                            <div className="notes_inputs">
-                                <input type="text" className="note_input_1"/>
-                                <input type="text" className="note_input_2"/>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colSpan="4" className="notes_all">
-                            <div className="notes_inputs">
-                                <input type="text" className="note_input_1"/>
-                                <input type="text" className="note_input_2"/>
-                            </div>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td colSpan="4" className="notes_all">
-                            <div className="notes_inputs">
-                                <input type="text" className="note_input_1"/>
-                                <input type="text" className="note_input_2"/>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colSpan="4" className="notes_all">
-                            <div className="notes_inputs">
-                                <input type="text" className="note_input_1"/>
-                                <input type="text" className="note_input_2"/>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colSpan="4" className="notes_all">
-                            <div className="notes_inputs">
-                                <input type="text" className="note_input_1"/>
-                                <input type="text" className="note_input_2"/>
-                            </div>
-                        </td>
-                    </tr>
+                    {workCentersNotes}
 
                     </tbody>
                 </table>
@@ -195,6 +176,25 @@ class BodyMiddle extends React.Component {
             </div>
         );
     }
+
+    __createWorkCentersNotes() {
+        var selectedCenters = this.state.selectedCenters;
+        var components = [];
+        var index = 0;
+
+        for (var key in selectedCenters) {
+            if (selectedCenters[key].length == 0) { //there are no workcenters in this group
+                continue;
+            }
+            components.push(
+                <WorkCenterNoteRow index={++index} workCenterGroup={selectedCenters[key]} />
+            );
+            //index is temp. attribute (maybe)
+        }
+
+        return components;
+    }
+
 }
 
 export default BodyMiddle;
