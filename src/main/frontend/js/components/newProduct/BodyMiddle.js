@@ -1,5 +1,6 @@
 import React from 'react';
 import Dictionary from '../newProduct/Dictionary';
+import SquareInput from '../newProduct/SquareInput';
 
 class BodyMiddle extends React.Component {
     render() {
@@ -89,7 +90,7 @@ class BodyMiddle extends React.Component {
                                 <input type="text"/>
                             </div>
                             <div className="print_input_3">
-                                <input type="text"/>
+                                <SquareInput />
                             </div>
                         </td>
                     </tr>
@@ -103,7 +104,7 @@ class BodyMiddle extends React.Component {
                                 <input type="text"/>
                             </div>
                             <div className="print_input_3">
-                                <input type="text"/>
+                                <SquareInput />
                             </div>
                         </td>
                     </tr>
@@ -117,7 +118,7 @@ class BodyMiddle extends React.Component {
                                 <input type="text"/>
                             </div>
                             <div className="print_input_3">
-                                <input type="text"/>
+                                <SquareInput />
                             </div>
                         </td>
                     </tr>
@@ -131,7 +132,7 @@ class BodyMiddle extends React.Component {
                                 <input type="text"/>
                             </div>
                             <div className="print_input_3">
-                                <input type="text"/>
+                                <SquareInput />
                             </div>
                         </td>
                     </tr>

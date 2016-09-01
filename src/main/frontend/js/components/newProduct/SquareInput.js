@@ -38,4 +38,7 @@ SquareInput.propTypes = {
     id: React.PropTypes.string
 };
 
+SquareInput.defaultProps = {
+    id: ""
+};
 export default SquareInput;
