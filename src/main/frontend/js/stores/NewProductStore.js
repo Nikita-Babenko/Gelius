@@ -77,7 +77,6 @@ class NewProductStore extends EventEmitter {
 
         //Workability notes:
         product["workabilityNotes"] = [];
-        //product["workabilityNotes"].push( {serviceCenter: idOfAG, note: noteForAG} );  - blank for #1186
         var centers = WorkCentersStore.selectedWorkCenters;
         for (var key in centers) {
             centers[key].forEach(function(item) {
@@ -89,10 +88,6 @@ class NewProductStore extends EventEmitter {
 
         return product;
     }
-
-    /*__createWorkabilityNotesElement(serviceCenterId, note) {
-        return { serviceCenter: serviceCenterId, note: note };
-    }*/
 
     clearAllSelectedValues() {
         $('#productName').val("");

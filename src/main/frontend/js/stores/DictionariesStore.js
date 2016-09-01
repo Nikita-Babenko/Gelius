@@ -1,6 +1,7 @@
 import EventEmitter from 'eventemitter3';
 import Dispatcher from '../dispatcher/Dispatcher';
 import EventConstants from '../constants/Events';
+import ObjectConstants from '../constants/Objects';
 
 class DictionaryStore extends EventEmitter {
     constructor() {
@@ -16,6 +17,15 @@ class DictionaryStore extends EventEmitter {
         return this.allDictionaryParameters[dictionaryName];
     }
 
+    getAgregatorWorkCenter() {
+        var centers = this.allDictionaryParameters["workability"];
+        for (var i = 0; i < centers.length; i++) {
+            if (centers[i].id == ObjectConstants.dictionaries.WORKCENTER_AGREGATOR_ID) {
+                return centers[i];
+            }
+            console.log("Workcenter Agregator not found.");
+        }
+    }
 
 }
 

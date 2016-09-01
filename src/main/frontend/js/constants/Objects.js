@@ -12,7 +12,12 @@ var ObjectsConstants = {
         {name: 'profile.profile', text: 'Профиль'},
         {name: 'layersColours', text: 'Цвет'},
         {name: 'cliche', text: 'Печать'}
-    ]
+    ],
+
+    dictionaries: {
+        WORKCENTER_AGREGATOR_ID: 1
+    }
+
 };
 
 export default ObjectsConstants;
