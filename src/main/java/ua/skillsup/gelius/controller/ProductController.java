@@ -4,10 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ua.skillsup.gelius.controller.response.Response;
 import ua.skillsup.gelius.controller.response.ResponseCode;
-import ua.skillsup.gelius.exception.ParseProductDateException;
 import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.dto.ProductDto;
@@ -87,13 +90,6 @@ public class ProductController {
         LOG.info("ExceptionHandler (ProductValidationException): " + e);
         List<String> validationErrors = e.getErrors();
         return new Response(ResponseCode.VALIDATION_ERROR, validationErrors);
-    }
-
-    @ResponseBody
-    @ExceptionHandler(ParseProductDateException.class)
-    public Response exceptionHandler(ParseProductDateException e) {
-        LOG.info("ExceptionHandler (ParseProductDateException): " + e);
-        return new Response(ResponseCode.BAD_DATA);
     }
 
     @ResponseBody
