@@ -9,15 +9,16 @@ class HeaderRight extends React.Component {
         this.state = {
             isUse: true
         };
-        this.__changeCheckbox = this.__changeCheckbox.bind(this);
+        this.__setIsUse = this.__setIsUse.bind(this);
+        this.__changeIsUse = this.__changeIsUse.bind(this);
     }
 
     componentWillMount() {
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setChecked);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setIsUse);
     }
 
     componentWillUnmount() {
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setChecked);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setIsUse);
     }
 
     render() {
@@ -39,20 +40,20 @@ class HeaderRight extends React.Component {
                 </div>
 
                 <div className="form-group form-inline use">
-                    <input type="checkbox" className="header_righ_checkbox" id="isUse" checked={this.state.isUse} onChange={this.__changeCheckbox}/>
+                    <input type="checkbox" className="header_righ_checkbox" id="isUse" checked={this.state.isUse} onChange={this.__changeIsUse}/>
                     <p>Тех.карта используется</p>
                 </div>
             </div>
         );
     }
 
-    __changeCheckbox(e) {
+    __changeIsUse(e) {
         var isUse = e.target.checked;
         this.setState({isUse: isUse});
     }
 
-    __setChecked(){
-        this.setState({isUse: NewProductStore.getIsNew()});
+    __setIsUse(){
+        this.setState({isUse: true});
     }
 }
 

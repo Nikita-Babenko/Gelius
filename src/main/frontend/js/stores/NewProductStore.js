@@ -25,10 +25,6 @@ class NewProductStore extends EventEmitter {
         return this.newProductNumber;
     }
 
-    getIsNew() {
-        return true;
-    }
-
     getAlertInformation() {
         return this.alert;
     }
