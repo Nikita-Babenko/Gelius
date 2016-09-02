@@ -23,9 +23,10 @@ class Dictionary extends React.Component {
     render() {
         var dictData = this.state.dictionaryParameters;
         var dictText = this.props.dictionaryTextName;
+        var defaultValue = Number(this.props.defaultValue);
         var dictOptions = dictData.map(function (d) {
             return (
-                <DictionaryOption id={d.id} text={d[dictText]}/>
+                <DictionaryOption id={d.id} text={d[dictText]} defaultValue={defaultValue} />
             );
         });
 
@@ -59,7 +60,7 @@ export default Dictionary;
 class DictionaryOption extends React.Component {
     render() {
         return (
-            <option value={this.props.id}>{this.props.text}</option>
+            <option value={this.props.id} selected={this.props.id === this.props.defaultValue ? 'true' : ''}>{this.props.text}</option>
         );
     }
 }

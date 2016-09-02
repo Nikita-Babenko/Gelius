@@ -25,6 +25,10 @@ class NewProductStore extends EventEmitter {
         return this.newProductNumber;
     }
 
+    getIsNew() {
+        return true;
+    }
+
     getAlertInformation() {
         return this.alert;
     }
@@ -95,8 +99,6 @@ class NewProductStore extends EventEmitter {
     }*/
 
     clearAllSelectedValues() {
-        $('#isNew').attr('checked', false);
-        $('#isUse').attr('checked', false);
         $('#productName').val("");
         //$('#productCreateDate').val();
         //$('#productUpdateDate').val();
@@ -108,7 +110,6 @@ class NewProductStore extends EventEmitter {
         $("#client").val("");
         $("#cardboardBrand").val("");
         $("#productType").val("");
-        $("#celluloseLayer").val("");
         $("#innerLayer").val("");
         $("#faceLayer").val("");
         $('#cliche').val("");

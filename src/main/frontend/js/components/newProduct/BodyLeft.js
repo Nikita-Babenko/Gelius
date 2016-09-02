@@ -86,6 +86,7 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="celluloseLayer"
                                 dictionaryTextName="celluloseLayer"
+                                defaultValue="1"
                             />
                         </td>
                     </tr>
