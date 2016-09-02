@@ -1,6 +1,5 @@
 import React from 'react';
 import Dictionary from '../newProduct/Dictionary';
-import NewProductActions from '../../actions/NewProductActions';
 
 class BodyRight extends React.Component {
     render() {
@@ -84,10 +83,10 @@ class BodyRight extends React.Component {
                                 <a href="#">тех.карта.pdf</a><br/>
                                 <a href="#">ссылка2.ai</a>
                             </div>
-                            <div className="buttons">
-                                <a className="fa fa-paperclip fa-2x" href="#">
+                            <div className="attachment_buttons icon_buttons_group">
+                                <a href="#" className="fa fa-paperclip fa-2x" title="Прикрепить ссылку" aria-hidden="true">
                                 </a>
-                                <a className="fa fa-trash-o fa-2x" href="#">
+                                <a href="#" className="fa fa-trash-o fa-2x" title="Удалить все ссылки" aria-hidden="true">
                                 </a>
                             </div>
                         </td>
@@ -143,23 +142,18 @@ class BodyRight extends React.Component {
                 </table>
 
                 <div className="buttonContainer">
-                    <div className="buttons_bottom">
-                        <a className="fa fa-pencil  fa-3x" href="#">
+                    <div className="buttons_bottom icon_buttons_group">
+                        <a className="fa fa-pencil  fa-2x" href="#">
                         </a>
-                        <a className="fa fa-plus fa-3x" href="#" id="addNew"
-                           onClick={this.__onAddNewProductButtonClick}>
+                        <a className="fa fa-plus fa-2x" href="#" id="addNew">
                         </a>
-                        <a className="fa fa-trash fa-3x" href="#">
+                        <a className="fa fa-trash-o fa-2x" href="#">
                         </a>
                     </div>
                 </div>
 
             </div>
         );
-    }
-
-    __onAddNewProductButtonClick() {
-        NewProductActions.saveProduct();
     }
 }
 
