@@ -1,14 +1,15 @@
 import React from 'react';
+import Dropdown from '../productRegisterTable/Dropdown';
 
 class Heading extends React.Component {
     render() {
         return (
-            <th className="text-center">
+            <div>
                 <span>
                     {this.props.heading.text}
                 </span>
-                {this.props.children}
-            </th>
+                <Dropdown columnName={this.props.heading.name} position={this.props.position}/>
+            </div>
         );
     }
 }

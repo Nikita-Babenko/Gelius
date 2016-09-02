@@ -1,0 +1,21 @@
+.icon_buttons_group > a {
+    padding-top: 5px;
+    text-decoration: none;
+    border: 1px solid green;
+    text-align: center;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    color: green;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.icon_buttons_group > a:hover {
+    background-color: rgba(213, 241, 202, 0.96);
+}
+
+.icon_buttons_group > a:active {
+    background-color: #B6D7A8;
+}

@@ -4,7 +4,7 @@ import ProductRegisterTableStore from '../../stores/ProductRegisterTableStore';
 import EventConstants from '../../constants/Events';
 import Row from '../productRegisterTable/Row';
 
-class Rows extends React.Component {
+class TableBody extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,4 +42,4 @@ class Rows extends React.Component {
 
 }
 
-export default Rows;
+export default TableBody;

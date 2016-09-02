@@ -14,6 +14,7 @@
           rel="stylesheet">
 
     <link href="/resources/css/newProduct.css" rel="stylesheet">
+    <link href="/resources/css/general_styles.css" rel="stylesheet">
 
     <script src="<c:url value="${pageContext.request.contextPath}/webjars/jquery/2.1.4/jquery.js"/>"></script>
     <script src="<c:url value="${pageContext.request.contextPath}/webjars/bootstrap/3.3.5/js/bootstrap.js"/>"></script>

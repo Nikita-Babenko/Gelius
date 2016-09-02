@@ -1,14 +1,14 @@
 import React from 'react';
 import Table from '../productRegisterTable/Table';
-import Headings from '../productRegisterTable/Headings';
-import Rows from '../productRegisterTable/Rows';
+import TableHeader from '../productRegisterTable/TableHeader';
+import TableBody from '../productRegisterTable/TableBody';
 
 class ProductsTableComponent extends React.Component {
     render() {
         return (
             <Table>
-                <Headings />
-                <Rows />
+                <TableHeader />
+                <TableBody />
             </Table>
         );
     }
