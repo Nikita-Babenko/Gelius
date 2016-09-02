@@ -1,7 +1,7 @@
 import React from "react";
 import Dictionary from "../newProduct/Dictionary";
 import ProductNumberInput from "../newProduct/ProductNumberInput";
-import NewProductActions from '../../actions/NewProductActions';
+import NewProductActions from "../../actions/NewProductActions";
 
 class HeaderLeft extends React.Component {
     render() {
@@ -48,6 +48,7 @@ class HeaderLeft extends React.Component {
                                 dictionaryName="client"
                                 dictionaryTextName="companyName"
                                 style="form-control header_info_customer"
+                                defaultValue=""
                             />
                         </div>
 
@@ -63,6 +64,7 @@ class HeaderLeft extends React.Component {
                                 dictionaryName="productType"
                                 dictionaryTextName="productType"
                                 style="form-control header_info_type"
+                                defaultValue=""
                             />
                         </div>
 

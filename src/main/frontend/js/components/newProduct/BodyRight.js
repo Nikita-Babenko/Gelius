@@ -1,5 +1,5 @@
-import React from 'react';
-import Dictionary from '../newProduct/Dictionary';
+import React from "react";
+import Dictionary from "../newProduct/Dictionary";
 
 class BodyRight extends React.Component {
     render() {
@@ -19,6 +19,7 @@ class BodyRight extends React.Component {
                             <Dictionary
                                 dictionaryName="packing"
                                 dictionaryTextName="packing"
+                                defaultValue="1"
                             />
                         </td>
                     </tr>
@@ -52,6 +53,7 @@ class BodyRight extends React.Component {
                             <Dictionary
                                 dictionaryName="pallet"
                                 dictionaryTextName="pallet"
+                                defaultValue=""
                             />
                         </td>
                     </tr>
@@ -62,6 +64,7 @@ class BodyRight extends React.Component {
                             <Dictionary
                                 dictionaryName="palletPlacement"
                                 dictionaryTextName="palletPlacement"
+                                defaultValue=""
                             />
                         </td>
                     </tr>

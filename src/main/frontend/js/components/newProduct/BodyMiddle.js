@@ -1,9 +1,9 @@
-import React from 'react';
-import WorkCentersStore from '../../stores/WorkCentersStore';
-import EventConstants from '../../constants/Events';
-import Dictionary from '../newProduct/Dictionary';
-import SquareInput from '../newProduct/SquareInput';
-import WorkCenterNoteRow from '../newProduct/WorkCenterNoteRow';
+import React from "react";
+import WorkCentersStore from "../../stores/WorkCentersStore";
+import EventConstants from "../../constants/Events";
+import Dictionary from "../newProduct/Dictionary";
+import SquareInput from "../newProduct/SquareInput";
+import WorkCenterNoteRow from "../newProduct/WorkCenterNoteRow";
 
 class BodyMiddle extends React.Component {
 
@@ -72,6 +72,7 @@ class BodyMiddle extends React.Component {
                             <Dictionary
                                 dictionaryName="connectionValve"
                                 dictionaryTextName="connectionValve"
+                                defaultValue=""
                             />
                         </td>
                     </tr>
