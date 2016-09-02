@@ -33,7 +33,7 @@ public class ProductRegisterDaoImplTest {
 
     @Test
     public void get_All_Products_From_Database() throws Exception {
-        List<ProductRegisterDto> allProducts = productRegisterDao.getAllProducts();
+        List<ProductRegisterDto> allProducts = productRegisterDao.findAll();
         assertEquals("In database are storing 7 products", allProducts.size(), 7);
     }
 
@@ -141,7 +141,6 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    @Ignore
     public void find_Products_By_Same_Clients_In_Russian() throws Exception {
         productRegisterFilter.setClientNames(Collections.singletonList("Ласунка"));
         productRegisterFilter.setSortingDirection("asc");
@@ -151,7 +150,7 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    @Ignore
+
     public void find_Products_By_Different_Clients_Mixed() throws Exception {
         productRegisterFilter.setClientNames(Arrays.asList("Ласунка", "Lasunka", "АВК"));
         productRegisterFilter.setSortingDirection("asc");
@@ -181,7 +180,6 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    @Ignore
     public void find_Products_By_Different_Clients_By_Filter_Same_Width_In_Mixed() throws Exception {
         productRegisterFilter.setClientNames(Arrays.asList("Lasunka", "Ласунка"));
         productRegisterFilter.setSortingDirection("asc");
@@ -192,7 +190,6 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    @Ignore
     public void find_Products_By_Different_Clients_By_Filter_Two_Widths_In_Mixed() throws Exception {
         productRegisterFilter.setClientNames(Arrays.asList("Lasunka", "Ласунка"));
         productRegisterFilter.setSortingDirection("asc");
@@ -204,7 +201,6 @@ public class ProductRegisterDaoImplTest {
 
 
     @Test
-    @Ignore
     public void find_Products_Different_Clients_Filter_Two_Widths_Length_In_Mixed() throws Exception {
         productRegisterFilter.setClientNames(Arrays.asList("Lasunka", "Ласунка"));
         productRegisterFilter.setSortingDirection("asc");
@@ -216,7 +212,6 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    @Ignore
     public void find_Products_Different_Clients_Filter_One_Width_Length_In_Russian() throws Exception {
         productRegisterFilter.setClientNames(Arrays.asList("Петрушенко", "Ласунка"));
         productRegisterFilter.setSortingDirection("asc");
@@ -228,7 +223,6 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    @Ignore
     public void find_Products_Same_Client_Filter_One_Width_CardBoardBrand_Length_In_English() throws Exception {
         productRegisterFilter.setClientNames(Collections.singletonList("Lasunka"));
         productRegisterFilter.setCardboardBrands(Collections.singletonList("Т-21"));
