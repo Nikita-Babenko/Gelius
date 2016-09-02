@@ -95,9 +95,9 @@ class NewProductStore extends EventEmitter {
         //$('#productUpdateDate').val();
         $('#personPrepared').val("");
         $('#innerLength').val("");
+        $('#celluloseLayer').val("1");
         $('#innerWidth').val("");
         $('#innerHeight').val("");
-        $("#profile").val("");
         $("#client").val("");
         $("#cardboardBrand").val("");
         $("#productType").val("");

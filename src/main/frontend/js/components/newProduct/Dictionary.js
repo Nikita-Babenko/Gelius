@@ -1,29 +1,34 @@
-import React from 'react';
-import DictionaryStore from '../../stores/DictionariesStore';
-import EventConstants from '../../constants/Events';
+import React from "react";
+import DictionaryStore from "../../stores/DictionariesStore";
+import EventConstants from "../../constants/Events";
+import NewProductStore from "../../stores/NewProductStore";
 
 class Dictionary extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dictionaryParameters: []
+            dictionaryParameters: [],
+            defaultValue : Number(this.props.defaultValue)
         };
-
+        
+        this.__reloadDefaultValue = this.__reloadDefaultValue.bind(this);
         this._onDictionariesParametersUpdated = this._onDictionariesParametersUpdated.bind(this);
     }
 
     componentWillMount() {
         DictionaryStore.addListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__reloadDefaultValue);
     }
 
     componentWillUnmount() {
         DictionaryStore.removeListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__reloadDefaultValue);
     }
 
     render() {
         var dictData = this.state.dictionaryParameters;
         var dictText = this.props.dictionaryTextName;
-        var defaultValue = Number(this.props.defaultValue);
+        var defaultValue = this.state.defaultValue;
         var dictOptions = dictData.map(function (d) {
             return (
                 <DictionaryOption id={d.id} text={d[dictText]} defaultValue={defaultValue} />
@@ -41,6 +46,12 @@ class Dictionary extends React.Component {
     _onDictionariesParametersUpdated() {
         this.setState({
             dictionaryParameters: DictionaryStore.getDictionaryParameters(this.props.dictionaryName)
+        });
+    }
+    
+    __reloadDefaultValue(){
+        this.setState({
+            defaultValue : Number(this.props.defaultValue)
         });
     }
 }
