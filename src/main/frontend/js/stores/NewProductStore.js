@@ -78,10 +78,13 @@ class NewProductStore extends EventEmitter {
         //Workability notes:
         product["workabilityNotes"] = [];
         var centers = WorkCentersStore.selectedWorkCenters;
-        for (var key in centers) {
-            centers[key].forEach(function(item) {
+        var centersArrayPropName = WorkCentersStore.CENTERS_ARRAY_PROPNAME;
+        var note;
+        for (var groupName in centers) {
+            note = centers[groupName].note;
+            centers[groupName][centersArrayPropName].forEach(function(group) {
                 product["workabilityNotes"].push(
-                    { serviceCenter: item.id, note: null } //null will be replaced for workcenter's note (in #1186)
+                    { serviceCenter: group.id, note: note }
                 );
             });
         }
@@ -115,7 +118,10 @@ class NewProductStore extends EventEmitter {
         $('#numberLoadCar').val("");
         $('#productionFormat').val("");
 
-        //TODO reset selected workcenters in WorkCentersStore and reset checkboxes in modal window
+        //TODO
+        // reset selected workcenters in WorkCentersStore,
+        // reset checkboxes in modal window,
+        // trigger EventConstants.UPDATE_WORKABILITY_INFO for Notes update
     }
 
 }

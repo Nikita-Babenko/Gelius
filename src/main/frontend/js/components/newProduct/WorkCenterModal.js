@@ -24,7 +24,6 @@ class ModalBody extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            //TODO for #1186: add AG (id=1 or id will be find by "groupPriority==null && elementPriority==null") (must it be here or in NewProductStore.getNewProduct()?)
             workCenters: []
         };
         this._onWorkCentersUpdated = this._onWorkCentersUpdated.bind(this);

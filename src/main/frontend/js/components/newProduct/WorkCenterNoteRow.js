@@ -1,6 +1,5 @@
 import React from 'react';
-//import NewProductAction from '../../actions/NewProductActions';
-//import EventConstants from '../../constants/Events';
+import NewProductAction from '../../actions/NewProductActions';
 
 class WorkCenterNoteRow extends React.Component {
 
@@ -13,16 +12,19 @@ class WorkCenterNoteRow extends React.Component {
     }
 
     __changeText(event) {
-        this.setState({note: event.target.value});
+        var note = event.target.value;
+        var groupPriority = event.target.getAttribute("data-group-priority");
+        NewProductAction.updateWorkCenterNote(groupPriority, note);
+        this.setState({note: note});
     }
 
     render() {
         var workCenters = [];
-        this.props.workCenterGroup.forEach(function(group) {
-            workCenters.push(group.serviceCenter);
+        this.props.workCenterGroup.forEach(function(item) {
+            workCenters.push(item.serviceCenter);
         });
         var workCentersString = workCenters.join("/");
-        var index = this.props.index;
+        var groupPriority = this.props.workCenterGroup[0].groupPriority;
         return (
             <tr>
                 <td colSpan="4" className="notes_all">
@@ -35,10 +37,10 @@ class WorkCenterNoteRow extends React.Component {
                         />
                         <input
                             type="text"
-                            id={"workCenterNote_" + index}
                             className="note_input_2"
                             value={this.state.note}
                             onChange={this.__changeText}
+                            data-group-priority={groupPriority}
                         />
                     </div>
                 </td>

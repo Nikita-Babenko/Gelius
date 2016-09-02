@@ -26,6 +26,7 @@ var EventConstants = {
     ADD_WORK_CENTER: "add_work_center",
     DELETE_WORK_CENTER: "delete_work_center",
     UPDATE_WORKABILITY_INFO: "update_workability_information",
+    UPDATE_WORK_CENTER_NOTE: "update_work_center_note",
     WORK_CENTERS_CHANGE_EVENT: "work_centers_change_event"
 
 };

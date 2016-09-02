@@ -181,16 +181,14 @@ class BodyMiddle extends React.Component {
     __createWorkCentersNotes() {
         var selectedCenters = this.state.selectedCenters;
         var components = [];
-        var index = 0;
 
         for (var key in selectedCenters) {
             if (selectedCenters[key].length == 0) { //there are no workcenters in this group
                 continue;
             }
             components.push(
-                <WorkCenterNoteRow index={++index} workCenterGroup={selectedCenters[key]} />
+                <WorkCenterNoteRow workCenterGroup={selectedCenters[key]} />
             );
-            //index is temp. attribute (maybe)
         }
 
         return components;

@@ -109,7 +109,15 @@ var NewProductActions = {
             eventType: EventConstants.UPDATE_WORKABILITY_INFO
         });
     },
-    
+
+    updateWorkCenterNote(groupPriority, note) {
+        Dispatcher.dispatch({
+            eventType: EventConstants.UPDATE_WORK_CENTER_NOTE,
+            groupPriority: groupPriority,
+            note: note
+        });
+    },
+
     // implemented #1201
     disablePalletDictionaryDependsFromChangePacking(){
         var palletContext = $('#pallet');

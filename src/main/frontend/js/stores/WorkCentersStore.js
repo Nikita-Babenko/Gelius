@@ -7,6 +7,9 @@ import ObjectConstants from '../constants/Objects';
 class WorkCentersStore extends EventEmitter {
     constructor() {
         super();
+        //Inner elements:
+        this.CENTERS_ARRAY_PROPNAME = "centersList";
+
         this.selectedWorkCenters = this.__initWorkCenters();
         this.selectedCentersText = "центры не выбраны";
     }
@@ -20,7 +23,11 @@ class WorkCentersStore extends EventEmitter {
     }
 
     getSelectedCenters() {
-        return this.selectedWorkCenters;
+        var selectedWorkCenters = {};
+        for (var groupName in this.selectedWorkCenters) {
+            selectedWorkCenters[groupName] = this.selectedWorkCenters[groupName][this.CENTERS_ARRAY_PROPNAME];
+        }
+        return selectedWorkCenters;
     }
 
     __prepareTextOfSelectedWorkCenters() {
@@ -28,10 +35,10 @@ class WorkCentersStore extends EventEmitter {
         var centers = this.selectedWorkCenters;
         var isAgregatorGroup = false;
 
-        for (var key in centers) {
-            if (centers[key].length > 0) {
+        for (var groupName in centers) {
+            if (centers[groupName][this.CENTERS_ARRAY_PROPNAME].length > 0) {
 
-                centers[key].forEach(function (item, i) {
+                centers[groupName][this.CENTERS_ARRAY_PROPNAME].forEach(function (item, i) {
                     if (item.id == ObjectConstants.dictionaries.WORKCENTER_AGREGATOR_ID) { //it is Agregator
                         isAgregatorGroup = true;
                         return;
@@ -55,22 +62,24 @@ class WorkCentersStore extends EventEmitter {
 
     __initWorkCenters() {
         return {
-            group0: this.createWorkCentersGroup(), //for Agregator
-            group10: this.createWorkCentersGroup(),
-            group20: this.createWorkCentersGroup(),
-            group30: this.createWorkCentersGroup(),
-            group40: this.createWorkCentersGroup(),
-            group50: this.createWorkCentersGroup(),
-            group60: this.createWorkCentersGroup(),
-            group70: this.createWorkCentersGroup(),
-            group80: this.createWorkCentersGroup(),
-            group90: this.createWorkCentersGroup(),
-            group100: this.createWorkCentersGroup()
+            group0: this.__createWorkCentersGroupObject(), //for Agregator
+            group10: this.__createWorkCentersGroupObject(),
+            group20: this.__createWorkCentersGroupObject(),
+            group30: this.__createWorkCentersGroupObject(),
+            group40: this.__createWorkCentersGroupObject(),
+            group50: this.__createWorkCentersGroupObject(),
+            group60: this.__createWorkCentersGroupObject(),
+            group70: this.__createWorkCentersGroupObject(),
+            group80: this.__createWorkCentersGroupObject(),
+            group90: this.__createWorkCentersGroupObject(),
+            group100: this.__createWorkCentersGroupObject()
         };
     }
 
-    createWorkCentersGroup() {
-        return [];
+    __createWorkCentersGroupObject() {
+        var obj = { note: null };
+        obj[this.CENTERS_ARRAY_PROPNAME] = [];
+        return obj;
     }
 
 
@@ -79,31 +88,39 @@ class WorkCentersStore extends EventEmitter {
 const workCentersStore = new WorkCentersStore();
 
 workCentersStore.dispatchToken = Dispatcher.register(function (event) {
+    var centersArrayPropName = workCentersStore.CENTERS_ARRAY_PROPNAME;
+    var centers = workCentersStore.selectedWorkCenters;
     switch (event.eventType) {
         case EventConstants.LOAD_ALL_DICTIONARIES:
             Dispatcher.waitFor([ DictionaryStore.dispatchToken ]);
             var agregatorCenter = DictionaryStore.getAgregatorWorkCenter();
-            workCentersStore.selectedWorkCenters["group0"].push(agregatorCenter);
-            //There are no operator "break" here, because we need UPDATE_WORKABILITY_INFO-operations immediately after
+            workCentersStore.selectedWorkCenters["group0"][centersArrayPropName].push(agregatorCenter);
+            //There is no operator "break" here, because we need UPDATE_WORKABILITY_INFO-operations immediately after
             // LOAD_ALL_DICTIONARIES for displaying Agregator in Notes.
         case EventConstants.UPDATE_WORKABILITY_INFO:
             workCentersStore.selectedCentersText = workCentersStore.__prepareTextOfSelectedWorkCenters();
             workCentersStore.emitChange();
             break;
         case EventConstants.ADD_WORK_CENTER:
-            var centers = workCentersStore.selectedWorkCenters;
             var center = event.workCenter;
             var groupName = "group" + center.groupPriority;
             if (centers[groupName] !== undefined) {
-                centers[groupName].push(center);
+                centers[groupName][centersArrayPropName].push(center);
             }
             break;
         case EventConstants.DELETE_WORK_CENTER:
-            var centers = workCentersStore.selectedWorkCenters;
             var center = event.workCenter;
             var groupName = "group" + center.groupPriority;
             if (centers[groupName] !== undefined) {
-                centers[groupName].splice($.inArray(center, centers[groupName]), 1);
+                centers[groupName][centersArrayPropName].splice(
+                    $.inArray(center, centers[groupName][centersArrayPropName]), 1
+                );
+            }
+            break;
+        case EventConstants.UPDATE_WORK_CENTER_NOTE:
+            var groupName = "group" + event.groupPriority;
+            if (centers[groupName] !== undefined) {
+                centers[groupName]["note"] = event.note;
             }
             break;
     }
