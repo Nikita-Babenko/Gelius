@@ -25,7 +25,7 @@
     <bean id="modelMapper" class="org.modelmapper.ModelMapper" />
 
     <jdbc:embedded-database id="dataSource" type="H2">
-        <jdbc:script location="classpath:sql/create_db.sql" />
+        <jdbc:script location="classpath:sql/create_db.sql"  />
         <jdbc:script location="classpath:sql/insert-data.sql" />
     </jdbc:embedded-database>
 
