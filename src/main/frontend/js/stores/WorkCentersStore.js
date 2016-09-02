@@ -81,15 +81,13 @@ const workCentersStore = new WorkCentersStore();
 workCentersStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.LOAD_ALL_DICTIONARIES:
-            Dispatcher.waitFor([
-                DictionaryStore.dispatchToken
-            ]);
+            Dispatcher.waitFor([ DictionaryStore.dispatchToken ]);
             var agregatorCenter = DictionaryStore.getAgregatorWorkCenter();
             workCentersStore.selectedWorkCenters["group0"].push(agregatorCenter);
-            break;
+            //There are no operator "break" here, because we need UPDATE_WORKABILITY_INFO-operations immediately after
+            // LOAD_ALL_DICTIONARIES for displaying Agregator in Notes.
         case EventConstants.UPDATE_WORKABILITY_INFO:
             workCentersStore.selectedCentersText = workCentersStore.__prepareTextOfSelectedWorkCenters();
-            var agregatorCenter = DictionaryStore.getAgregatorWorkCenter();
             workCentersStore.emitChange();
             break;
         case EventConstants.ADD_WORK_CENTER:
