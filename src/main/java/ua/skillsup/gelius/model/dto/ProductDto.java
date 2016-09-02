@@ -2,18 +2,7 @@ package ua.skillsup.gelius.model.dto;
 
 import ua.skillsup.gelius.annotation.CheckDoubleAboveZero;
 import ua.skillsup.gelius.annotation.CheckOldProductNumberExistence;
-import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
-import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
-import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
-import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
-import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
-import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
-import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
-import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
+import ua.skillsup.gelius.model.dto.dictionary.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -25,19 +14,12 @@ import java.util.List;
 @CheckOldProductNumberExistence(message = "не заполнен номер техкарты")
 public class ProductDto {
 
-    //"Raw" date fields marked with an "asterisk" in comments.They was sent from the client as a string.
-
     private Long id;
     private Integer productNumber;
     private Boolean isNew;
 
-    //TODO validation: date should not be in the future?
     private LocalDate productCreateDate;
-    private String productCreateDateValue; // *
-
-    //TODO validation: date should not be in the future?
     private LocalDate productUpdateDate;
-    private String productUpdateDateValue; // *
 
     @Size(max = 50, message = "подготовил - не должно превышать {max} символов")
     private String personPrepared;
@@ -456,22 +438,6 @@ public class ProductDto {
         this.productionFormat = productionFormat;
     }
 
-    public String getProductCreateDateValue() {
-        return productCreateDateValue;
-    }
-
-    public void setProductCreateDateValue(String productCreateDateValue) {
-        this.productCreateDateValue = productCreateDateValue;
-    }
-
-    public String getProductUpdateDateValue() {
-        return productUpdateDateValue;
-    }
-
-    public void setProductUpdateDateValue(String productUpdateDateValue) {
-        this.productUpdateDateValue = productUpdateDateValue;
-    }
-
     public List<WorkabilityNotesDto> getWorkabilityNotes() {
         return workabilityNotes;
     }
@@ -487,9 +453,7 @@ public class ProductDto {
         sb.append(", productNumber=").append(productNumber);
         sb.append(", isNew=").append(isNew);
         sb.append(", productCreateDate=").append(productCreateDate);
-        sb.append(", productCreateDateValue='").append(productCreateDateValue).append('\'');
         sb.append(", productUpdateDate=").append(productUpdateDate);
-        sb.append(", productUpdateDateValue='").append(productUpdateDateValue).append('\'');
         sb.append(", personPrepared='").append(personPrepared).append('\'');
         sb.append(", isUse=").append(isUse);
         sb.append(", client=").append(client);

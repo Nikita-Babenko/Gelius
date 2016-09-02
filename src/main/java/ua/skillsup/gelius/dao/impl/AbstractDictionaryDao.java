@@ -1,4 +1,4 @@
-package ua.skillsup.gelius.dao;
+package ua.skillsup.gelius.dao.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractCommonDao implements CommonDao {
+public abstract class AbstractDictionaryDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -30,7 +30,7 @@ public abstract class AbstractCommonDao implements CommonDao {
         return (object);
     }
 
-    public <T> List<T> getAll(Class<T> type) {
+    public <T> List<T> findAll(Class<T> type) {
         final Session session = sessionFactory.getCurrentSession();
         final Criteria crit = session.createCriteria(type);
         return crit.list();

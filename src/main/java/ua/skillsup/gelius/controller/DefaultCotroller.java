@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DefaultCotroller {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    private String index() {
+    private String pageIndex() {
         return "index";
     }
 

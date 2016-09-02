@@ -1,8 +1,8 @@
-import EventEmitter from 'eventemitter3';
-import Dispatcher from '../dispatcher/Dispatcher';
-import WorkCentersStore from './WorkCentersStore';
-import EventConstants from '../constants/Events';
-import ResponseCodeConstants from '../constants/ResponseCodes';
+import EventEmitter from "eventemitter3";
+import Dispatcher from "../dispatcher/Dispatcher";
+import WorkCentersStore from "./WorkCentersStore";
+import EventConstants from "../constants/Events";
+import ResponseCodeConstants from "../constants/ResponseCodes";
 
 class NewProductStore extends EventEmitter {
     constructor() {
@@ -39,8 +39,8 @@ class NewProductStore extends EventEmitter {
         product["isUse"] = $('#isUse').is(":checked");
         product["productNumber"] = $('#productNumber').val();
         product["productName"] = $('#productName').val();
-        product["productCreateDateValue"] = $('#productCreateDate').val();
-        product["productUpdateDateValue"] = $('#productUpdateDate').val();
+        product["productCreateDate"] = $('#productCreateDate').val();
+        product["productUpdateDate"] = $('#productUpdateDate').val();
         product["personPrepared"] = $('#personPrepared').val();
         product["innerLength"] = $('#innerLength').val();
         product["innerWidth"] = $('#innerWidth').val();
@@ -53,8 +53,8 @@ class NewProductStore extends EventEmitter {
         product["innerLayer"] = Number($('#innerLayer :selected').val());
         product["faceLayer"] = Number($('#faceLayer :selected').val());
         product["cliche"] = $('#cliche').val();
-        product["theoreticalSquare"] = $('#theoreticalSquare').val();
-        product["actualSquare"] = $('#actualSquare').val();
+        product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/,'.'));
+        product["actualSquare"] = $('#actualSquare').val().replace(/,/,'.');
         product["material"] = $('#material').val();
         product["format"] = Number($('#format :selected').val());
         product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
@@ -77,7 +77,6 @@ class NewProductStore extends EventEmitter {
 
         //Workability notes:
         product["workabilityNotes"] = [];
-        //product["workabilityNotes"].push( {serviceCenter: idOfAG, note: noteForAG} );  - blank for #1186
         var centers = WorkCentersStore.selectedWorkCenters;
         for (var key in centers) {
             centers[key].forEach(function(item) {
@@ -90,46 +89,39 @@ class NewProductStore extends EventEmitter {
         return product;
     }
 
-    /*__createWorkabilityNotesElement(serviceCenterId, note) {
-        return { serviceCenter: serviceCenterId, note: note };
-    }*/
-
     clearAllSelectedValues() {
-        $('#isNew').attr('checked', false);
-        $('#isUse').attr('checked', false);
         $('#productName').val("");
         //$('#productCreateDate').val();
         //$('#productUpdateDate').val();
         $('#personPrepared').val("");
         $('#innerLength').val("");
+        $('#celluloseLayer').val("1");
         $('#innerWidth').val("");
         $('#innerHeight').val("");
-        $("#profile").val($("#profile option:first").val());
-        $("#client").val($("#client option:first").val());
-        $("#cardboardBrand").val($("#cardboardBrand option:first").val());
-        $("#productType").val($("#productType option:first").val());
-        $("#celluloseLayer").val($("#celluloseLayer option:first").val());
-        $("#innerLayer").val($("#innerLayer option:first").val());
-        $("#faceLayer").val($("#faceLayer option:first").val());
+        $("#client").val("");
+        $("#cardboardBrand").val("");
+        $("#productType").val("");
+        $("#innerLayer").val("");
+        $("#faceLayer").val("");
         $('#cliche').val("");
         $('#theoreticalSquare').val("");
         $('#actualSquare').val("");
         $('#material').val("");
-        $("#format").val($("#format option:first").val());
+        $("#format").val("");
         $('#sizeWorkpieceLength').val("");
         $('#sizeWorkpieceWidth').val("");
         $('#numberFromSheet').val("");
         $('#blankFormat').val("");
-        $("#connectionValve").val($("#connectionValve option:first").val());
+        $("#connectionValve").val("");
         $('#stamp').val("");
-        $("#packing").val($("#packing option:first").val());
+        $("#packing").val("");
         $('#numberInPack').val("");
         $('#numberInTransportPackage').val("");
         $('#packageLength').val("");
         $('#packageWidth').val("");
         $('#packageHeight').val("");
-        $("#pallet").val($("#pallet option:first").val());
-        $("#palletPlacement").val($("#palletPlacement option:first").val());
+        $("#pallet").val("");
+        $("#palletPlacement").val("");
         $('#palletRows').val("");
         $('#numberLoadCar').val("");
         $('#productionFormat').val("");

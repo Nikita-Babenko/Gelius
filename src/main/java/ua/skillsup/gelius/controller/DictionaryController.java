@@ -21,10 +21,10 @@ public class DictionaryController {
 
     @RequestMapping(path = "/all", method = RequestMethod.GET)
     @ResponseBody
-    private JSONResponse getAllDictionaries() {
+    private JSONResponse findAllDictionaries() {
         LOG.info("Get all dictionaries");
         JSONResponse response = new JSONResponse();
-        Map<String, List<?>> dictionaries = dictionaryService.getAllDictionaries();
+        Map<String, List<?>> dictionaries = dictionaryService.findAll();
         response.setMessage("OK");
         response.setCode("200");
         response.setResult(dictionaries);
@@ -33,12 +33,12 @@ public class DictionaryController {
 
     @RequestMapping(path = "/{dictionary}/{operation}", method = RequestMethod.POST)
     @ResponseBody
-    private JSONResponse editDictionary(@PathVariable("dictionary") String dictionary,
+    private JSONResponse edit(@PathVariable("dictionary") String dictionary,
                                         @PathVariable("operation") String operation, @RequestBody Object object) {
 
         LOG.info("Edit dictionary {}", dictionary);
 
-        dictionaryService.editDictionary(dictionary, operation, object);
+        dictionaryService.update(dictionary, operation, object);
 
         JSONResponse response = new JSONResponse();
         response.setMessage("OK");

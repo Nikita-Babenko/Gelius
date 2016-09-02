@@ -4,6 +4,7 @@ import EventConstants from '../../constants/Events';
 import WorkCentersStore from '../../stores/WorkCentersStore';
 import WorkCenterModal from '../newProduct/WorkCenterModal';
 import Dictionary from '../newProduct/Dictionary';
+import SquareInput from '../newProduct/SquareInput';
 
 class BodyLeft extends React.Component {
     constructor(props) {
@@ -46,11 +47,13 @@ class BodyLeft extends React.Component {
 
                     <tr>
                         <td className="products_large_td">S теор.</td>
-                        <td className="products_small_td"><input type="number" className="numberInputCheck"
-                                                                 id="theoreticalSquare"/></td>
+                        <td className="products_small_td">
+                            <SquareInput id="theoreticalSquare"/>
+                        </td>
                         <td className="products_large_td">S факт.</td>
-                        <td className="products_small_td"><input type="number" className="numberInputCheck"
-                                                                 id="actualSquare"/></td>
+                        <td className="products_small_td">
+                            <SquareInput id="actualSquare"/>
+                        </td>
                     </tr>
 
                     <tr>
@@ -83,6 +86,7 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="celluloseLayer"
                                 dictionaryTextName="celluloseLayer"
+                                defaultValue="1"
                             />
                         </td>
                     </tr>

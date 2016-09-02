@@ -10,7 +10,6 @@ import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.ProductService;
 import ua.skillsup.gelius.service.ValidationService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,20 +22,14 @@ public class ProductServiceImpl implements ProductService {
     private ValidationService<ProductDto> validationService;
 
     @Override
-    public String createProduct(ProductDto product) {
+    public String save(ProductDto product) {
         if ( product.getIsNew() ) {
-            int productNumber = getProductNumberOfNewDatasheet();
+            int productNumber = getProductNumber();
             product.setProductNumber(productNumber);
         }
 
-        //Dates parsing, filling them to DTO:
-        LocalDate productCreateDate = this.validationService.parseDate( product.getProductCreateDateValue() );
-        LocalDate productUpdateDate = this.validationService.parseDate( product.getProductUpdateDateValue() );
-        product.setProductCreateDate(productCreateDate);
-        product.setProductUpdateDate(productUpdateDate);
-
         //Filling other DTO fields (vocabularies):
-        ProductDto filledProduct = fillProductDto(product);
+        ProductDto filledProduct = isFillProduct(product);
 
         //DTO validation (including mandatory fields check):
         List<String> validationErrors = this.validationService.validation(filledProduct);
@@ -46,19 +39,19 @@ public class ProductServiceImpl implements ProductService {
 
         //Check existing product with same productNumber in DB (AFTER DTO validation, because before validation productNumber may be null):
         if (!filledProduct.getIsNew()) {
-            checkExistenceOldProductWithSameProductNumber( filledProduct.getProductNumber() );
+            isProductExist( filledProduct.getProductNumber() );
         }
 
         if (filledProduct.getIsUse() == null) {
             filledProduct.setIsUse(false);
         }
 
-        this.productDao.create(filledProduct);
+        this.productDao.save(filledProduct);
 
         return getFullProductNumber(filledProduct.getProductNumber(), filledProduct.getIsNew());
     }
     
-    private ProductDto fillProductDto(ProductDto product) {
+    private ProductDto isFillProduct(ProductDto product) {
         if ( product.getClient().getId() == 0 ) {
             product.setClient(null);
         }
@@ -100,16 +93,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     //If product with same productNumber exists in DB, throw ProductExistsException
-    private void checkExistenceOldProductWithSameProductNumber(int productNumber) {
-        boolean isExists = this.productDao.isExistsOldProductWithSameProductNumber(productNumber);
+    private void isProductExist(int productNumber) {
+        boolean isExists = this.productDao.isProductExist(productNumber);
         if (isExists) {
             throw new ProductExistsException(productNumber);
         }
     }
 
     @Override
-    public int getProductNumberOfNewDatasheet() {
-        return this.productDao.getMaxProductNumberOfNewDatasheets() + 1;
+    public int getProductNumber() {
+        return this.productDao.getMaxProductNumber() + 1;
     }
 
     @Override
