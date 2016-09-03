@@ -1,5 +1,5 @@
-import React from 'react';
-import NewProductAction from '../../actions/NewProductActions';
+import React from "react";
+import NewProductAction from "../../actions/NewProductActions";
 
 class WorkCenterNoteRow extends React.Component {
 
@@ -29,19 +29,13 @@ class WorkCenterNoteRow extends React.Component {
             <tr>
                 <td colSpan="4" className="notes_all">
                     <div className="notes_inputs">
-                        <input
-                            value={workCentersString}
-                            type="text"
-                            className="note_input_1"
-                            disabled
-                        />
-                        <input
-                            type="text"
-                            className="note_input_2"
-                            value={this.state.note}
-                            onChange={this.__changeText}
-                            data-group-priority={groupPriority}
-                        />
+                        <div className="note_input_1" contentEditable="true">
+                            {workCentersString}
+                        </div>
+                        <div className="note_input_2" contentEditable="true" onChange={this.__changeText}
+                             data-group-priority={groupPriority}>
+                            {this.state.note}
+                        </div>
                     </div>
                 </td>
             </tr>
