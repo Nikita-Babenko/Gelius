@@ -1,5 +1,6 @@
 import React from "react";
 import Dictionary from "../newProduct/Dictionary";
+import UploadFiles from "../newProduct/UploadFiles";
 
 class BodyRight extends React.Component {
     render() {
@@ -81,18 +82,7 @@ class BodyRight extends React.Component {
                     </tr>
 
                     <tr>
-                        <td colSpan="3" className="attachments">
-                            <div className="links">
-                                <a href="#">тех.карта.pdf</a><br/>
-                                <a href="#">ссылка2.ai</a>
-                            </div>
-                            <div className="attachment_buttons icon_buttons_group">
-                                <a href="#" className="fa fa-paperclip fa-2x" title="Прикрепить ссылку" aria-hidden="true">
-                                </a>
-                                <a href="#" className="fa fa-trash-o fa-2x" title="Удалить все ссылки" aria-hidden="true">
-                                </a>
-                            </div>
-                        </td>
+                        <UploadFiles />
                     </tr>
 
                     <tr>

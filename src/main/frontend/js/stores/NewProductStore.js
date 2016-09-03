@@ -141,6 +141,37 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.alert.alertType = "alert-success";
                     newProductStore.alert.message = "Новый продукт (техкарта № " + responseData.data.savedProductNumber + ") был успешно добавлен";
                     hasDoneWithError = false;
+
+
+                    //Будет перенесено в хранилище, отвечающее за файлы.
+                    var formData = new FormData();
+                    $(".attachments :file").each(function(){
+                        var file = this.files[0];
+                        var name = file.name, size = file.size, type = file.type;
+                        console.log("name=" + name + ", size=" + size + ", type=" + type);
+                        formData.append('files', file);
+                    });
+                    formData.append('productNumber', responseData.data.savedProductNumber);
+                    $.ajax({
+                        url : "/files/upload",
+                        type : 'POST',
+                        dataType: "json",
+                        data : formData,
+                        processData: false, // tell jQuery not to process the data
+                        contentType: false, // tell jQuery not to set contentType
+                        success : function(data) {
+                            //console.log(data);
+                            //alert(data.code);
+                            console.log("Успешный ответ от сервера!");
+                        },
+                        error: function(xhr, status) {
+                            alert("Ошибка запроса :(\nstatus=" + status);
+                            //console.log(xhr);
+                            $("BODY").html(xhr.responseText);
+                        }
+                    });
+
+
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.alert.message = "Вами допущены ошибки: " + responseData.data.join(", ");
