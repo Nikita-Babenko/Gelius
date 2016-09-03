@@ -52,7 +52,7 @@ class NewProductStore extends EventEmitter {
         product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());
         product["innerLayer"] = Number($('#innerLayer :selected').val());
         product["faceLayer"] = Number($('#faceLayer :selected').val());
-        product["cliche"] = $('#cliche').val();
+        product["cliche"] = $('#cliche').text();
         product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/,'.'));
         product["actualSquare"] = $('#actualSquare').val().replace(/,/,'.');
         product["material"] = $('#material').val();
@@ -62,7 +62,7 @@ class NewProductStore extends EventEmitter {
         product["numberFromSheet"] = $('#numberFromSheet').val();
         product["blankFormat"] = $('#blankFormat').val();
         product["connectionValve"] = Number($('#connectionValve :selected').val());
-        product["stamp"] = $('#stamp').val();
+        product["stamp"] = $('#stamp').text();
         product["packing"] = Number($('#packing :selected').val());
         product["numberInPack"] = $('#numberInPack').val();
         product["numberInTransportPackage"] = $('#numberInTransportPackage').val();

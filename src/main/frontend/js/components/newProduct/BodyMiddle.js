@@ -79,14 +79,18 @@ class BodyMiddle extends React.Component {
 
                         <tr>
                             <td className="middle_products_small_td" colSpan="2">
-                                <div className="special">Штамп</div>
-                                <textarea id="stamp"/></td>
+                                <div className="res_div_cliche_stamp">Штамп</div>
+                                <div id="stamp" className="res_cliche_stamp" contentEditable="true">
+                                </div>
+                            </td>
                         </tr>
 
                         <tr>
                             <td className="middle_products_small_td" colSpan="2">
-                                <div className="special">Клише</div>
-                                <textarea id="cliche"/></td>
+                                <div className="res_div_cliche_stamp">Клише</div>
+                                <div id="cliche" className="res_cliche_stamp" contentEditable="true">
+                                </div>
+                            </td>
                         </tr>
 
                         <tr>
