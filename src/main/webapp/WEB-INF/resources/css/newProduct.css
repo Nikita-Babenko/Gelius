@@ -223,9 +223,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .middle {
-    padding-right: 5px;
+    padding-right: 0;
     margin-bottom: 10px;
-    padding-left: 5px;
+    padding-left: 0;
 }
 
 .right {
@@ -367,10 +367,20 @@ input[type=number]::-webkit-outer-spin-button {
 /*
     Middle table
 */
+
+.middle_vertical_left_title {
+    padding-top: 20px;
+    writing-mode: tb-rl;
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 .middle_table > tbody > tr > .middle_left_title {
     width: 5%;
     border: 1px solid black !important;
-    padding: 15px 0 0 0 !important;
+    padding: 2px 0 0 0 !important;
     text-align: center;
 }
 
@@ -393,11 +403,17 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: left;
     vertical-align: middle;
     width: 35%;
-    padding: 0 0 0 10px;
+    padding: 0;
     position: relative;
     overflow: hidden;
     font-size: 16px;
     border: 1px solid black;
+}
+
+.special{
+    padding : 40px 8px 8px 3% !important;
+    text-align: left !important;
+    vertical-align: middle;
 }
 
 .middle_table > tbody > tr > td > input, .middle_table > tbody > tr > td > select {
@@ -414,6 +430,24 @@ input[type=number]::-webkit-outer-spin-button {
     border: 0;
     outline: none;
     background-color: white;
+}
+.middle_table > tbody > tr > .middle_products_small_td > textarea{
+    position: absolute;
+    top:0;
+    right: 0;
+    padding: 1px !important;
+    height: 100%;
+    width: 76%;
+    margin: 0;
+    border-radius: 0;
+    border-left: 1px solid black;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+    background-color: white;
+    font-size: 14px;
+    resize: none;
+    outline: none;
 }
 
 .middle_table > tbody > tr > .print_td {
