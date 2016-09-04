@@ -1,7 +1,8 @@
 import React from 'react';
-import DatePicker from '../newProduct/DatePicker';
 import EventConstants from '../../constants/Events';
 import NewProductStore from '../../stores/NewProductStore';
+import DatePicker from '../newProduct/DatePicker';
+import TextInput from "../newProduct/TextInput";
 
 class HeaderRight extends React.Component {
     constructor(props) {
@@ -9,16 +10,17 @@ class HeaderRight extends React.Component {
         this.state = {
             isUse: true
         };
-        this.__setIsUse = this.__setIsUse.bind(this);
+
+        this.__loadDefaultValueForIsUse = this.__loadDefaultValueForIsUse.bind(this);
         this.__changeIsUse = this.__changeIsUse.bind(this);
     }
 
     componentWillMount() {
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setIsUse);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForIsUse);
     }
 
     componentWillUnmount() {
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setIsUse);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForIsUse);
     }
 
     render() {
@@ -36,11 +38,12 @@ class HeaderRight extends React.Component {
 
                 <div className="form-group form-inline do">
                     <p>Подготовил</p>
-                    <input type="text" className="form-control" id="personPrepared"/>
+                    <TextInput id="personPrepared" style="form-control"/>
                 </div>
 
                 <div className="form-group form-inline use">
-                    <input type="checkbox" className="header_righ_checkbox" id="isUse" checked={this.state.isUse} onChange={this.__changeIsUse}/>
+                    <input type="checkbox" className="header_righ_checkbox" id="isUse" checked={this.state.isUse}
+                           onChange={this.__changeIsUse}/>
                     <p>Тех.карта используется</p>
                 </div>
             </div>
@@ -52,8 +55,12 @@ class HeaderRight extends React.Component {
         this.setState({isUse: isUse});
     }
 
-    __setIsUse(){
-        this.setState({isUse: true});
+    __loadDefaultValueForIsUse() {
+        if (NewProductStore.isEnableDefaultValues()) {
+            this.setState({
+                isUse: NewProductStore.getDefaultProductProperty("isUse")
+            });
+        }
     }
 }
 

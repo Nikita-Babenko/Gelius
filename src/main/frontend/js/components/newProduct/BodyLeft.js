@@ -6,6 +6,7 @@ import WorkCenterModal from "../newProduct/WorkCenterModal";
 import Dictionary from "../newProduct/Dictionary";
 import SquareInput from "../newProduct/SquareInput";
 import NumberInput from "../newProduct/NumberInput";
+import TextArea from "../newProduct/TextArea";
 
 class BodyLeft extends React.Component {
     constructor(props) {
@@ -115,9 +116,7 @@ class BodyLeft extends React.Component {
                             <p className="vertical_left_title">Материал</p>
                         </td>
                         <td colSpan="4" className="material">
-                        <textarea id="material">
-
-                        </textarea>
+                            <TextArea id="material"/>
                         </td>
                     </tr>
 
@@ -147,8 +146,10 @@ class BodyLeft extends React.Component {
 
                     <tr>
                         <td colSpan="5" className="workability_textarea">
-                            <textarea readOnly onClick={this.__showWorkCentersModal}
-                                      value={this.state.workabilityCentersText}/>
+                            <textarea
+                                readOnly onClick={this.__showWorkCentersModal}
+                                value={this.state.workabilityCentersText}
+                            />
                             <WorkCenterModal ref="modal"/>
                         </td>
                     </tr>

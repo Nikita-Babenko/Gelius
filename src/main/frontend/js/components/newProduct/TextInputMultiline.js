@@ -1,17 +1,18 @@
 import React from 'react';
+import ReactDOM from "react-dom";
 import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
 
-class NumberInput extends React.Component {
+class TextInputMultiline extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            number: ""
+            text: ""
         };
 
-        this.__onNumberInputChange = this.__onNumberInputChange.bind(this);
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
+        this.__onTextInputMultilineChange = this.__onTextInputMultilineChange.bind(this);
     }
 
     componentWillMount() {
@@ -22,40 +23,45 @@ class NumberInput extends React.Component {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
-    render() {
-        return (
-            <input type="number" min="0"
-                   id={this.props.id}
-                   className={"numberInputCheck " + this.props.style}
-                   value={this.state.number}
-                   onChange={this.__onNumberInputChange}
-            />
-        );
+    shouldComponentUpdate() {
+        return true;
     }
 
-    __onNumberInputChange(e) {
-        var newValue = e.target.value;
-        this.setState({number: newValue});
+    render() {
+
+        return (
+            <div id={this.props.id}
+                 className={this.props.style}
+                 onInput={this.__onTextInputMultilineChange}
+                 dangerouslySetInnerHTML={{__html: this.state.text}}
+                 contentEditable>
+            </div>
+        )
+    }
+
+    __onTextInputMultilineChange() {
+        var html = ReactDOM.findDOMNode(this).innerHTML;
+        this.setState({text: html})
     }
 
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
             var value = NewProductStore.getDefaultProductProperty(this.props.id);
             this.setState({
-                number: value ? value : ""
+                text: value ? value : ""
             });
         }
     }
 }
 
-NumberInput.propTypes = {
-    id: React.PropTypes.string,
+TextInputMultiline.propTypes = {
+    id: React.PropTypes.string.isRequired,
     style: React.PropTypes.string
 };
 
-NumberInput.defaultProps = {
+TextInputMultiline.defaultProps = {
     id: "",
     style: ""
 };
 
-export default NumberInput;
+export default TextInputMultiline;

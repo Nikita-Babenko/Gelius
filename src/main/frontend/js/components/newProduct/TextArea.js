@@ -2,15 +2,15 @@ import React from 'react';
 import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
 
-class NumberInput extends React.Component {
+class TextArea extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            number: ""
+            text: ""
         };
 
-        this.__onNumberInputChange = this.__onNumberInputChange.bind(this);
+        this.__onTextAreaChange = this.__onTextAreaChange.bind(this);
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
     }
 
@@ -23,39 +23,29 @@ class NumberInput extends React.Component {
     }
 
     render() {
-        return (
-            <input type="number" min="0"
-                   id={this.props.id}
-                   className={"numberInputCheck " + this.props.style}
-                   value={this.state.number}
-                   onChange={this.__onNumberInputChange}
-            />
-        );
+        return (<textarea id={this.props.id} value={this.state.text} onChange={this.__onTextAreaChange}/>)
     }
 
-    __onNumberInputChange(e) {
-        var newValue = e.target.value;
-        this.setState({number: newValue});
+    __onTextAreaChange(e) {
+        this.setState({text: e.target.value});
     }
 
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
             var value = NewProductStore.getDefaultProductProperty(this.props.id);
             this.setState({
-                number: value ? value : ""
+                text: value ? value : ""
             });
         }
     }
 }
 
-NumberInput.propTypes = {
-    id: React.PropTypes.string,
-    style: React.PropTypes.string
+TextArea.propTypes = {
+    id: React.PropTypes.string.isRequired
 };
 
-NumberInput.defaultProps = {
-    id: "",
-    style: ""
+TextArea.defaultProps = {
+    id: ""
 };
 
-export default NumberInput;
+export default TextArea;

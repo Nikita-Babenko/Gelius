@@ -1,7 +1,8 @@
 import React from "react";
+import NewProductActions from "../../actions/NewProductActions";
 import Dictionary from "../newProduct/Dictionary";
 import ProductNumberInput from "../newProduct/ProductNumberInput";
-import NewProductActions from "../../actions/NewProductActions";
+import TextInput from "../newProduct/TextInput";
 
 class HeaderLeft extends React.Component {
     render() {
@@ -54,7 +55,7 @@ class HeaderLeft extends React.Component {
 
                         <div className="form-group col-xs-12 col-sm-10 col-md-6 col-lg-4">
                             <label for="Name">Название</label>
-                            <input type="text" className="form-control header_info_name" id="productName"/>
+                            <TextInput id="productName" style="form-control header_info_name"/>
                         </div>
 
 

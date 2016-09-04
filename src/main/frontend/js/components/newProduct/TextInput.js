@@ -2,15 +2,16 @@ import React from 'react';
 import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
 
-class NumberInput extends React.Component {
+class TextInput extends React.Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
-            number: ""
+            text: ""
         };
 
-        this.__onNumberInputChange = this.__onNumberInputChange.bind(this);
+        this.__onTextInputChange = this.__onTextInputChange.bind(this);
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
     }
 
@@ -23,39 +24,35 @@ class NumberInput extends React.Component {
     }
 
     render() {
-        return (
-            <input type="number" min="0"
-                   id={this.props.id}
-                   className={"numberInputCheck " + this.props.style}
-                   value={this.state.number}
-                   onChange={this.__onNumberInputChange}
-            />
-        );
+        return (<input type="text"
+                       className={this.props.style}
+                       id={this.props.id}
+                       value={this.state.text}
+                       onChange={this.__onTextInputChange}/>);
     }
 
-    __onNumberInputChange(e) {
-        var newValue = e.target.value;
-        this.setState({number: newValue});
+    __onTextInputChange(e) {
+        this.setState({text: e.target.value});
     }
 
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
             var value = NewProductStore.getDefaultProductProperty(this.props.id);
             this.setState({
-                number: value ? value : ""
+                text: value ? value : ""
             });
         }
     }
 }
 
-NumberInput.propTypes = {
-    id: React.PropTypes.string,
+TextInput.propTypes = {
+    id: React.PropTypes.string.isRequired,
     style: React.PropTypes.string
 };
 
-NumberInput.defaultProps = {
+TextInput.defaultProps = {
     id: "",
     style: ""
 };
 
-export default NumberInput;
+export default TextInput;

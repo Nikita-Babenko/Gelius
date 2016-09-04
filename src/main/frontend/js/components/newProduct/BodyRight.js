@@ -1,5 +1,6 @@
 import React from "react";
 import Dictionary from "../newProduct/Dictionary";
+import NumberInput from "../newProduct/NumberInput";
 
 class BodyRight extends React.Component {
     render() {
@@ -19,30 +20,33 @@ class BodyRight extends React.Component {
                             <Dictionary
                                 dictionaryName="packing"
                                 dictionaryTextName="packing"
-                                defaultValue="1"
                             />
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В пачке, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberInPack" className="numberInputCheck"/></td>
+                        <td className="avto_small_td">
+                            <NumberInput id="numberInPack"/>
+                        </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В транспортном пакете, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberInTransportPackage" className="numberInputCheck"/></td>
+                        <td className="avto_small_td">
+                            <NumberInput id="numberInTransportPackage"/>
+                        </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">
                             Размеры пакета
-                            <input className="embeded_input numberInputCheck" type="number" id="packageLength"/>
+                            <NumberInput id="packageLength" style="embeded_input"/>
                         </td>
                         <td className="avto_small_td">
                             <div className="inputs">
-                                <input type="number" className="input_1 numberInputCheck" id="packageWidth"/>
-                                <input type="number" className="input_2 numberInputCheck" id="packageHeight"/>
+                                <NumberInput id="packageWidth" style="input_1"/>
+                                <NumberInput id="packageHeight" style="input_2"/>
                             </div>
                         </td>
                     </tr>
@@ -53,7 +57,6 @@ class BodyRight extends React.Component {
                             <Dictionary
                                 dictionaryName="pallet"
                                 dictionaryTextName="pallet"
-                                defaultValue=""
                             />
                         </td>
                     </tr>
@@ -64,7 +67,6 @@ class BodyRight extends React.Component {
                             <Dictionary
                                 dictionaryName="palletPlacement"
                                 dictionaryTextName="palletPlacement"
-                                defaultValue=""
                             />
                         </td>
                     </tr>
@@ -72,12 +74,16 @@ class BodyRight extends React.Component {
 
                     <tr>
                         <td className="avto_large_td">Рядов на поддоне</td>
-                        <td className="avto_small_td"><input type="number" id="palletRows" className="numberInputCheck"/></td>
+                        <td className="avto_small_td">
+                            <NumberInput id="palletRows"/>
+                        </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberLoadCar" className="numberInputCheck"/></td>
+                        <td className="avto_small_td">
+                            <NumberInput id="numberLoadCar"/>
+                        </td>
                     </tr>
 
                     <tr>
@@ -120,7 +126,9 @@ class BodyRight extends React.Component {
 
                     <tr>
                         <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                        <td className="avto_small_td"><input type="number" id="productionFormat" className="numberInputCheck"/></td>
+                        <td className="avto_small_td">
+                            <NumberInput id="productionFormat"/>
+                        </td>
                     </tr>
 
                     <tr>

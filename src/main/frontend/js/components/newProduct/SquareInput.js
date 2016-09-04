@@ -44,10 +44,12 @@ class SquareInput extends React.Component {
     }
 
     __loadDefaultValue() {
-        var value = NewProductStore.getDefaultProductProperty(this.props.id);
-        this.setState({
-            square: value ? value : ""
-        });
+        if (NewProductStore.isEnableDefaultValues()) {
+            var value = NewProductStore.getDefaultProductProperty(this.props.id);
+            this.setState({
+                square: value ? value : ""
+            });
+        }
     }
 
 }
@@ -59,4 +61,5 @@ SquareInput.propTypes = {
 SquareInput.defaultProps = {
     id: ""
 };
+
 export default SquareInput;

@@ -13,56 +13,16 @@ class NewProductStore extends EventEmitter {
             message: ""
         };
 
+        this.enableDefaultValues = true;
         this.showAlert = false;
 
         this.defaultProduct = {
-            "productNumber": "0",
             "isNew": true,
-            "productCreateDate": [2016, 9, 3],
-            "productUpdateDate": [2016, 9, 3],
-            "personPrepared": "",
+            "productCreateDate": this.__getTodayDate(),
+            "productUpdateDate": this.__getTodayDate(),
             "isUse": true,
-            "client": null,
-            "productName": "without name",
-            "productType": null,
-            "innerLength": null,
-            "innerWidth": null,
-            "innerHeight": null,
-            "theoreticalSquare": "",
-            "actualSquare": "",
-            "format": null,
-            "profile": null,
-            "cardboardBrand": null,
             "celluloseLayer": {"id": 1},
-            "faceLayer": null,
-            "innerLayer": null,
-            "material": "",
-            "sizeWorkpieceLength": null,
-            "sizeWorkpieceWidth": null,
-            "numberFromSheet": null,
-            "blankFormat": 19,
-            "connectionValve": null,
-            "stamp": null,
-            "cliche": null,
-            "packing": {"id": 1},
-            "numberInPack": null,
-            "numberInTransportPackage": null,
-            "packageLength": null,
-            "packageWidth": null,
-            "packageHeight": null,
-            "pallet": null,
-            "palletPlacement": null,
-            "palletRows": null,
-            "numberLoadCar": null,
-            "productionFormat": null,
-            "workabilityNotes": [
-                {
-                    "serviceCenter": {
-                        "id": 1
-                    },
-                    "note": null
-                }
-            ]
+            "packing": {"id": 1}
         };
     }
 
@@ -80,6 +40,10 @@ class NewProductStore extends EventEmitter {
 
     getAlertStatus() {
         return this.showAlert;
+    }
+
+    isEnableDefaultValues() {
+        return this.enableDefaultValues;
     }
 
     getNewProduct() {
@@ -101,7 +65,7 @@ class NewProductStore extends EventEmitter {
         product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());
         product["innerLayer"] = Number($('#innerLayer :selected').val());
         product["faceLayer"] = Number($('#faceLayer :selected').val());
-        product["cliche"] = $('#cliche').val();
+        product["cliche"] = $('#cliche').text();
         product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/, '.'));
         product["actualSquare"] = $('#actualSquare').val().replace(/,/, '.');
         product["material"] = $('#material').val();
@@ -111,7 +75,7 @@ class NewProductStore extends EventEmitter {
         product["numberFromSheet"] = $('#numberFromSheet').val();
         product["blankFormat"] = $('#blankFormat').val();
         product["connectionValve"] = Number($('#connectionValve :selected').val());
-        product["stamp"] = $('#stamp').val();
+        product["stamp"] = $('#stamp').text();
         product["packing"] = Number($('#packing :selected').val());
         product["numberInPack"] = $('#numberInPack').val();
         product["numberInTransportPackage"] = $('#numberInTransportPackage').val();
@@ -141,6 +105,15 @@ class NewProductStore extends EventEmitter {
         return product;
     }
 
+    __getTodayDate() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+
+        return [year, month, day];
+    }
+
 }
 
 const newProductStore = new NewProductStore();
@@ -155,19 +128,22 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.defaultProduct.productNumber = responseData.data.newProductNumber;
                     newProductStore.alert.alertType = "alert-success";
                     newProductStore.alert.message = "Новый продукт (техкарта № " + responseData.data.savedProductNumber + ") был успешно добавлен";
+                    newProductStore.enableDefaultValues = true;
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
+                    newProductStore.enableDefaultValues = false;
                     newProductStore.alert.message = "Вами допущены ошибки: " + responseData.data.join(", ");
                     break;
                 case ResponseCodeConstants.OBJECT_EXISTS:
+                    newProductStore.enableDefaultValues = false;
                     newProductStore.alert.message = "Техкарта с таким номером уже существует";
                     break;
                 default:
+                    newProductStore.enableDefaultValues = false;
                     newProductStore.alert.message = "Произошла ошибка. Обновите страницу и повторите действие или попробуйте повторить действие позже";
             }
             newProductStore.showAlert = true;
             newProductStore.emitChange();
-            newProductStore.showAlert = false;
             break;
         case EventConstants.LOAD_PRODUCT_NUMBER:
             newProductStore.defaultProduct.productNumber = event.productNumber;

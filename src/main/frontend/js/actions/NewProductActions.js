@@ -64,7 +64,7 @@ var NewProductActions = {
 
     saveProduct(){
         var newProduct = NewProductStore.getNewProduct();
-            L.log(newProduct);
+        L.log(newProduct);
         $.ajax({
             type: 'POST',
             url: UrlConstants.SAVE_PRODUCT_URL,
@@ -115,7 +115,7 @@ var NewProductActions = {
     },
 
     // implemented #1201
-    disablePalletDictionaryDependsFromChangePacking(){
+    __disablePalletDictionaryDependsFromChangePacking(){
         var palletContext = $('#pallet');
         $('#packing').change(function () {
             if (this.value === '' || this.value === '1') {
@@ -129,7 +129,7 @@ var NewProductActions = {
         });
     },
 
-    disablePalletDictionaryByDefault(){
+    __disablePalletDictionaryByDefault(){
         var value = $('#packing').find(':selected').val();
         if (value === '' || value === '1') {
             $('#pallet').prop("disabled", true);
@@ -137,12 +137,44 @@ var NewProductActions = {
     },
 
     // implemented 1203
-    defaultConnectionValveDictionaryDependsFromProductType(){
+    __defaultConnectionValveDictionaryDependsFromProductType(){
         $('#productType').change(function () {
             if (this.value === '1') {
                 $('#connectionValve').val('1');
             }
             else $('#connectionValve').val('');
+        });
+    },
+
+    __sumBigovki: function () {
+        $(".sumBigovki").keyup(function () {
+            var isEmpty = true;
+            var total = 0;
+            $('.sumBigovki').each(function () {
+                total = total + Number($(this).val());
+                if ($.trim($(this).val()) !== '') {
+                    isEmpty = isEmpty && false;
+                }
+            });
+            if (isEmpty === false) {
+                $('input#sizeWorkpieceWidth').prop("disabled", true);
+                $('input#sizeWorkpieceWidth').val(total);
+            }
+            else {
+                $('input#sizeWorkpieceWidth').prop("disabled", false);
+                $('input#sizeWorkpieceWidth').val("");
+            }
+        });
+    },
+
+
+    __checkInputNumber: function () {
+        $(".numberInputCheck").keydown(function (event) {
+            if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+            }
+            else if (event.keyCode != 8 && event.keyCode != 46) {
+                event.preventDefault();
+            }
         });
     }
 };

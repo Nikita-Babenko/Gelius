@@ -2,9 +2,11 @@ import React from "react";
 import WorkCentersStore from "../../stores/WorkCentersStore";
 import EventConstants from "../../constants/Events";
 import Dictionary from "../newProduct/Dictionary";
+import DictionaryColoured from "../newProduct/DictionaryColoured";
 import SquareInput from "../newProduct/SquareInput";
 import WorkCenterNoteRow from "../newProduct/WorkCenterNoteRow";
 import NumberInput from "../newProduct/NumberInput";
+import TextInputMultiline from "../newProduct/TextInputMultiline";
 
 class BodyMiddle extends React.Component {
 
@@ -25,7 +27,7 @@ class BodyMiddle extends React.Component {
     }
 
     __getSelectedCenters() {
-        this.setState({ selectedCenters: WorkCentersStore.getSelectedCenters() });
+        this.setState({selectedCenters: WorkCentersStore.getSelectedCenters()});
     }
 
     render() {
@@ -69,7 +71,7 @@ class BodyMiddle extends React.Component {
                         <tr>
                             <td className="middle_products_large_td">Соединение клапана</td>
                             <td className="middle_products_small_td">
-                                <Dictionary
+                                <DictionaryColoured
                                     dictionaryName="connectionValve"
                                     dictionaryTextName="connectionValve"
                                 />
@@ -79,16 +81,14 @@ class BodyMiddle extends React.Component {
                         <tr>
                             <td className="middle_products_small_td" colSpan="2">
                                 <div className="res_div_cliche_stamp">Штамп</div>
-                                <div id="stamp" className="res_cliche_stamp" contentEditable="true">
-                                </div>
+                                <TextInputMultiline id="stamp" style="res_cliche_stamp"/>
                             </td>
                         </tr>
 
                         <tr>
                             <td className="middle_products_small_td" colSpan="2">
                                 <div className="res_div_cliche_stamp">Клише</div>
-                                <div id="cliche" className="res_cliche_stamp" contentEditable="true">
-                                </div>
+                                <TextInputMultiline id="cliche" style="res_cliche_stamp"/>
                             </td>
                         </tr>
 
@@ -183,6 +183,7 @@ class BodyMiddle extends React.Component {
             </div>
         );
     }
+
     __createWorkCentersNotes() {
         var selectedCenters = this.state.selectedCenters;
         var components = [];
@@ -193,7 +194,7 @@ class BodyMiddle extends React.Component {
                 continue;
             }
             components.push(
-                <WorkCenterNoteRow index={++index} workCenterGroup={selectedCenters[key]} />
+                <WorkCenterNoteRow index={++index} workCenterGroup={selectedCenters[key]}/>
             );
             //index is temp. attribute (maybe)
         }

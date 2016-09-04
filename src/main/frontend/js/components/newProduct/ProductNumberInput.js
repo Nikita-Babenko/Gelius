@@ -11,15 +11,15 @@ class ProductNumberInput extends React.Component {
         };
         this.__changeCheckbox = this.__changeCheckbox.bind(this);
         this.__changeText = this.__changeText.bind(this);
-        this.__getNewProductNumber = this.__getNewProductNumber.bind(this);
+        this.__loadDefaultValues = this.__loadDefaultValues.bind(this);
     }
 
     componentWillMount() {
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__getNewProductNumber);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValues);
     }
 
     componentWillUnmount() {
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__getNewProductNumber);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValues);
     }
 
     render() {
@@ -53,11 +53,13 @@ class ProductNumberInput extends React.Component {
         this.setState({newProductNumber: e.target.value});
     }
 
-    __getNewProductNumber() {
-        this.setState({
-            newProductNumber: NewProductStore.getDefaultProductProperty("productNumber"),
-            isNewProduct: NewProductStore.getDefaultProductProperty("isNew")
-        });
+    __loadDefaultValues() {
+        if (NewProductStore.isEnableDefaultValues()) {
+            this.setState({
+                newProductNumber: NewProductStore.getDefaultProductProperty("productNumber"),
+                isNewProduct: NewProductStore.getDefaultProductProperty("isNew")
+            });
+        }
     }
 }
 

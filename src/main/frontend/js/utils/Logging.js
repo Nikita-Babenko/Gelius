@@ -1,4 +1,4 @@
-var isLoggingEnabled = true;
+var isLoggingEnabled = false;
 
 var Logging = {
 

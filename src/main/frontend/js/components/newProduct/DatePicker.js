@@ -1,13 +1,24 @@
 import React from 'react';
+import EventConstants from "../../constants/Events";
+import NewProductStore from "../../stores/NewProductStore";
 
 class DatePicker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: this.props.todayDate
+            date: ""
         };
 
         this.__changeDate = this.__changeDate.bind(this);
+        this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
+    }
+
+    componentWillMount() {
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
+    }
+
+    componentWillUnmount() {
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     render() {
@@ -20,29 +31,34 @@ class DatePicker extends React.Component {
     __changeDate(e) {
         this.setState({date: e.target.value});
     }
+
+    __loadDefaultValue() {
+        if (NewProductStore.isEnableDefaultValues()) {
+            var receivedDate = NewProductStore.getDefaultProductProperty(this.props.id);
+            var value = receivedDate ? __transformDate(receivedDate) : "";
+
+            this.setState({
+                date: value
+            });
+        }
+    }
 }
 
 DatePicker.propTypes = {
-    todayDate: React.PropTypes.string,
     id: React.PropTypes.string,
     class: React.PropTypes.string
 };
 
 DatePicker.defaultProps = {
-    todayDate: __getTodayDate(),
     id: "",
     class: ""
 };
 
-function __getTodayDate() {
-    var now = new Date();
-    var month = (now.getMonth() + 1);
-    var day = now.getDate();
-    if (month < 10)
-        month = "0" + month;
-    if (day < 10)
-        day = "0" + day;
-    return +now.getFullYear() + '-' + month + '-' + day;
+function __transformDate(date) {
+    var year = date[0]
+    var month = date[1] < 10 ? "0" + date[1] : date[1];
+    var day = date[2] < 10 ? "0" + date[2] : date[2];
+    return year + '-' + month + '-' + day;
 }
 
 export default DatePicker;
