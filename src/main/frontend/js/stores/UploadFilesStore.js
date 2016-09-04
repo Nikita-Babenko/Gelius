@@ -29,14 +29,14 @@ uploadFilesStore.dispatchToken = Dispatcher.register(function (event) {
             } else {
                 uploadFilesStore.filesCount++;
                 //some actions, when link was added...
-                //console.log("uploadFilesStore.filesCount=" + uploadFilesStore.filesCount + " (элемент удален)");
+                console.log("uploadFilesStore.filesCount=" + uploadFilesStore.filesCount + " (элемент добавлен)");
                 uploadFilesStore.emitChange();
             }
             break;
         case EventConstants.REMOVE_FILE_LINK:
             uploadFilesStore.filesCount--;
             //some actions, when link was removing...
-            //console.log("uploadFilesStore.filesCount=" + uploadFilesStore.filesCount + " (элемент удален)");
+            console.log("uploadFilesStore.filesCount=" + uploadFilesStore.filesCount + " (элемент удален)");
             uploadFilesStore.emitChange();
             break;
         /*case EventConstants.SAVE_FILE_LINKS_OF_NEW_PRODUCT:

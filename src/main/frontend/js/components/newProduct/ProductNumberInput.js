@@ -58,7 +58,7 @@ class ProductNumberInput extends React.Component {
     __loadDefaultValues() {
         if (NewProductStore.isEnableDefaultValues()) {
             this.setState({
-                newProductNumber: NewProductStore.getDefaultProductProperty("productNumber"),
+                newProductNumber: NewProductStore.newProductNumber, //Dima: NewProductStore.getDefaultProductProperty("productNumber"),
                 isNewProduct: NewProductStore.getDefaultProductProperty("isNew")
             });
         }

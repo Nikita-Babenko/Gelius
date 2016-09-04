@@ -30,16 +30,16 @@ class FileLinksContainer extends React.Component {
 
     __onFileLinksUpdated() {
         this.setState({filesCount: UploadFilesStore.filesCount});
-        //console.log("__onFileLinksUpdated");
+        console.log("__onFileLinksUpdated");
     }
 
     __onEntitySaved() {
-        //console.log("__onEntitySaved");
+        console.log("__onEntitySaved");
         NewProductAction.saveFileLinks();
     }
 
     __addFile(event) {
-        //console.log("__addFile");
+        console.log("__addFile");
         NewProductAction.addFileLink();
 
     }

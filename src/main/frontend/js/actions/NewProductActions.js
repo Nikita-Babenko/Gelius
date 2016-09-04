@@ -64,28 +64,23 @@ var NewProductActions = {
 
     saveProduct(){
         var newProduct = NewProductStore.getNewProduct();
-
-        if (!newProduct.blankFormat) {
-            Dispatcher.dispatch({
-                eventType: EventConstants.BLANK_FORMAT_VALIDATION_ERROR
-            });
-        } else {
-            $.ajax({
-                type: 'POST',
-                url: UrlConstants.SAVE_PRODUCT_URL,
-                contentType: 'application/json',
-                data: JSON.stringify(NewProductStore.getNewProduct()),
-                dataType: 'JSON',
-                timeout: 100000,
-                success: function (response) {
-                    Dispatcher.dispatch({
-                        eventType: EventConstants.SAVE_NEW_PRODUCT,
-                        response: response
-                    });
-                }.bind(this),
-                error: function (e) {
-                    console.log("ERROR: ", e);
-                }.bind(this)
+        L.log(newProduct);
+        $.ajax({
+            type: 'POST',
+            url: UrlConstants.SAVE_PRODUCT_URL,
+            contentType: 'application/json',
+            data: JSON.stringify(NewProductStore.getNewProduct()),
+            dataType: 'JSON',
+            timeout: 100000,
+            success: function (response) {
+                Dispatcher.dispatch({
+                    eventType: EventConstants.SAVE_NEW_PRODUCT_ENTITY,
+                    response: response
+                });
+            }.bind(this),
+            error: function (e) {
+                console.log("ERROR: ", e);
+            }.bind(this)
 
         });
 
@@ -142,7 +137,7 @@ var NewProductActions = {
 
     saveFileLinks() {
         var savedProductNumber = NewProductStore.savedProductNumber;
-        //console.log("NewProductActions.saveFileLinks(): получили из хранилища номер сохраненной техкарты: " + savedProductNumber);
+        console.log("NewProductActions.saveFileLinks(): получили из хранилища номер сохраненной техкарты: " + savedProductNumber);
 
         //TODO Remove this block to UploadFilesStore; get this data from UploadFilesStore
         var formData = new FormData();
@@ -150,7 +145,7 @@ var NewProductActions = {
             var file = this.files[0];
             var name = file.name, size = file.size, type = file.type;
             //TODO size and type validation
-            //console.log("Найден файл: name=" + name + ", size=" + size + ", type=" + type);
+            console.log("Найден файл: name=" + name + ", size=" + size + ", type=" + type);
             formData.append("files", file);
         });
         formData.append("productNumber", savedProductNumber);
@@ -166,8 +161,8 @@ var NewProductActions = {
             //contentType maybe need for encoding ("...; encoding=UTF-8"), cuz we have bad russian filenames, that arrived on server
             success : function(data) {
                 //console.log(data);
-                //console.log("NewProductActions.saveFileLinks(): файлы успешно сохранены");
-                //console.log("NewProductActions.saveFileLinks(): 1...");
+                console.log("NewProductActions.saveFileLinks(): файлы успешно сохранены");
+                console.log("NewProductActions.saveFileLinks(): 1...");
                 //TODO вызвать событие успешного сохранения всех данных (по факту - сущность и ее файлы-ссылки):
                 /*Dispatcher.
                     dispatch({ eventType: EventConstants.SAVE_FILE_LINKS_OF_NEW_PRODUCT }).
@@ -176,7 +171,7 @@ var NewProductActions = {
                     })
                 ;*/
                 Dispatcher.dispatch({ eventType: EventConstants.SAVE_NEW_PRODUCT });
-                //console.log("NewProductActions.saveFileLinks(): ...2");
+                console.log("NewProductActions.saveFileLinks(): ...2");
             },
             error: function(xhr, status) {
                 alert("NewProductActions.saveFileLinks(): ошибка запроса при сохранении файлов\nstatus=" + status);
