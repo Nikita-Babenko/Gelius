@@ -2,6 +2,7 @@ import Dispatcher from "../dispatcher/Dispatcher";
 import UrlConstants from "../constants/Url";
 import EventConstants from "../constants/Events";
 import NewProductStore from "../stores/NewProductStore";
+import ObjectConstants from '../constants/Objects';
 import L from "../utils/Logging";
 
 var NewProductActions = {
@@ -146,6 +147,9 @@ var NewProductActions = {
             var name = file.name, size = file.size, type = file.type;
             //TODO size and type validation
             console.log("Найден файл: name=" + name + ", size=" + size + ", type=" + type);
+            if (size > ObjectConstants.UPLOADED_FILE_SIZE_LIMIT) {
+                alert("Размер одного из файлов превышает допустимые " + "0" + " (МБ)"); //TODO проверять еще перед сохранением сущности
+            }
             formData.append("files", file);
         });
         formData.append("productNumber", savedProductNumber);
@@ -156,6 +160,9 @@ var NewProductActions = {
             type : "POST",
             dataType: "json",
             data : formData,
+            /*headers: {
+                "Content-Type": "charset=UTF-8"
+            },*/
             processData: false, //(tell jQuery not to process the data)
             contentType: false, //(tell jQuery not to set contentType)
             //contentType maybe need for encoding ("...; encoding=UTF-8"), cuz we have bad russian filenames, that arrived on server

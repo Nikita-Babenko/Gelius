@@ -14,6 +14,6 @@ public class CheckOldProductNumberExistenceValidator implements ConstraintValida
 
     @Override
     public boolean isValid(ProductDto productDto, ConstraintValidatorContext context) {
-        return !( !productDto.getNew() && productDto.getProductNumber() == null );
+        return !( !productDto.getIsNew() && productDto.getProductNumber() == null );
     }
 }

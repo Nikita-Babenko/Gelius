@@ -16,7 +16,9 @@ var ObjectsConstants = {
 
     dictionaries: {
         WORKCENTER_AGREGATOR_ID: 1
-    }
+    },
+
+    UPLOADED_FILE_SIZE_LIMIT: 15*1024*1024 //size limit for each uploaded file (in bytes)
 
 };
 
