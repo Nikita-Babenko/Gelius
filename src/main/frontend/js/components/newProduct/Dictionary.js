@@ -8,11 +8,19 @@ class Dictionary extends React.Component {
         super(props);
         this.state = {
             dictionaryParameters: [],
-            value : this.props.defaultValue
+            value : this.props.defaultValue,
+            selectedOptionColor: {
+                background: ''
+            },
+            defaultOptionColor: {
+                background: 'white'
+            }
         };
 
         this.__reloadDefaultValue = this.__reloadDefaultValue.bind(this);
-        this.__selectOption = this.__selectOption.bind(this);
+        this.__selectOptionValue = this.__selectOptionValue.bind(this);
+        this.__chooseOption = this.__chooseOption.bind(this);
+        this.__setColorForSelectedOption = this.__setColorForSelectedOption.bind(this);
         this._onDictionariesParametersUpdated = this._onDictionariesParametersUpdated.bind(this);
     }
 
@@ -29,15 +37,16 @@ class Dictionary extends React.Component {
     render() {
         var dictData = this.state.dictionaryParameters;
         var dictText = this.props.dictionaryTextName;
+        var whiteColor = this.state.defaultOptionColor;
         var dictOptions = dictData.map(function (d) {
             return (
-                <DictionaryOption id={d.id} text={d[dictText]} />
+                <DictionaryOption id={d.id} text={d[dictText]} style={whiteColor}/>
             );
         });
 
         return (
-            <select value={this.state.value} className={this.props.style} id={this.props.dictionaryName} onChange={this.__selectOption}>
-                <option value="">не выбран</option>
+            <select value={this.state.value} style={this.state.selectedOptionColor} className={this.props.style} id={this.props.dictionaryName} onChange={this.__chooseOption}>
+                <option value="" style={this.state.defaultOptionColor}>не выбран</option>
                 {dictOptions}
             </select>
         );
@@ -48,6 +57,12 @@ class Dictionary extends React.Component {
             dictionaryParameters: DictionaryStore.getDictionaryParameters(this.props.dictionaryName)
         });
     }
+    
+    
+    __chooseOption(e){
+        this.__selectOptionValue(e);
+        this.__setColorForSelectedOption(e);
+    }
 
     __reloadDefaultValue(){
         this.setState({
@@ -55,10 +70,21 @@ class Dictionary extends React.Component {
         });
     }
 
-    __selectOption(e){
-        var selectValue = e.target.value;
+    __selectOptionValue(e){
+        var selectedValue = e.target.value;
         this.setState({
-            value : selectValue
+            value : selectedValue
+        });
+    }
+
+    __setColorForSelectedOption(e){
+        var selectedValue = e.target.value;
+        var dictionaryName = this.props.dictionaryName;
+        var color = (dictionaryName === "connectionValve") ? (selectedValue === "2" ? 'yellow' : (selectedValue === "3" ? '#FFBAB7' : 'white')) : 'white';
+        this.setState({
+            selectedOptionColor: {
+                background : color
+            }
         });
     }
 }
@@ -78,7 +104,7 @@ export default Dictionary;
 class DictionaryOption extends React.Component {
     render() {
         return (
-            <option value={this.props.id}>{this.props.text}</option>
+            <option value={this.props.id} style={this.props.style}>{this.props.text}</option>
         );
     }
 }
