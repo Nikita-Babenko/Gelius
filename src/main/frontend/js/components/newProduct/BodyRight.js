@@ -1,6 +1,6 @@
 import React from "react";
 import Dictionary from "../newProduct/Dictionary";
-import UploadFiles from "../newProduct/UploadFiles";
+import FileLinksContainer from "../newProduct/FileLinksContainer";
 import NumberInput from "../newProduct/NumberInput";
 
 class BodyRight extends React.Component {
@@ -88,7 +88,7 @@ class BodyRight extends React.Component {
                     </tr>
 
                     <tr>
-                        <UploadFiles />
+                        <FileLinksContainer />
                     </tr>
 
                     <tr>

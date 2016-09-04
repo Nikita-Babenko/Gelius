@@ -64,23 +64,28 @@ var NewProductActions = {
 
     saveProduct(){
         var newProduct = NewProductStore.getNewProduct();
-        L.log(newProduct);
-        $.ajax({
-            type: 'POST',
-            url: UrlConstants.SAVE_PRODUCT_URL,
-            contentType: 'application/json',
-            data: JSON.stringify(NewProductStore.getNewProduct()),
-            dataType: 'JSON',
-            timeout: 100000,
-            success: function (response) {
-                Dispatcher.dispatch({
-                    eventType: EventConstants.SAVE_NEW_PRODUCT,
-                    response: response
-                });
-            }.bind(this),
-            error: function (e) {
-                console.log("ERROR: ", e);
-            }.bind(this)
+
+        if (!newProduct.blankFormat) {
+            Dispatcher.dispatch({
+                eventType: EventConstants.BLANK_FORMAT_VALIDATION_ERROR
+            });
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: UrlConstants.SAVE_PRODUCT_URL,
+                contentType: 'application/json',
+                data: JSON.stringify(NewProductStore.getNewProduct()),
+                dataType: 'JSON',
+                timeout: 100000,
+                success: function (response) {
+                    Dispatcher.dispatch({
+                        eventType: EventConstants.SAVE_NEW_PRODUCT,
+                        response: response
+                    });
+                }.bind(this),
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                }.bind(this)
 
         });
 
@@ -112,6 +117,75 @@ var NewProductActions = {
             groupPriority: groupPriority,
             note: note
         });
+    },
+
+    addFileLink() {
+        Dispatcher.dispatch({
+            eventType: EventConstants.ADD_FILE_LINK,
+            someData: 42
+        });
+    },
+
+    removeFileLink() {
+        Dispatcher.dispatch({
+            eventType: EventConstants.REMOVE_FILE_LINK,
+            someData: 42
+        });
+    },
+
+    /*triggerFullSave() {
+        console.log("NewProductAction.triggerFullSave()");
+        Dispatcher.dispatch({
+            eventType: EventConstants.NEW_PRODUCT_CHANGE_TRIGGER
+        });
+    },*/
+
+    saveFileLinks() {
+        var savedProductNumber = NewProductStore.savedProductNumber;
+        //console.log("NewProductActions.saveFileLinks(): получили из хранилища номер сохраненной техкарты: " + savedProductNumber);
+
+        //TODO Remove this block to UploadFilesStore; get this data from UploadFilesStore
+        var formData = new FormData();
+        $(".attachments :file").each(function() {
+            var file = this.files[0];
+            var name = file.name, size = file.size, type = file.type;
+            //TODO size and type validation
+            //console.log("Найден файл: name=" + name + ", size=" + size + ", type=" + type);
+            formData.append("files", file);
+        });
+        formData.append("productNumber", savedProductNumber);
+        //End of block
+
+        $.ajax({
+            url : UrlConstants.SAVE_PRODUCT_FILES_URL,
+            type : "POST",
+            dataType: "json",
+            data : formData,
+            processData: false, //(tell jQuery not to process the data)
+            contentType: false, //(tell jQuery not to set contentType)
+            //contentType maybe need for encoding ("...; encoding=UTF-8"), cuz we have bad russian filenames, that arrived on server
+            success : function(data) {
+                //console.log(data);
+                //console.log("NewProductActions.saveFileLinks(): файлы успешно сохранены");
+                //console.log("NewProductActions.saveFileLinks(): 1...");
+                //TODO вызвать событие успешного сохранения всех данных (по факту - сущность и ее файлы-ссылки):
+                /*Dispatcher.
+                    dispatch({ eventType: EventConstants.SAVE_FILE_LINKS_OF_NEW_PRODUCT }).
+                    then(function() {  //because file saving is last operation is saving chain
+                        this.triggerFullSave()
+                    })
+                ;*/
+                Dispatcher.dispatch({ eventType: EventConstants.SAVE_NEW_PRODUCT });
+                //console.log("NewProductActions.saveFileLinks(): ...2");
+            },
+            error: function(xhr, status) {
+                alert("NewProductActions.saveFileLinks(): ошибка запроса при сохранении файлов\nstatus=" + status);
+                //console.log(xhr);
+                $("BODY").html(xhr.responseText);
+                //TODO вызвать событие ошибки сохранения файлов (но упомянуть, что сущность сохранилась)
+            }
+        });
+
     },
 
     // implemented #1201

@@ -15,10 +15,12 @@ class ProductNumberInput extends React.Component {
     }
 
     componentWillMount() {
+        NewProductStore.addListener(EventConstants.LOAD_PRODUCT_NUMBER_EVENT, this.__loadDefaultValues);
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValues);
     }
 
     componentWillUnmount() {
+        NewProductStore.removeListener(EventConstants.LOAD_PRODUCT_NUMBER_EVENT, this.__loadDefaultValues);
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValues);
     }
 

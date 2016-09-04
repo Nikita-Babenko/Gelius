@@ -1,5 +1,7 @@
 var EventConstants = {
-    //product register constants
+
+    //Product register constants
+
     LOAD_FILTERED_SORTED_PRODUCTS: "load_filtered_sorted_products",
     LOAD_ALL_FILTER_PARAMETERS: "load_filter_parameters",
     LOAD_FILTER_PARAMETERS_FOR_COLUMN: "load_filter_parameters",
@@ -13,11 +15,21 @@ var EventConstants = {
     PRODUCTS_TABLE_CHANGE_EVENT: "products_table_change_event",
     FILTERING_SORTING_CHANGE_EVENT: "filtering_sorting_change_event",
 
-    //new product constants
+
+    //New product constants
+
     LOAD_ALL_DICTIONARIES: "load_all_dictionaries",
     LOAD_PRODUCT_NUMBER: "load_product_number",
-    SAVE_NEW_PRODUCT: "save_new_product",
+    SAVE_NEW_PRODUCT_ENTITY: "save_new_product_entity", //entity was saved
 
+    DICTIONARIES_CHANGE_EVENT: "dictionaries_change_event", //store: dictionaries was loaded from server?
+    LOAD_PRODUCT_NUMBER_EVENT: "load_product_number_event", //store: product number was loaded from server
+    NEW_PRODUCT_CHANGE_EVENT: "new_product_change_event", //store: all data (entity, file links etc) was saved
+    NEW_PRODUCT_ENTITY_CHANGE_EVENT: "new_product_entity_change_event", //store: entity was saved
+    NEW_PRODUCT_ENTITY_CHANGE_WITH_ERROR_EVENT: "new_product_entity_change_with_error_event", //store: entity was not saved (saving errors)
+    BLANK_FORMAT_VALIDATION_ERROR: "blank_format_validation_error", //validation error (before saving)
+
+    SAVE_NEW_PRODUCT: "save_new_product", //event to NewProductStore: it needs say about full saving
     DICTIONARIES_CHANGE_EVENT: "dictionaries_change_event",
     NEW_PRODUCT_CHANGE_EVENT: "new_product_change_event",
     DEFAULT_PRODUCT_CHANGE_EVENT: "work_centers_change_event",
@@ -26,7 +38,13 @@ var EventConstants = {
     ADD_WORK_CENTER: "add_work_center",
     DELETE_WORK_CENTER: "delete_work_center",
     UPDATE_WORKABILITY_INFO: "update_workability_information",
-    UPDATE_WORK_CENTER_NOTE: "update_work_center_note"
+    UPDATE_WORK_CENTER_NOTE: "update_work_center_note",
+    WORK_CENTERS_CHANGE_EVENT: "work_centers_change_event",
+
+    ADD_FILE_LINK: "add_file_link",
+    REMOVE_FILE_LINK: "remove_file_link",
+    FILE_LINKS_CHANGE_EVENT: "file_links_change_event", //UploadFilesStore: file link was added or removed
+    SAVE_FILE_LINKS_OF_NEW_PRODUCT: "save_file_links_of_new_product" //file links was saved
 
 };
 
