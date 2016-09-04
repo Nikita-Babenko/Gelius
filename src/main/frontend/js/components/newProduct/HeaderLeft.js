@@ -9,7 +9,8 @@ class HeaderLeft extends React.Component {
             <div className="col-lg-9 col-md-8 col-sm-7 col-xs-7 header_left">
                 <div className="col-md-12 header_top">
                     <div className="col-md-5 col-xs-10 col-sm-11  header_buttons icon_buttons_group">
-                        <a href="/products/register" className="fa fa-arrow-left fa-2x" title="На страницу реестра" aria-hidden="true"/>
+                        <a href="/products/register" className="fa fa-arrow-left fa-2x" title="На страницу реестра"
+                           aria-hidden="true"/>
 
                         <a href="#"
                            className="fa fa-floppy-o fa-2x"
@@ -48,7 +49,6 @@ class HeaderLeft extends React.Component {
                                 dictionaryName="client"
                                 dictionaryTextName="companyName"
                                 style="form-control header_info_customer"
-                                defaultValue=""
                             />
                         </div>
 
@@ -64,7 +64,6 @@ class HeaderLeft extends React.Component {
                                 dictionaryName="productType"
                                 dictionaryTextName="productType"
                                 style="form-control header_info_type"
-                                defaultValue=""
                             />
                         </div>
 
@@ -77,6 +76,7 @@ class HeaderLeft extends React.Component {
     __onSaveNewProductButtonClick() {
         NewProductActions.saveProduct();
     }
+
 }
 
 export default HeaderLeft;

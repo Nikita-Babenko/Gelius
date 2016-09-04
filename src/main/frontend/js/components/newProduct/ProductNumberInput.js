@@ -44,7 +44,7 @@ class ProductNumberInput extends React.Component {
         this.setState({isNewProduct: isNewProduct});
 
         if (isNewProduct)
-            this.setState({newProductNumber: NewProductStore.getNewProductNumber()});
+            this.setState({newProductNumber: NewProductStore.getDefaultProductProperty("productNumber")});
         else
             this.setState({newProductNumber: ""});
     }
@@ -55,7 +55,8 @@ class ProductNumberInput extends React.Component {
 
     __getNewProductNumber() {
         this.setState({
-            newProductNumber: NewProductStore.getNewProductNumber(), isNewProduct: true
+            newProductNumber: NewProductStore.getDefaultProductProperty("productNumber"),
+            isNewProduct: NewProductStore.getDefaultProductProperty("isNew")
         });
     }
 }

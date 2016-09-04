@@ -4,6 +4,7 @@ import EventConstants from "../../constants/Events";
 import Dictionary from "../newProduct/Dictionary";
 import SquareInput from "../newProduct/SquareInput";
 import WorkCenterNoteRow from "../newProduct/WorkCenterNoteRow";
+import NumberInput from "../newProduct/NumberInput";
 
 class BodyMiddle extends React.Component {
 
@@ -44,10 +45,8 @@ class BodyMiddle extends React.Component {
                             <td className="middle_products_large_td">Размеры заготовки</td>
                             <td className="middle_products_small_td">
                                 <div className="inputs">
-                                    <input type="number" className="input_1 numberInputCheck" id="sizeWorkpieceLength"
-                                           min="0"/>
-                                    <input type="number" className="input_2 numberInputCheck" id="sizeWorkpieceWidth"
-                                           min="0"/>
+                                    <NumberInput id="sizeWorkpieceLength" style="input_1"/>
+                                    <NumberInput id="sizeWorkpieceWidth" style="input_2"/>
                                 </div>
                             </td>
 
@@ -55,15 +54,16 @@ class BodyMiddle extends React.Component {
 
                         <tr>
                             <td className="middle_products_large_td">Количество с листа</td>
-                            <td className="middle_products_small_td"><input type="number" className="numberInputCheck"
-                                                                            id="numberFromSheet" min="0"/></td>
+                            <td className="middle_products_small_td">
+                                <NumberInput id="numberFromSheet"/>
+                            </td>
                         </tr>
 
                         <tr>
                             <td className="middle_products_large_td">Формат заготовки</td>
-                            <td className="middle_products_small_td"><input required type="number"
-                                                                            className="numberInputCheck" id="blankFormat"
-                                                                            min="0"/></td>
+                            <td className="middle_products_small_td">
+                                <NumberInput id="blankFormat"/>
+                            </td>
                         </tr>
 
                         <tr>
@@ -72,7 +72,6 @@ class BodyMiddle extends React.Component {
                                 <Dictionary
                                     dictionaryName="connectionValve"
                                     dictionaryTextName="connectionValve"
-                                    defaultValue=""
                                 />
                             </td>
                         </tr>

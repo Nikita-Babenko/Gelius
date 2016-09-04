@@ -20,14 +20,13 @@ var EventConstants = {
 
     DICTIONARIES_CHANGE_EVENT: "dictionaries_change_event",
     NEW_PRODUCT_CHANGE_EVENT: "new_product_change_event",
-    NEW_PRODUCT_CHANGE_WITH_ERROR_EVENT: "new_product_change_with_error_event",
-    BLANK_FORMAT_VALIDATION_ERROR: "blank_format_validation_error",
+    DEFAULT_PRODUCT_CHANGE_EVENT: "work_centers_change_event",
+    WORK_CENTERS_CHANGE_EVENT: "work_centers_change_event",
 
     ADD_WORK_CENTER: "add_work_center",
     DELETE_WORK_CENTER: "delete_work_center",
     UPDATE_WORKABILITY_INFO: "update_workability_information",
-    UPDATE_WORK_CENTER_NOTE: "update_work_center_note",
-    WORK_CENTERS_CHANGE_EVENT: "work_centers_change_event"
+    UPDATE_WORK_CENTER_NOTE: "update_work_center_note"
 
 };
 

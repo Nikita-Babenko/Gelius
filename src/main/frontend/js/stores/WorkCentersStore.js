@@ -11,7 +11,7 @@ class WorkCentersStore extends EventEmitter {
         this.CENTERS_ARRAY_PROPNAME = "centersList";
 
         this.selectedWorkCenters = this.__initWorkCenters();
-        this.selectedCentersText = "центры не выбраны";
+        this.selectedCentersText = "";
     }
 
     emitChange() {
@@ -93,8 +93,8 @@ workCentersStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.LOAD_ALL_DICTIONARIES:
             Dispatcher.waitFor([ DictionaryStore.dispatchToken ]);
-            var agregatorCenter = DictionaryStore.getAgregatorWorkCenter();
-            workCentersStore.selectedWorkCenters["group0"][centersArrayPropName].push(agregatorCenter);
+            var aggregatorCenter = DictionaryStore.getAgregatorWorkCenter();
+            workCentersStore.selectedWorkCenters["group0"][centersArrayPropName].push(aggregatorCenter);
             //There is no operator "break" here, because we need UPDATE_WORKABILITY_INFO-operations immediately after
             // LOAD_ALL_DICTIONARIES for displaying Agregator in Notes.
         case EventConstants.UPDATE_WORKABILITY_INFO:

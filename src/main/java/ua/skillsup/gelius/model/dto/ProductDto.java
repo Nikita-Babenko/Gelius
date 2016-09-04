@@ -1,5 +1,6 @@
 package ua.skillsup.gelius.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ua.skillsup.gelius.annotation.CheckDoubleAboveZero;
 import ua.skillsup.gelius.annotation.CheckOldProductNumberExistence;
 import ua.skillsup.gelius.model.dto.dictionary.*;
@@ -107,6 +108,7 @@ public class ProductDto {
     @Min(value = 1, message = "производственный формат не может быть меньше {value}")
     private Integer productionFormat;
 
+    @JsonManagedReference
     @Valid
     private List<WorkabilityNotesDto> workabilityNotes;
 

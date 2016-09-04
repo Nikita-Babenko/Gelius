@@ -7,22 +7,71 @@ import ResponseCodeConstants from "../constants/ResponseCodes";
 class NewProductStore extends EventEmitter {
     constructor() {
         super();
-        this.newProductNumber = "0";
+
         this.alert = {
             alertType: "",
             message: ""
         };
 
         this.showAlert = false;
+
+        this.defaultProduct = {
+            "productNumber": "0",
+            "isNew": true,
+            "productCreateDate": [2016, 9, 3],
+            "productUpdateDate": [2016, 9, 3],
+            "personPrepared": "",
+            "isUse": true,
+            "client": null,
+            "productName": "without name",
+            "productType": null,
+            "innerLength": null,
+            "innerWidth": null,
+            "innerHeight": null,
+            "theoreticalSquare": "",
+            "actualSquare": "",
+            "format": null,
+            "profile": null,
+            "cardboardBrand": null,
+            "celluloseLayer": {"id": 1},
+            "faceLayer": null,
+            "innerLayer": null,
+            "material": "",
+            "sizeWorkpieceLength": null,
+            "sizeWorkpieceWidth": null,
+            "numberFromSheet": null,
+            "blankFormat": 19,
+            "connectionValve": null,
+            "stamp": null,
+            "cliche": null,
+            "packing": {"id": 1},
+            "numberInPack": null,
+            "numberInTransportPackage": null,
+            "packageLength": null,
+            "packageWidth": null,
+            "packageHeight": null,
+            "pallet": null,
+            "palletPlacement": null,
+            "palletRows": null,
+            "numberLoadCar": null,
+            "productionFormat": null,
+            "workabilityNotes": [
+                {
+                    "serviceCenter": {
+                        "id": 1
+                    },
+                    "note": null
+                }
+            ]
+        };
     }
 
-    emitChange(hasDoneWithError) {
-        var event = hasDoneWithError ? EventConstants.NEW_PRODUCT_CHANGE_WITH_ERROR_EVENT : EventConstants.NEW_PRODUCT_CHANGE_EVENT;
-        this.emit(event);
+    emitChange() {
+        this.emit(EventConstants.NEW_PRODUCT_CHANGE_EVENT);
     }
 
-    getNewProductNumber() {
-        return this.newProductNumber;
+    getDefaultProductProperty(propertyName) {
+        return this.defaultProduct[propertyName];
     }
 
     getAlertInformation() {
@@ -52,9 +101,9 @@ class NewProductStore extends EventEmitter {
         product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());
         product["innerLayer"] = Number($('#innerLayer :selected').val());
         product["faceLayer"] = Number($('#faceLayer :selected').val());
-        product["cliche"] = $('#cliche').text();
-        product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/,'.'));
-        product["actualSquare"] = $('#actualSquare').val().replace(/,/,'.');
+        product["cliche"] = $('#cliche').val();
+        product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/, '.'));
+        product["actualSquare"] = $('#actualSquare').val().replace(/,/, '.');
         product["material"] = $('#material').val();
         product["format"] = Number($('#format :selected').val());
         product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
@@ -62,7 +111,7 @@ class NewProductStore extends EventEmitter {
         product["numberFromSheet"] = $('#numberFromSheet').val();
         product["blankFormat"] = $('#blankFormat').val();
         product["connectionValve"] = Number($('#connectionValve :selected').val());
-        product["stamp"] = $('#stamp').text();
+        product["stamp"] = $('#stamp').val();
         product["packing"] = Number($('#packing :selected').val());
         product["numberInPack"] = $('#numberInPack').val();
         product["numberInTransportPackage"] = $('#numberInTransportPackage').val();
@@ -82,46 +131,14 @@ class NewProductStore extends EventEmitter {
         var note;
         for (var groupName in centers) {
             note = centers[groupName].note;
-            centers[groupName][centersArrayPropName].forEach(function(group) {
+            centers[groupName][centersArrayPropName].forEach(function (group) {
                 product["workabilityNotes"].push(
-                    { serviceCenter: group.id, note: note }
+                    {serviceCenter: group.id, note: note}
                 );
             });
         }
 
         return product;
-    }
-
-    clearAllSelectedValues() {
-        $('#productName').val("");
-        //$('#productCreateDate').val();
-        //$('#productUpdateDate').val();
-        $('#personPrepared').val("");
-        $('#innerLength').val("");
-        $('#innerWidth').val("");
-        $('#innerHeight').val("");
-        $('#cliche').val("");
-        $('#theoreticalSquare').val("");
-        $('#actualSquare').val("");
-        $('#material').val("");
-        $('#sizeWorkpieceLength').val("");
-        $('#sizeWorkpieceWidth').val("");
-        $('#numberFromSheet').val("");
-        $('#blankFormat').val("");
-        $('#stamp').val("");
-        $('#numberInPack').val("");
-        $('#numberInTransportPackage').val("");
-        $('#packageLength').val("");
-        $('#packageWidth').val("");
-        $('#packageHeight').val("");
-        $('#palletRows').val("");
-        $('#numberLoadCar').val("");
-        $('#productionFormat').val("");
-
-        //TODO
-        // reset selected workcenters in WorkCentersStore,
-        // reset checkboxes in modal window,
-        // trigger EventConstants.UPDATE_WORKABILITY_INFO for Notes update
     }
 
 }
@@ -132,15 +149,12 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.SAVE_NEW_PRODUCT:
             var responseData = event.response;
-            var hasDoneWithError = true;
             newProductStore.alert.alertType = "alert-danger";
             switch (responseData.code) {
                 case ResponseCodeConstants.OK:
-                    newProductStore.newProductNumber = responseData.data.newProductNumber;
-                    newProductStore.clearAllSelectedValues();
+                    newProductStore.defaultProduct.productNumber = responseData.data.newProductNumber;
                     newProductStore.alert.alertType = "alert-success";
                     newProductStore.alert.message = "Новый продукт (техкарта № " + responseData.data.savedProductNumber + ") был успешно добавлен";
-                    hasDoneWithError = false;
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.alert.message = "Вами допущены ошибки: " + responseData.data.join(", ");
@@ -150,20 +164,15 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     break;
                 default:
                     newProductStore.alert.message = "Произошла ошибка. Обновите страницу и повторите действие или попробуйте повторить действие позже";
-                }
+            }
             newProductStore.showAlert = true;
-            newProductStore.emitChange(hasDoneWithError);
+            newProductStore.emitChange();
+            newProductStore.showAlert = false;
             break;
         case EventConstants.LOAD_PRODUCT_NUMBER:
-            newProductStore.newProductNumber = event.productNumber;
-            newProductStore.emitChange(false);
+            newProductStore.defaultProduct.productNumber = event.productNumber;
+            newProductStore.emitChange();
             break;
-        case EventConstants.BLANK_FORMAT_VALIDATION_ERROR:
-            newProductStore.alert.alertType = "alert-danger";
-            newProductStore.alert.message = "Поле 'формат заготовки' должно быть заполнено!";
-            newProductStore.showAlert = true;
-            newProductStore.emitChange(true);
-            newProductStore.showAlert = false;
     }
 });
 

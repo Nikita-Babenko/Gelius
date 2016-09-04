@@ -2,15 +2,15 @@ import React from 'react';
 import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
 
-class SquareInput extends React.Component {
+class NumberInput extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            square: ""
+            number: ""
         };
 
-        this.__onSquareInputChange = this.__onSquareInputChange.bind(this);
+        this.__onNumberInputChange = this.__onNumberInputChange.bind(this);
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
     }
 
@@ -24,39 +24,36 @@ class SquareInput extends React.Component {
 
     render() {
         return (
-            <input type="text"
-                   className="numberInputCheck"
+            <input type="number" min="0"
                    id={this.props.id}
-                   value={this.state.square}
-                   onChange={this.__onSquareInputChange}/>
+                   className={this.props.style}
+                   value={this.state.number}
+                   onChange={this.__onNumberInputChange}
+            />
         );
     }
 
-    __onSquareInputChange(e) {
+    __onNumberInputChange(e) {
         var newValue = e.target.value;
-        var onlyPositiveDecimals = /^(\d?)[.,]?(\d{0,3})$/;
-        if (onlyPositiveDecimals.test(newValue)) {
-            if (newValue.length === 1 && newValue !== ",")
-                newValue += ",";
-
-            this.setState({square: newValue});
-        }
+        this.setState({number: newValue});
     }
 
     __loadDefaultValue() {
         var value = NewProductStore.getDefaultProductProperty(this.props.id);
         this.setState({
-            square: value ? value : ""
+            number: value ? value : ""
         });
     }
-
 }
 
-SquareInput.propTypes = {
-    id: React.PropTypes.string
+NumberInput.propTypes = {
+    id: React.PropTypes.string,
+    style: React.PropTypes.string
 };
 
-SquareInput.defaultProps = {
-    id: ""
+NumberInput.defaultProps = {
+    id: "",
+    style: ""
 };
-export default SquareInput;
+
+export default NumberInput;

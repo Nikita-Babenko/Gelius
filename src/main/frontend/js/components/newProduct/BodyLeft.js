@@ -5,6 +5,7 @@ import WorkCentersStore from "../../stores/WorkCentersStore";
 import WorkCenterModal from "../newProduct/WorkCenterModal";
 import Dictionary from "../newProduct/Dictionary";
 import SquareInput from "../newProduct/SquareInput";
+import NumberInput from "../newProduct/NumberInput";
 
 class BodyLeft extends React.Component {
     constructor(props) {
@@ -29,20 +30,21 @@ class BodyLeft extends React.Component {
         return (
             <div className="col-md-12 col-lg-5 left">
                 <table border="1" className="table left_table">
-
                     <tbody>
-
                     <tr>
                         <td className="left_title green_color" rowSpan="5">
                             <p className="vertical_left_title">Продукция</p>
                         </td>
                         <td className="products_large_td">Размеры внутренние</td>
-                        <td className="products_small_td"><input className="numberInputCheck" type="number"
-                                                                 id="innerLength" min="0"/></td>
-                        <td className="products_large_td"><input className="numberInputCheck" type="number"
-                                                                 id="innerWidth" min="0"/></td>
-                        <td className="products_small_td"><input className="numberInputCheck" type="number"
-                                                                 id="innerHeight" min="0"/></td>
+                        <td className="products_small_td">
+                            <NumberInput id="innerLength"/>
+                        </td>
+                        <td className="products_large_td">
+                            <NumberInput id="innerWidth"/>
+                        </td>
+                        <td className="products_small_td">
+                            <NumberInput id="innerHeight"/>
+                        </td>
                     </tr>
 
                     <tr>
@@ -62,7 +64,6 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="format"
                                 dictionaryTextName="format"
-                                defaultValue=""
                             />
                         </td>
                         <td className="products_large_td">Профиль</td>
@@ -70,7 +71,6 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="profile"
                                 dictionaryTextName="profile"
-                                defaultValue=""
                             />
                         </td>
                     </tr>
@@ -81,7 +81,6 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="cardboardBrand"
                                 dictionaryTextName="cardboardBrand"
-                                defaultValue=""
                             />
                         </td>
                         <td className="products_large_td">Целлюлозный слой</td>
@@ -89,7 +88,6 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="celluloseLayer"
                                 dictionaryTextName="celluloseLayer"
-                                defaultValue="1"
                             />
                         </td>
                     </tr>
@@ -101,7 +99,6 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="faceLayer"
                                 dictionaryTextName="faceLayer"
-                                defaultValue=""
                             />
                         </td>
                         <td className="products_large_td">Внутренний слой</td>
@@ -109,7 +106,6 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="innerLayer"
                                 dictionaryTextName="innerLayer"
-                                defaultValue=""
                             />
                         </td>
                     </tr>

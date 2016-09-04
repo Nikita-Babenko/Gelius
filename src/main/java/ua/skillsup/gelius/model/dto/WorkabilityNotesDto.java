@@ -1,5 +1,6 @@
 package ua.skillsup.gelius.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import ua.skillsup.gelius.model.dto.dictionary.WorkabilityDto;
 
 import javax.validation.constraints.Size;
@@ -8,6 +9,7 @@ public class WorkabilityNotesDto {
 
     private Long id;
 
+    @JsonBackReference
     private ProductDto product;
 
     private WorkabilityDto serviceCenter;

@@ -8,45 +8,39 @@ class Dictionary extends React.Component {
         super(props);
         this.state = {
             dictionaryParameters: [],
-            value : this.props.defaultValue,
-            selectedOptionColor: {
-                background: ''
-            },
-            defaultOptionColor: {
-                background: 'white'
-            }
+            value: ""
         };
 
-        this.__reloadDefaultValue = this.__reloadDefaultValue.bind(this);
-        this.__selectOptionValue = this.__selectOptionValue.bind(this);
-        this.__chooseOption = this.__chooseOption.bind(this);
-        this.__setColorForSelectedOption = this.__setColorForSelectedOption.bind(this);
+        this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
+        this.__selectOption = this.__selectOption.bind(this);
         this._onDictionariesParametersUpdated = this._onDictionariesParametersUpdated.bind(this);
     }
 
     componentWillMount() {
         DictionaryStore.addListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__reloadDefaultValue);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     componentWillUnmount() {
         DictionaryStore.removeListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__reloadDefaultValue);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     render() {
         var dictData = this.state.dictionaryParameters;
         var dictText = this.props.dictionaryTextName;
-        var whiteColor = this.state.defaultOptionColor;
         var dictOptions = dictData.map(function (d) {
             return (
-                <DictionaryOption id={d.id} text={d[dictText]} style={whiteColor}/>
+                <DictionaryOption id={d.id} text={d[dictText]}/>
             );
         });
 
         return (
-            <select value={this.state.value} style={this.state.selectedOptionColor} className={this.props.style} id={this.props.dictionaryName} onChange={this.__chooseOption}>
-                <option value="" style={this.state.defaultOptionColor}>не выбран</option>
+            <select value={this.state.value}
+                    className={this.props.style}
+                    id={this.props.dictionaryName}
+                    onChange={this.__selectOption}>
+                <option value="">не выбран</option>
                 {dictOptions}
             </select>
         );
@@ -57,34 +51,17 @@ class Dictionary extends React.Component {
             dictionaryParameters: DictionaryStore.getDictionaryParameters(this.props.dictionaryName)
         });
     }
-    
-    
-    __chooseOption(e){
-        this.__selectOptionValue(e);
-        this.__setColorForSelectedOption(e);
-    }
 
-    __reloadDefaultValue(){
+    __loadDefaultValue() {
+        var dictionaryValue = NewProductStore.getDefaultProductProperty(this.props.dictionaryName);
         this.setState({
-            value : this.props.defaultValue
+            value: dictionaryValue ? dictionaryValue.id : ""
         });
     }
 
-    __selectOptionValue(e){
-        var selectedValue = e.target.value;
+    __selectOption(e) {
         this.setState({
-            value : selectedValue
-        });
-    }
-
-    __setColorForSelectedOption(e){
-        var selectedValue = e.target.value;
-        var dictionaryName = this.props.dictionaryName;
-        var color = (dictionaryName === "connectionValve") ? (selectedValue === "2" ? 'yellow' : (selectedValue === "3" ? '#FFBAB7' : 'white')) : 'white';
-        this.setState({
-            selectedOptionColor: {
-                background : color
-            }
+            value: e.target.value
         });
     }
 }
@@ -99,12 +76,12 @@ Dictionary.defaultProps = {
     style: ""
 };
 
-export default Dictionary;
-
 class DictionaryOption extends React.Component {
     render() {
         return (
-            <option value={this.props.id} style={this.props.style}>{this.props.text}</option>
+            <option value={this.props.id}>
+                {this.props.text}
+            </option>
         );
     }
 }
@@ -113,3 +90,5 @@ DictionaryOption.propTypes = {
     id: React.PropTypes.number.isRequired,
     text: React.PropTypes.string.isRequired
 };
+
+export default Dictionary;

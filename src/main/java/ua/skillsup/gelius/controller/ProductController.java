@@ -42,10 +42,12 @@ public class ProductController {
     @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
     @ResponseBody
     private Response save(@RequestBody ProductDto product) {
-        LOG.info("createProduct. Mapping 'raw' product data:\n" + product);
+        LOG.info("createProduct. Mapping 'raw' product data");
+
         String savedProductNumberValue = this.productService.save(product);
         String newProductNumberValue = getFullProductNumber();
         Map<String, String> responseData = new HashMap<>();
+
         responseData.put("newProductNumber", newProductNumberValue);
         responseData.put("savedProductNumber", savedProductNumberValue);
 
