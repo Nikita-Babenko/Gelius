@@ -49,7 +49,8 @@ public class FileController {
             //File size validation was done in context (bean multipartResolver)
 
             //Content-type validation:
-            String[] fileNameParts = file.getOriginalFilename().split("\\.");
+            //Commented for debug:
+            /*String[] fileNameParts = file.getOriginalFilename().split("\\.");
             if (fileNameParts.length == 0) {
                 LOG.info("File has not extension");
                 return new Response(ResponseCode.VALIDATION_ERROR); //TODO insert filename int list
@@ -66,7 +67,7 @@ public class FileController {
             if (!isFileTypeAllowed) {
                 LOG.info("This file type not allowed: " + extension);
                 return new Response(ResponseCode.VALIDATION_ERROR); //TODO insert filename int list
-            }
+            }*/
 
             String fileName = file.getOriginalFilename();
             LOG.info(
