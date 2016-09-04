@@ -26,23 +26,23 @@ class BodyRight extends React.Component {
 
                     <tr>
                         <td className="avto_large_td">В пачке, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberInPack"/></td>
+                        <td className="avto_small_td"><input type="number" id="numberInPack" className="numberInputCheck"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">В транспортном пакете, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberInTransportPackage"/></td>
+                        <td className="avto_small_td"><input type="number" id="numberInTransportPackage" className="numberInputCheck"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">
                             Размеры пакета
-                            <input className="embeded_input" type="number" id="packageLength"/>
+                            <input className="embeded_input numberInputCheck" type="number" id="packageLength"/>
                         </td>
                         <td className="avto_small_td">
                             <div className="inputs">
-                                <input type="number" className="input_1" id="packageWidth"/>
-                                <input type="number" className="input_2" id="packageHeight"/>
+                                <input type="number" className="input_1 numberInputCheck" id="packageWidth"/>
+                                <input type="number" className="input_2 numberInputCheck" id="packageHeight"/>
                             </div>
                         </td>
                     </tr>
@@ -72,12 +72,12 @@ class BodyRight extends React.Component {
 
                     <tr>
                         <td className="avto_large_td">Рядов на поддоне</td>
-                        <td className="avto_small_td"><input type="number" id="palletRows"/></td>
+                        <td className="avto_small_td"><input type="number" id="palletRows" className="numberInputCheck"/></td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td">Загрузка автомобиля, шт.</td>
-                        <td className="avto_small_td"><input type="number" id="numberLoadCar"/></td>
+                        <td className="avto_small_td"><input type="number" id="numberLoadCar" className="numberInputCheck"/></td>
                     </tr>
 
                     <tr>
@@ -104,23 +104,23 @@ class BodyRight extends React.Component {
                     <tr>
                         <td colSpan="3" className="bigovki_all">
                             <div className="bigovki_inputs_1">
-                                <input type="number" className="bigovki_input_1 sumBigovki" min="0"/>
+                                <input type="number" className="bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_2">
-                                <input type="number" className="bigovki_input_1 sumBigovki" min="0"/>
+                                <input type="number" className="bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
                                 <input type="text" className="bigovki_input_2" value="+" disabled/>
                             </div>
                             <div className="bigovki_inputs_3">
-                                <input type="number" className="bigovki_input_3 sumBigovki" min="0"/>
-                                <input type="number" className="bigovki_input_4 sumBigovki" min="0"/>
+                                <input type="number" className="bigovki_input_3 sumBigovki numberInputCheck" min="0"/>
+                                <input type="number" className="bigovki_input_4 numberInputCheck" min="0"/>
                             </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                        <td className="avto_small_td"><input type="number" id="productionFormat"/></td>
+                        <td className="avto_small_td"><input type="number" id="productionFormat" className="numberInputCheck"/></td>
                     </tr>
 
                     <tr>
@@ -132,11 +132,11 @@ class BodyRight extends React.Component {
                     <tr>
                         <td colSpan="3" className="prosechki_all">
                             <div className="prosechki_inputs">
-                                <input type="number" className="prosechki_input_1"/>
-                                <input type="number" className="prosechki_input_2"/>
-                                <input type="number" className="prosechki_input_3"/>
-                                <input type="number" className="prosechki_input_4"/>
-                                <input type="number" className="prosechki_input_5"/>
+                                <input type="number" className="prosechki_input_1 numberInputCheck"/>
+                                <input type="number" className="prosechki_input_2 numberInputCheck"/>
+                                <input type="number" className="prosechki_input_3 numberInputCheck"/>
+                                <input type="number" className="prosechki_input_4 numberInputCheck"/>
+                                <input type="number" className="prosechki_input_5 numberInputCheck"/>
                             </div>
                         </td>
                     </tr>

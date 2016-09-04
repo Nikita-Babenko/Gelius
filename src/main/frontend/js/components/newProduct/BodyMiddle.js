@@ -106,10 +106,10 @@ class BodyMiddle extends React.Component {
                                     <input type="text" value="Цвет" disabled/>
                                 </div>
                                 <div className="print_input_2">
-                                    <input type="text" className="numberInputCheck" value="Название" disabled/>
+                                    <input type="text" value="Название" disabled/>
                                 </div>
                                 <div className="print_input_3">
-                                    <input type="text" className="numberInputCheck" value="S запечатки" disabled/>
+                                    <input type="text" value="S запечатки" disabled/>
                                 </div>
                             </td>
                         </tr>

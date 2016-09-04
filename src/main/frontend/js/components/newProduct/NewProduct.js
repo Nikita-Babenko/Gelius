@@ -14,9 +14,11 @@ class NewProduct extends React.Component {
     }
 
     componentDidMount(){
-        NewProductAction.disablePalletDictionaryByDefault();
-        NewProductAction.disablePalletDictionaryDependsFromChangePacking();
-        NewProductAction.defaultConnectionValveDictionaryDependsFromProductType();
+        NewProductAction.__disablePalletDictionaryByDefault();
+        NewProductAction.__disablePalletDictionaryDependsFromChangePacking();
+        NewProductAction.__defaultConnectionValveDictionaryDependsFromProductType();
+        NewProductAction.__sumBigovki();
+        NewProductAction.__checkInputNumber();
     }
     
     componentWillMount() {
