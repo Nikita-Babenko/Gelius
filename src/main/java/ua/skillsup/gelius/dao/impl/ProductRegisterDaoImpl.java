@@ -63,7 +63,7 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
     @Override
     public <T> Map<String, List<T>> findAllFilterParameters(ProductRegisterFilter filter) {
         Map<String, List<T>> filterParameters = new HashMap<>();
-        filterParameters.put("id", findFilterParameters(filter, "id"));
+        filterParameters.put("productNumber", findFilterParameters(filter, "productNumber"));
         filterParameters.put("client.companyName", findFilterParameters(filter, "client.companyName"));
         filterParameters.put("productName", findFilterParameters(filter, "productName"));
         filterParameters.put("productType.productType", findFilterParameters(filter, "productType.productType"));
@@ -98,8 +98,8 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
         criteria.createAlias("product.faceLayer", "faceLayer", JoinType.LEFT_OUTER_JOIN);
         criteria.createAlias("product.innerLayer", "innerLayer", JoinType.LEFT_OUTER_JOIN);
         if (!filter.isEmpty()) {
-            if (!filter.getIds().isEmpty()) {
-                criteria.add(Restrictions.in("product.id", filter.getIds()));
+            if (!filter.getProductNumbers().isEmpty()) {
+                criteria.add(Restrictions.in("product.productNumber", filter.getProductNumbers()));
             }
             if (!filter.getClientNames().isEmpty()) {
                 criteria.add(Restrictions.in("client.companyName", filter.getClientNames()));

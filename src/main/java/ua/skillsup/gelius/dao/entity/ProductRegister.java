@@ -17,6 +17,12 @@ public class ProductRegister {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_number")
+    private Integer productNumber;
+
+    @Column(name = "isNew")
+    private Boolean isNew;
+
     @ManyToOne
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "client_id")
@@ -77,6 +83,22 @@ public class ProductRegister {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getProductNumber() {
+        return productNumber;
+    }
+
+    public void setProductNumber(Integer productNumber) {
+        this.productNumber = productNumber;
+    }
+
+    public Boolean getNew() {
+        return isNew;
+    }
+
+    public void setNew(Boolean aNew) {
+        isNew = aNew;
     }
 
     public Client getClient() {
@@ -179,6 +201,8 @@ public class ProductRegister {
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductRegister{");
         sb.append("id=").append(id);
+        sb.append(", productNumber=").append(productNumber);
+        sb.append(", isNew=").append(isNew);
         sb.append(", client=").append(client);
         sb.append(", productName='").append(productName).append('\'');
         sb.append(", productType=").append(productType);

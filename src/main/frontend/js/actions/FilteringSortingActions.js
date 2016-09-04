@@ -2,6 +2,7 @@ import Dispatcher from '../dispatcher/Dispatcher';
 import FilteringSortingStore from '../stores/FilteringSortingStore';
 import UrlConstants from '../constants/Url';
 import EventConstants from '../constants/Events';
+import L from '../utils/Logging';
 
 var FilteringSortingActions = {
 
@@ -14,6 +15,7 @@ var FilteringSortingActions = {
             dataType: 'json',
             timeout: 100000,
             success: (data) => {
+                L.log(data.result);
                 Dispatcher.dispatch({
                     eventType: EventConstants.LOAD_ALL_FILTER_PARAMETERS,
                     parameters: data.result

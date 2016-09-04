@@ -2,7 +2,7 @@ import React from 'react';
 import FilteringSortingActions from '../../actions/FilteringSortingActions';
 import FilteringSortingStore from '../../stores/FilteringSortingStore';
 import EventConstants from '../../constants/Events';
-import FilterElement from '../productRegisterTable/FilterElement';
+import FilterElement from '../productRegister/FilterElement';
 
 class Filtering extends React.Component {
     constructor(props) {

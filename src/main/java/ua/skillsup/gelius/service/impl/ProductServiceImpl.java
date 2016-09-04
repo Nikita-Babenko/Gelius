@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String save(ProductDto product) {
-        if ( product.getIsNew() ) {
+        if ( product.getNew() ) {
             int productNumber = getProductNumber();
             product.setProductNumber(productNumber);
         }
@@ -38,17 +38,17 @@ public class ProductServiceImpl implements ProductService {
         }
 
         //Check existing product with same productNumber in DB (AFTER DTO validation, because before validation productNumber may be null):
-        if (!filledProduct.getIsNew()) {
+        if (!filledProduct.getNew()) {
             isProductExist( filledProduct.getProductNumber() );
         }
 
-        if (filledProduct.getIsUse() == null) {
-            filledProduct.setIsUse(false);
+        if (filledProduct.getUse() == null) {
+            filledProduct.setUse(false);
         }
 
         this.productDao.save(filledProduct);
 
-        return getFullProductNumber(filledProduct.getProductNumber(), filledProduct.getIsNew());
+        return getFullProductNumber(filledProduct.getProductNumber(), filledProduct.getNew());
     }
     
     private ProductDto isFillProduct(ProductDto product) {

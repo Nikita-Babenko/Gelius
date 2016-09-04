@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRegisterFilter {
-    @JsonProperty("id")
-    private List<Long> ids;
+    @JsonProperty("productNumber")
+    private List<Integer> productNumbers;
 
     @JsonProperty("client.companyName")
     private List<String> clientNames;
@@ -46,7 +46,7 @@ public class ProductRegisterFilter {
     private String sortingDirection;
 
     public ProductRegisterFilter() {
-        ids = new ArrayList<>();
+        productNumbers = new ArrayList<>();
         clientNames = new ArrayList<>();
         productNames = new ArrayList<>();
         productTypes = new ArrayList<>();
@@ -59,12 +59,12 @@ public class ProductRegisterFilter {
         cliches = new ArrayList<>();
     }
 
-    public List<Long> getIds() {
-        return ids;
+    public List<Integer> getProductNumbers() {
+        return productNumbers;
     }
 
-    public void setIds(List<Long> ids) {
-        this.ids = ids;
+    public void setProductNumbers(List<Integer> productNumbers) {
+        this.productNumbers = productNumbers;
     }
 
     public List<String> getClientNames() {
@@ -165,7 +165,7 @@ public class ProductRegisterFilter {
 
 
     public boolean isEmpty() {
-        return ((ids == null) || ids.isEmpty())
+        return ((productNumbers == null) || productNumbers.isEmpty())
                 && ((clientNames == null) || clientNames.isEmpty())
                 && ((productNames == null) || productNames.isEmpty())
                 && ((productTypes == null) || productTypes.isEmpty())
@@ -182,7 +182,7 @@ public class ProductRegisterFilter {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductRegisterFilter{");
-        sb.append("ids=").append(ids);
+        sb.append("productNumbers=").append(productNumbers);
         sb.append(", clientNames=").append(clientNames);
         sb.append(", productNames=").append(productNames);
         sb.append(", productTypes=").append(productTypes);

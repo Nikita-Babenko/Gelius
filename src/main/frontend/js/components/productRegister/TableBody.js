@@ -2,7 +2,7 @@ import React from 'react';
 import ProductRegisterTableActions from '../../actions/ProductRegisterTableActions';
 import ProductRegisterTableStore from '../../stores/ProductRegisterTableStore';
 import EventConstants from '../../constants/Events';
-import Row from '../productRegisterTable/Row';
+import Row from '../productRegister/Row';
 
 class TableBody extends React.Component {
     constructor(props) {

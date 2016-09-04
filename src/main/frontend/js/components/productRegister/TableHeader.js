@@ -3,7 +3,7 @@ import FilteringSortingActions from '../../actions/FilteringSortingActions';
 import FilteringSortingStore from '../../stores/FilteringSortingStore';
 import EventConstants from '../../constants/Events';
 import ObjectsConstants from '../../constants/Objects';
-import Heading from '../productRegisterTable/Heading';
+import Heading from '../productRegister/Heading';
 
 class TableHeader extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '../productRegisterTable/Dropdown';
+import Dropdown from '../productRegister/Dropdown';
 
 class Heading extends React.Component {
     render() {

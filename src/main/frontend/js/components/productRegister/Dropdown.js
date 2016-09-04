@@ -2,8 +2,8 @@ import React from 'react';
 import FilteringSortingActions from '../../actions/FilteringSortingActions';
 import FilteringSortingStore from '../../stores/FilteringSortingStore';
 import EventConstants from '../../constants/Events';
-import Sorting from '../productRegisterTable/Sorting';
-import Filtering from '../productRegisterTable/Filtering';
+import Sorting from '../productRegister/Sorting';
+import Filtering from '../productRegister/Filtering';
 
 class Dropdown extends React.Component {
     constructor(props) {

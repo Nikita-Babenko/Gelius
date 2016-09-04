@@ -9,7 +9,7 @@ class FilteringSortingStore extends EventEmitter {
     constructor() {
         super();
         this.sortingFiltering = {
-            id: [],
+            productNumber: [],
             "client.companyName": [],
             productName: [],
             "productType.productType": [],
@@ -20,7 +20,7 @@ class FilteringSortingStore extends EventEmitter {
             "profile.profile": [],
             layersColours: [],
             cliche: [],
-            sortableColumn: "id",
+            sortableColumn: "productNumber",
             sortingDirection: "asc"
         };
 

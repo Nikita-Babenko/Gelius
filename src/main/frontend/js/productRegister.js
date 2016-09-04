@@ -1,4 +1,4 @@
-import ProductRegisterTable from './components/productRegisterTable/ProductRegisterTable';
+import ProductRegisterTable from './components/productRegister/ProductRegisterTable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 

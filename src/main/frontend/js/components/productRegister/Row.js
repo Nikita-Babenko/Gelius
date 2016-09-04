@@ -4,7 +4,7 @@ class Row extends React.Component {
     render() {
         return (
             <tr>
-                <td>{this.props.row.id ? this.props.row.id : "-"}</td>
+                <td>{this.props.row.productNumber ? this.props.row.productNumber : "-"}</td>
                 <td>{this.props.row.client ? this.props.row.client.companyName : "-"}</td>
                 <td>{this.props.row.productName ? this.props.row.productName : "-"}</td>
                 <td>{this.props.row.productType ? this.props.row.productType.productType : "-"}</td>

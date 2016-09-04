@@ -1,7 +1,7 @@
 var ObjectsConstants = {
 
     productTableColumnNames: [
-        {name: 'id', text: '№'},
+        {name: 'productNumber', text: '№'},
         {name: 'client.companyName', text: 'Клиент'},
         {name: 'productName', text: 'Название продукта'},
         {name: 'productType.productType', text: 'Тип изделия'},

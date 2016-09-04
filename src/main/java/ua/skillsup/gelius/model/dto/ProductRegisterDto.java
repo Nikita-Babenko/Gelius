@@ -6,6 +6,10 @@ public class ProductRegisterDto {
 
     private Long id;
 
+    private Integer productNumber;
+
+    private Boolean isNew;
+
     private ClientDto client;
 
     private String productName;
@@ -43,6 +47,22 @@ public class ProductRegisterDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getProductNumber() {
+        return productNumber;
+    }
+
+    public void setProductNumber(Integer productNumber) {
+        this.productNumber = productNumber;
+    }
+
+    public Boolean getNew() {
+        return isNew;
+    }
+
+    public void setNew(Boolean aNew) {
+        isNew = aNew;
     }
 
     public ClientDto getClient() {
@@ -145,6 +165,8 @@ public class ProductRegisterDto {
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductRegisterDto{");
         sb.append("id=").append(id);
+        sb.append(", productNumber=").append(productNumber);
+        sb.append(", isNew=").append(isNew);
         sb.append(", client=").append(client);
         sb.append(", productName='").append(productName).append('\'');
         sb.append(", productType=").append(productType);
