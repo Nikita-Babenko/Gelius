@@ -20,6 +20,7 @@ class DictionaryColoured extends React.Component {
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
         this.__selectOptionValue = this.__selectOptionValue.bind(this);
         this.__chooseOption = this.__chooseOption.bind(this);
+        this.__setDefaultColor = this.__setDefaultColor.bind(this);
         this.__setColorForSelectedOption = this.__setColorForSelectedOption.bind(this);
         this._onDictionariesParametersUpdated = this._onDictionariesParametersUpdated.bind(this);
     }
@@ -27,11 +28,13 @@ class DictionaryColoured extends React.Component {
     componentWillMount() {
         DictionaryStore.addListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setDefaultColor);
     }
 
     componentWillUnmount() {
         DictionaryStore.removeListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setDefaultColor);
     }
 
     render() {
@@ -58,6 +61,14 @@ class DictionaryColoured extends React.Component {
         });
     }
 
+    __setDefaultColor(){
+        this.setState({
+            selectedOptionColor: {
+                background: 'white'
+            }
+        });
+    };
+
 
     __chooseOption(e){
         this.__selectOptionValue(e);
@@ -83,10 +94,21 @@ class DictionaryColoured extends React.Component {
     __setColorForSelectedOption(e){
         var selectedValue = e.target.value;
         var dictionaryName = this.props.dictionaryName;
-        var color = (dictionaryName === "connectionValve") ? (selectedValue === "2" ? 'yellow' : (selectedValue === "3" ? '#FFBAB7' : 'white')) : 'white';
+        var finalColor;
+        switch (dictionaryName){
+            case "connectionValve" :{
+                switch (selectedValue){
+                    case "2" : finalColor = 'yellow';
+                        break;
+                    case "3" : finalColor = '#FFBAB7';
+                        break;
+                }
+            }break;
+            default : finalColor = 'white';
+        }
         this.setState({
             selectedOptionColor: {
-                background : color
+                background : finalColor
             }
         });
     }
