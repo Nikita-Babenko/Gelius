@@ -12,7 +12,6 @@ class TextInputMultiline extends React.Component {
         };
 
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
-        this.__onTextInputMultilineChange = this.__onTextInputMultilineChange.bind(this);
     }
 
     componentWillMount() {
@@ -23,39 +22,20 @@ class TextInputMultiline extends React.Component {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
-    shouldComponentUpdate() {
-        return true;
-    }
-
-    componentDidUpdate() {
-        if (this.state.text !== ReactDOM.findDOMNode(this).innerHTML) {
-            ReactDOM.findDOMNode(this).innerHTML = this.state.text;
-        }
-    }
-
     render() {
 
         return (
             <div id={this.props.id}
                  className={this.props.style}
-                 onInput={this.__onTextInputMultilineChange}
-                 dangerouslySetInnerHTML={{__html: this.state.text}}
                  contentEditable="true">
             </div>
         )
     }
 
-    __onTextInputMultilineChange() {
-        var html = ReactDOM.findDOMNode(this).innerHTML;
-        this.setState({text: html})
-    }
-
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
-            var value = NewProductStore.getDefaultProductProperty(this.props.id);
-            this.setState({
-                text: value ? value : ""
-            });
+            //temporary solution
+            $('#'+this.props.id).text("");
         }
     }
 }

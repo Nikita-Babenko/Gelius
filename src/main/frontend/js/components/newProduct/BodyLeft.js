@@ -132,9 +132,7 @@ class BodyLeft extends React.Component {
 
                     <tr>
                         <td colSpan="5" className="special_conditions_textarea">
-                        <textarea>
-
-                        </textarea>
+                            <TextArea id="specialConditions"/>
                         </td>
                     </tr>
 

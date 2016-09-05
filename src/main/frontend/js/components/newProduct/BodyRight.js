@@ -109,7 +109,7 @@ class BodyRight extends React.Component {
                             </div>
                             <div className="bigovki_inputs_3">
                                 <input type="number" className="bigovki_input_3 sumBigovki numberInputCheck" min="0"/>
-                                <input type="number" className="bigovki_input_4 numberInputCheck" min="0"/>
+                                <NumberInput id="bigovki4" style="bigovki_input_4"/>
                             </div>
                         </td>
                     </tr>

@@ -29,7 +29,7 @@ class WorkCenterNoteRow extends React.Component {
             <tr>
                 <td colSpan="4" className="notes_all">
                     <div className="notes_inputs">
-                        <div className="note_input_1" contentEditable="true">
+                        <div className="note_input_1" contentEditable="false">
                             {workCentersString}
                         </div>
                         <div className="note_input_2" contentEditable="true" onChange={this.__changeText}

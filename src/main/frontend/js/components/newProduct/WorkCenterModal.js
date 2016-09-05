@@ -2,6 +2,8 @@ import React from 'react';
 import DictionaryStore from '../../stores/DictionariesStore';
 import NewProductAction from '../../actions/NewProductActions';
 import EventConstants from '../../constants/Events';
+import NewProductStore from "../../stores/NewProductStore";
+import L from "../../utils/Logging";
 
 class WorkCenterModal extends React.Component {
     render() {
@@ -24,17 +26,22 @@ class ModalBody extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            workCenters: []
+            workCenters: [],
+            defaultWorkabilityNotes: []
         };
         this._onWorkCentersUpdated = this._onWorkCentersUpdated.bind(this);
+        this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
+        this.__isWorkCenterInWorkabilityNotes = this.__isWorkCenterInWorkabilityNotes.bind(this);
     }
 
     componentWillMount() {
         DictionaryStore.addListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onWorkCentersUpdated);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     componentWillUnmount() {
         DictionaryStore.removeListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onWorkCentersUpdated);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     render() {
@@ -92,10 +99,31 @@ class ModalBody extends React.Component {
         )
     }
 
+    __isWorkCenterInWorkabilityNotes(centerId) {
+        var notes = this.state.defaultWorkabilityNotes;
+        var centersIds = notes.map(function (note) {
+            return (note.serviceCenter.id);
+        });
+
+        return $.inArray(centerId, centersIds) > -1
+    }
+
     _onWorkCentersUpdated() {
         this.setState({
             workCenters: DictionaryStore.getDictionaryParameters("workability")
         });
+    }
+
+    __loadDefaultValue() {
+        if (NewProductStore.isEnableDefaultValues()) {
+            var workabilityNotes = NewProductStore.getDefaultProductProperty("workabilityNotes");
+
+            L.log(workabilityNotes);
+            this.setState({
+                defaultWorkabilityNotes: workabilityNotes ? workabilityNotes : []
+            });
+        }
+
     }
 }
 
@@ -103,7 +131,7 @@ class WorkCenterItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isChecked: false
+            isChecked: this.props.isChecked
         };
         this._handleChangeSelection = this._handleChangeSelection.bind(this);
     }
@@ -134,6 +162,14 @@ class WorkCenterItem extends React.Component {
         }
     }
 }
+
+WorkCenterItem.propTypes = {
+    isChecked: React.PropTypes.bool
+};
+
+WorkCenterItem.defaultProps = {
+    isChecked: false
+};
 
 
 class ModalFooter extends React.Component {
