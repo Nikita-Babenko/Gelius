@@ -57,11 +57,11 @@ public class ProductRegisterDto {
         this.productNumber = productNumber;
     }
 
-    public Boolean getNew() {
+    public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setNew(Boolean aNew) {
+    public void setIsNew(Boolean aNew) {
         isNew = aNew;
     }
 

@@ -24,14 +24,12 @@ class NewProduct extends React.Component {
     componentWillMount() {
         NewProductAction.loadAllDictionaries();
         NewProductAction.loadNewProductNumber();
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_ENTITY_CHANGE_EVENT, this.__enableAlert); // ---- ?
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_ENTITY_CHANGE_WITH_ERROR_EVENT, this.__enableAlert);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__enableAlert);
 
     }
 
     componentWillUnmount() {
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_ENTITY_CHANGE_EVENT, this.__enableAlert); // --- ?
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_ENTITY_CHANGE_WITH_ERROR_EVENT, this.__enableAlert);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__enableAlert);
     }
 
     render() {

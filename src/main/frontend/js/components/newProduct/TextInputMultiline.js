@@ -27,6 +27,12 @@ class TextInputMultiline extends React.Component {
         return true;
     }
 
+    componentDidUpdate() {
+        if (this.state.text !== ReactDOM.findDOMNode(this).innerHTML) {
+            ReactDOM.findDOMNode(this).innerHTML = this.state.text;
+        }
+    }
+
     render() {
 
         return (
@@ -34,7 +40,7 @@ class TextInputMultiline extends React.Component {
                  className={this.props.style}
                  onInput={this.__onTextInputMultilineChange}
                  dangerouslySetInnerHTML={{__html: this.state.text}}
-                 contentEditable>
+                 contentEditable="true">
             </div>
         )
     }

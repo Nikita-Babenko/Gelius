@@ -4,7 +4,7 @@ var Logging = {
 
     log (message) {
         if (isLoggingEnabled)
-            console.log("[INFO]: ", message);
+            console.log("[LOG]: ", message);
     }
 };
 

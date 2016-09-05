@@ -17,7 +17,7 @@ var NewProductActions = {
             timeout: 100000,
             success: function (response) {
                 if (!response["data"]) {
-                    console.log("Empty 'data' in response on '" + UrlConstants.LOAD_ALL_DICTIONARIES_URL + "'");
+                    L.log("Empty 'data' in response on '" + UrlConstants.LOAD_ALL_DICTIONARIES_URL + "'");
                     return;
                 }
 
@@ -30,7 +30,7 @@ var NewProductActions = {
 
             }.bind(this),
             error: function (e) {
-                console.log("ERROR: ", e);
+                L.log("ERROR: ", e);
             }.bind(this)
         });
     },
@@ -45,7 +45,7 @@ var NewProductActions = {
             timeout: 100000,
             success: function (response) {
                 if (!response["data"]) {
-                    console.log("Empty 'newProductNumber' in response on '" + UrlConstants.LOAD_PRODUCT_NUMBER_URL + "'");
+                    L.log("Empty 'newProductNumber' in response on '" + UrlConstants.LOAD_PRODUCT_NUMBER_URL + "'");
                     return;
                 }
 
@@ -58,7 +58,7 @@ var NewProductActions = {
 
             }.bind(this),
             error: function (e) {
-                console.log("ERROR: ", e);
+                L.log("ERROR: ", e);
             }.bind(this)
         });
     },
@@ -74,13 +74,17 @@ var NewProductActions = {
             dataType: 'JSON',
             timeout: 100000,
             success: function (response) {
+                if (response.code === 200) {
+                    L.log("product (" + response.data.savedProductNumber + ") was saved");
+                    L.log("new product number (" + response.data.newProductNumber + ") was received");
+                }
                 Dispatcher.dispatch({
-                    eventType: EventConstants.SAVE_NEW_PRODUCT_ENTITY,
+                    eventType: EventConstants.SAVE_NEW_PRODUCT,
                     response: response
                 });
             }.bind(this),
             error: function (e) {
-                console.log("ERROR: ", e);
+                L.log("ERROR: ", e);
             }.bind(this)
 
         });
@@ -130,7 +134,7 @@ var NewProductActions = {
     },
 
     /*triggerFullSave() {
-        console.log("NewProductAction.triggerFullSave()");
+        L.log("NewProductAction.triggerFullSave()");
         Dispatcher.dispatch({
             eventType: EventConstants.NEW_PRODUCT_CHANGE_TRIGGER
         });
@@ -138,7 +142,7 @@ var NewProductActions = {
 
     saveFileLinks() {
         var savedProductNumber = NewProductStore.savedProductNumber;
-        console.log("NewProductActions.saveFileLinks(): получили из хранилища номер сохраненной техкарты: " + savedProductNumber);
+        L.log("NewProductActions.saveFileLinks(): получили из хранилища номер сохраненной техкарты: " + savedProductNumber);
 
         //TODO Remove this block to UploadFilesStore; get this data from UploadFilesStore
         var formData = new FormData();
@@ -146,7 +150,7 @@ var NewProductActions = {
             var file = this.files[0];
             var name = file.name, size = file.size, type = file.type;
             //TODO size and type validation
-            console.log("Найден файл: name=" + name + ", size=" + size + ", type=" + type);
+            L.log("Найден файл: name=" + name + ", size=" + size + ", type=" + type);
             if (size > ObjectConstants.UPLOADED_FILE_SIZE_LIMIT) {
                 alert("Размер одного из файлов превышает допустимые " + "0" + " (МБ)"); //TODO проверять еще перед сохранением сущности
             }
@@ -167,9 +171,9 @@ var NewProductActions = {
             contentType: false, //(tell jQuery not to set contentType)
             //contentType maybe need for encoding ("...; encoding=UTF-8"), cuz we have bad russian filenames, that arrived on server
             success : function(data) {
-                //console.log(data);
-                console.log("NewProductActions.saveFileLinks(): файлы успешно сохранены");
-                console.log("NewProductActions.saveFileLinks(): 1...");
+                //L.log(data);
+                L.log("NewProductActions.saveFileLinks(): файлы успешно сохранены");
+                L.log("NewProductActions.saveFileLinks(): 1...");
                 //TODO вызвать событие успешного сохранения всех данных (по факту - сущность и ее файлы-ссылки):
                 /*Dispatcher.
                     dispatch({ eventType: EventConstants.SAVE_FILE_LINKS_OF_NEW_PRODUCT }).
@@ -177,20 +181,18 @@ var NewProductActions = {
                         this.triggerFullSave()
                     })
                 ;*/
-                Dispatcher.dispatch({ eventType: EventConstants.SAVE_NEW_PRODUCT });
-                console.log("NewProductActions.saveFileLinks(): ...2");
+                L.log("NewProductActions.saveFileLinks(): ...2");
             },
             error: function(xhr, status) {
                 alert("NewProductActions.saveFileLinks(): ошибка запроса при сохранении файлов\nstatus=" + status);
-                //console.log(xhr);
+                //L.log(xhr);
                 $("BODY").html(xhr.responseText);
                 //TODO вызвать событие ошибки сохранения файлов (но упомянуть, что сущность сохранилась)
             }
         });
 
     },
-
-    // implemented #1201
+    
     __disablePalletDictionaryDependsFromChangePacking(){
         var palletContext = $('#pallet');
         $('#packing').change(function () {
@@ -211,8 +213,7 @@ var NewProductActions = {
             $('#pallet').prop("disabled", true);
         }
     },
-
-    // implemented 1203
+    
     __defaultConnectionValveDictionaryDependsFromProductType(){
         $('#productType').change(function () {
             if (this.value === '1') {

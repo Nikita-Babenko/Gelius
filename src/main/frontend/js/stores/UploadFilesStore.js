@@ -13,7 +13,6 @@ class UploadFilesStore extends EventEmitter {
     }
 
     emitChange() {
-        //console.log("UploadFilesStore: EventConstants.FILE_LINKS_CHANGE_EVENT");
         this.emit(EventConstants.FILE_LINKS_CHANGE_EVENT);
     }
 

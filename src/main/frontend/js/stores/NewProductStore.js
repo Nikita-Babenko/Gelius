@@ -3,21 +3,24 @@ import Dispatcher from "../dispatcher/Dispatcher";
 import WorkCentersStore from "./WorkCentersStore";
 import EventConstants from "../constants/Events";
 import ResponseCodeConstants from "../constants/ResponseCodes";
+import L from '../utils/Logging';
+
 
 class NewProductStore extends EventEmitter {
     constructor() {
         super();
-        this.newProductNumber = "0";
         this.savedProductNumber = "";
         this.alert = {
             alertType: "",
             message: ""
         };
 
+        this.saveFiles = false;
         this.enableDefaultValues = true;
         this.showAlert = false;
 
         this.defaultProduct = {
+            "productNumber": "00001",
             "isNew": true,
             "productCreateDate": this.__getTodayDate(),
             "productUpdateDate": this.__getTodayDate(),
@@ -27,23 +30,12 @@ class NewProductStore extends EventEmitter {
         };
     }
 
-    emitChange(hasDoneWithError) {
-        var event = hasDoneWithError ?
-            EventConstants.NEW_PRODUCT_ENTITY_CHANGE_WITH_ERROR_EVENT : EventConstants.NEW_PRODUCT_ENTITY_CHANGE_EVENT;
-        this.emit(event);
+    emitChange() {
+        this.emit(EventConstants.NEW_PRODUCT_CHANGE_EVENT);
     }
 
     getDefaultProductProperty(propertyName) {
         return this.defaultProduct[propertyName];
-    }
-
-    emitLoadProductNumber() {
-        this.emit(EventConstants.LOAD_PRODUCT_NUMBER_EVENT);
-    }
-
-    emitSave() {
-        //console.log("NewProductStore: EventConstants.NEW_PRODUCT_CHANGE_EVENT");
-        this.emit(EventConstants.NEW_PRODUCT_CHANGE_EVENT);
     }
 
     getAlertInformation() {
@@ -56,6 +48,10 @@ class NewProductStore extends EventEmitter {
 
     isEnableDefaultValues() {
         return this.enableDefaultValues;
+    }
+
+    isSaveFiles() {
+        return this.saveFiles;
     }
 
     getNewProduct() {
@@ -132,24 +128,17 @@ const newProductStore = new NewProductStore();
 
 newProductStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
-        case EventConstants.SAVE_NEW_PRODUCT_ENTITY:
+        case EventConstants.SAVE_NEW_PRODUCT:
             var responseData = event.response;
-            var hasDoneWithError = true;
             newProductStore.alert.alertType = "alert-danger";
             switch (responseData.code) {
                 case ResponseCodeConstants.OK:
-                    var savedProductNumber = responseData.data.savedProductNumber;
-                    newProductStore.newProductNumber = responseData.data.newProductNumber;
-                    newProductStore.savedProductNumber = savedProductNumber;
-                    //newProductStore.clearAllSelectedValues(); //???
-
-                    //TODO move to case EventConstants.SAVE_NEW_PRODUCT !
+                    newProductStore.savedProductNumber = responseData.data.savedProductNumber;
+                    newProductStore.defaultProduct.productNumber = responseData.data.newProductNumber;
                     newProductStore.alert.alertType = "alert-success";
-                    newProductStore.alert.message = "Новый продукт (техкарта № " + savedProductNumber + ") был успешно добавлен";
-                    hasDoneWithError = false;
+                    newProductStore.alert.message = "Новый продукт (техкарта № " + newProductStore.savedProductNumber + ") был успешно добавлен";
                     newProductStore.enableDefaultValues = true;
-                    //TODO forbid alert showing
-
+                    newProductStore.saveFiles = true;
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.enableDefaultValues = false;
@@ -164,28 +153,12 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.alert.message = "Произошла ошибка. Обновите страницу и повторите действие или попробуйте повторить действие позже";
             }
             newProductStore.showAlert = true;
-            newProductStore.emitChange(hasDoneWithError);
+            newProductStore.emitChange();
+            newProductStore.saveFiles = false;
             break;
         case EventConstants.LOAD_PRODUCT_NUMBER:
-
-            newProductStore.newProductNumber = event.productNumber; //Demitt
-            //or
-            newProductStore.defaultProduct.productNumber = event.productNumber; //Dima
-
-            newProductStore.emitLoadProductNumber();
-            break;
-        /* Not used
-        case EventConstants.BLANK_FORMAT_VALIDATION_ERROR:
-            newProductStore.alert.alertType = "alert-danger";
-            newProductStore.alert.message = "Поле 'формат заготовки' должно быть заполнено!";
-            newProductStore.showAlert = true;
-            newProductStore.emitChange(true);
-            newProductStore.showAlert = false;
-            break;*/
-        case EventConstants.SAVE_NEW_PRODUCT:
-            console.log("newProductStore.dispatchToken: поймано SAVE_NEW_PRODUCT");
-            //TODO move code from EventConstants.SAVE_NEW_PRODUCT_ENTITY to here; show alert about completed saving
-            newProductStore.emitSave();
+            newProductStore.defaultProduct.productNumber = event.productNumber;
+            newProductStore.emitChange();
             break;
     }
 });

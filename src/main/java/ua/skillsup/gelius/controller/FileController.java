@@ -4,11 +4,7 @@ import org.apache.commons.fileupload.FileUploadBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.skillsup.gelius.controller.response.Response;
 import ua.skillsup.gelius.controller.response.ResponseCode;
@@ -30,10 +26,8 @@ public class FileController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    private Response uploadFile2(
-        @RequestParam("productNumber") String fullProductNumber,
-        @RequestParam("files") MultipartFile[] files
-        ) {
+    private Response uploadFile2(@RequestParam("productNumber") String fullProductNumber,
+                                 @RequestParam("files") MultipartFile[] files) {
         LOG.info("Upload files");
 
         LOG.info("productNumber=" + fullProductNumber);
@@ -71,11 +65,11 @@ public class FileController {
 
             String fileName = file.getOriginalFilename();
             LOG.info(
-                fileName + ": " +
-                    "преобразованное имя=" + regexp.matcher(fileName).replaceAll("_") +
-                    ", размер=" + file.getSize() +
-                    ", content-type=" + file.getContentType() +
-                    "."
+                    fileName + ": " +
+                            "преобразованное имя=" + regexp.matcher(fileName).replaceAll("_") +
+                            ", размер=" + file.getSize() +
+                            ", content-type=" + file.getContentType() +
+                            "."
             );
         }
 

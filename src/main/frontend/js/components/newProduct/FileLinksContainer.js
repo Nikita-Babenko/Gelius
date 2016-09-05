@@ -4,6 +4,7 @@ import NewProductStore from '../../stores/NewProductStore';
 import UrlConstants from "../../constants/Url";
 import NewProductAction from '../../actions/NewProductActions';
 import EventConstants from '../../constants/Events';
+import L from '../../utils/Logging';
 
 
 class FileLinksContainer extends React.Component {
@@ -20,26 +21,28 @@ class FileLinksContainer extends React.Component {
 
     componentWillMount() {
         UploadFilesStore.addListener(EventConstants.FILE_LINKS_CHANGE_EVENT, this.__onFileLinksUpdated);
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_ENTITY_CHANGE_EVENT, this.__onEntitySaved);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__onEntitySaved);
     }
 
     componentWillUnmount() {
         UploadFilesStore.removeListener(EventConstants.FILE_LINKS_CHANGE_EVENT, this.__onFileLinksUpdated);
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_ENTITY_CHANGE_EVENT, this.__onEntitySaved);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__onEntitySaved);
     }
 
     __onFileLinksUpdated() {
         this.setState({filesCount: UploadFilesStore.filesCount});
-        console.log("__onFileLinksUpdated");
+        L.log("__onFileLinksUpdated");
     }
 
     __onEntitySaved() {
-        console.log("__onEntitySaved");
-        NewProductAction.saveFileLinks();
+        if (NewProductStore.isSaveFiles() && this.state.filesCount > 0) {
+            L.log("__onEntitySaved: save files");
+            NewProductAction.saveFileLinks();
+        }
     }
 
-    __addFile(event) {
-        console.log("__addFile");
+    __addFile() {
+        L.log("__addFile");
         NewProductAction.addFileLink();
 
     }
@@ -47,7 +50,7 @@ class FileLinksContainer extends React.Component {
     render() {
         var fileFields = [];
         for (var i = 0; i < this.state.filesCount; i++) {
-            fileFields.push(<FileLink fakeId={"fileLink_" + i} />);
+            fileFields.push(<FileLink fakeId={"fileLink_" + i}/>);
         }
         return (
             <td colSpan="3" className="attachments">
@@ -55,7 +58,8 @@ class FileLinksContainer extends React.Component {
                     {fileFields}
                 </div>
                 <div className="attachment_buttons icon_buttons_group">
-                    <a href="#" className="fa fa-paperclip fa-2x" title="Прикрепить ссылку" onClick={this.__addFile} aria-hidden="true"></a>
+                    <a href="#" className="fa fa-paperclip fa-2x" title="Прикрепить ссылку" onClick={this.__addFile}
+                       aria-hidden="true"></a>
                     <a href="#" className="fa fa-trash-o fa-2x" title="Удалить все ссылки" aria-hidden="true"></a>
                 </div>
             </td>
@@ -70,8 +74,8 @@ class FileLink extends React.Component {
     constructor(props) {
         super(props);
         /*this.state = {
-            fileName: this.props.fileName
-        };*/
+         fileName: this.props.fileName
+         };*/
     }
 
     componentDidMount() {
@@ -80,12 +84,12 @@ class FileLink extends React.Component {
 
     render() {
         return (
-            <input id={this.props.fakeId} type="file" />
+            <input id={this.props.fakeId} type="file"/>
         );
     }
 
 }
 
 /*FileLink.defaultProps = {
-    fileName: "Файл не выбран"
-};*/
+ fileName: "Файл не выбран"
+ };*/

@@ -25,7 +25,6 @@ var EventConstants = {
     LOAD_PRODUCT_NUMBER_EVENT: "load_product_number_event", //store: product number was loaded from server
     NEW_PRODUCT_ENTITY_CHANGE_EVENT: "new_product_entity_change_event", //store: entity was saved
     NEW_PRODUCT_ENTITY_CHANGE_WITH_ERROR_EVENT: "new_product_entity_change_with_error_event", //store: entity was not saved (saving errors)
-    //BLANK_FORMAT_VALIDATION_ERROR: "blank_format_validation_error", //validation error (before saving) - NOT USED
 
     SAVE_NEW_PRODUCT: "save_new_product", //event to NewProductStore: it needs say about full saving
     DICTIONARIES_CHANGE_EVENT: "dictionaries_change_event", //store: dictionaries was loaded from server?
