@@ -46,7 +46,7 @@ class DictionaryColoured extends React.Component {
 
         return (
             <select value={this.state.value} style={this.state.selectedOptionColor} className={this.props.style} id={this.props.dictionaryName} onChange={this.__chooseOption}>
-                <option value="">не выбран</option>
+                <option value="" style={this.state.defaultOptionColor}>не выбран</option>
                 {dictOptions}
             </select>
         );

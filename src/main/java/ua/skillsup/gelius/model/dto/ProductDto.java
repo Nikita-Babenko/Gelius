@@ -58,6 +58,9 @@ public class ProductDto {
     @Size(max = 200, message = "материал не может превышать {max} символов")
     private String material;
 
+    @Size(max = 200, message = "особые условия не могут превышать {max} символов")
+    private String specialConditions;
+
     @Min(value = 1, message = "длина (размер заготовки) не может быть меньше {value}")
     private Integer sizeWorkpieceLength;
 
@@ -107,6 +110,9 @@ public class ProductDto {
 
     @Min(value = 1, message = "производственный формат не может быть меньше {value}")
     private Integer productionFormat;
+
+    @Min(value = 1, message = "количество заготовок на формате не может быть меньше {value}")
+    private Integer numberBlanksOnFormat;
 
     @JsonManagedReference
     @Valid
@@ -448,6 +454,38 @@ public class ProductDto {
         this.workabilityNotes = workabilityNotes;
     }
 
+    public Boolean getNew() {
+        return isNew;
+    }
+
+    public void setNew(Boolean aNew) {
+        isNew = aNew;
+    }
+
+    public Boolean getUse() {
+        return isUse;
+    }
+
+    public void setUse(Boolean use) {
+        isUse = use;
+    }
+
+    public String getSpecialConditions() {
+        return specialConditions;
+    }
+
+    public void setSpecialConditions(String specialConditions) {
+        this.specialConditions = specialConditions;
+    }
+
+    public Integer getNumberBlanksOnFormat() {
+        return numberBlanksOnFormat;
+    }
+
+    public void setNumberBlanksOnFormat(Integer numberBlanksOnFormat) {
+        this.numberBlanksOnFormat = numberBlanksOnFormat;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductDto{");
@@ -473,6 +511,7 @@ public class ProductDto {
         sb.append(", faceLayer=").append(faceLayer);
         sb.append(", innerLayer=").append(innerLayer);
         sb.append(", material='").append(material).append('\'');
+        sb.append(", specialConditions='").append(specialConditions).append('\'');
         sb.append(", sizeWorkpieceLength=").append(sizeWorkpieceLength);
         sb.append(", sizeWorkpieceWidth=").append(sizeWorkpieceWidth);
         sb.append(", numberFromSheet=").append(numberFromSheet);
@@ -491,6 +530,7 @@ public class ProductDto {
         sb.append(", palletRows=").append(palletRows);
         sb.append(", numberLoadCar=").append(numberLoadCar);
         sb.append(", productionFormat=").append(productionFormat);
+        sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
         sb.append(", workabilityNotes=").append(workabilityNotes);
         sb.append('}');
         return sb.toString();

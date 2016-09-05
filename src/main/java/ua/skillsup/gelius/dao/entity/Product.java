@@ -2,33 +2,10 @@ package ua.skillsup.gelius.dao.entity;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import ua.skillsup.gelius.dao.entity.dictionary.CardboardBrand;
-import ua.skillsup.gelius.dao.entity.dictionary.CelluloseLayer;
-import ua.skillsup.gelius.dao.entity.dictionary.Client;
-import ua.skillsup.gelius.dao.entity.dictionary.ConnectionValve;
-import ua.skillsup.gelius.dao.entity.dictionary.FaceLayer;
-import ua.skillsup.gelius.dao.entity.dictionary.Format;
-import ua.skillsup.gelius.dao.entity.dictionary.InnerLayer;
-import ua.skillsup.gelius.dao.entity.dictionary.Packing;
-import ua.skillsup.gelius.dao.entity.dictionary.Pallet;
-import ua.skillsup.gelius.dao.entity.dictionary.PalletPlacement;
-import ua.skillsup.gelius.dao.entity.dictionary.ProductType;
-import ua.skillsup.gelius.dao.entity.dictionary.Profile;
+import ua.skillsup.gelius.dao.entity.dictionary.*;
 import ua.skillsup.gelius.util.LocalDateConverter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
@@ -123,6 +100,10 @@ public class Product {
     private InnerLayer innerLayer;
 
     @Size(max = 200)
+    @Column(name = "specialConditions")
+    private String specialConditions;
+
+    @Size(max = 200)
     @Column(name = "material")
     private String material;
 
@@ -188,6 +169,9 @@ public class Product {
 
     @Column(name = "production_format")
     private Integer productionFormat;
+
+    @Column(name = "numberBlanksOnFormat")
+    private Integer numberBlanksOnFormat;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<WorkabilityNotes> workabilityNotes;
@@ -368,6 +352,14 @@ public class Product {
         this.material = material;
     }
 
+    public String getSpecialConditions() {
+        return specialConditions;
+    }
+
+    public void setSpecialConditions(String specialConditions) {
+        this.specialConditions = specialConditions;
+    }
+
     public Integer getSizeWorkpieceLength() {
         return sizeWorkpieceLength;
     }
@@ -512,6 +504,14 @@ public class Product {
         this.productionFormat = productionFormat;
     }
 
+    public Integer getNumberBlanksOnFormat() {
+        return numberBlanksOnFormat;
+    }
+
+    public void setNumberBlanksOnFormat(Integer numberBlanksOnFormat) {
+        this.numberBlanksOnFormat = numberBlanksOnFormat;
+    }
+
     public List<WorkabilityNotes> getWorkabilityNotes() {
         return workabilityNotes;
     }
@@ -544,6 +544,7 @@ public class Product {
         sb.append(", celluloseLayer=").append(celluloseLayer);
         sb.append(", faceLayer=").append(faceLayer);
         sb.append(", innerLayer=").append(innerLayer);
+        sb.append(", specialConditions='").append(specialConditions).append('\'');
         sb.append(", material='").append(material).append('\'');
         sb.append(", sizeWorkpieceLength=").append(sizeWorkpieceLength);
         sb.append(", sizeWorkpieceWidth=").append(sizeWorkpieceWidth);
@@ -563,9 +564,9 @@ public class Product {
         sb.append(", palletRows=").append(palletRows);
         sb.append(", numberLoadCar=").append(numberLoadCar);
         sb.append(", productionFormat=").append(productionFormat);
+        sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
         sb.append(", workabilityNotes=").append(workabilityNotes);
         sb.append('}');
-        sb.append('\n');
         return sb.toString();
     }
 }

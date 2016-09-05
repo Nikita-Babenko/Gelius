@@ -77,6 +77,7 @@ class NewProductStore extends EventEmitter {
         product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/, '.'));
         product["actualSquare"] = $('#actualSquare').val().replace(/,/, '.');
         product["material"] = $('#material').val();
+        product["specialConditions"] = $('#specialConditions').val();
         product["format"] = Number($('#format :selected').val());
         product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
         product["sizeWorkpieceWidth"] = $('#sizeWorkpieceWidth').val();
@@ -93,6 +94,7 @@ class NewProductStore extends EventEmitter {
         product["pallet"] = Number($('#pallet :selected').val());
         product["palletPlacement"] = Number($('#palletPlacement :selected').val());
         product["palletRows"] = $('#palletRows').val();
+        product["numberBlanksOnFormat"] = $('#numberBlanksOnFormat').val();
         product["numberLoadCar"] = $('#numberLoadCar').val();
         product["productionFormat"] = $('#productionFormat').val();
 

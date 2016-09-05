@@ -57,10 +57,10 @@ class FileLinksContainer extends React.Component {
                 <div className="links">
                     {fileFields}
                 </div>
-                <div className="attachment_buttons icon_buttons_group">
-                    <a href="#" className="fa fa-paperclip fa-2x" title="Прикрепить ссылку" onClick={this.__addFile}
-                       aria-hidden="true"></a>
-                    <a href="#" className="fa fa-trash-o fa-2x" title="Удалить все ссылки" aria-hidden="true"></a>
+                <div className="attachment_buttons icon_buttons_group" id="buttonsLink">
+                    <a href="#" className="fa fa-paperclip fa-lg" title="Прикрепить ссылку" onClick={this.__addFile}
+                       aria-hidden="true" />
+                    <a href="#" className="fa fa-trash-o fa-lg" title="Удалить все ссылки" aria-hidden="true" />
                 </div>
             </td>
         );
