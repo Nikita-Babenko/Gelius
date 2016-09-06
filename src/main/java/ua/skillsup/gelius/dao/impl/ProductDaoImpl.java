@@ -36,8 +36,22 @@ public class ProductDaoImpl implements ProductDao {
     public long save(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
         assignProductToWorkabilityNotes(product);
-        this.sessionFactory.getCurrentSession().persist(product);
+        this.sessionFactory.getCurrentSession().save(product);
         return product.getId();
+    }
+
+    @Override
+    public long delete(ProductDto productDto) {
+        Product product = modelMapper.map(productDto, Product.class);
+        this.sessionFactory.getCurrentSession().delete(product);
+        return product.getId();
+    }
+
+    @Override
+    public long delete(long productId) {
+        ProductDto productDto = findById(productId);
+        delete(productDto);
+        return productDto.getId();
     }
 
     private void assignProductToWorkabilityNotes(Product product) {

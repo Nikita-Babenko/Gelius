@@ -137,14 +137,15 @@ CREATE TABLE product(
   face_layer_id BIGINT,
   inner_layer_id BIGINT,
   material VARCHAR(200),
+  specialConditions VARCHAR(200),
 
   size_workpiece_length INT,
   size_workpiece_width INT,
   number_from_sheet INT,
   blank_format INT NOT NULL,
   connection_valve_id BIGINT,
-  stamp VARCHAR(50),
-  cliche VARCHAR(50),
+  stamp VARCHAR(100),
+  cliche VARCHAR(100),
   packing_id BIGINT,
   number_in_pack INT,
   number_in_transport_package INT,
@@ -156,6 +157,8 @@ CREATE TABLE product(
   pallet_rows INT,
   number_load_car INT,
   production_format INT,
+  numberBlanksOnFormat INT,
+
 
   PRIMARY KEY (product_id),
   UNIQUE(product_number, isNew),
