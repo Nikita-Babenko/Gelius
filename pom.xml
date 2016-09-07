@@ -5,7 +5,7 @@
     <artifactId>gelius</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>gelius Maven Webapp</name>
+    <name>Gelius</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -52,7 +52,7 @@
         <model-mapper.version>0.7.6</model-mapper.version>
 
         <!-- SonarQube && Jacoco-->
-        <jacoco.version>0.7.4.201502262128</jacoco.version>
+        <jacoco.version>0.7.7.201606060606</jacoco.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
