@@ -20,7 +20,7 @@ class NewProduct extends React.Component {
         NewProductAction.__sumBigovki();
         NewProductAction.__checkInputNumber();
     }
-    
+
     componentWillMount() {
         NewProductAction.loadAllDictionaries();
         NewProductAction.loadNewProductNumber();

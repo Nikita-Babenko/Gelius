@@ -350,7 +350,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid black !important;
 }
 
-.special_conditions_textarea > textarea, .workability_textarea > textarea {
+.special_conditions_textarea > textarea, .workability_textarea > div > textarea {
     position: absolute;
     padding: 0 5px 0 5px !important;
     height: 100%;

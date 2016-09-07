@@ -3,6 +3,7 @@ import Dispatcher from '../dispatcher/Dispatcher';
 import DictionaryStore from './DictionariesStore';
 import EventConstants from '../constants/Events';
 import ObjectConstants from '../constants/Objects';
+import L from '../utils/Logging';
 
 class WorkCentersStore extends EventEmitter {
     constructor() {
@@ -28,6 +29,13 @@ class WorkCentersStore extends EventEmitter {
             selectedWorkCenters[groupName] = this.selectedWorkCenters[groupName][this.CENTERS_ARRAY_PROPNAME];
         }
         return selectedWorkCenters;
+    }
+
+    clearSelectedWorkCentersInfo() {
+        this.selectedWorkCenters = workCentersStore.__initWorkCenters();
+        this.selectedWorkCenters["group0"][this.CENTERS_ARRAY_PROPNAME].push(DictionaryStore.getAgregatorWorkCenter());
+        this.selectedCentersText = "";
+        this.emitChange();
     }
 
     __prepareTextOfSelectedWorkCenters() {
@@ -77,7 +85,7 @@ class WorkCentersStore extends EventEmitter {
     }
 
     __createWorkCentersGroupObject() {
-        var obj = { note: null };
+        var obj = {note: null};
         obj[this.CENTERS_ARRAY_PROPNAME] = [];
         return obj;
     }
@@ -92,11 +100,11 @@ workCentersStore.dispatchToken = Dispatcher.register(function (event) {
     var centers = workCentersStore.selectedWorkCenters;
     switch (event.eventType) {
         case EventConstants.LOAD_ALL_DICTIONARIES:
-            Dispatcher.waitFor([ DictionaryStore.dispatchToken ]);
+            Dispatcher.waitFor([DictionaryStore.dispatchToken]);
             var aggregatorCenter = DictionaryStore.getAgregatorWorkCenter();
             workCentersStore.selectedWorkCenters["group0"][centersArrayPropName].push(aggregatorCenter);
-            //There is no operator "break" here, because we need UPDATE_WORKABILITY_INFO-operations immediately after
-            // LOAD_ALL_DICTIONARIES for displaying Agregator in Notes.
+        /*There is no operator "break" here, because we need UPDATE_WORKABILITY_INFO-operations immediately after
+         LOAD_ALL_DICTIONARIES for displaying Agregator in Notes.*/
         case EventConstants.UPDATE_WORKABILITY_INFO:
             workCentersStore.selectedCentersText = workCentersStore.__prepareTextOfSelectedWorkCenters();
             workCentersStore.emitChange();

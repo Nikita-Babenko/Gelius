@@ -11,16 +11,9 @@ class WorkCenterNoteRow extends React.Component {
         this.__changeText = this.__changeText.bind(this);
     }
 
-    __changeText(event) {
-        var note = event.target.value;
-        var groupPriority = event.target.getAttribute("data-group-priority");
-        NewProductAction.updateWorkCenterNote(groupPriority, note);
-        this.setState({note: note});
-    }
-
     render() {
         var workCenters = [];
-        this.props.workCenterGroup.forEach(function(item) {
+        this.props.workCenterGroup.forEach(function (item) {
             workCenters.push(item.serviceCenter);
         });
         var workCentersString = workCenters.join("/");
@@ -32,7 +25,9 @@ class WorkCenterNoteRow extends React.Component {
                         <div className="note_input_1" contentEditable="false">
                             {workCentersString}
                         </div>
-                        <div className="note_input_2" contentEditable="true" onChange={this.__changeText}
+                        <div className="note_input_2"
+                             contentEditable="true"
+                             onChange={this.__changeText}
                              data-group-priority={groupPriority}>
                             {this.state.note}
                         </div>
@@ -40,6 +35,13 @@ class WorkCenterNoteRow extends React.Component {
                 </td>
             </tr>
         );
+    }
+
+    __changeText(event) {
+        var note = event.target.value;
+        var groupPriority = event.target.getAttribute("data-group-priority");
+        NewProductAction.updateWorkCenterNote(groupPriority, note);
+        this.setState({note: note});
     }
 }
 

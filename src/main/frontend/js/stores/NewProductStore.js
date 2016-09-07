@@ -26,7 +26,12 @@ class NewProductStore extends EventEmitter {
             "productUpdateDate": this.__getTodayDate(),
             "isUse": true,
             "celluloseLayer": {"id": 1},
-            "packing": {"id": 1}
+            "packing": {"id": 1},
+            "workabilityNotes": [
+                {
+                    "serviceCenter": {"id": 1}
+                }
+            ]
         };
     }
 
@@ -141,6 +146,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.alert.message = "Новый продукт (техкарта № " + newProductStore.savedProductNumber + ") был успешно добавлен";
                     newProductStore.enableDefaultValues = true;
                     newProductStore.saveFiles = true;
+                    WorkCentersStore.clearSelectedWorkCentersInfo();
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.enableDefaultValues = false;

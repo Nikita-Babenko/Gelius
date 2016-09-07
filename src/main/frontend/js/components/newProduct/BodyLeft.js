@@ -1,31 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import EventConstants from "../../constants/Events";
-import WorkCentersStore from "../../stores/WorkCentersStore";
-import WorkCenterModal from "../newProduct/WorkCenterModal";
 import Dictionary from "../newProduct/Dictionary";
 import SquareInput from "../newProduct/SquareInput";
 import NumberInput from "../newProduct/NumberInput";
 import TextArea from "../newProduct/TextArea";
+import WorkCenterTextarea from "../newProduct/WorkCenterTextarea";
 
 class BodyLeft extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            workabilityCentersText: ""
-        };
-
-        this.__showWorkCentersModal = this.__showWorkCentersModal.bind(this);
-        this.__updateWorkabilityTextArea = this.__updateWorkabilityTextArea.bind(this);
-    }
-
-    componentWillMount() {
-        WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
-    }
-
-    componentWillUnmount() {
-        WorkCentersStore.removeListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
-    }
 
     render() {
         return (
@@ -144,11 +125,7 @@ class BodyLeft extends React.Component {
 
                     <tr>
                         <td colSpan="5" className="workability_textarea">
-                            <textarea
-                                readOnly onClick={this.__showWorkCentersModal}
-                                value={this.state.workabilityCentersText}
-                            />
-                            <WorkCenterModal ref="modal"/>
+                            <WorkCenterTextarea />
                         </td>
                     </tr>
 
@@ -159,15 +136,6 @@ class BodyLeft extends React.Component {
         );
     }
 
-    __updateWorkabilityTextArea() {
-        this.setState({
-            workabilityCentersText: WorkCentersStore.getSelectedCentersText()
-        });
-    }
-
-    __showWorkCentersModal() {
-        $(ReactDOM.findDOMNode(this.refs.modal)).modal();
-    }
 }
 
 export default BodyLeft;

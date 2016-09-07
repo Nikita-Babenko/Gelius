@@ -26,22 +26,17 @@ class ModalBody extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            workCenters: [],
-            defaultWorkabilityNotes: []
+            workCenters: []
         };
         this._onWorkCentersUpdated = this._onWorkCentersUpdated.bind(this);
-        this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
-        this.__isWorkCenterInWorkabilityNotes = this.__isWorkCenterInWorkabilityNotes.bind(this);
     }
 
     componentWillMount() {
         DictionaryStore.addListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onWorkCentersUpdated);
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     componentWillUnmount() {
         DictionaryStore.removeListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onWorkCentersUpdated);
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     render() {
@@ -99,41 +94,28 @@ class ModalBody extends React.Component {
         )
     }
 
-    __isWorkCenterInWorkabilityNotes(centerId) {
-        var notes = this.state.defaultWorkabilityNotes;
-        var centersIds = notes.map(function (note) {
-            return (note.serviceCenter.id);
-        });
-
-        return $.inArray(centerId, centersIds) > -1
-    }
-
     _onWorkCentersUpdated() {
         this.setState({
             workCenters: DictionaryStore.getDictionaryParameters("workability")
         });
-    }
-
-    __loadDefaultValue() {
-        if (NewProductStore.isEnableDefaultValues()) {
-            var workabilityNotes = NewProductStore.getDefaultProductProperty("workabilityNotes");
-
-            L.log(workabilityNotes);
-            this.setState({
-                defaultWorkabilityNotes: workabilityNotes ? workabilityNotes : []
-            });
-        }
-
     }
 }
 
 class WorkCenterItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isChecked: this.props.isChecked
-        };
+        this.state = {isChecked: this.__checkIfWorkCenterActive()};
         this._handleChangeSelection = this._handleChangeSelection.bind(this);
+        this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
+        this.__checkIfWorkCenterActive = this.__checkIfWorkCenterActive.bind(this);
+    }
+
+    componentWillMount() {
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
+    }
+
+    componentWillUnmount() {
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
     }
 
     render() {
@@ -143,12 +125,29 @@ class WorkCenterItem extends React.Component {
                     <input type="checkbox"
                            checked={this.state.isChecked}
                            value={this.props.item.id}
+                           name={this.props.item.groupPriority}
                            onChange={this._handleChangeSelection}
                            className="filter-checkbox"/>
                     {this.props.item.serviceCenter}
                 </label>
             </div>
         );
+    }
+
+    __loadDefaultValue() {
+        if (NewProductStore.isEnableDefaultValues()) {
+            this.setState({isChecked: this.__checkIfWorkCenterActive()})
+        }
+    }
+
+    __checkIfWorkCenterActive () {
+        var notes = NewProductStore.getDefaultProductProperty("workabilityNotes");
+        //(notes.length > 1) cause we'll usually have AG-center on a first place for each product
+        if (notes && notes.length > 1) {
+           return notes.some(e => e.serviceCenter.id == this.props.item.id)
+        } else {
+            return false
+        }
     }
 
     _handleChangeSelection() {
@@ -162,15 +161,6 @@ class WorkCenterItem extends React.Component {
         }
     }
 }
-
-WorkCenterItem.propTypes = {
-    isChecked: React.PropTypes.bool
-};
-
-WorkCenterItem.defaultProps = {
-    isChecked: false
-};
-
 
 class ModalFooter extends React.Component {
     render() {

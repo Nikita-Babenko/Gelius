@@ -100,7 +100,7 @@ public class Product {
     private InnerLayer innerLayer;
 
     @Size(max = 200)
-    @Column(name = "specialConditions")
+    @Column(name = "special_conditions")
     private String specialConditions;
 
     @Size(max = 200)
@@ -170,7 +170,7 @@ public class Product {
     @Column(name = "production_format")
     private Integer productionFormat;
 
-    @Column(name = "numberBlanksOnFormat")
+    @Column(name = "number_blanks_on_format")
     private Integer numberBlanksOnFormat;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
