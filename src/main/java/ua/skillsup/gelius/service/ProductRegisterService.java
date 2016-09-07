@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface ProductRegisterService {
 
-    List<ProductRegisterDto> getAllProducts();
+    List<ProductRegisterDto> findAll();
 
     List<ProductRegisterDto> findByFilter(ProductRegisterFilter searchFilter);
 

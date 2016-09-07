@@ -34,7 +34,7 @@ public class ProductRegisterController {
     @ResponseBody
     private JSONResponse findAllProducts() {
         LOG.info("Get all products");
-        List<ProductRegisterDto> allProducts = productRegisterService.getAllProducts();
+        List<ProductRegisterDto> allProducts = productRegisterService.findAll();
         return createResponse(allProducts, "products");
     }
 

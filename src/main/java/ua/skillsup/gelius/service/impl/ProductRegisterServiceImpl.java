@@ -2,7 +2,6 @@ package ua.skillsup.gelius.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductRegisterDao;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
@@ -18,8 +17,7 @@ public class ProductRegisterServiceImpl implements ProductRegisterService {
     private ProductRegisterDao productRegisterDao;
 
     @Override
-    @Transactional(readOnly = true)
-    public List<ProductRegisterDto> getAllProducts() {
+    public List<ProductRegisterDto> findAll() {
         return productRegisterDao.findAll();
     }
 
