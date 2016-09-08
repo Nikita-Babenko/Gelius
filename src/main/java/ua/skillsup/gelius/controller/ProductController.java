@@ -50,6 +50,16 @@ public class ProductController {
         return new Response(ResponseCode.OK, responseData);
     }
 
+    @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONResponse findProductById(@PathVariable Long id) {
+        LOG.info("Find product by Id");
+
+        ProductDto product = productService.findById(id);
+
+        return new JSONResponse("200", "OK", product);
+    }
+
     @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)
     @ResponseBody
     public Response getNumberForNewProduct() {

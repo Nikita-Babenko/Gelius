@@ -92,7 +92,6 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-    //If product with same productNumber exists in DB, throw ProductExistsException
     private void isProductExist(int productNumber) {
         boolean isExists = this.productDao.isProductExist(productNumber);
         if (isExists) {
@@ -119,7 +118,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    //Can returns null if product not found.
     public ProductDto findById(long productId) {
         return this.productDao.findById(productId);
     }

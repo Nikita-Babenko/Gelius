@@ -80,13 +80,14 @@ public class ProductControllerTest {
 
     @Test
     public void getNumberForNewProduct() throws Exception {
-        when(productService.getProductNumber()).thenReturn(1);
-        when(productService.getFullProductNumber(1, true)).thenReturn("00001");
+        int number = 1;
+        when(productService.getProductNumber()).thenReturn(number);
+        when(productService.getFullProductNumber(number, true)).thenReturn("00001");
 
         productController.getNumberForNewProduct();
 
         verify(productService, times(1)).getProductNumber();
-        verify(productService, times(1)).getFullProductNumber(1, true);
+        verify(productService, times(1)).getFullProductNumber(number, true);
     }
 
     @Test
@@ -96,5 +97,15 @@ public class ProductControllerTest {
         productController.findAllDictionaries();
 
         verify(dictionaryService, times(1)).findAll();
+    }
+
+    @Test
+    public void findById() throws Exception {
+        long id = 1;
+        when(productService.findById(id)).thenReturn(productDto);
+
+        productController.findProductById(id);
+
+        verify(productService, times(1)).findById(id);
     }
 }

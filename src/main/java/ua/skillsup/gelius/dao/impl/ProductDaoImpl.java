@@ -68,7 +68,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    //Can returns null if product not found.
     public ProductDto findById(long productId) {
         Product product = this.sessionFactory.getCurrentSession().get(Product.class, productId);
         return modelMapper.map(product, ProductDto.class);
