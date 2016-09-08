@@ -1,13 +1,20 @@
 package ua.skillsup.gelius.model;
 
-import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Data {
 
-    //DateTimeFormatter for dates (according to HTML-field INPUT:date format):
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+    //Uploaded files:
     public static final String FILES_DIR = "PRODUCT_FILES";
+    public static final Pattern ALLOWED_FILENAME_SYMBOLS = Pattern.compile(
+        "[^a-zA-Zа-яА-ЯҐґЄєІіЇї0-9_\\+\\.\\,\\(\\)!@\\$=-]"
+    );
+    public static final String FILENAME_REPLACER = "_";
+    public static final List<String> ALLOWED_FILE_EXTENSIONS = Arrays.asList(
+        "pdf", "png", "jpg", "jpeg", "ai", "cdr"
+    );
 
     //Numbers of old and new datasheets - placeholder (padded from left) and number of digits:
     public class ProductNumber {

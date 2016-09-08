@@ -25,7 +25,7 @@
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"/>
-        <property name="maxUploadSizePerFile" value="15728640" /> <!-- File size limit: 15MB -->
+        <property name="maxUploadSizePerFile" value="${upload.max_size_per_file_in_bytes}" />
     </bean>
 
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">

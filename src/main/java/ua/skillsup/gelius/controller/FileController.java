@@ -3,20 +3,19 @@ package ua.skillsup.gelius.controller;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ua.skillsup.gelius.controller.response.Response;
 import ua.skillsup.gelius.controller.response.ResponseCode;
-import ua.skillsup.gelius.model.Data;
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
+import ua.skillsup.gelius.exception.DeniedFileTypesException;
+import ua.skillsup.gelius.exception.FileSavingException;
+import ua.skillsup.gelius.service.FileService;
 
 @Controller
 @RequestMapping("/files")
@@ -24,107 +23,46 @@ public class FileController {
 
     private static final Logger LOG = LoggerFactory.getLogger("FileController");
 
+    @Autowired
+    private FileService fileService;
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public Response uploadFile2(@RequestParam("productNumber") String fullProductNumber,
-                                 @RequestParam("files") MultipartFile[] files) {
-        LOG.info("Upload files");
-
-        LOG.info("productNumber=" + fullProductNumber);
-        LOG.info("Количество полученных файлов: " + files.length);
-
-        //*** Code in this method will be moved to DAO and service layers:-) ***
-
-        Pattern regexp = Pattern.compile("[^a-zA-Zа-яА-ЯҐґЄєІіЇї0-9_\\+\\.\\(\\)!@\\$=-]");
-        List<String> allowedFileExtensions = Arrays.asList("pdf", "png", "jpg", "jpeg", "ai", "cdr" /*, "txt"*/); //txt - for debug
-
-        for (MultipartFile file : files) {
-
-            //File size validation was done in context (bean multipartResolver)
-
-            //Content-type validation:
-            //Commented for debug:
-            /*String[] fileNameParts = file.getOriginalFilename().split("\\.");
-            if (fileNameParts.length == 0) {
-                LOG.info("File has not extension");
-                return new Response(ResponseCode.VALIDATION_ERROR); //TODO insert filename int list
-            }
-            String extension = fileNameParts[ fileNameParts.length-1 ];
-            LOG.info("Расширение файла=" + extension);
-            boolean isFileTypeAllowed = false;
-            for (String allowedExtension : allowedFileExtensions) {
-                if (allowedExtension.equalsIgnoreCase(extension)) {
-                    isFileTypeAllowed = true;
-                    break;
-                }
-            }
-            if (!isFileTypeAllowed) {
-                LOG.info("This file type not allowed: " + extension);
-                return new Response(ResponseCode.VALIDATION_ERROR); //TODO insert filename int list
-            }*/
-
-            String fileName = file.getOriginalFilename();
-            LOG.info(
-                    fileName + ": " +
-                            "преобразованное имя=" + regexp.matcher(fileName).replaceAll("_") +
-                            ", размер=" + file.getSize() +
-                            ", content-type=" + file.getContentType() +
-                            "."
-            );
-        }
-
-        if (files.length == 0) {
-            return new Response(ResponseCode.OK);
-        }
-
-        String rootPath = System.getProperty("catalina.home");
-
-        File dir = new File(rootPath + File.separator + Data.FILES_DIR + File.separator + fullProductNumber);
-        boolean dirCreated = false;
-        if (!dir.exists()) {
-            dirCreated = dir.mkdirs();
-        }
-        if (!dirCreated) {
-            //TODO logging!
-            return new Response(ResponseCode.SERVER_ERROR);
-        }
-        LOG.info("Dir " + fullProductNumber + " created");
-
-        String newFileName = "";
-
-        for (MultipartFile file : files) {
-            try {
-                byte[] bytes = file.getBytes();
-
-                //Replacing not allowed symbols in fileName:
-                newFileName = regexp.matcher(file.getOriginalFilename()).replaceAll("_");
-
-                //Save file on server:
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + newFileName);
-                LOG.info("Сохраняем в " + dir.getAbsolutePath() + File.separator + newFileName);
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-            } catch (IOException e) {
-                //TODO logging!
-                return new Response(ResponseCode.SERVER_ERROR);
-            }
-        }
-        LOG.info("Files was saved");
-
+    public Response uploadFiles(
+        @RequestParam("productNumber") String fullProductNumber,
+        @RequestParam("files") MultipartFile[] files
+    ) {
+        LOG.info("uploadFiles(): productNumber=" + fullProductNumber + ", files count=" + files.length);
+        this.fileService.uploadFiles(fullProductNumber, files);
         return new Response(ResponseCode.OK);
     }
 
 
+    //Exception handling
+
+    //Not catch:-( It will be fixed
     @ResponseBody
     @ExceptionHandler(FileUploadBase.FileSizeLimitExceededException.class)
     public Response exceptionHandler(FileUploadBase.FileSizeLimitExceededException e) {
-        LOG.info("ExceptionHandler (FileUploadBase.FileSizeLimitExceededException): " + e);
+        LOG.info("ExceptionHandler: " + e);
         return new Response(ResponseCode.FILE_SIZE_EXCEEDED);
     }
 
-    /* It will be uncommented after debugging
+    @ResponseBody
+    @ExceptionHandler(DeniedFileTypesException.class)
+    public Response exceptionHandler(DeniedFileTypesException e) {
+        LOG.info("ExceptionHandler: " + e);
+        return new Response(ResponseCode.VALIDATION_ERROR, e.getFileNames());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(FileSavingException.class)
+    public Response exceptionHandler(FileSavingException e) {
+        LOG.info("ExceptionHandler: " + e);
+        return new Response(ResponseCode.SERVER_ERROR);
+    }
+
+    /* It will be uncommented after debug
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public Response exceptionHandler(Exception e) {
