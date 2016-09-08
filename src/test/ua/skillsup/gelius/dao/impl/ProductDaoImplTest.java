@@ -3,10 +3,13 @@ package ua.skillsup.gelius.dao.impl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dao.entity.Product;
@@ -17,12 +20,14 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = "classpath:spring/mock-mvc-dispatcher-servlet.xml")
 @Transactional
 public class ProductDaoImplTest {
 
     @Autowired
+    @InjectMocks
     private ProductDao productDao;
 
     @Autowired
@@ -34,6 +39,8 @@ public class ProductDaoImplTest {
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
         Product newProductFirst = new Product();
         newProductFirst.setId(22L);
         newProductFirst.setProductNumber(223);

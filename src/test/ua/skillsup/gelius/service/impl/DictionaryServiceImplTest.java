@@ -1,6 +1,5 @@
 package ua.skillsup.gelius.service.impl;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,13 +25,11 @@ public class DictionaryServiceImplTest {
     @InjectMocks
     private DictionaryService dictionaryService = new DictionaryServiceImpl();
 
-    @Before
-    public void setUp() throws Exception {
-        when(dictionaryDao.findAll(any())).thenReturn(new ArrayList<>());
-    }
-
     @Test
     public void findAll() throws Exception {
+        when(dictionaryDao.findAll(any())).thenReturn(new ArrayList<>());
+
+
         Map<String, List<?>> all = dictionaryService.findAll();
         int count = 13;
 

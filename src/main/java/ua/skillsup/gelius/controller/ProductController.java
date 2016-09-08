@@ -4,11 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ua.skillsup.gelius.controller.response.Response;
 import ua.skillsup.gelius.controller.response.ResponseCode;
 import ua.skillsup.gelius.exception.ProductExistsException;
@@ -34,14 +30,14 @@ public class ProductController {
     private DictionaryService dictionaryService;
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
-    private String pageNewProduct() {
+    public String pageNewProduct() {
         LOG.info("Open new product page");
         return "newProduct";
     }
 
     @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
     @ResponseBody
-    private Response save(@RequestBody ProductDto product) {
+    public Response save(@RequestBody ProductDto product) {
         LOG.info("createProduct. Mapping 'raw' product data");
 
         String savedProductNumberValue = this.productService.save(product);
@@ -56,7 +52,7 @@ public class ProductController {
 
     @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)
     @ResponseBody
-    private Response getNumberForNewProduct() {
+    public Response getNumberForNewProduct() {
 
         LOG.info("Get number for new product");
         String newProductNumberValue = getFullProductNumber();
@@ -66,7 +62,7 @@ public class ProductController {
 
     @RequestMapping(value = "/newProduct/allDictionaries", method = RequestMethod.GET)
     @ResponseBody
-    private Response findAllDictionaries() {
+    public Response findAllDictionaries() {
 
         LOG.info("Get all dictionaries");
         Map<String, List<?>> dictionaries = dictionaryService.findAll();

@@ -26,7 +26,7 @@ public class FileController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    private Response uploadFile2(@RequestParam("productNumber") String fullProductNumber,
+    public Response uploadFile2(@RequestParam("productNumber") String fullProductNumber,
                                  @RequestParam("files") MultipartFile[] files) {
         LOG.info("Upload files");
 

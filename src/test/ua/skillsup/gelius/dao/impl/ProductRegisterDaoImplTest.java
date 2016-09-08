@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductRegisterDao;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = "classpath:spring/mock-mvc-dispatcher-servlet.xml")
 @Transactional
@@ -174,7 +176,6 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-
     public void findProductsByDifferentClientsMixed() throws Exception {
         productRegisterFilter.setClientNames(Arrays.asList("Ласунка", "Lasunka", "АВК"));
         productRegisterFilter.setSortingDirection("asc");

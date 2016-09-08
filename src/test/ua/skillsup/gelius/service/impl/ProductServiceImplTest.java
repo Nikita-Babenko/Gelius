@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.model.dto.ProductDto;
@@ -33,7 +34,9 @@ public class ProductServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
         productDto = new ProductDto();
+        productDto.setId(1L);
         productDto.setIsNew(false);
         productDto.setProductNumber(1);
         productDto.setClient(new ClientDto(1L));
@@ -48,15 +51,13 @@ public class ProductServiceImplTest {
         productDto.setPacking(new PackingDto(1L));
         productDto.setPallet(new PalletDto(1L));
         productDto.setPalletPlacement(new PalletPlacementDto(1L));
-
-        when(productDao.save(productDto)).thenReturn(1L);
-        when(productDao.getMaxProductNumber()).thenReturn(1);
-        when(validationService.validation(productDto)).thenReturn(new ArrayList<>());
-        when(productDao.findById(1)).thenReturn(productDto);
     }
 
     @Test
     public void save() throws Exception {
+        when(validationService.validation(productDto)).thenReturn(new ArrayList<>());
+        when(productDao.save(productDto)).thenReturn(1L);
+
         productService.save(productDto);
 
         verify(productDao, times(1)).save(productDto);
@@ -64,6 +65,8 @@ public class ProductServiceImplTest {
 
     @Test
     public void getProductNumber() throws Exception {
+        when(productDao.getMaxProductNumber()).thenReturn(1);
+
         int productNumber = productService.getProductNumber();
 
         verify(productDao, times(1)).getMaxProductNumber();
@@ -105,6 +108,8 @@ public class ProductServiceImplTest {
 
     @Test
     public void findById() throws Exception {
+        when(productDao.findById(1)).thenReturn(productDto);
+
         ProductDto product = productService.findById(1);
 
         verify(productDao, times(1)).findById(1);
