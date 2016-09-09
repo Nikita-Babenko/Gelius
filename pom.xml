@@ -62,11 +62,6 @@
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
 
-        <findbugs-maven-plugin.version>3.0.3</findbugs-maven-plugin.version>
-        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
-        <maven-surefire-report-plugin.version>2.18.1</maven-surefire-report-plugin.version>
-        <cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
-
     </properties>
 
     <dependencies>
@@ -360,65 +355,9 @@
 
             </plugin>
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${findbugs-maven-plugin.version}</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>${cobertura-maven-plugin.version}</version>
-                <configuration>
-                    <formats>
-                        <format>xml</format>
-                    </formats>
-                    <check/>
-                </configuration>
-            </plugin>
-
         </plugins>
 
     </build>
-
-    <reporting>
-
-        <plugins>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${findbugs-maven-plugin.version}</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-plugin.version}</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>${maven-surefire-report-plugin.version}</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>${cobertura-maven-plugin.version}</version>
-                <configuration>
-                    <formats>
-                        <format>xml</format>
-                    </formats>
-                    <check/>
-                </configuration>
-            </plugin>
-
-        </plugins>
-
-    </reporting>
 
     <profiles>
 
