@@ -5,16 +5,13 @@
     <artifactId>gelius</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>gelius Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <name>gelius</name>
 
     <properties>
 
         <!-- Main properties -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.build.timestamp.format>MM.yyyy</maven.build.timestamp.format>
-        <yearMonth>${maven.build.timestamp}</yearMonth>
         <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Spring properties-->
         <spring.version>4.2.6.RELEASE</spring.version>
@@ -25,72 +22,54 @@
         <mysql.connector.version>5.1.36</mysql.connector.version>
         <h2database.version>1.4.189</h2database.version>
 
-        <!-- Web -->
+        <!-- Web properties-->
         <javax.servlet.version>3.0.1</javax.servlet.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <javax.el.version>2.2.6</javax.el.version>
         <jstl.version>1.2</jstl.version>
 
-        <!-- Data format(JSON) -->
+        <!-- Data format(JSON) properties-->
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
         <jackson-datatype-jsr310>2.7.7</jackson-datatype-jsr310>
         <jackson-databind.version>2.8.0</jackson-databind.version>
 
-        <!-- Testing -->
+        <!-- Testing properties-->
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
 
-        <!-- Logging -->
+        <!-- Logging properties-->
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
 
-        <!-- Frontend -->
+        <!-- Frontend properties-->
         <bootstrap.version>3.3.5</bootstrap.version>
         <jquery.version>2.1.4</jquery.version>
         <font-awesome.version>4.6.3</font-awesome.version>
         <react.version>15.2.1</react.version>
         <model-mapper.version>0.7.6</model-mapper.version>
 
-        <!-- SonarQube && Jacoco-->
-        <jacoco.version>0.7.2.201409121644</jacoco.version>
+        <!-- SonarQube && Jacoco properties -->
+        <jacoco.version>0.7.4.201502262128</jacoco.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
+        <maven.build.timestamp.format>MM.yyyy</maven.build.timestamp.format>
+        <yearMonth>${maven.build.timestamp}</yearMonth>
+
+        <!-- Maven plugins properties -->
+        <frontend-maven-plugin.version>0.0.29</frontend-maven-plugin.version>
+        <maven-war-plugin.version>2.4</maven-war-plugin.version>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+
+        <findbugs-maven-plugin.version>3.0.3</findbugs-maven-plugin.version>
+        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
+        <maven-surefire-report-plugin.version>2.18.1</maven-surefire-report-plugin.version>
+        <cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
 
     </properties>
 
     <dependencies>
-
-        <!-- junit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- mockito -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- jstl -->
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
-        </dependency>
-
-        <!-- servlet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet.version}</version>
-        </dependency>
 
         <!-- Spring -->
         <dependency>
@@ -174,6 +153,20 @@
             <version>${javax.el.version}</version>
         </dependency>
 
+        <!-- jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
+        <!-- servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+        </dependency>
+
         <!-- In-memory database -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -212,6 +205,21 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${model-mapper.version}</version>
+        </dependency>
+
+        <!-- Testing junit and mockito -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Front-End -->
@@ -284,7 +292,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
+                <version>${maven-war-plugin.version}</version>
 
                 <configuration>
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
@@ -297,7 +305,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven-compiler-plugin.version}</version>
 
                 <configuration>
                     <source>${jdk.version}</source>
@@ -310,7 +318,7 @@
 
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>0.0.29</version>
+                <version>${frontend-maven-plugin.version}</version>
 
                 <configuration>
                     <workingDirectory>src/main/frontend</workingDirectory>
@@ -352,8 +360,65 @@
 
             </plugin>
 
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs-maven-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>${cobertura-maven-plugin.version}</version>
+                <configuration>
+                    <formats>
+                        <format>xml</format>
+                    </formats>
+                    <check/>
+                </configuration>
+            </plugin>
+
         </plugins>
+
     </build>
+
+    <reporting>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs-maven-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven-surefire-report-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>${cobertura-maven-plugin.version}</version>
+                <configuration>
+                    <formats>
+                        <format>xml</format>
+                    </formats>
+                    <check/>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </reporting>
 
     <profiles>
 
