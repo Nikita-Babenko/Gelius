@@ -6,6 +6,8 @@ public interface ProductService {
 
     String save(ProductDto product);
 
+    String delete(long productId);
+
     int getProductNumber();
 
     String getFullProductNumber(int productNumber, boolean isNewDatasheet);

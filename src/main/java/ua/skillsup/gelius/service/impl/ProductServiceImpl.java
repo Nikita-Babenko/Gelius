@@ -50,7 +50,13 @@ public class ProductServiceImpl implements ProductService {
 
         return getFullProductNumber(filledProduct.getProductNumber(), filledProduct.getIsNew());
     }
-    
+
+    @Override
+    public String delete(long productId) {
+        ProductDto productDto = productDao.delete(productId);
+        return getFullProductNumber(productDto.getProductNumber(), productDto.getIsNew());
+    }
+
     private ProductDto isFillProduct(ProductDto product) {
         if ( product.getClient().getId() == 0 ) {
             product.setClient(null);

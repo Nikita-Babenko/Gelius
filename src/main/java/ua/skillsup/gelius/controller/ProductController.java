@@ -60,6 +60,16 @@ public class ProductController {
         return new JSONResponse("200", "OK", product);
     }
 
+    @RequestMapping(value = "/newProduct/deleteProduct/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONResponse deleteProductById(@PathVariable Long id) {
+        LOG.info("Delete product by Id");
+
+        String deletedFullProductNumber = productService.delete(id);
+
+        return new JSONResponse("200", "OK", deletedFullProductNumber);
+    }
+
     @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)
     @ResponseBody
     public Response getNumberForNewProduct() {

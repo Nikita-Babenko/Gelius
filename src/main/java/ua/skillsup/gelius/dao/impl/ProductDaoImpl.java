@@ -1,5 +1,6 @@
 package ua.skillsup.gelius.dao.impl;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,11 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public long delete(long productId) {
-        ProductDto productDto = findById(productId);
-        delete(productDto);
-        return productDto.getId();
+    public ProductDto delete(long productId) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Product product = session.get(Product.class, productId);
+        session.delete(product);
+        return modelMapper.map(product, ProductDto.class);
     }
 
     private void assignProductToWorkabilityNotes(Product product) {

@@ -116,4 +116,15 @@ public class ProductServiceImplTest {
         assertEquals("Is equal", product.getId(), productDto.getId());
     }
 
+
+    @Test
+    public void deleteById() throws Exception {
+        long id = 1;
+        when(productDao.delete(id)).thenReturn(productDto);
+
+        productService.delete(1);
+
+        verify(productDao, times(1)).delete(id);
+    }
+
 }

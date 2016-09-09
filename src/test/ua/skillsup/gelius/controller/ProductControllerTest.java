@@ -81,8 +81,9 @@ public class ProductControllerTest {
     @Test
     public void getNumberForNewProduct() throws Exception {
         int number = 1;
+        String idString = "00001";
         when(productService.getProductNumber()).thenReturn(number);
-        when(productService.getFullProductNumber(number, true)).thenReturn("00001");
+        when(productService.getFullProductNumber(number, true)).thenReturn(idString);
 
         productController.getNumberForNewProduct();
 
@@ -107,5 +108,15 @@ public class ProductControllerTest {
         productController.findProductById(id);
 
         verify(productService, times(1)).findById(id);
+    }
+
+    @Test
+    public void deleteProductById() {
+        long id = 1;
+        when(productService.delete(1)).thenReturn(anyString());
+
+        productService.delete(id);
+
+        verify(productService, times(1)).delete(id);
     }
 }

@@ -173,7 +173,8 @@ public class Product {
     @Column(name = "number_blanks_on_format")
     private Integer numberBlanksOnFormat;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<WorkabilityNotes> workabilityNotes;
 
     public Long getId() {

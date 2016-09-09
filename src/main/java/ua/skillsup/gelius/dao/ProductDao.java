@@ -10,9 +10,9 @@ public interface ProductDao {
 
     long save(ProductDto product);
 
-    long delete(ProductDto productDto);
+    ProductDto delete(long productId);
 
-    long delete(long productId);
+    long delete(ProductDto productDto);
 
     int getMaxProductNumber();
 
