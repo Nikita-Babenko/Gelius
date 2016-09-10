@@ -6,50 +6,55 @@ import NewProductStore from "../../stores/NewProductStore";
 class DictionaryColoured extends React.Component {
     constructor(props) {
         super(props);
+
+        this.bgColors = {
+            "Default": "white",
+            "LightRed": "#FFBAB7",
+            "Yellow": "yellow"
+        };
+
         this.state = {
             dictionaryParameters: [],
-            value : "",
+            value: "",
             selectedOptionColor: {
-                background: ''
-            },
-            defaultOptionColor: {
-                background: 'white'
+                backgroundColor: this.bgColors.Default
             }
         };
 
+
+
+        this.__setColourForOption = this.__setColourForOption.bind(this);
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
         this.__selectOptionValue = this.__selectOptionValue.bind(this);
-        this.__chooseOption = this.__chooseOption.bind(this);
-        this.__setDefaultColor = this.__setDefaultColor.bind(this);
-        this.__setColorForSelectedOption = this.__setColorForSelectedOption.bind(this);
         this._onDictionariesParametersUpdated = this._onDictionariesParametersUpdated.bind(this);
     }
 
     componentWillMount() {
         DictionaryStore.addListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setDefaultColor);
     }
 
     componentWillUnmount() {
         DictionaryStore.removeListener(EventConstants.DICTIONARIES_CHANGE_EVENT, this._onDictionariesParametersUpdated);
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__setDefaultColor);
     }
 
     render() {
         var dictData = this.state.dictionaryParameters;
         var dictText = this.props.dictionaryTextName;
-        var whiteColor = this.state.defaultOptionColor;
         var dictOptions = dictData.map(function (d) {
             return (
-                <DictionaryOption id={d.id} text={d[dictText]} style={whiteColor}/>
+                <DictionaryOption id={d.id} text={d[dictText]} />
             );
         });
 
         return (
-            <select value={this.state.value} style={this.state.selectedOptionColor} className={this.props.style} id={this.props.dictionaryName} onChange={this.__chooseOption}>
-                <option value="" style={this.state.defaultOptionColor}>не выбран</option>
+            <select value={this.state.value}
+                    style={this.state.selectedOptionColor}
+                    className={this.props.style}
+                    id={this.props.dictionaryName}
+                    onChange={this.__selectOptionValue}>
+                <DictionaryOption id="" text="не выбран" />
                 {dictOptions}
             </select>
         );
@@ -61,54 +66,41 @@ class DictionaryColoured extends React.Component {
         });
     }
 
-    __setDefaultColor(){
-        this.setState({
-            selectedOptionColor: {
-                background: 'white'
-            }
-        });
-    };
-
-
-    __chooseOption(e){
-        this.__selectOptionValue(e);
-        this.__setColorForSelectedOption(e);
-    }
-
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
-            var dictionaryValue = NewProductStore.getDefaultProductProperty(this.props.dictionaryName);
+            var value = NewProductStore.getDefaultProductProperty(this.props.dictionaryName);
+            var dictionaryValue = value ? value.id : "";
+            this.__setColourForOption("" + dictionaryValue);
             this.setState({
-                value: dictionaryValue ? dictionaryValue.id : ""
+                value: dictionaryValue
             })
         }
     }
 
     __selectOptionValue(e){
         var selectedValue = e.target.value;
+        this.__setColourForOption(selectedValue);
         this.setState({
             value : selectedValue
         });
     }
 
-    __setColorForSelectedOption(e){
-        var selectedValue = e.target.value;
-        var dictionaryName = this.props.dictionaryName;
-        var finalColor;
-        switch (dictionaryName){
-            case "connectionValve" :{
-                switch (selectedValue){
-                    case "2" : finalColor = 'yellow';
-                        break;
-                    case "3" : finalColor = '#FFBAB7';
-                        break;
-                }
-            }break;
-            default : finalColor = 'white';
+    __setColourForOption(value) {
+        var color;
+        switch (value) {
+            case "2":
+                color = this.bgColors.Yellow;
+                break;
+            case "3":
+                color = this.bgColors.LightRed;
+                break;
+            default:
+                color = this.bgColors.Default;
         }
+
         this.setState({
             selectedOptionColor: {
-                background : finalColor
+                backgroundColor: color
             }
         });
     }
@@ -125,7 +117,7 @@ export default DictionaryColoured;
 class DictionaryOption extends React.Component {
     render() {
         return (
-            <option value={this.props.id} style={this.props.style}>
+            <option value={this.props.id} style={{backgroundColor: "white"}}>
                 {this.props.text}
             </option>
         );
@@ -134,10 +126,5 @@ class DictionaryOption extends React.Component {
 
 DictionaryOption.propTypes = {
     id: React.PropTypes.number.isRequired,
-    text: React.PropTypes.string.isRequired,
-    style: React.PropTypes.string
-};
-
-DictionaryColoured.defaultProps = {
-    style: ""
+    text: React.PropTypes.string.isRequired
 };
