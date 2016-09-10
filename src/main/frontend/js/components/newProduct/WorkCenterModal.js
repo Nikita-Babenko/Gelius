@@ -91,7 +91,7 @@ class ModalBody extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 
     _onWorkCentersUpdated() {
@@ -124,10 +124,11 @@ class WorkCenterItem extends React.Component {
                 <label>
                     <input type="checkbox"
                            checked={this.state.isChecked}
-                           value={this.props.item.id}
-                           name={this.props.item.groupPriority}
+                           id={this.props.item.id}
+                           name={this.props.item.serviceCenter}
+                           data-group={this.props.item.groupPriority}
                            onChange={this._handleChangeSelection}
-                           className="filter-checkbox"/>
+                           className="work-centers-checkbox"/>
                     {this.props.item.serviceCenter}
                 </label>
             </div>
@@ -153,16 +154,11 @@ class WorkCenterItem extends React.Component {
     _handleChangeSelection() {
         var newState = !this.state.isChecked;
         this.setState({isChecked: newState});
-
-        if (newState) {
-            NewProductAction.addWorkCenter(this.props.item);
-        } else {
-            NewProductAction.deleteWorkCenter(this.props.item);
-        }
     }
 }
 
 class ModalFooter extends React.Component {
+
     render() {
         return (
             <div className="modal-footer">
@@ -182,6 +178,6 @@ class ModalFooter extends React.Component {
     }
 
     __onOkClick() {
-        NewProductAction.updateWorkabilityInfo();
+            NewProductAction.updateWorkabilityInfo();
     }
 }

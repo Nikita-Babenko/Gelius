@@ -376,6 +376,9 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: bold;
 }
 
+.middle_table {
+    margin-bottom: 2px !important;
+}
 
 .middle_table > tbody > tr > .middle_left_title {
     width: 5%;
@@ -410,8 +413,8 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid black;
 }
 
-.special{
-    padding : 40px 8px 8px 3% !important;
+.special {
+    padding: 12px 8px 8px 3% !important;
     text-align: left !important;
     vertical-align: middle;
 }
@@ -431,9 +434,10 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
     background-color: white;
 }
-.middle_table > tbody > tr > .middle_products_small_td > textarea{
+
+.middle_table > tbody > tr > .middle_products_small_td > textarea {
     position: absolute;
-    top:0;
+    top: 0;
     right: 0;
     padding: 1px !important;
     height: 100%;
@@ -450,11 +454,30 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 
+.notes-textarea {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1px !important;
+    height: 100%;
+    width: 64%;
+    margin: 0;
+    border-radius: 0;
+    border-left: 1px solid black;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+    background-color: white;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+}
+
 .res_cliche_stamp {
     float: left;
     padding: 0 0 0 5px !important;
     width: 75%;
-    margin-left:-1px;
+    margin-left: -1px;
     word-break: break-all;
     border-left: 1px solid black;
     cursor: text;
@@ -464,13 +487,12 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 0;
     outline: none;
 }
-
 
 .res_div_cliche_stamp {
     float: left;
     padding: 0 0 0 9px !important;
     width: 25%;
-    margin-left:-1px;
+    margin-left: -1px;
     word-break: break-all;
     border-left: 1px solid black;
     cursor: text;
@@ -480,8 +502,6 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 0;
     outline: none;
 }
-
-
 
 .middle_table > tbody > tr > .print_td {
     height: 20px;
@@ -570,7 +590,7 @@ input[type=number]::-webkit-outer-spin-button {
     float: left;
     padding: 0 0 0 5px !important;
     width: 60%;
-    margin-left:-1px;
+    margin-left: -1px;
     word-break: break-all;
     border-left: 1px solid black;
     cursor: text;
@@ -699,7 +719,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 15px 0 10px 10px;
 }
 
-.links > input{
+.links > input {
     outline: none;
 }
 
@@ -870,7 +890,7 @@ input[type=number]::-webkit-outer-spin-button {
     top: 0;
 }
 
-#buttonsLink > a{
+#buttonsLink > a {
     height: 28px;
     width: 32px;
 }

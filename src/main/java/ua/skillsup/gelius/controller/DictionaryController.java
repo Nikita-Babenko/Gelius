@@ -34,7 +34,8 @@ public class DictionaryController {
     @RequestMapping(path = "/{dictionary}/{operation}", method = RequestMethod.POST)
     @ResponseBody
     public JSONResponse edit(@PathVariable("dictionary") String dictionary,
-                                        @PathVariable("operation") String operation, @RequestBody Object object) {
+                             @PathVariable("operation") String operation,
+                             @RequestBody Object object) {
 
         LOG.info("Edit dictionary {}", dictionary);
 

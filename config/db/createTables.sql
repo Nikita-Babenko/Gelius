@@ -1,4 +1,3 @@
-/* Клиент */
 CREATE TABLE client(
   client_id BIGINT AUTO_INCREMENT,
   address VARCHAR(200),

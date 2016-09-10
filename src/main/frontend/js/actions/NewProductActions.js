@@ -2,6 +2,7 @@ import Dispatcher from "../dispatcher/Dispatcher";
 import UrlConstants from "../constants/Url";
 import EventConstants from "../constants/Events";
 import NewProductStore from "../stores/NewProductStore";
+import WorkCentersStore from "../stores/WorkCentersStore";
 import ObjectConstants from '../constants/Objects';
 import L from "../utils/Logging";
 
@@ -65,16 +66,20 @@ var NewProductActions = {
 
     saveProduct(){
         var newProduct = NewProductStore.getNewProduct();
+        newProduct["workabilityNotes"] = WorkCentersStore.__getWorkCentersFromModal();
+
         L.log(newProduct);
         $.ajax({
             type: 'POST',
             url: UrlConstants.SAVE_PRODUCT_URL,
             contentType: 'application/json',
-            data: JSON.stringify(NewProductStore.getNewProduct()),
+            data: JSON.stringify(newProduct),
             dataType: 'JSON',
             timeout: 100000,
             success: function (response) {
                 if (response.code === 200) {
+                    WorkCentersStore.setUseDefautCenters(true);
+                    this.updateWorkabilityInfo();
                     L.log("product (" + response.data.savedProductNumber + ") was saved");
                     L.log("new product number (" + response.data.newProductNumber + ") was received");
                 }
@@ -89,20 +94,6 @@ var NewProductActions = {
 
         });
 
-    },
-
-    addWorkCenter(center) {
-        Dispatcher.dispatch({
-            eventType: EventConstants.ADD_WORK_CENTER,
-            workCenter: center
-        });
-    },
-
-    deleteWorkCenter(center) {
-        Dispatcher.dispatch({
-            eventType: EventConstants.DELETE_WORK_CENTER,
-            workCenter: center
-        });
     },
 
     updateWorkabilityInfo() {
@@ -134,11 +125,11 @@ var NewProductActions = {
     },
 
     /*triggerFullSave() {
-        L.log("NewProductAction.triggerFullSave()");
-        Dispatcher.dispatch({
-            eventType: EventConstants.NEW_PRODUCT_CHANGE_TRIGGER
-        });
-    },*/
+     L.log("NewProductAction.triggerFullSave()");
+     Dispatcher.dispatch({
+     eventType: EventConstants.NEW_PRODUCT_CHANGE_TRIGGER
+     });
+     },*/
 
     saveFileLinks() {
         var savedProductNumber = NewProductStore.savedProductNumber;
@@ -146,7 +137,7 @@ var NewProductActions = {
 
         //TODO Remove this block to UploadFilesStore; get this data from UploadFilesStore
         var formData = new FormData();
-        $(".attachments :file").each(function() {
+        $(".attachments :file").each(function () {
             var file = this.files[0];
             var name = file.name, size = file.size, type = file.type;
             //TODO size and type validation
@@ -160,30 +151,30 @@ var NewProductActions = {
         //End of block
 
         $.ajax({
-            url : UrlConstants.SAVE_PRODUCT_FILES_URL,
-            type : "POST",
+            url: UrlConstants.SAVE_PRODUCT_FILES_URL,
+            type: "POST",
             dataType: "json",
-            data : formData,
+            data: formData,
             /*headers: {
-                "Content-Type": "charset=UTF-8"
-            },*/
+             "Content-Type": "charset=UTF-8"
+             },*/
             processData: false, //(tell jQuery not to process the data)
             contentType: false, //(tell jQuery not to set contentType)
             //contentType maybe need for encoding ("...; encoding=UTF-8"), cuz we have bad russian filenames, that arrived on server
-            success : function(data) {
+            success: function (data) {
                 //L.log(data);
                 L.log("NewProductActions.saveFileLinks(): файлы успешно сохранены");
                 L.log("NewProductActions.saveFileLinks(): 1...");
                 //TODO вызвать событие успешного сохранения всех данных (по факту - сущность и ее файлы-ссылки):
                 /*Dispatcher.
-                    dispatch({ eventType: EventConstants.SAVE_FILE_LINKS_OF_NEW_PRODUCT }).
-                    then(function() {  //because file saving is last operation is saving chain
-                        this.triggerFullSave()
-                    })
-                ;*/
+                 dispatch({ eventType: EventConstants.SAVE_FILE_LINKS_OF_NEW_PRODUCT }).
+                 then(function() {  //because file saving is last operation is saving chain
+                 this.triggerFullSave()
+                 })
+                 ;*/
                 L.log("NewProductActions.saveFileLinks(): ...2");
             },
-            error: function(xhr, status) {
+            error: function (xhr, status) {
                 alert("NewProductActions.saveFileLinks(): ошибка запроса при сохранении файлов\nstatus=" + status);
                 //L.log(xhr);
                 $("BODY").html(xhr.responseText);
@@ -192,7 +183,7 @@ var NewProductActions = {
         });
 
     },
-    
+
     __disablePalletDictionaryDependsFromChangePacking(){
         var palletContext = $('#pallet');
         $('#packing').change(function () {
@@ -213,7 +204,7 @@ var NewProductActions = {
             $('#pallet').prop("disabled", true);
         }
     },
-    
+
     __defaultConnectionValveDictionaryDependsFromProductType(){
         $('#productType').change(function () {
             if (this.value === '1') {

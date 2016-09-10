@@ -63,7 +63,7 @@ public class WorkabilityNotes {
     public String toString() {
         final StringBuilder sb = new StringBuilder("WorkabilityNotes{");
         sb.append("id=").append(id);
-        sb.append(", product=").append(product);
+        sb.append(", productId=").append(product.getId());
         sb.append(", serviceCenter=").append(serviceCenter);
         sb.append(", note=").append(note);
         sb.append('}');

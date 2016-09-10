@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import EventConstants from "../../constants/Events";
+import NewProductAction from "../../actions/NewProductActions";
 import WorkCentersStore from "../../stores/WorkCentersStore";
 import NewProductStore from "../../stores/NewProductStore";
 import WorkCenterModal from "../newProduct/WorkCenterModal";
@@ -19,6 +20,7 @@ class WorkCenterTextarea extends React.Component {
 
     componentWillMount() {
         WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
+        NewProductAction.updateWorkabilityInfo();
     }
 
     componentWillUnmount() {
@@ -38,11 +40,10 @@ class WorkCenterTextarea extends React.Component {
     }
 
     __updateWorkabilityTextArea() {
-        if (NewProductStore.isEnableDefaultValues()) {
             this.setState({
                 workabilityCentersText: WorkCentersStore.getSelectedCentersText()
             });
-        }
+
     }
 
     __showWorkCentersModal() {

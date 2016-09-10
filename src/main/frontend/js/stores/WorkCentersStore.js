@@ -1,6 +1,7 @@
 import EventEmitter from 'eventemitter3';
 import Dispatcher from '../dispatcher/Dispatcher';
 import DictionaryStore from './DictionariesStore';
+import NewProductStore from './NewProductStore';
 import EventConstants from '../constants/Events';
 import ObjectConstants from '../constants/Objects';
 import L from '../utils/Logging';
@@ -8,11 +9,8 @@ import L from '../utils/Logging';
 class WorkCentersStore extends EventEmitter {
     constructor() {
         super();
-        //Inner elements:
-        this.CENTERS_ARRAY_PROPNAME = "centersList";
-
-        this.selectedWorkCenters = this.__initWorkCenters();
-        this.selectedCentersText = "";
+        this.defaultWorkCenters = [];
+        this.useDefault = true;
     }
 
     emitChange() {
@@ -20,49 +18,75 @@ class WorkCentersStore extends EventEmitter {
     }
 
     getSelectedCentersText() {
-        return this.selectedCentersText;
+        return this.__prepareTextOfSelectedWorkCenters();
     }
 
-    getSelectedCenters() {
-        var selectedWorkCenters = {};
-        for (var groupName in this.selectedWorkCenters) {
-            selectedWorkCenters[groupName] = this.selectedWorkCenters[groupName][this.CENTERS_ARRAY_PROPNAME];
-        }
-        return selectedWorkCenters;
+    getSelectedWorkCenters() {
+        return this.__prepareSelectedWorkCenters();
     }
 
-    clearSelectedWorkCentersInfo() {
-        this.selectedWorkCenters = workCentersStore.__initWorkCenters();
-        this.selectedWorkCenters["group0"][this.CENTERS_ARRAY_PROPNAME].push(DictionaryStore.getAgregatorWorkCenter());
-        this.selectedCentersText = "";
-        this.emitChange();
+    setUseDefautCenters(value) {
+        this.useDefault = value;
+    }
+
+    __getDefaultWorkCenters() {
+        var defaultWorkCenters = this.defaultWorkCenters;
+        var workCenters = [];
+        defaultWorkCenters.map(function (center) {
+            workCenters.push(center);
+        });
+        return workCenters;
+    }
+
+    __getWorkCentersFromModal() {
+        var workCenters = [];
+        workCenters.push({
+            "serviceCenter": {
+                "id": 1,
+                "serviceCenter": "АГ",
+                "groupPriority": 0
+            },
+            note: $('[data-group=0].notes-textarea').val()
+        });
+
+        $(".work-centers-checkbox:checked").each(function () {
+            var group = $(this).data('group');
+            workCenters.push({
+                serviceCenter: {
+                    id: $(this).attr('id'),
+                    serviceCenter: $(this).attr('name'),
+                    groupPriority: group
+                },
+                note: $('[data-group='+ group +'].notes-textarea').val()
+            });
+        });
+        return workCenters;
+    }
+
+    __prepareSelectedWorkCenters() {
+        var workCenters = this.__initWorkCenters();
+        var selectedCenters = this.useDefault ? this.__getDefaultWorkCenters() : this.__getWorkCentersFromModal();
+
+        selectedCenters.map(function (center) {
+            workCenters['group' + center.serviceCenter.groupPriority].centers.push(center);
+            workCenters['group' + center.serviceCenter.groupPriority].note = center.note;
+        });
+
+        return workCenters;
     }
 
     __prepareTextOfSelectedWorkCenters() {
         var text = "";
-        var centers = this.selectedWorkCenters;
-        var isAgregatorGroup = false;
+        var centers = this.__prepareSelectedWorkCenters();
 
-        for (var groupName in centers) {
-            if (centers[groupName][this.CENTERS_ARRAY_PROPNAME].length > 0) {
-
-                centers[groupName][this.CENTERS_ARRAY_PROPNAME].forEach(function (item, i) {
-                    if (item.id == ObjectConstants.dictionaries.WORKCENTER_AGREGATOR_ID) { //it is Agregator
-                        isAgregatorGroup = true;
-                        return;
-                    }
-                    if (i > 0) {
+        for (var group in centers) {
+            if (group != 'group0' && centers[group].centers.length > 0) {
+                centers[group].centers.map(function (center, index) {
+                    if (index > 0)
                         text += '/';
-                    }
-                    text += item.serviceCenter;
+                    text += center.serviceCenter.serviceCenter;
                 });
-
-                if (!isAgregatorGroup) {
-                    text += "      ";
-                } else {
-                    isAgregatorGroup = false;
-                }
-
+                text += "     ";
             }
         }
         return text;
@@ -70,7 +94,7 @@ class WorkCentersStore extends EventEmitter {
 
     __initWorkCenters() {
         return {
-            group0: this.__createWorkCentersGroupObject(), //for Agregator
+            group0: this.__createWorkCentersGroupObject(),
             group10: this.__createWorkCentersGroupObject(),
             group20: this.__createWorkCentersGroupObject(),
             group30: this.__createWorkCentersGroupObject(),
@@ -85,51 +109,20 @@ class WorkCentersStore extends EventEmitter {
     }
 
     __createWorkCentersGroupObject() {
-        var obj = {note: null};
-        obj[this.CENTERS_ARRAY_PROPNAME] = [];
-        return obj;
+        return {
+            centers: [],
+            note: null
+        };
     }
-
-
 }
 
 const workCentersStore = new WorkCentersStore();
 
 workCentersStore.dispatchToken = Dispatcher.register(function (event) {
-    var centersArrayPropName = workCentersStore.CENTERS_ARRAY_PROPNAME;
-    var centers = workCentersStore.selectedWorkCenters;
     switch (event.eventType) {
-        case EventConstants.LOAD_ALL_DICTIONARIES:
-            Dispatcher.waitFor([DictionaryStore.dispatchToken]);
-            var aggregatorCenter = DictionaryStore.getAgregatorWorkCenter();
-            workCentersStore.selectedWorkCenters["group0"][centersArrayPropName].push(aggregatorCenter);
-        /*There is no operator "break" here, because we need UPDATE_WORKABILITY_INFO-operations immediately after
-         LOAD_ALL_DICTIONARIES for displaying Agregator in Notes.*/
         case EventConstants.UPDATE_WORKABILITY_INFO:
-            workCentersStore.selectedCentersText = workCentersStore.__prepareTextOfSelectedWorkCenters();
+            workCentersStore.defaultWorkCenters = NewProductStore.getDefaultProductProperty("workabilityNotes");
             workCentersStore.emitChange();
-            break;
-        case EventConstants.ADD_WORK_CENTER:
-            var center = event.workCenter;
-            var groupName = "group" + center.groupPriority;
-            if (centers[groupName] !== undefined) {
-                centers[groupName][centersArrayPropName].push(center);
-            }
-            break;
-        case EventConstants.DELETE_WORK_CENTER:
-            var center = event.workCenter;
-            var groupName = "group" + center.groupPriority;
-            if (centers[groupName] !== undefined) {
-                centers[groupName][centersArrayPropName].splice(
-                    $.inArray(center, centers[groupName][centersArrayPropName]), 1
-                );
-            }
-            break;
-        case EventConstants.UPDATE_WORK_CENTER_NOTE:
-            var groupName = "group" + event.groupPriority;
-            if (centers[groupName] !== undefined) {
-                centers[groupName]["note"] = event.note;
-            }
             break;
     }
 });

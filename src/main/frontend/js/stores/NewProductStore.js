@@ -1,6 +1,5 @@
 import EventEmitter from "eventemitter3";
 import Dispatcher from "../dispatcher/Dispatcher";
-import WorkCentersStore from "./WorkCentersStore";
 import EventConstants from "../constants/Events";
 import ResponseCodeConstants from "../constants/ResponseCodes";
 import L from '../utils/Logging';
@@ -29,7 +28,11 @@ class NewProductStore extends EventEmitter {
             "packing": {"id": 1},
             "workabilityNotes": [
                 {
-                    "serviceCenter": {"id": 1}
+                    "serviceCenter": {
+                        "serviceCenter": "АГ",
+                        "groupPriority": 0
+                    },
+                    "note": null
                 }
             ]
         };
@@ -78,9 +81,9 @@ class NewProductStore extends EventEmitter {
         product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());
         product["innerLayer"] = Number($('#innerLayer :selected').val());
         product["faceLayer"] = Number($('#faceLayer :selected').val());
-        product["cliche"] = $('#cliche').text();
+        product["cliche"] = $('#cliche').val();
         product["theoreticalSquare"] = parseFloat($('#theoreticalSquare').val().replace(/,/, '.'));
-        product["actualSquare"] = $('#actualSquare').val().replace(/,/, '.');
+        product["actualSquare"] = parseFloat($('#actualSquare').val().replace(/,/, '.'));
         product["material"] = $('#material').val();
         product["specialConditions"] = $('#specialConditions').val();
         product["format"] = Number($('#format :selected').val());
@@ -89,7 +92,7 @@ class NewProductStore extends EventEmitter {
         product["numberFromSheet"] = $('#numberFromSheet').val();
         product["blankFormat"] = $('#blankFormat').val();
         product["connectionValve"] = Number($('#connectionValve :selected').val());
-        product["stamp"] = $('#stamp').text();
+        product["stamp"] = $('#stamp').val();
         product["packing"] = Number($('#packing :selected').val());
         product["numberInPack"] = $('#numberInPack').val();
         product["numberInTransportPackage"] = $('#numberInTransportPackage').val();
@@ -102,21 +105,6 @@ class NewProductStore extends EventEmitter {
         product["numberBlanksOnFormat"] = $('#numberBlanksOnFormat').val();
         product["numberLoadCar"] = $('#numberLoadCar').val();
         product["productionFormat"] = $('#productionFormat').val();
-
-        //Workability notes:
-        product["workabilityNotes"] = [];
-        var centers = WorkCentersStore.selectedWorkCenters;
-        var centersArrayPropName = WorkCentersStore.CENTERS_ARRAY_PROPNAME;
-        var note;
-        for (var groupName in centers) {
-            note = centers[groupName].note;
-            centers[groupName][centersArrayPropName].forEach(function (group) {
-                product["workabilityNotes"].push(
-                    {serviceCenter: group.id, note: note}
-                );
-            });
-        }
-
         return product;
     }
 
@@ -146,7 +134,6 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.alert.message = "Новый продукт (техкарта № " + newProductStore.savedProductNumber + ") был успешно добавлен";
                     newProductStore.enableDefaultValues = true;
                     newProductStore.saveFiles = true;
-                    WorkCentersStore.clearSelectedWorkCentersInfo();
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.enableDefaultValues = false;

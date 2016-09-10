@@ -42,7 +42,7 @@ public class ProductController {
     @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
     @ResponseBody
     public Response save(@RequestBody ProductDto product) {
-        LOG.info("createProduct. Mapping 'raw' product data");
+        LOG.info("createProduct. Mapping 'raw' product data: " + product);
 
         String savedProductNumberValue = this.productService.save(product);
         String newProductNumberValue = getFullProductNumber();
