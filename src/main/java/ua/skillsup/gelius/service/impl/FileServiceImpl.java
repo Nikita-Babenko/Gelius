@@ -14,7 +14,7 @@ import ua.skillsup.gelius.service.FileService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,6 +62,7 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    @Override
     public String addSuffixToFileName(String fileName) {
         Map<PART, String> fileParts = explodeFileName(fileName);
         return fileParts.get(PART.NAME) + "_new." + fileParts.get(PART.EXT);
@@ -94,9 +95,9 @@ public class FileServiceImpl implements FileService {
     }
 
 
-    //Returns HashMap with PART.NAME and PART.EXT keys.
+    //Returns EnumMap with PART.NAME and PART.EXT keys.
     private Map<PART, String> explodeFileName(String fileName) {
-        Map<PART, String> data = new HashMap<>();
+        Map<PART, String> data = new EnumMap<>(PART.class);
         data.put(PART.EXT, "");
         List<String> parts = Arrays.asList(fileName.split("\\."));
 
