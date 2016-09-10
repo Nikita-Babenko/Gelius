@@ -2,12 +2,10 @@ package ua.skillsup.gelius.dao.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 import ua.skillsup.gelius.dao.FileDao;
 import ua.skillsup.gelius.model.Data;
-import ua.skillsup.gelius.service.FileService;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -15,13 +13,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
+import static ua.skillsup.gelius.util.FileNameManipulator.addSuffixToFileName;
+
 @Repository
 public class FileDaoImpl implements FileDao {
 
     private static final Logger LOG = LoggerFactory.getLogger("FileDao");
-
-    @Autowired
-    private FileService fileService;
 
     //Throws null, if directory was not created.
     @Override
@@ -52,7 +49,7 @@ public class FileDaoImpl implements FileDao {
 
             File serverFile = new File(path + newFileName);
             while (isNotTheSameFile(file, serverFile)) {
-                serverFile = new File(path + this.fileService.addSuffixToFileName(newFileName));
+                serverFile = new File(path + addSuffixToFileName(newFileName));
             }
 
             try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
