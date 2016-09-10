@@ -1,6 +1,5 @@
 package ua.skillsup.gelius.controller;
 
-import org.apache.commons.fileupload.FileUploadBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +38,6 @@ public class FileController {
 
 
     //Exception handling
-
-    //Not catch:-( It will be fixed
-    @ResponseBody
-    @ExceptionHandler(FileUploadBase.FileSizeLimitExceededException.class)
-    public Response exceptionHandler(FileUploadBase.FileSizeLimitExceededException e) {
-        LOG.info("ExceptionHandler: " + e);
-        return new Response(ResponseCode.FILE_SIZE_EXCEEDED);
-    }
 
     @ResponseBody
     @ExceptionHandler(DeniedFileTypesException.class)
