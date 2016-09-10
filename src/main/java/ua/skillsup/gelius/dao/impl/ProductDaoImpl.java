@@ -37,7 +37,7 @@ public class ProductDaoImpl implements ProductDao {
     public long save(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
         assignProductToWorkabilityNotes(product);
-        this.sessionFactory.getCurrentSession().save(product);
+        this.sessionFactory.getCurrentSession().persist(product);
         return product.getId();
     }
 
@@ -62,7 +62,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public int getMaxProductNumber() {
+    public int getMaxNumberOfNewProduct() {
         Integer maxNumber = (Integer) this.sessionFactory.getCurrentSession().
             createQuery("select max(p.productNumber) from Product p where p.isNew = true").
             uniqueResult();
@@ -76,7 +76,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean isProductExist(int productNumber) {
+    public boolean isOldProductExist(int productNumber) {
         long count = (long) this.sessionFactory.getCurrentSession().
             createQuery("select count(p) from Product p where p.productNumber = :productNumber and p.isNew = false").
             setParameter("productNumber", productNumber).

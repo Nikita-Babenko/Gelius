@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,100 +35,121 @@ public class ProductDaoImplTest {
     @Autowired
     private ModelMapper modelMapper;
 
-    private ProductDto newProductFirst;
-    private ProductDto newProductSecond;
-    private ProductDto oldProduct;
+    private ProductDto newProductDtoFirst;
+    private ProductDto newProductDtoSecond;
+    private ProductDto oldProductDto;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         Product newProductFirst = new Product();
-        newProductFirst.setId(22L);
+        //newProductFirst.setId(22L);
         newProductFirst.setProductNumber(223);
         newProductFirst.setNew(true);
         newProductFirst.setBlankFormat(200);
         newProductFirst.setWorkabilityNotes(new ArrayList<>());
-        this.newProductFirst = modelMapper.map(newProductFirst, ProductDto.class);
+        this.newProductDtoFirst = modelMapper.map(newProductFirst, ProductDto.class);
 
         Product newProductSecond = new Product();
-        newProductSecond.setId(245L);
+        //newProductSecond.setId(245L);
         newProductSecond.setProductNumber(343);
         newProductSecond.setNew(true);
         newProductSecond.setProductName("New Product Test2");
         newProductSecond.setBlankFormat(150);
         newProductSecond.setWorkabilityNotes(new ArrayList<>());
-        this.newProductSecond = modelMapper.map(newProductSecond, ProductDto.class);
+        this.newProductDtoSecond = modelMapper.map(newProductSecond, ProductDto.class);
 
         Product oldProduct = new Product();
-        oldProduct.setId(234L);
+        //oldProductDto.setId(234L);
         oldProduct.setProductNumber(122);
         oldProduct.setNew(false);
         oldProduct.setProductName("New Product Test2");
         oldProduct.setBlankFormat(150);
         oldProduct.setWorkabilityNotes(new ArrayList<>());
-        this.oldProduct = modelMapper.map(oldProduct, ProductDto.class);
+        this.oldProductDto = modelMapper.map(oldProduct, ProductDto.class);
     }
 
     @Test
     public void findAll() throws Exception {
+        //G
+        int productCountExpected = 7;
+        //W
         List<ProductDto> allProducts = productDao.findAll();
-
-        assertEquals("Find all products in the database :", allProducts.size(), 7);
+        //T
+        assertEquals("Find all products in the database :", productCountExpected, allProducts.size());
     }
 
     @Test
     public void findAllProductsAfterSaveProduct() throws Exception {
-        productDao.save(newProductFirst);
+        //G
+        int productCountExpected = 7 + 1;
+        //W
+        long productId = productDao.save(newProductDtoFirst);
         List<ProductDto> allProducts = productDao.findAll();
-        productDao.delete(newProductFirst);
+        //T
+        assertEquals("Find all products after save singe Product", productCountExpected, allProducts.size());
 
-        assertEquals("Find all products after save singe Product", allProducts.size(), 8);
+        productDao.delete(productId);
     }
 
     @Test
     public void getMaxProductNumberForNewProduct() throws Exception {
-        productDao.save(newProductFirst);
-        int maxProductNumber = productDao.getMaxProductNumber();
-        productDao.delete(newProductFirst);
+        //G
+        int maxProductNumberExpected = 223;
+        //W
+        long productId = productDao.save(newProductDtoFirst);
+        int maxProductNumber = productDao.getMaxNumberOfNewProduct();
+        //T
+        assertEquals("Get max product number", maxProductNumberExpected, maxProductNumber);
 
-        assertEquals("Get max product number", maxProductNumber, 223);
+        productDao.delete(productId);
     }
 
     @Test
     public void getMaxProductNumberAfterSaveMoreNumberForNewProduct() throws Exception {
-        int maxProductNumber;
-        productDao.save(newProductFirst);
-        maxProductNumber = productDao.getMaxProductNumber();
-        assertEquals("Get max product number", maxProductNumber, 223);
+        //G
+        int maxProductNumberExpectedFirst = 223;
+        int maxProductNumberExpectedSecond = 343;
+        //W
+        long productIdFirst = productDao.save(newProductDtoFirst);
+        int maxProductNumberFirst = productDao.getMaxNumberOfNewProduct();
+        long productIdSecond = productDao.save(newProductDtoSecond);
+        int maxProductNumberSecond = productDao.getMaxNumberOfNewProduct();
+        //T
+        assertEquals("Get max product number", maxProductNumberExpectedFirst, maxProductNumberFirst);
+        assertEquals("Get max product number", maxProductNumberExpectedSecond, maxProductNumberSecond);
 
-        productDao.save(newProductSecond);
-        maxProductNumber = productDao.getMaxProductNumber();
-        assertEquals("Get max product number", maxProductNumber, 343);
-
-        productDao.delete(newProductFirst);
-        productDao.delete(newProductSecond);
+        productDao.delete(productIdFirst);
+        productDao.delete(productIdSecond);
     }
 
     @Test
     public void oldProductExist() throws Exception {
-        productDao.save(oldProduct);
-        boolean isExist = productDao.isProductExist(oldProduct.getProductNumber());
-        productDao.delete(oldProduct);
-        assertEquals("Old product exist", isExist, true);
+        //W
+        long productId = productDao.save(oldProductDto);
+        boolean isExist = productDao.isOldProductExist(oldProductDto.getProductNumber());
+        //T
+        assertTrue("Old product exist", isExist);
+
+        productDao.delete(productId);
     }
 
     @Test
     public void oldProductIsNotExist() throws Exception {
-        boolean isExist = productDao.isProductExist(1233);
-
-        assertEquals("Old product isn't exist", isExist, false);
+        //W
+        boolean isExist = productDao.isOldProductExist(1233);
+        //T
+        assertFalse("Old product isn't exist", isExist);
     }
 
     @Test
     public void findProductById() throws Exception {
-        ProductDto product = productDao.findById(3);
-
-        assertEquals("Find product bu id", product.getId(), new Long(3));
+        //G
+        long productId = 3L;
+        //W
+        ProductDto product = productDao.findById(productId);
+        //T
+        assertEquals("Find product bu id", product.getId(), new Long(productId));
     }
 }

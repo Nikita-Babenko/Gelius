@@ -12,12 +12,13 @@ public interface ProductDao {
 
     ProductDto delete(long productId);
 
+    //Can be removed
     long delete(ProductDto productDto);
 
-    int getMaxProductNumber();
+    int getMaxNumberOfNewProduct();
 
     ProductDto findById(long productId);
 
-    boolean isProductExist(int productNumber);
+    boolean isOldProductExist(int productNumber);
 
 }

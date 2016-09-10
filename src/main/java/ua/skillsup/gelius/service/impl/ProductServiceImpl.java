@@ -99,7 +99,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void isProductExist(int productNumber) {
-        boolean isExists = this.productDao.isProductExist(productNumber);
+        boolean isExists = this.productDao.isOldProductExist(productNumber);
         if (isExists) {
             throw new ProductExistsException(productNumber);
         }
@@ -107,7 +107,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int getProductNumber() {
-        return this.productDao.getMaxProductNumber() + 1;
+        return this.productDao.getMaxNumberOfNewProduct() + 1;
     }
 
     @Override

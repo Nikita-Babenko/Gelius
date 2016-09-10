@@ -65,11 +65,11 @@ public class ProductServiceImplTest {
 
     @Test
     public void getProductNumber() throws Exception {
-        when(productDao.getMaxProductNumber()).thenReturn(1);
+        when(productDao.getMaxNumberOfNewProduct()).thenReturn(1);
 
         int productNumber = productService.getProductNumber();
 
-        verify(productDao, times(1)).getMaxProductNumber();
+        verify(productDao, times(1)).getMaxNumberOfNewProduct();
         assertEquals("Is equal", productNumber, 2);
     }
 
