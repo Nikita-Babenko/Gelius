@@ -42,13 +42,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public long delete(ProductDto productDto) {
-        Product product = modelMapper.map(productDto, Product.class);
-        this.sessionFactory.getCurrentSession().delete(product);
-        return product.getId();
-    }
-
-    @Override
     public ProductDto delete(long productId) {
         Session session = this.sessionFactory.getCurrentSession();
         Product product = session.get(Product.class, productId);

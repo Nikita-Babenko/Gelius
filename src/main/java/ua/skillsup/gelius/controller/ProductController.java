@@ -11,6 +11,7 @@ import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.DictionaryService;
+import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.service.ProductService;
 
 import java.util.HashMap;
@@ -28,6 +29,9 @@ public class ProductController {
 
     @Autowired
     private DictionaryService dictionaryService;
+
+    @Autowired
+    private FileService fileService;
 
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
     public String pageNewProduct() {
@@ -66,6 +70,7 @@ public class ProductController {
         LOG.info("Delete product by Id");
 
         String deletedFullProductNumber = productService.delete(id);
+        fileService.removeDirectory(deletedFullProductNumber);
 
         return new JSONResponse("200", "OK", deletedFullProductNumber);
     }

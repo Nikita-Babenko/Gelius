@@ -87,4 +87,8 @@ public class FileServiceImpl implements FileService {
         return fileNamesWithDeniedTypes;
     }
 
+    @Override
+    public boolean removeDirectory(String directoryPath) {
+        return fileDao.removeDirectory(directoryPath);
+    }
 }

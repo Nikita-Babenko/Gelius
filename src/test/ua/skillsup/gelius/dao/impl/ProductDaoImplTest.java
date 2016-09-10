@@ -18,9 +18,7 @@ import ua.skillsup.gelius.model.dto.ProductDto;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -83,7 +81,7 @@ public class ProductDaoImplTest {
     @Test
     public void findAllProductsAfterSaveProduct() throws Exception {
         //G
-        int productCountExpected = 7 + 1;
+        int productCountExpected = 8;
         //W
         long productId = productDao.save(newProductDtoFirst);
         List<ProductDto> allProducts = productDao.findAll();

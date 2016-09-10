@@ -39,6 +39,34 @@ public class FileDaoImpl implements FileDao {
         return dir;
     }
 
+
+    @Override
+    public boolean removeDirectory(String directoryPath) {
+        LOG.info("removeFiles");
+
+        String rootPath = System.getProperty("catalina.home");
+        File dir = new File(rootPath + File.separator + Data.FILES_DIR + File.separator + directoryPath);
+
+        return deleteFilesWithDirectory(dir);
+    }
+
+
+    private boolean deleteFilesWithDirectory(File path) {
+        if(path.exists()) {
+            File[] files = path.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        deleteFilesWithDirectory(file);
+                    } else {
+                        file.delete();
+                    }
+                }
+            }
+        }
+        return (path.delete());
+    }
+
     @Override
     public boolean saveFiles(File dir, MultipartFile[] files) {
         LOG.info("saveFiles()");
@@ -55,7 +83,6 @@ public class FileDaoImpl implements FileDao {
             try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
                 byte[] bytes = file.getBytes();
                 stream.write(bytes);
-                stream.close(); //need?
             } catch (IOException e) {
                 LOG.info("Error during file saving: " + newFileName + " (original name: " + file.getOriginalFilename() + ")");
                 return false;

@@ -12,9 +12,6 @@ public interface ProductDao {
 
     ProductDto delete(long productId);
 
-    //Can be removed
-    long delete(ProductDto productDto);
-
     int getMaxNumberOfNewProduct();
 
     ProductDto findById(long productId);
