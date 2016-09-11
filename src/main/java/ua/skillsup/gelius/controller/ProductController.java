@@ -60,6 +60,8 @@ public class ProductController {
         LOG.info("Find product by Id");
 
         ProductDto product = productService.findById(id);
+        String getFullProductName = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
+        product.setFilePaths(fileService.findFilePaths(getFullProductName));
 
         return new Response(ResponseCode.OK, product);
     }
@@ -69,10 +71,10 @@ public class ProductController {
     public Response deleteProductById(@PathVariable Long id) {
         LOG.info("Delete product by Id");
 
-        String deletedFullProductNumber = productService.delete(id);
-        fileService.removeDirectory(deletedFullProductNumber);
+        String dirNameFromFullProductName = productService.delete(id);
+        fileService.deleteDirectory(dirNameFromFullProductName);
 
-        return new Response(ResponseCode.OK, deletedFullProductNumber);
+        return new Response(ResponseCode.OK, dirNameFromFullProductName);
     }
 
     @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)

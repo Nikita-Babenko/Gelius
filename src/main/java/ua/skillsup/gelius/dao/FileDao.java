@@ -3,6 +3,7 @@ package ua.skillsup.gelius.dao;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 
 public interface FileDao {
 
@@ -10,6 +11,8 @@ public interface FileDao {
 
     boolean saveFiles(File dir, MultipartFile[] files);
 
-    boolean removeDirectory(String directoryPath);
+    boolean deleteDirectory(String dirName);
+
+    List<String> findFilePaths(String dirName);
 
 }

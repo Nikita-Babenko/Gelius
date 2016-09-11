@@ -118,6 +118,7 @@ public class ProductDto {
     @Valid
     private List<WorkabilityNotesDto> workabilityNotes;
 
+    private List<String> filePaths;
 
     public ProductDto() {
     }
@@ -484,6 +485,14 @@ public class ProductDto {
 
     public void setNumberBlanksOnFormat(Integer numberBlanksOnFormat) {
         this.numberBlanksOnFormat = numberBlanksOnFormat;
+    }
+
+    public List<String> getFilePaths() {
+        return filePaths;
+    }
+
+    public void setFilePaths(List<String> filePaths) {
+        this.filePaths = filePaths;
     }
 
     @Override

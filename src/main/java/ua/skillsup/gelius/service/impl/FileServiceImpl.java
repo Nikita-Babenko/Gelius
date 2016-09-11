@@ -88,7 +88,12 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean removeDirectory(String directoryPath) {
-        return fileDao.removeDirectory(directoryPath);
+    public boolean deleteDirectory(String dirName) {
+        return fileDao.deleteDirectory(dirName);
+    }
+
+    @Override
+    public List<String> findFilePaths(String dirName) {
+        return fileDao.findFilePaths(dirName);
     }
 }
