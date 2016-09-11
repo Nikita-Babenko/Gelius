@@ -40,6 +40,6 @@ public class FileServiceImplTest {
 
         fileService.deleteDirectory(dirName);
 
-        verify(fileDao, times(1)).findFilePaths(dirName);
+        verify(fileDao, times(1)).deleteDirectory(dirName);
     }
 }
