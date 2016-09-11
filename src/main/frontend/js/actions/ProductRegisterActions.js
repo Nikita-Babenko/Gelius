@@ -1,5 +1,5 @@
 import Dispatcher from '../dispatcher/Dispatcher';
-import ProductsTableStore from '../stores/ProductRegisterTableStore';
+import ProductsTableStore from '../stores/ProductRegisterStore';
 import FilteringSortingStore from '../stores/FilteringSortingStore';
 import UrlConstants from '../constants/Url';
 import EventConstants from '../constants/Events';
@@ -15,10 +15,10 @@ var ProductsTableActions = {
             data: JSON.stringify(FilteringSortingStore.getSortingFilteringData()),
             dataType: 'json',
             timeout: 100000,
-            success: (data) => {
+            success: (response) => {
                 Dispatcher.dispatch({
                     eventType: EventConstants.LOAD_FILTERED_SORTED_PRODUCTS,
-                    payload: data.result
+                    payload: response.data
                 });
             },
             error: function () {
@@ -27,6 +27,13 @@ var ProductsTableActions = {
                     payload: "Some error has happened during loading products!"
                 });
             }
+        });
+    },
+
+    selectProduct(id) {
+        Dispatcher.dispatch({
+            eventType: EventConstants.SELECT_PRODUCT,
+            productId: id
         });
     }
 

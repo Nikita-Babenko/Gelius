@@ -80,6 +80,7 @@ var NewProductActions = {
                 if (response.code === 200) {
                     WorkCentersStore.setUseDefautCenters(true);
                     this.updateWorkabilityInfo();
+                    $(".notes-textarea").val("");
                     L.log("product (" + response.data.savedProductNumber + ") was saved");
                     L.log("new product number (" + response.data.newProductNumber + ") was received");
                 }

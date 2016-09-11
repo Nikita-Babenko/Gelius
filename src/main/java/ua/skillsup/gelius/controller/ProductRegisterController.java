@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ua.skillsup.gelius.controller.response.Response;
+import ua.skillsup.gelius.controller.response.ResponseCode;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.service.ProductRegisterService;
@@ -32,44 +34,28 @@ public class ProductRegisterController {
 
     @RequestMapping(path = "/all", method = RequestMethod.GET)
     @ResponseBody
-    public JSONResponse findAllProducts() {
+    public Response findAllProducts() {
         LOG.info("Get all products");
         List<ProductRegisterDto> allProducts = productRegisterService.findAll();
-        return createResponse(allProducts, "products");
+        return new Response(ResponseCode.OK, allProducts);
+
     }
 
     @RequestMapping(value = "/allFilterParameters", method = RequestMethod.POST)
     @ResponseBody
-    public JSONResponse findFilterParameters(@RequestBody ProductRegisterFilter filter) {
+    public Response findFilterParameters(@RequestBody ProductRegisterFilter filter) {
         Map parameters = productRegisterService.findAllFilterParameters(filter);
 
-        return new JSONResponse("200", "OK", parameters);
+        return new Response(ResponseCode.OK, parameters);
     }
 
 
     @RequestMapping(value = "/filtrate", method = RequestMethod.POST)
     @ResponseBody
-    public JSONResponse findByFilter(@RequestBody ProductRegisterFilter filter) {
+    public Response findByFilter(@RequestBody ProductRegisterFilter filter) {
         List<ProductRegisterDto> products = productRegisterService.findByFilter(filter);
         LOG.info("Get filtrated products");
 
-        return createResponse(products, "products");
-    }
-
-    private boolean isValidSearchFilter(ProductRegisterFilter searchFilter) {
-        return searchFilter != null && !searchFilter.isEmpty();
-    }
-
-    private <T> JSONResponse createResponse(List<T> result, String resultName) {
-        JSONResponse response = new JSONResponse();
-        if (result.isEmpty()) {
-            response.setCode("204");
-            response.setMessage("List of " + resultName + " is empty!");
-        } else {
-            response.setCode("200");
-            response.setMessage("OK");
-            response.setResult(result);
-        }
-        return response;
+        return new Response(ResponseCode.OK, products);
     }
 }

@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ua.skillsup.gelius.controller.response.Response;
+import ua.skillsup.gelius.controller.response.ResponseCode;
 import ua.skillsup.gelius.service.DictionaryService;
 
 import java.util.List;
@@ -21,19 +23,15 @@ public class DictionaryController {
 
     @RequestMapping(path = "/all", method = RequestMethod.GET)
     @ResponseBody
-    public JSONResponse findAllDictionaries() {
+    public Response findAllDictionaries() {
         LOG.info("Get all dictionaries");
-        JSONResponse response = new JSONResponse();
         Map<String, List<?>> dictionaries = dictionaryService.findAll();
-        response.setMessage("OK");
-        response.setCode("200");
-        response.setResult(dictionaries);
-        return response;
+        return new Response(ResponseCode.OK, dictionaries);
     }
 
     @RequestMapping(path = "/{dictionary}/{operation}", method = RequestMethod.POST)
     @ResponseBody
-    public JSONResponse edit(@PathVariable("dictionary") String dictionary,
+    public Response edit(@PathVariable("dictionary") String dictionary,
                              @PathVariable("operation") String operation,
                              @RequestBody Object object) {
 
@@ -41,11 +39,7 @@ public class DictionaryController {
 
         dictionaryService.update(dictionary, operation, object);
 
-        JSONResponse response = new JSONResponse();
-        response.setMessage("OK");
-        response.setCode("200");
-
-        return response;
+        return new Response(ResponseCode.OK);
     }
 
 }

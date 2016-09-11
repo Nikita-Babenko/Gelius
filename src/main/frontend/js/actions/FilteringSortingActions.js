@@ -14,11 +14,11 @@ var FilteringSortingActions = {
             data: JSON.stringify(FilteringSortingStore.getSortingFilteringData()),
             dataType: 'json',
             timeout: 100000,
-            success: (data) => {
-                L.log(data.result);
+            success: (response) => {
+                L.log(response.data);
                 Dispatcher.dispatch({
                     eventType: EventConstants.LOAD_ALL_FILTER_PARAMETERS,
-                    parameters: data.result
+                    parameters: response.data
                 });
             },
             error: function () {

@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductRegisterTableActions from '../../actions/ProductRegisterTableActions';
-import ProductRegisterTableStore from '../../stores/ProductRegisterTableStore';
+import ProductRegisterActions from '../../actions/ProductRegisterActions';
+import ProductRegisterStore from '../../stores/ProductRegisterStore';
 import EventConstants from '../../constants/Events';
 import Row from '../productRegister/Row';
 
@@ -14,12 +14,12 @@ class TableBody extends React.Component {
     }
 
     componentDidMount() {
-        ProductRegisterTableStore.addListener(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT, this._onProductsTableDataUpdated);
-        ProductRegisterTableActions.loadProductsFromServer();
+        ProductRegisterStore.addListener(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT, this._onProductsTableDataUpdated);
+        ProductRegisterActions.loadProductsFromServer();
     }
 
     componentWillUnmount() {
-        ProductRegisterTableStore.removeListener(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT, this._onProductsTableDataUpdated);
+        ProductRegisterStore.removeListener(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT, this._onProductsTableDataUpdated);
     }
 
     render() {
@@ -36,7 +36,7 @@ class TableBody extends React.Component {
 
     _onProductsTableDataUpdated() {
         this.setState({
-            allProducts: ProductRegisterTableStore.getProductsTableData()
+            allProducts: ProductRegisterStore.getProductsTableData()
         })
     }
 

@@ -56,23 +56,23 @@ public class ProductController {
 
     @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public JSONResponse findProductById(@PathVariable Long id) {
+    public Response findProductById(@PathVariable Long id) {
         LOG.info("Find product by Id");
 
         ProductDto product = productService.findById(id);
 
-        return new JSONResponse("200", "OK", product);
+        return new Response(ResponseCode.OK, product);
     }
 
     @RequestMapping(value = "/newProduct/deleteProduct/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public JSONResponse deleteProductById(@PathVariable Long id) {
+    public Response deleteProductById(@PathVariable Long id) {
         LOG.info("Delete product by Id");
 
         String deletedFullProductNumber = productService.delete(id);
         fileService.removeDirectory(deletedFullProductNumber);
 
-        return new JSONResponse("200", "OK", deletedFullProductNumber);
+        return new Response(ResponseCode.OK, deletedFullProductNumber);
     }
 
     @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)

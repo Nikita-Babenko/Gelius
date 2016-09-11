@@ -32,7 +32,7 @@ class NewProductStore extends EventEmitter {
                         "serviceCenter": "АГ",
                         "groupPriority": 0
                     },
-                    "note": null
+                    "note": ""
                 }
             ]
         };

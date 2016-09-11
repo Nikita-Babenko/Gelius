@@ -1,11 +1,9 @@
 var EventConstants = {
 
     //Product register constants
-
     LOAD_FILTERED_SORTED_PRODUCTS: "load_filtered_sorted_products",
     LOAD_ALL_FILTER_PARAMETERS: "load_filter_parameters",
     LOAD_FILTER_PARAMETERS_FOR_COLUMN: "load_filter_parameters",
-
 
     ADD_FILTER_ELEMENT: "add_filter_element",
     DELETE_FILTER_ELEMENT: "delete_filter_element",
@@ -15,9 +13,10 @@ var EventConstants = {
     PRODUCTS_TABLE_CHANGE_EVENT: "products_table_change_event",
     FILTERING_SORTING_CHANGE_EVENT: "filtering_sorting_change_event",
 
+    SELECT_PRODUCT: "select_product",
+
 
     //New product constants
-
     LOAD_ALL_DICTIONARIES: "load_all_dictionaries",
     LOAD_PRODUCT_NUMBER: "load_product_number",
     SAVE_NEW_PRODUCT_ENTITY: "save_new_product_entity", //entity was saved

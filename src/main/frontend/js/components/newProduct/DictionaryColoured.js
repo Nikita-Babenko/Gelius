@@ -21,8 +21,6 @@ class DictionaryColoured extends React.Component {
             }
         };
 
-
-
         this.__setColourForOption = this.__setColourForOption.bind(this);
         this.__loadDefaultValue = this.__loadDefaultValue.bind(this);
         this.__selectOptionValue = this.__selectOptionValue.bind(this);

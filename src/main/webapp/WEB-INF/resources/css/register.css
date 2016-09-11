@@ -79,3 +79,20 @@
 tbody > tr:nth-child(even) {
     background-color: #B6D7A8
 }
+
+tbody > tr:hover {
+    background-color: #dcf1b6;
+}
+
+tbody > tr:active {
+    background-color: #8eba68;
+}
+
+tbody > tr {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}

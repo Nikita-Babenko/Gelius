@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductRegisterTableActions from '../../actions/ProductRegisterTableActions';
+import ProductRegisterActions from '../../actions/ProductRegisterActions';
 import FilteringSortingActions from '../../actions/FilteringSortingActions';
 
 class FilterElement extends React.Component {
@@ -32,7 +32,7 @@ class FilterElement extends React.Component {
             FilteringSortingActions.deleteFilterParameter(this.props.columnName, this.props.element);
         }
 
-        ProductRegisterTableActions.loadProductsFromServer();
+        ProductRegisterActions.loadProductsFromServer();
     }
 }
 

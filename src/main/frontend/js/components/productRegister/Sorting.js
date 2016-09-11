@@ -1,6 +1,6 @@
 import React from 'react';
 import FilteringSortingActions from '../../actions/FilteringSortingActions';
-import ProductRegisterTableActions from '../../actions/ProductRegisterTableActions';
+import ProductRegisterActions from '../../actions/ProductRegisterActions';
 
 class Sorting extends React.Component {
     constructor(props) {
@@ -31,7 +31,7 @@ class Sorting extends React.Component {
 
     __onSortingDirectionClick(direction) {
         FilteringSortingActions.applySorting(this.props.columnName, direction);
-        ProductRegisterTableActions.loadProductsFromServer();
+        ProductRegisterActions.loadProductsFromServer();
         this.props.enableSorting(direction);
     }
 }
