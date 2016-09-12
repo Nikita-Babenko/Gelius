@@ -15,11 +15,10 @@ class WorkCenterNotes extends React.Component {
 
     componentWillMount() {
         WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__getSelectedCenters);
-        this.__getSelectedCenters();
     }
 
     componentDidMount() {
-
+        this.__getSelectedCenters();
     }
 
     componentWillUnmount() {

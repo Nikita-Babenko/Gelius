@@ -45,7 +45,7 @@ class SquareInput extends React.Component {
 
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
-            var value = NewProductStore.getDefaultProductProperty(this.props.id);
+            var value = NewProductStore.getProductProperty(this.props.id);
             this.setState({
                 square: value ? value : ""
             });

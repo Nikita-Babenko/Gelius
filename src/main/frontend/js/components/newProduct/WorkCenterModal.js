@@ -142,7 +142,7 @@ class WorkCenterItem extends React.Component {
     }
 
     __checkIfWorkCenterActive () {
-        var notes = NewProductStore.getDefaultProductProperty("workabilityNotes");
+        var notes = NewProductStore.getProductProperty("workabilityNotes");
         //(notes.length > 1) cause we'll usually have AG-center on a first place for each product
         if (notes && notes.length > 1) {
            return notes.some(e => e.serviceCenter.id == this.props.item.id)

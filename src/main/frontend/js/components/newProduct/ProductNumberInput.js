@@ -6,7 +6,9 @@ class ProductNumberInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isNewProduct: true,
+            isCheckBoxDisabled: false,
+            idProductNumberDisabled: true,
+            isNewProduct: false,
             newProductNumber: ""
         };
         this.__changeCheckbox = this.__changeCheckbox.bind(this);
@@ -25,14 +27,20 @@ class ProductNumberInput extends React.Component {
     render() {
         return (
             <div className="header_title_input">
-                <input
-                    type="text" className="form-control numberInputCheck" id="productNumber" contenteditable="false"
-                    value={this.state.newProductNumber} onChange={this.__changeText}
-                    disabled={this.state.isNewProduct}
+                <input type="text"
+                       className="form-control numberInputCheck"
+                       id="productNumber"
+                       value={this.state.newProductNumber}
+                       onChange={this.__changeText}
+                       disabled={this.state.idProductNumberDisabled}
                 />
                 <div className="isNew">
-                    <input type="checkbox" id="isNew" checked={this.state.isNewProduct}
-                           onChange={this.__changeCheckbox}/>
+                    <input type="checkbox"
+                           id="isNew"
+                           checked={this.state.isNewProduct}
+                           onChange={this.__changeCheckbox}
+                           disabled={this.state.isCheckBoxDisabled}
+                    />
                     <p>Новая карта</p>
                 </div>
             </div>
@@ -44,9 +52,15 @@ class ProductNumberInput extends React.Component {
         this.setState({isNewProduct: isNewProduct});
 
         if (isNewProduct)
-            this.setState({newProductNumber: NewProductStore.getDefaultProductProperty("productNumber")});
+            this.setState({
+                newProductNumber: NewProductStore.getProductProperty("productNumber"),
+                idProductNumberDisabled: true
+            });
         else
-            this.setState({newProductNumber: ""});
+            this.setState({
+                newProductNumber: "",
+                idProductNumberDisabled: false
+            });
     }
 
     __changeText(e) {
@@ -56,9 +70,16 @@ class ProductNumberInput extends React.Component {
     __loadDefaultValues() {
         if (NewProductStore.isEnableDefaultValues()) {
             this.setState({
-                newProductNumber: NewProductStore.getDefaultProductProperty("productNumber"),
-                isNewProduct: NewProductStore.getDefaultProductProperty("isNew")
+                newProductNumber: NewProductStore.getProductProperty("productNumber"),
+                isNewProduct: NewProductStore.getProductProperty("isNew")
             });
+            if (NewProductStore.isInEditModeStatus())
+                this.setState({
+                    idProductNumberDisabled: true,
+                    isCheckBoxDisabled: true
+                });
+
+
         }
     }
 }

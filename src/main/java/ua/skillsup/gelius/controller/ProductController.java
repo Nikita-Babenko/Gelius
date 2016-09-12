@@ -33,10 +33,45 @@ public class ProductController {
     @Autowired
     private FileService fileService;
 
+    private String operationOnProduct;
+    private int productId;
+
     @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
     public String pageNewProduct() {
-        LOG.info("Open new product page");
+        LOG.info("Open new product page in [new product] mode");
+
+        operationOnProduct = "new";
+        productId = 0;
+
         return "newProduct";
+    }
+
+    @RequestMapping(value = "/{operation}/{productId}", method = RequestMethod.GET)
+    public String pageProductInEditOrCopyMode(@PathVariable("operation") String operation, @PathVariable("productId") int id) {
+        LOG.info("Open new product page in [" + operation + " product] mode");
+
+        operationOnProduct = operation;
+        productId = id;
+
+        return "newProduct";
+    }
+
+
+    /**
+     *
+     * @return id of product and operation name that will be executed on it
+     */
+    @RequestMapping(value = "/getOperationInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public Response getOperationInfo() {
+        LOG.info("Find product by Id");
+
+        Map<String, Object> responseData = new HashMap<>();
+
+        responseData.put("operation", operationOnProduct);
+        responseData.put("productId", productId);
+
+        return new Response(ResponseCode.OK, responseData);
     }
 
     @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
@@ -85,6 +120,16 @@ public class ProductController {
         String newProductNumberValue = getFullProductNumber();
 
         return new Response(ResponseCode.OK, newProductNumberValue);
+    }
+
+    @RequestMapping(value = "/getFullProductNumber/{productNumber}/{isNew}", method = RequestMethod.GET)
+    @ResponseBody
+    public Response getNumberForEditableProduct(@PathVariable int productNumber, @PathVariable boolean isNew) {
+
+        LOG.info("Get full number for editable product");
+        String number = this.productService.getFullProductNumber(productNumber, isNew);
+
+        return new Response(ResponseCode.OK, number);
     }
 
     @RequestMapping(value = "/newProduct/allDictionaries", method = RequestMethod.GET)

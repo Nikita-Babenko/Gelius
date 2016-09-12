@@ -34,7 +34,7 @@ class DatePicker extends React.Component {
 
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
-            var receivedDate = NewProductStore.getDefaultProductProperty(this.props.id);
+            var receivedDate = NewProductStore.getProductProperty(this.props.id);
             var value = receivedDate ? __transformDate(receivedDate) : "";
 
             this.setState({

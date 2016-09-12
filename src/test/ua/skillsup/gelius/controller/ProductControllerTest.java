@@ -67,10 +67,20 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void returnPage() throws Exception {
+    public void returnPageInAddNewProductMode() throws Exception {
         mockMvc.perform(get("/products/newProduct")).andDo(print())
                 .andExpect(handler().handlerType(ProductController.class))
                 .andExpect(handler().methodName("pageNewProduct"))
+                .andExpect(view().name("newProduct"))
+                .andExpect(forwardedUrl("/WEB-INF/views/newProduct.jsp"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void returnPageInEditOrCopyMode() throws Exception {
+        mockMvc.perform(get("/products/copy/1")).andDo(print())
+                .andExpect(handler().handlerType(ProductController.class))
+                .andExpect(handler().methodName("pageProductInEditOrCopyMode"))
                 .andExpect(view().name("newProduct"))
                 .andExpect(forwardedUrl("/WEB-INF/views/newProduct.jsp"))
                 .andExpect(status().isOk());
@@ -96,6 +106,18 @@ public class ProductControllerTest {
 
         verify(productService, times(1)).getProductNumber();
         verify(productService, times(1)).getFullProductNumber(number, true);
+    }
+
+    @Test
+    public void getNumberForEditableProduct() throws Exception {
+        int number = 15;
+        boolean isNew = true;
+        String idString = "00015";
+        when(productService.getFullProductNumber(number, isNew)).thenReturn(idString);
+
+        productController.getNumberForEditableProduct(number, isNew);
+
+        verify(productService, times(1)).getFullProductNumber(number, isNew);
     }
 
     @Test

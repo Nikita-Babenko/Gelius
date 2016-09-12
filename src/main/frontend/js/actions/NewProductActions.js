@@ -36,25 +36,49 @@ var NewProductActions = {
         });
     },
 
-    loadNewProductNumber() {
+    getOperationInfo() {
         $.ajax({
             type: 'GET',
             contentType: "application/json",
-            url: UrlConstants.LOAD_PRODUCT_NUMBER_URL,
+            url: UrlConstants.GET_OPERATION_INFO_URL,
             data: '',
             dataType: 'JSON',
             timeout: 100000,
             success: function (response) {
                 if (!response["data"]) {
-                    L.log("Empty 'newProductNumber' in response on '" + UrlConstants.LOAD_PRODUCT_NUMBER_URL + "'");
+                    L.log("Empty response on '" + UrlConstants.GET_OPERATION_INFO_URL + "'");
                     return;
                 }
 
                 if (response["data"]) {
-                    Dispatcher.dispatch({
-                        eventType: EventConstants.LOAD_PRODUCT_NUMBER,
-                        productNumber: response.data
-                    });
+                    switch (response.data.operation) {
+                        case EventConstants.CREATE_NEW_PRODUCT:
+                            L.log("in CREATE_NEW_PRODUCT section");
+                            Dispatcher.dispatch({
+                                eventType: EventConstants.CREATE_NEW_PRODUCT,
+                                newProductNumber: this.loadNewProductNumber()
+                            });
+                            break;
+                        case EventConstants.EDIT_PRODUCT:
+                            L.log("in EDIT_PRODUCT section");
+                            var product = this.loadProductById(response.data.productId);
+                            Dispatcher.dispatch({
+                                eventType: EventConstants.EDIT_PRODUCT,
+                                product: product,
+                                productNumber: this.loadEditableProductNumber(product.productNumber, product.isNew)
+                            });
+                            break;
+                        case EventConstants.COPY_PRODUCT:
+                            L.log("in COPY_PRODUCT section");
+                            Dispatcher.dispatch({
+                                eventType: EventConstants.COPY_PRODUCT,
+                                product: this.loadProductById(response.data.productId),
+                                newProductNumber: this.loadNewProductNumber()
+                            });
+                            break;
+                    }
+                    WorkCentersStore.setUseDefautCenters(true);
+                    this.updateWorkabilityInfo();
                 }
 
             }.bind(this),
@@ -62,6 +86,66 @@ var NewProductActions = {
                 L.log("ERROR: ", e);
             }.bind(this)
         });
+    },
+
+    loadNewProductNumber() {
+        var number = "";
+        $.ajax({
+            type: 'GET',
+            async: false,
+            contentType: "application/json",
+            url: UrlConstants.LOAD_FULL_NUMBER_FOR_NEW_PRODUCT_URL,
+            data: '',
+            dataType: 'JSON',
+            timeout: 100000,
+            success: function (response) {
+                number = response.data;
+            }.bind(this),
+            error: function (e) {
+                L.log("ERROR: ", e);
+            }.bind(this)
+        });
+        return number;
+    },
+
+    loadEditableProductNumber(productNumber, isNew) {
+        var number = "";
+        $.ajax({
+            type: 'GET',
+            async: false,
+            contentType: "application/json",
+            url: UrlConstants.LOAD_FULL_NUMBER_FOR_EDITABLE_PRODUCT_URL + productNumber + "/" + isNew,
+            data: '',
+            dataType: 'JSON',
+            timeout: 100000,
+            success: function (response) {
+                number = response.data;
+            }.bind(this),
+            error: function (e) {
+                L.log("ERROR: ", e);
+            }.bind(this)
+        });
+        return number;
+    },
+
+    loadProductById(productId) {
+        var product = {};
+        $.ajax({
+            type: 'GET',
+            async: false,
+            contentType: "application/json",
+            url: UrlConstants.LOAD_PRODUCT_BY_ID_URL + productId,
+            data: '',
+            dataType: 'JSON',
+            timeout: 100000,
+            success: function (response) {
+                product = response.data;
+            }.bind(this),
+            error: function (e) {
+                L.log("ERROR: ", e);
+            }.bind(this)
+        });
+        return product;
     },
 
     saveProduct(){
@@ -77,6 +161,11 @@ var NewProductActions = {
             dataType: 'JSON',
             timeout: 100000,
             success: function (response) {
+                Dispatcher.dispatch({
+                    eventType: EventConstants.SAVE_NEW_PRODUCT,
+                    response: response
+                });
+
                 if (response.code === 200) {
                     WorkCentersStore.setUseDefautCenters(true);
                     this.updateWorkabilityInfo();
@@ -84,10 +173,6 @@ var NewProductActions = {
                     L.log("product (" + response.data.savedProductNumber + ") was saved");
                     L.log("new product number (" + response.data.newProductNumber + ") was received");
                 }
-                Dispatcher.dispatch({
-                    eventType: EventConstants.SAVE_NEW_PRODUCT,
-                    response: response
-                });
             }.bind(this),
             error: function (e) {
                 L.log("ERROR: ", e);
@@ -100,14 +185,6 @@ var NewProductActions = {
     updateWorkabilityInfo() {
         Dispatcher.dispatch({
             eventType: EventConstants.UPDATE_WORKABILITY_INFO
-        });
-    },
-
-    updateWorkCenterNote(groupPriority, note) {
-        Dispatcher.dispatch({
-            eventType: EventConstants.UPDATE_WORK_CENTER_NOTE,
-            groupPriority: groupPriority,
-            note: note
         });
     },
 
@@ -235,7 +312,6 @@ var NewProductActions = {
             }
         });
     },
-
 
     __checkInputNumber: function () {
         $(".numberInputCheck").keydown(function (event) {

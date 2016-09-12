@@ -2,12 +2,19 @@ var UrlConstants = {
     //url for product register
     LOAD_PRODUCTS_URL: "/products/filtrate",
     LOAD_ALL_FILTER_PARAMETERS_URL: "/products/allFilterParameters",
+    CREATE_PRODUCT_URL: "/products/newProduct",
+    EDIT_PRODUCT_URL: "/products/edit/",
+    COPY_PRODUCT_URL: "/products/copy/",
 
     //url for new product
     LOAD_ALL_DICTIONARIES_URL: "/products/newProduct/allDictionaries",
-    LOAD_PRODUCT_NUMBER_URL: "/products/newProduct/getNewProductNumber",
+    LOAD_FULL_NUMBER_FOR_NEW_PRODUCT_URL: "/products/newProduct/getNewProductNumber",
+    LOAD_FULL_NUMBER_FOR_EDITABLE_PRODUCT_URL: "/products/getFullProductNumber/",
+    LOAD_PRODUCT_BY_ID_URL: "/products/findById/",
     SAVE_PRODUCT_URL: "/products/newProduct/saveProduct",
+    GET_OPERATION_INFO_URL: "/products/getOperationInfo",
     SAVE_PRODUCT_FILES_URL: "/files/upload"
+
 };
 
 export default UrlConstants;

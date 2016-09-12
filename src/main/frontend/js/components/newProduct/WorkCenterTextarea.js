@@ -20,7 +20,6 @@ class WorkCenterTextarea extends React.Component {
 
     componentWillMount() {
         WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
-        NewProductAction.updateWorkabilityInfo();
     }
 
     componentWillUnmount() {

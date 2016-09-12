@@ -8,7 +8,7 @@ class HeaderRight extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUse: true
+            isUse: false
         };
 
         this.__loadDefaultValueForIsUse = this.__loadDefaultValueForIsUse.bind(this);
@@ -58,7 +58,7 @@ class HeaderRight extends React.Component {
     __loadDefaultValueForIsUse() {
         if (NewProductStore.isEnableDefaultValues()) {
             this.setState({
-                isUse: NewProductStore.getDefaultProductProperty("isUse")
+                isUse: NewProductStore.getProductProperty("isUse")
             });
         }
     }

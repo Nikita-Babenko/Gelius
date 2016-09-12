@@ -3,7 +3,7 @@ import Table from '../productRegister/Table';
 import TableHeader from '../productRegister/TableHeader';
 import TableBody from '../productRegister/TableBody';
 
-class ProductRegisterTable extends React.Component {
+class RegisterTable extends React.Component {
     render() {
         return (
             <Table>
@@ -14,4 +14,4 @@ class ProductRegisterTable extends React.Component {
     }
 }
 
-export default ProductRegisterTable;
+export default RegisterTable;

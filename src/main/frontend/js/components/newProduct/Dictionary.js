@@ -54,7 +54,7 @@ class Dictionary extends React.Component {
 
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
-            var dictionaryValue = NewProductStore.getDefaultProductProperty(this.props.dictionaryName);
+            var dictionaryValue = NewProductStore.getProductProperty(this.props.dictionaryName);
             this.setState({
                 value: dictionaryValue ? dictionaryValue.id : ""
             });

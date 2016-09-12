@@ -51,7 +51,6 @@ class Row extends React.Component {
     }
 
     __onProductRowClick() {
-        console.log("ID: ", this.props.row.id);
         ProductRegisterActions.selectProduct(this.props.row.id);
     }
 

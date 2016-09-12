@@ -15,7 +15,6 @@ var EventConstants = {
 
     SELECT_PRODUCT: "select_product",
 
-
     //New product constants
     LOAD_ALL_DICTIONARIES: "load_all_dictionaries",
     LOAD_PRODUCT_NUMBER: "load_product_number",
@@ -37,7 +36,12 @@ var EventConstants = {
     ADD_FILE_LINK: "add_file_link",
     REMOVE_FILE_LINK: "remove_file_link",
     FILE_LINKS_CHANGE_EVENT: "file_links_change_event", //UploadFilesStore: file link was added or removed
-    SAVE_FILE_LINKS_OF_NEW_PRODUCT: "save_file_links_of_new_product" //file links was saved
+    SAVE_FILE_LINKS_OF_NEW_PRODUCT: "save_file_links_of_new_product", //file links was saved
+
+    COPY_PRODUCT: "copy",
+    EDIT_PRODUCT: "edit",
+    EDIT_COPY_PRODUCT: "edit_copy_product",
+    CREATE_NEW_PRODUCT: "new"
 
 };
 

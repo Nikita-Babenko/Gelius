@@ -26,44 +26,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 ">
-            <div class="panel panel-default panel-table">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-md-5 col-xs-6  header_buttons icon_buttons_group">
-                            <a href="/products/newProduct"
-                               class="fa fa-plus fa-2x"
-                               title="Добавить новый продукт"
-                               aria-hidden="true">
-                            </a>
-                            <a href="#" class="fa fa-pencil fa-2x"
-                               title="Отредактировать продукт"
-                               aria-hidden="true">
-                            </a>
-                            <a href="#"
-                               class="fa fa-check fa-2x"
-                               aria-hidden="true">
-                            </a>
-                            <a href="#"
-                               class="fa fa-copy fa-2x"
-                               aria-hidden="true">
-                            </a>
-
-                        </div>
-
-                        <div class="col-md-7 col-xs-6 header_title">
-                            <p class="panel-title">Реестр продукции</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive products-panel" id="products-table">
-
-                    </div>
-
-                </div>
-            </div>
+        <div class="col-md-12" id="products-panel">
         </div>
     </div>
 </div>

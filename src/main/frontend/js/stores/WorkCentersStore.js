@@ -121,7 +121,7 @@ const workCentersStore = new WorkCentersStore();
 workCentersStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.UPDATE_WORKABILITY_INFO:
-            workCentersStore.defaultWorkCenters = NewProductStore.getDefaultProductProperty("workabilityNotes");
+            workCentersStore.defaultWorkCenters = NewProductStore.getProductProperty("workabilityNotes");
             workCentersStore.emitChange();
             break;
     }

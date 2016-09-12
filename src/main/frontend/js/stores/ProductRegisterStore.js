@@ -9,10 +9,15 @@ class ProductsTableStore extends EventEmitter {
         this.products = [];
         this.previousSelectedProductId = null;
         this.selectedProductId = null;
+        this.loadProducts = true;
     }
 
     emitChange() {
         this.emit(EventConstants.PRODUCTS_TABLE_CHANGE_EVENT);
+    }
+
+    getLoadProductsStatus() {
+        return this.loadProducts;
     }
 
     getPreviousSelectedProductId() {
@@ -31,19 +36,23 @@ class ProductsTableStore extends EventEmitter {
 
 const productsTableStore = new ProductsTableStore();
 
-productsTableStore.dispatchToken = Dispatcher.register(function(event) {
+productsTableStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
 
         case EventConstants.LOAD_FILTERED_SORTED_PRODUCTS:
+            productsTableStore.loadProducts = true;
             productsTableStore.products = event.payload;
             productsTableStore.emitChange();
+            productsTableStore.loadProducts = false;
             break;
         case EventConstants.SELECT_PRODUCT:
             productsTableStore.previousSelectedProductId = productsTableStore.selectedProductId;
             productsTableStore.selectedProductId = event.productId;
             productsTableStore.emitChange();
-            if (productsTableStore.previousSelectedProductId === productsTableStore.selectedProductId)
+            if (productsTableStore.previousSelectedProductId === productsTableStore.selectedProductId) {
                 productsTableStore.previousSelectedProductId = productsTableStore.selectedProductId = null;
+                productsTableStore.emitChange();
+            }
             break;
         default:
         // Do nothing

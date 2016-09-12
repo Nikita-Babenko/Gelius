@@ -66,7 +66,7 @@ class DictionaryColoured extends React.Component {
 
     __loadDefaultValue() {
         if (NewProductStore.isEnableDefaultValues()) {
-            var value = NewProductStore.getDefaultProductProperty(this.props.dictionaryName);
+            var value = NewProductStore.getProductProperty(this.props.dictionaryName);
             var dictionaryValue = value ? value.id : "";
             this.__setColourForOption("" + dictionaryValue);
             this.setState({

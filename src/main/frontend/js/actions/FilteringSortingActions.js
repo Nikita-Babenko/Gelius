@@ -15,17 +15,13 @@ var FilteringSortingActions = {
             dataType: 'json',
             timeout: 100000,
             success: (response) => {
-                L.log(response.data);
                 Dispatcher.dispatch({
                     eventType: EventConstants.LOAD_ALL_FILTER_PARAMETERS,
                     parameters: response.data
                 });
             },
-            error: function () {
-                Dispatcher.dispatch({
-                    eventType: EventConstants.LOAD_ALL_FILTER_PARAMETERS,
-                    parameters: "Some error has happened during loading filtering parameters!"
-                });
+            error: (e) => {
+                L.log("ERROR: ", e);
             }
         });
     },

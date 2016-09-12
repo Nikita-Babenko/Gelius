@@ -17,33 +17,16 @@ class NewProductStore extends EventEmitter {
         this.saveFiles = false;
         this.enableDefaultValues = true;
         this.showAlert = false;
-
-        this.defaultProduct = {
-            "productNumber": "00001",
-            "isNew": true,
-            "productCreateDate": this.__getTodayDate(),
-            "productUpdateDate": this.__getTodayDate(),
-            "isUse": true,
-            "celluloseLayer": {"id": 1},
-            "packing": {"id": 1},
-            "workabilityNotes": [
-                {
-                    "serviceCenter": {
-                        "serviceCenter": "АГ",
-                        "groupPriority": 0
-                    },
-                    "note": ""
-                }
-            ]
-        };
+        this.isInEditMode = false;
+        this.product = {};
     }
 
     emitChange() {
         this.emit(EventConstants.NEW_PRODUCT_CHANGE_EVENT);
     }
 
-    getDefaultProductProperty(propertyName) {
-        return this.defaultProduct[propertyName];
+    getProductProperty(propertyName) {
+        return this.product[propertyName];
     }
 
     getAlertInformation() {
@@ -52,6 +35,10 @@ class NewProductStore extends EventEmitter {
 
     getAlertStatus() {
         return this.showAlert;
+    }
+
+    isInEditModeStatus() {
+        return this.isInEditMode;
     }
 
     isEnableDefaultValues() {
@@ -117,6 +104,27 @@ class NewProductStore extends EventEmitter {
         return [year, month, day];
     }
 
+    __getDefaultProduct() {
+        return {
+            "productNumber": "",
+            "isNew": true,
+            "productCreateDate": this.__getTodayDate(),
+            "productUpdateDate": this.__getTodayDate(),
+            "isUse": true,
+            "celluloseLayer": {"id": 1},
+            "packing": {"id": 1},
+            "workabilityNotes": [
+                {
+                    "serviceCenter": {
+                        "serviceCenter": "АГ",
+                        "groupPriority": 0
+                    },
+                    "note": ""
+                }
+            ]
+        };
+    }
+
 }
 
 const newProductStore = new NewProductStore();
@@ -128,8 +136,9 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
             newProductStore.alert.alertType = "alert-danger";
             switch (responseData.code) {
                 case ResponseCodeConstants.OK:
+                    newProductStore.product = newProductStore.__getDefaultProduct();
+                    newProductStore.product.productNumber = responseData.data.newProductNumber;
                     newProductStore.savedProductNumber = responseData.data.savedProductNumber;
-                    newProductStore.defaultProduct.productNumber = responseData.data.newProductNumber;
                     newProductStore.alert.alertType = "alert-success";
                     newProductStore.alert.message = "Новый продукт (техкарта № " + newProductStore.savedProductNumber + ") был успешно добавлен";
                     newProductStore.enableDefaultValues = true;
@@ -151,8 +160,24 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
             newProductStore.emitChange();
             newProductStore.saveFiles = false;
             break;
-        case EventConstants.LOAD_PRODUCT_NUMBER:
-            newProductStore.defaultProduct.productNumber = event.productNumber;
+        case EventConstants.CREATE_NEW_PRODUCT:
+            newProductStore.product = newProductStore.__getDefaultProduct();
+            newProductStore.product.productNumber = event.newProductNumber;
+            newProductStore.emitChange();
+            break;
+        case EventConstants.EDIT_PRODUCT:
+            newProductStore.isInEditMode = true;
+            newProductStore.product = event.product;
+            newProductStore.product.productNumber = event.productNumber;
+            newProductStore.product.productUpdateDate = newProductStore.__getTodayDate();
+            newProductStore.emitChange();
+            newProductStore.isInEditMode = false;
+            break;
+        case EventConstants.COPY_PRODUCT:
+            newProductStore.product = event.product;
+            newProductStore.product.productNumber = event.newProductNumber;
+            newProductStore.product.productCreateDate = newProductStore.__getTodayDate();
+            newProductStore.product.productUpdateDate = newProductStore.__getTodayDate();
             newProductStore.emitChange();
             break;
     }

@@ -35,9 +35,10 @@ class TableBody extends React.Component {
     }
 
     _onProductsTableDataUpdated() {
-        this.setState({
-            allProducts: ProductRegisterStore.getProductsTableData()
-        })
+        if (ProductRegisterStore.getLoadProductsStatus())
+            this.setState({
+                allProducts: ProductRegisterStore.getProductsTableData()
+            })
     }
 
 }

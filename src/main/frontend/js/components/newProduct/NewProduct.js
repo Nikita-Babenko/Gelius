@@ -23,7 +23,7 @@ class NewProduct extends React.Component {
 
     componentWillMount() {
         NewProductAction.loadAllDictionaries();
-        NewProductAction.loadNewProductNumber();
+        NewProductAction.getOperationInfo();
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__enableAlert);
 
     }
