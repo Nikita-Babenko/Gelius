@@ -142,9 +142,14 @@ public class ProductController {
         return new Response(ResponseCode.OK, dictionaries);
     }
 
-    private String getFullProductNumber() {
-        int newProductNumber = this.productService.getProductNumber();
-        return this.productService.getFullProductNumber(newProductNumber, true);
+    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
+    @ResponseBody
+    public Response update(@RequestBody ProductDto product) {
+        LOG.info("update Product");
+
+        productService.update(product);
+
+        return new Response(ResponseCode.OK);
     }
 
     @ResponseBody
@@ -167,6 +172,11 @@ public class ProductController {
     public Response exceptionHandler(Exception e) {
         LOG.info("ExceptionHandler (Exception): " + e);
         return new Response(ResponseCode.SERVER_ERROR);
+    }
+
+    private String getFullProductNumber() {
+        int newProductNumber = this.productService.getProductNumber();
+        return this.productService.getFullProductNumber(newProductNumber, true);
     }
 
 }

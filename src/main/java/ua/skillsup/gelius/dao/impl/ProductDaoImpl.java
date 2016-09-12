@@ -49,11 +49,6 @@ public class ProductDaoImpl implements ProductDao {
         return modelMapper.map(product, ProductDto.class);
     }
 
-    private void assignProductToWorkabilityNotes(Product product) {
-        List<WorkabilityNotes> workabilityNotes = product.getWorkabilityNotes();
-        workabilityNotes.forEach(workabilityNote -> workabilityNote.setProduct(product));
-    }
-
     @Override
     public int getMaxNumberOfNewProduct() {
         Integer maxNumber = (Integer) this.sessionFactory.getCurrentSession().
@@ -75,5 +70,15 @@ public class ProductDaoImpl implements ProductDao {
             setParameter("productNumber", productNumber).
             uniqueResult();
         return count != 0;
+    }
+
+    @Override
+    public void update(ProductDto product) {
+        sessionFactory.getCurrentSession().update(product);
+    }
+
+    private void assignProductToWorkabilityNotes(Product product) {
+        List<WorkabilityNotes> workabilityNotes = product.getWorkabilityNotes();
+        workabilityNotes.forEach(workabilityNote -> workabilityNote.setProduct(product));
     }
 }

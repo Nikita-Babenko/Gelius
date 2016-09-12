@@ -18,4 +18,6 @@ public interface ProductDao {
 
     boolean isOldProductExist(int productNumber);
 
+    void update(ProductDto product);
+
 }

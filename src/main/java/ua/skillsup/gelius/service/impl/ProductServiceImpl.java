@@ -57,6 +57,53 @@ public class ProductServiceImpl implements ProductService {
         return getFullProductNumber(productDto.getProductNumber(), productDto.getIsNew());
     }
 
+    @Override
+    public int getProductNumber() {
+        return this.productDao.getMaxNumberOfNewProduct() + 1;
+    }
+
+    @Override
+    public String getFullProductNumber(int productNumber, boolean isNewDatasheet) {
+        int needLength = isNewDatasheet ? Data.ProductNumber.DIGITS_COUNT_NEW : Data.ProductNumber.DIGITS_COUNT_OLD;
+        int currentLength = String.valueOf(productNumber).length();
+        int delta = needLength - currentLength;
+        StringBuilder value = new StringBuilder(productNumber);
+        for (int i = 0; i < delta; i++) {
+            value.append(Data.ProductNumber.PLACEHOLDER);
+        }
+        value.append(productNumber);
+        return value.toString();
+    }
+
+    @Override
+    public ProductDto findById(long productId) {
+        return this.productDao.findById(productId);
+    }
+
+    @Override
+    public void update(ProductDto product) {
+
+        //Filling DTO fields if it has zero values
+        ProductDto updatedProduct = isFillProduct(product);
+
+        //DTO validation (including mandatory fields check)
+        List<String> validationErrors = this.validationService.validation(updatedProduct);
+        if ( !validationErrors.isEmpty() ) {
+            throw new ProductValidationException(validationErrors);
+        }
+
+        //Check existing product with same productNumber in DB
+        if (!updatedProduct.getIsNew()) {
+            isProductExist(updatedProduct.getProductNumber() );
+        }
+
+        if (updatedProduct.getIsUse() == null) {
+            updatedProduct.setIsUse(false);
+        }
+
+        productDao.update(product);
+    }
+
     private ProductDto isFillProduct(ProductDto product) {
         if ( product.getClient().getId() == 0 ) {
             product.setClient(null);
@@ -103,28 +150,5 @@ public class ProductServiceImpl implements ProductService {
         if (isExists) {
             throw new ProductExistsException(productNumber);
         }
-    }
-
-    @Override
-    public int getProductNumber() {
-        return this.productDao.getMaxNumberOfNewProduct() + 1;
-    }
-
-    @Override
-    public String getFullProductNumber(int productNumber, boolean isNewDatasheet) {
-        int needLength = isNewDatasheet ? Data.ProductNumber.DIGITS_COUNT_NEW : Data.ProductNumber.DIGITS_COUNT_OLD;
-        int currentLength = String.valueOf(productNumber).length();
-        int delta = needLength - currentLength;
-        StringBuilder value = new StringBuilder(productNumber);
-        for (int i = 0; i < delta; i++) {
-            value.append(Data.ProductNumber.PLACEHOLDER);
-        }
-        value.append(productNumber);
-        return value.toString();
-    }
-
-    @Override
-    public ProductDto findById(long productId) {
-        return this.productDao.findById(productId);
     }
 }
