@@ -73,7 +73,7 @@ class ProductNumberInput extends React.Component {
                 newProductNumber: NewProductStore.getProductProperty("productNumber"),
                 isNewProduct: NewProductStore.getProductProperty("isNew")
             });
-            if (NewProductStore.isInEditModeStatus())
+            if (NewProductStore.isInEditMode())
                 this.setState({
                     idProductNumberDisabled: true,
                     isCheckBoxDisabled: true

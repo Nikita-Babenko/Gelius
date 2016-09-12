@@ -2,6 +2,7 @@ import React from 'react';
 import ProductRegisterActions from '../../actions/ProductRegisterActions';
 import ProductRegisterStore from '../../stores/ProductRegisterStore';
 import EventConstants from '../../constants/Events';
+import UrlConstants from '../../constants/Url';
 
 class Row extends React.Component {
 
@@ -21,6 +22,7 @@ class Row extends React.Component {
         };
 
         this.__onProductRowClick = this.__onProductRowClick.bind(this);
+        this.__onProductRowDoubleClick = this.__onProductRowDoubleClick.bind(this);
         this.__updateProductColor = this.__updateProductColor.bind(this);
     }
 
@@ -34,7 +36,7 @@ class Row extends React.Component {
 
     render() {
         return (
-            <tr onClick={this.__onProductRowClick} style={this.state.selectedProductColor}>
+            <tr onClick={this.__onProductRowClick} onDoubleClick={this.__onProductRowDoubleClick} style={this.state.selectedProductColor}>
                 <td>{this.props.row.productNumber ? this.props.row.productNumber : "-"}</td>
                 <td>{this.props.row.client ? this.props.row.client.companyName : "-"}</td>
                 <td>{this.props.row.productName ? this.props.row.productName : "-"}</td>
@@ -52,6 +54,10 @@ class Row extends React.Component {
 
     __onProductRowClick() {
         ProductRegisterActions.selectProduct(this.props.row.id);
+    }
+
+    __onProductRowDoubleClick() {
+        window.location = UrlConstants.EDIT_PRODUCT_URL + this.props.row.id;
     }
 
     __updateProductColor() {

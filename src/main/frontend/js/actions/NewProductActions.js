@@ -51,12 +51,14 @@ var NewProductActions = {
                 }
 
                 if (response["data"]) {
-                    switch (response.data.operation) {
+                    var operation = response.data.operation;
+                    switch (operation) {
                         case EventConstants.CREATE_NEW_PRODUCT:
                             L.log("in CREATE_NEW_PRODUCT section");
                             Dispatcher.dispatch({
                                 eventType: EventConstants.CREATE_NEW_PRODUCT,
-                                newProductNumber: this.loadNewProductNumber()
+                                newProductNumber: this.loadNewProductNumber(),
+                                operation: operation
                             });
                             break;
                         case EventConstants.EDIT_PRODUCT:
@@ -65,7 +67,8 @@ var NewProductActions = {
                             Dispatcher.dispatch({
                                 eventType: EventConstants.EDIT_PRODUCT,
                                 product: product,
-                                productNumber: this.loadEditableProductNumber(product.productNumber, product.isNew)
+                                productNumber: this.loadEditableProductNumber(product.productNumber, product.isNew),
+                                operation: operation
                             });
                             break;
                         case EventConstants.COPY_PRODUCT:
@@ -73,7 +76,8 @@ var NewProductActions = {
                             Dispatcher.dispatch({
                                 eventType: EventConstants.COPY_PRODUCT,
                                 product: this.loadProductById(response.data.productId),
-                                newProductNumber: this.loadNewProductNumber()
+                                newProductNumber: this.loadNewProductNumber(),
+                                operation: operation
                             });
                             break;
                     }
@@ -149,15 +153,23 @@ var NewProductActions = {
     },
 
     saveProduct(){
-        var newProduct = NewProductStore.getNewProduct();
-        newProduct["workabilityNotes"] = WorkCentersStore.__getWorkCentersFromModal();
+        var url;
+        var productToSave = NewProductStore.getNewProduct();
+        productToSave["workabilityNotes"] = WorkCentersStore.getWorkCenterNotes();
 
-        L.log(newProduct);
+        if (NewProductStore.isInEditMode()) {
+            url = UrlConstants.UPDATE_PRODUCT_URL;
+            productToSave["id"] = NewProductStore.getProductProperty("id");
+        } else {
+            url = UrlConstants.SAVE_PRODUCT_URL;
+        }
+
+        L.log(productToSave);
         $.ajax({
             type: 'POST',
-            url: UrlConstants.SAVE_PRODUCT_URL,
+            url: url,
             contentType: 'application/json',
-            data: JSON.stringify(newProduct),
+            data: JSON.stringify(productToSave),
             dataType: 'JSON',
             timeout: 100000,
             success: function (response) {

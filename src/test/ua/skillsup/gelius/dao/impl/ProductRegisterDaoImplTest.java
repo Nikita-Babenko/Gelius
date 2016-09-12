@@ -42,7 +42,7 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    public void sortAllProducts_ByIdAsc() throws Exception {
+    public void sortAllProductsByIdAsc() throws Exception {
         productRegisterFilter.setSortingDirection("asc");
         productRegisterFilter.setSortableColumn("id");
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
@@ -64,7 +64,7 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    public void sortAllProductsByInnerWidth_Asc() throws Exception {
+    public void sortAllProductsByInnerWidthAsc() throws Exception {
         productRegisterFilter.setSortingDirection("asc");
         productRegisterFilter.setSortableColumn("innerWidth");
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
@@ -86,7 +86,7 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    public void sortAllProductsBy_InnerHeightAsc() throws Exception {
+    public void sortAllProductsByInnerHeightAsc() throws Exception {
         productRegisterFilter.setSortingDirection("asc");
         productRegisterFilter.setSortableColumn("innerHeight");
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
@@ -239,7 +239,7 @@ public class ProductRegisterDaoImplTest {
         productRegisterFilter.setInnerLengths(Collections.singletonList(90));
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
 
-        assertEquals("Find Products with different width, lenghts and clients", byFilter.size(), 1);
+        assertEquals("Find Products with different width, lengths and clients", byFilter.size(), 1);
     }
 
     @Test
@@ -251,7 +251,7 @@ public class ProductRegisterDaoImplTest {
         productRegisterFilter.setInnerLengths(Collections.singletonList(255));
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
 
-        assertEquals("Find Products with different width, lenghts and clients", byFilter.size(), 1);
+        assertEquals("Find Products with different width, lengths and clients", byFilter.size(), 1);
     }
 
     @Test
@@ -264,7 +264,7 @@ public class ProductRegisterDaoImplTest {
         productRegisterFilter.setInnerLengths(Collections.singletonList(140));
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
 
-        assertEquals("Find Products with different width, lenghts and clients", byFilter.size(), 1);
+        assertEquals("Find Products with different width, lengths and clients", byFilter.size(), 1);
     }
 
 }

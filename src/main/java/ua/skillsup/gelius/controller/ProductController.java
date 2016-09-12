@@ -56,24 +56,6 @@ public class ProductController {
         return "newProduct";
     }
 
-
-    /**
-     *
-     * @return id of product and operation name that will be executed on it
-     */
-    @RequestMapping(value = "/getOperationInfo", method = RequestMethod.GET)
-    @ResponseBody
-    public Response getOperationInfo() {
-        LOG.info("Find product by Id");
-
-        Map<String, Object> responseData = new HashMap<>();
-
-        responseData.put("operation", operationOnProduct);
-        responseData.put("productId", productId);
-
-        return new Response(ResponseCode.OK, responseData);
-    }
-
     @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
     @ResponseBody
     public Response save(@RequestBody ProductDto product) {
@@ -89,6 +71,33 @@ public class ProductController {
         return new Response(ResponseCode.OK, responseData);
     }
 
+    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
+    @ResponseBody
+    public Response update(@RequestBody ProductDto product) {
+        LOG.info("update Product");
+
+        productService.update(product);
+
+        String savedProductNumber = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
+        String newProductNumber = getFullProductNumber();
+        Map<String, String> responseData = new HashMap<>();
+
+        responseData.put("newProductNumber", newProductNumber);
+        responseData.put("savedProductNumber", savedProductNumber);
+        return new Response(ResponseCode.OK, responseData);
+    }
+
+    @RequestMapping(value = "/newProduct/deleteProduct/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Response deleteProductById(@PathVariable Long id) {
+        LOG.info("Delete product by Id");
+
+        String dirNameFromFullProductName = productService.delete(id);
+        fileService.deleteDirectory(dirNameFromFullProductName);
+
+        return new Response(ResponseCode.OK, dirNameFromFullProductName);
+    }
+
     @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Response findProductById(@PathVariable Long id) {
@@ -101,15 +110,20 @@ public class ProductController {
         return new Response(ResponseCode.OK, product);
     }
 
-    @RequestMapping(value = "/newProduct/deleteProduct/{id}", method = RequestMethod.POST)
+    /**
+     * @return id of product and operation name that will be executed on it
+     */
+    @RequestMapping(value = "/getOperationInfo", method = RequestMethod.GET)
     @ResponseBody
-    public Response deleteProductById(@PathVariable Long id) {
-        LOG.info("Delete product by Id");
+    public Response getOperationInfo() {
+        LOG.info("Find product by Id");
 
-        String dirNameFromFullProductName = productService.delete(id);
-        fileService.deleteDirectory(dirNameFromFullProductName);
+        Map<String, Object> responseData = new HashMap<>();
 
-        return new Response(ResponseCode.OK, dirNameFromFullProductName);
+        responseData.put("operation", operationOnProduct);
+        responseData.put("productId", productId);
+
+        return new Response(ResponseCode.OK, responseData);
     }
 
     @RequestMapping(value = "/newProduct/getNewProductNumber", method = RequestMethod.GET)
@@ -140,16 +154,6 @@ public class ProductController {
         Map<String, List<?>> dictionaries = dictionaryService.findAll();
 
         return new Response(ResponseCode.OK, dictionaries);
-    }
-
-    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
-    @ResponseBody
-    public Response update(@RequestBody ProductDto product) {
-        LOG.info("update Product");
-
-        productService.update(product);
-
-        return new Response(ResponseCode.OK);
     }
 
     @ResponseBody

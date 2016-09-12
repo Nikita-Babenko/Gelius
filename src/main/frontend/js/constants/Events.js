@@ -40,7 +40,6 @@ var EventConstants = {
 
     COPY_PRODUCT: "copy",
     EDIT_PRODUCT: "edit",
-    EDIT_COPY_PRODUCT: "edit_copy_product",
     CREATE_NEW_PRODUCT: "new"
 
 };

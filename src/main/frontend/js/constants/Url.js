@@ -12,6 +12,7 @@ var UrlConstants = {
     LOAD_FULL_NUMBER_FOR_EDITABLE_PRODUCT_URL: "/products/getFullProductNumber/",
     LOAD_PRODUCT_BY_ID_URL: "/products/findById/",
     SAVE_PRODUCT_URL: "/products/newProduct/saveProduct",
+    UPDATE_PRODUCT_URL: "/products/updateProduct",
     GET_OPERATION_INFO_URL: "/products/getOperationInfo",
     SAVE_PRODUCT_FILES_URL: "/files/upload"
 

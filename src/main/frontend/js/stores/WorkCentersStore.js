@@ -38,7 +38,7 @@ class WorkCentersStore extends EventEmitter {
         return workCenters;
     }
 
-    __getWorkCentersFromModal() {
+    getWorkCenterNotes() {
         var workCenters = [];
         workCenters.push({
             "serviceCenter": {
@@ -65,7 +65,7 @@ class WorkCentersStore extends EventEmitter {
 
     __prepareSelectedWorkCenters() {
         var workCenters = this.__initWorkCenters();
-        var selectedCenters = this.useDefault ? this.__getDefaultWorkCenters() : this.__getWorkCentersFromModal();
+        var selectedCenters = this.useDefault ? this.__getDefaultWorkCenters() : this.getWorkCenterNotes();
 
         selectedCenters.map(function (center) {
             workCenters['group' + center.serviceCenter.groupPriority].centers.push(center);

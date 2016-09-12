@@ -6,7 +6,8 @@ class DatePicker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: ""
+            date: "",
+            isChangeDateDisabled: false
         };
 
         this.__changeDate = this.__changeDate.bind(this);
@@ -23,8 +24,13 @@ class DatePicker extends React.Component {
 
     render() {
         return (
-            <input type="date" className={this.props.class} id={this.props.id}
-                   value={this.state.date} onChange={this.__changeDate}/>
+            <input type="date"
+                   className={this.props.class}
+                   id={this.props.id}
+                   value={this.state.date}
+                   onChange={this.__changeDate}
+                   disabled={this.state.isChangeDateDisabled}
+            />
         );
     }
 
@@ -40,6 +46,12 @@ class DatePicker extends React.Component {
             this.setState({
                 date: value
             });
+
+            if (this.props.id === "productCreateDate") {
+                this.setState({
+                    isChangeDateDisabled: NewProductStore.isInEditMode()
+                });
+            }
         }
     }
 }
@@ -55,7 +67,7 @@ DatePicker.defaultProps = {
 };
 
 function __transformDate(date) {
-    var year = date[0]
+    var year = date[0];
     var month = date[1] < 10 ? "0" + date[1] : date[1];
     var day = date[2] < 10 ? "0" + date[2] : date[2];
     return year + '-' + month + '-' + day;

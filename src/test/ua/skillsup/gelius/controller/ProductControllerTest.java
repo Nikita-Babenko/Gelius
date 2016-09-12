@@ -96,6 +96,17 @@ public class ProductControllerTest {
     }
 
     @Test
+    public void update() throws Exception {
+        String idString = "00001";
+        when(productService.getFullProductNumber(productDto.getProductNumber(), productDto.getIsNew())).thenReturn(idString);
+
+        productController.update(productDto);
+
+        verify(productService, times(1)).getFullProductNumber(productDto.getProductNumber(), productDto.getIsNew());
+        verify(productService, times(1)).update(productDto);
+    }
+
+    @Test
     public void getNumberForNewProduct() throws Exception {
         int number = 1;
         String idString = "00001";

@@ -17,7 +17,7 @@ class NewProductStore extends EventEmitter {
         this.saveFiles = false;
         this.enableDefaultValues = true;
         this.showAlert = false;
-        this.isInEditMode = false;
+        this.operation = "";
         this.product = {};
     }
 
@@ -37,8 +37,8 @@ class NewProductStore extends EventEmitter {
         return this.showAlert;
     }
 
-    isInEditModeStatus() {
-        return this.isInEditMode;
+    isInEditMode() {
+        return this.operation === EventConstants.EDIT_PRODUCT;
     }
 
     isEnableDefaultValues() {
@@ -140,9 +140,13 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
                     newProductStore.product.productNumber = responseData.data.newProductNumber;
                     newProductStore.savedProductNumber = responseData.data.savedProductNumber;
                     newProductStore.alert.alertType = "alert-success";
-                    newProductStore.alert.message = "Новый продукт (техкарта № " + newProductStore.savedProductNumber + ") был успешно добавлен";
+                    if (newProductStore.isInEditMode())
+                        newProductStore.alert.message = "Продукт (техкарта № " + newProductStore.savedProductNumber + ") был успешно обновлен";
+                    else
+                        newProductStore.alert.message = "Новый продукт (техкарта № " + newProductStore.savedProductNumber + ") был успешно добавлен";
                     newProductStore.enableDefaultValues = true;
                     newProductStore.saveFiles = true;
+                    newProductStore.operation = EventConstants.CREATE_NEW_PRODUCT;
                     break;
                 case ResponseCodeConstants.VALIDATION_ERROR:
                     newProductStore.enableDefaultValues = false;
@@ -163,21 +167,22 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
         case EventConstants.CREATE_NEW_PRODUCT:
             newProductStore.product = newProductStore.__getDefaultProduct();
             newProductStore.product.productNumber = event.newProductNumber;
+            newProductStore.operation = event.operation;
             newProductStore.emitChange();
             break;
         case EventConstants.EDIT_PRODUCT:
-            newProductStore.isInEditMode = true;
             newProductStore.product = event.product;
             newProductStore.product.productNumber = event.productNumber;
             newProductStore.product.productUpdateDate = newProductStore.__getTodayDate();
+            newProductStore.operation = event.operation;
             newProductStore.emitChange();
-            newProductStore.isInEditMode = false;
             break;
         case EventConstants.COPY_PRODUCT:
             newProductStore.product = event.product;
             newProductStore.product.productNumber = event.newProductNumber;
             newProductStore.product.productCreateDate = newProductStore.__getTodayDate();
             newProductStore.product.productUpdateDate = newProductStore.__getTodayDate();
+            newProductStore.operation = event.operation;
             newProductStore.emitChange();
             break;
     }

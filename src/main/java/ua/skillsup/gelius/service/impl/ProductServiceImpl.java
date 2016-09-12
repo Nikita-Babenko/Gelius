@@ -92,11 +92,6 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductValidationException(validationErrors);
         }
 
-        //Check existing product with same productNumber in DB
-        if (!updatedProduct.getIsNew()) {
-            isProductExist(updatedProduct.getProductNumber() );
-        }
-
         if (updatedProduct.getIsUse() == null) {
             updatedProduct.setIsUse(false);
         }

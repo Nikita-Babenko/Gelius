@@ -42,7 +42,6 @@ public class ProductDaoImplTest {
         MockitoAnnotations.initMocks(this);
 
         Product newProductFirst = new Product();
-        //newProductFirst.setId(22L);
         newProductFirst.setProductNumber(223);
         newProductFirst.setNew(true);
         newProductFirst.setBlankFormat(200);
@@ -50,7 +49,6 @@ public class ProductDaoImplTest {
         this.newProductDtoFirst = modelMapper.map(newProductFirst, ProductDto.class);
 
         Product newProductSecond = new Product();
-        //newProductSecond.setId(245L);
         newProductSecond.setProductNumber(343);
         newProductSecond.setNew(true);
         newProductSecond.setProductName("New Product Test2");
@@ -59,7 +57,6 @@ public class ProductDaoImplTest {
         this.newProductDtoSecond = modelMapper.map(newProductSecond, ProductDto.class);
 
         Product oldProduct = new Product();
-        //oldProductDto.setId(234L);
         oldProduct.setProductNumber(122);
         oldProduct.setNew(false);
         oldProduct.setProductName("New Product Test2");

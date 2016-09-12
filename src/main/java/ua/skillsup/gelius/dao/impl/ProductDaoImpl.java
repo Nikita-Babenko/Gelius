@@ -42,6 +42,13 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public void update(ProductDto productDto) {
+        Product product = modelMapper.map(productDto, Product.class);
+        assignProductToWorkabilityNotes(product);
+        sessionFactory.getCurrentSession().update(product);
+    }
+
+    @Override
     public ProductDto delete(long productId) {
         Session session = this.sessionFactory.getCurrentSession();
         Product product = session.get(Product.class, productId);
@@ -70,11 +77,6 @@ public class ProductDaoImpl implements ProductDao {
             setParameter("productNumber", productNumber).
             uniqueResult();
         return count != 0;
-    }
-
-    @Override
-    public void update(ProductDto product) {
-        sessionFactory.getCurrentSession().update(product);
     }
 
     private void assignProductToWorkabilityNotes(Product product) {
