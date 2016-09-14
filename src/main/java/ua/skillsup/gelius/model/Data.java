@@ -1,5 +1,6 @@
 package ua.skillsup.gelius.model;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -7,7 +8,11 @@ import java.util.regex.Pattern;
 public class Data {
 
     //Uploaded files:
-    public static final String FILES_DIR = "PRODUCT_FILES";
+    public static final String DIRECTORY_PATH = System.getProperty("catalina.home")
+                                                                    + File.separator
+                                                                    + "PRODUCT_FILES"
+                                                                    + File.separator;
+
     public static final Pattern ALLOWED_FILENAME_SYMBOLS = Pattern.compile(
         "[^a-zA-Zа-яА-ЯҐґЄєІіЇї0-9_\\+\\.\\,\\(\\)!@\\$=-]"
     );

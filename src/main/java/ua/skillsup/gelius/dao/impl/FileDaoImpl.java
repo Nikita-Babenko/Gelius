@@ -24,28 +24,13 @@ public class FileDaoImpl implements FileDao {
 
     private static final Logger LOG = LoggerFactory.getLogger("FileDao");
 
-    private static final String PATH_TO_FILES = System.getProperty("catalina.home")
-                                                + File.separator
-                                                + Data.FILES_DIR
-                                                + File.separator;
-
-    //Throws null, if directory was not created.
     @Override
-    public File createDirectory(String dirName) {
+    public boolean createDirectory(String dirName) {
         LOG.info("createDirectory " + dirName);
 
-        File dir = new File(PATH_TO_FILES + dirName);
-        boolean dirCreated = true;
+        File dir = new File(Data.DIRECTORY_PATH + dirName);
 
-        if (!dir.exists()) {
-            dirCreated = dir.mkdirs();
-        }
-
-        if (!dirCreated) {
-            return null;
-        }
-
-        return dir;
+        return dir.exists() || dir.mkdirs();
     }
 
 
@@ -53,7 +38,7 @@ public class FileDaoImpl implements FileDao {
     public boolean deleteDirectory(String dirName) {
         LOG.info("removeFiles from " + dirName);
 
-        File dir = new File(PATH_TO_FILES + dirName);
+        File dir = new File(Data.DIRECTORY_PATH + dirName);
 
         try {
             findFilesFromDirectory(dir)
@@ -79,7 +64,7 @@ public class FileDaoImpl implements FileDao {
 
         try {
             List<String> listFiles = new ArrayList<>();
-            findFilesFromDirectory(new File(PATH_TO_FILES + dirName))
+            findFilesFromDirectory(new File(Data.DIRECTORY_PATH + dirName))
                     .forEach(file -> listFiles.add(file.getAbsolutePath()));
             return listFiles;
         } catch (IOException e) {
@@ -88,16 +73,16 @@ public class FileDaoImpl implements FileDao {
     }
 
     @Override
-    public boolean saveFiles(File dir, MultipartFile[] files) {
+    public boolean saveFiles(String fullProductNumber, MultipartFile[] files) {
         LOG.info("saveFiles()");
 
         for (MultipartFile file : files) {
             String newFileName = replaceNotAllowedSymbolsInFileName(file.getOriginalFilename());
-            String path = dir.getAbsolutePath() + File.separator;
 
-            File serverFile = new File(path + newFileName);
+            File serverFile = new File(Data.DIRECTORY_PATH + fullProductNumber + File.separator + newFileName);
+
             while (isNotTheSameFile(file, serverFile)) {
-                serverFile = new File(path + addSuffixToFileName(newFileName));
+                serverFile = new File(Data.DIRECTORY_PATH + fullProductNumber + File.separator + addSuffixToFileName(newFileName));
             }
 
             try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {

@@ -6,6 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class CheckDoubleAboveZeroValidator implements ConstraintValidator<CheckDoubleAboveZero, Double> {
+
     @Override
     public void initialize(CheckDoubleAboveZero constraintAnnotation) {
 
@@ -13,7 +14,7 @@ public class CheckDoubleAboveZeroValidator implements ConstraintValidator<CheckD
 
     @Override
     public boolean isValid(Double object, ConstraintValidatorContext context) {
-        if (object == null) {
+        if (null == object) {
             return true;
         }
         return object > 0;

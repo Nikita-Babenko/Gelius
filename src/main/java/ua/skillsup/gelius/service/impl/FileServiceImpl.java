@@ -12,8 +12,8 @@ import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.util.FileNameManipulator.PART;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -33,33 +33,32 @@ public class FileServiceImpl implements FileService {
             return;
         }
 
-        //For debug ******************************************
-        for (MultipartFile file : files) {
-            String fileName = file.getOriginalFilename();
-            LOG.info(
-                fileName + ": " +
-                ", size=" + file.getSize() +
-                ", content-type=" + file.getContentType()
-            );
-        }
-
-        /*File size validation was done in context*/
+        printFilesInfo(files);
 
         List<String> filesWithDeniedTypes = getFileNamesWithDeniedTypes(files);
         if (!filesWithDeniedTypes.isEmpty()) {
             throw new DeniedFileTypesException(filesWithDeniedTypes);
         }
 
-        File dir = this.fileDao.createDirectory(fullProductNumber);
-        if (dir == null) {
+        boolean isCreated = this.fileDao.createDirectory(fullProductNumber);
+        System.out.println(isCreated);
+        if (!isCreated) {
             throw new FileSavingException("Directory (product number " + fullProductNumber + ") was not created");
         }
 
-        boolean isSaved = this.fileDao.saveFiles(dir, files);
+        boolean isSaved = this.fileDao.saveFiles(fullProductNumber, files);
         if (!isSaved) {
             throw new FileSavingException("Files (product number " + fullProductNumber + ") was not saved");
         }
 
+    }
+
+    private void printFilesInfo(MultipartFile[] files){
+        List<MultipartFile> filesList = Arrays.asList(files);
+        filesList.forEach(multipartFile -> LOG.debug(
+                                                multipartFile + ": " +
+                                                ", size=" + multipartFile.getSize() +
+                                                ", content-type=" + multipartFile.getContentType()));
     }
 
     private List<String> getFileNamesWithDeniedTypes(MultipartFile[] files) {

@@ -7,6 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class CheckOldProductNumberExistenceValidator implements ConstraintValidator<CheckOldProductNumberExistence, ProductDto> {
+
     @Override
     public void initialize(CheckOldProductNumberExistence constraintAnnotation) {
 
