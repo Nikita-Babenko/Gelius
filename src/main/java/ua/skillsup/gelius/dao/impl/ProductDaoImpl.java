@@ -49,7 +49,7 @@ public class ProductDaoImpl implements ProductDao {
                                 createQuery("DELETE FROM WorkabilityNotes a " +
                                         "WHERE a.product=:productNumber")
                                 .setParameter("productNumber", product).executeUpdate());
-        sessionFactory.getCurrentSession().update(product);
+        sessionFactory.getCurrentSession().merge(product);
     }
 
     @Override

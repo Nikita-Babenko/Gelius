@@ -127,4 +127,10 @@ public class ProductServiceImplTest {
         verify(productDao, times(1)).delete(id);
     }
 
+    @Test
+    public void testUpdate() {
+        productService.update(productDto);
+        verify(productDao, times(1)).update(productDto);
+    }
+
 }

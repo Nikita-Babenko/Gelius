@@ -147,4 +147,18 @@ public class ProductDaoImplTest {
         //T
         assertEquals("Find product bu id", product.getId(), new Long(productId));
     }
+
+    @Test
+    public void testUpdate() {
+        //Given
+        long id = productDao.save(newProductDtoFirst);
+        //When
+        String newName = "Reticular formation";
+        ProductDto updatedProduct = productDao.findById(id);
+        updatedProduct.setProductName(newName);
+        productDao.update(updatedProduct);
+        //Then
+        assertEquals("Check updating new product name", newName, productDao.findById(id).getProductName());
+    }
+
 }
