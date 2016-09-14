@@ -2,27 +2,30 @@ import React from 'react';
 import DictionaryStore from '../../stores/DictionariesStore';
 import NewProductAction from '../../actions/NewProductActions';
 import EventConstants from '../../constants/Events';
-import NewProductStore from "../../stores/NewProductStore";
+import NewProductStore from '../../stores/NewProductStore';
+import Modal from '../general/Modal';
+import ModalBody from '../general/ModalBody';
+import ModalFooter from '../general/ModalFooter';
 import L from "../../utils/Logging";
 
 class WorkCenterModal extends React.Component {
     render() {
         return (
-            <div className="modal" id="work-centers-modal">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <ModalBody />
-                        <ModalFooter />
-                    </div>
-                </div>
-            </div>
+            <Modal id="work-centers-modal">
+                <ModalBody>
+                    <WorkCenterGroups/>
+                </ModalBody>
+                <ModalFooter>
+                    <WorkCenterControls/>
+                </ModalFooter>
+            </Modal>
         );
     }
 }
 
 export default WorkCenterModal;
 
-class ModalBody extends React.Component {
+class WorkCenterGroups extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,41 +56,39 @@ class ModalBody extends React.Component {
             }
         });
         return (
-            <div className="modal-body">
-                <div className="row">
-                    <div className="col-md-6">
-                        <div className="=row group">
-                            {groups.group10}
-                        </div>
-                        <div className="=row group">
-                            {groups.group20}
-                        </div>
-                        <div className="=row group">
-                            {groups.group30}
-                        </div>
-                        <div className="=row ungrouped">
-                            {groups.group40}
-                        </div>
-                        <div className="=row ungrouped">
-                            {groups.group50}
-                        </div>
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="=row group">
+                        {groups.group10}
                     </div>
-                    <div className="col-md-6">
-                        <div className="=row group">
-                            {groups.group60}
-                        </div>
-                        <div className="=row ungrouped">
-                            {groups.group70}
-                        </div>
-                        <div className="=row ungrouped">
-                            {groups.group80}
-                        </div>
-                        <div className="=row ungrouped">
-                            {groups.group90}
-                        </div>
-                        <div className="=row ungrouped">
-                            {groups.group100}
-                        </div>
+                    <div className="=row group">
+                        {groups.group20}
+                    </div>
+                    <div className="=row group">
+                        {groups.group30}
+                    </div>
+                    <div className="=row ungrouped">
+                        {groups.group40}
+                    </div>
+                    <div className="=row ungrouped">
+                        {groups.group50}
+                    </div>
+                </div>
+                <div className="col-md-6">
+                    <div className="=row group">
+                        {groups.group60}
+                    </div>
+                    <div className="=row ungrouped">
+                        {groups.group70}
+                    </div>
+                    <div className="=row ungrouped">
+                        {groups.group80}
+                    </div>
+                    <div className="=row ungrouped">
+                        {groups.group90}
+                    </div>
+                    <div className="=row ungrouped">
+                        {groups.group100}
                     </div>
                 </div>
             </div>
@@ -141,11 +142,11 @@ class WorkCenterItem extends React.Component {
         }
     }
 
-    __checkIfWorkCenterActive () {
+    __checkIfWorkCenterActive() {
         var notes = NewProductStore.getProductProperty("workabilityNotes");
         //(notes.length > 1) cause we'll usually have AG-center on a first place for each product
         if (notes && notes.length > 1) {
-           return notes.some(e => e.serviceCenter.id == this.props.item.id)
+            return notes.some(e => e.serviceCenter.id == this.props.item.id)
         } else {
             return false
         }
@@ -157,27 +158,25 @@ class WorkCenterItem extends React.Component {
     }
 }
 
-class ModalFooter extends React.Component {
+class WorkCenterControls extends React.Component {
 
     render() {
         return (
-            <div className="modal-footer">
-                <div className="row text-center">
-                    <button type="button"
-                            className="btn modal-btn "
-                            data-dismiss="modal"
-                            onClick={this.__onOkClick}>Ok
-                    </button>
-                    <button type="button"
-                            className="btn modal-btn"
-                            data-dismiss="modal">Отмена
-                    </button>
-                </div>
+            <div className="row text-center">
+                <button type="button"
+                        className="btn modal-btn "
+                        data-dismiss="modal"
+                        onClick={this.__onOkClick}>Ok
+                </button>
+                <button type="button"
+                        className="btn modal-btn"
+                        data-dismiss="modal">Отмена
+                </button>
             </div>
         )
     }
 
     __onOkClick() {
-            NewProductAction.updateWorkabilityInfo();
+        NewProductAction.updateWorkabilityInfo();
     }
 }

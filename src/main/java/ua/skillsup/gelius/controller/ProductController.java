@@ -46,7 +46,7 @@ public class ProductController {
         return "newProduct";
     }
 
-    @RequestMapping(value = "/{operation}/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/operation/{operation}/{productId}", method = RequestMethod.GET)
     public String pageProductInEditOrCopyMode(@PathVariable("operation") String operation, @PathVariable("productId") int id) {
         LOG.info("Open new product page in [" + operation + " product] mode");
 
@@ -59,7 +59,7 @@ public class ProductController {
     @RequestMapping(value = "/newProduct/saveProduct", method = RequestMethod.POST)
     @ResponseBody
     public Response save(@RequestBody ProductDto product) {
-        LOG.info("createProduct. Mapping 'raw' product data: " + product);
+        LOG.info("save Product. Product data: " + product);
 
         String savedProductNumberValue = this.productService.save(product);
         String newProductNumberValue = getFullProductNumber();
@@ -74,7 +74,7 @@ public class ProductController {
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
     @ResponseBody
     public Response update(@RequestBody ProductDto product) {
-        LOG.info("update Product");
+        LOG.info("update Product. Product data: " + product);
 
         productService.update(product);
 
@@ -87,15 +87,15 @@ public class ProductController {
         return new Response(ResponseCode.OK, responseData);
     }
 
-    @RequestMapping(value = "/newProduct/deleteProduct/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteProduct/{id}", method = RequestMethod.POST)
     @ResponseBody
     public Response deleteProductById(@PathVariable Long id) {
         LOG.info("Delete product by Id");
 
-        String dirNameFromFullProductName = productService.delete(id);
-        fileService.deleteDirectory(dirNameFromFullProductName);
+        String fullProductNumber = productService.delete(id);
+        fileService.deleteDirectory(fullProductNumber);
 
-        return new Response(ResponseCode.OK, dirNameFromFullProductName);
+        return new Response(ResponseCode.OK, fullProductNumber);
     }
 
     @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)

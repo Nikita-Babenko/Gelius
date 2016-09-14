@@ -33,7 +33,7 @@ class WorkCenterTextarea extends React.Component {
                     onClick={this.__showWorkCentersModal}
                     value={this.state.workabilityCentersText}
                 />
-                <WorkCenterModal ref="modal"/>
+                <WorkCenterModal ref="workCenterModal"/>
             </div>
         );
     }
@@ -46,7 +46,7 @@ class WorkCenterTextarea extends React.Component {
     }
 
     __showWorkCentersModal() {
-        $(ReactDOM.findDOMNode(this.refs.modal)).modal();
+        $(ReactDOM.findDOMNode(this.refs.workCenterModal)).modal();
     }
 }
 

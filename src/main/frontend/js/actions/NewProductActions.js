@@ -4,6 +4,8 @@ import EventConstants from "../constants/Events";
 import NewProductStore from "../stores/NewProductStore";
 import WorkCentersStore from "../stores/WorkCentersStore";
 import ObjectConstants from '../constants/Objects';
+import ProductRegisterActions from './ProductRegisterActions';
+import FilteringSortingActions from './FilteringSortingActions';
 import L from "../utils/Logging";
 
 var NewProductActions = {
@@ -150,6 +152,31 @@ var NewProductActions = {
             }.bind(this)
         });
         return product;
+    },
+
+    deleteProductById(productId, redirectToRegister){
+        $.ajax({
+            type: 'POST',
+            contentType: "application/json",
+            url: UrlConstants.DELETE_PRODUCT_BY_ID_URL + productId,
+            data: '',
+            dataType: 'JSON',
+            timeout: 100000,
+            success: function (response) {
+                L.log("PRODUCT [number " + response.data + "] was deleted");
+
+                if (redirectToRegister)
+                    window.location = UrlConstants.PRODUCT_REGISTER_URL;
+                else {
+                    ProductRegisterActions.loadProductsFromServer();
+                    FilteringSortingActions.loadAllFilterParametersFromServer();
+                }
+
+            }.bind(this),
+            error: function (e) {
+                L.log("ERROR: ", e);
+            }.bind(this)
+        });
     },
 
     saveProduct(){

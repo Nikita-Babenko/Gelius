@@ -78,7 +78,7 @@ public class ProductControllerTest {
 
     @Test
     public void returnPageInEditOrCopyMode() throws Exception {
-        mockMvc.perform(get("/products/copy/1")).andDo(print())
+        mockMvc.perform(get("/products/operation/copy/1")).andDo(print())
                 .andExpect(handler().handlerType(ProductController.class))
                 .andExpect(handler().methodName("pageProductInEditOrCopyMode"))
                 .andExpect(view().name("newProduct"))

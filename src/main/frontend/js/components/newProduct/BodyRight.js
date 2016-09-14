@@ -144,11 +144,11 @@ class BodyRight extends React.Component {
 
                 <div className="buttonContainer">
                     <div className="buttons_bottom icon_buttons_group">
-                        <a className="fa fa-pencil  fa-2x" href="#">
+                        <a className="control-btn btn fa fa-pencil fa-2x disabled" href="#">
                         </a>
-                        <a className="fa fa-plus fa-2x" href="#" id="addNew">
+                        <a className="control-btn btn fa fa-plus fa-2x disabled" href="#" id="addNew">
                         </a>
-                        <a className="fa fa-trash-o fa-2x" href="#">
+                        <a className="control-btn btn fa fa-trash-o fa-2x disabled" href="#">
                         </a>
                     </div>
                 </div>

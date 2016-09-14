@@ -78,6 +78,10 @@ class ProductNumberInput extends React.Component {
                     idProductNumberDisabled: true,
                     isCheckBoxDisabled: true
                 });
+            else
+                this.setState({
+                    isCheckBoxDisabled: false
+                });
 
 
         }

@@ -182,6 +182,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
             newProductStore.product.productNumber = event.newProductNumber;
             newProductStore.product.productCreateDate = newProductStore.__getTodayDate();
             newProductStore.product.productUpdateDate = newProductStore.__getTodayDate();
+            newProductStore.product.isNew = true;
             newProductStore.operation = event.operation;
             newProductStore.emitChange();
             break;

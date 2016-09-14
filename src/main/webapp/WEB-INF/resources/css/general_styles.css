@@ -1,3 +1,17 @@
+* {
+    font-style: normal;
+    font-family: sans-serif, Calibri;
+}
+
+.modal-btn {
+    color: #222222;
+    background-color: #B6D7A8;
+}
+
+.modal-content {
+    background-color: #fafafa;
+}
+
 .icon_buttons_group > a {
     padding-top: 5px;
     text-decoration: none;
@@ -7,7 +21,7 @@
     width: 40px;
     height: 40px;
     border-radius: 4px;
-    color: green;
+    color: green !important;
     margin-right: 5px;
     margin-left: 5px;
 }
@@ -18,4 +32,17 @@
 
 .icon_buttons_group > a:active {
     background-color: #B6D7A8;
+}
+
+.control-btn {
+    padding-left: 8px;
+}
+
+.control-btn-slide {
+    padding-left: 5px;
+}
+
+.big-modal-icon {
+    font-size: 12em;
+    color: #004e00;
 }
