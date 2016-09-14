@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import NewProductStore from "../../stores/NewProductStore";
+import UploadFilesStore from "../../stores/UploadFilesStore";
 import EventConstants from "../../constants/Events";
 import NewProductAction from "../../actions/NewProductActions";
 
@@ -22,12 +23,12 @@ class FileLinksContainer extends React.Component {
     }
 
     componentWillMount(){
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__deleteAllFileLinksWhenProductSaved);
+        UploadFilesStore.addListener(EventConstants.FILE_LINKS_CHANGE_EVENT, this.__deleteAllFileLinksWhenProductSaved);
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__ifProductSaved);
     }
 
     componentWillUnmount(){
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__deleteAllFileLinksWhenProductSaved);
+        UploadFilesStore.removeListener(EventConstants.FILE_LINKS_CHANGE_EVENT, this.__deleteAllFileLinksWhenProductSaved);
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__ifProductSaved);
     }
     
@@ -46,7 +47,7 @@ class FileLinksContainer extends React.Component {
     }
     
     __deleteAllFileLinksWhenProductSaved(){
-        if(NewProductStore.isEnableDefaultValues()){
+        if(UploadFilesStore.isDeleteSelectedFiles()){
             this.setState({
                 items: [],
                 counter: 0
@@ -120,14 +121,13 @@ class FileLink extends React.Component {
     }
 
     __setValue(e){
-        var value = e.target.value;
         this.setState({
-            value : value
+            value : e.target.value
         });
     }
     
     render() {
-        return  <input type="file" className="fileLinks" onChange={this.__setValue}/>
+        return  <input type="file" className="fileLinks" onChange={this.__setValue} value={this.state.value}/>
     }
 
 }

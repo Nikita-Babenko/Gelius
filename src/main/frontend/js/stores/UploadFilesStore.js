@@ -10,10 +10,15 @@ class UploadFilesStore extends EventEmitter {
         super();
         this.MAX_FILES_COUNT = 5;
         this.filesCount = 0;
+        this.deleteSelectedFiles = false;
     }
 
     emitChange() {
         this.emit(EventConstants.FILE_LINKS_CHANGE_EVENT);
+    }
+
+    isDeleteSelectedFiles() {
+        return this.deleteSelectedFiles;
     }
 
 }
@@ -23,24 +28,22 @@ const uploadFilesStore = new UploadFilesStore();
 uploadFilesStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
         case EventConstants.ADD_FILE_LINK:
-            if ( false /*uploadFilesStore.filesCount == uploadFilesStore.MAX_FILES_COUNT*/ ) { //temp!
-                alert("Установлено ограничение в " + uploadFilesStore.MAX_FILES_COUNT + " файлов.");
+            if ( uploadFilesStore.filesCount == uploadFilesStore.MAX_FILES_COUNT) {
+                console.log("Установлено ограничение в " + uploadFilesStore.MAX_FILES_COUNT + " файлов.");
             } else {
                 uploadFilesStore.filesCount++;
-                //some actions, when link was added...
-                console.log("uploadFilesStore.filesCount=" + uploadFilesStore.filesCount + " (элемент добавлен)");
                 uploadFilesStore.emitChange();
             }
             break;
         case EventConstants.REMOVE_FILE_LINK:
             uploadFilesStore.filesCount--;
-            //some actions, when link was removing...
-            console.log("uploadFilesStore.filesCount=" + uploadFilesStore.filesCount + " (элемент удален)");
             uploadFilesStore.emitChange();
             break;
-        /*case EventConstants.SAVE_FILE_LINKS_OF_NEW_PRODUCT:
-            console.log("UploadFilesStore.dispatchToken: файлы-ссылки сохранены на сервере");
-            break;*/
+        case EventConstants.SELECTED_FILES_WERE_SAVED:
+            uploadFilesStore.deleteSelectedFiles = true;
+            uploadFilesStore.emitChange();
+            uploadFilesStore.deleteSelectedFiles = false;
+            break;
     }
 });
 

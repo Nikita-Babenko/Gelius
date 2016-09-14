@@ -45,6 +45,7 @@ public class FileDaoImpl implements FileDao {
                     .forEach(File::delete);
             return dir.delete();
         } catch (IOException e) {
+            LOG.info("IOException: " + e);
             return false;
         }
     }
@@ -68,6 +69,7 @@ public class FileDaoImpl implements FileDao {
                     .forEach(file -> listFiles.add(file.getAbsolutePath()));
             return listFiles;
         } catch (IOException e) {
+            LOG.info("IOException: " + e);
             return Collections.emptyList();
         }
     }
@@ -90,6 +92,7 @@ public class FileDaoImpl implements FileDao {
                 stream.write(bytes);
             } catch (IOException e) {
                 LOG.info("Error during file saving: " + newFileName + " (original name: " + file.getOriginalFilename() + ")");
+                LOG.info("Full exeption message: " + e);
                 return false;
             }
         }

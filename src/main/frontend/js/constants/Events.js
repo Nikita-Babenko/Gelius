@@ -36,7 +36,7 @@ var EventConstants = {
     ADD_FILE_LINK: "add_file_link",
     REMOVE_FILE_LINK: "remove_file_link",
     FILE_LINKS_CHANGE_EVENT: "file_links_change_event", //UploadFilesStore: file link was added or removed
-    SAVE_FILE_LINKS_OF_NEW_PRODUCT: "save_file_links_of_new_product", //file links was saved
+    SELECTED_FILES_WERE_SAVED: "selected_files_were_saved", //file links was saved
 
     COPY_PRODUCT: "copy",
     EDIT_PRODUCT: "edit",

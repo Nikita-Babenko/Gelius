@@ -65,15 +65,6 @@ public class ProductRegisterControllerTest {
     }
 
     @Test
-    public void findAllProducts() throws Exception {
-        when(productRegisterService.findAll()).thenReturn(new ArrayList<>());
-
-        productRegisterController.findAllProducts();
-
-        verify(productRegisterService, times(1)).findAll();
-    }
-
-    @Test
     public void findFilterParameters() throws Exception {
         when(productRegisterService.findAllFilterParameters(productRegisterFilter)).thenReturn(new HashMap<>());
 

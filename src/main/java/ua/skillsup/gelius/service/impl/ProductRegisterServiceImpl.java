@@ -17,11 +17,6 @@ public class ProductRegisterServiceImpl implements ProductRegisterService {
     private ProductRegisterDao productRegisterDao;
 
     @Override
-    public List<ProductRegisterDto> findAll() {
-        return productRegisterDao.findAll();
-    }
-
-    @Override
     public List<ProductRegisterDto> findByFilter(ProductRegisterFilter searchFilter) {
         return productRegisterDao.findByFilter(searchFilter);
     }

@@ -2,6 +2,7 @@ import React from "react";
 import Dictionary from "../newProduct/Dictionary";
 import FileLinksContainer from "../newProduct/FileLinksContainer";
 import NumberInput from "../newProduct/NumberInput";
+import Bigovki from "../newProduct/Bigovki";
 
 class BodyRight extends React.Component {
     render() {
@@ -98,20 +99,7 @@ class BodyRight extends React.Component {
                     </tr>
 
                     <tr>
-                        <td colSpan="3" className="bigovki_all">
-                            <div className="bigovki_inputs_1">
-                                <input type="number" className="bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
-                                <input type="text" className="bigovki_input_2" value="+" disabled/>
-                            </div>
-                            <div className="bigovki_inputs_2">
-                                <input type="number" className="bigovki_input_1 sumBigovki numberInputCheck" min="0"/>
-                                <input type="text" className="bigovki_input_2" value="+" disabled/>
-                            </div>
-                            <div className="bigovki_inputs_3">
-                                <input type="number" className="bigovki_input_3 sumBigovki numberInputCheck" min="0"/>
-                                <NumberInput id="numberBlanksOnFormat" style="bigovki_input_4"/>
-                            </div>
-                        </td>
+                        <Bigovki/>
                     </tr>
 
                     <tr>

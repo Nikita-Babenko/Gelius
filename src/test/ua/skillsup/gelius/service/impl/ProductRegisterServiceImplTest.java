@@ -26,15 +26,6 @@ public class ProductRegisterServiceImplTest {
     private final static ProductRegisterService productRegisterService =  new ProductRegisterServiceImpl();
 
     @Test
-    public void getAllProducts() throws Exception {
-        when(productRegisterDao.findAll()).thenReturn(Arrays.asList(new ProductRegisterDto()));
-
-        productRegisterService.findAll();
-
-        verify(productRegisterDao, times(1)).findAll();
-    }
-
-    @Test
     public void findByFilter() throws Exception {
         List<ProductRegisterDto> productList = new ArrayList<>();
         when(productRegisterDao.findByFilter(productRegisterFilter)).thenReturn(productList);

@@ -9,16 +9,16 @@ public class Data {
 
     //Uploaded files:
     public static final String DIRECTORY_PATH = System.getProperty("catalina.home")
-                                                                    + File.separator
-                                                                    + "PRODUCT_FILES"
-                                                                    + File.separator;
+            + File.separator
+            + "PRODUCT_FILES"
+            + File.separator;
 
     public static final Pattern ALLOWED_FILENAME_SYMBOLS = Pattern.compile(
-        "[^a-zA-Zа-яА-ЯҐґЄєІіЇї0-9_\\+\\.\\,\\(\\)!@\\$=-]"
+            "[^a-zA-Zа-яА-ЯҐґЄєІіЇї0-9_\\+\\.\\,\\(\\)!@\\$=-]"
     );
     public static final String FILENAME_REPLACER = "_";
     public static final List<String> ALLOWED_FILE_EXTENSIONS = Arrays.asList(
-        "pdf", "png", "jpg", "jpeg", "ai", "cdr"
+            "pdf", "png", "jpg", "jpeg", "ai", "cdr"
     );
     public static final String FILENAME_SUFFIX = "_new";
 

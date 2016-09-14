@@ -35,13 +35,6 @@ public class ProductRegisterDaoImplTest {
     }
 
     @Test
-    public void getAllProductsFromDatabase() throws Exception {
-        List<ProductRegisterDto> allProducts = productRegisterDao.findAll();
-
-        assertEquals("In database are storing 7 products", allProducts.size(), 7);
-    }
-
-    @Test
     public void sortAllProductsByIdAsc() throws Exception {
         productRegisterFilter.setSortingDirection("asc");
         productRegisterFilter.setSortableColumn("id");

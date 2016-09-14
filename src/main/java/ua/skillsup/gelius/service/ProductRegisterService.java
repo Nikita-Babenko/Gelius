@@ -8,8 +8,6 @@ import java.util.Map;
 
 public interface ProductRegisterService {
 
-    List<ProductRegisterDto> findAll();
-
     List<ProductRegisterDto> findByFilter(ProductRegisterFilter searchFilter);
 
     <T> Map<String, List<T>> findAllFilterParameters(ProductRegisterFilter filter);

@@ -32,15 +32,6 @@ public class ProductRegisterController {
         return "register";
     }
 
-    @RequestMapping(path = "/all", method = RequestMethod.GET)
-    @ResponseBody
-    public Response findAllProducts() {
-        LOG.info("Get all products");
-        List<ProductRegisterDto> allProducts = productRegisterService.findAll();
-        return new Response(ResponseCode.OK, allProducts);
-
-    }
-
     @RequestMapping(value = "/allFilterParameters", method = RequestMethod.POST)
     @ResponseBody
     public Response findFilterParameters(@RequestBody ProductRegisterFilter filter) {

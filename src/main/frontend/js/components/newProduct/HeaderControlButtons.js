@@ -69,9 +69,13 @@ class HeaderControlButtons extends React.Component {
     }
 
     __loadProductId() {
-        if (NewProductStore.isInEditMode())
+        if (NewProductStore.isInEditMode()) {
             this.setState({
                 productId: NewProductStore.getProductProperty("id")
+            });
+        } else
+            this.setState({
+                productId: null
             });
     }
 }

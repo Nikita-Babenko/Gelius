@@ -31,13 +31,20 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Override
-    public List<ProductRegisterDto> findAll() {
-        List<ProductRegister> productList = sessionFactory.getCurrentSession().createCriteria(ProductRegister.class).list();
-        List<ProductRegisterDto> productDtoList = new ArrayList<>(productList.size());
-        productList.forEach(product -> productDtoList.add(modelMapper.map(product, ProductRegisterDto.class)));
+    private enum RegisterParameter {
+        NUMBER("productNumber"), CLIENT("client.companyName"), NAME("productName"), TYPE("productType.productType"),
+        LENGTH("innerLength"), WIDTH("innerWidth"), HEIGHT("innerHeight"), CARDBOARD_BRAND("cardboardBrand.cardboardBrand"),
+        PROFILE("profile.profile"), LAYERS("layersColours"), CLICHE("cliche");
 
-        return productDtoList;
+        private String fullParameterName;
+
+        RegisterParameter(String fullName) {
+            fullParameterName = fullName;
+        }
+
+        String getFllParameterName() {
+            return fullParameterName;
+        }
     }
 
     @Override
@@ -63,29 +70,19 @@ public class ProductRegisterDaoImpl implements ProductRegisterDao {
     @Override
     public <T> Map<String, List<T>> findAllFilterParameters(ProductRegisterFilter filter) {
         Map<String, List<T>> filterParameters = new HashMap<>();
-        filterParameters.put("productNumber", findFilterParameters(filter, "productNumber"));
-        filterParameters.put("client.companyName", findFilterParameters(filter, "client.companyName"));
-        filterParameters.put("productName", findFilterParameters(filter, "productName"));
-        filterParameters.put("productType.productType", findFilterParameters(filter, "productType.productType"));
-        filterParameters.put("innerLength", findFilterParameters(filter, "innerLength"));
-        filterParameters.put("innerWidth", findFilterParameters(filter, "innerWidth"));
-        filterParameters.put("innerHeight", findFilterParameters(filter, "innerHeight"));
-        filterParameters.put("cardboardBrand.cardboardBrand", findFilterParameters(filter, "cardboardBrand.cardboardBrand"));
-        filterParameters.put("profile.profile", findFilterParameters(filter, "profile.profile"));
-        filterParameters.put("layersColours", findFilterParameters(filter, "layersColours"));
-        filterParameters.put("cliche", findFilterParameters(filter, "cliche"));
+        for(RegisterParameter p: RegisterParameter.values()) {
+            filterParameters.put(p.getFllParameterName(), findFilterParameters(filter, p.getFllParameterName()));
+        }
 
         return filterParameters;
     }
 
     private Criteria findSortingCriteria(Criteria criteria, ProductRegisterFilter filter) {
         String columnName = filter.getSortableColumn();
-
-        if (filter.getSortingDirection().equals("asc"))
+        if ("asc".equals(filter.getSortingDirection()))
             criteria.addOrder(Order.asc(columnName));
         else
             criteria.addOrder(Order.desc(columnName));
-
         return criteria;
     }
 
