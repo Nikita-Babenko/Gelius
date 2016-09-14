@@ -174,7 +174,8 @@ public class Product {
     private Integer numberBlanksOnFormat;
 
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
     private List<WorkabilityNotes> workabilityNotes;
 
     public Long getId() {

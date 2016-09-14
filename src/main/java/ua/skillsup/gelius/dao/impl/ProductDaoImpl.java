@@ -44,7 +44,11 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void update(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
-        assignProductToWorkabilityNotes(product);
+        product.getWorkabilityNotes()
+                .forEach(workabilityNotes -> this.sessionFactory.getCurrentSession().
+                                createQuery("DELETE FROM WorkabilityNotes a " +
+                                        "WHERE a.product=:productNumber")
+                                .setParameter("productNumber", product).executeUpdate());
         sessionFactory.getCurrentSession().update(product);
     }
 
