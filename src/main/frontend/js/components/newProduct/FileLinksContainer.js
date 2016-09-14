@@ -1,10 +1,8 @@
-import React from 'react';
-import UploadFilesStore from '../../stores/UploadFilesStore';
-import NewProductStore from '../../stores/NewProductStore';
-import UrlConstants from "../../constants/Url";
-import NewProductAction from '../../actions/NewProductActions';
-import EventConstants from '../../constants/Events';
-import L from '../../utils/Logging';
+import React from "react";
+import ReactDOM from "react-dom";
+import NewProductStore from "../../stores/NewProductStore";
+import EventConstants from "../../constants/Events";
+import NewProductAction from "../../actions/NewProductActions";
 
 
 class FileLinksContainer extends React.Component {
@@ -12,56 +10,97 @@ class FileLinksContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filesCount: 0
+            items: [],
+            counter: 0,
+            deleteItem : 0
         };
-        this.__addFile = this.__addFile.bind(this);
-        this.__onFileLinksUpdated = this.__onFileLinksUpdated.bind(this);
-        this.__onEntitySaved = this.__onEntitySaved.bind(this);
+        this.__addFileLink = this.__addFileLink.bind(this);
+        this.__deleteAllFileLinks = this.__deleteAllFileLinks.bind(this);
+        this.__showModalWindow = this.__showModalWindow.bind(this);
+        this.__deleteAllFileLinksWhenProductSaved = this.__deleteAllFileLinksWhenProductSaved.bind(this);
+        this.__ifProductSaved = this.__ifProductSaved.bind(this);
     }
 
-    componentWillMount() {
-        UploadFilesStore.addListener(EventConstants.FILE_LINKS_CHANGE_EVENT, this.__onFileLinksUpdated);
-        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__onEntitySaved);
+    componentWillMount(){
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__deleteAllFileLinksWhenProductSaved);
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__ifProductSaved);
     }
 
-    componentWillUnmount() {
-        UploadFilesStore.removeListener(EventConstants.FILE_LINKS_CHANGE_EVENT, this.__onFileLinksUpdated);
-        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__onEntitySaved);
+    componentWillUnmount(){
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__deleteAllFileLinksWhenProductSaved);
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__ifProductSaved);
     }
-
-    __onFileLinksUpdated() {
-        this.setState({filesCount: UploadFilesStore.filesCount});
-        L.log("__onFileLinksUpdated");
-    }
-
-    __onEntitySaved() {
-        if (NewProductStore.isSaveFiles() && this.state.filesCount > 0) {
-            L.log("__onEntitySaved: save files");
+    
+    __ifProductSaved(){
+        if (NewProductStore.isSaveFiles()) {
             NewProductAction.saveFileLinks();
         }
     }
 
-    __addFile() {
-        L.log("__addFile");
-        NewProductAction.addFileLink();
+    __deleteFileLink(index) {
+        this.setState({
+            items: this.state.items.filter(function (e) {
+                return e.index !== index;
+            })
+        });
+    }
+    
+    __deleteAllFileLinksWhenProductSaved(){
+        if(NewProductStore.isEnableDefaultValues()){
+            this.setState({
+                items: [],
+                counter: 0
+            });
+        }
+    }
 
+    __deleteAllFileLinks(){
+        this.setState({
+            items: [],
+            counter: 0
+        });
+    }
+
+    __addFileLink() {
+        var counter = this.state.counter + 1;
+        if (this.state.items.length < 5) {
+            this.setState({
+                items: this.state.items.concat({index: counter, el: <FileLink />}),
+                counter: counter
+            });
+        }
+    }
+
+    __showModalWindow(item){
+        this.setState({
+            deleteItem : item
+        });
+        $(ReactDOM.findDOMNode(this.refs.modalWindow)).modal();
     }
 
     render() {
-        var fileFields = [];
-        for (var i = 0; i < this.state.filesCount; i++) {
-            fileFields.push(<FileLink fakeId={"fileLink_" + i}/>);
-        }
+        var list = this.state.items.map(function(item) {
+            
+            return(
+                <div key={item.index} className="fileLink">
+                    <a href="#" onClick={this.__showModalWindow.bind(this, item.index)}  className="fa fa-trash-o fa-lg" aria-hidden="true" />
+                    {item.el}
+                </div>
+            );
+            
+        }, this);
+
         return (
             <td colSpan="3" className="attachments">
                 <div className="links">
-                    {fileFields}
+                    {list}
                 </div>
                 <div className="attachment_buttons icon_buttons_group" id="buttonsLink">
-                    <a href="#" className="fa fa-paperclip fa-lg" title="Прикрепить ссылку" onClick={this.__addFile}
+                    <a href="#" className="fa fa-paperclip fa-lg" title="Прикрепить ссылку" onClick={this.__addFileLink}
                        aria-hidden="true" />
-                    <a href="#" className="fa fa-trash-o fa-lg" title="Удалить все ссылки" aria-hidden="true" />
+                    <a href="#" className="fa fa-trash-o fa-lg" title="Удалить все ссылки" aria-hidden="true" onClick={this.__deleteAllFileLinks}/>
                 </div>
+                <ModalWindow ref="modalWindow" onDelete={this.__deleteFileLink.bind(this, this.state.deleteItem)}/>
             </td>
         );
     }
@@ -73,23 +112,48 @@ export default FileLinksContainer;
 class FileLink extends React.Component {
     constructor(props) {
         super(props);
-        /*this.state = {
-         fileName: this.props.fileName
-         };*/
+        this.state = {
+         value: ""
+        };
+
+        this.__setValue = this.__setValue.bind(this);
     }
 
-    componentDidMount() {
-        //SELF.click();
+    __setValue(e){
+        var value = e.target.value;
+        this.setState({
+            value : value
+        });
     }
-
+    
     render() {
-        return (
-            <input id={this.props.fakeId} type="file"/>
-        );
+        return  <input type="file" className="fileLinks" onChange={this.__setValue}/>
     }
 
 }
 
-/*FileLink.defaultProps = {
- fileName: "Файл не выбран"
- };*/
+class ModalWindow extends React.Component{
+
+    render(){
+        return (
+            <div className="modal fade">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" /></button>
+                            <h4 className="modal-title">Удаление файла</h4>
+                        </div>
+                        <div className="modal-body">
+                            <p>Вы действительно хотите удалить файл?</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" onClick={this.props.onDelete} data-dismiss="modal">Да</button>
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Нет</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+}
