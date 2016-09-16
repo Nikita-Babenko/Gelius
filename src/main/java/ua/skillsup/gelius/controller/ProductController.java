@@ -9,6 +9,7 @@ import ua.skillsup.gelius.controller.response.Response;
 import ua.skillsup.gelius.controller.response.ResponseCode;
 import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
+import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.FileService;
@@ -93,7 +94,8 @@ public class ProductController {
         LOG.info("Delete product by Id");
 
         String fullProductNumber = productService.delete(id);
-        fileService.deleteDirectory(fullProductNumber);
+        String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
+        fileService.deleteDirectory(directoryPath);
 
         return new Response(ResponseCode.OK, fullProductNumber);
     }
@@ -104,8 +106,9 @@ public class ProductController {
         LOG.info("Find product by Id");
 
         ProductDto product = productService.findById(id);
-        String getFullProductName = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
-        product.setFilePaths(fileService.findFilePaths(getFullProductName));
+        String fullProductNumber = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
+        String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
+        product.setFilePaths(fileService.findFilePaths(directoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false));
 
         return new Response(ResponseCode.OK, product);
     }

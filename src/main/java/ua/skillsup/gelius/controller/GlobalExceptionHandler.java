@@ -20,10 +20,8 @@ public class GlobalExceptionHandler {
     public Response exceptionHandler(MultipartException e) {
         LOG.info("ExceptionHandler: " + e);
         if (e.getCause() instanceof FileUploadBase.FileSizeLimitExceededException) {
-            System.out.println("111");
             return new Response(ResponseCode.FILE_SIZE_EXCEEDED);
         }
-        System.out.println("222");
         return new Response(ResponseCode.SERVER_ERROR);
     }
 }

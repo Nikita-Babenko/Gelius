@@ -6,9 +6,10 @@ import java.util.List;
 
 public interface FileService {
 
-    void uploadFiles(String fullProductNumber, MultipartFile[] files);
+    void saveFiles(String directoryPath, MultipartFile[] files);
 
-    boolean deleteDirectory(String dirName);
+    boolean deleteDirectory(String directoryPath);
 
-    List<String> findFilePaths(String dirName);
+    List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
+
 }

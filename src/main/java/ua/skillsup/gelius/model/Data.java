@@ -16,10 +16,13 @@ public class Data {
     public static final Pattern ALLOWED_FILENAME_SYMBOLS = Pattern.compile(
             "[^a-zA-Zа-яА-ЯҐґЄєІіЇї0-9_\\+\\.\\,\\(\\)!@\\$=-]"
     );
+
     public static final String FILENAME_REPLACER = "_";
+
     public static final List<String> ALLOWED_FILE_EXTENSIONS = Arrays.asList(
             "pdf", "png", "jpg", "jpeg", "ai", "cdr"
     );
+
     public static final String FILENAME_SUFFIX = "_new";
 
     //Numbers of old and new datasheets - placeholder (padded from left) and number of digits:

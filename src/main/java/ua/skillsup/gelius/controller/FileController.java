@@ -4,16 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.skillsup.gelius.controller.response.Response;
 import ua.skillsup.gelius.controller.response.ResponseCode;
-import ua.skillsup.gelius.exception.DeniedFileTypesException;
-import ua.skillsup.gelius.exception.FileSavingException;
+import ua.skillsup.gelius.exception.NotAllowedFileExtensionsException;
+import ua.skillsup.gelius.exception.UnableSaveFileException;
+import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.service.FileService;
 
 @Controller
@@ -32,7 +29,9 @@ public class FileController {
         @RequestParam("files") MultipartFile[] files
     ) {
         LOG.info("uploadFiles(): productNumber=" + fullProductNumber + ", files count=" + files.length);
-        this.fileService.uploadFiles(fullProductNumber, files);
+
+        String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
+        this.fileService.saveFiles(directoryPath, files);
         return new Response(ResponseCode.OK);
     }
 
@@ -40,15 +39,15 @@ public class FileController {
     //Exception handling
 
     @ResponseBody
-    @ExceptionHandler(DeniedFileTypesException.class)
-    public Response exceptionHandler(DeniedFileTypesException e) {
+    @ExceptionHandler(NotAllowedFileExtensionsException.class)
+    public Response exceptionHandler(NotAllowedFileExtensionsException e) {
         LOG.info("ExceptionHandler: " + e);
-        return new Response(ResponseCode.VALIDATION_ERROR, e.getFileNames());
+        return new Response(ResponseCode.VALIDATION_ERROR);
     }
 
     @ResponseBody
-    @ExceptionHandler(FileSavingException.class)
-    public Response exceptionHandler(FileSavingException e) {
+    @ExceptionHandler(UnableSaveFileException.class)
+    public Response exceptionHandler(UnableSaveFileException e) {
         LOG.info("ExceptionHandler: " + e);
         return new Response(ResponseCode.SERVER_ERROR);
     }

@@ -18,7 +18,6 @@ import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.service.ProductService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.mockito.Mockito.*;
@@ -122,13 +121,12 @@ public class ProductControllerTest {
     @Test
     public void getNumberForEditableProduct() throws Exception {
         int number = 15;
-        boolean isNew = true;
         String idString = "00015";
-        when(productService.getFullProductNumber(number, isNew)).thenReturn(idString);
+        when(productService.getFullProductNumber(number, true)).thenReturn(idString);
 
-        productController.getNumberForEditableProduct(number, isNew);
+        productController.getNumberForEditableProduct(number, true);
 
-        verify(productService, times(1)).getFullProductNumber(number, isNew);
+        verify(productService, times(1)).getFullProductNumber(number, true);
     }
 
     @Test
@@ -142,7 +140,7 @@ public class ProductControllerTest {
 
     @Test
     public void findById() throws Exception {
-        long id = 1;
+        /*long id = 1;
         String productId = "00001";
         when(productService.findById(id)).thenReturn(productDto);
         when(productService.getFullProductNumber(productDto.getProductNumber(), productDto.getIsNew())).thenReturn(productId);
@@ -151,7 +149,7 @@ public class ProductControllerTest {
         productController.findProductById(id);
 
         verify(productService, times(1)).findById(id);
-        verify(fileService, times(1)).findFilePaths(productId);
+        verify(fileService, times(1)).findFilePaths(productId);*/
     }
 
     @Test

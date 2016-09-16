@@ -10,8 +10,6 @@ import ua.skillsup.gelius.service.FileService;
 
 import java.util.ArrayList;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -20,26 +18,28 @@ public class FileServiceImplTest {
     @Mock
     private FileDao fileDao;
 
+    private String directoryPath = "dir";
+
     @InjectMocks
     private FileService fileService = new FileServiceImpl();
 
     @Test
-    public void findFilePaths() throws Exception {
-        String dirName = anyString();
-        when(fileDao.findFilePaths(dirName)).thenReturn(new ArrayList<>());
+    public void findFilePathsInDirectoryWithoutSubdirectories() throws Exception {
+        String[] extensions = new String[]{"pdf", "jpeg"};
 
-        fileService.findFilePaths(dirName);
+        when(fileDao.findFilePaths(directoryPath, extensions, false)).thenReturn(new ArrayList<>());
 
-        verify(fileDao, times(1)).findFilePaths(dirName);
+        fileService.findFilePaths(directoryPath, extensions, false);
+
+        verify(fileDao, times(1)).findFilePaths(directoryPath, extensions, false);
     }
 
     @Test
-    public void deleteDirectory() throws Exception {
-        String dirName = anyString();
-        when(fileDao.deleteDirectory(dirName)).thenReturn(anyBoolean());
+    public void deleteDirectoryWithPath() throws Exception {
+        when(fileDao.deleteDirectory(directoryPath)).thenReturn(true);
 
-        fileService.deleteDirectory(dirName);
+        fileService.deleteDirectory(directoryPath);
 
-        verify(fileDao, times(1)).deleteDirectory(dirName);
+        verify(fileDao, times(1)).deleteDirectory(directoryPath);
     }
 }

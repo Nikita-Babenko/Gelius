@@ -6,18 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ua.skillsup.gelius.dao.FileDao;
-import ua.skillsup.gelius.exception.DeniedFileTypesException;
-import ua.skillsup.gelius.exception.FileSavingException;
+import ua.skillsup.gelius.exception.RuntimeNullPointerException;
+import ua.skillsup.gelius.exception.UnableSaveFileException;
 import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.service.FileService;
-import ua.skillsup.gelius.util.FileNameManipulator.PART;
+import ua.skillsup.gelius.util.ProductFileUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static ua.skillsup.gelius.util.FileNameManipulator.explodeFileName;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -28,29 +25,30 @@ public class FileServiceImpl implements FileService {
     private FileDao fileDao;
 
     @Override
-    public void uploadFiles(String fullProductNumber, MultipartFile[] files) {
-        if (files.length == 0) {
-            return;
+    public void saveFiles(String directoryPath, MultipartFile[] files) {
+        if (directoryPath == null || files == null) {
+            throw new RuntimeNullPointerException("Directory path or files may be null");
         }
 
         printFilesInfo(files);
 
-        List<String> filesWithDeniedTypes = getFileNamesWithDeniedTypes(files);
-        if (!filesWithDeniedTypes.isEmpty()) {
-            throw new DeniedFileTypesException(filesWithDeniedTypes);
+        final Map<String, MultipartFile> filePathWithFiles = ProductFileUtils.splitFileNameWithAllowedExtensions(Arrays.asList(files), Data.ALLOWED_FILE_EXTENSIONS);
+
+        /*if (!(fileNameWithExtensions.size() == files.length)){
+            throw new NotAllowedFileExtensionsException("Among the files may be with not allowed extensions. " +
+                    "Allowed extensions are " + Data.ALLOWED_FILE_EXTENSIONS);
+        }*/
+
+        boolean isDirectoryCreated = this.fileDao.createDirectory(directoryPath);
+
+        if (!isDirectoryCreated) {
+            throw new UnableSaveFileException("Directory (with path" + directoryPath + ") was not created");
         }
 
-        boolean isCreated = this.fileDao.createDirectory(fullProductNumber);
-        System.out.println(isCreated);
-        if (!isCreated) {
-            throw new FileSavingException("Directory (product number " + fullProductNumber + ") was not created");
+        boolean isFilesSaved = this.fileDao.saveFiles(directoryPath, filePathWithFiles.values());
+        if (!isFilesSaved) {
+            throw new UnableSaveFileException("Files was not saved");
         }
-
-        boolean isSaved = this.fileDao.saveFiles(fullProductNumber, files);
-        if (!isSaved) {
-            throw new FileSavingException("Files (product number " + fullProductNumber + ") was not saved");
-        }
-
     }
 
     private void printFilesInfo(MultipartFile[] files){
@@ -61,38 +59,13 @@ public class FileServiceImpl implements FileService {
                                                 ", content-type=" + multipartFile.getContentType()));
     }
 
-    private List<String> getFileNamesWithDeniedTypes(MultipartFile[] files) {
-        LOG.info("getFileNamesWithDeniedTypes()");
-        List<String> fileNamesWithDeniedTypes = new ArrayList<>(files.length);
-
-        for (MultipartFile file : files) {
-            String fileName = file.getOriginalFilename();
-            Map<PART, String> fileNameParts = explodeFileName(fileName);
-
-            String extension = fileNameParts.get(PART.EXT);
-            LOG.info("File extension=" + extension);
-            boolean isFileTypeDenied = true;
-            for (String allowedExtension : Data.ALLOWED_FILE_EXTENSIONS) {
-                if (allowedExtension.equalsIgnoreCase(extension)) {
-                    isFileTypeDenied = false;
-                    break;
-                }
-            }
-            if (isFileTypeDenied) {
-                fileNamesWithDeniedTypes.add(fileName);
-            }
-        }
-
-        return fileNamesWithDeniedTypes;
+    @Override
+    public boolean deleteDirectory(String directoryPath) {
+        return fileDao.deleteDirectory(directoryPath);
     }
 
     @Override
-    public boolean deleteDirectory(String dirName) {
-        return fileDao.deleteDirectory(dirName);
-    }
-
-    @Override
-    public List<String> findFilePaths(String dirName) {
-        return fileDao.findFilePaths(dirName);
+    public List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
+        return fileDao.findFilePaths(directoryPath, extensions, isFindInSubdirectories);
     }
 }
