@@ -8,21 +8,7 @@ class FilteringSortingStore extends EventEmitter {
 
     constructor() {
         super();
-        this.sortingFiltering = {
-            productNumber: [],
-            "client.companyName": [],
-            productName: [],
-            "productType.productType": [],
-            innerLength: [],
-            innerWidth: [],
-            innerHeight: [],
-            "cardboardBrand.cardboardBrand": [],
-            "profile.profile": [],
-            layersColours: [],
-            cliche: [],
-            sortableColumn: "productNumber",
-            sortingDirection: "asc"
-        };
+        this.sortingFiltering = this.__getDefaultSortingFilteringObject();
 
         this.allFilterParameters = [];
 
@@ -37,7 +23,26 @@ class FilteringSortingStore extends EventEmitter {
         };
 
         this.isSortingAction = false;
+        this.isResetAll = false;
     }
+
+    __getDefaultSortingFilteringObject() {
+        return {
+            "productNumber": [],
+            "client.companyName": [],
+            "productName": [],
+            "productType.productType": [],
+            "innerLength": [],
+            "innerWidth": [],
+            "innerHeight": [],
+            "cardboardBrand.cardboardBrand": [],
+            "profile.profile": [],
+            "layersColours": [],
+            "cliche": [],
+            "sortableColumn": "productNumber",
+            "sortingDirection": "asc"
+        };
+    };
 
     getFilterParametersForColumn(columnName) {
         var result = [];
@@ -71,11 +76,28 @@ class FilteringSortingStore extends EventEmitter {
         this.emit(EventConstants.FILTERING_SORTING_CHANGE_EVENT);
     }
 
+    getIsResetAll() {
+        return this.isResetAll;
+    }
+
     __concatArrays(a, b) {
         return a.concat(b.filter(function (item) {
             return a.indexOf(item) < 0;
         }));
     }
+
+    isAnyFilterSelected() {
+        var isSelected = false;
+        var filtering = this.sortingFiltering;
+        for (var param in this.sortingFiltering) {
+            if (Array.isArray(filtering[param]) && (filtering[param].length > 0)) {
+                isSelected = true;
+                break;
+            }
+        }
+        return isSelected;
+    }
+
 }
 
 const filteringSortingStore = new FilteringSortingStore();
@@ -109,6 +131,19 @@ filteringSortingStore.dispatchToken = Dispatcher.register(function (event) {
             filteringSortingStore.sortableColumns.currentSortableColumn = event.columnName;
             filteringSortingStore.emitChange();
             break;
+        case EventConstants.RESET_ALL_FILTERS:
+            filteringSortingStore.sortingFiltering = filteringSortingStore.__getDefaultSortingFilteringObject();
+            filteringSortingStore.isResetAll = true;
+            filteringSortingStore.emitChange();
+            filteringSortingStore.isResetAll = false;
+            break;
+        case EventConstants.RESET_FILTERS_FOR_COLUMN:
+            filteringSortingStore.sortingFiltering[event.columnName] = [];
+            break;
+        case EventConstants.SELECT_FILTERS_FOR_COLUMN:
+            filteringSortingStore.sortingFiltering[event.columnName] = filteringSortingStore.allFilterParameters[event.columnName];
+            break;
+
     }
 });
 

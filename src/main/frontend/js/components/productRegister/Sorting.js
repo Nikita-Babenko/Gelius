@@ -11,14 +11,14 @@ class Sorting extends React.Component {
         return (
             <div>
                 <div className="dropdown-header">Сортировка</div>
-                <div className="sorting-option" onClick={this.__onSortingDirectionClick.bind(null, "asc")}>
+                <div className="dropdown-option" onClick={this.__onSortingDirectionClick.bind(null, "asc")}>
                     <a href="#">
                         <i className="fa fa-sort-amount-asc" aria-hidden="true">
                             <span>&nbsp;по возрастанию</span>
                         </i>
                     </a>
                 </div>
-                <div className="sorting-option" onClick={this.__onSortingDirectionClick.bind(null, "desc")}>
+                <div className="dropdown-option" onClick={this.__onSortingDirectionClick.bind(null, "desc")}>
                     <a href="#">
                         <i className="fa fa-sort-amount-desc" aria-hidden="true">
                             <span>&nbsp;по убыванию</span>

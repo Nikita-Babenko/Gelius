@@ -1,5 +1,6 @@
 import Dispatcher from '../dispatcher/Dispatcher';
 import FilteringSortingStore from '../stores/FilteringSortingStore';
+import ProductRegisterActions from './ProductRegisterActions';
 import UrlConstants from '../constants/Url';
 import EventConstants from '../constants/Events';
 import L from '../utils/Logging';
@@ -50,6 +51,32 @@ var FilteringSortingActions = {
             columnName: columnName,
             direction: sortingDirection
         });
+    },
+
+    resetAllFilters() {
+        Dispatcher.dispatch({
+            eventType: EventConstants.RESET_ALL_FILTERS
+        });
+        this.loadAllFilterParametersFromServer ();
+        ProductRegisterActions.loadProductsFromServer();
+    },
+
+    resetAllFiltersForColumn(columnName){
+        Dispatcher.dispatch({
+            eventType: EventConstants.RESET_FILTERS_FOR_COLUMN,
+            columnName: columnName
+        });
+        this.loadAllFilterParametersFromServer ();
+        ProductRegisterActions.loadProductsFromServer();
+    },
+
+    selectAllFiltersForColumn(columnName){
+        Dispatcher.dispatch({
+            eventType: EventConstants.SELECT_FILTERS_FOR_COLUMN,
+            columnName: columnName
+        });
+        this.loadAllFilterParametersFromServer ();
+        ProductRegisterActions.loadProductsFromServer();
     }
 
 };

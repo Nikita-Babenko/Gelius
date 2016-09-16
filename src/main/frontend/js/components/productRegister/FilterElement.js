@@ -1,6 +1,8 @@
 import React from 'react';
 import ProductRegisterActions from '../../actions/ProductRegisterActions';
 import FilteringSortingActions from '../../actions/FilteringSortingActions';
+import FilteringSortingStore from '../../stores/FilteringSortingStore';
+import EventConstants from '../../constants/Events';
 
 class FilterElement extends React.Component {
     constructor(props) {
@@ -8,6 +10,7 @@ class FilterElement extends React.Component {
         this.state = {
             isChecked: false
         };
+        this._setIsCheckedValue = this._setIsCheckedValue.bind(this);
     }
 
     render() {
@@ -33,6 +36,12 @@ class FilterElement extends React.Component {
         }
 
         ProductRegisterActions.loadProductsFromServer();
+    }
+
+    _setIsCheckedValue(value) {
+        this.setState({
+            isChecked: value
+        })
     }
 }
 

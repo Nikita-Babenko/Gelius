@@ -9,6 +9,9 @@ var EventConstants = {
     DELETE_FILTER_ELEMENT: "delete_filter_element",
 
     APPLY_SORTING: "apply_sorting",
+    RESET_ALL_FILTERS: "reset_all_filters",
+    RESET_FILTERS_FOR_COLUMN: "reset_filters_for_column",
+    SELECT_FILTERS_FOR_COLUMN: "select_filters_for_column",
 
     PRODUCTS_TABLE_CHANGE_EVENT: "products_table_change_event",
     FILTERING_SORTING_CHANGE_EVENT: "filtering_sorting_change_event",

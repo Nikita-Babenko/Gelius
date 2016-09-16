@@ -93,6 +93,13 @@ class BodyRight extends React.Component {
                     </tr>
 
                     <tr>
+                        <td className="avto_large_td" colSpan="2">Производственный формат</td>
+                        <td className="avto_small_td">
+                            <NumberInput id="productionFormat"/>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td colSpan="3" className="right_table_title green_color">
                             Биговки
                         </td>
@@ -100,13 +107,6 @@ class BodyRight extends React.Component {
 
                     <tr>
                         <Bigovki/>
-                    </tr>
-
-                    <tr>
-                        <td className="avto_large_td" colSpan="2">Производственный формат</td>
-                        <td className="avto_small_td">
-                            <NumberInput id="productionFormat"/>
-                        </td>
                     </tr>
 
                     <tr>
