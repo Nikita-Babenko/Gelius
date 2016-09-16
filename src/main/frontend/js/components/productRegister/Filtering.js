@@ -46,7 +46,6 @@ class Filtering extends React.Component {
         }
         var self = this;
         var filterCheckboxes = filterData.map(function (e, index) {
-            if (e !== null)
                 return (
                     <FilterElement columnName={self.props.columnName}
                                    ref={self.props.columnName+index}
@@ -129,10 +128,11 @@ class Filtering extends React.Component {
     }
 
     _resetFilters() {
-        if (FilteringSortingStore.getIsResetAll()) {
-            this._checkAll(false);
-            this.props.enableFiltering(false);
-        }
+        if (this.state.filtersChecked > 0)
+            if (FilteringSortingStore.getIsResetAll()) {
+                this._checkAll(false);
+                this.props.enableFiltering(false);
+            }
     }
 
     _checkAll(value) {
