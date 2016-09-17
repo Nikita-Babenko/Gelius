@@ -3,6 +3,7 @@ import ProductRegisterActions from '../../actions/ProductRegisterActions';
 import ProductRegisterStore from '../../stores/ProductRegisterStore';
 import EventConstants from '../../constants/Events';
 import UrlConstants from '../../constants/Url';
+import Util from '../../utils/Utility';
 
 class Row extends React.Component {
 
@@ -36,8 +37,9 @@ class Row extends React.Component {
 
     render() {
         return (
-            <tr onClick={this.__onProductRowClick} onDoubleClick={this.__onProductRowDoubleClick} style={this.state.selectedProductColor}>
-                <td>{this.props.row.productNumber ? this.props.row.productNumber : "-"}</td>
+            <tr onClick={this.__onProductRowClick} onDoubleClick={this.__onProductRowDoubleClick}
+                style={this.state.selectedProductColor}>
+                <td>{this.props.row.productNumber ? Util.getFullProductNumber(this.props.row.productNumber, this.props.row.isNew) : "-"}</td>
                 <td>{this.props.row.client ? this.props.row.client.companyName : "-"}</td>
                 <td>{this.props.row.productName ? this.props.row.productName : "-"}</td>
                 <td>{this.props.row.productType ? this.props.row.productType.productType : "-"}</td>
