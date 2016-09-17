@@ -34,7 +34,7 @@ public final class ProductFileUtils {
             String fileExtension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
 
             if (allowedFileExtensions.contains(fileExtension)) {
-                fileWithExtensions.put(multipartFile.getName(), multipartFile);
+                fileWithExtensions.put(multipartFile.getOriginalFilename(), multipartFile);
             }
         });
 

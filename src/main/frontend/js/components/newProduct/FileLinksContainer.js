@@ -96,7 +96,7 @@ class FileLinksContainer extends React.Component {
         var fileLinks = this.state.fileLinks.map(function (link) {
             return (
                 <div>
-                    <a href={link}>
+                    <a href={link} target="_blank">
                         <i className="fa fa-file-image-o" aria-hidden="true" />
                         {link.indexOf("/") >= 0 ? link.split("/").pop() : link.split("\\").pop()}
                     </a>
