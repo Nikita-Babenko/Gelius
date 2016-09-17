@@ -97,8 +97,8 @@ class FileLinksContainer extends React.Component {
             return (
                 <div>
                     <a href={link}>
-                        <i className="fa fa-file-image-o" aria-hidden="true"></i>
-                        {link.split("/").pop()}
+                        <i className="fa fa-file-image-o" aria-hidden="true" />
+                        {link.indexOf("/") >= 0 ? link.split("/").pop() : link.split("\\").pop()}
                     </a>
                 </div>
             );

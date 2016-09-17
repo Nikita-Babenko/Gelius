@@ -7,10 +7,12 @@ import java.util.regex.Pattern;
 
 public class Data {
 
+    public static final String DIRECTORY_NAME = "PRODUCT_FILES";
+
     //Uploaded files:
     public static final String DIRECTORY_PATH = System.getProperty("catalina.home")
             + File.separator
-            + "PRODUCT_FILES"
+            + DIRECTORY_NAME
             + File.separator;
 
     public static final Pattern ALLOWED_FILENAME_SYMBOLS = Pattern.compile(

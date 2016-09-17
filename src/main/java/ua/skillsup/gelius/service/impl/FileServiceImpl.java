@@ -29,8 +29,7 @@ public class FileServiceImpl implements FileService {
         if (directoryPath == null || files == null) {
             throw new RuntimeNullPointerException("Directory path or files may be null");
         }
-
-        printFilesInfo(files);
+        else printFilesInfo(files);
 
         final Map<String, MultipartFile> filePathWithFiles = ProductFileUtils.splitFileNameWithAllowedExtensions(Arrays.asList(files), Data.ALLOWED_FILE_EXTENSIONS);
 
@@ -53,8 +52,8 @@ public class FileServiceImpl implements FileService {
 
     private void printFilesInfo(MultipartFile[] files){
         List<MultipartFile> filesList = Arrays.asList(files);
-        filesList.forEach(multipartFile -> LOG.debug(
-                                                multipartFile + ": " +
+        filesList.forEach(multipartFile -> LOG.info(
+                                                multipartFile.getOriginalFilename() + ": " +
                                                 ", size=" + multipartFile.getSize() +
                                                 ", content-type=" + multipartFile.getContentType()));
     }

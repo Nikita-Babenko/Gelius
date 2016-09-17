@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.impl;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -23,6 +24,11 @@ public class FileDaoImplTest {
 
     private FileDao fileDao = new FileDaoImpl();
 
+    @After
+    public void tearDown() throws Exception {
+        File directory = new File(directoryPath);
+        FileUtils.deleteDirectory(directory);
+    }
 
     @Test
     public void createDirectory() throws Exception {
@@ -44,7 +50,6 @@ public class FileDaoImplTest {
         fileDao.deleteDirectory(directoryPath);
 
         assertEquals("Directory have already deleted", directory.exists(), false);
-        FileUtils.deleteDirectory(directory);
     }
 
     @Test
@@ -61,7 +66,6 @@ public class FileDaoImplTest {
         final List<String> filePaths = fileDao.findFilePaths(directoryPath, extensions, false);
 
         assertEquals("Find all file paths withour subdirectories", filePaths.size(), 2);
-        FileUtils.deleteDirectory(directory);
     }
 
 
@@ -71,7 +75,6 @@ public class FileDaoImplTest {
         File file1 = new File(directoryPath + File.separator + "test" + File.separator +"somefile1.pdf");
         File file2 = new File(directoryPath + File.separator + "test" + File.separator +"somefile2.png");
         File file3 = new File(directoryPath + File.separator + "somefile3.pdf");
-        File directory = new File(directoryPath);
 
         file1.getParentFile().mkdirs();
         file3.getParentFile().mkdirs();
@@ -82,7 +85,6 @@ public class FileDaoImplTest {
         final List<String> filePaths = fileDao.findFilePaths(directoryPath, extensions, true);
 
         assertEquals("Find all file paths with subdirectories", filePaths.size(), 3);
-        FileUtils.deleteDirectory(directory);
     }
 
     @Test
@@ -105,7 +107,6 @@ public class FileDaoImplTest {
         fileDao.saveFiles(directoryPath, list);
 
         assertEquals("Is saved file exists", new File(directoryPath + File.separator + multipartFile.getOriginalFilename()).exists(), true);
-        FileUtils.deleteDirectory(directory);
     }
 
 

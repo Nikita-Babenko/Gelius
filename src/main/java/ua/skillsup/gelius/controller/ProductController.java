@@ -15,6 +15,7 @@ import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.service.ProductService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +109,13 @@ public class ProductController {
         ProductDto product = productService.findById(id);
         String fullProductNumber = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
-        product.setFilePaths(fileService.findFilePaths(directoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false));
+        List<String> currentPaths = fileService.findFilePaths(directoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
+        List<String> newPaths = new ArrayList<>();
+        currentPaths.forEach(filePath -> {
+            String newFileName = "productFiles" + filePath.split("PRODUCT_FILES")[1];
+            newPaths.add(newFileName);
+        });
+        product.setFilePaths(newPaths);
 
         return new Response(ResponseCode.OK, product);
     }
