@@ -925,3 +925,13 @@ input[type=number]::-webkit-outer-spin-button {
         right: 20%;
     }
 }
+
+.product-image {
+    margin-bottom: 20px;
+}
+
+.product-image img {
+    max-width: 80% !important;
+    height: auto;
+    padding: 3px;
+}

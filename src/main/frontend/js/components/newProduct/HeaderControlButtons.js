@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import EventConstants from '../../constants/Events';
 import NewProductActions from '../../actions/NewProductActions';
 import NewProductStore from '../../stores/NewProductStore';
-import DeleteProductModal from '../newProduct/DeleteProductModal';
+import DeleteModal from '../general/DeleteModal';
 
 class HeaderControlButtons extends React.Component {
 
@@ -16,6 +16,7 @@ class HeaderControlButtons extends React.Component {
 
         this.__loadProductId = this.__loadProductId.bind(this);
         this.__onDeleteProductButtonClick = this.__onDeleteProductButtonClick.bind(this);
+        this._deleteFunction = this._deleteFunction.bind(this);
     }
 
     componentDidMount() {
@@ -44,7 +45,10 @@ class HeaderControlButtons extends React.Component {
                    title="Удалить продук"
                    aria-hidden="true"
                    onClick={this.__onDeleteProductButtonClick}/>
-                <DeleteProductModal ref="deleteProductModal"/>
+                <DeleteModal ref="deleteProductModal"
+                             confirmMessage="Вы уверены, что хотите удалить техническую карту?"
+                             deleteFunction={this._deleteFunction}
+                />
 
                 <a href="#"
                    className="control-btn btn fa fa-file-pdf-o fa-2x disabled"
@@ -66,6 +70,10 @@ class HeaderControlButtons extends React.Component {
     __onDeleteProductButtonClick() {
         if (this.state.productId)
             $(ReactDOM.findDOMNode(this.refs.deleteProductModal)).modal();
+    }
+
+    _deleteFunction() {
+        NewProductActions.deleteProductById(this.state.productId, true)
     }
 
     __loadProductId() {

@@ -4,7 +4,7 @@ import NewProductStore from "../../stores/NewProductStore";
 import UploadFilesStore from "../../stores/UploadFilesStore";
 import EventConstants from "../../constants/Events";
 import NewProductAction from "../../actions/NewProductActions";
-
+import DeleteModal from '../general/DeleteModal';
 
 class FileLinksContainer extends React.Component {
 
@@ -18,7 +18,8 @@ class FileLinksContainer extends React.Component {
         };
         this.__addFileLink = this.__addFileLink.bind(this);
         this.__deleteAllFileLinks = this.__deleteAllFileLinks.bind(this);
-        this.__showModalWindow = this.__showModalWindow.bind(this);
+        this.__showDeleteFileModalWindow = this.__showDeleteFileModalWindow.bind(this);
+        this.__showDeleteAllFilesModalWindow = this.__showDeleteAllFilesModalWindow.bind(this);
         this.__deleteAllFileLinksWhenProductSaved = this.__deleteAllFileLinksWhenProductSaved.bind(this);
         this.__ifProductSaved = this.__ifProductSaved.bind(this);
         this.__loadDefaultFileLinks = this.__loadDefaultFileLinks.bind(this);
@@ -85,11 +86,15 @@ class FileLinksContainer extends React.Component {
         }
     }
 
-    __showModalWindow(item) {
+    __showDeleteFileModalWindow(item) {
         this.setState({
             deleteItem: item
         });
-        $(ReactDOM.findDOMNode(this.refs.modalWindow)).modal();
+        $(ReactDOM.findDOMNode(this.refs.deleteFileModal)).modal();
+    }
+
+    __showDeleteAllFilesModalWindow() {
+        $(ReactDOM.findDOMNode(this.refs.deleteAllFilesModal)).modal();
     }
 
     render() {
@@ -97,7 +102,7 @@ class FileLinksContainer extends React.Component {
             return (
                 <div>
                     <a href={link} target="_blank">
-                        <i className="fa fa-file-image-o" aria-hidden="true" />
+                        <i className="fa fa-file-image-o" aria-hidden="true"/>
                         {link.indexOf("/") >= 0 ? link.split("/").pop() : link.split("\\").pop()}
                     </a>
                 </div>
@@ -109,7 +114,7 @@ class FileLinksContainer extends React.Component {
                 <div key={item.index} className="fileLink">
                     <a href="#"
                        className="fa fa-trash-o fa-lg"
-                       onClick={this.__showModalWindow.bind(this, item.index)}
+                       onClick={this.__showDeleteFileModalWindow.bind(this, item.index)}
                        aria-hidden="true"/>
                     {item.el}
                 </div>
@@ -129,9 +134,16 @@ class FileLinksContainer extends React.Component {
                     <a href="#" className="fa fa-paperclip fa-lg" title="Прикрепить ссылку" onClick={this.__addFileLink}
                        aria-hidden="true"/>
                     <a href="#" className="fa fa-trash-o fa-lg" title="Удалить все ссылки" aria-hidden="true"
-                       onClick={this.__deleteAllFileLinks}/>
+                       onClick={this.__showDeleteAllFilesModalWindow}/>
                 </div>
-                <ModalWindow ref="modalWindow" onDelete={this.__deleteFileLink.bind(this, this.state.deleteItem)}/>
+                <DeleteModal ref="deleteFileModal"
+                             confirmMessage="Вы действительно хотите удалить этот файл?"
+                             deleteFunction={this.__deleteFileLink.bind(this, this.state.deleteItem)}
+                />
+                <DeleteModal ref="deleteAllFilesModal"
+                             confirmMessage="Вы действительно хотите удалить все выбранные файлы?"
+                             deleteFunction={this.__deleteAllFileLinks}
+                />
             </td>
         );
     }
@@ -158,35 +170,6 @@ class FileLink extends React.Component {
 
     render() {
         return <input type="file" className="fileLinks" onChange={this.__setValue} value={this.state.value}/>
-    }
-
-}
-
-class ModalWindow extends React.Component {
-
-    render() {
-        return (
-            <div className="modal fade">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true"/></button>
-                            <h4 className="modal-title">Удаление файла</h4>
-                        </div>
-                        <div className="modal-body">
-                            <p>Вы действительно хотите удалить файл?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" onClick={this.props.onDelete}
-                                    data-dismiss="modal">Да
-                            </button>
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Нет</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
     }
 
 }

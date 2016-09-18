@@ -266,6 +266,27 @@ var NewProductActions = {
 
     },
 
+    addImage(image){
+        Dispatcher.dispatch({
+            eventType: EventConstants.ADD_IMAGE,
+            image: image
+        });
+    },
+
+    removeImage(imageID){
+        Dispatcher.dispatch({
+            eventType: EventConstants.REMOVE_IMAGE,
+            imageId: imageID
+        });
+    },
+
+    selectImage(imageID) {
+        Dispatcher.dispatch({
+            eventType: EventConstants.SELECT_IMAGE,
+            imageId: imageID
+        });
+    },
+
     __disablePalletDictionaryDependsFromChangePacking(){
         var palletContext = $('#pallet');
         $('#packing').change(function () {

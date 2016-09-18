@@ -3,6 +3,7 @@ import Dictionary from "../newProduct/Dictionary";
 import FileLinksContainer from "../newProduct/FileLinksContainer";
 import NumberInput from "../newProduct/NumberInput";
 import Bigovki from "../newProduct/Bigovki";
+import FooterControlButtons from "../newProduct/FooterControlButtons";
 
 class BodyRight extends React.Component {
     render() {
@@ -130,16 +131,7 @@ class BodyRight extends React.Component {
                     </tbody>
                 </table>
 
-                <div className="buttonContainer">
-                    <div className="buttons_bottom icon_buttons_group">
-                        <a className="control-btn btn fa fa-pencil fa-2x disabled" href="#">
-                        </a>
-                        <a className="control-btn btn fa fa-plus fa-2x disabled" href="#" id="addNew">
-                        </a>
-                        <a className="control-btn btn fa fa-trash-o fa-2x disabled" href="#">
-                        </a>
-                    </div>
-                </div>
+                <FooterControlButtons/>
 
             </div>
         );

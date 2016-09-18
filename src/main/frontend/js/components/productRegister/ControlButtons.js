@@ -6,7 +6,7 @@ import UrlConstants from '../../constants/Url';
 import EventConstants from '../../constants/Events';
 import NewProductActions from '../../actions/NewProductActions';
 import FilteringSortingActions from '../../actions/FilteringSortingActions';
-import DeleteProductModal from './DeleteProductModal';
+import DeleteModal from '../general/DeleteModal';
 
 class ControlButtons extends React.Component {
 
@@ -22,6 +22,7 @@ class ControlButtons extends React.Component {
         this.__isAnyFilterSelected = this.__isAnyFilterSelected.bind(this);
         this.__onDiscardAllFiltersButtonClick = this.__onDiscardAllFiltersButtonClick.bind(this);
         this.__onDeleteProductButtonClick = this.__onDeleteProductButtonClick.bind(this);
+        this._deleteFunction = this._deleteFunction.bind(this);
     }
 
     componentDidMount() {
@@ -66,7 +67,10 @@ class ControlButtons extends React.Component {
                    aria-hidden="true"
                    onClick={this.__onDeleteProductButtonClick}>
                 </a>
-                <DeleteProductModal ref="deleteRegisterProductModal"/>
+                <DeleteModal ref="deleteRegisterProductModal"
+                             confirmMessage="Вы уверены, что хотите удалить техническую карту?"
+                             deleteFunction={this._deleteFunction}
+                />
             </div>
         );
     }
@@ -90,6 +94,10 @@ class ControlButtons extends React.Component {
     __onDeleteProductButtonClick() {
         if (this.state.productId)
             $(ReactDOM.findDOMNode(this.refs.deleteRegisterProductModal)).modal();
+    }
+
+    _deleteFunction() {
+        NewProductActions.deleteProductById(this.state.productId, false)
     }
 
 

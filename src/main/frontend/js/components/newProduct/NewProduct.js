@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Header from "../newProduct/Header";
 import Body from "../newProduct/Body";
+import Footer from "../newProduct/Footer";
 import NewProductAction from "../../actions/NewProductActions";
 import NewProductStore from "../../stores/NewProductStore";
 import EventConstants from "../../constants/Events";
@@ -35,9 +36,10 @@ class NewProduct extends React.Component {
     render() {
         return (
             <div className="container-fluid target">
-                <Header />
+                <Header/>
                 <div id="alert-information"></div>
-                <Body />
+                <Body/>
+                <Footer/>
             </div>
         );
     }

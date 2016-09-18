@@ -17,6 +17,7 @@ var EventConstants = {
     FILTERING_SORTING_CHANGE_EVENT: "filtering_sorting_change_event",
 
     SELECT_PRODUCT: "select_product",
+    SELECT_IMAGE: "select_image",
 
     //New product constants
     LOAD_ALL_DICTIONARIES: "load_all_dictionaries",
@@ -40,6 +41,10 @@ var EventConstants = {
     REMOVE_FILE_LINK: "remove_file_link",
     FILE_LINKS_CHANGE_EVENT: "file_links_change_event", //UploadFilesStore: file link was added or removed
     SELECTED_FILES_WERE_SAVED: "selected_files_were_saved", //file links was saved
+
+    IMAGES_CHANGE_EVENT: "images_change_event",
+    ADD_IMAGE: "add_image",
+    REMOVE_IMAGE: "remove_image",
 
     COPY_PRODUCT: "copy",
     EDIT_PRODUCT: "edit",
