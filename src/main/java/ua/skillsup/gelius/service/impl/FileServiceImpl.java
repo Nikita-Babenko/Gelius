@@ -12,7 +12,6 @@ import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.util.ProductFileUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,13 +24,13 @@ public class FileServiceImpl implements FileService {
     private FileDao fileDao;
 
     @Override
-    public void saveFiles(String directoryPath, MultipartFile[] files) {
+    public void saveFiles(String directoryPath, List<MultipartFile> files) {
         if (directoryPath == null || files == null) {
             throw new RuntimeNullPointerException("Directory path or files may be null");
         }
         else printFilesInfo(files);
 
-        final Map<String, MultipartFile> filePathWithFiles = ProductFileUtils.splitFileNameWithAllowedExtensions(Arrays.asList(files), Data.ALLOWED_FILE_EXTENSIONS);
+        final Map<String, MultipartFile> filePathWithFiles = ProductFileUtils.splitFileNameWithAllowedExtensions(files, Data.ALLOWED_FILE_EXTENSIONS);
 
         /*if (!(fileNameWithExtensions.size() == files.length)){
             throw new NotAllowedFileExtensionsException("Among the files may be with not allowed extensions. " +
@@ -50,9 +49,8 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    private void printFilesInfo(MultipartFile[] files){
-        List<MultipartFile> filesList = Arrays.asList(files);
-        filesList.forEach(multipartFile -> LOG.info(
+    private void printFilesInfo(List<MultipartFile> files){
+        files.forEach(multipartFile -> LOG.info(
                                                 multipartFile.getOriginalFilename() + ": " +
                                                 ", size=" + multipartFile.getSize() +
                                                 ", content-type=" + multipartFile.getContentType()));
@@ -66,5 +64,10 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
         return fileDao.findFilePaths(directoryPath, extensions, isFindInSubdirectories);
+    }
+
+    @Override
+    public boolean updateFiles(String directoryPath, List<MultipartFile> newFiles, List<String> fileNamesFromFrontend) {
+        return this.fileDao.updateFiles(directoryPath, newFiles, fileNamesFromFrontend, null, false);
     }
 }

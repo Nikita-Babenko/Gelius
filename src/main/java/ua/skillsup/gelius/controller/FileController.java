@@ -13,6 +13,11 @@ import ua.skillsup.gelius.exception.UnableSaveFileException;
 import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.service.FileService;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RequestMapping("/files")
 public class FileController {
@@ -31,7 +36,28 @@ public class FileController {
         LOG.info("uploadFiles(): productNumber=" + fullProductNumber + ", files count=" + files.length);
 
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
-        this.fileService.saveFiles(directoryPath, files);
+        this.fileService.saveFiles(directoryPath, Arrays.asList(files));
+        return new Response(ResponseCode.OK);
+    }
+
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public Response updateFiles(
+           @RequestParam("serverFiles") String[] oldFiles,
+           @RequestParam("fullProductNumber") String fullProductNumber,
+           @RequestParam("newFiles") MultipartFile[] newFiles
+    ) throws IOException {
+        LOG.info("update Files(): productNumber=" + fullProductNumber + "," +
+                                                   ", new Files count=" + newFiles.length +
+                                                   ", old server files count=" + oldFiles.length);
+
+        String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
+
+        List<String> oldFilesList = new ArrayList<>();
+        Arrays.asList(oldFiles).forEach(pathToFile -> oldFilesList.add(pathToFile.split(fullProductNumber + "/")[1]));
+
+        this.fileService.updateFiles(directoryPath, Arrays.asList(newFiles), oldFilesList);
         return new Response(ResponseCode.OK);
     }
 

@@ -12,10 +12,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class FileDaoImpl implements FileDao {
@@ -60,27 +57,44 @@ public class FileDaoImpl implements FileDao {
     @Override
     public boolean saveFiles(String directoryPath, Collection<MultipartFile> files) {
         LOG.info("save files: " + files);
-
-        for (MultipartFile file : files) {
-            String newFileName = ProductFileUtils.replaceNotAllowedSymbolsInFileName(file.getOriginalFilename());
-
-            File newFile = new File(directoryPath + File.separator + newFileName);
-
-            while (ProductFileUtils.isNotTheSameFile(file, newFile)) {
-                newFile = new File(directoryPath + File.separator + ProductFileUtils.addSuffixToFileName(newFileName));
-            }
-
-            try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile))) {
-                byte[] bytes = file.getBytes();
-                stream.write(bytes);
-            } catch (IOException e) {
-                LOG.info("Error during file saving: " + newFileName + " (original name: " + file.getOriginalFilename() + ")");
-                return false;
-            }
-        }
-
+        boolean isSaved = ProductFileUtils.saveMultipartFiles(directoryPath, files);
         LOG.info("All files were saved");
-        return true;
+        return isSaved;
     }
 
+    @Override
+    public boolean updateFiles(String directoryPath, List<MultipartFile> newFiles, List<String> fileNamesFromFrontend, String [] extensions, boolean isFindInSubdirectories) {
+        File directory = new File(directoryPath);
+        List<File> allFiles = (List<File>) FileUtils.listFiles(directory, extensions, isFindInSubdirectories);
+
+        List<File> resultFiles = new ArrayList<>();
+        allFiles.forEach(serverFile -> fileNamesFromFrontend.forEach(frontendFileName -> {
+            if (serverFile.getName().equals(frontendFileName)) {
+                resultFiles.add(serverFile);
+            }
+        }));
+
+        Map<String, byte[]> normalFilesMap = new HashMap<>();
+        normalFilesMap.putAll(ProductFileUtils.convertNormalFiles(resultFiles, normalFilesMap));
+        allFiles.forEach(File::delete);
+
+        Map<String, byte[]> multipartFilesMap = new HashMap<>();
+        multipartFilesMap.putAll(ProductFileUtils.convertMultipartFiles(newFiles, multipartFilesMap));
+
+        Map<String, byte[]> resultMap = ProductFileUtils.mergeFileMaps(normalFilesMap, multipartFilesMap);
+
+        resultMap.forEach((fileName, bytesFile) -> {
+
+            File newFile = new File(directoryPath + File.separator + fileName);
+
+            try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile))){
+                stream.write(bytesFile);
+            } catch (IOException e) {
+                throw new RuntimeException("Error to update files");
+            }
+        });
+
+        LOG.info("All files were updated");
+        return true;
+    }
 }

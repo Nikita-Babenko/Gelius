@@ -11,8 +11,9 @@ public interface FileDao {
 
     boolean saveFiles(String directoryPath, Collection<MultipartFile> files);
 
+    boolean updateFiles(String directoryPath, List<MultipartFile> newFiles, List<String> fileNamesFromFrontend, String [] extensions, boolean isFindInSubdirectories);
+
     boolean deleteDirectory(String directoryPath);
 
     List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
-
 }

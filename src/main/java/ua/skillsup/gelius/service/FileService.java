@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface FileService {
 
-    void saveFiles(String directoryPath, MultipartFile[] files);
+    void saveFiles(String directoryPath, List<MultipartFile> files);
+
+    boolean updateFiles(String directoryPath, List<MultipartFile> newFiles, List<String> fileNamesFromFrontend);
 
     boolean deleteDirectory(String directoryPath);
 
