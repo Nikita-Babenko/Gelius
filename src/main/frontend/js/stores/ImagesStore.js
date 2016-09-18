@@ -20,6 +20,16 @@ class ImagesStore extends EventEmitter {
         return this.images;
     }
 
+    getImagesToSave() {
+        var allImages = this.images;
+        var imagesToSave = [];
+        for (var i = 0; i < allImages.length; i++) {
+            if (allImages[i].file !== null)
+                imagesToSave.push(allImages[i].file);
+        }
+        return imagesToSave;
+    }
+
     getSelectedImageId() {
         return this.selectedImageId;
     }
@@ -47,6 +57,7 @@ imagesStore.dispatchToken = Dispatcher.register(function (event) {
                 imagesStore.selectedImageId.previous = imagesStore.selectedImageId.current = null;
                 imagesStore.emitChange();
             }
+            console.log("FILE info: ", imagesStore.images[event.imageId].file);
             break;
 
     }

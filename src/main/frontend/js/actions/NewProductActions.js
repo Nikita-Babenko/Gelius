@@ -4,6 +4,7 @@ import EventConstants from "../constants/Events";
 import NewProductStore from "../stores/NewProductStore";
 import UploadFilesStore from "../stores/UploadFilesStore";
 import WorkCentersStore from "../stores/WorkCentersStore";
+import ImagesStore from '../stores/ImagesStore';
 import ObjectConstants from '../constants/Objects';
 import ProductRegisterActions from './ProductRegisterActions';
 import FilteringSortingActions from './FilteringSortingActions';
@@ -246,6 +247,9 @@ var NewProductActions = {
             }
         });
         formData.append("productNumber", savedProductNumber);
+        var images = ImagesStore.getImagesToSave();
+        for (let i = 0; i < images.length; i++)
+            formData.append("images", images[i]);
 
         $.ajax({
             url: UrlConstants.SAVE_PRODUCT_FILES_URL,
@@ -263,7 +267,6 @@ var NewProductActions = {
                 L.log("ERROR during saving files: ", e);
             }
         });
-
     },
 
     addImage(image){

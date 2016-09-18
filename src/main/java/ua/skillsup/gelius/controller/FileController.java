@@ -30,10 +30,11 @@ public class FileController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     public Response uploadFiles(
-        @RequestParam("productNumber") String fullProductNumber,
-        @RequestParam("files") MultipartFile[] files
+            @RequestParam("productNumber") String fullProductNumber,
+            @RequestParam("files") MultipartFile[] files,
+            @RequestParam("images") MultipartFile[] images
     ) {
-        LOG.info("uploadFiles(): productNumber=" + fullProductNumber + ", files count=" + files.length);
+        LOG.info("uploadFiles(): productNumber=" + fullProductNumber + ", files count=" + files.length + ", images count=" + images.length);
 
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
         this.fileService.saveFiles(directoryPath, Arrays.asList(files));
