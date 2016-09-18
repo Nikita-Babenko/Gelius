@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       //  Поддон
 @Table(name = "pallet")
@@ -31,6 +32,19 @@ public class Pallet {
 
     public void setPallet(String pallet) {
         this.pallet = pallet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pallet pallet = (Pallet) o;
+        return Objects.equals(id, pallet.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

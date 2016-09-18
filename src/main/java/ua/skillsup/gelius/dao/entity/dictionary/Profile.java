@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       //  Профиль
 @Table(name = "profile")
@@ -31,6 +32,19 @@ public class Profile {
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profile profile = (Profile) o;
+        return Objects.equals(id, profile.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       //  Рабочий центр
 @Table(name = "workability")
@@ -53,6 +54,19 @@ public class Workability {
 
     public void setElementPriority(Integer elementPriority) {
         this.elementPriority = elementPriority;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Workability that = (Workability) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

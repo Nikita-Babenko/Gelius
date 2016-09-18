@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       //  Тип изделия
 @Table(name = "product_type")
@@ -31,6 +32,19 @@ public class ProductType {
 
     public void setProductType(String productType) {
         this.productType = productType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductType that = (ProductType) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

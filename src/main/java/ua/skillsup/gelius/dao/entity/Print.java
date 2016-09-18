@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "print")
@@ -65,6 +66,19 @@ public class Print {
 
     public void setSquareSeal(Integer squareSeal) {
         this.squareSeal = squareSeal;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Print print = (Print) o;
+        return Objects.equals(id, print.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

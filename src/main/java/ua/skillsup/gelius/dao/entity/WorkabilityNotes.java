@@ -3,6 +3,7 @@ package ua.skillsup.gelius.dao.entity;
 import ua.skillsup.gelius.dao.entity.dictionary.Workability;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "workability_notes")
@@ -57,6 +58,19 @@ public class WorkabilityNotes {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkabilityNotes that = (WorkabilityNotes) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

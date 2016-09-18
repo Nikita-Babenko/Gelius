@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       //  Внутренний слой
 @Table(name = "inner_layer")
@@ -31,6 +32,19 @@ public class InnerLayer {
 
     public void setInnerLayer(String innerLayer) {
         this.innerLayer = innerLayer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InnerLayer that = (InnerLayer) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

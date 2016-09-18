@@ -13,6 +13,7 @@ import ua.skillsup.gelius.exception.UnableSaveFileException;
 import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.service.FileService;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +39,9 @@ public class FileController {
 
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
         this.fileService.saveFiles(directoryPath, Arrays.asList(files));
+
+        String directoryPathForImages = directoryPath + File.separator + "images";
+        this.fileService.saveFiles(directoryPathForImages, Arrays.asList(images));
         return new Response(ResponseCode.OK);
     }
 

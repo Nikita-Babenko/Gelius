@@ -15,6 +15,7 @@ import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.service.ProductService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -108,14 +109,24 @@ public class ProductController {
 
         ProductDto product = productService.findById(id);
         String fullProductNumber = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
-        String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
-        List<String> currentPaths = fileService.findFilePaths(directoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
-        List<String> newPaths = new ArrayList<>();
-        currentPaths.forEach(filePath -> {
+        
+        String productDirectoryPath = Data.DIRECTORY_PATH + fullProductNumber;
+        List<String> productFilePaths = fileService.findFilePaths(productDirectoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
+        List<String> newProductFilePaths = new ArrayList<>();
+        productFilePaths.forEach(filePath -> {
             String newFileName = "productFiles" + filePath.split("PRODUCT_FILES")[1];
-            newPaths.add(newFileName);
+            newProductFilePaths.add(newFileName);
         });
-        product.setFilePaths(newPaths);
+        product.setFilePaths(newProductFilePaths);
+
+        String productDirectoryImagePaths = productDirectoryPath + File.separator + "images";
+        List<String> productImagePaths = fileService.findFilePaths(productDirectoryImagePaths, null, false);
+        List<String> newProductImagePaths = new ArrayList<>();
+        productImagePaths.forEach(imagePath -> {
+            String newImageName = "productImages" + imagePath.split("PRODUCT_FILES")[1];
+            newProductImagePaths.add(newImageName);
+        });
+        product.setFileImagePaths(newProductImagePaths);
 
         return new Response(ResponseCode.OK, product);
     }

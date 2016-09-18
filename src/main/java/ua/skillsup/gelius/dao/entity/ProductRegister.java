@@ -8,6 +8,7 @@ import ua.skillsup.gelius.dao.entity.dictionary.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "product")
@@ -195,6 +196,19 @@ public class ProductRegister {
 
     public void setCliche(String cliche) {
         this.cliche = cliche;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductRegister that = (ProductRegister) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

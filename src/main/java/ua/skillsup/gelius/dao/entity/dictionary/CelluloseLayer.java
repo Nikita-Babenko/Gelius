@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       //  Целлюлозный слой
 @Table(name = "cellulose_layer")
@@ -31,6 +32,19 @@ public class CelluloseLayer {
 
     public void setCelluloseLayer(String celluloseLayer) {
         this.celluloseLayer = celluloseLayer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CelluloseLayer that = (CelluloseLayer) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

@@ -120,6 +120,8 @@ public class ProductDto {
 
     private List<String> filePaths;
 
+    private List<String> fileImagePaths;
+
     public ProductDto() {
     }
 
@@ -493,6 +495,14 @@ public class ProductDto {
 
     public void setFilePaths(List<String> filePaths) {
         this.filePaths = filePaths;
+    }
+
+    public List<String> getFileImagePaths() {
+        return fileImagePaths;
+    }
+
+    public void setFileImagePaths(List<String> fileImagePaths) {
+        this.fileImagePaths = fileImagePaths;
     }
 
     @Override

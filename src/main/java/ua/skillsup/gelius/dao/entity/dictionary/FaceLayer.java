@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       //  Лицевой слой
 @Table(name = "face_layer")
@@ -31,6 +32,19 @@ public class FaceLayer {
 
     public void setFaceLayer(String faceLayer) {
         this.faceLayer = faceLayer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FaceLayer faceLayer = (FaceLayer) o;
+        return Objects.equals(id, faceLayer.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

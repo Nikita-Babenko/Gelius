@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.dao.entity.dictionary;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity       // Марка картона
 @Table(name = "cardboard_brand")
@@ -31,6 +32,19 @@ public class CardboardBrand {
 
     public void setCardboardBrand(String cardBoardBrand) {
         this.cardboardBrand = cardBoardBrand;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CardboardBrand that = (CardboardBrand) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
