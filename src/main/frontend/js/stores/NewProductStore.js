@@ -1,6 +1,7 @@
 import EventEmitter from "eventemitter3";
 import Dispatcher from "../dispatcher/Dispatcher";
 import EventConstants from "../constants/Events";
+import ImagesStore from './ImagesStore';
 import ResponseCodeConstants from "../constants/ResponseCodes";
 import L from '../utils/Logging';
 
@@ -124,7 +125,6 @@ class NewProductStore extends EventEmitter {
             ]
         };
     }
-
 }
 
 const newProductStore = new NewProductStore();
@@ -175,6 +175,7 @@ newProductStore.dispatchToken = Dispatcher.register(function (event) {
             newProductStore.product.productNumber = event.productNumber;
             newProductStore.product.productUpdateDate = newProductStore.__getTodayDate();
             newProductStore.operation = event.operation;
+            ImagesStore.initData(newProductStore.product.fileImagePaths);
             newProductStore.emitChange();
             break;
         case EventConstants.COPY_PRODUCT:

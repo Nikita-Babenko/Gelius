@@ -250,6 +250,12 @@ var NewProductActions = {
         var images = ImagesStore.getImagesToSave();
         for (let i = 0; i < images.length; i++)
             formData.append("images", images[i]);
+        var deleteImages = ImagesStore.getImagesToDelete();
+        if (deleteImages.length)
+            for (let i = 0; i < deleteImages.length; i++)
+                formData.append("deleteImages", images[i]);
+        else
+            formData.append("deleteImages", []);
 
         $.ajax({
             url: UrlConstants.SAVE_PRODUCT_FILES_URL,
@@ -261,6 +267,9 @@ var NewProductActions = {
             success: function () {
                 Dispatcher.dispatch({
                     eventType: EventConstants.SELECTED_FILES_WERE_SAVED
+                });
+                Dispatcher.dispatch({
+                    eventType: EventConstants.INIT_IMAGE_STORE
                 });
             },
             error: function (e) {

@@ -1,7 +1,7 @@
 import React from 'react';
-import ImagesStore from '../../stores/ImagesStore';
 import EventConstants from '../../constants/Events';
 import NewProductActions from '../../actions/NewProductActions';
+import ImagesStore from '../../stores/ImagesStore';
 
 class Images extends React.Component {
     constructor(props) {
@@ -38,6 +38,7 @@ class Images extends React.Component {
             allImages: ImagesStore.getImages()
         });
     }
+
 }
 
 export default Images;

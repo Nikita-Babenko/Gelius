@@ -43,6 +43,7 @@ var EventConstants = {
     SELECTED_FILES_WERE_SAVED: "selected_files_were_saved", //file links was saved
 
     IMAGES_CHANGE_EVENT: "images_change_event",
+    INIT_IMAGE_STORE: "init_image_store",
     ADD_IMAGE: "add_image",
     REMOVE_IMAGE: "remove_image",
 

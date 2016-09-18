@@ -33,9 +33,14 @@ public class FileController {
     public Response uploadFiles(
             @RequestParam("productNumber") String fullProductNumber,
             @RequestParam("files") MultipartFile[] files,
-            @RequestParam("images") MultipartFile[] images
+            @RequestParam("images") MultipartFile[] images,
+            @RequestParam("deleteImages") String[] deleteImages
     ) {
-        LOG.info("uploadFiles(): productNumber=" + fullProductNumber + ", files count=" + files.length + ", images count=" + images.length);
+        LOG.info("uploadFiles():" +
+                "\n\tproductNumber= " + fullProductNumber + "," +
+                "\n\tfilesToSave count= " + files.length + "," +
+                "\n\timagesToSave count= " + images.length + "," +
+                "\n\timagesToDelete count= " + deleteImages.length);
 
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
         this.fileService.saveFiles(directoryPath, Arrays.asList(files));

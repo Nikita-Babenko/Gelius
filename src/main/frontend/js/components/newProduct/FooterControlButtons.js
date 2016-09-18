@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import NewProductActions from '../../actions/NewProductActions';
 import ImagesStore from '../../stores/ImagesStore';
 import EventConstants from '../../constants/Events';
+import Objects from '../../constants/Objects';
 import DeleteModal from '../general/DeleteModal';
 
 class FooterControlButtons extends React.Component {
@@ -10,29 +11,31 @@ class FooterControlButtons extends React.Component {
         super(props);
 
         this.state = {
-            selectedImageId: null
+            selectedImageId: null,
+            numberOfImages: 0
         };
 
-        this._updateSelectedImageId = this._updateSelectedImageId.bind(this);
+        this._updateImagesData = this._updateImagesData.bind(this);
         this._onDeleteImageButtonClick = this._onDeleteImageButtonClick.bind(this);
         this._deleteFunction = this._deleteFunction.bind(this);
     }
 
     componentDidMount() {
-        ImagesStore.addListener(EventConstants.IMAGES_CHANGE_EVENT, this._updateSelectedImageId);
+        ImagesStore.addListener(EventConstants.IMAGES_CHANGE_EVENT, this._updateImagesData);
     }
 
     componentWillUnmount() {
-        ImagesStore.removeListener(EventConstants.IMAGES_CHANGE_EVENT, this._updateSelectedImageId);
+        ImagesStore.removeListener(EventConstants.IMAGES_CHANGE_EVENT, this._updateImagesData);
     }
 
     render() {
         var disableDeleteImageButton = this.state.selectedImageId !== null ? "" : " disabled";
+        var disableAddImageButton = this.state.numberOfImages < Objects.UPLOADED_FILES_COUNT_LIMIT ? "" : " disabled";
         return (
             <div className="buttonContainer">
                 <div className="buttons_bottom icon_buttons_group">
                     <a className="control-btn btn fa fa-pencil fa-2x disabled"/>
-                    <a className="control-btn btn fa fa-plus fa-2x"
+                    <a className={"control-btn btn fa fa-plus fa-2x" + disableAddImageButton}
                        onClick={this._onAddImageButtonClick}/>
                     <a className={"control-btn btn fa fa-trash-o fa-2x" + disableDeleteImageButton}
                        onClick={this._onDeleteImageButtonClick}/>
@@ -58,9 +61,10 @@ class FooterControlButtons extends React.Component {
         NewProductActions.removeImage(this.state.selectedImageId);
     }
 
-    _updateSelectedImageId() {
+    _updateImagesData() {
         this.setState({
-            selectedImageId: ImagesStore.getSelectedImageId().current
+            selectedImageId: ImagesStore.getSelectedImageId().current,
+            numberOfImages: ImagesStore.getCountOfImages()
         });
     }
 
