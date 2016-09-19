@@ -250,10 +250,18 @@ var NewProductActions = {
         var images = ImagesStore.getImagesToSave();
         for (let i = 0; i < images.length; i++)
             formData.append("images", images[i]);
+
+        var deleteFileLinks = UploadFilesStore.getFileLinksToDelete();
+        if (deleteFileLinks.length)
+            for (let i = 0; i < deleteFileLinks.length; i++)
+                formData.append("deleteFileLinks", deleteFileLinks[i]);
+        else
+            formData.append("deleteFileLinks", []);
+
         var deleteImages = ImagesStore.getImagesToDelete();
         if (deleteImages.length)
             for (let i = 0; i < deleteImages.length; i++)
-                formData.append("deleteImages", images[i]);
+                formData.append("deleteImages", deleteImages[i]);
         else
             formData.append("deleteImages", []);
 
@@ -289,6 +297,13 @@ var NewProductActions = {
         Dispatcher.dispatch({
             eventType: EventConstants.REMOVE_IMAGE,
             imageId: imageID
+        });
+    },
+
+    removeFileLink(link){
+        Dispatcher.dispatch({
+            eventType: EventConstants.REMOVE_FILE_LINK,
+            link: link
         });
     },
 

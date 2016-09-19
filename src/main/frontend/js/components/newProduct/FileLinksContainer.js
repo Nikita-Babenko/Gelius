@@ -14,11 +14,14 @@ class FileLinksContainer extends React.Component {
             items: [],
             counter: 0,
             deleteItem: 0,
-            fileLinks: []
+            deleteLink: "",
+            fileLinks: [],
+            itemsToSave: 5
         };
         this.__addFileLink = this.__addFileLink.bind(this);
         this.__deleteAllFileLinks = this.__deleteAllFileLinks.bind(this);
         this.__showDeleteFileModalWindow = this.__showDeleteFileModalWindow.bind(this);
+        this.__showDeleteFileLinkModalWindow = this.__showDeleteFileLinkModalWindow.bind(this);
         this.__showDeleteAllFilesModalWindow = this.__showDeleteAllFilesModalWindow.bind(this);
         this.__deleteAllFileLinksWhenProductSaved = this.__deleteAllFileLinksWhenProductSaved.bind(this);
         this.__ifProductSaved = this.__ifProductSaved.bind(this);
@@ -51,6 +54,15 @@ class FileLinksContainer extends React.Component {
         });
     }
 
+    __deleteSavedFileLink(item) {
+        var links = this.state.fileLinks;
+        NewProductAction.removeFileLink(item);
+        links.splice($.inArray(item, links), 1);
+        this.setState({
+            fileLinks: links
+        });
+    }
+
     __deleteAllFileLinksWhenProductSaved() {
         if (UploadFilesStore.isDeleteSelectedFiles()) {
             this.setState({
@@ -69,6 +81,7 @@ class FileLinksContainer extends React.Component {
 
     __loadDefaultFileLinks() {
         if (NewProductStore.isEnableDefaultValues()) {
+            UploadFilesStore.fileLinksToDelete = [];
             var links = NewProductStore.getProductProperty("filePaths");
             this.setState({
                 fileLinks: links ? links : []
@@ -78,7 +91,7 @@ class FileLinksContainer extends React.Component {
 
     __addFileLink() {
         var counter = this.state.counter + 1;
-        if (this.state.items.length < 5) {
+        if (this.state.items.length < this.state.itemsToSave) {
             this.setState({
                 items: this.state.items.concat({index: counter, el: <FileLink />}),
                 counter: counter
@@ -93,6 +106,13 @@ class FileLinksContainer extends React.Component {
         $(ReactDOM.findDOMNode(this.refs.deleteFileModal)).modal();
     }
 
+    __showDeleteFileLinkModalWindow(item) {
+        this.setState({
+            deleteLink: item
+        });
+        $(ReactDOM.findDOMNode(this.refs.deleteFileLinkModal)).modal();
+    }
+
     __showDeleteAllFilesModalWindow() {
         $(ReactDOM.findDOMNode(this.refs.deleteAllFilesModal)).modal();
     }
@@ -100,20 +120,21 @@ class FileLinksContainer extends React.Component {
     render() {
         var fileLinks = this.state.fileLinks.map(function (link) {
             return (
-                <div>
+                <div className="fileLink">
+                    <a className="fa fa-trash-o fa-lg"
+                       onClick={this.__showDeleteFileLinkModalWindow.bind(this, link)}
+                       aria-hidden="true"/>
                     <a href={link} target="_blank">
-                        <i className="fa fa-file-image-o" aria-hidden="true"/>
                         {link.indexOf("/") >= 0 ? link.split("/").pop() : link.split("\\").pop()}
                     </a>
                 </div>
             );
-        });
+        }, this);
 
         var list = this.state.items.map(function (item) {
             return (
                 <div key={item.index} className="fileLink">
-                    <a href="#"
-                       className="fa fa-trash-o fa-lg"
+                    <a className="fa fa-trash-o fa-lg"
                        onClick={this.__showDeleteFileModalWindow.bind(this, item.index)}
                        aria-hidden="true"/>
                     {item.el}
@@ -127,19 +148,23 @@ class FileLinksContainer extends React.Component {
                 <div className="links">
                     {fileLinks}
                 </div>
+                <DeleteModal ref="deleteFileLinkModal"
+                             confirmMessage="Вы действительно хотите удалить ссылку на этот файл?"
+                             deleteFunction={this.__deleteSavedFileLink.bind(this, this.state.deleteLink)}
+                />
                 <div className="links">
                     {list}
                 </div>
+                <DeleteModal ref="deleteFileModal"
+                             confirmMessage="Вы действительно хотите удалить этот файл?"
+                             deleteFunction={this.__deleteFileLink.bind(this, this.state.deleteItem)}
+                />
                 <div className="attachment_buttons icon_buttons_group" id="buttonsLink">
                     <a href="#" className="fa fa-paperclip fa-lg" title="Прикрепить ссылку" onClick={this.__addFileLink}
                        aria-hidden="true"/>
                     <a href="#" className="fa fa-trash-o fa-lg" title="Удалить все ссылки" aria-hidden="true"
                        onClick={this.__showDeleteAllFilesModalWindow}/>
                 </div>
-                <DeleteModal ref="deleteFileModal"
-                             confirmMessage="Вы действительно хотите удалить этот файл?"
-                             deleteFunction={this.__deleteFileLink.bind(this, this.state.deleteItem)}
-                />
                 <DeleteModal ref="deleteAllFilesModal"
                              confirmMessage="Вы действительно хотите удалить все выбранные файлы?"
                              deleteFunction={this.__deleteAllFileLinks}

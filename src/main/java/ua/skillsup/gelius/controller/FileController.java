@@ -34,13 +34,22 @@ public class FileController {
             @RequestParam("productNumber") String fullProductNumber,
             @RequestParam("files") MultipartFile[] files,
             @RequestParam("images") MultipartFile[] images,
+            @RequestParam("deleteFileLinks") String[] deleteFileLinks,
             @RequestParam("deleteImages") String[] deleteImages
     ) {
         LOG.info("uploadFiles():" +
                 "\n\tproductNumber= " + fullProductNumber + "," +
                 "\n\tfilesToSave count= " + files.length + "," +
                 "\n\timagesToSave count= " + images.length + "," +
+                "\n\tfileLinksToDelete count= " + deleteFileLinks.length + "," +
                 "\n\timagesToDelete count= " + deleteImages.length);
+
+        for (String deleteFileLink : deleteFileLinks) {
+            System.out.println("LINK: " + deleteFileLink);
+        }
+        for (String deleteImage : deleteImages) {
+            System.out.println("IMAGE: " + deleteImage);
+        }
 
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
         this.fileService.saveFiles(directoryPath, Arrays.asList(files));
@@ -54,13 +63,13 @@ public class FileController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public Response updateFiles(
-           @RequestParam("serverFiles") String[] oldFiles,
-           @RequestParam("fullProductNumber") String fullProductNumber,
-           @RequestParam("newFiles") MultipartFile[] newFiles
+            @RequestParam("serverFiles") String[] oldFiles,
+            @RequestParam("fullProductNumber") String fullProductNumber,
+            @RequestParam("newFiles") MultipartFile[] newFiles
     ) throws IOException {
         LOG.info("update Files(): productNumber=" + fullProductNumber + "," +
-                                                   ", new Files count=" + newFiles.length +
-                                                   ", old server files count=" + oldFiles.length);
+                ", new Files count=" + newFiles.length +
+                ", old server files count=" + oldFiles.length);
 
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
 
