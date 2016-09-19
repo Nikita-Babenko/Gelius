@@ -82,7 +82,7 @@ class FileLinksContainer extends React.Component {
     __loadDefaultFileLinks() {
         if (NewProductStore.isEnableDefaultValues()) {
             UploadFilesStore.fileLinksToDelete = [];
-            var links = NewProductStore.getProductProperty("filePaths");
+            var links = NewProductStore.operation === EventConstants.COPY_PRODUCT ? [] : NewProductStore.getProductProperty("filePaths")
             this.setState({
                 fileLinks: links ? links : []
             });
