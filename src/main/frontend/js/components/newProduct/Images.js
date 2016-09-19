@@ -60,6 +60,7 @@ class ImagePreview extends React.Component {
         };
 
         this._onImageClick = this._onImageClick.bind(this);
+        this._onImageDoubleClick = this._onImageDoubleClick.bind(this);
         this._updateSelectedState = this._updateSelectedState.bind(this);
     }
 
@@ -73,14 +74,22 @@ class ImagePreview extends React.Component {
 
     render() {
         return (
-            <div className="product-image" onClick={this._onImageClick}>
-                <img src={this.props.imageUrl} style={this.state.selectedImageColor}/>
+            <div className="product-image">
+                <img src={this.props.imageUrl}
+                     style={this.state.selectedImageColor}
+                     onClick={this._onImageClick}
+                     onDoubleClick={this._onImageDoubleClick}
+                />
             </div>
         );
     }
 
     _onImageClick() {
         NewProductActions.selectImage(this.props.id);
+    }
+
+    _onImageDoubleClick() {
+        window.open(this.props.imageUrl, '_blank');
     }
 
     _updateSelectedState() {
