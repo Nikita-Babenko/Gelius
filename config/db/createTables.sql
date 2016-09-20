@@ -1,3 +1,4 @@
+/* Клиент */
 CREATE TABLE client(
   client_id BIGINT AUTO_INCREMENT,
   address VARCHAR(200),
@@ -196,7 +197,7 @@ CREATE  TABLE producibility_notes(
 
   PRIMARY KEY (producibility_notes_id),
   FOREIGN KEY (product_id) REFERENCES product(product_id),
-  FOREIGN KEY (service_center) REFERENCES workability(workability_id)
+  FOREIGN KEY (service_center) REFERENCES producibility(producibility_id)
 );
 
 /* Просечки */
