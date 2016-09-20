@@ -2,6 +2,8 @@ package ua.skillsup.gelius.model.dto;
 
 import ua.skillsup.gelius.model.dto.dictionary.*;
 
+import java.util.Objects;
+
 public class ProductRegisterDto {
 
     private Long id;
@@ -159,6 +161,19 @@ public class ProductRegisterDto {
 
     public void setCliche(String cliche) {
         this.cliche = cliche;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductRegisterDto that = (ProductRegisterDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

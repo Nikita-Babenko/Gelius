@@ -1,12 +1,11 @@
-import React from 'react';
-import DictionaryStore from '../../stores/DictionariesStore';
-import NewProductAction from '../../actions/NewProductActions';
-import EventConstants from '../../constants/Events';
-import NewProductStore from '../../stores/NewProductStore';
-import Modal from '../general/Modal';
-import ModalBody from '../general/ModalBody';
-import ModalFooter from '../general/ModalFooter';
-import L from "../../utils/Logging";
+import React from "react";
+import DictionaryStore from "../../stores/DictionariesStore";
+import NewProductAction from "../../actions/NewProductActions";
+import EventConstants from "../../constants/Events";
+import NewProductStore from "../../stores/NewProductStore";
+import Modal from "../general/Modal";
+import ModalBody from "../general/ModalBody";
+import ModalFooter from "../general/ModalFooter";
 
 class WorkCenterModal extends React.Component {
     render() {
@@ -97,7 +96,7 @@ class WorkCenterGroups extends React.Component {
 
     _onWorkCentersUpdated() {
         this.setState({
-            workCenters: DictionaryStore.getDictionaryParameters("workability")
+            workCenters: DictionaryStore.getDictionaryParameters("producibility")
         });
     }
 }
@@ -143,7 +142,7 @@ class WorkCenterItem extends React.Component {
     }
 
     __checkIfWorkCenterActive() {
-        var notes = NewProductStore.getProductProperty("workabilityNotes");
+        var notes = NewProductStore.getProductProperty("producibilityNotes");
         //(notes.length > 1) cause we'll usually have AG-center on a first place for each product
         if (notes && notes.length > 1) {
             return notes.some(e => e.serviceCenter.id == this.props.item.id)
@@ -177,6 +176,6 @@ class WorkCenterControls extends React.Component {
     }
 
     __onOkClick() {
-        NewProductAction.updateWorkabilityInfo();
+        NewProductAction.updateProducibilityInfo();
     }
 }

@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.model.dto.dictionary;
 
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class PackingDto {
 
@@ -30,6 +31,19 @@ public class PackingDto {
 
     public void setPacking(String packing) {
         this.packing = packing;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PackingDto that = (PackingDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

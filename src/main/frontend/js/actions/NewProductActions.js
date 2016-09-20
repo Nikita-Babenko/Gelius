@@ -4,10 +4,10 @@ import EventConstants from "../constants/Events";
 import NewProductStore from "../stores/NewProductStore";
 import UploadFilesStore from "../stores/UploadFilesStore";
 import WorkCentersStore from "../stores/WorkCentersStore";
-import ImagesStore from '../stores/ImagesStore';
-import ObjectConstants from '../constants/Objects';
-import ProductRegisterActions from './ProductRegisterActions';
-import FilteringSortingActions from './FilteringSortingActions';
+import ImagesStore from "../stores/ImagesStore";
+import ObjectConstants from "../constants/Objects";
+import ProductRegisterActions from "./ProductRegisterActions";
+import FilteringSortingActions from "./FilteringSortingActions";
 import L from "../utils/Logging";
 
 var NewProductActions = {
@@ -86,7 +86,7 @@ var NewProductActions = {
                             break;
                     }
                     WorkCentersStore.setUseDefautCenters(true);
-                    this.updateWorkabilityInfo();
+                    this.updateProducibilityInfo();
                 }
 
             }.bind(this),
@@ -184,7 +184,7 @@ var NewProductActions = {
     saveProduct(){
         var url;
         var productToSave = NewProductStore.getNewProduct();
-        productToSave["workabilityNotes"] = WorkCentersStore.getWorkCenterNotes();
+        productToSave["producibilityNotes"] = WorkCentersStore.getWorkCenterNotes();
 
         if (NewProductStore.isInEditMode()) {
             url = UrlConstants.UPDATE_PRODUCT_URL;
@@ -209,7 +209,7 @@ var NewProductActions = {
 
                 if (response.code === 200) {
                     WorkCentersStore.setUseDefautCenters(true);
-                    this.updateWorkabilityInfo();
+                    this.updateProducibilityInfo();
                     $(".notes-textarea").val("");
                     window.history.pushState("", "", '/products/newProduct');
                     L.log("product (" + response.data.savedProductNumber + ") was saved");
@@ -224,9 +224,9 @@ var NewProductActions = {
 
     },
 
-    updateWorkabilityInfo() {
+    updateProducibilityInfo() {
         Dispatcher.dispatch({
-            eventType: EventConstants.UPDATE_WORKABILITY_INFO
+            eventType: EventConstants.UPDATE_PRODUCIBILITY_INFO
         });
     },
 

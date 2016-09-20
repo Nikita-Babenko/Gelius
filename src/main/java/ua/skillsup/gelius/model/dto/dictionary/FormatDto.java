@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.model.dto.dictionary;
 
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class FormatDto {
 
@@ -30,6 +31,19 @@ public class FormatDto {
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FormatDto formatDto = (FormatDto) o;
+        return Objects.equals(id, formatDto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

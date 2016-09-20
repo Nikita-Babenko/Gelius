@@ -1,5 +1,7 @@
 package ua.skillsup.gelius.model.dto;
 
+import java.util.Objects;
+
 public class PerforationDto {
 
     private Long id;
@@ -40,10 +42,23 @@ public class PerforationDto {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PerforationDto that = (PerforationDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("PerforationDto{");
         sb.append("id=").append(id);
-        sb.append(", product=").append(product);
+        sb.append(", product=").append(product.getId());
         sb.append(", value=").append(value);
         sb.append('}');
         return sb.toString();

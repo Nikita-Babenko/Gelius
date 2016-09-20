@@ -311,7 +311,7 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 
-.left_table > tbody > tr > .special_conditions, .left_table > tbody > tr > .workability {
+.left_table > tbody > tr > .special_conditions, .left_table > tbody > tr > .producibility {
     font-size: 16px;
     padding: 0 0 0 10px !important;
     margin: 0;
@@ -320,7 +320,7 @@ input[type=number]::-webkit-outer-spin-button {
     vertical-align: middle;
 }
 
-.left_table > tbody > tr > .special_conditions > p, .left_table > tbody > tr > .workability > p {
+.left_table > tbody > tr > .special_conditions > p, .left_table > tbody > tr > .producibility > p {
     margin: 0;
     font-weight: bold;
 }
@@ -335,7 +335,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 0 !important;
 }
 
-.workability_textarea {
+.producibility_textarea {
     position: relative;
     max-height: 80px !important;
     height: 80px !important;
@@ -345,7 +345,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid black !important;
 }
 
-.special_conditions_textarea > textarea, .workability_textarea > div > textarea {
+.special_conditions_textarea > textarea, .producibility_textarea > div > textarea {
     position: absolute;
     padding: 0 5px 0 5px !important;
     height: 100%;

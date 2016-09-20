@@ -1,5 +1,4 @@
 import React from "react";
-import EventConstants from "../../constants/Events";
 import Dictionary from "../newProduct/Dictionary";
 import SquareInput from "../newProduct/SquareInput";
 import NumberInput from "../newProduct/NumberInput";
@@ -118,13 +117,13 @@ class BodyLeft extends React.Component {
                     </tr>
 
                     <tr>
-                        <td colSpan="5" className="workability green_color">
+                        <td colSpan="5" className="producibility green_color">
                             <p>Технологичность</p>
                         </td>
                     </tr>
 
                     <tr>
-                        <td colSpan="5" className="workability_textarea">
+                        <td colSpan="5" className="producibility_textarea">
                             <WorkCenterTextarea />
                         </td>
                     </tr>

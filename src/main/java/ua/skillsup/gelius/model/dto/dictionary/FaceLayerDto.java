@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.model.dto.dictionary;
 
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class FaceLayerDto {
 
@@ -30,6 +31,19 @@ public class FaceLayerDto {
 
     public void setFaceLayer(String faceLayer) {
         this.faceLayer = faceLayer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FaceLayerDto that = (FaceLayerDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

@@ -75,13 +75,13 @@ CREATE TABLE connection_valve(
 );
 
 /* Рабочие центры (технологичность) */
-CREATE TABLE workability(
-  workability_id BIGINT AUTO_INCREMENT,
+CREATE TABLE producibility(
+  producibility_id BIGINT AUTO_INCREMENT,
   service_center VARCHAR(100),
   group_priority INT,
   element_priority INT,
 
-  PRIMARY KEY (workability_id)
+  PRIMARY KEY (producibility_id)
 );
 
 /* Способ упаковки */
@@ -188,13 +188,13 @@ CREATE TABLE print(
 );
 
 /* Примечания */
-CREATE  TABLE workability_notes(
-  workability_notes_id BIGINT AUTO_INCREMENT,
+CREATE  TABLE producibility_notes(
+  producibility_notes_id BIGINT AUTO_INCREMENT,
   product_id BIGINT NOT NULL,
   service_center BIGINT,
   notes VARCHAR(100),
 
-  PRIMARY KEY (workability_notes_id),
+  PRIMARY KEY (producibility_notes_id),
   FOREIGN KEY (product_id) REFERENCES product(product_id),
   FOREIGN KEY (service_center) REFERENCES workability(workability_id)
 );

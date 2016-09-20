@@ -69,7 +69,7 @@ public class DictionaryServiceImpl implements DictionaryService {
         dictionaries.put("palletPlacement", new ClassWithDTOPair(PalletPlacement.class, PalletPlacementDto.class));
         dictionaries.put("productType", new ClassWithDTOPair(ProductType.class, ProductTypeDto.class));
         dictionaries.put("profile", new ClassWithDTOPair(Profile.class, ProfileDto.class));
-        dictionaries.put("workability", new ClassWithDTOPair(Workability.class, WorkabilityDto.class));
+        dictionaries.put("producibility", new ClassWithDTOPair(Producibility.class, ProducibilityDto.class));
 
         return dictionaries;
     }

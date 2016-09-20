@@ -1,8 +1,6 @@
-import EventEmitter from 'eventemitter3';
-import Dispatcher from '../dispatcher/Dispatcher';
-import EventConstants from '../constants/Events';
-import ObjectsConstants from '../constants/Objects';
-import FilteringSortingActions from '../actions/FilteringSortingActions';
+import EventEmitter from "eventemitter3";
+import Dispatcher from "../dispatcher/Dispatcher";
+import EventConstants from "../constants/Events";
 
 class FilteringSortingStore extends EventEmitter {
 

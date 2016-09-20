@@ -1,5 +1,7 @@
 package ua.skillsup.gelius.model.dto;
 
+import java.util.Objects;
+
 public class PrintDto {
 
     private Long id;
@@ -60,10 +62,23 @@ public class PrintDto {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PrintDto printDto = (PrintDto) o;
+        return Objects.equals(id, printDto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("PrintDto{");
         sb.append("id=").append(id);
-        sb.append(", product=").append(product);
+        sb.append(", product=").append(product.getId());
         sb.append(", color='").append(color).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", squareSeal=").append(squareSeal);

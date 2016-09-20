@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 import ReactDOM from "react-dom";
 import EventConstants from "../../constants/Events";
-import NewProductAction from "../../actions/NewProductActions";
 import WorkCentersStore from "../../stores/WorkCentersStore";
-import NewProductStore from "../../stores/NewProductStore";
 import WorkCenterModal from "../newProduct/WorkCenterModal";
 
 class WorkCenterTextarea extends React.Component {
@@ -11,19 +9,19 @@ class WorkCenterTextarea extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            workabilityCentersText: ""
+            producibilityCentersText: ""
         };
 
         this.__showWorkCentersModal = this.__showWorkCentersModal.bind(this);
-        this.__updateWorkabilityTextArea = this.__updateWorkabilityTextArea.bind(this);
+        this.__updateProducibilityTextArea = this.__updateProducibilityTextArea.bind(this);
     }
 
     componentWillMount() {
-        WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
+        WorkCentersStore.addListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateProducibilityTextArea);
     }
 
     componentWillUnmount() {
-        WorkCentersStore.removeListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateWorkabilityTextArea);
+        WorkCentersStore.removeListener(EventConstants.WORK_CENTERS_CHANGE_EVENT, this.__updateProducibilityTextArea);
     }
 
     render() {
@@ -31,16 +29,16 @@ class WorkCenterTextarea extends React.Component {
             <div>
                 <textarea readOnly
                     onClick={this.__showWorkCentersModal}
-                    value={this.state.workabilityCentersText}
+                    value={this.state.producibilityCentersText}
                 />
                 <WorkCenterModal ref="workCenterModal"/>
             </div>
         );
     }
 
-    __updateWorkabilityTextArea() {
+    __updateProducibilityTextArea() {
             this.setState({
-                workabilityCentersText: WorkCentersStore.getSelectedCentersText()
+                producibilityCentersText: WorkCentersStore.getSelectedCentersText()
             });
 
     }

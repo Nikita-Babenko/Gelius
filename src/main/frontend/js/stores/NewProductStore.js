@@ -1,9 +1,8 @@
 import EventEmitter from "eventemitter3";
 import Dispatcher from "../dispatcher/Dispatcher";
 import EventConstants from "../constants/Events";
-import ImagesStore from './ImagesStore';
+import ImagesStore from "./ImagesStore";
 import ResponseCodeConstants from "../constants/ResponseCodes";
-import L from '../utils/Logging';
 
 
 class NewProductStore extends EventEmitter {
@@ -114,7 +113,7 @@ class NewProductStore extends EventEmitter {
             "isUse": true,
             "celluloseLayer": {"id": 1},
             "packing": {"id": 1},
-            "workabilityNotes": [
+            "producibilityNotes": [
                 {
                     "serviceCenter": {
                         "serviceCenter": "АГ",

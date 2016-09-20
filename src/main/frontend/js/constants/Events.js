@@ -34,7 +34,7 @@ var EventConstants = {
     DEFAULT_PRODUCT_CHANGE_EVENT: "work_centers_change_event",
     WORK_CENTERS_CHANGE_EVENT: "work_centers_change_event",
 
-    UPDATE_WORKABILITY_INFO: "update_workability_information",
+    UPDATE_PRODUCIBILITY_INFO: "update_producibility_information",
     UPDATE_WORK_CENTER_NOTE: "update_work_center_note",
 
     ADD_FILE_LINK: "add_file_link",

@@ -1,5 +1,4 @@
 import React from "react";
-import NewProductAction from "../../actions/NewProductActions";
 import WorkCentersStore from "../../stores/WorkCentersStore";
 import EventConstants from "../../constants/Events";
 

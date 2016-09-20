@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.model.dto.dictionary;
 
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class ProductTypeDto {
 
@@ -30,6 +31,19 @@ public class ProductTypeDto {
 
     public void setProductType(String productType) {
         this.productType = productType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductTypeDto that = (ProductTypeDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

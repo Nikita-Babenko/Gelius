@@ -97,7 +97,7 @@ INSERT INTO connection_valve (connection_valve) VALUES ('сшитый');
 INSERT INTO connection_valve (connection_valve) VALUES ('склееный+сшитый');
 
 
-INSERT INTO workability (service_center, group_priority, element_priority) VALUES
+INSERT INTO producibility (service_center, group_priority, element_priority) VALUES
     ('АГ', NULL, NULL),
     ('Тайванец', 10, 10),
     ('Болгарец', 10, 20),

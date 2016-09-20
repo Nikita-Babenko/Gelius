@@ -1,8 +1,9 @@
 package ua.skillsup.gelius.model.dto.dictionary;
 
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
-public class WorkabilityDto {
+public class ProducibilityDto {
 
     private Long id;
 
@@ -13,10 +14,10 @@ public class WorkabilityDto {
 
     private Integer elementPriority;
 
-    public WorkabilityDto() {
+    public ProducibilityDto() {
     }
 
-    public WorkabilityDto(Long id) {
+    public ProducibilityDto(Long id) {
         this.id = id;
     }
 
@@ -53,12 +54,26 @@ public class WorkabilityDto {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProducibilityDto that = (ProducibilityDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
     public String toString() {
-        return "WorkabilityDto{" +
-            "id=" + id +
-            ", serviceCenter='" + serviceCenter + '\'' +
-            ", groupPriority=" + groupPriority +
-            ", elementPriority=" + elementPriority +
-            '}';
+        final StringBuilder sb = new StringBuilder("ProducibilityDto{");
+        sb.append("id=").append(id);
+        sb.append(", serviceCenter='").append(serviceCenter).append('\'');
+        sb.append(", groupPriority=").append(groupPriority);
+        sb.append(", elementPriority=").append(elementPriority);
+        sb.append('}');
+        return sb.toString();
     }
 }

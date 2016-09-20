@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from "react-dom";
+import React from "react";
 import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
 

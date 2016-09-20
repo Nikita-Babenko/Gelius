@@ -1,26 +1,27 @@
 package ua.skillsup.gelius.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import ua.skillsup.gelius.model.dto.dictionary.WorkabilityDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProducibilityDto;
 
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
-public class WorkabilityNotesDto {
+public class ProducibilityNotesDto {
 
     private Long id;
 
     @JsonBackReference
     private ProductDto product;
 
-    private WorkabilityDto serviceCenter;
+    private ProducibilityDto serviceCenter;
 
     @Size(max = 100, message = "примечание к рабочему центру не может превышать {max} символов")
     private String note;
 
-    public WorkabilityNotesDto() {
+    public ProducibilityNotesDto() {
     }
 
-    public WorkabilityNotesDto(Long id) {
+    public ProducibilityNotesDto(Long id) {
         this.id = id;
     }
 
@@ -40,11 +41,11 @@ public class WorkabilityNotesDto {
         this.product = product;
     }
 
-    public WorkabilityDto getServiceCenter() {
+    public ProducibilityDto getServiceCenter() {
         return serviceCenter;
     }
 
-    public void setServiceCenter(WorkabilityDto serviceCenter) {
+    public void setServiceCenter(ProducibilityDto serviceCenter) {
         this.serviceCenter = serviceCenter;
     }
 
@@ -57,12 +58,25 @@ public class WorkabilityNotesDto {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProducibilityNotesDto that = (ProducibilityNotesDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("WorkabilityNotesDto{");
+        final StringBuilder sb = new StringBuilder("ProducibilityNotesDto{");
         sb.append("id=").append(id);
-        sb.append(", productId=").append(product.getId());
+        sb.append(", product=").append(product.getId());
         sb.append(", serviceCenter=").append(serviceCenter);
-        sb.append(", note=").append(note);
+        sb.append(", note='").append(note).append('\'');
         sb.append('}');
         return sb.toString();
     }

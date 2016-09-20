@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @CheckOldProductNumberExistence(message = "не заполнен номер техкарты")
 public class ProductDto {
@@ -116,7 +117,7 @@ public class ProductDto {
 
     @JsonManagedReference
     @Valid
-    private List<WorkabilityNotesDto> workabilityNotes;
+    private List<ProducibilityNotesDto> producibilityNotes;
 
     private List<String> filePaths;
 
@@ -449,12 +450,12 @@ public class ProductDto {
         this.productionFormat = productionFormat;
     }
 
-    public List<WorkabilityNotesDto> getWorkabilityNotes() {
-        return workabilityNotes;
+    public List<ProducibilityNotesDto> getProducibilityNotes() {
+        return producibilityNotes;
     }
 
-    public void setWorkabilityNotes(List<WorkabilityNotesDto> workabilityNotes) {
-        this.workabilityNotes = workabilityNotes;
+    public void setProducibilityNotes(List<ProducibilityNotesDto> producibilityNotes) {
+        this.producibilityNotes = producibilityNotes;
     }
 
     public Boolean getNew() {
@@ -506,6 +507,19 @@ public class ProductDto {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDto that = (ProductDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ProductDto{");
         sb.append("id=").append(id);
@@ -550,7 +564,7 @@ public class ProductDto {
         sb.append(", numberLoadCar=").append(numberLoadCar);
         sb.append(", productionFormat=").append(productionFormat);
         sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
-        sb.append(", workabilityNotes=").append(workabilityNotes);
+        sb.append(", producibilityNotes=").append(producibilityNotes);
         sb.append('}');
         return sb.toString();
     }

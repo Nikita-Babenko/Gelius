@@ -177,7 +177,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
-    private List<WorkabilityNotes> workabilityNotes;
+    private List<ProducibilityNotes> producibilityNotes;
 
     public Long getId() {
         return id;
@@ -515,12 +515,12 @@ public class Product {
         this.numberBlanksOnFormat = numberBlanksOnFormat;
     }
 
-    public List<WorkabilityNotes> getWorkabilityNotes() {
-        return workabilityNotes;
+    public List<ProducibilityNotes> getProducibilityNotes() {
+        return producibilityNotes;
     }
 
-    public void setWorkabilityNotes(List<WorkabilityNotes> workabilityNotes) {
-        this.workabilityNotes = workabilityNotes;
+    public void setProducibilityNotes(List<ProducibilityNotes> producibilityNotes) {
+        this.producibilityNotes = producibilityNotes;
     }
 
     @Override
@@ -581,7 +581,7 @@ public class Product {
         sb.append(", numberLoadCar=").append(numberLoadCar);
         sb.append(", productionFormat=").append(productionFormat);
         sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
-        sb.append(", workabilityNotes=").append(workabilityNotes);
+        sb.append(", producibilityNotes=").append(producibilityNotes);
         sb.append('}');
         return sb.toString();
     }

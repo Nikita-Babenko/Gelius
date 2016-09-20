@@ -57,7 +57,7 @@ INSERT INTO connection_valve (connection_valve_id, connection_valve) VALUES
   (1, 'склееный'), (2, 'сшитый'), (3, 'склееный+сшитый');
 
 
-INSERT INTO workability (workability_id, service_center, group_priority, element_priority) VALUES
+INSERT INTO producibility (producibility_id, service_center, group_priority, element_priority) VALUES
     (1, 'АГ', 0, NULL),
     (2, 'Тайванец', 10, 10),
     (3, 'Болгарец', 10, 20),

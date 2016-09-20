@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
+import ua.skillsup.gelius.dao.entity.ProducibilityNotes;
 import ua.skillsup.gelius.dao.entity.Product;
-import ua.skillsup.gelius.dao.entity.WorkabilityNotes;
 import ua.skillsup.gelius.model.dto.ProductDto;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public long save(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
-        assignProductToWorkabilityNotes(product);
+        assignProductToProducibilityNotes(product);
         this.sessionFactory.getCurrentSession().persist(product);
         return product.getId();
     }
@@ -44,11 +44,11 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void update(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
-        product.getWorkabilityNotes()
-                .forEach(workabilityNotes -> this.sessionFactory.getCurrentSession().
-                        createQuery("DELETE FROM WorkabilityNotes a " +
-                                "WHERE a.product=:productNumber")
-                        .setParameter("productNumber", product).executeUpdate());
+        product.getProducibilityNotes()
+                .forEach(producibilityNotes -> this.sessionFactory.getCurrentSession().
+                        createQuery("DELETE FROM ProducibilityNotes a " +
+                                "WHERE a.product=:product")
+                        .setParameter("product", product).executeUpdate());
         sessionFactory.getCurrentSession().merge(product);
     }
 
@@ -83,8 +83,8 @@ public class ProductDaoImpl implements ProductDao {
         return count != 0;
     }
 
-    private void assignProductToWorkabilityNotes(Product product) {
-        List<WorkabilityNotes> workabilityNotes = product.getWorkabilityNotes();
-        workabilityNotes.forEach(workabilityNote -> workabilityNote.setProduct(product));
+    private void assignProductToProducibilityNotes(Product product) {
+        List<ProducibilityNotes> producibilityNotes = product.getProducibilityNotes();
+        producibilityNotes.forEach(producibilityNote -> producibilityNote.setProduct(product));
     }
 }

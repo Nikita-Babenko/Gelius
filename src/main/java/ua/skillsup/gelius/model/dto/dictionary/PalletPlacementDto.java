@@ -1,6 +1,7 @@
 package ua.skillsup.gelius.model.dto.dictionary;
 
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class PalletPlacementDto {
 
@@ -30,6 +31,19 @@ public class PalletPlacementDto {
 
     public void setPlacement(String palletPlacement) {
         this.palletPlacement = palletPlacement;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PalletPlacementDto that = (PalletPlacementDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

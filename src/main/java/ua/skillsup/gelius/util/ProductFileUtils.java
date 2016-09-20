@@ -94,11 +94,11 @@ public final class ProductFileUtils {
 
     public static Map<String, byte[]> getFilesByteMap(List<MultipartFile> multipartFiles, List<File> normalFiles){
         Map<String, byte[]> normalFilesMap = new HashMap<>();
-        normalFilesMap.putAll(ProductFileUtils.convertNormalFiles(normalFiles, normalFilesMap));
+        normalFilesMap.putAll(convertNormalFiles(normalFiles, normalFilesMap));
 
         Map<String, byte[]> multipartFilesMap = new HashMap<>();
-        multipartFilesMap.putAll(ProductFileUtils.convertMultipartFiles(multipartFiles, multipartFilesMap));
+        multipartFilesMap.putAll(convertMultipartFiles(multipartFiles, multipartFilesMap));
 
-        return ProductFileUtils.mergeFileMaps(normalFilesMap, multipartFilesMap);
+        return mergeFileMaps(normalFilesMap, multipartFilesMap);
     }
 }

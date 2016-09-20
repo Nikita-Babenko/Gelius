@@ -41,12 +41,22 @@
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.6.1</slf4j.version>
 
+        <!-- Apache Commons properties -->
+        <commons.io.version>2.5</commons.io.version>
+        <commons.fileupload.version>1.3.2</commons.fileupload.version>
+
         <!-- Frontend properties-->
+        <webjars.servlet.version>1.1</webjars.servlet.version>
         <bootstrap.version>3.3.5</bootstrap.version>
         <jquery.version>2.1.4</jquery.version>
         <font-awesome.version>4.6.3</font-awesome.version>
         <react.version>15.2.1</react.version>
         <model-mapper.version>0.7.6</model-mapper.version>
+
+        <!-- Maven plugins properties -->
+        <frontend-maven-plugin.version>0.0.29</frontend-maven-plugin.version>
+        <maven-war-plugin.version>2.4</maven-war-plugin.version>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
 
         <!-- SonarQube && Jacoco properties -->
         <jacoco.version>0.7.7.201606060606</jacoco.version>
@@ -57,14 +67,11 @@
         <maven.build.timestamp.format>MM.yyyy</maven.build.timestamp.format>
         <yearMonth>${maven.build.timestamp}</yearMonth>
 
-        <!-- Maven plugins properties -->
-        <frontend-maven-plugin.version>0.0.29</frontend-maven-plugin.version>
-        <maven-war-plugin.version>2.4</maven-war-plugin.version>
-        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
-
     </properties>
 
     <dependencies>
+
+        <!-- Back-end -->
 
         <!-- Spring -->
         <dependency>
@@ -217,11 +224,41 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- File upload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons.fileupload.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+        <!--Logging-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+
         <!-- Front-End -->
+
+
+        <!-- Web jars -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-servlet-2.x</artifactId>
-            <version>1.1</version>
+            <version>${webjars.servlet.version}</version>
         </dependency>
 
         <dependency>
@@ -248,31 +285,6 @@
             <version>${react.version}</version>
         </dependency>
 
-        <!--Logging-->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <!-- File upload -->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.5</version>
-        </dependency>
 
     </dependencies>
 

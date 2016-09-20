@@ -1,7 +1,6 @@
-import EventEmitter from 'eventemitter3';
-import Dispatcher from '../dispatcher/Dispatcher';
-import EventConstants from '../constants/Events';
-import ObjectConstants from '../constants/Objects';
+import EventEmitter from "eventemitter3";
+import Dispatcher from "../dispatcher/Dispatcher";
+import EventConstants from "../constants/Events";
 
 class DictionaryStore extends EventEmitter {
     constructor() {

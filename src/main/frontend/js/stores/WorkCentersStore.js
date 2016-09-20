@@ -1,10 +1,7 @@
-import EventEmitter from 'eventemitter3';
-import Dispatcher from '../dispatcher/Dispatcher';
-import DictionaryStore from './DictionariesStore';
-import NewProductStore from './NewProductStore';
-import EventConstants from '../constants/Events';
-import ObjectConstants from '../constants/Objects';
-import L from '../utils/Logging';
+import EventEmitter from "eventemitter3";
+import Dispatcher from "../dispatcher/Dispatcher";
+import NewProductStore from "./NewProductStore";
+import EventConstants from "../constants/Events";
 
 class WorkCentersStore extends EventEmitter {
     constructor() {
@@ -120,8 +117,8 @@ const workCentersStore = new WorkCentersStore();
 
 workCentersStore.dispatchToken = Dispatcher.register(function (event) {
     switch (event.eventType) {
-        case EventConstants.UPDATE_WORKABILITY_INFO:
-            workCentersStore.defaultWorkCenters = NewProductStore.getProductProperty("workabilityNotes");
+        case EventConstants.UPDATE_PRODUCIBILITY_INFO:
+            workCentersStore.defaultWorkCenters = NewProductStore.getProductProperty("producibilityNotes");
             workCentersStore.emitChange();
             break;
     }
