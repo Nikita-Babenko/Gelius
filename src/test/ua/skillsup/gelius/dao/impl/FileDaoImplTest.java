@@ -104,7 +104,7 @@ public class FileDaoImplTest {
         List<MultipartFile> list = new ArrayList<>();
         list.add(multipartFile);
 
-        fileDao.saveFiles(directoryPath, list);
+        fileDao.saveOrUpdateFiles(directoryPath, list, null);
 
         assertEquals("Is saved file exists", new File(directoryPath + File.separator + multipartFile.getOriginalFilename()).exists(), true);
     }

@@ -4,14 +4,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 import ua.skillsup.gelius.exception.RuntimeNullPointerException;
-import ua.skillsup.gelius.model.Data;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public final class ProductFileUtils {
 
@@ -35,12 +33,6 @@ public final class ProductFileUtils {
         });
 
         return files.isEmpty() ? Collections.EMPTY_MAP : fileWithExtensions;
-    }
-
-    private static String replaceNotAllowedSymbolsInFileName(String fileName) {
-        Pattern regexp = Data.ALLOWED_FILENAME_SYMBOLS;
-
-        return regexp.matcher(fileName).replaceAll(Data.FILENAME_REPLACER);
     }
 
     public static Map<String, byte[]> convertNormalFiles(List<File> files, Map<String, byte[]> mapFiles){
@@ -85,19 +77,28 @@ public final class ProductFileUtils {
         return resultFilesMap;
     }
 
-    public static boolean saveMultipartFiles(String directoryPath, Collection<MultipartFile> files){
-        for (MultipartFile file : files) {
-            String newFileName = ProductFileUtils.replaceNotAllowedSymbolsInFileName(file.getOriginalFilename());
+    public static boolean saveFiles (String directoryPath, Map<String, byte[]> resultMap){
+        final boolean[] isFileSaved = {true};
+        resultMap.forEach((fileName, bytesFile) -> {
 
-            File newFile = new File(directoryPath + File.separator + newFileName);
+            File newFile = new File(directoryPath + File.separator + fileName);
 
-            try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile))) {
-                byte[] bytes = file.getBytes();
-                stream.write(bytes);
+            try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile))){
+                stream.write(bytesFile);
             } catch (IOException e) {
-                return false;
+                isFileSaved[0] = false;
             }
-        }
-        return true;
+        });
+        return isFileSaved[0];
+    }
+
+    public static Map<String, byte[]> getFilesByteMap(List<MultipartFile> multipartFiles, List<File> normalFiles){
+        Map<String, byte[]> normalFilesMap = new HashMap<>();
+        normalFilesMap.putAll(ProductFileUtils.convertNormalFiles(normalFiles, normalFilesMap));
+
+        Map<String, byte[]> multipartFilesMap = new HashMap<>();
+        multipartFilesMap.putAll(ProductFileUtils.convertMultipartFiles(multipartFiles, multipartFilesMap));
+
+        return ProductFileUtils.mergeFileMaps(normalFilesMap, multipartFilesMap);
     }
 }

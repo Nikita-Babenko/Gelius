@@ -9,9 +9,7 @@ public interface FileDao {
 
     boolean createDirectory(String directoryPath);
 
-    boolean saveFiles(String directoryPath, Collection<MultipartFile> files);
-
-    boolean updateFiles(String directoryPath, List<MultipartFile> newFiles, List<String> fileNamesFromFrontend, String [] extensions, boolean isFindInSubdirectories);
+    boolean saveOrUpdateFiles(String directoryPath, Collection<MultipartFile> files, List<String> deletedFiles);
 
     boolean deleteDirectory(String directoryPath);
 

@@ -8,9 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.skillsup.gelius.dao.FileDao;
 import ua.skillsup.gelius.util.ProductFileUtils;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -55,46 +53,27 @@ public class FileDaoImpl implements FileDao {
     }
 
     @Override
-    public boolean saveFiles(String directoryPath, Collection<MultipartFile> files) {
+    public boolean saveOrUpdateFiles(String directoryPath, Collection<MultipartFile> files, List<String> deletedFiles) {
         LOG.info("save files: " + files);
-        boolean isSaved = ProductFileUtils.saveMultipartFiles(directoryPath, files);
-        LOG.info("All files were saved");
-        return isSaved;
-    }
 
-    @Override
-    public boolean updateFiles(String directoryPath, List<MultipartFile> newFiles, List<String> fileNamesFromFrontend, String [] extensions, boolean isFindInSubdirectories) {
+        Map<String, byte[]> resultMap;
         File directory = new File(directoryPath);
-        List<File> allFiles = (List<File>) FileUtils.listFiles(directory, extensions, isFindInSubdirectories);
+        List<File> allFiles = (List<File>) FileUtils.listFiles(directory, null, false);
 
-        List<File> resultFiles = new ArrayList<>();
-        allFiles.forEach(serverFile -> fileNamesFromFrontend.forEach(frontendFileName -> {
-            if (serverFile.getName().equals(frontendFileName)) {
-                resultFiles.add(serverFile);
-            }
-        }));
-
-        Map<String, byte[]> normalFilesMap = new HashMap<>();
-        normalFilesMap.putAll(ProductFileUtils.convertNormalFiles(resultFiles, normalFilesMap));
-        allFiles.forEach(File::delete);
-
-        Map<String, byte[]> multipartFilesMap = new HashMap<>();
-        multipartFilesMap.putAll(ProductFileUtils.convertMultipartFiles(newFiles, multipartFilesMap));
-
-        Map<String, byte[]> resultMap = ProductFileUtils.mergeFileMaps(normalFilesMap, multipartFilesMap);
-
-        resultMap.forEach((fileName, bytesFile) -> {
-
-            File newFile = new File(directoryPath + File.separator + fileName);
-
-            try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile))){
-                stream.write(bytesFile);
-            } catch (IOException e) {
-                throw new RuntimeException("Error to update files");
-            }
-        });
-
-        LOG.info("All files were updated");
-        return true;
+        if(deletedFiles == null || deletedFiles.isEmpty()){
+            resultMap = ProductFileUtils.getFilesByteMap(new ArrayList<>(files), allFiles);
+            allFiles.forEach(File::delete);
+            return ProductFileUtils.saveFiles(directoryPath, resultMap);
+        } else {
+            List<File> resultFiles = new ArrayList<>();
+            allFiles.forEach(serverFile -> deletedFiles.forEach(frontendFileName -> {
+                if (!serverFile.getName().equals(frontendFileName)) {
+                    resultFiles.add(serverFile);
+                }
+            }));
+            resultMap = ProductFileUtils.getFilesByteMap(new ArrayList<>(files), resultFiles);
+            allFiles.forEach(File::delete);
+            return ProductFileUtils.saveFiles(directoryPath, resultMap);
+        }
     }
 }

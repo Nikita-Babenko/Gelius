@@ -14,10 +14,7 @@ import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.service.FileService;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/files")
@@ -52,34 +49,12 @@ public class FileController {
         }
 
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
-        this.fileService.saveFiles(directoryPath, Arrays.asList(files));
+        this.fileService.saveOrUpdateFiles(directoryPath, Arrays.asList(files), Arrays.asList(deleteFileLinks));
 
         String directoryPathForImages = directoryPath + File.separator + "images";
-        this.fileService.saveFiles(directoryPathForImages, Arrays.asList(images));
+        this.fileService.saveOrUpdateFiles(directoryPathForImages, Arrays.asList(images), Arrays.asList(deleteImages));
         return new Response(ResponseCode.OK);
     }
-
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    @ResponseBody
-    public Response updateFiles(
-            @RequestParam("serverFiles") String[] oldFiles,
-            @RequestParam("fullProductNumber") String fullProductNumber,
-            @RequestParam("newFiles") MultipartFile[] newFiles
-    ) throws IOException {
-        LOG.info("update Files(): productNumber=" + fullProductNumber + "," +
-                ", new Files count=" + newFiles.length +
-                ", old server files count=" + oldFiles.length);
-
-        String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
-
-        List<String> oldFilesList = new ArrayList<>();
-        Arrays.asList(oldFiles).forEach(pathToFile -> oldFilesList.add(pathToFile.split(fullProductNumber + "/")[1]));
-
-        this.fileService.updateFiles(directoryPath, Arrays.asList(newFiles), oldFilesList);
-        return new Response(ResponseCode.OK);
-    }
-
 
     //Exception handling
 
