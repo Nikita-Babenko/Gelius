@@ -119,6 +119,10 @@ public class ProductDto {
     @Valid
     private List<ProducibilityNotesDto> producibilityNotes;
 
+    @JsonManagedReference
+    @Valid
+    private List<BigovkiDto> bigovki;
+
     private List<String> filePaths;
 
     private List<String> fileImagePaths;
@@ -506,6 +510,14 @@ public class ProductDto {
         this.fileImagePaths = fileImagePaths;
     }
 
+    public List<BigovkiDto> getBigovki() {
+        return bigovki;
+    }
+
+    public void setBigovki(List<BigovkiDto> bigovki) {
+        this.bigovki = bigovki;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -565,6 +577,7 @@ public class ProductDto {
         sb.append(", productionFormat=").append(productionFormat);
         sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
         sb.append(", producibilityNotes=").append(producibilityNotes);
+        sb.append(", bigovki=").append(bigovki);
         sb.append('}');
         return sb.toString();
     }

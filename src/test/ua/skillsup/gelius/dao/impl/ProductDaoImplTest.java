@@ -46,6 +46,7 @@ public class ProductDaoImplTest {
         newProductFirst.setNew(true);
         newProductFirst.setBlankFormat(200);
         newProductFirst.setProducibilityNotes(new ArrayList<>());
+        newProductFirst.setBigovki(new ArrayList<>());
         this.newProductDtoFirst = modelMapper.map(newProductFirst, ProductDto.class);
 
         Product newProductSecond = new Product();
@@ -54,6 +55,7 @@ public class ProductDaoImplTest {
         newProductSecond.setProductName("New Product Test2");
         newProductSecond.setBlankFormat(150);
         newProductSecond.setProducibilityNotes(new ArrayList<>());
+        newProductSecond.setBigovki(new ArrayList<>());
         this.newProductDtoSecond = modelMapper.map(newProductSecond, ProductDto.class);
 
         Product oldProduct = new Product();
@@ -62,6 +64,7 @@ public class ProductDaoImplTest {
         oldProduct.setProductName("New Product Test2");
         oldProduct.setBlankFormat(150);
         oldProduct.setProducibilityNotes(new ArrayList<>());
+        oldProduct.setBigovki(new ArrayList<>());
         this.oldProductDto = modelMapper.map(oldProduct, ProductDto.class);
     }
 

@@ -174,10 +174,13 @@ public class Product {
     @Column(name = "number_blanks_on_format")
     private Integer numberBlanksOnFormat;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    private List<ProducibilityNotes> producibilityNotes;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
-    private List<ProducibilityNotes> producibilityNotes;
+    @Fetch(FetchMode.SELECT)
+    private List<Bigovki> bigovki;
 
     public Long getId() {
         return id;
@@ -523,6 +526,14 @@ public class Product {
         this.producibilityNotes = producibilityNotes;
     }
 
+    public List<Bigovki> getBigovki() {
+        return bigovki;
+    }
+
+    public void setBigovki(List<Bigovki> bigovki) {
+        this.bigovki = bigovki;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -582,6 +593,7 @@ public class Product {
         sb.append(", productionFormat=").append(productionFormat);
         sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
         sb.append(", producibilityNotes=").append(producibilityNotes);
+        sb.append(", bigovki=").append(bigovki);
         sb.append('}');
         return sb.toString();
     }

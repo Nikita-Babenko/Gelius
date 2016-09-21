@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.skillsup.gelius.dao.ProductDao;
-import ua.skillsup.gelius.dao.entity.ProducibilityNotes;
 import ua.skillsup.gelius.dao.entity.Product;
 import ua.skillsup.gelius.model.dto.ProductDto;
 
@@ -36,7 +35,13 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public long save(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
-        assignProductToProducibilityNotes(product);
+
+        product.getProducibilityNotes()
+                .forEach(producibilityNote -> producibilityNote.setProduct(product));
+
+        product.getBigovki()
+                .forEach(bigovki -> bigovki.setProduct(product));
+
         this.sessionFactory.getCurrentSession().persist(product);
         return product.getId();
     }
@@ -44,11 +49,19 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void update(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
+
         product.getProducibilityNotes()
                 .forEach(producibilityNotes -> this.sessionFactory.getCurrentSession().
                         createQuery("DELETE FROM ProducibilityNotes a " +
                                 "WHERE a.product=:product")
                         .setParameter("product", product).executeUpdate());
+
+        product.getBigovki()
+                .forEach(bigovki -> this.sessionFactory.getCurrentSession().
+                        createQuery("DELETE FROM Bigovki a " +
+                                "WHERE a.product=:product")
+                        .setParameter("product", product).executeUpdate());
+
         sessionFactory.getCurrentSession().merge(product);
     }
 
@@ -81,10 +94,5 @@ public class ProductDaoImpl implements ProductDao {
             setParameter("productNumber", productNumber).
             uniqueResult();
         return count != 0;
-    }
-
-    private void assignProductToProducibilityNotes(Product product) {
-        List<ProducibilityNotes> producibilityNotes = product.getProducibilityNotes();
-        producibilityNotes.forEach(producibilityNote -> producibilityNote.setProduct(product));
     }
 }

@@ -49,6 +49,17 @@ class NewProductStore extends EventEmitter {
         return this.saveFiles;
     }
 
+    __getBigovki() {
+        var bigovki = [];
+        $('.sumBigovki').each(function () {
+            var value = $(this).val();
+            bigovki.push({
+                "value" : value
+            });
+        });
+        return bigovki;
+    }
+
     getNewProduct() {
         var product = {};
         product["isNew"] = $('#isNew').is(":checked");

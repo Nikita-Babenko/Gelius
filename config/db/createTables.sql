@@ -210,4 +210,14 @@ CREATE TABLE perforation(
   FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
 
+/* Биговки */
+CREATE TABLE bigovki(
+  bigovki_id BIGINT AUTO_INCREMENT,
+  product_id BIGINT NOT NULL,
+  value INT,
+
+  PRIMARY KEY (bigovki_id),
+  FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
 COMMIT;
