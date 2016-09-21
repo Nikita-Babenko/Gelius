@@ -1,11 +1,14 @@
 package ua.skillsup.gelius.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Objects;
 
 public class PerforationDto {
 
     private Long id;
 
+    @JsonBackReference
     private ProductDto product;
 
     private Integer value;

@@ -182,6 +182,10 @@ public class Product {
     @Fetch(FetchMode.SELECT)
     private List<Bigovki> bigovki;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    private List<Perforation> perforations;
+
     public Long getId() {
         return id;
     }
@@ -534,6 +538,14 @@ public class Product {
         this.bigovki = bigovki;
     }
 
+    public List<Perforation> getPerforations() {
+        return perforations;
+    }
+
+    public void setPerforations(List<Perforation> perforations) {
+        this.perforations = perforations;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -594,6 +606,7 @@ public class Product {
         sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
         sb.append(", producibilityNotes=").append(producibilityNotes);
         sb.append(", bigovki=").append(bigovki);
+        sb.append(", perforations=").append(perforations);
         sb.append('}');
         return sb.toString();
     }

@@ -3,6 +3,7 @@ import Dictionary from "../newProduct/Dictionary";
 import FileLinksContainer from "../newProduct/FileLinksContainer";
 import NumberInput from "../newProduct/NumberInput";
 import Bigovki from "../newProduct/Bigovki";
+import Perforations from "../newProduct/Perforations";
 import FooterControlButtons from "../newProduct/FooterControlButtons";
 
 class BodyRight extends React.Component {
@@ -117,15 +118,7 @@ class BodyRight extends React.Component {
                     </tr>
 
                     <tr>
-                        <td colSpan="3" className="prosechki_all">
-                            <div className="prosechki_inputs">
-                                <input type="number" className="prosechki_input_1 numberInputCheck"/>
-                                <input type="number" className="prosechki_input_2 numberInputCheck"/>
-                                <input type="number" className="prosechki_input_3 numberInputCheck"/>
-                                <input type="number" className="prosechki_input_4 numberInputCheck"/>
-                                <input type="number" className="prosechki_input_5 numberInputCheck"/>
-                            </div>
-                        </td>
+                        <Perforations />
                     </tr>
 
                     </tbody>

@@ -123,6 +123,10 @@ public class ProductDto {
     @Valid
     private List<BigovkiDto> bigovki;
 
+    @JsonManagedReference
+    @Valid
+    private List<PerforationDto> perforations;
+
     private List<String> filePaths;
 
     private List<String> fileImagePaths;
@@ -518,6 +522,14 @@ public class ProductDto {
         this.bigovki = bigovki;
     }
 
+    public List<PerforationDto> getPerforations() {
+        return perforations;
+    }
+
+    public void setPerforations(List<PerforationDto> perforations) {
+        this.perforations = perforations;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -578,6 +590,7 @@ public class ProductDto {
         sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
         sb.append(", producibilityNotes=").append(producibilityNotes);
         sb.append(", bigovki=").append(bigovki);
+        sb.append(", perforations=").append(perforations);
         sb.append('}');
         return sb.toString();
     }

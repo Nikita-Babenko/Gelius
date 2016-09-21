@@ -62,6 +62,12 @@ public class ProductDaoImpl implements ProductDao {
                                 "WHERE a.product=:product")
                         .setParameter("product", product).executeUpdate());
 
+        product.getPerforations()
+                .forEach(perforation -> this.sessionFactory.getCurrentSession().
+                        createQuery("DELETE FROM Perforation a " +
+                                "WHERE a.product=:product")
+                        .setParameter("product", product).executeUpdate());
+
         sessionFactory.getCurrentSession().merge(product);
     }
 

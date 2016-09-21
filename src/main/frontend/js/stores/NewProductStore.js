@@ -60,6 +60,17 @@ class NewProductStore extends EventEmitter {
         return bigovki;
     }
 
+    __getPerforations() {
+        var perforations = [];
+        $('.perforations').each(function () {
+            var value = $(this).val();
+            perforations.push({
+                "value" : value
+            });
+        });
+        return perforations;
+    }
+
     getNewProduct() {
         var product = {};
         product["isNew"] = $('#isNew').is(":checked");

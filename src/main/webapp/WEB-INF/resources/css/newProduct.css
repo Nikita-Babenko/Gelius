@@ -409,10 +409,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .special {
-    padding: 12px 10px 9px 1px !important;
+    padding: 12px 10px 5px 3% !important;
     text-align: left !important;
     vertical-align: middle;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .middle_table > tbody > tr > td > input, .middle_table > tbody > tr > td > select {
@@ -456,7 +456,7 @@ input[type=number]::-webkit-outer-spin-button {
     right: 0;
     padding: 1px !important;
     height: 100%;
-    width: 64%;
+    width: 63%;
     margin: 0;
     border-radius: 0;
     border-left: 1px solid black;
@@ -549,7 +549,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .middle_table > tbody > tr > .notes {
     font-size: 16px;
-    padding: 0 0 0 0 !important;
+    padding: 0!important;
     margin: 0;
     text-align: center;
     border: 1px solid black;
@@ -571,30 +571,15 @@ input[type=number]::-webkit-outer-spin-button {
 .middle_table > tbody > tr > .notes_all > .notes_inputs > .note_input_1 {
     outline: none;
     float: left;
-    padding-left: 5px;
+    padding: 12px 2px 8px 1.5% !important;
     word-break: break-all;
     cursor: text;
     border-right: 1px solid black;
     text-align: left;
-    width: 40%;
+    width: 38%;
     background: white;
     border-bottom: 0;
     border-radius: 0;
-}
-
-.middle_table > tbody > tr > .notes_all > .notes_inputs > .note_input_2 {
-    float: left;
-    padding: 0 0 0 5px !important;
-    width: 60%;
-    margin-left: -1px;
-    word-break: break-all;
-    border-left: 1px solid black;
-    cursor: text;
-    text-align: left;
-    border-top: 0;
-    border-bottom: 0;
-    border-radius: 0;
-    outline: none;
 }
 
 /* Right table */
@@ -840,19 +825,19 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 
-/* Prosechki right_table */
+/* Perforations right_table */
 
-.prosechki_all {
+.perforations_all {
     height: 20px;
     position: relative;
     padding: 0 !important;
     border: 1px solid black;
 }
 
-.prosechki_all > .prosechki_inputs > .prosechki_input_1,
-.prosechki_all > .prosechki_inputs > .prosechki_input_2,
-.prosechki_all > .prosechki_inputs > .prosechki_input_3,
-.prosechki_all > .prosechki_inputs > .prosechki_input_4 {
+.perforations_all > .perforations_inputs > .perforation_input_1,
+.perforations_all > .perforations_inputs > .perforation_input_2,
+.perforations_all > .perforations_inputs > .perforation_input_3,
+.perforations_all > .perforations_inputs > .perforation_input_4 {
     float: left;
     height: 100%;
     width: 20%;
@@ -867,7 +852,7 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 
-.prosechki_all > .prosechki_inputs > .prosechki_input_5 {
+.perforations_all > .perforations_inputs > .perforation_input_5 {
     float: left;
     height: 100%;
     text-align: center;

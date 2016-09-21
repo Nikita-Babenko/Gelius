@@ -63,7 +63,7 @@ public class Perforation {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Perforation{");
         sb.append("id=").append(id);
-        sb.append(", product=").append(product);
+        sb.append(", product=").append(product.getId());
         sb.append(", value=").append(value);
         sb.append('}');
         return sb.toString();
