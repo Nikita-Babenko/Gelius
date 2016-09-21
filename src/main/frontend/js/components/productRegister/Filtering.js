@@ -46,13 +46,13 @@ class Filtering extends React.Component {
         }
         var self = this;
         var filterCheckboxes = filterData.map(function (e, index) {
-                return (
-                    <FilterElement columnName={self.props.columnName}
-                                   ref={self.props.columnName+index}
-                                   parameterSelected={self._onFilteringParameterSelected}
-                                   key={e}
-                                   element={e}/>
-                );
+            return (
+                <FilterElement columnName={self.props.columnName}
+                               ref={self.props.columnName+index}
+                               parameterSelected={self._onFilteringParameterSelected}
+                               key={e}
+                               element={e}/>
+            );
         });
         return (
             <div>
@@ -106,7 +106,11 @@ class Filtering extends React.Component {
     }
 
     _resetAllFilters() {
-        if (this.state.filtersChecked > 0) {
+        this.setState({
+            searchString: ''
+        });
+
+        if (this.state.filtersChecked) {
             this.setState({
                 filtersChecked: 0
             });
@@ -128,19 +132,24 @@ class Filtering extends React.Component {
     }
 
     _resetFilters() {
-        if (this.state.filtersChecked > 0)
-            if (FilteringSortingStore.getIsResetAll()) {
-                this._checkAll(false);
+        if (FilteringSortingStore.getIsResetAll()) {
+            this.setState({
+                searchString: ''
+            });
+            if (this.state.filtersChecked) {
+                this.setState({
+                    filtersChecked: 0
+                });
                 this.props.enableFiltering(false);
+                this._checkAll(false);
             }
+        }
     }
 
     _checkAll(value) {
         var filterParamCount = this.state.filterData.length;
-        if (filterParamCount > 0)
-            for (var i = 0; i < filterParamCount; i++) {
-                this.refs[this.props.columnName + i]._setIsCheckedValue(value);
-            }
+        for (var i = 0; i < filterParamCount; i++)
+            this.refs[this.props.columnName + i]._setIsCheckedValue(value);
     }
 
 }
