@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS print;
 DROP TABLE IF EXISTS producibility_notes;
 DROP TABLE IF EXISTS perforation;
+DROP TABLE IF EXISTS bigovki;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS client;
 DROP TABLE IF EXISTS product_type;
