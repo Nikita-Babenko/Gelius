@@ -38,21 +38,19 @@ public class Packing {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Packing packing = (Packing) o;
-        return Objects.equals(id, packing.id);
+        Packing packing1 = (Packing) o;
+        return Objects.equals(packing, packing1.packing);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(packing);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Packing{");
-        sb.append("id=").append(id);
-        sb.append(", packing='").append(packing).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Packing{" + "id=" + id +
+                ", packing='" + packing + '\'' +
+                '}';
     }
 }

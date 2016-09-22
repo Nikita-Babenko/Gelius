@@ -38,20 +38,18 @@ public class FaceLayerDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FaceLayerDto that = (FaceLayerDto) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(faceLayer, that.faceLayer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(faceLayer);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FaceLayerDto{");
-        sb.append("id=").append(id);
-        sb.append(", faceLayer='").append(faceLayer).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "FaceLayerDto{" + "id=" + id +
+                ", faceLayer='" + faceLayer + '\'' +
+                '}';
     }
 }

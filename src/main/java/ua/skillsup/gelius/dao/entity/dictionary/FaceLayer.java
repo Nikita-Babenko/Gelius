@@ -38,21 +38,19 @@ public class FaceLayer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FaceLayer faceLayer = (FaceLayer) o;
-        return Objects.equals(id, faceLayer.id);
+        FaceLayer faceLayer1 = (FaceLayer) o;
+        return Objects.equals(faceLayer, faceLayer1.faceLayer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(faceLayer);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FaceLayer{");
-        sb.append("id=").append(id);
-        sb.append(", faceLayer='").append(faceLayer).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "FaceLayer{" + "id=" + id +
+                ", faceLayer='" + faceLayer + '\'' +
+                '}';
     }
 }

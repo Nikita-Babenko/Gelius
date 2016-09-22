@@ -42,6 +42,9 @@ public class ProductDaoImpl implements ProductDao {
         product.getBigovki()
                 .forEach(bigovki -> bigovki.setProduct(product));
 
+        product.getPerforations()
+                .forEach(perforation -> perforation.setProduct(product));
+
         this.sessionFactory.getCurrentSession().persist(product);
         return product.getId();
     }

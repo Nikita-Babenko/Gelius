@@ -535,63 +535,101 @@ public class ProductDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(productNumber, that.productNumber) &&
+                Objects.equals(isNew, that.isNew) &&
+                Objects.equals(productCreateDate, that.productCreateDate) &&
+                Objects.equals(productUpdateDate, that.productUpdateDate) &&
+                Objects.equals(personPrepared, that.personPrepared) &&
+                Objects.equals(isUse, that.isUse) &&
+                Objects.equals(client, that.client) &&
+                Objects.equals(productName, that.productName) &&
+                Objects.equals(productType, that.productType) &&
+                Objects.equals(innerLength, that.innerLength) &&
+                Objects.equals(innerWidth, that.innerWidth) &&
+                Objects.equals(innerHeight, that.innerHeight) &&
+                Objects.equals(theoreticalSquare, that.theoreticalSquare) &&
+                Objects.equals(actualSquare, that.actualSquare) &&
+                Objects.equals(format, that.format) &&
+                Objects.equals(profile, that.profile) &&
+                Objects.equals(cardboardBrand, that.cardboardBrand) &&
+                Objects.equals(celluloseLayer, that.celluloseLayer) &&
+                Objects.equals(faceLayer, that.faceLayer) &&
+                Objects.equals(innerLayer, that.innerLayer) &&
+                Objects.equals(material, that.material) &&
+                Objects.equals(specialConditions, that.specialConditions) &&
+                Objects.equals(sizeWorkpieceLength, that.sizeWorkpieceLength) &&
+                Objects.equals(sizeWorkpieceWidth, that.sizeWorkpieceWidth) &&
+                Objects.equals(numberFromSheet, that.numberFromSheet) &&
+                Objects.equals(blankFormat, that.blankFormat) &&
+                Objects.equals(connectionValve, that.connectionValve) &&
+                Objects.equals(stamp, that.stamp) &&
+                Objects.equals(cliche, that.cliche) &&
+                Objects.equals(packing, that.packing) &&
+                Objects.equals(numberInPack, that.numberInPack) &&
+                Objects.equals(numberInTransportPackage, that.numberInTransportPackage) &&
+                Objects.equals(packageLength, that.packageLength) &&
+                Objects.equals(packageWidth, that.packageWidth) &&
+                Objects.equals(packageHeight, that.packageHeight) &&
+                Objects.equals(pallet, that.pallet) &&
+                Objects.equals(palletPlacement, that.palletPlacement) &&
+                Objects.equals(palletRows, that.palletRows) &&
+                Objects.equals(numberLoadCar, that.numberLoadCar) &&
+                Objects.equals(productionFormat, that.productionFormat) &&
+                Objects.equals(numberBlanksOnFormat, that.numberBlanksOnFormat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(productNumber, isNew, productCreateDate, productUpdateDate, personPrepared, isUse, client, productName, productType, innerLength, innerWidth, innerHeight, theoreticalSquare, actualSquare, format, profile, cardboardBrand, celluloseLayer, faceLayer, innerLayer, material, specialConditions, sizeWorkpieceLength, sizeWorkpieceWidth, numberFromSheet, blankFormat, connectionValve, stamp, cliche, packing, numberInPack, numberInTransportPackage, packageLength, packageWidth, packageHeight, pallet, palletPlacement, palletRows, numberLoadCar, productionFormat, numberBlanksOnFormat);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProductDto{");
-        sb.append("id=").append(id);
-        sb.append(", productNumber=").append(productNumber);
-        sb.append(", isNew=").append(isNew);
-        sb.append(", productCreateDate=").append(productCreateDate);
-        sb.append(", productUpdateDate=").append(productUpdateDate);
-        sb.append(", personPrepared='").append(personPrepared).append('\'');
-        sb.append(", isUse=").append(isUse);
-        sb.append(", client=").append(client);
-        sb.append(", productName='").append(productName).append('\'');
-        sb.append(", productType=").append(productType);
-        sb.append(", innerLength=").append(innerLength);
-        sb.append(", innerWidth=").append(innerWidth);
-        sb.append(", innerHeight=").append(innerHeight);
-        sb.append(", theoreticalSquare=").append(theoreticalSquare);
-        sb.append(", actualSquare=").append(actualSquare);
-        sb.append(", format=").append(format);
-        sb.append(", profile=").append(profile);
-        sb.append(", cardboardBrand=").append(cardboardBrand);
-        sb.append(", celluloseLayer=").append(celluloseLayer);
-        sb.append(", faceLayer=").append(faceLayer);
-        sb.append(", innerLayer=").append(innerLayer);
-        sb.append(", material='").append(material).append('\'');
-        sb.append(", specialConditions='").append(specialConditions).append('\'');
-        sb.append(", sizeWorkpieceLength=").append(sizeWorkpieceLength);
-        sb.append(", sizeWorkpieceWidth=").append(sizeWorkpieceWidth);
-        sb.append(", numberFromSheet=").append(numberFromSheet);
-        sb.append(", blankFormat=").append(blankFormat);
-        sb.append(", connectionValve=").append(connectionValve);
-        sb.append(", stamp='").append(stamp).append('\'');
-        sb.append(", cliche='").append(cliche).append('\'');
-        sb.append(", packing=").append(packing);
-        sb.append(", numberInPack=").append(numberInPack);
-        sb.append(", numberInTransportPackage=").append(numberInTransportPackage);
-        sb.append(", packageLength=").append(packageLength);
-        sb.append(", packageWidth=").append(packageWidth);
-        sb.append(", packageHeight=").append(packageHeight);
-        sb.append(", pallet=").append(pallet);
-        sb.append(", palletPlacement=").append(palletPlacement);
-        sb.append(", palletRows=").append(palletRows);
-        sb.append(", numberLoadCar=").append(numberLoadCar);
-        sb.append(", productionFormat=").append(productionFormat);
-        sb.append(", numberBlanksOnFormat=").append(numberBlanksOnFormat);
-        sb.append(", producibilityNotes=").append(producibilityNotes);
-        sb.append(", bigovki=").append(bigovki);
-        sb.append(", perforations=").append(perforations);
-        sb.append('}');
-        return sb.toString();
+        return "ProductDto{" + "id=" + id +
+                ", productNumber=" + productNumber +
+                ", isNew=" + isNew +
+                ", productCreateDate=" + productCreateDate +
+                ", productUpdateDate=" + productUpdateDate +
+                ", personPrepared='" + personPrepared + '\'' +
+                ", isUse=" + isUse +
+                ", client=" + client +
+                ", productName='" + productName + '\'' +
+                ", productType=" + productType +
+                ", innerLength=" + innerLength +
+                ", innerWidth=" + innerWidth +
+                ", innerHeight=" + innerHeight +
+                ", theoreticalSquare=" + theoreticalSquare +
+                ", actualSquare=" + actualSquare +
+                ", format=" + format +
+                ", profile=" + profile +
+                ", cardboardBrand=" + cardboardBrand +
+                ", celluloseLayer=" + celluloseLayer +
+                ", faceLayer=" + faceLayer +
+                ", innerLayer=" + innerLayer +
+                ", material='" + material + '\'' +
+                ", specialConditions='" + specialConditions + '\'' +
+                ", sizeWorkpieceLength=" + sizeWorkpieceLength +
+                ", sizeWorkpieceWidth=" + sizeWorkpieceWidth +
+                ", numberFromSheet=" + numberFromSheet +
+                ", blankFormat=" + blankFormat +
+                ", connectionValve=" + connectionValve +
+                ", stamp='" + stamp + '\'' +
+                ", cliche='" + cliche + '\'' +
+                ", packing=" + packing +
+                ", numberInPack=" + numberInPack +
+                ", numberInTransportPackage=" + numberInTransportPackage +
+                ", packageLength=" + packageLength +
+                ", packageWidth=" + packageWidth +
+                ", packageHeight=" + packageHeight +
+                ", pallet=" + pallet +
+                ", palletPlacement=" + palletPlacement +
+                ", palletRows=" + palletRows +
+                ", numberLoadCar=" + numberLoadCar +
+                ", productionFormat=" + productionFormat +
+                ", numberBlanksOnFormat=" + numberBlanksOnFormat +
+                ", producibilityNotes=" + producibilityNotes +
+                ", bigovki=" + bigovki +
+                ", perforations=" + perforations +
+                '}';
     }
 }

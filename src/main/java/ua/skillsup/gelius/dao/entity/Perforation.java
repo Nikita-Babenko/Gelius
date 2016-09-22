@@ -51,21 +51,20 @@ public class Perforation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Perforation that = (Perforation) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(product, that.product) &&
+                Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(product, value);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Perforation{");
-        sb.append("id=").append(id);
-        sb.append(", product=").append(product.getId());
-        sb.append(", value=").append(value);
-        sb.append('}');
-        return sb.toString();
+        return "Perforation{" + "id=" + id +
+                ", product=" + product.getId() +
+                ", value=" + value +
+                '}';
     }
 }

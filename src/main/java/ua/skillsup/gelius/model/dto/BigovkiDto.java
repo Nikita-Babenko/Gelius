@@ -49,21 +49,20 @@ public class BigovkiDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BigovkiDto that = (BigovkiDto) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(product, that.product) &&
+                Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(product, value);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("BigovkiDto{");
-        sb.append("id=").append(id);
-        sb.append(", product=").append(product.getId());
-        sb.append(", value='").append(value).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "BigovkiDto{" + "id=" + id +
+                ", product=" + product.getId() +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

@@ -1,17 +1,23 @@
 package ua.skillsup.gelius.dao.impl;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import ua.skillsup.gelius.dao.ProductDao;
 import ua.skillsup.gelius.dao.ProductRegisterDao;
+import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
+import ua.skillsup.gelius.util.ProductTestUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,11 +33,67 @@ public class ProductRegisterDaoImplTest {
     @Autowired
     private ProductRegisterDao productRegisterDao;
 
+    @Autowired
+    private ProductDao productDao;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     private ProductRegisterFilter productRegisterFilter;
+
+    private List<ProductDto> products;
+
+    private List<Long> productIds;
 
     @Before
     public void setUp() throws Exception {
         productRegisterFilter = new ProductRegisterFilter();
+
+        products = new ArrayList<ProductDto>(){{
+
+            add(modelMapper.map(
+                    ProductTestUtil
+                            .createProduct(1, true, "Product 1", 2, 12, 200, 50, 140, 1),
+                    ProductDto.class));
+
+            add(modelMapper.map(
+                    ProductTestUtil
+                            .createProduct(1, false, "Product 2", 2, 15, 100, 75, 188, 1),
+                    ProductDto.class));
+
+            add(modelMapper.map(
+                    ProductTestUtil
+                            .createProduct(567, false,"Product 3", 1, 45, 324, 44, 124, 2),
+                    ProductDto.class));
+
+            add(modelMapper.map(
+                    ProductTestUtil
+                            .createProduct(14, true,"Product 4", 4, 8, 200, 89, 255,3),
+                    ProductDto.class));
+
+            add(modelMapper.map(
+                    ProductTestUtil
+                            .createProduct(45, false,"Product 5", 4, 8, 415, 30, 90,4),
+                    ProductDto.class));
+
+            add(modelMapper.map(
+                    ProductTestUtil
+                            .createProduct(2, false, "Product 6",2, 9, 200, 46, 145,5),
+                    ProductDto.class));
+
+            add(modelMapper.map(
+                    ProductTestUtil
+                            .createProduct(34, false,"Product 7", 3, 9, 200, 66, 167, 4),
+                    ProductDto.class));
+        }};
+
+        productIds = new ArrayList<>();
+        products.forEach(productDto -> productIds.add(productDao.save(productDto)));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        productIds.forEach(aLong -> productDao.delete(aLong));
     }
 
     @Test
@@ -41,8 +103,9 @@ public class ProductRegisterDaoImplTest {
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
 
         long id = byFilter.get(0).getId();
+        long currentId = productDao.findById(id).getId();
 
-        assertEquals("Sort all product by id, asc", id, 1);
+        assertEquals("Sort all product by id, asc", id, currentId);
     }
 
     @Test
@@ -52,8 +115,9 @@ public class ProductRegisterDaoImplTest {
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
 
         long id = byFilter.get(0).getId();
+        long currentId = productDao.findById(id).getId();
 
-        assertEquals("Sort all product by id, desc", id, 7);
+        assertEquals("Sort all product by id, desc", id, currentId);
     }
 
     @Test
@@ -130,9 +194,10 @@ public class ProductRegisterDaoImplTest {
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
 
         long id = byFilter.get(0).getId();
+        long currentId = productDao.findById(id).getId();
 
         assertEquals("Find products with different names and sort by id, asc", byFilter.size(), 3);
-        assertEquals("After sorting", id, 1);
+        assertEquals("After sorting", id, currentId);
     }
 
     @Test
@@ -143,9 +208,10 @@ public class ProductRegisterDaoImplTest {
         List<ProductRegisterDto> byFilter = productRegisterDao.findByFilter(productRegisterFilter);
 
         long id = byFilter.get(0).getId();
+        long currentId = productDao.findById(id).getId();
 
         assertEquals("Find products with different names and sort by id, asc", byFilter.size(), 4);
-        assertEquals("After sorting", id, 5);
+        assertEquals("After sorting", id, currentId);
     }
 
     @Test

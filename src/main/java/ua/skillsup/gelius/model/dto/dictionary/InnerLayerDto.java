@@ -38,20 +38,18 @@ public class InnerLayerDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InnerLayerDto that = (InnerLayerDto) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(innerLayer, that.innerLayer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(innerLayer);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("InnerLayerDto{");
-        sb.append("id=").append(id);
-        sb.append(", innerLayer='").append(innerLayer).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "InnerLayerDto{" + "id=" + id +
+                ", innerLayer='" + innerLayer + '\'' +
+                '}';
     }
 }

@@ -168,32 +168,43 @@ public class ProductRegisterDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductRegisterDto that = (ProductRegisterDto) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(productNumber, that.productNumber) &&
+                Objects.equals(isNew, that.isNew) &&
+                Objects.equals(client, that.client) &&
+                Objects.equals(productName, that.productName) &&
+                Objects.equals(productType, that.productType) &&
+                Objects.equals(innerLength, that.innerLength) &&
+                Objects.equals(innerWidth, that.innerWidth) &&
+                Objects.equals(innerHeight, that.innerHeight) &&
+                Objects.equals(cardboardBrand, that.cardboardBrand) &&
+                Objects.equals(profile, that.profile) &&
+                Objects.equals(faceLayer, that.faceLayer) &&
+                Objects.equals(innerLayer, that.innerLayer) &&
+                Objects.equals(layersColours, that.layersColours) &&
+                Objects.equals(cliche, that.cliche);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(productNumber, isNew, client, productName, productType, innerLength, innerWidth, innerHeight, cardboardBrand, profile, faceLayer, innerLayer, layersColours, cliche);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProductRegisterDto{");
-        sb.append("id=").append(id);
-        sb.append(", productNumber=").append(productNumber);
-        sb.append(", isNew=").append(isNew);
-        sb.append(", client=").append(client);
-        sb.append(", productName='").append(productName).append('\'');
-        sb.append(", productType=").append(productType);
-        sb.append(", innerLength=").append(innerLength);
-        sb.append(", innerWidth=").append(innerWidth);
-        sb.append(", innerHeight=").append(innerHeight);
-        sb.append(", cardboardBrand=").append(cardboardBrand);
-        sb.append(", profile=").append(profile);
-        sb.append(", faceLayer=").append(faceLayer);
-        sb.append(", innerLayer=").append(innerLayer);
-        sb.append(", cliche='").append(cliche).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ProductRegisterDto{" + "id=" + id +
+                ", productNumber=" + productNumber +
+                ", isNew=" + isNew +
+                ", client=" + client +
+                ", productName='" + productName + '\'' +
+                ", productType=" + productType +
+                ", innerLength=" + innerLength +
+                ", innerWidth=" + innerWidth +
+                ", innerHeight=" + innerHeight +
+                ", cardboardBrand=" + cardboardBrand +
+                ", profile=" + profile +
+                ", faceLayer=" + faceLayer +
+                ", innerLayer=" + innerLayer +
+                ", cliche='" + cliche + '\'' +
+                '}';
     }
 }

@@ -66,23 +66,24 @@ public class PrintDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrintDto printDto = (PrintDto) o;
-        return Objects.equals(id, printDto.id);
+        return Objects.equals(product, printDto.product) &&
+                Objects.equals(color, printDto.color) &&
+                Objects.equals(name, printDto.name) &&
+                Objects.equals(squareSeal, printDto.squareSeal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(product, color, name, squareSeal);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PrintDto{");
-        sb.append("id=").append(id);
-        sb.append(", product=").append(product.getId());
-        sb.append(", color='").append(color).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", squareSeal=").append(squareSeal);
-        sb.append('}');
-        return sb.toString();
+        return "PrintDto{" + "id=" + id +
+                ", product=" + product.getId() +
+                ", color='" + color + '\'' +
+                ", name='" + name + '\'' +
+                ", squareSeal=" + squareSeal +
+                '}';
     }
 }

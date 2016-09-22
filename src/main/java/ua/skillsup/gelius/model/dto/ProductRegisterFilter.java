@@ -181,21 +181,19 @@ public class ProductRegisterFilter {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProductRegisterFilter{");
-        sb.append("productNumbers=").append(productNumbers);
-        sb.append(", clientNames=").append(clientNames);
-        sb.append(", productNames=").append(productNames);
-        sb.append(", productTypes=").append(productTypes);
-        sb.append(", innerLengths=").append(innerLengths);
-        sb.append(", innerWidths=").append(innerWidths);
-        sb.append(", innerHeights=").append(innerHeights);
-        sb.append(", cardboardBrands=").append(cardboardBrands);
-        sb.append(", profiles=").append(profiles);
-        sb.append(", layersColours=").append(layersColours);
-        sb.append(", cliches=").append(cliches);
-        sb.append(", sortableColumn='").append(sortableColumn).append('\'');
-        sb.append(", sortingDirection='").append(sortingDirection).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ProductRegisterFilter{" + "productNumbers=" + productNumbers +
+                ", clientNames=" + clientNames +
+                ", productNames=" + productNames +
+                ", productTypes=" + productTypes +
+                ", innerLengths=" + innerLengths +
+                ", innerWidths=" + innerWidths +
+                ", innerHeights=" + innerHeights +
+                ", cardboardBrands=" + cardboardBrands +
+                ", profiles=" + profiles +
+                ", layersColours=" + layersColours +
+                ", cliches=" + cliches +
+                ", sortableColumn='" + sortableColumn + '\'' +
+                ", sortingDirection='" + sortingDirection + '\'' +
+                '}';
     }
 }

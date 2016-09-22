@@ -38,20 +38,18 @@ public class FormatDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FormatDto formatDto = (FormatDto) o;
-        return Objects.equals(id, formatDto.id);
+        return Objects.equals(format, formatDto.format);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(format);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FormatDto{");
-        sb.append("id=").append(id);
-        sb.append(", format='").append(format).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "FormatDto{" + "id=" + id +
+                ", format='" + format + '\'' +
+                '}';
     }
 }

@@ -61,22 +61,22 @@ public class Producibility {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Producibility that = (Producibility) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(serviceCenter, that.serviceCenter) &&
+                Objects.equals(groupPriority, that.groupPriority) &&
+                Objects.equals(elementPriority, that.elementPriority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(serviceCenter, groupPriority, elementPriority);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Producibility{");
-        sb.append("id=").append(id);
-        sb.append(", serviceCenter='").append(serviceCenter).append('\'');
-        sb.append(", groupPriority=").append(groupPriority);
-        sb.append(", elementPriority=").append(elementPriority);
-        sb.append('}');
-        return sb.toString();
+        return "Producibility{" + "id=" + id +
+                ", serviceCenter='" + serviceCenter + '\'' +
+                ", groupPriority=" + groupPriority +
+                ", elementPriority=" + elementPriority +
+                '}';
     }
 }

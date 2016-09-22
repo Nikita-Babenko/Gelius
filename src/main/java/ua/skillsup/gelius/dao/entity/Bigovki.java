@@ -50,22 +50,21 @@ public class Bigovki {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Bigovki that = (Bigovki) o;
-        return Objects.equals(id, that.id);
+        Bigovki bigovki = (Bigovki) o;
+        return Objects.equals(product, bigovki.product) &&
+                Objects.equals(value, bigovki.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(product, value);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Bigovki{");
-        sb.append("id=").append(id);
-        sb.append(", product=").append(product.getId());
-        sb.append(", value='").append(value).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Bigovki{" + "id=" + id +
+                ", product=" + product.getId() +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

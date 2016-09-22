@@ -38,21 +38,19 @@ public class Format {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Format format = (Format) o;
-        return Objects.equals(id, format.id);
+        Format format1 = (Format) o;
+        return Objects.equals(format, format1.format);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(format);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Format{");
-        sb.append("id=").append(id);
-        sb.append(", format='").append(format).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Format{" + "id=" + id +
+                ", format='" + format + '\'' +
+                '}';
     }
 }

@@ -38,20 +38,18 @@ public class CelluloseLayerDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CelluloseLayerDto that = (CelluloseLayerDto) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(celluloseLayer, that.celluloseLayer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(celluloseLayer);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CelluloseLayerDto{");
-        sb.append("id=").append(id);
-        sb.append(", celluloseLayer='").append(celluloseLayer).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "CelluloseLayerDto{" + "id=" + id +
+                ", celluloseLayer='" + celluloseLayer + '\'' +
+                '}';
     }
 }

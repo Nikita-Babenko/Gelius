@@ -39,20 +39,18 @@ public class CardboardBrand {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CardboardBrand that = (CardboardBrand) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(cardboardBrand, that.cardboardBrand);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(cardboardBrand);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CardboardBrand{");
-        sb.append("id=").append(id);
-        sb.append(", cardboardBrand='").append(cardboardBrand).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "CardboardBrand{" + "id=" + id +
+                ", cardboardBrand='" + cardboardBrand + '\'' +
+                '}';
     }
 }

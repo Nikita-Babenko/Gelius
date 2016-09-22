@@ -94,25 +94,28 @@ public class ClientDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClientDto clientDto = (ClientDto) o;
-        return Objects.equals(id, clientDto.id);
+        return Objects.equals(firstName, clientDto.firstName) &&
+                Objects.equals(lastName, clientDto.lastName) &&
+                Objects.equals(companyName, clientDto.companyName) &&
+                Objects.equals(phoneNumber, clientDto.phoneNumber) &&
+                Objects.equals(address, clientDto.address) &&
+                Objects.equals(description, clientDto.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(firstName, lastName, companyName, phoneNumber, address, description);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ClientDto{");
-        sb.append("id=").append(id);
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", companyName='").append(companyName).append('\'');
-        sb.append(", phoneNumber='").append(phoneNumber).append('\'');
-        sb.append(", address='").append(address).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ClientDto{" + "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

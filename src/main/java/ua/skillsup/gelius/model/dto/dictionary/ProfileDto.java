@@ -38,20 +38,18 @@ public class ProfileDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProfileDto that = (ProfileDto) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(profile, that.profile);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(profile);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProfileDto{");
-        sb.append("id=").append(id);
-        sb.append(", profile='").append(profile).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ProfileDto{" + "id=" + id +
+                ", profile='" + profile + '\'' +
+                '}';
     }
 }

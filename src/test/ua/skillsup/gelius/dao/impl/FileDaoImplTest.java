@@ -72,8 +72,8 @@ public class FileDaoImplTest {
     @Test
     public void findAllFilePathsWithSubdirectoriesAndAnyExtensions() throws Exception {
         String [] extensions = new String[]{"pdf", "png"};
-        File file1 = new File(directoryPath + File.separator + "test" + File.separator +"somefile1.pdf");
-        File file2 = new File(directoryPath + File.separator + "test" + File.separator +"somefile2.png");
+        File file1 = new File(directoryPath + File.separator + "test" + File.separator + "somefile1.pdf");
+        File file2 = new File(directoryPath + File.separator + "test" + File.separator + "somefile2.png");
         File file3 = new File(directoryPath + File.separator + "somefile3.pdf");
 
         file1.getParentFile().mkdirs();

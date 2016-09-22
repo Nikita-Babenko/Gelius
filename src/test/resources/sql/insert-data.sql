@@ -138,15 +138,4 @@ INSERT INTO pallet_placement (pallet_placement) VALUES ('5 пачек в ряд�
 INSERT INTO pallet_placement (pallet_placement) VALUES ('6 пачек в ряду');
 INSERT INTO pallet_placement (pallet_placement) VALUES ('8 пачек в ряду');
 
-INSERT INTO product (product_number, isNew, product_name, client_id, blank_format, inner_width, inner_height, inner_length, cardboard_brand_id)
-VALUES
-  (1, true, 'Product 1',2, 12, 200, 50, 140, 1),
-  (1, false, 'Product 2',2, 15, 100, 75, 188, 1),
-  (567, false,'Product 3', 1, 45, 324, 44, 124, 2),
-  (14, true,'Product 4', 4, 8, 200, 89, 255,3),
-  (45, false,'Product 5', 4, 8, 415, 30, 90,4),
-  (2, false, 'Product 6',2, 9, 200, 46, 145,5),
-  (34, false,'Product 7', 3, 9, 200, 66, 167, 4);
-
-
 COMMIT;

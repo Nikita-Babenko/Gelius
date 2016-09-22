@@ -94,25 +94,28 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(id, client.id);
+        return Objects.equals(firstName, client.firstName) &&
+                Objects.equals(lastName, client.lastName) &&
+                Objects.equals(companyName, client.companyName) &&
+                Objects.equals(phoneNumber, client.phoneNumber) &&
+                Objects.equals(address, client.address) &&
+                Objects.equals(description, client.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(firstName, lastName, companyName, phoneNumber, address, description);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Client{");
-        sb.append("id=").append(id);
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", companyName='").append(companyName).append('\'');
-        sb.append(", phoneNumber='").append(phoneNumber).append('\'');
-        sb.append(", address='").append(address).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Client{" + "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

@@ -38,20 +38,18 @@ public class PalletDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PalletDto palletDto = (PalletDto) o;
-        return Objects.equals(id, palletDto.id);
+        return Objects.equals(pallet, palletDto.pallet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(pallet);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PalletDto{");
-        sb.append("id=").append(id);
-        sb.append(", pallet='").append(pallet).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "PalletDto{" + "id=" + id +
+                ", pallet='" + pallet + '\'' +
+                '}';
     }
 }

@@ -38,21 +38,19 @@ public class Pallet {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pallet pallet = (Pallet) o;
-        return Objects.equals(id, pallet.id);
+        Pallet pallet1 = (Pallet) o;
+        return Objects.equals(pallet, pallet1.pallet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(pallet);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Pallet{");
-        sb.append("id=").append(id);
-        sb.append(", pallet='").append(pallet).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Pallet{" + "id=" + id +
+                ", pallet='" + pallet + '\'' +
+                '}';
     }
 }

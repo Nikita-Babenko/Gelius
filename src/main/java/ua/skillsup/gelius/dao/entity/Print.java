@@ -73,23 +73,24 @@ public class Print {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Print print = (Print) o;
-        return Objects.equals(id, print.id);
+        return Objects.equals(product, print.product) &&
+                Objects.equals(color, print.color) &&
+                Objects.equals(name, print.name) &&
+                Objects.equals(squareSeal, print.squareSeal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(product, color, name, squareSeal);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Print{");
-        sb.append("id=").append(id);
-        sb.append(", product=").append(product);
-        sb.append(", color='").append(color).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", squareSeal=").append(squareSeal);
-        sb.append('}');
-        return sb.toString();
+        return "Print{" + "id=" + id +
+                ", product=" + product +
+                ", color='" + color + '\'' +
+                ", name='" + name + '\'' +
+                ", squareSeal=" + squareSeal +
+                '}';
     }
 }

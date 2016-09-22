@@ -65,22 +65,22 @@ public class ProducibilityNotes {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProducibilityNotes that = (ProducibilityNotes) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(product.getId(), that.product.getId()) &&
+                Objects.equals(serviceCenter, that.serviceCenter) &&
+                Objects.equals(note, that.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(product.getId(), serviceCenter, note);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProducibilityNotes{");
-        sb.append("id=").append(id);
-        sb.append(", product=").append(product.getId());
-        sb.append(", serviceCenter=").append(serviceCenter);
-        sb.append(", note='").append(note).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ProducibilityNotes{" + "id=" + id +
+                ", product=" + product.getId() +
+                ", serviceCenter=" + serviceCenter +
+                ", note='" + note + '\'' +
+                '}';
     }
 }
