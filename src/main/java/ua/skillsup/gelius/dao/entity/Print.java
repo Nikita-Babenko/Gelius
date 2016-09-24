@@ -22,8 +22,8 @@ public class Print {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "square_seal")
-    private Integer squareSeal;
+    @Column(name = "square_seal", precision = 5, scale = 3)
+    private Double squareSeal;
 
     public Print() {
     }
@@ -60,11 +60,11 @@ public class Print {
         this.name = name;
     }
 
-    public Integer getSquareSeal() {
+    public Double getSquareSeal() {
         return squareSeal;
     }
 
-    public void setSquareSeal(Integer squareSeal) {
+    public void setSquareSeal(Double squareSeal) {
         this.squareSeal = squareSeal;
     }
 

@@ -2,6 +2,7 @@ package ua.skillsup.gelius.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.validation.constraints.Min;
 import java.util.Objects;
 
 public class PerforationDto {
@@ -11,6 +12,7 @@ public class PerforationDto {
     @JsonBackReference
     private ProductDto product;
 
+    @Min(value = 1, message = "величина просечки не может быть меньше {value}")
     private Integer value;
 
     public PerforationDto() {

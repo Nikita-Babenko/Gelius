@@ -2,6 +2,7 @@ package ua.skillsup.gelius.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.validation.constraints.Min;
 import java.util.Objects;
 
 public class BigovkiDto {
@@ -11,6 +12,7 @@ public class BigovkiDto {
     @JsonBackReference
     private ProductDto product;
 
+    @Min(value = 1, message = "величина биговки не может быть меньше {value}")
     private Integer value;
 
     public BigovkiDto() {

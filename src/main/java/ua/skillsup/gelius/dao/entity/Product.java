@@ -186,6 +186,10 @@ public class Product {
     @Fetch(FetchMode.SELECT)
     private List<Perforation> perforations;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    private List<Print> prints;
+
     public Long getId() {
         return id;
     }
@@ -546,6 +550,14 @@ public class Product {
         this.perforations = perforations;
     }
 
+    public List<Print> getPrints() {
+        return prints;
+    }
+
+    public void setPrints(List<Print> prints) {
+        this.prints = prints;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -646,6 +658,7 @@ public class Product {
                 ", producibilityNotes=" + producibilityNotes +
                 ", bigovki=" + bigovki +
                 ", perforations=" + perforations +
+                ", prints=" + prints +
                 '}';
     }
 }

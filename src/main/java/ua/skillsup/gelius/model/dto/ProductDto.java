@@ -127,6 +127,10 @@ public class ProductDto {
     @Valid
     private List<PerforationDto> perforations;
 
+    @JsonManagedReference
+    @Valid
+    private List<PrintDto> prints;
+
     private List<String> filePaths;
 
     private List<String> fileImagePaths;
@@ -530,6 +534,14 @@ public class ProductDto {
         this.perforations = perforations;
     }
 
+    public List<PrintDto> getPrints() {
+        return prints;
+    }
+
+    public void setPrints(List<PrintDto> prints) {
+        this.prints = prints;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -630,6 +642,7 @@ public class ProductDto {
                 ", producibilityNotes=" + producibilityNotes +
                 ", bigovki=" + bigovki +
                 ", perforations=" + perforations +
+                ", prints=" + prints +
                 '}';
     }
 }

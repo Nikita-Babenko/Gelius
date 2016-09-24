@@ -1,18 +1,26 @@
 package ua.skillsup.gelius.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import ua.skillsup.gelius.annotation.CheckDoubleAboveZero;
+
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class PrintDto {
 
     private Long id;
 
+    @JsonBackReference
     private ProductDto product;
 
+    @Size(max = 6, message = "код цвета не должен превышать {max} символов")
     private String color;
 
+    @Size(max = 50, message = "название цвета не должно превышать {max} символов")
     private String name;
 
-    private Integer squareSeal;
+    @CheckDoubleAboveZero(message = "площадь запечатки должна быть больше нуля")
+    private Double squareSeal;
 
     public PrintDto() {
     }
@@ -53,11 +61,11 @@ public class PrintDto {
         this.name = name;
     }
 
-    public Integer getSquareSeal() {
+    public Double getSquareSeal() {
         return squareSeal;
     }
 
-    public void setSquareSeal(Integer squareSeal) {
+    public void setSquareSeal(Double squareSeal) {
         this.squareSeal = squareSeal;
     }
 
