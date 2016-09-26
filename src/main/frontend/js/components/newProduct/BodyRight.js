@@ -4,6 +4,7 @@ import FileLinksContainer from "../newProduct/FileLinksContainer";
 import NumberInput from "../newProduct/NumberInput";
 import Bigovki from "../newProduct/Bigovki";
 import Perforations from "../newProduct/Perforations";
+import ProductionFormat from "../newProduct/ProductionFormat";
 import FooterControlButtons from "../newProduct/FooterControlButtons";
 
 class BodyRight extends React.Component {
@@ -97,7 +98,7 @@ class BodyRight extends React.Component {
                     <tr>
                         <td className="avto_large_td" colSpan="2">Производственный формат</td>
                         <td className="avto_small_td">
-                            <NumberInput id="productionFormat"/>
+                            <ProductionFormat/>
                         </td>
                     </tr>
 

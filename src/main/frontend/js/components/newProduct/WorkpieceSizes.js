@@ -76,12 +76,13 @@ class WorkpieceSizes extends React.Component {
 
     __updateWorkpieceWidth() {
         var data = UpdateStore.getWorkpieceWidthData();
-        this.setState({
-            workpieceWidth: data.value,
-            disableWorkpieceWidth: data.isDisabled
-        });
-        this.props.update(this.state.workpieceLength, data.value);
-
+        if (data.value) {
+            this.setState({
+                workpieceWidth: data.value,
+                disableWorkpieceWidth: data.isDisabled
+            });
+            this.props.update(this.state.workpieceLength, data.value);
+        }
     }
 }
 

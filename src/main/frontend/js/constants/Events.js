@@ -52,7 +52,8 @@ var EventConstants = {
     CREATE_NEW_PRODUCT: "new",
 
     UPDATE_CHANGE_EVENT: "update_change_event",
-    UPDATE_WORKPIECE_WIDTH: "update_workpiece_width"
+    UPDATE_WORKPIECE_WIDTH: "update_workpiece_width",
+    UPDATE_PRODUCTION_FORMAT: "update_production_format"
 
 };
 

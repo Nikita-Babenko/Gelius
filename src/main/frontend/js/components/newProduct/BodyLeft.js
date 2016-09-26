@@ -1,4 +1,6 @@
 import React from "react";
+import NewProductAction from "../../actions/NewProductActions";
+import NewProductStore from "../../stores/NewProductStore";
 import Dictionary from "../newProduct/Dictionary";
 import SquareInput from "../newProduct/SquareInput";
 import NumberInput from "../newProduct/NumberInput";
@@ -45,6 +47,7 @@ class BodyLeft extends React.Component {
                             <Dictionary
                                 dictionaryName="format"
                                 dictionaryTextName="format"
+                                updateFunction={this.__updateProductionFormat.bind(this)}
                             />
                         </td>
                         <td className="products_large_td">Профиль</td>
@@ -133,6 +136,11 @@ class BodyLeft extends React.Component {
                 </table>
             </div>
         );
+    }
+
+    __updateProductionFormat(value) {
+        if (NewProductStore.isInNewMode())
+            NewProductAction.updateProductionFormat(value);
     }
 
 }

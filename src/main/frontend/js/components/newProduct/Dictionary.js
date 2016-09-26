@@ -65,17 +65,22 @@ class Dictionary extends React.Component {
         this.setState({
             value: e.target.value
         });
+        if (typeof this.props.updateFunction === "function") {
+            var value = e.target.value !== "" ? e.target.options[event.target.selectedIndex].text : ""
+            this.props.updateFunction(value);
+        }
     }
 }
 
 Dictionary.propTypes = {
     dictionaryName: React.PropTypes.string.isRequired,
     dictionaryTextName: React.PropTypes.string,
-    style: React.PropTypes.string
+    style: React.PropTypes.string,
+    updateFunction: React.PropTypes.func
 };
 
 Dictionary.defaultProps = {
-    style: ""
+    style: "",
 };
 
 class DictionaryOption extends React.Component {

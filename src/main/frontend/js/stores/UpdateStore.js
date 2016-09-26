@@ -5,10 +5,8 @@ import EventConstants from "../constants/Events";
 class UpdateStore extends EventEmitter {
     constructor() {
         super();
-        this.workpieceWidth = {
-            value: "",
-            isDisabled: false
-        }
+        this.workpieceWidth = {};
+        this.productionFormat = null;
     }
 
     emitChange() {
@@ -17,6 +15,10 @@ class UpdateStore extends EventEmitter {
 
     getWorkpieceWidthData() {
         return this.workpieceWidth;
+    }
+
+    getProductionFormat() {
+        return this.productionFormat;
     }
 
 }
@@ -29,6 +31,12 @@ updateStore.dispatchToken = Dispatcher.register(function (event) {
             updateStore.workpieceWidth.value = event.value;
             updateStore.workpieceWidth.isDisabled = event.isDisabled;
             updateStore.emitChange();
+            updateStore.workpieceWidth = {};
+            break;
+        case EventConstants.UPDATE_PRODUCTION_FORMAT:
+            updateStore.productionFormat = event.recommendedFormat;
+            updateStore.emitChange();
+            updateStore.productionFormat = null;
             break;
     }
 });

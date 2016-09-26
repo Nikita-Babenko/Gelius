@@ -17,7 +17,7 @@ class NewProductStore extends EventEmitter {
         this.saveFiles = false;
         this.enableDefaultValues = true;
         this.showAlert = false;
-        this.operation = "";
+        this.operation = EventConstants.CREATE_NEW_PRODUCT;
         this.product = {};
     }
 
@@ -39,6 +39,10 @@ class NewProductStore extends EventEmitter {
 
     isInEditMode() {
         return this.operation === EventConstants.EDIT_PRODUCT;
+    }
+
+    isInNewMode() {
+        return this.operation === EventConstants.CREATE_NEW_PRODUCT;
     }
 
     isEnableDefaultValues() {
