@@ -99,7 +99,7 @@ class NewProductStore extends EventEmitter {
         product["sizeWorkpieceLength"] = $('#sizeWorkpieceLength').val();
         product["sizeWorkpieceWidth"] = $('#sizeWorkpieceWidth').val();
         product["numberFromSheet"] = $('#numberFromSheet').val();
-        product["blankFormat"] = $('#blankFormat').val();
+        product["blankFormat"] = Number($('#blankFormat :selected').val());
         product["connectionValve"] = Number($('#connectionValve :selected').val());
         product["stamp"] = $('#stamp').val();
         product["packing"] = Number($('#packing :selected').val());

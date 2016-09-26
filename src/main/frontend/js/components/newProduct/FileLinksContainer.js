@@ -114,6 +114,7 @@ class FileLinksContainer extends React.Component {
     }
 
     __showDeleteAllFilesModalWindow() {
+        if (this.state.items.length > 0)
         $(ReactDOM.findDOMNode(this.refs.deleteAllFilesModal)).modal();
     }
 
@@ -194,7 +195,12 @@ class FileLink extends React.Component {
     }
 
     render() {
-        return <input type="file" className="fileLinks" onChange={this.__setValue} value={this.state.value}/>
+        return <input type="file"
+                      className="fileLinks"
+                      accept="image/*, application/pdf"//"pdf", "ai", "cdr"
+                      onChange={this.__setValue}
+                      value={this.state.value}
+        />
     }
 
 }

@@ -41,13 +41,6 @@ public class FileController {
                 "\n\tfileLinksToDelete count= " + deleteFileLinks.length + "," +
                 "\n\timagesToDelete count= " + deleteImages.length);
 
-        for (String deleteFileLink : deleteFileLinks) {
-            System.out.println("LINK: " + deleteFileLink);
-        }
-        for (String deleteImage : deleteImages) {
-            System.out.println("IMAGE: " + deleteImage);
-        }
-
         String directoryPath = Data.DIRECTORY_PATH + fullProductNumber;
         this.fileService.saveOrUpdateFiles(directoryPath, Arrays.asList(files), Arrays.asList(deleteFileLinks));
 

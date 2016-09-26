@@ -18,7 +18,6 @@ class NewProduct extends React.Component {
         NewProductAction.__disablePalletDictionaryByDefault();
         NewProductAction.__disablePalletDictionaryDependsFromChangePacking();
         NewProductAction.__defaultConnectionValveDictionaryDependsFromProductType();
-        NewProductAction.__sumBigovki();
         NewProductAction.__checkInputNumber();
     }
 

@@ -346,24 +346,11 @@ var NewProductActions = {
         });
     },
 
-    __sumBigovki: function () {
-        $(".sumBigovki").keyup(function () {
-            var isEmpty = true;
-            var total = 0;
-            $('.sumBigovki').each(function () {
-                total = total + Number($(this).val());
-                if ($.trim($(this).val()) !== '') {
-                    isEmpty = isEmpty && false;
-                }
-            });
-            if (isEmpty === false) {
-                $('input#sizeWorkpieceWidth').prop("disabled", true);
-                $('input#sizeWorkpieceWidth').val(total);
-            }
-            else {
-                $('input#sizeWorkpieceWidth').prop("disabled", false);
-                $('input#sizeWorkpieceWidth').val("");
-            }
+    updateWorkpieceWidth(isDisabled, value) {
+        Dispatcher.dispatch({
+            eventType: EventConstants.UPDATE_WORKPIECE_WIDTH,
+            isDisabled: isDisabled,
+            value: value
         });
     },
 
