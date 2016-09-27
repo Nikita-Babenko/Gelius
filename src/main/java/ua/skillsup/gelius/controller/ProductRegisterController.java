@@ -15,6 +15,8 @@ import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.service.ProductRegisterService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
 
@@ -35,9 +37,10 @@ public class ProductRegisterController {
 
     @RequestMapping(path = "/address", method = RequestMethod.GET)
     @ResponseBody
-    public Response getAddress(HttpServletRequest request) {
-        String address = request.getRemoteAddr();
-        LOG.info("address: " + address);
+    public Response getAddress(HttpServletRequest request) throws UnknownHostException {
+        String address = InetAddress.getLocalHost().getHostAddress();
+
+        LOG.info("host: " + InetAddress.getLocalHost());
         return new Response(ResponseCode.OK, address);
     }
 
