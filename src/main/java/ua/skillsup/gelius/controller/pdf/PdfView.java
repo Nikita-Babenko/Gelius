@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 public class PdfView extends AbstractPdfView{
 
@@ -88,7 +87,7 @@ public class PdfView extends AbstractPdfView{
         String fullProductNumber = (productNumber == null && isNew == null) ?
                                                 EMPTY_STRING : ProductUtils.getFullProductNumber(productNumber, isNew);
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate createdDate = product.getProductCreateDate();
         String productCreatedDate = (createdDate == null) ? EMPTY_STRING : createdDate.format(dateTimeFormatter);
 
@@ -170,7 +169,7 @@ public class PdfView extends AbstractPdfView{
     private PdfPTable[] createHeaderBottom(ProductDto product, BaseFont baseFont, String version){
         ClientDto client = product.getClient();
         String productClient = (client == null)
-                ? EMPTY_STRING : client.getLastName() == null ? EMPTY_STRING : client.getLastName();
+                ? EMPTY_STRING : client.getCompanyName() == null ? EMPTY_STRING : client.getCompanyName();
 
         String productName = product.getProductName();
 
@@ -387,37 +386,35 @@ public class PdfView extends AbstractPdfView{
         cellProductClicheValue.setBorder(Rectangle.BOX);
         middleTableTop.addCell(cellProductClicheValue);
 
-        PdfPCell middleCellTableBottom = new PdfPCell();
-        float[] columnWidthsLeftCellTableBottom = {0.265f, 0.7f, 1.3f, 1f};
-        PdfPTable middleTableBottom = new PdfPTable(columnWidthsLeftCellTableBottom);
-        middleTableBottom.setWidthPercentage(101);
+        float[] columnWidthsLeftCellTableMiddle = {0.265f, 0.7f, 1.3f, 1f};
+        PdfPTable middleTableMiddle = new PdfPTable(columnWidthsLeftCellTableMiddle);
+        middleTableMiddle.setWidthPercentage(101);
         java.util.List<PrintDto> listPrint = product.getPrints();
-        middleCellTableBottom.setBorder(Rectangle.NO_BORDER);
 
         PdfPCell verticalTitlePrint = getCell("Печать", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTittle, Font.BOLD);
         verticalTitlePrint.setRotation(-90);
         verticalTitlePrint.setRowspan(5);
         verticalTitlePrint.setBackgroundColor(COLOR);
         verticalTitlePrint.setBorder(Rectangle.BOX);
-        middleTableBottom.addCell(verticalTitlePrint);
+        middleTableMiddle.addCell(verticalTitlePrint);
 
         PdfPCell cellProductColor = getCell("Цвет", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductColor.setMinimumHeight(13);
         cellProductColor.setBorder(Rectangle.BOX);
         cellProductColor.setPaddingBottom(4);
-        middleTableBottom.addCell(cellProductColor);
+        middleTableMiddle.addCell(cellProductColor);
 
         PdfPCell cellProductPrintName = getCell("Название", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPrintName.setMinimumHeight(13);
         cellProductPrintName.setBorder(Rectangle.BOX);
         cellProductPrintName.setPaddingBottom(4);
-        middleTableBottom.addCell(cellProductPrintName);
+        middleTableMiddle.addCell(cellProductPrintName);
 
         PdfPCell cellProductPrintPrice = getCell("S запечатки", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPrintPrice.setMinimumHeight(13);
         cellProductPrintPrice.setBorder(Rectangle.BOX);
         cellProductPrintPrice.setPaddingBottom(4);
-        middleTableBottom.addCell(cellProductPrintPrice);
+        middleTableMiddle.addCell(cellProductPrintPrice);
 
         if(listPrint != null && listPrint.size() > 0){
             listPrint.forEach(pr -> {
@@ -426,21 +423,21 @@ public class PdfView extends AbstractPdfView{
                 printColor.setMinimumHeight(13);
                 printColor.setBorder(Rectangle.BOX);
                 printColor.setPaddingBottom(4);
-                middleTableBottom.addCell(printColor);
+                middleTableMiddle.addCell(printColor);
 
                 String name = (pr.getName() == null) ? EMPTY_STRING : pr.getName() == null ? EMPTY_STRING : pr.getName();
                 PdfPCell printName = getCell(name, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 printName.setMinimumHeight(13);
                 printName.setBorder(Rectangle.BOX);
                 printName.setPaddingBottom(4);
-                middleTableBottom.addCell(printName);
+                middleTableMiddle.addCell(printName);
 
                 String price = (pr.getSquareSeal() == null) ? EMPTY_STRING : pr.getSquareSeal().toString();
                 PdfPCell printPrice = getCell(price, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 printPrice.setMinimumHeight(13);
                 printPrice.setBorder(Rectangle.BOX);
                 printPrice.setPaddingBottom(4);
-                middleTableBottom.addCell(printPrice);
+                middleTableMiddle.addCell(printPrice);
             });
         }
 
@@ -450,20 +447,24 @@ public class PdfView extends AbstractPdfView{
             printColor.setMinimumHeight(13);
             printColor.setBorder(Rectangle.BOX);
             printColor.setPaddingBottom(4);
-            middleTableBottom.addCell(printColor);
+            middleTableMiddle.addCell(printColor);
 
             PdfPCell printName = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
             printName.setMinimumHeight(13);
             printName.setBorder(Rectangle.BOX);
             printName.setPaddingBottom(4);
-            middleTableBottom.addCell(printName);
+            middleTableMiddle.addCell(printName);
 
             PdfPCell printPrice = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
             printPrice.setMinimumHeight(13);
             printPrice.setBorder(Rectangle.BOX);
             printPrice.setPaddingBottom(4);
-            middleTableBottom.addCell(printPrice);
+            middleTableMiddle.addCell(printPrice);
         }
+
+        float[] columnWidthsLeftCellTableBottom = {1.5f, 2.5f};
+        PdfPTable middleTableBottom = new PdfPTable(columnWidthsLeftCellTableBottom);
+        middleTableBottom.setWidthPercentage(101);
 
         PdfPCell producibilityNotes = getCell("Примечания", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.BOLD);
         producibilityNotes.setBorder(Rectangle.BOX);
@@ -476,18 +477,14 @@ public class PdfView extends AbstractPdfView{
         switch (version) {
             case "full":
                 java.util.List<ProducibilityNotesDto> listNotes = product.getProducibilityNotes();
-                if(listNotes != null){
+                if(listNotes != null && listNotes.size() > 0){
                     middleTableBottom.addCell(producibilityNotes);
-                    listNotes.forEach(productNote -> {
-                        String serviceCenter = (productNote.getServiceCenter() == null)
-                                ? EMPTY_STRING : (productNote.getServiceCenter().getServiceCenter() == null)
-                                ? EMPTY_STRING : productNote.getServiceCenter().getServiceCenter();
 
-                        String note = (productNote.getNote() == null) ? EMPTY_STRING : productNote.getNote();
+                    Map<String, String> notes = createProducibilityNotes(listNotes);
 
-                        PdfPCell cellProductNotesCenter = getCell(serviceCenter, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                    notes.forEach((center, note) -> {
+                        PdfPCell cellProductNotesCenter = getCell(center, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                         cellProductNotesCenter.setBorder(Rectangle.BOX);
-                        cellProductNotesCenter.setColspan(2);
                         cellProductNotesCenter.setPaddingTop(-2);
                         cellProductNotesCenter.setPaddingLeft(2);
                         cellProductNotesCenter.setMinimumHeight(13);
@@ -496,8 +493,7 @@ public class PdfView extends AbstractPdfView{
 
                         PdfPCell cellProductNote = getCell(note, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                         cellProductNote.setBorder(Rectangle.BOX);
-                        cellProductNote.setColspan(3);
-                        cellProductNote.setPaddingTop(-2);
+                        cellProductNote.setPaddingTop(-1);
                         cellProductNote.setPaddingLeft(2);
                         cellProductNote.setMinimumHeight(13);
                         middleTableBottom.addCell(cellProductNote);
@@ -508,6 +504,7 @@ public class PdfView extends AbstractPdfView{
         }
 
         middleCellTable.addElement(middleTableTop);
+        middleCellTable.addElement(middleTableMiddle);
         middleCellTable.addElement(middleTableBottom);
 
         return middleCellTable;
@@ -1126,12 +1123,26 @@ public class PdfView extends AbstractPdfView{
         producibility.setPaddingLeft(8);
         producibility.setPaddingBottom(6);
 
-        PdfPCell producibilityValue = getCell("Технологичность", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        java.util.List<ProducibilityNotesDto> listNotes = product.getProducibilityNotes();
+        PdfPCell producibilityValue;
+        if(listNotes != null && listNotes.size() > 0){
+            Map<String, String> notes = createProducibilityNotes(listNotes);
+
+            final String[] resultProducibility = {""};
+            notes.forEach((center, note) -> resultProducibility[0] += center + "   ");
+
+            producibilityValue = getCell(resultProducibility[0], PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        }
+        else {
+            producibilityValue = getCell(EMPTY_STRING, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        }
+
         producibilityValue.setBorder(Rectangle.BOX);
         producibilityValue.setColspan(5);
-        producibilityValue.setPaddingLeft(2);
+        producibilityValue.setPaddingLeft(7);
         producibilityValue.setPaddingTop(-2);
         producibilityValue.setMinimumHeight(50);
+
 
         switch (version) {
             case "full":
@@ -1156,153 +1167,47 @@ public class PdfView extends AbstractPdfView{
         return cell;
     }
 
-    private ProductDto createProduct(){
-        ProductDto product = new ProductDto();
-        product.setProductNumber(23);
-        product.setNew(true);
-        product.setProductName("Продукт тест");
-        product.setProductCreateDate(LocalDate.now());
-        product.setProductUpdateDate(LocalDate.now());
-        product.setPersonPrepared("Голтвянский А.О.");
+    private Map<String, String> createProducibilityNotes(List<ProducibilityNotesDto> listNotes){
+        Map<ProducibilityDto, String> producibilityCenters = new LinkedHashMap<>();
+        listNotes.forEach(note -> producibilityCenters.put(note.getServiceCenter(), note.getNote()));
 
-        ClientDto client = new ClientDto(1L);
-        client.setLastName("Приймаченко В.О.");
-        product.setClient(client);
+        Set<Integer> valuesPriority = new TreeSet<>();
+        listNotes.forEach(productNote -> valuesPriority.add(productNote.getServiceCenter().getGroupPriority()));
 
-        product.setIsUse(false);
+        Map<Integer, List<String>> result = new LinkedHashMap<>();
+        valuesPriority.forEach(integer -> {
+            List<String> list = new ArrayList<>();
+            producibilityCenters.forEach((producibility, note) -> {
+                if(producibility.getGroupPriority().equals(integer))
+                    list.add(producibility.getServiceCenter());
+            });
+            result.put(integer, list);
+        });
 
-        ProductTypeDto productType = new ProductTypeDto(1L);
-        productType.setProductType("Ассорти 4 Продукта");
-        product.setProductType(productType);
+        Map<String, String> finalMap = new LinkedHashMap<>();
+        result.forEach((integer, notes) -> {
+            String resultString = "";
+            final String[] note = {""};
+            for (int i = 0; i < notes.size(); i++) {
+                if(i != notes.size() - 1){
+                    resultString += notes.get(i) + "/";
+                }
+                else {
+                    resultString += notes.get(i);
+                }
 
-        product.setInnerLength(111);
-        product.setInnerHeight(222);
-        product.setInnerWidth(333);
-        product.setActualSquare(3.23);
-        product.setTheoreticalSquare(3.23);
-        product.setNumberBlanksOnFormat(11);
+                int finalI = i;
+                producibilityCenters.forEach((producibilityDto, s) -> {
+                    if (producibilityDto.getServiceCenter().equals(notes.get(finalI))) {
+                        note[0] += s;
+                    }
+                });
+            }
+            finalMap.put(resultString, note[0]);
+            resultString = "";
+            note[0] = "";
+        });
 
-        ProfileDto profile = new ProfileDto(1L);
-        profile.setProfile("B");
-        product.setProfile(profile);
-
-        FormatDto format = new FormatDto(1L);
-        format.setFormat("1400");
-        product.setFormat(format);
-
-        CardboardBrandDto cardboardBrand = new CardboardBrandDto(1L);
-        cardboardBrand.setCardboardBrand("T-24");
-        product.setCardboardBrand(cardboardBrand);
-
-        CelluloseLayerDto celluloseLayer = new CelluloseLayerDto(1L);
-        celluloseLayer.setCelluloseLayer("нет");
-        product.setCelluloseLayer(celluloseLayer);
-
-        InnerLayerDto innerLayer = new InnerLayerDto(1L);
-        innerLayer.setInnerLayer("крашенный");
-        product.setInnerLayer(innerLayer);
-
-        FaceLayerDto faceLayer = new FaceLayerDto(1L);
-        faceLayer.setFaceLayer("крашенный");
-        product.setFaceLayer(faceLayer);
-
-        product.setSpecialConditions("I like programming, very much");
-        product.setSizeWorkpieceLength(350);
-        product.setSizeWorkpieceWidth(150);
-        product.setBlankFormat(777);
-
-        ConnectionValveDto connectionValve = new ConnectionValveDto(1L);
-        connectionValve.setConnectionValve("склеенный и сшитый");
-        product.setConnectionValve(connectionValve);
-
-        product.setStamp("Здесь мало текста");
-        product.setCliche("А здесь, теперь тут 2 строки и спускается вниз");
-
-        PackingDto packing = new PackingDto(1L);
-        packing.setPacking("Паллета, лента, стрейч");
-        product.setPacking(packing);
-
-        product.setNumberInPack(231);
-        product.setNumberInTransportPackage(123);
-        product.setPackageWidth(23);
-        product.setPackageLength(12);
-        product.setPackageHeight(32);
-
-        PalletDto pallet = new PalletDto(1L);
-        pallet.setPallet("1200*800");
-        product.setPallet(pallet);
-
-        PalletPlacementDto palletPlacement = new PalletPlacementDto(1L);
-        palletPlacement.setPlacement("2 пачки в ряду");
-        product.setPalletPlacement(palletPlacement);
-
-
-        ProducibilityDto producibility = new ProducibilityDto(1L);
-        producibility.setServiceCenter("Тайванец");
-        producibility.setGroupPriority(12);
-        producibility.setElementPriority(10);
-
-
-        ProducibilityNotesDto producibilityNote = new ProducibilityNotesDto(1L);
-        producibilityNote.setServiceCenter(producibility);
-        producibilityNote.setNote("someNote sdfsdf sdfsdfsdfsdf sdf sdf sdf sdfds sdfsdf sdfsdf");
-
-        java.util.List<ProducibilityNotesDto> producibilityNotes = new ArrayList<>();
-        producibilityNotes.add(producibilityNote);
-        producibilityNotes.add(producibilityNote);
-        producibilityNotes.add(producibilityNote);
-        producibilityNotes.add(producibilityNote);
-        product.setProducibilityNotes(producibilityNotes);
-
-
-        product.setPalletRows(2);
-        product.setNumberLoadCar(23);
-        product.setProductionFormat(23433);
-
-        BigovkiDto bigovki = new BigovkiDto(1L);
-        bigovki.setValue(12);
-
-        BigovkiDto bigovki1 = new BigovkiDto(2L);
-        bigovki1.setValue(13);
-
-        BigovkiDto bigovki2 = new BigovkiDto(3L);
-        bigovki2.setValue(14);
-
-        BigovkiDto bigovki3 = new BigovkiDto(4L);
-        bigovki3.setValue(15);
-
-        java.util.List<BigovkiDto> bigovkiDtoList = new ArrayList<>();
-        bigovkiDtoList.add(bigovki);
-        bigovkiDtoList.add(bigovki1);
-        bigovkiDtoList.add(bigovki2);
-        bigovkiDtoList.add(bigovki3);
-        product.setBigovki(bigovkiDtoList);
-
-        PerforationDto perforation = new PerforationDto(1L);
-        perforation.setValue(1);
-
-        PerforationDto perforation1 = new PerforationDto(2L);
-        perforation1.setValue(2);
-
-        PerforationDto perforation2 = new PerforationDto(3L);
-        perforation2.setValue(3);
-
-        PerforationDto perforation3 = new PerforationDto(4L);
-        perforation3.setValue(4);
-
-        PerforationDto perforation4 = new PerforationDto(4L);
-        perforation4.setValue(5);
-
-        java.util.List<PerforationDto> perforations = new ArrayList<>();
-        perforations.add(perforation);
-        perforations.add(perforation1);
-        perforations.add(perforation2);
-        perforations.add(perforation3);
-        perforations.add(perforation4);
-        product.setPerforations(perforations);
-
-        return product;
+        return finalMap;
     }
-
-
 }
