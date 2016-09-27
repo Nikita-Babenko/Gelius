@@ -14,6 +14,7 @@ import ua.skillsup.gelius.model.dto.ProductRegisterDto;
 import ua.skillsup.gelius.model.dto.ProductRegisterFilter;
 import ua.skillsup.gelius.service.ProductRegisterService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,14 @@ public class ProductRegisterController {
     public String pageRegister() {
         LOG.info("Open register page");
         return "register";
+    }
+
+    @RequestMapping(path = "/address", method = RequestMethod.GET)
+    @ResponseBody
+    public Response getAddress(HttpServletRequest request) {
+        String address = request.getRemoteAddr();
+        LOG.info("address: " + address);
+        return new Response(ResponseCode.OK, address);
     }
 
     @RequestMapping(value = "/allFilterParameters", method = RequestMethod.POST)

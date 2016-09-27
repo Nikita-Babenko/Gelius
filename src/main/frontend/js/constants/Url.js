@@ -16,7 +16,10 @@ var UrlConstants = {
     SAVE_PRODUCT_URL: "/products/newProduct/saveProduct",
     UPDATE_PRODUCT_URL: "/products/updateProduct",
     GET_OPERATION_INFO_URL: "/products/getOperationInfo",
-    SAVE_PRODUCT_FILES_URL: "/files/upload"
+    SAVE_PRODUCT_FILES_URL: "/files/upload",
+    PRODUCT_REGISTER_PAGE: "/products/register",
+    DOWNLOAD_FULL_PRODUCT_PDF: "/products/downloadPdf/full/",
+    DOWNLOAD_SHORT_PRODUCT_PDF: "/products/downloadPdf/short/"
 
 };
 

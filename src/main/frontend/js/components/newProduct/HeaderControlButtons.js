@@ -4,6 +4,7 @@ import EventConstants from '../../constants/Events';
 import NewProductActions from '../../actions/NewProductActions';
 import NewProductStore from '../../stores/NewProductStore';
 import DeleteModal from '../general/DeleteModal';
+import UrlConstants from '../../constants/Url';
 
 class HeaderControlButtons extends React.Component {
 
@@ -31,7 +32,7 @@ class HeaderControlButtons extends React.Component {
         var disableClass = this.state.productId ? "" : " disabled";
         return (
             <div className="col-md-5 col-xs-10 col-sm-11  header_buttons icon_buttons_group">
-                <a href="/products/register"
+                <a href={UrlConstants.PRODUCT_REGISTER_PAGE}
                    className="fa fa-arrow-left fa-2x"
                    title="На страницу реестра"
                    aria-hidden="true"/>
@@ -42,7 +43,7 @@ class HeaderControlButtons extends React.Component {
                    onClick={this.__onSaveProductButtonClick}/>
 
                 <a className={"control-btn btn fa fa-trash-o fa-2x" + disableClass}
-                   title="Удалить продук"
+                   title="Удалить продукт"
                    aria-hidden="true"
                    onClick={this.__onDeleteProductButtonClick}/>
                 <DeleteModal ref="deleteProductModal"
@@ -50,11 +51,14 @@ class HeaderControlButtons extends React.Component {
                              deleteFunction={this._deleteFunction}
                 />
 
-                <a href="#"
-                   className="control-btn btn fa fa-file-pdf-o fa-2x disabled"
+                <a href={UrlConstants.DOWNLOAD_FULL_PRODUCT_PDF + this.state.productId} target="_blank"
+                   title="Загрузить техническую карту для менеджера"
+                   className={"control-btn btn fa fa-file-pdf-o fa-2x"  + disableClass}
                    aria-hidden="true"/>
 
-                <a href="#" className="control-btn btn fa-2x fa-stack disabled">
+                <a href={UrlConstants.DOWNLOAD_SHORT_PRODUCT_PDF + this.state.productId} target="_blank"
+                   title="Загрузить техническую карту для клиента"
+                   className={"control-btn btn fa-2x fa-stack"  + disableClass}>
                     <i className="fa fa-file-pdf-o fa-stack-1x" id="stacked_pdf_icon"></i>
                     <i className="fa fa-user fa-stack-1x" id="stacked_user_icon"></i>
                 </a>
