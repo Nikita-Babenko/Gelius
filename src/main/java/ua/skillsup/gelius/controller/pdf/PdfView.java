@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
-public class PdfView extends AbstractPdfView{
+public class PdfView extends AbstractPdfView {
 
     private static final String EMPTY_STRING = "";
     private static final BaseColor COLOR = new BaseColor(182, 215, 168);
@@ -29,7 +29,7 @@ public class PdfView extends AbstractPdfView{
         return new Document(PAGE_SIZE, 36, 36, 15, 15);
     }
 
-    private void addMetaData(Document document, ProductDto product){
+    private void addMetaData(Document document, ProductDto product) {
         document.addTitle(ProductUtils.getFullProductNumber(product.getProductNumber(), product.getIsNew()));
         document.addAuthor("Gelius Company");
     }
@@ -37,7 +37,7 @@ public class PdfView extends AbstractPdfView{
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ProductDto product = (ProductDto) model.get("product");
-        String version = (String)model.get("version");
+        String version = (String) model.get("version");
 
         BaseFont baseFont = BaseFont.createFont(FONT_PATH, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
@@ -60,11 +60,11 @@ public class PdfView extends AbstractPdfView{
 
             System.out.println(str);
 
-            if(width > 800){
+            if (width > 800) {
                 width = 800;
             }
 
-            if(height > 400){
+            if (height > 400) {
                 height = 400;
             }
 
@@ -76,7 +76,7 @@ public class PdfView extends AbstractPdfView{
         addMetaData(document, product);
     }
 
-    private Map<String, PdfPTable[]> createHeader(ProductDto product, String version, BaseFont baseFont){
+    private Map<String, PdfPTable[]> createHeader(ProductDto product, String version, BaseFont baseFont) {
         Map<String, PdfPTable[]> map = new LinkedHashMap<>();
 
         PdfPTable[] headerTop = createHeaderTop(product, baseFont, version);
@@ -87,7 +87,7 @@ public class PdfView extends AbstractPdfView{
         return map;
     }
 
-    private PdfPTable createPdfBody(ProductDto product, String version, BaseFont baseFont){
+    private PdfPTable createPdfBody(ProductDto product, String version, BaseFont baseFont) {
         float[] columnWidths = {5.2f, 0.05f, 3.7f, 0.05f, 3.7f};
         PdfPTable tableBody = new PdfPTable(columnWidths);
         tableBody.setWidthPercentage(105);
@@ -110,11 +110,11 @@ public class PdfView extends AbstractPdfView{
         return tableBody;
     }
 
-    private PdfPTable[] createHeaderTop(ProductDto product, BaseFont baseFont, String version){
+    private PdfPTable[] createHeaderTop(ProductDto product, BaseFont baseFont, String version) {
         Boolean isNew = product.getIsNew();
         Integer productNumber = product.getProductNumber();
         String fullProductNumber = (productNumber == null && isNew == null) ?
-                                                EMPTY_STRING : ProductUtils.getFullProductNumber(productNumber, isNew);
+                EMPTY_STRING : ProductUtils.getFullProductNumber(productNumber, isNew);
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate createdDate = product.getProductCreateDate();
@@ -125,7 +125,7 @@ public class PdfView extends AbstractPdfView{
 
         Boolean isUse = product.getIsUse();
         String productIsUse = (isUse == null) ?
-                                EMPTY_STRING : (isUse) ? "Тех. карта используется" : "Tex. карта не используется";
+                EMPTY_STRING : (isUse) ? "Тех. карта используется" : "Tex. карта не используется";
 
         String personPrepared = product.getPersonPrepared();
         String productPersonPrepared = (personPrepared == null) ? EMPTY_STRING : personPrepared;
@@ -195,7 +195,7 @@ public class PdfView extends AbstractPdfView{
         return new PdfPTable[]{titleAndCreatedDateTable, updatedDateTable};
     }
 
-    private PdfPTable[] createHeaderBottom(ProductDto product, BaseFont baseFont, String version){
+    private PdfPTable[] createHeaderBottom(ProductDto product, BaseFont baseFont, String version) {
         ClientDto client = product.getClient();
         String productClient = (client == null)
                 ? EMPTY_STRING : client.getCompanyName() == null ? EMPTY_STRING : client.getCompanyName();
@@ -245,8 +245,8 @@ public class PdfView extends AbstractPdfView{
         emptyCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         emptyCell.setPaddingBottom(15);
 
-        switch (version){
-            case "full" : {
+        switch (version) {
+            case "full": {
                 cellClient.setPaddingTop(-40);
                 cellProductNameValue.setPaddingTop(-40);
                 cellProductTypeValue.setPaddingTop(-40);
@@ -256,7 +256,7 @@ public class PdfView extends AbstractPdfView{
                 emptyCell.setPaddingTop(-40);
                 break;
             }
-            default:{
+            default: {
                 cellClient.setPaddingTop(-7);
                 cellProductNameValue.setPaddingTop(-7);
                 cellProductType.setPaddingTop(-7);
@@ -278,22 +278,22 @@ public class PdfView extends AbstractPdfView{
         return new PdfPTable[]{tableHeader};
     }
 
-    private PdfPCell createMiddleTable(ProductDto product, BaseFont baseFont, int fontSizeForTittle, int fontSizeForColumns, String version){
+    private PdfPCell createMiddleTable(ProductDto product, BaseFont baseFont, int fontSizeForTittle, int fontSizeForColumns, String version) {
         Integer sizeWorkpieceLength = product.getSizeWorkpieceLength();
         String productSizeWorkpieceLength = (sizeWorkpieceLength == null)
-                                                    ? EMPTY_STRING : sizeWorkpieceLength.toString();
+                ? EMPTY_STRING : sizeWorkpieceLength.toString();
 
         Integer sizeWorkpieceWidth = product.getSizeWorkpieceWidth();
         String productSizeWorkpieceWidth = (sizeWorkpieceWidth == null)
-                                                    ? EMPTY_STRING : sizeWorkpieceWidth.toString();
+                ? EMPTY_STRING : sizeWorkpieceWidth.toString();
 
         Integer numberBlankOnFormat = product.getNumberBlanksOnFormat();
         String productNumberBlankOnFormat = (numberBlankOnFormat == null)
-                                                    ? EMPTY_STRING : numberBlankOnFormat.toString();
+                ? EMPTY_STRING : numberBlankOnFormat.toString();
 
         Integer blankFormat = product.getBlankFormat();
         String productBlankFormat = (blankFormat == null)
-                                                    ? EMPTY_STRING : blankFormat.toString();
+                ? EMPTY_STRING : blankFormat.toString();
 
         ConnectionValveDto connectionValve = product.getConnectionValve();
         String productConnectionValve = (connectionValve == null)
@@ -445,10 +445,11 @@ public class PdfView extends AbstractPdfView{
         cellProductPrintPrice.setPaddingBottom(4);
         middleTableMiddle.addCell(cellProductPrintPrice);
 
-        if(listPrint != null && listPrint.size() > 0){
+        if (listPrint != null && listPrint.size() > 0) {
             listPrint.forEach(pr -> {
-                String color = (pr.getColor() == null) ? EMPTY_STRING : pr.getColor() == null ? EMPTY_STRING : pr.getColor();
-                PdfPCell printColor = getCell(color, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                String color = pr.getColor() == null ? EMPTY_STRING : pr.getColor();
+                PdfPCell printColor = getCell("", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                printColor.setBackgroundColor(hexToBaseColor(color));
                 printColor.setMinimumHeight(13);
                 printColor.setBorder(Rectangle.BOX);
                 printColor.setPaddingBottom(4);
@@ -506,7 +507,7 @@ public class PdfView extends AbstractPdfView{
         switch (version) {
             case "full":
                 java.util.List<ProducibilityNotesDto> listNotes = product.getProducibilityNotes();
-                if(listNotes != null && listNotes.size() > 0){
+                if (listNotes != null && listNotes.size() > 0) {
                     middleTableBottom.addCell(producibilityNotes);
 
                     Map<String, String> notes = createProducibilityNotes(listNotes);
@@ -539,17 +540,17 @@ public class PdfView extends AbstractPdfView{
         return middleCellTable;
     }
 
-    private PdfPCell createRightTable(ProductDto product, BaseFont baseFont, int fontSizeForTittle, int fontSizeForColumns, String version){
+    private PdfPCell createRightTable(ProductDto product, BaseFont baseFont, int fontSizeForTittle, int fontSizeForColumns, String version) {
         PackingDto packing = product.getPacking();
         String productPacking = (packing == null)
-                            ? EMPTY_STRING : packing.getPacking() == null ? EMPTY_STRING : packing.getPacking();
+                ? EMPTY_STRING : packing.getPacking() == null ? EMPTY_STRING : packing.getPacking();
 
         Integer numberInPack = product.getNumberInPack();
         String productNumberInPack = (numberInPack == null) ? EMPTY_STRING : numberInPack.toString();
 
         Integer numberInTransportPackage = product.getNumberInTransportPackage();
         String productTransportPackage = (numberInTransportPackage == null)
-                            ? EMPTY_STRING : numberInTransportPackage.toString();
+                ? EMPTY_STRING : numberInTransportPackage.toString();
 
         Integer packageLength = product.getPackageLength();
         String productPackageLength = (packageLength == null) ? EMPTY_STRING : packageLength.toString();
@@ -719,7 +720,7 @@ public class PdfView extends AbstractPdfView{
             case "full":
                 rightCellTable.addElement(rightTable);
 
-                float [] columnWidthLinks = new float[]{4f};
+                float[] columnWidthLinks = new float[]{4f};
                 PdfPTable linksTable = new PdfPTable(columnWidthLinks);
                 linksTable.setWidthPercentage(101);
 
@@ -730,7 +731,7 @@ public class PdfView extends AbstractPdfView{
                 String fullProductNumber = (productNumber == null && isNew == null) ?
                         EMPTY_STRING : ProductUtils.getFullProductNumber(productNumber, isNew);
 
-                if(productLinks != null && productLinks.size() > 0 && !fullProductNumber.equals(EMPTY_STRING)){
+                if (productLinks != null && productLinks.size() > 0 && !fullProductNumber.equals(EMPTY_STRING)) {
                     for (int i = 0; i < productLinks.size(); i++) {
                         Anchor anchor = new Anchor(productNames.get(i));
                         anchor.setReference(productLinks.get(i));
@@ -752,7 +753,7 @@ public class PdfView extends AbstractPdfView{
 
                 rightCellTable.addElement(linksTable);
 
-                float [] columnWidthFormat = new float[]{3f, 1f};
+                float[] columnWidthFormat = new float[]{3f, 1f};
                 PdfPTable formatTable = new PdfPTable(columnWidthFormat);
                 formatTable.setWidthPercentage(101);
                 PdfPCell cellProductionFormat = getCell("Производственный формат", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
@@ -782,11 +783,11 @@ public class PdfView extends AbstractPdfView{
 
                 java.util.List<BigovkiDto> bigovkiProduct = product.getBigovki();
                 String bigovki1 = bigovkiProduct.size() > 0 && bigovkiProduct != null
-                        ? (bigovkiProduct.get(0).getValue() != null ? bigovkiProduct.get(0).getValue().toString(): EMPTY_STRING) : EMPTY_STRING;
+                        ? (bigovkiProduct.get(0).getValue() != null ? bigovkiProduct.get(0).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
                 String bigovki2 = bigovkiProduct.size() > 1 && bigovkiProduct != null
-                        ? (bigovkiProduct.get(1).getValue() != null ? bigovkiProduct.get(1).getValue().toString(): EMPTY_STRING) : EMPTY_STRING;
+                        ? (bigovkiProduct.get(1).getValue() != null ? bigovkiProduct.get(1).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
                 String bigovki3 = bigovkiProduct.size() > 2 && bigovkiProduct != null
-                        ? (bigovkiProduct.get(2).getValue() != null ? bigovkiProduct.get(2).getValue().toString(): EMPTY_STRING) : EMPTY_STRING;
+                        ? (bigovkiProduct.get(2).getValue() != null ? bigovkiProduct.get(2).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
 
                 Integer numberBlanksOnFormat = product.getNumberBlanksOnFormat();
                 String productNumberBlanksOnFormat = (numberBlanksOnFormat == null)
@@ -845,19 +846,19 @@ public class PdfView extends AbstractPdfView{
 
                 String perforation2 = perforationDtos.size() > 1 && perforationDtos != null
                         ? (perforationDtos.get(1).getValue() != null
-                        ? perforationDtos.get(1).getValue().toString(): EMPTY_STRING) : EMPTY_STRING;
+                        ? perforationDtos.get(1).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
 
                 String perforation3 = perforationDtos.size() > 2 && perforationDtos != null
                         ? (perforationDtos.get(2).getValue() != null
-                        ? perforationDtos.get(2).getValue().toString(): EMPTY_STRING) : EMPTY_STRING;
+                        ? perforationDtos.get(2).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
 
                 String perforation4 = perforationDtos.size() > 3 && perforationDtos != null
                         ? (perforationDtos.get(3).getValue() != null
-                        ? perforationDtos.get(3).getValue().toString(): EMPTY_STRING) : EMPTY_STRING;
+                        ? perforationDtos.get(3).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
 
                 String perforation5 = perforationDtos.size() > 4 && perforationDtos != null
                         ? (perforationDtos.get(4).getValue() != null
-                        ? perforationDtos.get(4).getValue().toString(): EMPTY_STRING) : EMPTY_STRING;
+                        ? perforationDtos.get(4).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
 
                 PdfPCell perforationsValue1 = getCell(perforation1, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 perforationsValue1.setMinimumHeight(13);
@@ -892,7 +893,7 @@ public class PdfView extends AbstractPdfView{
                 rightCellTable.addElement(perforationsTable);
 
                 break;
-            default:{
+            default: {
                 rightCellTable.addElement(rightTable);
             }
         }
@@ -900,7 +901,7 @@ public class PdfView extends AbstractPdfView{
         return rightCellTable;
     }
 
-    private PdfPCell createLeftTable(ProductDto product, BaseFont baseFont, int fontSizeForTitle, int fontSizeForColumns, String version){
+    private PdfPCell createLeftTable(ProductDto product, BaseFont baseFont, int fontSizeForTitle, int fontSizeForColumns, String version) {
         Integer innerLength = product.getInnerLength();
         String productInnerLength = (innerLength == null) ? EMPTY_STRING : innerLength.toString();
 
@@ -1037,7 +1038,7 @@ public class PdfView extends AbstractPdfView{
                 cellProductProfileValue.setMinimumHeight(13);
                 leftTable.addCell(cellProductProfileValue);
                 break;
-            default:{
+            default: {
                 cellProductProfile = getCell("Профиль", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductProfile.setBorder(Rectangle.BOX);
                 cellProductProfile.setPaddingBottom(4);
@@ -1154,15 +1155,14 @@ public class PdfView extends AbstractPdfView{
 
         java.util.List<ProducibilityNotesDto> listNotes = product.getProducibilityNotes();
         PdfPCell producibilityValue;
-        if(listNotes != null && listNotes.size() > 0){
+        if (listNotes != null && listNotes.size() > 0) {
             Map<String, String> notes = createProducibilityNotes(listNotes);
 
             final String[] resultProducibility = {""};
             notes.forEach((center, note) -> resultProducibility[0] += center + "   ");
 
             producibilityValue = getCell(resultProducibility[0], PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
-        }
-        else {
+        } else {
             producibilityValue = getCell(EMPTY_STRING, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         }
 
@@ -1196,7 +1196,7 @@ public class PdfView extends AbstractPdfView{
         return cell;
     }
 
-    private Map<String, String> createProducibilityNotes(List<ProducibilityNotesDto> listNotes){
+    private Map<String, String> createProducibilityNotes(List<ProducibilityNotesDto> listNotes) {
         Map<ProducibilityDto, String> producibilityCenters = new LinkedHashMap<>();
         listNotes.forEach(note -> producibilityCenters.put(note.getServiceCenter(), note.getNote()));
 
@@ -1207,7 +1207,7 @@ public class PdfView extends AbstractPdfView{
         valuesPriority.forEach(integer -> {
             List<String> list = new ArrayList<>();
             producibilityCenters.forEach((producibility, note) -> {
-                if(producibility.getGroupPriority().equals(integer))
+                if (producibility.getGroupPriority().equals(integer))
                     list.add(producibility.getServiceCenter());
             });
             result.put(integer, list);
@@ -1218,10 +1218,9 @@ public class PdfView extends AbstractPdfView{
             String resultString = "";
             final String[] note = {""};
             for (int i = 0; i < notes.size(); i++) {
-                if(i != notes.size() - 1){
+                if (i != notes.size() - 1) {
                     resultString += notes.get(i) + "/";
-                }
-                else {
+                } else {
                     resultString += notes.get(i);
                 }
 
@@ -1238,5 +1237,15 @@ public class PdfView extends AbstractPdfView{
         });
 
         return finalMap;
+    }
+
+    private BaseColor hexToBaseColor(String hexColor) {
+        final int[] rgb = new int[3];
+        if (hexColor.length() == 6) {
+            for (int i = 0; i < 3; i++)
+                rgb[i] = Integer.parseInt(hexColor.substring(i * 2, i * 2 + 2), 16);
+            return new BaseColor(rgb[0], rgb[1], rgb[2]);
+        } else
+            return new BaseColor(255, 255, 255);
     }
 }
