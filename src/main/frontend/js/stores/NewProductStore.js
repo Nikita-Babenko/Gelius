@@ -58,7 +58,7 @@ class NewProductStore extends EventEmitter {
         $('.sumBigovki').each(function () {
             var value = $(this).val();
             bigovki.push({
-                "value" : value
+                "value": value
             });
         });
         return bigovki;
@@ -69,10 +69,27 @@ class NewProductStore extends EventEmitter {
         $('.perforations').each(function () {
             var value = $(this).val();
             perforations.push({
-                "value" : value
+                "value": value
             });
         });
         return perforations;
+    }
+
+    __getPrints() {
+        var prints = [];
+        $('.print_values').each(function () {
+            var color = $(".print_input_1 input", this).val();
+            var name = $(".print_input_2 input", this).val();
+            var squareSeal = $(".print_input_3 input", this).val();
+            if (!(color === "" && name === "" && squareSeal === ""))
+                prints.push({
+                    "color": color,
+                    "name": name,
+                    "squareSeal": parseFloat(squareSeal.replace(/,/, '.'))
+                });
+        });
+
+        return prints;
     }
 
     getNewProduct() {
@@ -118,6 +135,7 @@ class NewProductStore extends EventEmitter {
         product["numberBlanksOnFormat"] = $('#numberBlanksOnFormat').val();
         product["numberLoadCar"] = $('#numberLoadCar').val();
         product["productionFormat"] = $('#productionFormat').val();
+        product["prints"] = this.__getPrints();
         return product;
     }
 

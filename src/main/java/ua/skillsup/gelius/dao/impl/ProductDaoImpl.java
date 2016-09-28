@@ -45,6 +45,9 @@ public class ProductDaoImpl implements ProductDao {
         product.getPerforations()
                 .forEach(perforation -> perforation.setProduct(product));
 
+        product.getPrints()
+                .forEach(print -> print.setProduct(product));
+
         this.sessionFactory.getCurrentSession().persist(product);
         return product.getId();
     }
@@ -55,20 +58,22 @@ public class ProductDaoImpl implements ProductDao {
 
         product.getProducibilityNotes()
                 .forEach(producibilityNotes -> this.sessionFactory.getCurrentSession().
-                        createQuery("DELETE FROM ProducibilityNotes a " +
-                                "WHERE a.product=:product")
+                        createQuery("DELETE FROM ProducibilityNotes a " + "WHERE a.product=:product")
                         .setParameter("product", product).executeUpdate());
 
         product.getBigovki()
                 .forEach(bigovki -> this.sessionFactory.getCurrentSession().
-                        createQuery("DELETE FROM Bigovki a " +
-                                "WHERE a.product=:product")
+                        createQuery("DELETE FROM Bigovki a " + "WHERE a.product=:product")
                         .setParameter("product", product).executeUpdate());
 
         product.getPerforations()
                 .forEach(perforation -> this.sessionFactory.getCurrentSession().
-                        createQuery("DELETE FROM Perforation a " +
-                                "WHERE a.product=:product")
+                        createQuery("DELETE FROM Perforation a " + "WHERE a.product=:product")
+                        .setParameter("product", product).executeUpdate());
+
+        product.getPrints()
+                .forEach(print -> this.sessionFactory.getCurrentSession().
+                        createQuery("DELETE FROM Print a " + "WHERE a.product=:product")
                         .setParameter("product", product).executeUpdate());
 
         sessionFactory.getCurrentSession().merge(product);
