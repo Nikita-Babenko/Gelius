@@ -8,7 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ua.skillsup.gelius.dao.FileDao;
 import ua.skillsup.gelius.service.FileService;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.mockito.Mockito.*;
 
@@ -27,7 +27,7 @@ public class FileServiceImplTest {
     public void findFilePathsInDirectoryWithoutSubdirectories() throws Exception {
         String[] extensions = new String[]{"pdf", "jpeg"};
 
-        when(fileDao.findFilePaths(directoryPath, extensions, false)).thenReturn(new ArrayList<>());
+        when(fileDao.findFilePaths(directoryPath, extensions, false)).thenReturn(new HashMap<>());
 
         fileService.findFilePaths(directoryPath, extensions, false);
 

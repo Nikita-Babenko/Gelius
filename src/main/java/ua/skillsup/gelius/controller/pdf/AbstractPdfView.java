@@ -29,7 +29,6 @@ public abstract class AbstractPdfView extends AbstractView{
         Document document = newDocument();
         PdfWriter writer = newWriter(document, baos);
         prepareWriter(model, writer, request);
-        buildPdfMetadata(model, document, request);
 
         document.open();
         buildPdfDocument(model, document, writer, request, response);
@@ -51,9 +50,6 @@ public abstract class AbstractPdfView extends AbstractView{
 
     protected int getViewerPreferences() {
         return PdfWriter.ALLOW_PRINTING | PdfWriter.PageLayoutSinglePage;
-    }
-
-    protected void buildPdfMetadata(Map<String, Object> model, Document document, HttpServletRequest request) {
     }
 
     protected abstract void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,

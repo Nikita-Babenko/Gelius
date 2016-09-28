@@ -40,29 +40,16 @@ public class FileDaoImpl implements FileDao {
     }
 
     @Override
-    public List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
+    public Map<String, String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
         LOG.info("get file paths from directory" + directoryPath);
 
         File directory = new File(directoryPath);
 
         List<File> files = (List<File>) FileUtils.listFiles(directory, extensions, isFindInSubdirectories);
-        List<String> listFiles = new ArrayList<>();
-        files.forEach(file -> listFiles.add(file.getAbsolutePath()));
+        Map<String, String> mapFiles = new TreeMap<>();
+        files.forEach(file -> mapFiles.put(file.getAbsolutePath(), file.getName()));
 
-        return listFiles.isEmpty() ? Collections.emptyList() : listFiles;
-    }
-
-    @Override
-    public List<String> findFileNames(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
-        LOG.info("get file names from directory" + directoryPath);
-
-        File directory = new File(directoryPath);
-
-        List<File> files = (List<File>) FileUtils.listFiles(directory, extensions, isFindInSubdirectories);
-        List<String> listFiles = new ArrayList<>();
-        files.forEach(file -> listFiles.add(file.getName()));
-
-        return listFiles.isEmpty() ? Collections.emptyList() : listFiles;
+        return mapFiles.isEmpty() ? Collections.emptyMap() : mapFiles;
     }
 
     @Override
@@ -74,7 +61,7 @@ public class FileDaoImpl implements FileDao {
         List<File> allFiles = (List<File>) FileUtils.listFiles(directory, null, false);
 
         if(deletedFiles == null || deletedFiles.isEmpty()){
-            resultMap = ProductFileUtils.getFilesByteMap(new ArrayList<>(files), allFiles);
+            resultMap = ProductFileUtils.getFilesByteMap(files == null ? new ArrayList<>() : new ArrayList<>(files), allFiles, directoryPath);
             allFiles.forEach(File::delete);
             return ProductFileUtils.saveFiles(directoryPath, resultMap);
         } else {
@@ -84,7 +71,7 @@ public class FileDaoImpl implements FileDao {
                     resultFiles.add(serverFile);
                 }
             }));
-            resultMap = ProductFileUtils.getFilesByteMap(new ArrayList<>(files), resultFiles);
+            resultMap = ProductFileUtils.getFilesByteMap(new ArrayList<>(files), resultFiles, directoryPath);
             allFiles.forEach(File::delete);
             return ProductFileUtils.saveFiles(directoryPath, resultMap);
         }

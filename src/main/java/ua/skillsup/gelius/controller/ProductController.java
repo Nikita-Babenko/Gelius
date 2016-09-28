@@ -111,23 +111,23 @@ public class ProductController {
         String fullProductNumber = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
         
         String productDirectoryPath = Data.DIRECTORY_PATH + fullProductNumber;
-        List<String> productFilePaths = fileService.findFilePaths(productDirectoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
+        Map<String, String> productFilePaths = fileService.findFilePaths(productDirectoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
         List<String> newProductFilePaths = new ArrayList<>();
-        productFilePaths.forEach(filePath -> {
+        productFilePaths.keySet().forEach(filePath -> {
             String newFileName = "productFiles" + filePath.split("PRODUCT_FILES")[1];
             newProductFilePaths.add(newFileName);
         });
         product.setFilePaths(newProductFilePaths);
 
         String productDirectoryImagePaths = productDirectoryPath + File.separator + "images";
-        List<String> productImagePaths = fileService.findFilePaths(productDirectoryImagePaths, null, false);
+        Map<String, String> productImagePaths = fileService.findFilePaths(productDirectoryImagePaths, null, false);
         List<String> newProductImagePaths = new ArrayList<>();
-        productImagePaths.forEach(imagePath -> {
+
+        productImagePaths.keySet().forEach(imagePath -> {
             String newImageName = "productImages" + imagePath.split("PRODUCT_FILES")[1];
             newProductImagePaths.add(newImageName);
         });
         product.setFileImagePaths(newProductImagePaths);
-
         return new Response(ResponseCode.OK, product);
     }
 

@@ -29,6 +29,11 @@ public class PdfView extends AbstractPdfView{
         return new Document(PAGE_SIZE, 36, 36, 15, 15);
     }
 
+    private void addMetaData(Document document, ProductDto product){
+        document.addTitle(ProductUtils.getFullProductNumber(product.getProductNumber(), product.getIsNew()));
+        document.addAuthor("Gelius Company");
+    }
+
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ProductDto product = (ProductDto) model.get("product");
@@ -45,6 +50,30 @@ public class PdfView extends AbstractPdfView{
 
         PdfPTable body = createPdfBody(product, version, baseFont);
         document.add(body);
+
+        List<String> images = new ArrayList<>(product.getFileImagePaths());
+        for (String str : images) {
+            Image image = Image.getInstance(str);
+
+            float width = image.getScaledWidth();
+            float height = image.getScaledHeight();
+
+            System.out.println(str);
+
+            if(width > 800){
+                width = 800;
+            }
+
+            if(height > 400){
+                height = 400;
+            }
+
+            image.scaleToFit(width, height);
+            image.setAlignment(Element.ALIGN_CENTER);
+            document.add(image);
+            writer.setStrictImageSequence(true);
+        }
+        addMetaData(document, product);
     }
 
     private Map<String, PdfPTable[]> createHeader(ProductDto product, String version, BaseFont baseFont){
@@ -695,7 +724,7 @@ public class PdfView extends AbstractPdfView{
                 linksTable.setWidthPercentage(101);
 
                 java.util.List<String> productLinks = product.getFilePaths();
-                java.util.List<String> productNames = product.getFileNames();
+                java.util.List<String> productNames = new ArrayList<>(product.getMapFilePathNames().values());
                 Boolean isNew = product.getIsNew();
                 Integer productNumber = product.getProductNumber();
                 String fullProductNumber = (productNumber == null && isNew == null) ?

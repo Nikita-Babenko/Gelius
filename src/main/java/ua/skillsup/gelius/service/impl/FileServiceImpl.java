@@ -61,12 +61,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
+    public Map<String, String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
         return fileDao.findFilePaths(directoryPath, extensions, isFindInSubdirectories);
     }
 
-    @Override
-    public List<String> findFileNames(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
-        return fileDao.findFileNames(directoryPath, extensions, isFindInSubdirectories);
-    }
 }

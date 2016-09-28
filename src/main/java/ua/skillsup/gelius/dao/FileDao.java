@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public interface FileDao {
 
@@ -13,7 +14,5 @@ public interface FileDao {
 
     boolean deleteDirectory(String directoryPath);
 
-    List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
-
-    List<String> findFileNames(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
+    Map<String, String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
 }

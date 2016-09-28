@@ -21,7 +21,7 @@ public final class ProductFileUtils {
             throw new RuntimeNullPointerException("File name or file extensions cannot be null");
         }
 
-        Map<String, MultipartFile> fileWithExtensions = new HashMap<>();
+        Map<String, MultipartFile> fileWithExtensions = new LinkedHashMap<>();
 
         files.forEach(multipartFile -> {
 
@@ -47,11 +47,16 @@ public final class ProductFileUtils {
         return mapFiles;
     }
 
-    public static Map<String, byte[]> convertMultipartFiles(List<MultipartFile> files, Map<String, byte[]> mapFiles){
+    public static Map<String, byte[]> convertMultipartFiles(List<MultipartFile> files, Map<String, byte[]> mapFiles, String directoryPath){
+        long i = 0;
         for (MultipartFile multipartFile : files) {
             try {
                 byte bytes[] = multipartFile.getBytes();
-                mapFiles.put(multipartFile.getOriginalFilename(), bytes);
+                i = i + 5;
+                if(directoryPath.indexOf("images") > 0){
+                    mapFiles.put((System.currentTimeMillis() + i) + "_" + multipartFile.getOriginalFilename(), bytes);
+                }
+                else mapFiles.put(multipartFile.getOriginalFilename(), bytes);
             } catch (IOException e) {
                 return Collections.emptyMap();
             }
@@ -61,7 +66,7 @@ public final class ProductFileUtils {
 
 
     public static Map<String, byte[]> mergeFileMaps(Map<String, byte[]> serverFilesMap, Map<String, byte[]> multipartFilesMap){
-        Map<String, byte[]> resultFilesMap = new HashMap<>();
+        Map<String, byte[]> resultFilesMap = new TreeMap<>();
         resultFilesMap.putAll(serverFilesMap);
 
         multipartFilesMap.forEach((multipartFileName, multipartFileBytes) -> {
@@ -92,12 +97,12 @@ public final class ProductFileUtils {
         return isFileSaved[0];
     }
 
-    public static Map<String, byte[]> getFilesByteMap(List<MultipartFile> multipartFiles, List<File> normalFiles){
-        Map<String, byte[]> normalFilesMap = new HashMap<>();
+    public static Map<String, byte[]> getFilesByteMap(List<MultipartFile> multipartFiles, List<File> normalFiles, String directoryPath){
+        Map<String, byte[]> normalFilesMap = new TreeMap<>();
         normalFilesMap.putAll(convertNormalFiles(normalFiles, normalFilesMap));
 
-        Map<String, byte[]> multipartFilesMap = new HashMap<>();
-        multipartFilesMap.putAll(convertMultipartFiles(multipartFiles, multipartFilesMap));
+        Map<String, byte[]> multipartFilesMap = new TreeMap<>();
+        multipartFilesMap.putAll(convertMultipartFiles(multipartFiles, multipartFilesMap, directoryPath));
 
         return mergeFileMaps(normalFilesMap, multipartFilesMap);
     }

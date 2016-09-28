@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @CheckOldProductNumberExistence(message = "не заполнен номер техкарты")
@@ -131,9 +132,11 @@ public class ProductDto {
     @Valid
     private List<PrintDto> prints;
 
+    private Map<String, String> mapFilePathNames;
+
     private List<String> filePaths;
 
-    private List<String> fileNames;
+    private Map<String, String> mapImagePathNames;
 
     private List<String> fileImagePaths;
 
@@ -504,22 +507,6 @@ public class ProductDto {
         this.numberBlanksOnFormat = numberBlanksOnFormat;
     }
 
-    public List<String> getFilePaths() {
-        return filePaths;
-    }
-
-    public void setFilePaths(List<String> filePaths) {
-        this.filePaths = filePaths;
-    }
-
-    public List<String> getFileImagePaths() {
-        return fileImagePaths;
-    }
-
-    public void setFileImagePaths(List<String> fileImagePaths) {
-        this.fileImagePaths = fileImagePaths;
-    }
-
     public List<BigovkiDto> getBigovki() {
         return bigovki;
     }
@@ -544,12 +531,36 @@ public class ProductDto {
         this.prints = prints;
     }
 
-    public List<String> getFileNames() {
-        return fileNames;
+    public List<String> getFilePaths() {
+        return filePaths;
     }
 
-    public void setFileNames(List<String> fileNames) {
-        this.fileNames = fileNames;
+    public void setFilePaths(List<String> filePaths) {
+        this.filePaths = filePaths;
+    }
+
+    public List<String> getFileImagePaths() {
+        return fileImagePaths;
+    }
+
+    public void setFileImagePaths(List<String> fileImagePaths) {
+        this.fileImagePaths = fileImagePaths;
+    }
+
+    public Map<String, String> getMapFilePathNames() {
+        return mapFilePathNames;
+    }
+
+    public void setMapFilePathNames(Map<String, String> mapFilePathNames) {
+        this.mapFilePathNames = mapFilePathNames;
+    }
+
+    public Map<String, String> getMapImagePathNames() {
+        return mapImagePathNames;
+    }
+
+    public void setMapImagePathNames(Map<String, String> mapImagePathNames) {
+        this.mapImagePathNames = mapImagePathNames;
     }
 
     @Override

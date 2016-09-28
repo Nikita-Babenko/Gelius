@@ -13,9 +13,8 @@ import ua.skillsup.gelius.model.dto.ProductDto;
 import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.service.ProductService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.util.*;
 
 @Controller
 @RequestMapping("/products")
@@ -36,10 +35,16 @@ public class ViewController {
         String fullProductNumber = productService.getFullProductNumber(product.getProductNumber(), product.getIsNew());
 
         String productDirectoryPath = Data.DIRECTORY_PATH + fullProductNumber;
-        List<String> productFilePaths = fileService.findFilePaths(productDirectoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
-        List<String> productFileNames = fileService.findFileNames(productDirectoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
-        product.setFilePaths(productFilePaths);
-        product.setFileNames(productFileNames);
+        Map<String, String> productFilePaths = fileService.findFilePaths(productDirectoryPath, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
+        List<String> filePaths = new ArrayList<>(new TreeSet<>(productFilePaths.keySet()));
+        product.setFilePaths(filePaths);
+        product.setMapFilePathNames(productFilePaths);
+
+        String productDirectoryImagePaths = productDirectoryPath + File.separator + "images";
+        Map<String, String> productImagePaths = fileService.findFilePaths(productDirectoryImagePaths, (String[]) Data.ALLOWED_FILE_EXTENSIONS.toArray(), false);
+        List<String> imagePaths = new ArrayList<>(new TreeSet<>(productImagePaths.keySet()));
+        product.setFileImagePaths(imagePaths);
+        product.setMapImagePathNames(productImagePaths);
 
         Map<String, Object> model = new HashMap<>();
         model.put("product", product);

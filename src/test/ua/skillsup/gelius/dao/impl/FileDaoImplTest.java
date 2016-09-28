@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -63,7 +64,7 @@ public class FileDaoImplTest {
         file1.createNewFile();
         file2.createNewFile();
 
-        final List<String> filePaths = fileDao.findFilePaths(directoryPath, extensions, false);
+        final Map<String, String> filePaths = fileDao.findFilePaths(directoryPath, extensions, false);
 
         assertEquals("Find all file paths withour subdirectories", filePaths.size(), 2);
     }
@@ -82,7 +83,7 @@ public class FileDaoImplTest {
         file2.createNewFile();
         file3.createNewFile();
 
-        final List<String> filePaths = fileDao.findFilePaths(directoryPath, extensions, true);
+        final Map<String, String> filePaths = fileDao.findFilePaths(directoryPath, extensions, true);
 
         assertEquals("Find all file paths with subdirectories", filePaths.size(), 3);
     }
