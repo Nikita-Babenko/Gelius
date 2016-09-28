@@ -39,6 +39,7 @@ public final class ProductTestUtil {
         product.setBigovki(new ArrayList<>());
         product.setPerforations(new ArrayList<>());
         product.setProducibilityNotes(new ArrayList<>());
+        product.setPrints(new ArrayList<>());
 
         return product;
     }
@@ -90,6 +91,7 @@ public final class ProductTestUtil {
         productDto.setBigovki(new ArrayList<>());
         productDto.setProducibilityNotes(new ArrayList<>());
         productDto.setPerforations(new ArrayList<>());
+        productDto.setPrints(new ArrayList<>());
 
         return productDto;
     }
