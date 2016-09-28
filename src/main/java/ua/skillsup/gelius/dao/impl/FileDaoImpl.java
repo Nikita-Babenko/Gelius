@@ -53,6 +53,19 @@ public class FileDaoImpl implements FileDao {
     }
 
     @Override
+    public List<String> findFileNames(String directoryPath, String [] extensions, boolean isFindInSubdirectories) {
+        LOG.info("get file names from directory" + directoryPath);
+
+        File directory = new File(directoryPath);
+
+        List<File> files = (List<File>) FileUtils.listFiles(directory, extensions, isFindInSubdirectories);
+        List<String> listFiles = new ArrayList<>();
+        files.forEach(file -> listFiles.add(file.getName()));
+
+        return listFiles.isEmpty() ? Collections.emptyList() : listFiles;
+    }
+
+    @Override
     public boolean saveOrUpdateFiles(String directoryPath, Collection<MultipartFile> files, List<String> deletedFiles) {
         LOG.info("save files: " + files);
 

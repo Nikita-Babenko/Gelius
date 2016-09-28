@@ -14,4 +14,6 @@ public interface FileDao {
     boolean deleteDirectory(String directoryPath);
 
     List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
+
+    List<String> findFileNames(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
 }

@@ -12,4 +12,6 @@ public interface FileService {
 
     List<String> findFilePaths(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
 
+    List<String> findFileNames(String directoryPath, String [] extensions, boolean isFindInSubdirectories);
+
 }

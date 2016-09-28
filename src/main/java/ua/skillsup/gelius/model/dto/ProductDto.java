@@ -133,6 +133,8 @@ public class ProductDto {
 
     private List<String> filePaths;
 
+    private List<String> fileNames;
+
     private List<String> fileImagePaths;
 
     public ProductDto() {
@@ -540,6 +542,14 @@ public class ProductDto {
 
     public void setPrints(List<PrintDto> prints) {
         this.prints = prints;
+    }
+
+    public List<String> getFileNames() {
+        return fileNames;
+    }
+
+    public void setFileNames(List<String> fileNames) {
+        this.fileNames = fileNames;
     }
 
     @Override
