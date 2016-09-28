@@ -187,6 +187,7 @@ var NewProductActions = {
         productToSave["producibilityNotes"] = WorkCentersStore.getWorkCenterNotes();
         productToSave["bigovki"] = NewProductStore.__getBigovki();
         productToSave["perforations"] = NewProductStore.__getPerforations();
+        productToSave["prints"] = NewProductStore.__getPrints();
 
         if (NewProductStore.isInEditMode()) {
             url = UrlConstants.UPDATE_PRODUCT_URL;
