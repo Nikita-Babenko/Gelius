@@ -34,7 +34,7 @@ class Bigovki extends React.Component {
                 <div className="bigovki_inputs_1">
                     <input type="number" min="0"
                            ref="bigovki1"
-                           className="bigovki_input_1 numberInputCheck"
+                           className="bigovki_input_1 numberInputCheck sumBigovki"
                            value={this.state.bigovki_input_1}
                            onChange={this.__setValueBigovkiInput1}
                            onKeyUp={this.__calculateBigovkiSum}
@@ -44,7 +44,7 @@ class Bigovki extends React.Component {
                 <div className="bigovki_inputs_2">
                     <input type="number"
                            ref="bigovki2" min="0"
-                           className="bigovki_input_1 numberInputCheck"
+                           className="bigovki_input_1 numberInputCheck sumBigovki"
                            value={this.state.bigovki_input_2}
                            onChange={this.__setValueBigovkiInput2}
                            onKeyUp={this.__calculateBigovkiSum}
@@ -54,7 +54,7 @@ class Bigovki extends React.Component {
                 <div className="bigovki_inputs_3">
                     <input type="number" min="0"
                            ref="bigovki3"
-                           className="bigovki_input_3 numberInputCheck"
+                           className="bigovki_input_3 numberInputCheck sumBigovki"
                            value={this.state.bigovki_input_3}
                            onChange={this.__setValueBigovkiInput3}
                            onKeyUp={this.__calculateBigovkiSum}

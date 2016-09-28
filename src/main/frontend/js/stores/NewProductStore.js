@@ -135,6 +135,10 @@ class NewProductStore extends EventEmitter {
         product["numberBlanksOnFormat"] = $('#numberBlanksOnFormat').val();
         product["numberLoadCar"] = $('#numberLoadCar').val();
         product["productionFormat"] = $('#productionFormat').val();
+
+        product["bigovki"] = this.__getBigovki();
+        product["perforations"] = this.__getPerforations();
+        product["prints"] = this.__getPrints();
         return product;
     }
 
