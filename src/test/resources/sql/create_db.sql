@@ -182,7 +182,7 @@ CREATE TABLE print(
   product_id BIGINT NOT NULL,
   colour VARCHAR(50),
   name VARCHAR(50),
-  square_seal INT,
+  square_seal DECIMAL(5,3),
 
   PRIMARY KEY (print_id),
   FOREIGN KEY (product_id) REFERENCES product(product_id)
