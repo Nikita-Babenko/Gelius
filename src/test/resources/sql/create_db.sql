@@ -220,4 +220,31 @@ CREATE TABLE bigovki(
   FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
 
+/* Дополнительные дельты к расчету биговок */
+CREATE TABLE bigovki_deltas(
+  bigovki_deltas_id BIGINT AUTO_INCREMENT,
+  profile_id BIGINT NOT NULL,
+  delta_1 DECIMAL(5, 3) NOT NULL,
+  delta_2 DECIMAL(5, 3) NOT NULL,
+  delta_3 DECIMAL(5, 3) NOT NULL,
+
+  PRIMARY KEY (bigovki_deltas_id),
+  UNIQUE(profile_id),
+  FOREIGN KEY (profile_id) REFERENCES profile(profile_id)
+);
+
+/* Дополнительные дельты к расчету просечек */
+CREATE TABLE perforation_deltas(
+  perforation_deltas_id BIGINT AUTO_INCREMENT,
+  profile_id BIGINT NOT NULL,
+  delta_1 DECIMAL(5, 3) NOT NULL,
+  delta_2 DECIMAL(5, 3) NOT NULL,
+  delta_3 DECIMAL(5, 3) NOT NULL,
+  delta_4 DECIMAL(5, 3) NOT NULL,
+
+  PRIMARY KEY (perforation_deltas_id),
+  UNIQUE(profile_id),
+  FOREIGN KEY (profile_id) REFERENCES profile(profile_id)
+);
+
 COMMIT;

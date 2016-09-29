@@ -11,6 +11,7 @@ import ua.skillsup.gelius.exception.ProductExistsException;
 import ua.skillsup.gelius.exception.ProductValidationException;
 import ua.skillsup.gelius.model.Data;
 import ua.skillsup.gelius.model.dto.ProductDto;
+import ua.skillsup.gelius.service.DeltasService;
 import ua.skillsup.gelius.service.DictionaryService;
 import ua.skillsup.gelius.service.FileService;
 import ua.skillsup.gelius.service.ProductService;
@@ -35,6 +36,9 @@ public class ProductController {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private DeltasService deltasService;
 
     private String operationOnProduct;
     private int productId;
@@ -175,6 +179,15 @@ public class ProductController {
         Map<String, List<?>> dictionaries = dictionaryService.findAll();
 
         return new Response(ResponseCode.OK, dictionaries);
+    }
+
+    @RequestMapping(value = "/newProduct/getDeltas/{profileId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Response getDeltas(@PathVariable long profileId) {
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("bigovki", this.deltasService.getBigovkiDeltas(profileId));
+        responseData.put("perforation", this.deltasService.getPerforationDeltas(profileId));
+        return new Response(ResponseCode.OK, responseData);
     }
 
     @ResponseBody

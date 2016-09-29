@@ -91,4 +91,24 @@ INSERT INTO pallet_placement (pallet_placement_id, pallet_placement) VALUES
   (1, '1 пачка в ряду'), (2, '2 пачки в ряду'), (3, '3 пачки в ряду'),
   (4, '4 пачки в ряду'), (5, '5 пачек в ряду'), (6, '6 пачек в ряду'), (7, '8 пачек в ряду');
 
+
+INSERT INTO bigovki_deltas (bigovki_deltas_id, profile_id, delta_1, delta_2, delta_3) VALUES
+    (1, 2, 1.5, 2, 1.5),
+    (2, 1, 3, 4, 3),
+    (3, 3, 3, 4, 3),
+    (4, 4, 5, 6, 5),
+    (5, 6, 5, 6, 5),
+    (6, 5, 5, 8, 5)
+;
+
+INSERT INTO perforation_deltas (perforation_deltas_id, profile_id, delta_1, delta_2, delta_3, delta_4) VALUES
+    (1, 1, 2, 4, 4, 2),
+    (2, 3, 2, 4, 4, 2),
+    (3, 2, 2, 4, 4, 2),
+    (4, 5, 4, 8, 8, 4),
+    (5, 4, 3, 6, 6, 3),
+    (6, 6, 3, 6, 6, 3)
+;
+
+
 COMMIT;
