@@ -3,10 +3,6 @@ import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
 
 class BlankFormat extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <select id="blankFormat">

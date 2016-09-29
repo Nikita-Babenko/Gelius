@@ -105,7 +105,7 @@ class NewProductStore extends EventEmitter {
         product["innerWidth"] = $('#innerWidth').val();
         product["innerHeight"] = $('#innerHeight').val();
         product["profile"] = Number($('#profile :selected').val());
-        product["client"] = Number($('#client :selected').val());
+        product["client"] = Number($("input[name=client]").val());
         product["cardboardBrand"] = Number($('#cardboardBrand :selected').val());
         product["productType"] = Number($('#productType :selected').val());
         product["celluloseLayer"] = Number($('#celluloseLayer :selected').val());

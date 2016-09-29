@@ -80,7 +80,7 @@ Dictionary.propTypes = {
 };
 
 Dictionary.defaultProps = {
-    style: "",
+    style: ""
 };
 
 class DictionaryOption extends React.Component {
