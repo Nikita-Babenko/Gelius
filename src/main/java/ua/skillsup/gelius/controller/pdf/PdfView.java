@@ -734,23 +734,22 @@ public class PdfView extends AbstractPdfView {
                 if(mapFilePathNames != null && mapFilePathNames.size() > 0 && !fullProductNumber.equals(EMPTY_STRING)){
                     mapFilePathNames.forEach((path, name) -> {
                         Anchor anchor = new Anchor(name);
-
+                        anchor.setFont(new Font(Font.FontFamily.HELVETICA  , 9, Font.BOLD));
                         String address = null;
                         try {
                              address = ProductNetUtils.getAddress();
                         } catch (Exception e) {
                             System.err.println("Problem with get address");
                         }
-                        String resultPath = address + "/products/operation/edit/productFiles" + path.split("PRODUCT_FILES")[1];
+                        String resultPath = "http://" + address + "/products/operation/edit/productFiles" + path.split("PRODUCT_FILES")[1];
 
                         anchor.setReference(resultPath);
                         Phrase phrase = new Phrase();
                         phrase.add(anchor);
-                        phrase.setFont(new Font(baseFont, 12, Font.NORMAL));
                         PdfPCell cellLink = new PdfPCell(phrase);
                         cellLink.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
 
-                        cellLink.setMinimumHeight(11);
+                        cellLink.setMinimumHeight(9);
                         cellLink.setPaddingLeft(7);
                         cellLink.setPaddingTop(4);
                         cellLink.setPaddingBottom(4);
