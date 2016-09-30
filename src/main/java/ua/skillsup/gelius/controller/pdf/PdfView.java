@@ -53,26 +53,36 @@ public class PdfView extends AbstractPdfView {
         document.add(body);
 
         List<String> images = new ArrayList<>(product.getFileImagePaths());
+        int i = 0;
         for (String str : images) {
             Image image = Image.getInstance(str);
 
             float width = image.getScaledWidth();
             float height = image.getScaledHeight();
 
-            System.out.println(str);
-
-            if (width > 800) {
-                width = 800;
+            if(!"full".equals(version) && i == 0){
+                if (width > 800) {
+                    width = 800;
+                }
+                if (height > 350) {
+                    height = 350;
+                }
             }
+            else{
+                if (width > 800) {
+                    width = 800;
+                }
 
-            if (height > 400) {
-                height = 400;
+                if (height > 600 && !"full".equals(version)) {
+                    height = 600;
+                }
             }
 
             image.scaleToFit(width, height);
             image.setAlignment(Element.ALIGN_CENTER);
             document.add(image);
             writer.setStrictImageSequence(true);
+            i++;
         }
         addMetaData(document, product);
     }
@@ -136,13 +146,13 @@ public class PdfView extends AbstractPdfView {
         PdfPTable titleAndCreatedDateTable = new PdfPTable(columnWidths);
         titleAndCreatedDateTable.setWidthPercentage(100);
 
-        PdfPCell cellTitleCreatedDateTable1 = getCell("Техкарта № " + fullProductNumber, PdfPCell.ALIGN_CENTER, baseFont, 18, Font.BOLD);
+        PdfPCell cellTitleCreatedDateTable1 = createCell("Техкарта № " + fullProductNumber, PdfPCell.ALIGN_CENTER, baseFont, 18, Font.BOLD);
         cellTitleCreatedDateTable1.setVerticalAlignment(Element.ALIGN_BOTTOM);
         cellTitleCreatedDateTable1.setPaddingLeft(75);
         cellTitleCreatedDateTable1.setPaddingRight(-60);
         titleAndCreatedDateTable.addCell(cellTitleCreatedDateTable1);
 
-        PdfPCell cellTitleCreatedDateTable2 = getCell("Создано: " + productCreatedDate, PdfPCell.ALIGN_LEFT, baseFont, 12, Font.NORMAL);
+        PdfPCell cellTitleCreatedDateTable2 = createCell("Создано: " + productCreatedDate, PdfPCell.ALIGN_LEFT, baseFont, 12, Font.NORMAL);
         cellTitleCreatedDateTable2.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cellTitleCreatedDateTable2.setPaddingLeft("full".equals(version) ? 35 : 60);
         cellTitleCreatedDateTable2.setPaddingBottom(-5);
@@ -152,11 +162,11 @@ public class PdfView extends AbstractPdfView {
         PdfPTable updatedDateTable = new PdfPTable(columnWidths);
         updatedDateTable.setWidthPercentage(100);
 
-        PdfPCell cellUpdatedDateTable1 = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, 12, Font.NORMAL);
+        PdfPCell cellUpdatedDateTable1 = createCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, 12, Font.NORMAL);
         cellUpdatedDateTable1.setVerticalAlignment(Element.ALIGN_BOTTOM);
         updatedDateTable.addCell(cellUpdatedDateTable1);
 
-        PdfPCell cellUpdatedDateTable2 = getCell("Изменено: " + productUpdatedDate, PdfPCell.ALIGN_LEFT, baseFont, 12, Font.NORMAL);
+        PdfPCell cellUpdatedDateTable2 = createCell("Изменено: " + productUpdatedDate, PdfPCell.ALIGN_LEFT, baseFont, 12, Font.NORMAL);
         cellUpdatedDateTable2.setPaddingLeft("full".equals(version) ? 35 : 60);
         cellUpdatedDateTable2.setVerticalAlignment(Element.ALIGN_MIDDLE);
         updatedDateTable.addCell(cellUpdatedDateTable2);
@@ -167,11 +177,11 @@ public class PdfView extends AbstractPdfView {
                 PdfPTable preparedTable = new PdfPTable(columnWidths);
                 preparedTable.setWidthPercentage(100);
 
-                PdfPCell cellPreparedTable1 = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, 12, Font.NORMAL);
+                PdfPCell cellPreparedTable1 = createCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, 12, Font.NORMAL);
                 cellPreparedTable1.setVerticalAlignment(Element.ALIGN_BOTTOM);
                 preparedTable.addCell(cellPreparedTable1);
 
-                PdfPCell cellPreparedTable2 = getCell("Подготовил: " + productPersonPrepared, PdfPCell.ALIGN_LEFT, baseFont, 12, Font.NORMAL);
+                PdfPCell cellPreparedTable2 = createCell("Подготовил: " + productPersonPrepared, PdfPCell.ALIGN_LEFT, baseFont, 12, Font.NORMAL);
                 cellPreparedTable2.setPaddingTop(2);
                 cellPreparedTable2.setPaddingLeft("full".equals(version) ? 35 : 60);
                 cellPreparedTable2.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -181,11 +191,11 @@ public class PdfView extends AbstractPdfView {
                 PdfPTable isUseTable = new PdfPTable(columnWidths);
                 isUseTable.setWidthPercentage(100);
 
-                PdfPCell cellIsUseTable1 = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, 12, Font.NORMAL);
+                PdfPCell cellIsUseTable1 = createCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, 12, Font.NORMAL);
                 cellIsUseTable1.setVerticalAlignment(Element.ALIGN_BOTTOM);
                 isUseTable.addCell(cellIsUseTable1);
 
-                PdfPCell cellIsUseTable2 = getCell(productIsUse, PdfPCell.ALIGN_LEFT, baseFont, 10, Font.NORMAL);
+                PdfPCell cellIsUseTable2 = createCell(productIsUse, PdfPCell.ALIGN_LEFT, baseFont, 10, Font.NORMAL);
                 cellIsUseTable2.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cellIsUseTable2.setPaddingLeft("full".equals(version) ? 35 : 60);
                 isUseTable.addCell(cellIsUseTable2);
@@ -212,37 +222,37 @@ public class PdfView extends AbstractPdfView {
         tableHeader.setWidthPercentage(100);
 
         // Client
-        PdfPCell cellClient = getCell("Заказчик", PdfPCell.ALIGN_LEFT, baseFont, 14, Font.NORMAL);
+        PdfPCell cellClient = createCell("Заказчик", PdfPCell.ALIGN_LEFT, baseFont, 14, Font.NORMAL);
         cellClient.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cellClient.setPaddingLeft(-10);
         cellClient.setPaddingBottom(15);
 
-        PdfPCell cellClientValue = getCell(productClient, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
+        PdfPCell cellClientValue = createCell(productClient, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
         cellClientValue.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cellClientValue.setPaddingBottom(15);
 
         // Product Name
-        PdfPCell cellProductName = getCell("Название", PdfPCell.ALIGN_LEFT, baseFont, 14, Font.NORMAL);
+        PdfPCell cellProductName = createCell("Название", PdfPCell.ALIGN_LEFT, baseFont, 14, Font.NORMAL);
         cellProductName.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cellProductName.setPaddingLeft(40);
         cellProductName.setPaddingBottom(15);
 
-        PdfPCell cellProductNameValue = getCell(productName, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
+        PdfPCell cellProductNameValue = createCell(productName, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
         cellProductNameValue.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cellProductNameValue.setPaddingBottom(15);
 
         // Product Type
-        PdfPCell cellProductType = getCell("Тип изделия", PdfPCell.ALIGN_LEFT, baseFont, 14, Font.NORMAL);
+        PdfPCell cellProductType = createCell("Тип изделия", PdfPCell.ALIGN_LEFT, baseFont, 14, Font.NORMAL);
         cellProductType.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cellProductType.setPaddingLeft(20);
         cellProductType.setPaddingBottom(15);
 
-        PdfPCell cellProductTypeValue = getCell(productType, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
+        PdfPCell cellProductTypeValue = createCell(productType, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
         cellProductTypeValue.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cellProductTypeValue.setPaddingLeft(-5);
         cellProductTypeValue.setPaddingBottom(15);
 
-        PdfPCell emptyCell = getCell(EMPTY_STRING, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
+        PdfPCell emptyCell = createCell(EMPTY_STRING, PdfPCell.ALIGN_LEFT, baseFont, 14, Font.BOLD);
         emptyCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         emptyCell.setPaddingBottom(15);
 
@@ -313,26 +323,26 @@ public class PdfView extends AbstractPdfView {
         PdfPTable middleTableTop = new PdfPTable(columnWidthsLeftCellTableTop);
         middleTableTop.setWidthPercentage(101);
 
-        PdfPCell verticalTitleProducts = getCell("Продукция", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTittle, Font.BOLD);
+        PdfPCell verticalTitleProducts = createCell("Продукция", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTittle, Font.BOLD);
         verticalTitleProducts.setRotation(-90);
         verticalTitleProducts.setRowspan(6);
         verticalTitleProducts.setBackgroundColor(COLOR);
         verticalTitleProducts.setBorder(Rectangle.BOX);
         middleTableTop.addCell(verticalTitleProducts);
 
-        PdfPCell cellProductBlankSizes = getCell("Разм. заготовки", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductBlankSizes = createCell("Разм. заготовки", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductBlankSizes.setMinimumHeight(13);
         cellProductBlankSizes.setBorder(Rectangle.BOX);
         cellProductBlankSizes.setPaddingBottom(4);
         middleTableTop.addCell(cellProductBlankSizes);
 
-        PdfPCell cellProductBlankSizesLengthValue = getCell(productSizeWorkpieceLength, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductBlankSizesLengthValue = createCell(productSizeWorkpieceLength, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductBlankSizesLengthValue.setMinimumHeight(13);
         cellProductBlankSizesLengthValue.setBorder(Rectangle.BOX);
         cellProductBlankSizesLengthValue.setPaddingBottom(4);
         middleTableTop.addCell(cellProductBlankSizesLengthValue);
 
-        PdfPCell cellProductBlankSizesWidthValue = getCell(productSizeWorkpieceWidth, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductBlankSizesWidthValue = createCell(productSizeWorkpieceWidth, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductBlankSizesWidthValue.setMinimumHeight(13);
         cellProductBlankSizesWidthValue.setPaddingBottom(4);
         cellProductBlankSizesWidthValue.setBorder(Rectangle.BOX);
@@ -340,13 +350,13 @@ public class PdfView extends AbstractPdfView {
 
         switch (version) {
             case "full":
-                PdfPCell cellProductNumberOnBlankFormat = getCell("Кол-во с листа", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellProductNumberOnBlankFormat = createCell("Кол-во с листа", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductNumberOnBlankFormat.setMinimumHeight(13);
                 cellProductNumberOnBlankFormat.setPaddingBottom(4);
                 cellProductNumberOnBlankFormat.setBorder(Rectangle.BOX);
                 middleTableTop.addCell(cellProductNumberOnBlankFormat);
 
-                PdfPCell cellProductNumberOnBlankFormatValue = getCell(productNumberBlankOnFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellProductNumberOnBlankFormatValue = createCell(productNumberBlankOnFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductNumberOnBlankFormatValue.setColspan(2);
                 cellProductNumberOnBlankFormatValue.setMinimumHeight(13);
                 cellProductNumberOnBlankFormatValue.setPaddingBottom(4);
@@ -355,27 +365,27 @@ public class PdfView extends AbstractPdfView {
                 break;
         }
 
-        PdfPCell cellProductBlankFormat = getCell("Формат заготовки", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductBlankFormat = createCell("Формат заготовки", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductBlankFormat.setMinimumHeight(13);
         cellProductBlankFormat.setPaddingBottom(4);
         cellProductBlankFormat.setBorder(Rectangle.BOX);
         middleTableTop.addCell(cellProductBlankFormat);
 
-        PdfPCell cellProductBlankFormatValue = getCell(productBlankFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductBlankFormatValue = createCell(productBlankFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductBlankFormatValue.setColspan(2);
         cellProductBlankFormatValue.setMinimumHeight(13);
         cellProductBlankFormatValue.setPaddingBottom(4);
         cellProductBlankFormatValue.setBorder(Rectangle.BOX);
         middleTableTop.addCell(cellProductBlankFormatValue);
 
-        PdfPCell cellProductConnectionValve = getCell("Соедин. клапана", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductConnectionValve = createCell("Соедин. клапана", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductConnectionValve.setMinimumHeight(13);
         cellProductConnectionValve.setPaddingBottom(4);
         cellProductConnectionValve.setBorder(Rectangle.BOX);
         cellProductConnectionValve.setVerticalAlignment(Element.ALIGN_MIDDLE);
         middleTableTop.addCell(cellProductConnectionValve);
 
-        PdfPCell cellProductConnectionValveValue = getCell(productConnectionValve, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductConnectionValveValue = createCell(productConnectionValve, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductConnectionValveValue.setColspan(2);
         cellProductConnectionValveValue.setMinimumHeight(13);
         cellProductConnectionValveValue.setPaddingBottom(4);
@@ -384,7 +394,7 @@ public class PdfView extends AbstractPdfView {
         middleTableTop.addCell(cellProductConnectionValveValue);
 
 
-        PdfPCell cellProductStamp = getCell("Штамп", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductStamp = createCell("Штамп", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductStamp.setMinimumHeight(13);
         cellProductStamp.setColspan(1);
         cellProductStamp.setBorder(Rectangle.BOX);
@@ -393,14 +403,14 @@ public class PdfView extends AbstractPdfView {
         cellProductStamp.setVerticalAlignment(Element.ALIGN_MIDDLE);
         middleTableTop.addCell(cellProductStamp);
 
-        PdfPCell cellProductStampValue = getCell(productStamp, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductStampValue = createCell(productStamp, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductStampValue.setColspan(3);
         cellProductStampValue.setMinimumHeight(13);
         cellProductStampValue.setPaddingLeft(2);
         cellProductStampValue.setBorder(Rectangle.BOX);
         middleTableTop.addCell(cellProductStampValue);
 
-        PdfPCell cellProductCliche = getCell("Клише", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductCliche = createCell("Клише", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductCliche.setMinimumHeight(13);
         cellProductCliche.setColspan(1);
         cellProductCliche.setPaddingLeft(5);
@@ -409,7 +419,7 @@ public class PdfView extends AbstractPdfView {
         cellProductCliche.setVerticalAlignment(Element.ALIGN_MIDDLE);
         middleTableTop.addCell(cellProductCliche);
 
-        PdfPCell cellProductClicheValue = getCell(productCliche, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductClicheValue = createCell(productCliche, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductClicheValue.setColspan(3);
         cellProductClicheValue.setPaddingLeft(2);
         cellProductClicheValue.setMinimumHeight(13);
@@ -421,26 +431,26 @@ public class PdfView extends AbstractPdfView {
         middleTableMiddle.setWidthPercentage(101);
         java.util.List<PrintDto> listPrint = product.getPrints();
 
-        PdfPCell verticalTitlePrint = getCell("Печать", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTittle, Font.BOLD);
+        PdfPCell verticalTitlePrint = createCell("Печать", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTittle, Font.BOLD);
         verticalTitlePrint.setRotation(-90);
         verticalTitlePrint.setRowspan(5);
         verticalTitlePrint.setBackgroundColor(COLOR);
         verticalTitlePrint.setBorder(Rectangle.BOX);
         middleTableMiddle.addCell(verticalTitlePrint);
 
-        PdfPCell cellProductColor = getCell("Цвет", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductColor = createCell("Цвет", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductColor.setMinimumHeight(13);
         cellProductColor.setBorder(Rectangle.BOX);
         cellProductColor.setPaddingBottom(4);
         middleTableMiddle.addCell(cellProductColor);
 
-        PdfPCell cellProductPrintName = getCell("Название", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductPrintName = createCell("Название", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPrintName.setMinimumHeight(13);
         cellProductPrintName.setBorder(Rectangle.BOX);
         cellProductPrintName.setPaddingBottom(4);
         middleTableMiddle.addCell(cellProductPrintName);
 
-        PdfPCell cellProductPrintPrice = getCell("S запечатки", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductPrintPrice = createCell("S запечатки", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPrintPrice.setMinimumHeight(13);
         cellProductPrintPrice.setBorder(Rectangle.BOX);
         cellProductPrintPrice.setPaddingBottom(4);
@@ -449,7 +459,7 @@ public class PdfView extends AbstractPdfView {
         if (listPrint != null && listPrint.size() > 0) {
             listPrint.forEach(pr -> {
                 String color = pr.getColor() == null ? EMPTY_STRING : pr.getColor();
-                PdfPCell printColor = getCell("", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell printColor = createCell("", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 printColor.setBackgroundColor(hexToBaseColor(color));
                 printColor.setMinimumHeight(13);
                 printColor.setBorder(Rectangle.BOX);
@@ -457,14 +467,14 @@ public class PdfView extends AbstractPdfView {
                 middleTableMiddle.addCell(printColor);
 
                 String name = (pr.getName() == null) ? EMPTY_STRING : pr.getName() == null ? EMPTY_STRING : pr.getName();
-                PdfPCell printName = getCell(name, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell printName = createCell(name, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 printName.setMinimumHeight(13);
                 printName.setBorder(Rectangle.BOX);
                 printName.setPaddingBottom(4);
                 middleTableMiddle.addCell(printName);
 
                 String price = (pr.getSquareSeal() == null) ? EMPTY_STRING : pr.getSquareSeal().toString();
-                PdfPCell printPrice = getCell(price, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell printPrice = createCell(price, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 printPrice.setMinimumHeight(13);
                 printPrice.setBorder(Rectangle.BOX);
                 printPrice.setPaddingBottom(4);
@@ -474,19 +484,19 @@ public class PdfView extends AbstractPdfView {
 
         int value = (listPrint == null) ? 4 : 4 - listPrint.size();
         for (int i = 0; i < value; i++) {
-            PdfPCell printColor = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+            PdfPCell printColor = createCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
             printColor.setMinimumHeight(13);
             printColor.setBorder(Rectangle.BOX);
             printColor.setPaddingBottom(4);
             middleTableMiddle.addCell(printColor);
 
-            PdfPCell printName = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+            PdfPCell printName = createCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
             printName.setMinimumHeight(13);
             printName.setBorder(Rectangle.BOX);
             printName.setPaddingBottom(4);
             middleTableMiddle.addCell(printName);
 
-            PdfPCell printPrice = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+            PdfPCell printPrice = createCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
             printPrice.setMinimumHeight(13);
             printPrice.setBorder(Rectangle.BOX);
             printPrice.setPaddingBottom(4);
@@ -497,7 +507,7 @@ public class PdfView extends AbstractPdfView {
         PdfPTable middleTableBottom = new PdfPTable(columnWidthsLeftCellTableBottom);
         middleTableBottom.setWidthPercentage(101);
 
-        PdfPCell producibilityNotes = getCell("Примечания", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.BOLD);
+        PdfPCell producibilityNotes = createCell("Примечания", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.BOLD);
         producibilityNotes.setBorder(Rectangle.BOX);
         producibilityNotes.setColspan(5);
         producibilityNotes.setMinimumHeight(16);
@@ -514,7 +524,7 @@ public class PdfView extends AbstractPdfView {
                     Map<String, String> notes = createProducibilityNotes(listNotes);
 
                     notes.forEach((center, note) -> {
-                        PdfPCell cellProductNotesCenter = getCell(center, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                        PdfPCell cellProductNotesCenter = createCell(center, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                         cellProductNotesCenter.setBorder(Rectangle.BOX);
                         cellProductNotesCenter.setPaddingTop(-2);
                         cellProductNotesCenter.setPaddingLeft(2);
@@ -522,7 +532,7 @@ public class PdfView extends AbstractPdfView {
                         cellProductNotesCenter.setVerticalAlignment(Element.ALIGN_MIDDLE);
                         middleTableBottom.addCell(cellProductNotesCenter);
 
-                        PdfPCell cellProductNote = getCell(note, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                        PdfPCell cellProductNote = createCell(note, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                         cellProductNote.setBorder(Rectangle.BOX);
                         cellProductNote.setPaddingTop(-1);
                         cellProductNote.setPaddingLeft(2);
@@ -586,14 +596,14 @@ public class PdfView extends AbstractPdfView {
         PdfPTable rightTable = new PdfPTable(columnWidthsLeftCellTable);
         rightTable.setWidthPercentage(101);
 
-        PdfPCell verticalRightTitle = getCell("Авто", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTittle, Font.BOLD);
+        PdfPCell verticalRightTitle = createCell("Авто", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTittle, Font.BOLD);
         verticalRightTitle.setRotation(-90);
         verticalRightTitle.setRowspan(8);
         verticalRightTitle.setBackgroundColor(COLOR);
         verticalRightTitle.setBorder(Rectangle.BOX);
         rightTable.addCell(verticalRightTitle);
 
-        PdfPCell cellProductPacking = getCell("Способ упаковки", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductPacking = createCell("Способ упаковки", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPacking.setColspan(2);
         cellProductPacking.setMinimumHeight(13);
         cellProductPacking.setPaddingBottom(2);
@@ -601,72 +611,72 @@ public class PdfView extends AbstractPdfView {
         cellProductPacking.setVerticalAlignment(Element.ALIGN_MIDDLE);
         rightTable.addCell(cellProductPacking);
 
-        PdfPCell cellProductPackingValue = getCell(productPacking, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductPackingValue = createCell(productPacking, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPackingValue.setColspan(2);
         cellProductPackingValue.setMinimumHeight(13);
         cellProductPackingValue.setPaddingBottom(2);
         cellProductPackingValue.setBorder(Rectangle.BOX);
         rightTable.addCell(cellProductPackingValue);
 
-        PdfPCell cellNumberInPack = getCell("В пачке, шт", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellNumberInPack = createCell("В пачке, шт", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellNumberInPack.setColspan(2);
         cellNumberInPack.setPaddingBottom(2);
         cellNumberInPack.setMinimumHeight(13);
         cellNumberInPack.setBorder(Rectangle.BOX);
         rightTable.addCell(cellNumberInPack);
 
-        PdfPCell cellNumberInPackValue = getCell(productNumberInPack, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellNumberInPackValue = createCell(productNumberInPack, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellNumberInPackValue.setMinimumHeight(13);
         cellNumberInPackValue.setPaddingBottom(2);
         cellNumberInPackValue.setColspan(2);
         cellNumberInPackValue.setBorder(Rectangle.BOX);
         rightTable.addCell(cellNumberInPackValue);
 
-        PdfPCell cellNumberInTransportPackage = getCell("В паллета, шт", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellNumberInTransportPackage = createCell("В паллета, шт", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellNumberInTransportPackage.setMinimumHeight(13);
         cellNumberInTransportPackage.setColspan(2);
         cellNumberInTransportPackage.setPaddingBottom(2);
         cellNumberInTransportPackage.setBorder(Rectangle.BOX);
         rightTable.addCell(cellNumberInTransportPackage);
 
-        PdfPCell cellNumberInTransportPackageValue = getCell(productTransportPackage, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellNumberInTransportPackageValue = createCell(productTransportPackage, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellNumberInTransportPackageValue.setMinimumHeight(13);
         cellNumberInTransportPackageValue.setColspan(2);
         cellNumberInTransportPackageValue.setPaddingBottom(2);
         cellNumberInTransportPackageValue.setBorder(Rectangle.BOX);
         rightTable.addCell(cellNumberInTransportPackageValue);
 
-        PdfPCell packageSizes = getCell("Разм. пакета", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell packageSizes = createCell("Разм. пакета", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         packageSizes.setMinimumHeight(13);
         packageSizes.setPaddingBottom(2);
         packageSizes.setBorder(Rectangle.BOX);
         rightTable.addCell(packageSizes);
 
-        PdfPCell cellPackageLength = getCell(productPackageLength, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellPackageLength = createCell(productPackageLength, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellPackageLength.setMinimumHeight(13);
         cellPackageLength.setBorder(Rectangle.BOX);
         rightTable.addCell(cellPackageLength);
 
-        PdfPCell cellPackageWidth = getCell(productPackageWidth, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellPackageWidth = createCell(productPackageWidth, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellPackageWidth.setMinimumHeight(13);
         cellPackageWidth.setPaddingBottom(2);
         cellPackageWidth.setBorder(Rectangle.BOX);
         rightTable.addCell(cellPackageWidth);
 
-        PdfPCell cellPackageHeight = getCell(productPackageHeight, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellPackageHeight = createCell(productPackageHeight, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellPackageHeight.setMinimumHeight(13);
         cellPackageHeight.setPaddingBottom(2);
         cellPackageHeight.setBorder(Rectangle.BOX);
         rightTable.addCell(cellPackageHeight);
 
-        PdfPCell cellProductPallet = getCell("Поддон", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductPallet = createCell("Поддон", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPallet.setMinimumHeight(13);
         cellProductPallet.setPaddingBottom(2);
         cellProductPallet.setColspan(2);
         cellProductPallet.setBorder(Rectangle.BOX);
         rightTable.addCell(cellProductPallet);
 
-        PdfPCell cellProductPalletValue = getCell(productPallet, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductPalletValue = createCell(productPallet, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductPalletValue.setMinimumHeight(13);
         cellProductPalletValue.setPaddingBottom(2);
         cellProductPalletValue.setColspan(2);
@@ -674,21 +684,21 @@ public class PdfView extends AbstractPdfView {
         rightTable.addCell(cellProductPalletValue);
 
 
-        PdfPCell cellPalletPlacement = getCell("Раскладка на поддоне", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellPalletPlacement = createCell("Раскладка на поддоне", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellPalletPlacement.setMinimumHeight(13);
         cellPalletPlacement.setColspan(2);
         cellPalletPlacement.setPaddingBottom(2);
         cellPalletPlacement.setBorder(Rectangle.BOX);
         rightTable.addCell(cellPalletPlacement);
 
-        PdfPCell palletPlacementValue = getCell(productPalletPlacement, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell palletPlacementValue = createCell(productPalletPlacement, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         palletPlacementValue.setMinimumHeight(13);
         palletPlacementValue.setPaddingBottom(2);
         palletPlacementValue.setColspan(2);
         palletPlacementValue.setBorder(Rectangle.BOX);
         rightTable.addCell(palletPlacementValue);
 
-        PdfPCell cellNumberRows = getCell("Рядов на поддоне", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellNumberRows = createCell("Рядов на поддоне", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellNumberRows.setMinimumHeight(13);
         cellNumberRows.setColspan(2);
         cellNumberRows.setPaddingBottom(2);
@@ -696,21 +706,21 @@ public class PdfView extends AbstractPdfView {
         cellNumberRows.setVerticalAlignment(Element.ALIGN_MIDDLE);
         rightTable.addCell(cellNumberRows);
 
-        PdfPCell cellNumberRowsValue = getCell(productPalletRows, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellNumberRowsValue = createCell(productPalletRows, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellNumberRowsValue.setMinimumHeight(13);
         cellNumberRowsValue.setPaddingBottom(2);
         cellNumberRowsValue.setColspan(2);
         cellNumberRowsValue.setBorder(Rectangle.BOX);
         rightTable.addCell(cellNumberRowsValue);
 
-        PdfPCell cellLoadCar = getCell("Загрузка авто, шт", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellLoadCar = createCell("Загрузка авто, шт", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellLoadCar.setMinimumHeight(13);
         cellLoadCar.setColspan(2);
         cellLoadCar.setPaddingBottom(2);
         cellLoadCar.setBorder(Rectangle.BOX);
         rightTable.addCell(cellLoadCar);
 
-        PdfPCell loadCarValue = getCell(productLoadCar, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell loadCarValue = createCell(productLoadCar, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         loadCarValue.setMinimumHeight(13);
         loadCarValue.setColspan(2);
         loadCarValue.setPaddingBottom(2);
@@ -732,9 +742,12 @@ public class PdfView extends AbstractPdfView {
 
                 Map<String, String> mapFilePathNames = product.getMapFilePathNames();
                 if(mapFilePathNames != null && mapFilePathNames.size() > 0 && !fullProductNumber.equals(EMPTY_STRING)){
+
+                    Font linkFont = new Font(baseFont, 11, Font.NORMAL, BaseColor.BLUE);
+
                     mapFilePathNames.forEach((path, name) -> {
-                        Anchor anchor = new Anchor(name);
-                        anchor.setFont(new Font(Font.FontFamily.HELVETICA  , 9, Font.BOLD));
+
+                        Anchor anchor = new Anchor(name, linkFont);
                         String address = null;
                         try {
                              address = ProductNetUtils.getAddress();
@@ -742,13 +755,11 @@ public class PdfView extends AbstractPdfView {
                             System.err.println("Problem with get address");
                         }
                         String resultPath = "http://" + address + "/products/operation/edit/productFiles" + path.split("PRODUCT_FILES")[1];
-
                         anchor.setReference(resultPath);
                         Phrase phrase = new Phrase();
                         phrase.add(anchor);
                         PdfPCell cellLink = new PdfPCell(phrase);
                         cellLink.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
-
                         cellLink.setMinimumHeight(9);
                         cellLink.setPaddingLeft(7);
                         cellLink.setPaddingTop(4);
@@ -763,13 +774,13 @@ public class PdfView extends AbstractPdfView {
                 float[] columnWidthFormat = new float[]{3f, 1f};
                 PdfPTable formatTable = new PdfPTable(columnWidthFormat);
                 formatTable.setWidthPercentage(101);
-                PdfPCell cellProductionFormat = getCell("Производственный формат", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellProductionFormat = createCell("Производственный формат", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductionFormat.setMinimumHeight(13);
                 cellProductionFormat.setPaddingLeft(7);
                 cellProductionFormat.setBorder(Rectangle.BOX);
                 formatTable.addCell(cellProductionFormat);
 
-                PdfPCell cellProductionFormatValue = getCell(productProductionFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellProductionFormatValue = createCell(productProductionFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductionFormatValue.setMinimumHeight(13);
                 cellProductionFormatValue.setBorder(Rectangle.BOX);
                 formatTable.addCell(cellProductionFormatValue);
@@ -780,7 +791,7 @@ public class PdfView extends AbstractPdfView {
                 PdfPTable bigovkiTable = new PdfPTable(bigovkiWidth);
                 bigovkiTable.setWidthPercentage(101);
 
-                PdfPCell bigovki = getCell("Биговки", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.BOLD);
+                PdfPCell bigovki = createCell("Биговки", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.BOLD);
                 bigovki.setMinimumHeight(16);
                 bigovki.setColspan(6);
                 bigovki.setPaddingBottom(4);
@@ -800,19 +811,19 @@ public class PdfView extends AbstractPdfView {
                 String productNumberBlanksOnFormat = (numberBlanksOnFormat == null)
                         ? EMPTY_STRING : numberBlanksOnFormat.toString();
 
-                PdfPCell bigovkiValue1 = getCell(bigovki1, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell bigovkiValue1 = createCell(bigovki1, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 bigovkiValue1.setMinimumHeight(13);
                 bigovkiValue1.setPaddingTop(-1);
                 bigovkiValue1.setBorder(Rectangle.BOX);
                 bigovkiTable.addCell(bigovkiValue1);
 
-                PdfPCell plusBigovki = getCell("+", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell plusBigovki = createCell("+", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 plusBigovki.setMinimumHeight(13);
                 plusBigovki.setPaddingTop(-1);
                 plusBigovki.setBorder(Rectangle.BOX);
                 bigovkiTable.addCell(plusBigovki);
 
-                PdfPCell bigovkiValue2 = getCell(bigovki2, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell bigovkiValue2 = createCell(bigovki2, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 bigovkiValue2.setMinimumHeight(13);
                 bigovkiValue2.setPaddingTop(-1);
                 bigovkiValue2.setBorder(Rectangle.BOX);
@@ -820,13 +831,13 @@ public class PdfView extends AbstractPdfView {
 
                 bigovkiTable.addCell(plusBigovki);
 
-                PdfPCell bigovkiValue3 = getCell(bigovki3, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell bigovkiValue3 = createCell(bigovki3, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 bigovkiValue3.setMinimumHeight(13);
                 bigovkiValue3.setPaddingTop(-1);
                 bigovkiValue3.setBorder(Rectangle.BOX);
                 bigovkiTable.addCell(bigovkiValue3);
 
-                PdfPCell bigovkiValue4 = getCell(productNumberBlanksOnFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell bigovkiValue4 = createCell(productNumberBlanksOnFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 bigovkiValue4.setMinimumHeight(13);
                 bigovkiValue4.setPaddingTop(-1);
                 bigovkiValue4.setBorder(Rectangle.BOX);
@@ -838,7 +849,7 @@ public class PdfView extends AbstractPdfView {
                 PdfPTable perforationsTable = new PdfPTable(perforationsWidth);
                 perforationsTable.setWidthPercentage(101);
 
-                PdfPCell perforations = getCell("Просечки", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.BOLD);
+                PdfPCell perforations = createCell("Просечки", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.BOLD);
                 perforations.setMinimumHeight(16);
                 perforations.setColspan(6);
                 perforations.setPaddingBottom(4);
@@ -867,31 +878,31 @@ public class PdfView extends AbstractPdfView {
                         ? (perforationDtos.get(4).getValue() != null
                         ? perforationDtos.get(4).getValue().toString() : EMPTY_STRING) : EMPTY_STRING;
 
-                PdfPCell perforationsValue1 = getCell(perforation1, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell perforationsValue1 = createCell(perforation1, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 perforationsValue1.setMinimumHeight(13);
                 perforationsValue1.setPaddingTop(-1);
                 perforationsValue1.setBorder(Rectangle.BOX);
                 perforationsTable.addCell(perforationsValue1);
 
-                PdfPCell perforationsValue2 = getCell(perforation2, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell perforationsValue2 = createCell(perforation2, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 perforationsValue2.setMinimumHeight(13);
                 perforationsValue2.setPaddingTop(-1);
                 perforationsValue2.setBorder(Rectangle.BOX);
                 perforationsTable.addCell(perforationsValue2);
 
-                PdfPCell perforationsValue3 = getCell(perforation3, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell perforationsValue3 = createCell(perforation3, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 perforationsValue3.setMinimumHeight(13);
                 perforationsValue3.setPaddingTop(-1);
                 perforationsValue3.setBorder(Rectangle.BOX);
                 perforationsTable.addCell(perforationsValue3);
 
-                PdfPCell perforationsValue4 = getCell(perforation4, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell perforationsValue4 = createCell(perforation4, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 perforationsValue4.setMinimumHeight(13);
                 perforationsValue4.setPaddingTop(-1);
                 perforationsValue4.setBorder(Rectangle.BOX);
                 perforationsTable.addCell(perforationsValue4);
 
-                PdfPCell perforationsValue5 = getCell(perforation5, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell perforationsValue5 = createCell(perforation5, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 perforationsValue5.setMinimumHeight(13);
                 perforationsValue5.setPaddingTop(-1);
                 perforationsValue5.setBorder(Rectangle.BOX);
@@ -961,7 +972,7 @@ public class PdfView extends AbstractPdfView {
         PdfPTable leftTable = new PdfPTable(columnWidthsLeftCellTable);
         leftTable.setWidthPercentage(101);
 
-        PdfPCell verticalTitle = getCell("Продукция", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTitle, Font.BOLD);
+        PdfPCell verticalTitle = createCell("Продукция", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTitle, Font.BOLD);
         verticalTitle.setRotation(-90);
         int rowSpanForTitle = "full".equals(version) ? 5 : 4;
         verticalTitle.setRowspan(rowSpanForTitle);
@@ -969,25 +980,25 @@ public class PdfView extends AbstractPdfView {
         verticalTitle.setBorder(Rectangle.BOX);
         leftTable.addCell(verticalTitle);
 
-        PdfPCell productInnerSizes = getCell("Размеры внутр.", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell productInnerSizes = createCell("Размеры внутр.", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         productInnerSizes.setMinimumHeight(13);
         productInnerSizes.setPaddingBottom(4);
         productInnerSizes.setBorder(Rectangle.BOX);
         leftTable.addCell(productInnerSizes);
 
-        PdfPCell cellProductInnerLength = getCell(productInnerLength, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductInnerLength = createCell(productInnerLength, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductInnerLength.setBorder(Rectangle.BOX);
         cellProductInnerLength.setPaddingBottom(4);
         cellProductInnerLength.setMinimumHeight(13);
         leftTable.addCell(cellProductInnerLength);
 
-        PdfPCell cellProductInnerWidth = getCell(productInnerWidth, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductInnerWidth = createCell(productInnerWidth, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductInnerWidth.setBorder(Rectangle.BOX);
         cellProductInnerWidth.setMinimumHeight(13);
         cellProductInnerWidth.setPaddingBottom(4);
         leftTable.addCell(cellProductInnerWidth);
 
-        PdfPCell cellProductInnerHeight = getCell(productInnerHeight, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductInnerHeight = createCell(productInnerHeight, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductInnerHeight.setBorder(Rectangle.BOX);
         cellProductInnerHeight.setMinimumHeight(13);
         cellProductInnerHeight.setPaddingBottom(4);
@@ -997,68 +1008,68 @@ public class PdfView extends AbstractPdfView {
         PdfPCell cellProductProfileValue;
         switch (version) {
             case "full":
-                PdfPCell cellTheoreticalSquare = getCell("S теор.", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellTheoreticalSquare = createCell("S теор.", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellTheoreticalSquare.setBorder(Rectangle.BOX);
                 cellTheoreticalSquare.setPaddingBottom(4);
                 cellTheoreticalSquare.setMinimumHeight(13);
                 leftTable.addCell(cellTheoreticalSquare);
 
-                PdfPCell cellTheoreticalSquareValue = getCell(productTheoreticalSquare, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellTheoreticalSquareValue = createCell(productTheoreticalSquare, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellTheoreticalSquareValue.setBorder(Rectangle.BOX);
                 cellTheoreticalSquareValue.setPaddingBottom(4);
                 cellTheoreticalSquareValue.setMinimumHeight(13);
                 leftTable.addCell(cellTheoreticalSquareValue);
 
-                PdfPCell cellActualSquare = getCell("S факт.", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellActualSquare = createCell("S факт.", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellActualSquare.setBorder(Rectangle.BOX);
                 cellActualSquare.setPaddingBottom(4);
                 cellActualSquare.setMinimumHeight(13);
                 leftTable.addCell(cellActualSquare);
 
-                PdfPCell cellActualSquareValue = getCell(productActualSquare, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellActualSquareValue = createCell(productActualSquare, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellActualSquareValue.setBorder(Rectangle.BOX);
                 cellActualSquareValue.setPaddingBottom(4);
                 cellActualSquareValue.setMinimumHeight(13);
                 leftTable.addCell(cellActualSquareValue);
 
-                PdfPCell cellProductFormat = getCell("Расч. формат", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellProductFormat = createCell("Расч. формат", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductFormat.setBorder(Rectangle.BOX);
                 cellProductFormat.setPaddingBottom(4);
                 cellProductFormat.setMinimumHeight(13);
                 leftTable.addCell(cellProductFormat);
 
-                PdfPCell cellProductFormatValue = getCell(productFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell cellProductFormatValue = createCell(productFormat, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductFormatValue.setBorder(Rectangle.BOX);
                 cellProductFormatValue.setPaddingBottom(4);
                 cellProductFormatValue.setMinimumHeight(13);
                 leftTable.addCell(cellProductFormatValue);
 
-                cellProductProfile = getCell("Профиль", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                cellProductProfile = createCell("Профиль", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductProfile.setBorder(Rectangle.BOX);
                 cellProductProfile.setPaddingBottom(4);
                 cellProductProfile.setMinimumHeight(13);
                 leftTable.addCell(cellProductProfile);
 
-                cellProductProfileValue = getCell(productProfile, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                cellProductProfileValue = createCell(productProfile, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductProfileValue.setBorder(Rectangle.BOX);
                 cellProductProfileValue.setPaddingBottom(4);
                 cellProductProfileValue.setMinimumHeight(13);
                 leftTable.addCell(cellProductProfileValue);
                 break;
             default: {
-                cellProductProfile = getCell("Профиль", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+                cellProductProfile = createCell("Профиль", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductProfile.setBorder(Rectangle.BOX);
                 cellProductProfile.setPaddingBottom(4);
                 cellProductProfile.setMinimumHeight(13);
                 leftTable.addCell(cellProductProfile);
 
-                cellProductProfileValue = getCell(productProfile, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                cellProductProfileValue = createCell(productProfile, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 cellProductProfileValue.setBorder(Rectangle.BOX);
                 cellProductProfileValue.setPaddingBottom(4);
                 cellProductProfileValue.setMinimumHeight(13);
                 leftTable.addCell(cellProductProfileValue);
 
-                PdfPCell emptyCell = getCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+                PdfPCell emptyCell = createCell(EMPTY_STRING, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
                 emptyCell.setBorder(Rectangle.BOX);
                 emptyCell.setColspan(2);
                 emptyCell.setMinimumHeight(13);
@@ -1066,63 +1077,63 @@ public class PdfView extends AbstractPdfView {
             }
         }
 
-        PdfPCell cellProductCardboardBrand = getCell("Марка картона", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductCardboardBrand = createCell("Марка картона", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductCardboardBrand.setBorder(Rectangle.BOX);
         cellProductCardboardBrand.setPaddingBottom(4);
         cellProductCardboardBrand.setMinimumHeight(13);
         leftTable.addCell(cellProductCardboardBrand);
 
-        PdfPCell cellProductCardboardBrandValue = getCell(productCardboardBrand, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductCardboardBrandValue = createCell(productCardboardBrand, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductCardboardBrandValue.setBorder(Rectangle.BOX);
         cellProductCardboardBrandValue.setPaddingBottom(4);
         cellProductCardboardBrandValue.setMinimumHeight(13);
         leftTable.addCell(cellProductCardboardBrandValue);
 
 
-        PdfPCell cellProductCelluloseLayer = getCell("Целюлозный слой", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductCelluloseLayer = createCell("Целюлозный слой", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductCelluloseLayer.setBorder(Rectangle.BOX);
         cellProductCelluloseLayer.setPaddingBottom(4);
         cellProductCelluloseLayer.setMinimumHeight(13);
         leftTable.addCell(cellProductCelluloseLayer);
 
-        PdfPCell cellProductCelluloseLayerValue = getCell(productCelluloseLayer, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductCelluloseLayerValue = createCell(productCelluloseLayer, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductCelluloseLayerValue.setBorder(Rectangle.BOX);
         cellProductCelluloseLayerValue.setPaddingBottom(4);
         cellProductCelluloseLayerValue.setMinimumHeight(13);
         leftTable.addCell(cellProductCelluloseLayerValue);
 
-        PdfPCell cellProductFaceLayer = getCell("Лицевой слой", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductFaceLayer = createCell("Лицевой слой", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductFaceLayer.setMinimumHeight(13);
         cellProductFaceLayer.setPaddingBottom(4);
         cellProductFaceLayer.setBorder(Rectangle.BOX);
         leftTable.addCell(cellProductFaceLayer);
 
-        PdfPCell cellProductFaceLayerValue = getCell(productFaceLayer, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductFaceLayerValue = createCell(productFaceLayer, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductFaceLayerValue.setBorder(Rectangle.BOX);
         cellProductFaceLayerValue.setPaddingBottom(4);
         cellProductFaceLayerValue.setMinimumHeight(13);
         leftTable.addCell(cellProductFaceLayerValue);
 
-        PdfPCell cellProductInnerLayer = getCell("Внутренний слой", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductInnerLayer = createCell("Внутренний слой", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductInnerLayer.setBorder(Rectangle.BOX);
         cellProductInnerLayer.setPaddingBottom(4);
         cellProductInnerLayer.setMinimumHeight(13);
         leftTable.addCell(cellProductInnerLayer);
 
-        PdfPCell cellProductInnerLayerValue = getCell(productInnerLayer, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductInnerLayerValue = createCell(productInnerLayer, PdfPCell.ALIGN_CENTER, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductInnerLayerValue.setBorder(Rectangle.BOX);
         cellProductInnerLayerValue.setPaddingBottom(4);
         cellProductInnerLayerValue.setMinimumHeight(13);
         leftTable.addCell(cellProductInnerLayerValue);
 
 
-        PdfPCell verticalMaterial = getCell("Материал", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTitle, Font.BOLD);
+        PdfPCell verticalMaterial = createCell("Материал", PdfPCell.ALIGN_CENTER, baseFont, fontSizeForTitle, Font.BOLD);
         verticalMaterial.setRotation(-90);
         verticalMaterial.setPadding(2);
         verticalMaterial.setBackgroundColor(COLOR);
         verticalMaterial.setBorder(Rectangle.BOX);
 
-        PdfPCell verticalMaterialValue = getCell(productMaterial, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell verticalMaterialValue = createCell(productMaterial, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         verticalMaterialValue.setBorder(Rectangle.BOX);
         verticalMaterialValue.setColspan(4);
         verticalMaterialValue.setPaddingTop(-2);
@@ -1135,7 +1146,7 @@ public class PdfView extends AbstractPdfView {
                 break;
         }
 
-        PdfPCell cellProductSpecialConditions = getCell("Особые условия", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.BOLD);
+        PdfPCell cellProductSpecialConditions = createCell("Особые условия", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.BOLD);
         cellProductSpecialConditions.setBorder(Rectangle.BOX);
         cellProductSpecialConditions.setColspan(5);
         cellProductSpecialConditions.setMinimumHeight(16);
@@ -1144,7 +1155,7 @@ public class PdfView extends AbstractPdfView {
         cellProductSpecialConditions.setPaddingBottom(6);
         leftTable.addCell(cellProductSpecialConditions);
 
-        PdfPCell cellProductSpecialConditionsValue = getCell(productSpecialConditions, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+        PdfPCell cellProductSpecialConditionsValue = createCell(productSpecialConditions, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         cellProductSpecialConditionsValue.setBorder(Rectangle.BOX);
         cellProductSpecialConditionsValue.setColspan(5);
         cellProductSpecialConditionsValue.setPaddingLeft(2);
@@ -1152,7 +1163,7 @@ public class PdfView extends AbstractPdfView {
         cellProductSpecialConditionsValue.setMinimumHeight(50);
         leftTable.addCell(cellProductSpecialConditionsValue);
 
-        PdfPCell producibility = getCell("Технологичность", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.BOLD);
+        PdfPCell producibility = createCell("Технологичность", PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.BOLD);
         producibility.setBorder(Rectangle.BOX);
         producibility.setColspan(5);
         producibility.setMinimumHeight(16);
@@ -1168,9 +1179,9 @@ public class PdfView extends AbstractPdfView {
             final String[] resultProducibility = {""};
             notes.forEach((center, note) -> resultProducibility[0] += center + "   ");
 
-            producibilityValue = getCell(resultProducibility[0], PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+            producibilityValue = createCell(resultProducibility[0], PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         } else {
-            producibilityValue = getCell(EMPTY_STRING, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
+            producibilityValue = createCell(EMPTY_STRING, PdfPCell.ALIGN_LEFT, baseFont, fontSizeForColumns, Font.NORMAL);
         }
 
         producibilityValue.setBorder(Rectangle.BOX);
@@ -1192,7 +1203,7 @@ public class PdfView extends AbstractPdfView {
         return leftCellTable;
     }
 
-    private PdfPCell getCell(String text, int alignment, BaseFont font, int fontSize, int fontStyle) {
+    private PdfPCell createCell(String text, int alignment, BaseFont font, int fontSize, int fontStyle) {
         Phrase phrase = new Phrase();
         phrase.setFont(new Font(font, fontSize, fontStyle));
         phrase.add(text);
