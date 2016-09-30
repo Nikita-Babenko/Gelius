@@ -37,7 +37,7 @@ class Dictionary extends React.Component {
 
         return (
             <select value={this.state.value}
-                    className={this.props.style}
+                    className={"dictionary " + this.props.style}
                     id={this.props.dictionaryName}
                     onChange={this.__selectOption}>
                 <option value="">не выбран</option>

@@ -27,9 +27,9 @@ class WorkCenterTextarea extends React.Component {
     render() {
         return (
             <div>
-                <textarea readOnly
-                    onClick={this.__showWorkCentersModal}
-                    value={this.state.producibilityCentersText}
+                <textarea readOnly tabIndex="-1"
+                          onClick={this.__showWorkCentersModal}
+                          value={this.state.producibilityCentersText}
                 />
                 <WorkCenterModal ref="workCenterModal"/>
             </div>

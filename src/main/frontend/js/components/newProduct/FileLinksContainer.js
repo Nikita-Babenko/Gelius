@@ -124,8 +124,9 @@ class FileLinksContainer extends React.Component {
                 <div className="fileLink">
                     <a className="fa fa-trash-o fa-lg"
                        onClick={this.__showDeleteFileLinkModalWindow.bind(this, link)}
+                       tabIndex="-1"
                        aria-hidden="true"/>
-                    <a href={link} target="_blank">
+                    <a href={link} target="_blank" tabIndex="-1">
                         {link.indexOf("/") >= 0 ? link.split("/").pop() : link.split("\\").pop()}
                     </a>
                 </div>
@@ -137,6 +138,7 @@ class FileLinksContainer extends React.Component {
                 <div key={item.index} className="fileLink">
                     <a className="fa fa-trash-o fa-lg"
                        onClick={this.__showDeleteFileModalWindow.bind(this, item.index)}
+                       tabIndex="-1"
                        aria-hidden="true"/>
                     {item.el}
                 </div>
@@ -161,10 +163,20 @@ class FileLinksContainer extends React.Component {
                              deleteFunction={this.__deleteFileLink.bind(this, this.state.deleteItem)}
                 />
                 <div className="attachment_buttons icon_buttons_group" id="buttonsLink">
-                    <a href="#" className="fa fa-paperclip fa-lg" title="Прикрепить ссылку" onClick={this.__addFileLink}
-                       aria-hidden="true"/>
-                    <a href="#" className="fa fa-trash-o fa-lg" title="Удалить все ссылки" aria-hidden="true"
-                       onClick={this.__showDeleteAllFilesModalWindow}/>
+                    <a href="#"
+                       className="fa fa-paperclip fa-lg"
+                       title="Прикрепить ссылку"
+                       onClick={this.__addFileLink}
+                       aria-hidden="true"
+                       tabIndex="-1"
+                    />
+                    <a href="#"
+                       className="fa fa-trash-o fa-lg"
+                       title="Удалить все ссылки"
+                       aria-hidden="true"
+                       tabIndex="-1"
+                       onClick={this.__showDeleteAllFilesModalWindow}
+                    />
                 </div>
                 <DeleteModal ref="deleteAllFilesModal"
                              confirmMessage="Вы действительно хотите удалить все выбранные файлы?"
@@ -197,7 +209,8 @@ class FileLink extends React.Component {
     render() {
         return <input type="file"
                       className="fileLinks"
-                      accept="image/*, application/pdf"//"pdf", "ai", "cdr"
+                      accept="image/*, application/pdf"
+                      tabIndex="-1"
                       onChange={this.__setValue}
                       value={this.state.value}
         />

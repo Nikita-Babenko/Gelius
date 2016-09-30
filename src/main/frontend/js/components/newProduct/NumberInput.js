@@ -26,6 +26,7 @@ class NumberInput extends React.Component {
         return (
             <input type="number" min="0"
                    id={this.props.id}
+                   tabIndex={this.props.tabindex}
                    className={"numberInputCheck " + this.props.style}
                    value={this.state.number}
                    onChange={this.__onNumberInputChange}
@@ -50,12 +51,14 @@ class NumberInput extends React.Component {
 
 NumberInput.propTypes = {
     id: React.PropTypes.string,
-    style: React.PropTypes.string
+    style: React.PropTypes.string,
+    tabindex: React.PropTypes.string
 };
 
 NumberInput.defaultProps = {
     id: "",
-    style: ""
+    style: "",
+    tabindex: ""
 };
 
 export default NumberInput;

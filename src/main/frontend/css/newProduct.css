@@ -1173,3 +1173,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     padding: 8px 10px;
 }
+
+select:focus:not(.form-control) {
+    background-color: #e8f6d0 !important;
+}

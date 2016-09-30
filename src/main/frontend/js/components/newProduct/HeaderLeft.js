@@ -93,7 +93,7 @@ class ClientsSelect extends React.Component {
                 value={this.state.value}
                 options={options}
                 placeholder={"не выбран"}
-                noResultsText={"нет подходящих результатов"}
+                noResultsText={"нет подходящих вариантов"}
                 onChange={this.onClientChange.bind(this)}
                 clearable={false}
             />

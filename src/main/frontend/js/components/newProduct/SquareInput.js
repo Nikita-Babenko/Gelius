@@ -27,6 +27,7 @@ class SquareInput extends React.Component {
             <input type="text"
                    className="numberInputCheck"
                    id={this.props.id}
+                   tabIndex={this.props.tabindex}
                    value={this.state.square}
                    onChange={this.__onSquareInputChange}/>
         );
@@ -55,11 +56,13 @@ class SquareInput extends React.Component {
 }
 
 SquareInput.propTypes = {
-    id: React.PropTypes.string
+    id: React.PropTypes.string,
+    tabindex: React.PropTypes.string
 };
 
 SquareInput.defaultProps = {
-    id: ""
+    id: "",
+    tabindex: ""
 };
 
 export default SquareInput;

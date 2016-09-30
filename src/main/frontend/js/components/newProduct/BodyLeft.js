@@ -33,7 +33,7 @@ class BodyLeft extends React.Component {
                     <tr>
                         <td className="products_large_td">S теор.</td>
                         <td className="products_small_td">
-                            <SquareInput id="theoreticalSquare"/>
+                            <SquareInput id="theoreticalSquare" tabindex="-1"/>
                         </td>
                         <td className="products_large_td">S факт.</td>
                         <td className="products_small_td">
@@ -99,7 +99,7 @@ class BodyLeft extends React.Component {
                             <p className="vertical_left_title">Материал</p>
                         </td>
                         <td colSpan="4" className="material">
-                            <TextArea id="material"/>
+                            <TextArea id="material" tabindex="-1"/>
                         </td>
                     </tr>
 

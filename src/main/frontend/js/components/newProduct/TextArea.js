@@ -23,7 +23,8 @@ class TextArea extends React.Component {
     }
 
     render() {
-        return (<textarea id={this.props.id} value={this.state.text} onChange={this.__onTextAreaChange}/>)
+        return (<textarea id={this.props.id} value={this.state.text} tabIndex={this.props.tabindex}
+                          onChange={this.__onTextAreaChange}/>)
     }
 
     __onTextAreaChange(e) {
@@ -41,11 +42,14 @@ class TextArea extends React.Component {
 }
 
 TextArea.propTypes = {
-    id: React.PropTypes.string.isRequired
+    id: React.PropTypes.string.isRequired,
+    tabindex: React.PropTypes.string
+
 };
 
 TextArea.defaultProps = {
-    id: ""
+    id: "",
+    tabindex: ""
 };
 
 export default TextArea;
