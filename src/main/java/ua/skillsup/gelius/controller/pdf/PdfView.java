@@ -64,8 +64,8 @@ public class PdfView extends AbstractPdfView {
                 if (width > 800) {
                     width = 800;
                 }
-                if (height > 350) {
-                    height = 350;
+                if (height > 280) {
+                    height = 280;
                 }
             }
             else{
