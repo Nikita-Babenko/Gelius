@@ -202,8 +202,8 @@ CREATE  TABLE producibility_notes(
 /* Просечки */
 CREATE TABLE perforation(
   perforation_id BIGINT AUTO_INCREMENT,
-  product_id BIGINT NOT NULL,
-  value INT,
+  product_id     BIGINT NOT NULL,
+  value          DECIMAL(6, 1),
 
   PRIMARY KEY (perforation_id),
   FOREIGN KEY (product_id) REFERENCES product(product_id)

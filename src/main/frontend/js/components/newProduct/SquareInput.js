@@ -39,7 +39,6 @@ class SquareInput extends React.Component {
         if (onlyPositiveDecimals.test(newValue)) {
             if (newValue.length === 1 && newValue !== ",")
                 newValue += ",";
-
             this.setState({square: newValue});
         }
     }

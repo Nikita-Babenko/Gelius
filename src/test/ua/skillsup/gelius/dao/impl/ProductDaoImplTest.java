@@ -273,7 +273,7 @@ public class ProductDaoImplTest {
 
         PerforationDto perforation = new PerforationDto();
         perforation.setProduct(productDto);
-        perforation.setValue(34);
+        perforation.setValue(34d);
         perforations.add(perforation);
 
         productDto.setPerforations(perforations);

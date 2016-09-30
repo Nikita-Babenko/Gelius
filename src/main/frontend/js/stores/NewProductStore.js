@@ -69,7 +69,7 @@ class NewProductStore extends EventEmitter {
         $('.perforations').each(function () {
             var value = $(this).val();
             perforations.push({
-                "value": value
+                "value": parseFloat(value.replace(/,/, '.'))
             });
         });
         return perforations;
