@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import ua.skillsup.gelius.model.dto.*;
 import ua.skillsup.gelius.model.dto.dictionary.*;
+import ua.skillsup.gelius.util.ProductNetUtils;
 import ua.skillsup.gelius.util.ProductUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -724,18 +725,25 @@ public class PdfView extends AbstractPdfView {
                 PdfPTable linksTable = new PdfPTable(columnWidthLinks);
                 linksTable.setWidthPercentage(101);
 
-                java.util.List<String> productLinks = product.getFilePaths();
-                java.util.List<String> productNames = new ArrayList<>(product.getMapFilePathNames().values());
                 Boolean isNew = product.getIsNew();
                 Integer productNumber = product.getProductNumber();
                 String fullProductNumber = (productNumber == null && isNew == null) ?
                         EMPTY_STRING : ProductUtils.getFullProductNumber(productNumber, isNew);
 
-                if (productLinks != null && productLinks.size() > 0 && !fullProductNumber.equals(EMPTY_STRING)) {
-                    for (int i = 0; i < productLinks.size(); i++) {
-                        Anchor anchor = new Anchor(productNames.get(i));
-                        anchor.setReference(productLinks.get(i));
+                Map<String, String> mapFilePathNames = product.getMapFilePathNames();
+                if(mapFilePathNames != null && mapFilePathNames.size() > 0 && !fullProductNumber.equals(EMPTY_STRING)){
+                    mapFilePathNames.forEach((path, name) -> {
+                        Anchor anchor = new Anchor(name);
 
+                        String address = null;
+                        try {
+                             address = ProductNetUtils.getAddress();
+                        } catch (Exception e) {
+                            System.err.println("Problem with get address");
+                        }
+                        String resultPath = address + "/products/operation/edit/productFiles" + path.split("PRODUCT_FILES")[1];
+
+                        anchor.setReference(resultPath);
                         Phrase phrase = new Phrase();
                         phrase.add(anchor);
                         phrase.setFont(new Font(baseFont, 12, Font.NORMAL));
@@ -748,7 +756,7 @@ public class PdfView extends AbstractPdfView {
                         cellLink.setPaddingBottom(4);
                         cellLink.setBorder(PdfPCell.LEFT + PdfPCell.RIGHT);
                         linksTable.addCell(cellLink);
-                    }
+                    });
                 }
 
                 rightCellTable.addElement(linksTable);
