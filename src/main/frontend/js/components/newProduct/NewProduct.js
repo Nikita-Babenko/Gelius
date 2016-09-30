@@ -25,12 +25,18 @@ class NewProduct extends React.Component {
         NewProductAction.loadAllDictionaries();
         NewProductAction.getOperationInfo();
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__enableAlert);
-
+        window.addEventListener("beforeunload", this.__showModal);
     }
 
     componentWillUnmount() {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__enableAlert);
+        window.removeEventListener("beforeunload", this.__showModal);
     }
+
+    __showModal(event) {
+        event.returnValue = "";
+    }
+
 
     render() {
         return (
