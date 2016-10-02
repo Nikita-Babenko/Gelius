@@ -69,7 +69,7 @@ class Perforations extends React.Component {
 
     __calculatePerforations() {
         var perforationDeltas = UpdateStore.getPerforationDeltas();
-        if (perforationDeltas !== null) {
+        if (perforationDeltas) {
 
             var innerLength = $('#innerLength').val();
             var innerWidth = $('#innerWidth').val();
@@ -80,8 +80,6 @@ class Perforations extends React.Component {
             var perforation4 = innerWidth ? Number(innerWidth) + perforationDeltas.delta3 : 0;
             var perforation5 = innerLength ? Number(innerLength) + perforationDeltas.delta4 : 0;
             var perforation1 = workpieceLength ? Number(workpieceLength) - perforation2 - perforation3 - perforation4 - perforation5 : 0;
-
-
             this.setState({
                 perforation_input_1: perforation1,
                 perforation_input_2: perforation2,
@@ -95,7 +93,7 @@ class Perforations extends React.Component {
     __loadDefaultValueForPerforations() {
         if (NewProductStore.isEnableDefaultValues()) {
             var array = NewProductStore.getProductProperty("perforations");
-            if (array !== null) {
+            if (array) {
                 this.setState({
                     perforation_input_1: array[0] ? array[0].value : "",
                     perforation_input_2: array[1] ? array[1].value : "",

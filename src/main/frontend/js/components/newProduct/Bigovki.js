@@ -10,6 +10,7 @@ class Bigovki extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isUpdatedWidth: false,
             bigovki_input_1: "",
             bigovki_input_2: "",
             bigovki_input_3: ""
@@ -30,6 +31,17 @@ class Bigovki extends React.Component {
     componentWillUnmount() {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForBigovki);
         UpdateStore.removeListener(EventConstants.UPDATE_CHANGE_EVENT, this.__calculatedBigovkiByFormulas);
+    }
+
+    componentDidUpdate() {
+        if (this.state.isUpdatedWidth) {
+            this.__calculateBigovkiSum();
+            this.setState({
+                isUpdatedWidth: false
+            });
+
+        }
+
     }
 
     render() {
@@ -118,7 +130,7 @@ class Bigovki extends React.Component {
 
     __calculatedBigovkiByFormulas() {
         var bigovkiDeltas = UpdateStore.getBigovkiDeltas();
-        if (bigovkiDeltas !== null) {
+        if (bigovkiDeltas) {
 
             var innerWidth = $('#innerWidth').val();
             var innerHeight = $('#innerHeight').val();
@@ -130,7 +142,8 @@ class Bigovki extends React.Component {
             this.setState({
                 bigovki_input_1: bigovki1,
                 bigovki_input_2: bigovki2,
-                bigovki_input_3: bigovki3
+                bigovki_input_3: bigovki3,
+                isUpdatedWidth: true
             });
         }
     }

@@ -345,11 +345,13 @@ var NewProductActions = {
     },
 
     updateWorkpieceWidth(isDisabled, value) {
-        Dispatcher.dispatch({
-            eventType: EventConstants.UPDATE_WORKPIECE_WIDTH,
-            isDisabled: isDisabled,
-            value: value
-        });
+        window.setTimeout(function () {
+            Dispatcher.dispatch({
+                eventType: EventConstants.UPDATE_WORKPIECE_WIDTH,
+                isDisabled: isDisabled,
+                value: value
+            });
+        }, 1)
     },
 
     updateProductionFormat(value) {

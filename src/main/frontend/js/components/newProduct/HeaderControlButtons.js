@@ -38,7 +38,8 @@ class HeaderControlButtons extends React.Component {
                    tabIndex="-1"
                    aria-hidden="true"/>
 
-                <a className="fa fa-floppy-o fa-2x"
+                <a href="#"
+                   className="fa fa-floppy-o fa-2x"
                    title="Сохранить продукт"
                    aria-hidden="true"
                    tabIndex="-1"

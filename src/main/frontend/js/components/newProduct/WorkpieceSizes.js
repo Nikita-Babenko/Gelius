@@ -76,7 +76,7 @@ class WorkpieceSizes extends React.Component {
 
     __updateWorkpieceWidth() {
         var data = UpdateStore.getWorkpieceWidthData();
-        if (data.value) {
+        if (data.value !== undefined) {
             this.setState({
                 workpieceWidth: data.value,
                 disableWorkpieceWidth: data.isDisabled
