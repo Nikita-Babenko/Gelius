@@ -95,7 +95,7 @@ class Perforations extends React.Component {
     __loadDefaultValueForPerforations() {
         if (NewProductStore.isEnableDefaultValues()) {
             var array = NewProductStore.getProductProperty("perforations");
-            if (array !== null && array.length === 5) {
+            if (array !== null) {
                 this.setState({
                     perforation_input_1: array[0] ? array[0].value : "",
                     perforation_input_2: array[1] ? array[1].value : "",
