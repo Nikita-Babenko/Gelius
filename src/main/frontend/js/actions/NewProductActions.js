@@ -359,9 +359,28 @@ var NewProductActions = {
         });
     },
 
+    loadBigovkiAndPerforationDeltas(profileID) {
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json",
+            url: UrlConstants.LOAD_BIGOVKI_AND_PERFORATION_DELTAS + profileID,
+            data: '',
+            dataType: 'JSON',
+            success: function (response) {
+                Dispatcher.dispatch({
+                    eventType: EventConstants.UPDATE_BIGOVKI_AND_PERFORATION_VALUES,
+                    deltas: response.data
+                });
+            }.bind(this),
+            error: function (e) {
+                L.log("ERROR: ", e);
+            }.bind(this)
+        });
+    },
+
     __checkInputNumber: function () {
         $(".numberInputCheck").keydown(function (event) {
-            if (event.keyCode === 9 || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+            if (event.keyCode === 9 || event.keyCode === 37 || event.keyCode === 39 || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
             }
             else if (event.keyCode != 8 && event.keyCode != 46) {
                 event.preventDefault();

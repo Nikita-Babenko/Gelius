@@ -1,6 +1,7 @@
 import React from 'react';
 import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
+import UpdateStore from "../../stores/UpdateStore";
 
 class Perforations extends React.Component {
     constructor(props) {
@@ -18,14 +19,17 @@ class Perforations extends React.Component {
         this.__setValuePerforationInput4 = this.__setValuePerforationInput4.bind(this);
         this.__setValuePerforationInput5 = this.__setValuePerforationInput5.bind(this);
         this.__loadDefaultValueForPerforations = this.__loadDefaultValueForPerforations.bind(this);
+        this.__calculatePerforations = this.__calculatePerforations.bind(this);
     }
 
     componentWillMount() {
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForPerforations);
+        UpdateStore.addListener(EventConstants.UPDATE_CHANGE_EVENT, this.__calculatePerforations);
     }
 
     componentWillUnmount() {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForPerforations);
+        UpdateStore.removeListener(EventConstants.UPDATE_CHANGE_EVENT, this.__calculatePerforations);
     }
 
     __setValuePerforationInput1(e) {
@@ -63,11 +67,35 @@ class Perforations extends React.Component {
         });
     }
 
+    __calculatePerforations() {
+        var perforationDeltas = UpdateStore.getPerforationDeltas();
+        if (perforationDeltas !== null) {
+
+            var innerLength = $('#innerLength').val();
+            var innerWidth = $('#innerWidth').val();
+            var workpieceLength = $('#sizeWorkpieceLength').val();
+
+            var perforation2 = innerWidth ? Number(innerWidth) + perforationDeltas.delta1 : 0;
+            var perforation3 = innerLength ? Number(innerLength) + perforationDeltas.delta2 : 0;
+            var perforation4 = innerWidth ? Number(innerWidth) + perforationDeltas.delta3 : 0;
+            var perforation5 = innerLength ? Number(innerLength) + perforationDeltas.delta4 : 0;
+            var perforation1 = workpieceLength ? Number(workpieceLength) - perforation2 - perforation3 - perforation4 - perforation5 : 0;
+
+
+            this.setState({
+                perforation_input_1: perforation1,
+                perforation_input_2: perforation2,
+                perforation_input_3: perforation3,
+                perforation_input_4: perforation4,
+                perforation_input_5: perforation5
+            });
+        }
+    }
+
     __loadDefaultValueForPerforations() {
         if (NewProductStore.isEnableDefaultValues()) {
             var array = NewProductStore.getProductProperty("perforations");
-            var isFound = array ? true : false;
-            if (isFound) {
+            if (array !== null && array.length === 5) {
                 this.setState({
                     perforation_input_1: array[0] ? array[0].value : "",
                     perforation_input_2: array[1] ? array[1].value : "",

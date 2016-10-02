@@ -181,7 +181,7 @@ public class ProductController {
         return new Response(ResponseCode.OK, dictionaries);
     }
 
-    @RequestMapping(value = "/newProduct/getDeltas/{profileId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getDeltas/{profileId}", method = RequestMethod.GET)
     @ResponseBody
     public Response getDeltas(@PathVariable long profileId) {
         Map<String, Object> responseData = new HashMap<>();

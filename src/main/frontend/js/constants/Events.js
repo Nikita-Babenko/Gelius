@@ -53,7 +53,8 @@ var EventConstants = {
 
     UPDATE_CHANGE_EVENT: "update_change_event",
     UPDATE_WORKPIECE_WIDTH: "update_workpiece_width",
-    UPDATE_PRODUCTION_FORMAT: "update_production_format"
+    UPDATE_PRODUCTION_FORMAT: "update_production_format",
+    UPDATE_BIGOVKI_AND_PERFORATION_VALUES: "update_bigovki_and_perforation_values"
 
 };
 

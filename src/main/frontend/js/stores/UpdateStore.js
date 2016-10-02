@@ -7,6 +7,8 @@ class UpdateStore extends EventEmitter {
         super();
         this.workpieceWidth = {};
         this.productionFormat = null;
+        this.perforationDeltas = null;
+        this.bigovkiDeltas = null;
     }
 
     emitChange() {
@@ -19,6 +21,14 @@ class UpdateStore extends EventEmitter {
 
     getProductionFormat() {
         return this.productionFormat;
+    }
+
+    getPerforationDeltas() {
+        return this.perforationDeltas;
+    }
+
+    getBigovkiDeltas() {
+        return this.bigovkiDeltas;
     }
 
 }
@@ -37,6 +47,13 @@ updateStore.dispatchToken = Dispatcher.register(function (event) {
             updateStore.productionFormat = event.recommendedFormat;
             updateStore.emitChange();
             updateStore.productionFormat = null;
+            break;
+        case EventConstants.UPDATE_BIGOVKI_AND_PERFORATION_VALUES:
+            updateStore.perforationDeltas = event.deltas.perforation;
+            updateStore.bigovkiDeltas = event.deltas.bigovki;
+            updateStore.emitChange();
+            updateStore.perforationDeltas = null;
+            updateStore.bigovkiDeltas = null;
             break;
     }
 });

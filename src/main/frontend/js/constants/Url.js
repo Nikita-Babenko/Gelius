@@ -19,7 +19,8 @@ var UrlConstants = {
     SAVE_PRODUCT_FILES_URL: "/files/upload",
     PRODUCT_REGISTER_PAGE: "/products/register",
     DOWNLOAD_FULL_PRODUCT_PDF: "/products/downloadPdf/full/",
-    DOWNLOAD_SHORT_PRODUCT_PDF: "/products/downloadPdf/short/"
+    DOWNLOAD_SHORT_PRODUCT_PDF: "/products/downloadPdf/short/",
+    LOAD_BIGOVKI_AND_PERFORATION_DELTAS: "/products/getDeltas/"
 
 };
 

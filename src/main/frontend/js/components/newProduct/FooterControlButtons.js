@@ -56,8 +56,10 @@ class FooterControlButtons extends React.Component {
     }
 
     _calculateBigovkiAndPerforations() {
-        var profileID = Number($('#profile :selected').val());
-
+        if (Number($('#productType :selected').val()) === 1) {
+            var profileID = Number($('#profile :selected').val());
+            NewProductActions.loadBigovkiAndPerforationDeltas(profileID);
+        }
     }
 
     _onAddImageButtonClick() {

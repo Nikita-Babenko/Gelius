@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import EventConstants from "../../constants/Events";
 import NewProductAction from "../../actions/NewProductActions";
 import NewProductStore from "../../stores/NewProductStore";
+import UpdateStore from "../../stores/UpdateStore";
 import NumberInput from "../newProduct/NumberInput";
 
 class Bigovki extends React.Component {
@@ -17,15 +18,18 @@ class Bigovki extends React.Component {
         this.__setValueBigovkiInput2 = this.__setValueBigovkiInput2.bind(this);
         this.__setValueBigovkiInput3 = this.__setValueBigovkiInput3.bind(this);
         this.__calculateBigovkiSum = this.__calculateBigovkiSum.bind(this);
+        this.__calculatedBigovkiByFormulas = this.__calculatedBigovkiByFormulas.bind(this);
         this.__loadDefaultValueForBigovki = this.__loadDefaultValueForBigovki.bind(this);
     }
 
     componentWillMount() {
         NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForBigovki);
+        UpdateStore.addListener(EventConstants.UPDATE_CHANGE_EVENT, this.__calculatedBigovkiByFormulas);
     }
 
     componentWillUnmount() {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForBigovki);
+        UpdateStore.removeListener(EventConstants.UPDATE_CHANGE_EVENT, this.__calculatedBigovkiByFormulas);
     }
 
     render() {
@@ -101,17 +105,34 @@ class Bigovki extends React.Component {
 
     __calculateBigovkiSum() {
         var total = 0;
-
         for (var i = 1; i <= 3; i++) {
             var value = ReactDOM.findDOMNode(this.refs['bigovki' + i]).value.trim();
             if (value !== '')
                 total += Number(value.replace(/,/, '.'));
         }
-
         if (total)
             NewProductAction.updateWorkpieceWidth(true, total);
         else
             NewProductAction.updateWorkpieceWidth(false, "");
+    }
+
+    __calculatedBigovkiByFormulas() {
+        var bigovkiDeltas = UpdateStore.getBigovkiDeltas();
+        if (bigovkiDeltas !== null) {
+
+            var innerWidth = $('#innerWidth').val();
+            var innerHeight = $('#innerHeight').val();
+
+            var bigovki1 = innerWidth ? Number(innerWidth) / 2 + bigovkiDeltas.delta1 : 0;
+            var bigovki2 = innerHeight ? Number(innerHeight) + bigovkiDeltas.delta2 : 0;
+            var bigovki3 = innerWidth ? Number(innerWidth) / 2 + bigovkiDeltas.delta3 : 0;
+
+            this.setState({
+                bigovki_input_1: bigovki1,
+                bigovki_input_2: bigovki2,
+                bigovki_input_3: bigovki3
+            });
+        }
     }
 
     __loadDefaultValueForBigovki() {
