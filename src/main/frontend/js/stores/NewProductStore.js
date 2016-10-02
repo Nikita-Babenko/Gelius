@@ -58,7 +58,7 @@ class NewProductStore extends EventEmitter {
         $('.sumBigovki').each(function () {
             var value = $(this).val();
             bigovki.push({
-                "value": value
+                "value": parseFloat(value.replace(/,/, '.'))
             });
         });
         return bigovki;
@@ -69,7 +69,7 @@ class NewProductStore extends EventEmitter {
         $('.perforations').each(function () {
             var value = $(this).val();
             perforations.push({
-                "value": parseFloat(value.replace(/,/, '.'))
+                "value": value
             });
         });
         return perforations;

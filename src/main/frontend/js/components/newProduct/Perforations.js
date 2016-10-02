@@ -28,55 +28,39 @@ class Perforations extends React.Component {
         NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValueForPerforations);
     }
 
-    __validatePerforationInput(newValue) {
-        var onlyPositiveDecimals = /^(\d{0,5})[.,]?(\d?)$/;
-        if (onlyPositiveDecimals.test(newValue)) {
-            if (newValue.startsWith('.') || newValue.startsWith(','))
-                newValue = newValue.substring(1);
-            return newValue;
-        } else
-            return null;
-    }
-
-
     __setValuePerforationInput1(e) {
-        var value = this.__validatePerforationInput(e.target.value);
-        if (value !== null)
-            this.setState({
-                perforation_input_1: value
-            });
+        var value = e.target.value;
+        this.setState({
+            perforation_input_1: value
+        });
     }
 
     __setValuePerforationInput2(e) {
-        var value = this.__validatePerforationInput(e.target.value);
-        if (value !== null)
-            this.setState({
-                perforation_input_2: value
-            });
+        var value = e.target.value;
+        this.setState({
+            perforation_input_2: value
+        });
     }
 
     __setValuePerforationInput3(e) {
-        var value = this.__validatePerforationInput(e.target.value);
-        if (value !== null)
-            this.setState({
-                perforation_input_3: value
-            });
+        var value = e.target.value;
+        this.setState({
+            perforation_input_3: value
+        });
     }
 
     __setValuePerforationInput4(e) {
-        var value = this.__validatePerforationInput(e.target.value);
-        if (value !== null)
-            this.setState({
-                perforation_input_4: value
-            });
+        var value = e.target.value;
+        this.setState({
+            perforation_input_4: value
+        });
     }
 
     __setValuePerforationInput5(e) {
-        var value = this.__validatePerforationInput(e.target.value);
-        if (value !== null)
-            this.setState({
-                perforation_input_5: value
-            });
+        var value = e.target.value;
+        this.setState({
+            perforation_input_5: value
+        });
     }
 
     __loadDefaultValueForPerforations() {
@@ -108,15 +92,15 @@ class Perforations extends React.Component {
         return (
             <td colSpan="3" className="perforations_all">
                 <div className="perforations_inputs">
-                    <input type="text" className="perforations perforation_input_1"
+                    <input type="number" className="perforations perforation_input_1 numberInputCheck"
                            value={this.state.perforation_input_1} onChange={this.__setValuePerforationInput1}/>
-                    <input type="text" className="perforations perforation_input_2"
+                    <input type="number" className="perforations perforation_input_2 numberInputCheck"
                            value={this.state.perforation_input_2} onChange={this.__setValuePerforationInput2}/>
-                    <input type="text" className="perforations perforation_input_3"
+                    <input type="number" className="perforations perforation_input_3 numberInputCheck"
                            value={this.state.perforation_input_3} onChange={this.__setValuePerforationInput3}/>
-                    <input type="text" className="perforations perforation_input_4"
+                    <input type="number" className="perforations perforation_input_4 numberInputCheck"
                            value={this.state.perforation_input_4} onChange={this.__setValuePerforationInput4}/>
-                    <input type="text" className="perforations perforation_input_5"
+                    <input type="number" className="perforations perforation_input_5 numberInputCheck"
                            value={this.state.perforation_input_5} onChange={this.__setValuePerforationInput5}/>
                 </div>
             </td>

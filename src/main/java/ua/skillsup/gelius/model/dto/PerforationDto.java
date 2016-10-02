@@ -13,7 +13,7 @@ public class PerforationDto {
     private ProductDto product;
 
     @Min(value = 1, message = "величина просечки не может быть меньше {value}")
-    private Double value;
+    private Integer value;
 
     public PerforationDto() {
     }
@@ -38,11 +38,11 @@ public class PerforationDto {
         this.product = product;
     }
 
-    public Double getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

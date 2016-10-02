@@ -15,7 +15,7 @@ public final class ProductTestUtil {
     }
 
     public static Product createProduct(int productNumber, boolean isNew, String productName, long client,
-                                        int blankFormat, int innerWidth, int innerHeight, int innerLength,
+                                        Double blankFormat, int innerWidth, int innerHeight, int innerLength,
                                         long cardBoardBrand) {
         Product product = new Product();
         product.setProductNumber(productNumber);
@@ -68,9 +68,9 @@ public final class ProductTestUtil {
         productDto.setSpecialConditions("Conditions");
         productDto.setMaterial("Material");
         productDto.setSizeWorkpieceLength(344);
-        productDto.setSizeWorkpieceWidth(223);
+        productDto.setSizeWorkpieceWidth(223d);
         productDto.setNumberFromSheet(2);
-        productDto.setBlankFormat(223);
+        productDto.setBlankFormat(223d);
         productDto.setNew(isNew);
         productDto.setConnectionValve(new ConnectionValveDto(1L));
         productDto.setStamp("Stamp");

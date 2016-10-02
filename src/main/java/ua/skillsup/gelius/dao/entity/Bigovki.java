@@ -17,7 +17,7 @@ public class Bigovki {
     private Product product;
 
     @Column(name = "value")
-    private Integer value;
+    private Double value;
 
     public Bigovki() {
     }
@@ -38,11 +38,11 @@ public class Bigovki {
         this.product = product;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

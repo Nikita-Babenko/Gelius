@@ -32,9 +32,9 @@ class Bigovki extends React.Component {
         return (
             <td colSpan="3" className="bigovki_all">
                 <div className="bigovki_inputs_1">
-                    <input type="number" min="0"
+                    <input type="text"
                            ref="bigovki1"
-                           className="bigovki_input_1 numberInputCheck sumBigovki"
+                           className="bigovki_input_1 sumBigovki"
                            value={this.state.bigovki_input_1}
                            onChange={this.__setValueBigovkiInput1}
                            onKeyUp={this.__calculateBigovkiSum}
@@ -42,9 +42,9 @@ class Bigovki extends React.Component {
                     <input type="text" className="bigovki_input_2" value="+" disabled/>
                 </div>
                 <div className="bigovki_inputs_2">
-                    <input type="number"
-                           ref="bigovki2" min="0"
-                           className="bigovki_input_1 numberInputCheck sumBigovki"
+                    <input type="text"
+                           ref="bigovki2"
+                           className="bigovki_input_1 sumBigovki"
                            value={this.state.bigovki_input_2}
                            onChange={this.__setValueBigovkiInput2}
                            onKeyUp={this.__calculateBigovkiSum}
@@ -52,9 +52,9 @@ class Bigovki extends React.Component {
                     <input type="text" className="bigovki_input_2" value="+" disabled/>
                 </div>
                 <div className="bigovki_inputs_3">
-                    <input type="number" min="0"
+                    <input type="text"
                            ref="bigovki3"
-                           className="bigovki_input_3 numberInputCheck sumBigovki"
+                           className="bigovki_input_3 sumBigovki"
                            value={this.state.bigovki_input_3}
                            onChange={this.__setValueBigovkiInput3}
                            onKeyUp={this.__calculateBigovkiSum}
@@ -65,25 +65,38 @@ class Bigovki extends React.Component {
         );
     }
 
+    __validateBigovkiInput(newValue) {
+        var onlyPositiveDecimals = /^(\d{0,5})[.,]?(\d?)$/;
+        if (onlyPositiveDecimals.test(newValue)) {
+            if (newValue.startsWith('.') || newValue.startsWith(','))
+                newValue = newValue.substring(1);
+            return newValue;
+        } else
+            return null;
+    }
+
     __setValueBigovkiInput1(e) {
-        var value = e.target.value;
-        this.setState({
-            bigovki_input_1: value
-        });
+        var value = this.__validateBigovkiInput(e.target.value);
+        if (value !== null)
+            this.setState({
+                bigovki_input_1: value
+            });
     }
 
     __setValueBigovkiInput2(e) {
-        var value = e.target.value;
-        this.setState({
-            bigovki_input_2: value
-        });
+        var value = this.__validateBigovkiInput(e.target.value);
+        if (value !== null)
+            this.setState({
+                bigovki_input_2: value
+            });
     }
 
     __setValueBigovkiInput3(e) {
-        var value = e.target.value;
-        this.setState({
-            bigovki_input_3: value
-        });
+        var value = this.__validateBigovkiInput(e.target.value);
+        if (value !== null)
+            this.setState({
+                bigovki_input_3: value
+            });
     }
 
     __calculateBigovkiSum() {
@@ -92,7 +105,7 @@ class Bigovki extends React.Component {
         for (var i = 1; i <= 3; i++) {
             var value = ReactDOM.findDOMNode(this.refs['bigovki' + i]).value.trim();
             if (value !== '')
-                total += Number(value);
+                total += Number(value.replace(/,/, '.'));
         }
 
         if (total)

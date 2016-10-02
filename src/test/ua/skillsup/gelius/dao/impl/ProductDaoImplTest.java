@@ -51,47 +51,47 @@ public class ProductDaoImplTest {
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(1, true, "Product 1", 2, 12, 200, 50, 140, 1),
+                            .createProduct(1, true, "Product 1", 2, 12d, 200, 50, 140, 1),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(1, false, "Product 2", 2, 15, 100, 75, 188, 1),
+                            .createProduct(1, false, "Product 2", 2, 15d, 100, 75, 188, 1),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(567, false,"Product 3", 1, 45, 324, 44, 124, 2),
+                            .createProduct(567, false, "Product 3", 1, 45d, 324, 44, 124, 2),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(14, true,"Product 4", 4, 8, 200, 89, 255,3),
+                            .createProduct(14, true, "Product 4", 4, 8d, 200, 89, 255, 3),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(45, false,"Product 5", 4, 8, 415, 30, 90,4),
+                            .createProduct(45, false, "Product 5", 4, 8d, 415, 30, 90, 4),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(2, false, "Product 6",2, 9, 200, 46, 145,5),
+                            .createProduct(2, false, "Product 6", 2, 9d, 200, 46, 145, 5),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(34, false,"Product 7", 3, 9, 200, 66, 167, 4),
+                            .createProduct(34, false, "Product 7", 3, 9d, 200, 66, 167, 4),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(223, true,"Product 8", 2, 200, 343, 11, 255, 3),
+                            .createProduct(223, true, "Product 8", 2, 200d, 343, 11, 255, 3),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(343, true,"Product 9", 1, 150, 333, 44, 255, 2),
+                            .createProduct(343, true, "Product 9", 1, 150d, 333, 44, 255, 2),
                     ProductDto.class));
         }};
 
@@ -119,7 +119,7 @@ public class ProductDaoImplTest {
         int productCountExpected = products.size() + 1;
         ProductDto productDto = modelMapper.map(
                 ProductTestUtil
-                        .createProduct(122, false, "Product 10", 2, 150, 230, 50, 100, 1),
+                        .createProduct(122, false, "Product 10", 2, 150d, 230, 50, 100, 1),
                 ProductDto.class);
 
         long id = productDao.save(productDto);
@@ -138,7 +138,7 @@ public class ProductDaoImplTest {
         }
         ProductDto productDto = modelMapper.map(
                 ProductTestUtil
-                        .createProduct(222, true, "Product 10", 2, 150, 230, 50, 100, 1),
+                        .createProduct(222, true, "Product 10", 2, 150d, 230, 50, 100, 1),
                 ProductDto.class);
 
         long id = productDao.save(productDto);
@@ -156,7 +156,7 @@ public class ProductDaoImplTest {
         }
         ProductDto productDto = modelMapper.map(
                 ProductTestUtil
-                        .createProduct(555, true, "Product 10", 2, 333, 230, 50, 100, 1),
+                        .createProduct(555, true, "Product 10", 2, 333d, 230, 50, 100, 1),
                 ProductDto.class);
 
         long id = productDao.save(productDto);
@@ -170,7 +170,7 @@ public class ProductDaoImplTest {
     public void oldProductExist() throws Exception {
         ProductDto productDto = modelMapper.map(
                 ProductTestUtil
-                        .createProduct(1233, false, "Product 10", 2, 333, 230, 50, 100, 1),
+                        .createProduct(1233, false, "Product 10", 2, 333d, 230, 50, 100, 1),
                 ProductDto.class);
 
         long id = productDao.save(productDto);
@@ -243,7 +243,7 @@ public class ProductDaoImplTest {
         List<BigovkiDto> bigovki = new ArrayList<>();
         BigovkiDto bigovkiDto = new BigovkiDto();
         bigovkiDto.setProduct(productDto);
-        bigovkiDto.setValue(4);
+        bigovkiDto.setValue(4d);
         bigovki.add(bigovkiDto);
 
         productDto.setBigovki(bigovki);
@@ -273,7 +273,7 @@ public class ProductDaoImplTest {
 
         PerforationDto perforation = new PerforationDto();
         perforation.setProduct(productDto);
-        perforation.setValue(34d);
+        perforation.setValue(34);
         perforations.add(perforation);
 
         productDto.setPerforations(perforations);
@@ -404,7 +404,7 @@ public class ProductDaoImplTest {
     @Test
     public void updateBlankFormat() throws Exception {
         ProductDto productForUpdate = saveProduct();
-        productForUpdate.setBlankFormat(23);
+        productForUpdate.setBlankFormat(23d);
         long id = productForUpdate.getId();
 
         productDao.update(productForUpdate);

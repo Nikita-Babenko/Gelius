@@ -53,37 +53,37 @@ public class ProductRegisterDaoImplTest {
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(1, true, "Product 1", 2, 12, 200, 50, 140, 1),
+                            .createProduct(1, true, "Product 1", 2, 12d, 200, 50, 140, 1),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(1, false, "Product 2", 2, 15, 100, 75, 188, 1),
+                            .createProduct(1, false, "Product 2", 2, 15d, 100, 75, 188, 1),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(567, false,"Product 3", 1, 45, 324, 44, 124, 2),
+                            .createProduct(567, false, "Product 3", 1, 45d, 324, 44, 124, 2),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(14, true,"Product 4", 4, 8, 200, 89, 255,3),
+                            .createProduct(14, true, "Product 4", 4, 8d, 200, 89, 255, 3),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(45, false,"Product 5", 4, 8, 415, 30, 90,4),
+                            .createProduct(45, false, "Product 5", 4, 8d, 415, 30, 90, 4),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(2, false, "Product 6",2, 9, 200, 46, 145,5),
+                            .createProduct(2, false, "Product 6", 2, 9d, 200, 46, 145, 5),
                     ProductDto.class));
 
             add(modelMapper.map(
                     ProductTestUtil
-                            .createProduct(34, false,"Product 7", 3, 9, 200, 66, 167, 4),
+                            .createProduct(34, false, "Product 7", 3, 9d, 200, 66, 167, 4),
                     ProductDto.class));
         }};
 

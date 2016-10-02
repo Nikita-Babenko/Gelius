@@ -112,13 +112,13 @@ public class Product {
     private Integer sizeWorkpieceLength;
 
     @Column(name = "size_workpiece_width")
-    private Integer sizeWorkpieceWidth;
+    private Double sizeWorkpieceWidth;
 
     @Column(name = "number_from_sheet")
     private Integer numberFromSheet;
 
     @Column(name = "blank_format")
-    private Integer blankFormat;
+    private Double blankFormat;
 
     @ManyToOne
     @JoinColumn(name = "connection_valve_id")
@@ -382,11 +382,11 @@ public class Product {
         this.sizeWorkpieceLength = sizeWorkpieceLength;
     }
 
-    public Integer getSizeWorkpieceWidth() {
+    public Double getSizeWorkpieceWidth() {
         return sizeWorkpieceWidth;
     }
 
-    public void setSizeWorkpieceWidth(Integer sizeWorkpieceWidth) {
+    public void setSizeWorkpieceWidth(Double sizeWorkpieceWidth) {
         this.sizeWorkpieceWidth = sizeWorkpieceWidth;
     }
 
@@ -398,11 +398,11 @@ public class Product {
         this.numberFromSheet = numberFromSheet;
     }
 
-    public Integer getBlankFormat() {
+    public Double getBlankFormat() {
         return blankFormat;
     }
 
-    public void setBlankFormat(Integer blankFormat) {
+    public void setBlankFormat(Double blankFormat) {
         this.blankFormat = blankFormat;
     }
 

@@ -294,7 +294,7 @@ public class PdfView extends AbstractPdfView {
         String productSizeWorkpieceLength = (sizeWorkpieceLength == null)
                 ? EMPTY_STRING : sizeWorkpieceLength.toString();
 
-        Integer sizeWorkpieceWidth = product.getSizeWorkpieceWidth();
+        Double sizeWorkpieceWidth = product.getSizeWorkpieceWidth();
         String productSizeWorkpieceWidth = (sizeWorkpieceWidth == null)
                 ? EMPTY_STRING : sizeWorkpieceWidth.toString();
 
@@ -302,7 +302,7 @@ public class PdfView extends AbstractPdfView {
         String productNumberBlankOnFormat = (numberBlankOnFormat == null)
                 ? EMPTY_STRING : numberBlankOnFormat.toString();
 
-        Integer blankFormat = product.getBlankFormat();
+        Double blankFormat = product.getBlankFormat();
         String productBlankFormat = (blankFormat == null)
                 ? EMPTY_STRING : blankFormat.toString();
 

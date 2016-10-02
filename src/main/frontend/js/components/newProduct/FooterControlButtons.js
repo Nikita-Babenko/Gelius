@@ -15,6 +15,7 @@ class FooterControlButtons extends React.Component {
             numberOfImages: 0
         };
 
+        this._calculateBigovkiAndPerforations = this._calculateBigovkiAndPerforations.bind(this);
         this._updateImagesData = this._updateImagesData.bind(this);
         this._onDeleteImageButtonClick = this._onDeleteImageButtonClick.bind(this);
         this._deleteFunction = this._deleteFunction.bind(this);
@@ -34,7 +35,10 @@ class FooterControlButtons extends React.Component {
         return (
             <div className="buttonContainer">
                 <div className="buttons_bottom icon_buttons_group">
-                    <a className="control-btn btn fa fa-pencil fa-2x disabled" tabIndex="-1"/>
+                    <a className="control-btn btn fa fa-pencil fa-2x "
+                       title="Рассчитаь биговки и просечки"
+                       onClick={this._calculateBigovkiAndPerforations}
+                       tabIndex="-1"/>
                     <a className={"control-btn btn fa fa-plus fa-2x" + disableAddImageButton}
                        tabIndex="-1"
                        onClick={this._onAddImageButtonClick}/>
@@ -49,6 +53,11 @@ class FooterControlButtons extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    _calculateBigovkiAndPerforations() {
+        var profileID = Number($('#profile :selected').val());
+
     }
 
     _onAddImageButtonClick() {

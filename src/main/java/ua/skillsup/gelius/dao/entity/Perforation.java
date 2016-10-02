@@ -17,7 +17,7 @@ public class Perforation {
     private Product product;
 
     @Column(name = "value")
-    private Double value;
+    private Integer value;
 
     public Perforation() {
     }
@@ -38,11 +38,11 @@ public class Perforation {
         this.product = product;
     }
 
-    public Double getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

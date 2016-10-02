@@ -67,14 +67,14 @@ public class ProductDto {
     private Integer sizeWorkpieceLength;
 
     @Min(value = 1, message = "ширина (размер заготовки) не может быть меньше {value}")
-    private Integer sizeWorkpieceWidth;
+    private Double sizeWorkpieceWidth;
 
     @Min(value = 1, message = "количество с листа не может быть меньше {value} шт.")
     private Integer numberFromSheet;
 
     @NotNull(message = "формат заготовки должен быть заполнен")
     @Min(value = 1, message = "формат заготовки не может быть меньше {value}")
-    private Integer blankFormat;
+    private Double blankFormat;
 
     private ConnectionValveDto connectionValve;
 
@@ -331,11 +331,11 @@ public class ProductDto {
         this.sizeWorkpieceLength = sizeWorkpieceLength;
     }
 
-    public Integer getSizeWorkpieceWidth() {
+    public Double getSizeWorkpieceWidth() {
         return sizeWorkpieceWidth;
     }
 
-    public void setSizeWorkpieceWidth(Integer sizeWorkpieceWidth) {
+    public void setSizeWorkpieceWidth(Double sizeWorkpieceWidth) {
         this.sizeWorkpieceWidth = sizeWorkpieceWidth;
     }
 
@@ -347,11 +347,11 @@ public class ProductDto {
         this.numberFromSheet = numberFromSheet;
     }
 
-    public Integer getBlankFormat() {
+    public Double getBlankFormat() {
         return blankFormat;
     }
 
-    public void setBlankFormat(Integer blankFormat) {
+    public void setBlankFormat(Double blankFormat) {
         this.blankFormat = blankFormat;
     }
 
