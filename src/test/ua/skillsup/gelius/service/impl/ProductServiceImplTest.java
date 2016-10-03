@@ -51,6 +51,7 @@ public class ProductServiceImplTest {
         productDto.setPacking(new PackingDto(1L));
         productDto.setPallet(new PalletDto(1L));
         productDto.setPalletPlacement(new PalletPlacementDto(1L));
+        productDto.setBlankFormat(1d);
     }
 
     @Test
