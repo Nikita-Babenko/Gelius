@@ -82,6 +82,7 @@ class WorkpieceSizes extends React.Component {
                 disableWorkpieceWidth: data.isDisabled
             });
             this.props.update(this.state.workpieceLength, data.value);
+            $("#sizeWorkpieceWidth").keyup();
         }
     }
 }

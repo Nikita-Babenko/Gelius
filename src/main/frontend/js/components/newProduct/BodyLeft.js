@@ -3,6 +3,7 @@ import NewProductAction from "../../actions/NewProductActions";
 import NewProductStore from "../../stores/NewProductStore";
 import Dictionary from "../newProduct/Dictionary";
 import SquareInput from "../newProduct/SquareInput";
+import TheoreticalSquareInput from "../newProduct/TheoreticalSquareInput";
 import NumberInput from "../newProduct/NumberInput";
 import TextArea from "../newProduct/TextArea";
 import WorkCenterTextarea from "../newProduct/WorkCenterTextarea";
@@ -33,7 +34,7 @@ class BodyLeft extends React.Component {
                     <tr>
                         <td className="products_large_td">S теор.</td>
                         <td className="products_small_td">
-                            <SquareInput id="theoreticalSquare" tabindex="-1"/>
+                            <TheoreticalSquareInput/>
                         </td>
                         <td className="products_large_td">S факт.</td>
                         <td className="products_small_td">
