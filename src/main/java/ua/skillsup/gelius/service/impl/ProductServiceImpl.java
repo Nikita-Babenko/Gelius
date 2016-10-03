@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         //Filling other DTO fields (vocabularies):
-        ProductDto filledProduct = isFillProduct(product);
+        ProductDto filledProduct = fillDictionaryValues(product);
 
         //DTO validation (including mandatory fields check):
         List<String> validationErrors = this.validationService.validation(filledProduct);
@@ -84,7 +84,7 @@ public class ProductServiceImpl implements ProductService {
     public void update(ProductDto product) {
 
         //Filling DTO fields if it has zero values
-        ProductDto updatedProduct = isFillProduct(product);
+        ProductDto updatedProduct = fillDictionaryValues(product);
 
         //DTO validation (including mandatory fields check)
         List<String> validationErrors = this.validationService.validation(updatedProduct);
@@ -99,7 +99,7 @@ public class ProductServiceImpl implements ProductService {
         productDao.update(product);
     }
 
-    private ProductDto isFillProduct(ProductDto product) {
+    private ProductDto fillDictionaryValues(ProductDto product) {
         if ( product.getClient().getId() == 0 ) {
             product.setClient(null);
         }
@@ -135,6 +135,10 @@ public class ProductServiceImpl implements ProductService {
         }
         if ( product.getPalletPlacement().getId() == 0 ) {
             product.setPalletPlacement(null);
+        }
+
+        if ( product.getBlankFormat() == 0 ) {
+            product.setBlankFormat(null);
         }
 
         return product;

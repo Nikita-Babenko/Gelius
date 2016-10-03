@@ -3,7 +3,18 @@ package ua.skillsup.gelius.model.dto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ua.skillsup.gelius.annotation.CheckDoubleAboveZero;
 import ua.skillsup.gelius.annotation.CheckOldProductNumberExistence;
-import ua.skillsup.gelius.model.dto.dictionary.*;
+import ua.skillsup.gelius.model.dto.dictionary.CardboardBrandDto;
+import ua.skillsup.gelius.model.dto.dictionary.CelluloseLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.ClientDto;
+import ua.skillsup.gelius.model.dto.dictionary.ConnectionValveDto;
+import ua.skillsup.gelius.model.dto.dictionary.FaceLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.FormatDto;
+import ua.skillsup.gelius.model.dto.dictionary.InnerLayerDto;
+import ua.skillsup.gelius.model.dto.dictionary.PackingDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletDto;
+import ua.skillsup.gelius.model.dto.dictionary.PalletPlacementDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProductTypeDto;
+import ua.skillsup.gelius.model.dto.dictionary.ProfileDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -66,14 +77,14 @@ public class ProductDto {
     @Min(value = 1, message = "длина (размер заготовки) не может быть меньше {value}")
     private Integer sizeWorkpieceLength;
 
-    @Min(value = 1, message = "ширина (размер заготовки) не может быть меньше {value}")
+    @CheckDoubleAboveZero(message = "ширина (размер заготовки) должна быть больше нуля")
     private Double sizeWorkpieceWidth;
 
     @Min(value = 1, message = "количество с листа не может быть меньше {value} шт.")
     private Integer numberFromSheet;
 
-    @NotNull(message = "формат заготовки должен быть заполнен")
-    @Min(value = 1, message = "формат заготовки не может быть меньше {value}")
+    @NotNull(message = "формат заготовки должен быть выбран")
+    @CheckDoubleAboveZero(message = "формат заготовки должен быть больше нуля")
     private Double blankFormat;
 
     private ConnectionValveDto connectionValve;

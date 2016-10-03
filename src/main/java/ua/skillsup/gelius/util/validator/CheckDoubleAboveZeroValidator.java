@@ -14,7 +14,7 @@ public class CheckDoubleAboveZeroValidator implements ConstraintValidator<CheckD
 
     @Override
     public boolean isValid(Double object, ConstraintValidatorContext context) {
-        if (null == object) {
+        if (object == null) {
             return true;
         }
         return object > 0;
