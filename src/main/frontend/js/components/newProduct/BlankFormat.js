@@ -3,6 +3,21 @@ import EventConstants from "../../constants/Events";
 import NewProductStore from "../../stores/NewProductStore";
 
 class BlankFormat extends React.Component {
+
+    componentWillMount() {
+        NewProductStore.addListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
+    }
+
+    componentDidUpdate() {
+        var value = $('#blankFormat option:selected').val();
+        if (value != this.props.workpieceSize.workpieceLength && value != this.props.workpieceSize.workpieceWidth)
+            $('#blankFormat').val('');
+    }
+
+    componentWillUnmount() {
+        NewProductStore.removeListener(EventConstants.NEW_PRODUCT_CHANGE_EVENT, this.__loadDefaultValue);
+    }
+
     render() {
         return (
             <select id="blankFormat">
@@ -15,9 +30,11 @@ class BlankFormat extends React.Component {
         );
     }
 
-    componentDidUpdate() {
-        var value = NewProductStore.getProductProperty("blankFormat");
-        $('#blankFormat').val(value ? value : '');
+    __loadDefaultValue() {
+        if (NewProductStore.isEnableDefaultValues()) {
+            var value = NewProductStore.getProductProperty("blankFormat");
+            $('#blankFormat').val(value ? value : '');
+        }
     }
 
 }
