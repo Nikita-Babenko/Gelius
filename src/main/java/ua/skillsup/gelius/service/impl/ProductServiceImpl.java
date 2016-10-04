@@ -137,7 +137,7 @@ public class ProductServiceImpl implements ProductService {
             product.setPalletPlacement(null);
         }
 
-        if ( product.getBlankFormat() == 0 ) {
+        if ( product.getBlankFormat() != null && product.getBlankFormat() == 0 ) {
             product.setBlankFormat(null);
         }
 
